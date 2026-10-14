@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# Data & Evidences
+data/
+*.csv
+*.pdf
+*.docx
+
+# VS Code
+.vscode/
