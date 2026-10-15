@@ -1,0 +1,114 @@
+{
+  "version": "1.0-week1",
+  "project": "ISO/IEC 27001:2022 AI Agent Compliance Assessment",
+  "owner": "Lê Đăng Khoa (System & Evidence Tools)",
+  "security_principles": {
+    "collection_mode": "READ_ONLY",
+    "integrity_hash": "SHA-256",
+    "untrusted_input_handling": "SANITIZE_BEFORE_AGENT_EVAL"
+  },
+  "evidence_categories": [
+    {
+      "group": "A.6 People (Con người)",
+      "collector_tool": "Tool_People_Evidence_Check & Tool_Document_Evidence_Parser",
+      "types": [
+        {
+          "evidence_type": "EVID_DOC_POLICY",
+          "name": "Văn bản chính sách, quy trình nội bộ",
+          "formats": [".pdf", ".docx", ".md", ".txt"],
+          "mapped_controls": ["A.6.1", "A.6.2", "A.6.4", "A.6.7", "A.6.8", "A.8.25", "A.8.26", "A.8.27"]
+        },
+        {
+          "evidence_type": "EVID_PPL_TRAINING",
+          "name": "Hồ sơ đào tạo nhận thức ATTT và kết quả kiểm tra",
+          "formats": [".csv", ".json", ".pdf"],
+          "mapped_controls": ["A.6.3"]
+        },
+        {
+          "evidence_type": "EVID_PPL_CONTRACT_NDA",
+          "name": "Thỏa thuận bảo mật (NDA) và điều khoản lao động",
+          "formats": [".csv", ".json", ".pdf", ".docx"],
+          "mapped_controls": ["A.6.2", "A.6.6"]
+        },
+        {
+          "evidence_type": "EVID_PPL_HR_RECORD",
+          "name": "Hồ sơ thẩm tra lý lịch (Screening), bàn giao nghỉ việc (Offboarding), báo cáo sự kiện",
+          "formats": [".csv", ".json", ".pdf"],
+          "mapped_controls": ["A.6.1", "A.6.5", "A.6.8"]
+        }
+      ]
+    },
+    {
+      "group": "A.7 Physical (Phần cứng / Môi trường vật lý)",
+      "collector_tool": "Tool_Physical_Asset_Check & Tool_Document_Evidence_Parser",
+      "types": [
+        {
+          "evidence_type": "EVID_PHY_ASSET_INV",
+          "name": "Danh mục tài sản phần cứng, thiết bị mạng, thiết bị lưu trữ",
+          "formats": [".csv", ".json"],
+          "mapped_controls": ["A.7.8", "A.7.9", "A.7.10"]
+        },
+        {
+          "evidence_type": "EVID_PHY_ACCESS_LOG",
+          "name": "Nhật ký kiểm soát ra vào vật lý (cửa từ/sinh trắc học phòng Server)",
+          "formats": [".csv", ".json"],
+          "mapped_controls": ["A.7.2", "A.7.6"]
+        },
+        {
+          "evidence_type": "EVID_PHY_CHECKLIST",
+          "name": "Checklist kiểm tra an ninh vật lý, PCCC, UPS, đi dây cáp, Clear desk",
+          "formats": [".json", ".pdf", ".md"],
+          "mapped_controls": ["A.7.1", "A.7.3", "A.7.4", "A.7.5", "A.7.7", "A.7.11", "A.7.12"]
+        },
+        {
+          "evidence_type": "EVID_PHY_MAINT_DISP",
+          "name": "Biên bản bảo trì định kỳ và chứng nhận xóa dữ liệu/hủy thiết bị an toàn",
+          "formats": [".csv", ".json", ".pdf"],
+          "mapped_controls": ["A.7.13", "A.7.14"]
+        }
+      ]
+    },
+    {
+      "group": "A.8 Technological (Phần mềm / Hệ thống / Mạng)",
+      "collector_tool": "Tool_Technical_Evidence_Collector",
+      "types": [
+        {
+          "evidence_type": "EVID_TECH_IAM_AUTH",
+          "name": "Cấu hình tài khoản đặc quyền, Password Policy, SSH, MFA",
+          "formats": [".json"],
+          "mapped_controls": ["A.8.2", "A.8.3", "A.8.5", "A.8.18"]
+        },
+        {
+          "evidence_type": "EVID_TECH_ENDPOINT_AV",
+          "name": "Trạng thái Endpoint: mã hóa ổ đĩa, khóa màn hình, Antivirus/EDR, phần mềm cài đặt",
+          "formats": [".json"],
+          "mapped_controls": ["A.8.1", "A.8.7", "A.8.19"]
+        },
+        {
+          "evidence_type": "EVID_TECH_VULN_CONFIG",
+          "name": "Báo cáo quét lỗ hổng, trạng thái bản vá (Patch), cấu hình chuẩn (Baseline/TLS)",
+          "formats": [".json"],
+          "mapped_controls": ["A.8.8", "A.8.9", "A.8.10", "A.8.11", "A.8.12", "A.8.24"]
+        },
+        {
+          "evidence_type": "EVID_TECH_BACKUP_LOG",
+          "name": "Trạng thái dịch vụ Logging, giám sát dung lượng, đồng bộ giờ NTP, nhật ký Backup",
+          "formats": [".json"],
+          "mapped_controls": ["A.8.6", "A.8.13", "A.8.14", "A.8.15", "A.8.16", "A.8.17"]
+        },
+        {
+          "evidence_type": "EVID_TECH_NET_FIREWALL",
+          "name": "Cấu hình Firewall, danh sách cổng mở, phân tách VLAN/mạng, lọc Web",
+          "formats": [".json"],
+          "mapped_controls": ["A.8.20", "A.8.21", "A.8.22", "A.8.23"]
+        },
+        {
+          "evidence_type": "EVID_TECH_SDLC_REPORT",
+          "name": "Cấu hình bảo mật Git/CI-CD, báo cáo SAST/DAST, log quản lý thay đổi (Change log)",
+          "formats": [".json", ".yaml", ".pdf"],
+          "mapped_controls": ["A.8.4", "A.8.25", "A.8.28", "A.8.29", "A.8.30", "A.8.31", "A.8.32", "A.8.33", "A.8.34"]
+        }
+      ]
+    }
+  ]
+}
