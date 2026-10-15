@@ -1,0 +1,506 @@
+[
+  {
+    "control_id": "A.6.1",
+    "name": "Screening",
+    "group": "A.6 People",
+    "objective": "Thẩm tra lý lịch và năng lực của nhân sự trước khi tuyển dụng để đảm bảo sự tin cậy.",
+    "pass_criteria": ["Tồn tại hồ sơ kiểm tra lý lịch", "Có xác nhận từ bộ phận nhân sự (HR)"],
+    "automation_level": "SEMI_AUTO",
+    "expected_evidence_types": ["EVID_PPL_HR_RECORD"]
+  },
+  {
+    "control_id": "A.6.2",
+    "name": "Terms and conditions of employment",
+    "group": "A.6 People",
+    "objective": "Ràng buộc trách nhiệm bảo mật thông tin trong hợp đồng lao động.",
+    "pass_criteria": ["Hợp đồng lao động có điều khoản an toàn thông tin", "Nhân viên đã ký xác nhận"],
+    "automation_level": "SEMI_AUTO",
+    "expected_evidence_types": ["EVID_PPL_CONTRACT_NDA"]
+  },
+  {
+    "control_id": "A.6.3",
+    "name": "Information security awareness, education and training",
+    "group": "A.6 People",
+    "objective": "Đảm bảo mọi nhân sự đều được đào tạo định kỳ và nhận thức rõ trách nhiệm bảo mật.",
+    "pass_criteria": ["Tỷ lệ nhân sự hoàn thành khóa học đạt 100%", "Có bài kiểm tra đánh giá nhận thức"],
+    "automation_level": "SEMI_AUTO",
+    "expected_evidence_types": ["EVID_PPL_TRAINING", "EVID_DOC_POLICY"]
+  },
+  {
+    "control_id": "A.6.4",
+    "name": "Disciplinary process",
+    "group": "A.6 People",
+    "objective": "Quy định rõ các hình thức kỷ luật đối với hành vi vi phạm an toàn thông tin.",
+    "pass_criteria": ["Có tài liệu quy trình xử lý kỷ luật đã ban hành", "Được truyền đạt đến toàn bộ nhân viên"],
+    "automation_level": "SEMI_AUTO",
+    "expected_evidence_types": ["EVID_DOC_POLICY"]
+  },
+  {
+    "control_id": "A.6.5",
+    "name": "Responsibilities after termination or change of employment",
+    "group": "A.6 People",
+    "objective": "Kiểm soát rủi ro khi nhân sự nghỉ việc hoặc chuyển bộ phận.",
+    "pass_criteria": ["Có checklist thu hồi tài sản", "Biên bản xác nhận cắt quyền truy cập hệ thống"],
+    "automation_level": "SEMI_AUTO",
+    "expected_evidence_types": ["EVID_PPL_HR_RECORD"]
+  },
+  {
+    "control_id": "A.6.6",
+    "name": "Confidentiality or non-disclosure agreements",
+    "group": "A.6 People",
+    "objective": "Ràng buộc pháp lý về việc không tiết lộ thông tin nhạy cảm của tổ chức.",
+    "pass_criteria": ["Danh sách nhân sự/đối tác đã ký NDA", "Văn bản NDA còn hiệu lực"],
+    "automation_level": "SEMI_AUTO",
+    "expected_evidence_types": ["EVID_PPL_CONTRACT_NDA"]
+  },
+  {
+    "control_id": "A.6.7",
+    "name": "Remote working",
+    "group": "A.6 People",
+    "objective": "Đảm bảo an toàn thông tin khi nhân sự làm việc bên ngoài trụ sở.",
+    "pass_criteria": ["Có chính sách remote work", "Thiết bị từ xa được cài đặt bảo mật và VPN"],
+    "automation_level": "SEMI_AUTO",
+    "expected_evidence_types": ["EVID_DOC_POLICY", "EVID_TECH_ENDPOINT_AV"]
+  },
+  {
+    "control_id": "A.6.8",
+    "name": "Information security event reporting",
+    "group": "A.6 People",
+    "objective": "Tạo kênh liên lạc để nhân sự báo cáo kịp thời các sự kiện/sự cố bảo mật.",
+    "pass_criteria": ["Có kênh/biểu mẫu báo cáo sự cố", "Nhật ký ghi nhận sự kiện ATTT"],
+    "automation_level": "SEMI_AUTO",
+    "expected_evidence_types": ["EVID_PPL_HR_RECORD", "EVID_DOC_POLICY"]
+  },
+  {
+    "control_id": "A.7.1",
+    "name": "Physical security perimeters",
+    "group": "A.7 Physical",
+    "objective": "Thiết lập vành đai bảo vệ các khu vực xử lý thông tin quan trọng.",
+    "pass_criteria": ["Sơ đồ phân chia khu vực an ninh", "Checklist kiểm tra cửa/khóa vật lý đạt yêu cầu"],
+    "automation_level": "SEMI_AUTO",
+    "expected_evidence_types": ["EVID_PHY_CHECKLIST"]
+  },
+  {
+    "control_id": "A.7.2",
+    "name": "Physical entry",
+    "group": "A.7 Physical",
+    "objective": "Kiểm soát luồng người ra vào các khu vực an ninh bằng biện pháp xác thực.",
+    "pass_criteria": ["Có nhật ký quẹt thẻ/sinh trắc học", "Chỉ những người được cấp quyền mới được vào phòng Server"],
+    "automation_level": "SEMI_AUTO",
+    "expected_evidence_types": ["EVID_PHY_ACCESS_LOG"]
+  },
+  {
+    "control_id": "A.7.3",
+    "name": "Securing offices, rooms and facilities",
+    "group": "A.7 Physical",
+    "objective": "Bảo vệ vật lý cho các văn phòng và cơ sở hạ tầng thiết yếu.",
+    "pass_criteria": ["Biên bản kiểm tra an toàn định kỳ", "Quy định khóa cửa ngoài giờ làm việc"],
+    "automation_level": "SEMI_AUTO",
+    "expected_evidence_types": ["EVID_PHY_CHECKLIST", "EVID_DOC_POLICY"]
+  },
+  {
+    "control_id": "A.7.4",
+    "name": "Physical security monitoring",
+    "group": "A.7 Physical",
+    "objective": "Giám sát liên tục để phát hiện các truy cập vật lý trái phép.",
+    "pass_criteria": ["Hệ thống CCTV hoạt động", "Thời gian lưu trữ video đáp ứng quy định"],
+    "automation_level": "SEMI_AUTO",
+    "expected_evidence_types": ["EVID_PHY_ASSET_INV"]
+  },
+  {
+    "control_id": "A.7.5",
+    "name": "Protecting against physical and environmental threats",
+    "group": "A.7 Physical",
+    "objective": "Phòng chống rủi ro từ hỏa hoạn, lũ lụt, hoặc thảm họa tự nhiên.",
+    "pass_criteria": ["Biên bản nghiệm thu/bảo trì PCCC", "Cảm biến nhiệt độ, độ ẩm hoạt động"],
+    "automation_level": "SEMI_AUTO",
+    "expected_evidence_types": ["EVID_PHY_CHECKLIST"]
+  },
+  {
+    "control_id": "A.7.6",
+    "name": "Working in secure areas",
+    "group": "A.7 Physical",
+    "objective": "Kiểm soát các hoạt động diễn ra bên trong khu vực bảo mật cao.",
+    "pass_criteria": ["Nhật ký giám sát khách/nhà thầu", "Quy định cấm quay phim/chụp ảnh"],
+    "automation_level": "SEMI_AUTO",
+    "expected_evidence_types": ["EVID_PHY_ACCESS_LOG", "EVID_DOC_POLICY"]
+  },
+  {
+    "control_id": "A.7.7",
+    "name": "Clear desk and clear screen",
+    "group": "A.7 Physical",
+    "objective": "Ngăn chặn rò rỉ thông tin từ tài liệu giấy và màn hình máy tính không có người quản lý.",
+    "pass_criteria": ["Biên bản kiểm tra bàn làm việc sạch", "Máy tính có cấu hình tự khóa màn hình"],
+    "automation_level": "SEMI_AUTO",
+    "expected_evidence_types": ["EVID_PHY_CHECKLIST", "EVID_TECH_ENDPOINT_AV"]
+  },
+  {
+    "control_id": "A.7.8",
+    "name": "Equipment siting and protection",
+    "group": "A.7 Physical",
+    "objective": "Bố trí thiết bị phần cứng ở vị trí an toàn, tránh bị can thiệp trái phép.",
+    "pass_criteria": ["Danh mục tài sản có ghi nhận vị trí vật lý", "Thiết bị quan trọng được đặt trong tủ rack có khóa"],
+    "automation_level": "SEMI_AUTO",
+    "expected_evidence_types": ["EVID_PHY_ASSET_INV"]
+  },
+  {
+    "control_id": "A.7.9",
+    "name": "Security of assets off-premises",
+    "group": "A.7 Physical",
+    "objective": "Bảo vệ tài sản của tổ chức khi được mang ra khỏi trụ sở.",
+    "pass_criteria": ["Biên bản bàn giao thiết bị mang ra ngoài", "Thiết bị được mã hóa ổ cứng"],
+    "automation_level": "SEMI_AUTO",
+    "expected_evidence_types": ["EVID_PHY_ASSET_INV", "EVID_TECH_ENDPOINT_AV"]
+  },
+  {
+    "control_id": "A.7.10",
+    "name": "Storage media",
+    "group": "A.7 Physical",
+    "objective": "Quản lý an toàn vòng đời của các thiết bị lưu trữ rời.",
+    "pass_criteria": ["Danh mục thiết bị lưu trữ (USB, ổ cứng rời)", "Chính sách kiểm soát sử dụng USB"],
+    "automation_level": "SEMI_AUTO",
+    "expected_evidence_types": ["EVID_PHY_ASSET_INV", "EVID_DOC_POLICY"]
+  },
+  {
+    "control_id": "A.7.11",
+    "name": "Supporting utilities",
+    "group": "A.7 Physical",
+    "objective": "Đảm bảo nguồn điện và hệ thống phụ trợ (điều hòa) hoạt động liên tục.",
+    "pass_criteria": ["Nhật ký bảo trì UPS, máy phát điện", "Biên bản kiểm tra hệ thống làm mát"],
+    "automation_level": "SEMI_AUTO",
+    "expected_evidence_types": ["EVID_PHY_CHECKLIST"]
+  },
+  {
+    "control_id": "A.7.12",
+    "name": "Cabling security",
+    "group": "A.7 Physical",
+    "objective": "Bảo vệ cáp truyền dẫn điện và mạng khỏi bị cắt phá hoặc nghe lén.",
+    "pass_criteria": ["Hệ thống dây cáp được đi trong máng/ống bảo vệ", "Biên bản kiểm tra hạ tầng vật lý"],
+    "automation_level": "SEMI_AUTO",
+    "expected_evidence_types": ["EVID_PHY_CHECKLIST"]
+  },
+  {
+    "control_id": "A.7.13",
+    "name": "Equipment maintenance",
+    "group": "A.7 Physical",
+    "objective": "Bảo trì thiết bị định kỳ để ngăn ngừa sự cố hỏng hóc.",
+    "pass_criteria": ["Có hợp đồng/lịch bảo trì", "Biên bản bảo trì thiết bị lưu hệ thống"],
+    "automation_level": "SEMI_AUTO",
+    "expected_evidence_types": ["EVID_PHY_MAINT_DISP"]
+  },
+  {
+    "control_id": "A.7.14",
+    "name": "Secure disposal or re-use of equipment",
+    "group": "A.7 Physical",
+    "objective": "Đảm bảo dữ liệu không bị rò rỉ khi thanh lý hoặc tái sử dụng thiết bị.",
+    "pass_criteria": ["Biên bản xóa dữ liệu (wiping) đạt chuẩn", "Biên bản tiêu hủy vật lý đối với ổ cứng hỏng"],
+    "automation_level": "SEMI_AUTO",
+    "expected_evidence_types": ["EVID_PHY_MAINT_DISP"]
+  },
+  {
+    "control_id": "A.8.1",
+    "name": "User endpoint devices",
+    "group": "A.8 Technological",
+    "objective": "Bảo vệ các thiết bị đầu cuối của người dùng (laptop, PC, mobile).",
+    "pass_criteria": ["Bật mã hóa ổ đĩa (BitLocker/LUKS)", "Phần mềm diệt virus đang chạy", "Khóa màn hình tự động"],
+    "automation_level": "HIGH_AUTO",
+    "expected_evidence_types": ["EVID_TECH_ENDPOINT_AV"]
+  },
+  {
+    "control_id": "A.8.2",
+    "name": "Privileged access rights",
+    "group": "A.8 Technological",
+    "objective": "Cấp phát và hạn chế nghiêm ngặt các tài khoản có quyền quản trị/đặc quyền.",
+    "pass_criteria": ["Danh sách tài khoản admin/sudoers giới hạn tối thiểu", "Có bằng chứng rà soát quyền định kỳ"],
+    "automation_level": "HIGH_AUTO",
+    "expected_evidence_types": ["EVID_TECH_IAM_AUTH"]
+  },
+  {
+    "control_id": "A.8.3",
+    "name": "Information access restriction",
+    "group": "A.8 Technological",
+    "objective": "Giới hạn quyền truy cập thông tin dựa trên nhu cầu công việc (Need-to-know).",
+    "pass_criteria": ["Ma trận phân quyền hệ thống", "Cấu hình phân quyền ACL/RBAC trùng khớp với ma trận"],
+    "automation_level": "HIGH_AUTO",
+    "expected_evidence_types": ["EVID_TECH_IAM_AUTH", "EVID_DOC_POLICY"]
+  },
+  {
+    "control_id": "A.8.4",
+    "name": "Access to source code",
+    "group": "A.8 Technological",
+    "objective": "Ngăn chặn truy cập, sửa đổi trái phép vào kho mã nguồn của tổ chức.",
+    "pass_criteria": ["Cấu hình Git bảo vệ branch (branch protection)", "Phân quyền read/write kho mã nguồn rõ ràng"],
+    "automation_level": "HIGH_AUTO",
+    "expected_evidence_types": ["EVID_TECH_SDLC_REPORT"]
+  },
+  {
+    "control_id": "A.8.5",
+    "name": "Secure authentication",
+    "group": "A.8 Technological",
+    "objective": "Ngăn chặn truy cập trái phép bằng cách áp dụng các cơ chế xác thực mạnh.",
+    "pass_criteria": ["Độ dài mật khẩu tối thiểu 12 ký tự", "Bật MFA cho tài khoản đặc quyền", "Vô hiệu hóa SSH root login bằng mật khẩu"],
+    "automation_level": "HIGH_AUTO",
+    "expected_evidence_types": ["EVID_TECH_IAM_AUTH"]
+  },
+  {
+    "control_id": "A.8.6",
+    "name": "Capacity management",
+    "group": "A.8 Technological",
+    "objective": "Giám sát tài nguyên hệ thống để đảm bảo độ sẵn sàng của dịch vụ.",
+    "pass_criteria": ["Hệ thống giám sát CPU/RAM/Disk đang thu thập dữ liệu", "Cấu hình cảnh báo khi quá ngưỡng dung lượng"],
+    "automation_level": "HIGH_AUTO",
+    "expected_evidence_types": ["EVID_TECH_NET_FIREWALL"]
+  },
+  {
+    "control_id": "A.8.7",
+    "name": "Protection against malware",
+    "group": "A.8 Technological",
+    "objective": "Phát hiện và ngăn chặn các phần mềm độc hại lây nhiễm vào hệ thống.",
+    "pass_criteria": ["Dịch vụ Antivirus/EDR trạng thái Active", "Mẫu nhận diện (Signature) được cập nhật thường xuyên"],
+    "automation_level": "HIGH_AUTO",
+    "expected_evidence_types": ["EVID_TECH_ENDPOINT_AV"]
+  },
+  {
+    "control_id": "A.8.8",
+    "name": "Management of technical vulnerabilities",
+    "group": "A.8 Technological",
+    "objective": "Phát hiện và khắc phục kịp thời các lỗ hổng bảo mật kỹ thuật.",
+    "pass_criteria": ["Báo cáo quét lỗ hổng định kỳ", "Hệ thống được cập nhật bản vá bảo mật (Patch OS)"],
+    "automation_level": "HIGH_AUTO",
+    "expected_evidence_types": ["EVID_TECH_VULN_CONFIG"]
+  },
+  {
+    "control_id": "A.8.9",
+    "name": "Configuration management",
+    "group": "A.8 Technological",
+    "objective": "Quản lý và duy trì cấu hình an toàn cho mọi thiết bị trong mạng.",
+    "pass_criteria": ["Bản chụp cấu hình baseline", "Bằng chứng giám sát sự thay đổi cấu hình trái phép"],
+    "automation_level": "HIGH_AUTO",
+    "expected_evidence_types": ["EVID_TECH_VULN_CONFIG"]
+  },
+  {
+    "control_id": "A.8.10",
+    "name": "Information deletion",
+    "group": "A.8 Technological",
+    "objective": "Xóa thông tin an toàn khi hết thời hạn lưu trữ theo chính sách.",
+    "pass_criteria": ["Cấu hình retention policy để tự động xóa dữ liệu cũ", "Log hệ thống ghi nhận việc xóa dữ liệu"],
+    "automation_level": "SEMI_AUTO",
+    "expected_evidence_types": ["EVID_TECH_VULN_CONFIG", "EVID_DOC_POLICY"]
+  },
+  {
+    "control_id": "A.8.11",
+    "name": "Data masking",
+    "group": "A.8 Technological",
+    "objective": "Che giấu thông tin nhạy cảm để hạn chế sự lộ lọt không cần thiết.",
+    "pass_criteria": ["Cấu hình hoặc quy tắc che giấu dữ liệu PII", "Dữ liệu nhạy cảm bị ẩn trên môi trường không phải Production"],
+    "automation_level": "SEMI_AUTO",
+    "expected_evidence_types": ["EVID_TECH_VULN_CONFIG", "EVID_DOC_POLICY"]
+  },
+  {
+    "control_id": "A.8.12",
+    "name": "Data leakage prevention",
+    "group": "A.8 Technological",
+    "objective": "Phát hiện và ngăn chặn hành vi xuất/lưu trữ dữ liệu trái phép (DLP).",
+    "pass_criteria": ["Cấu hình kiểm soát sao chép USB", "Rule chặn gửi email chứa dữ liệu nhạy cảm ra ngoài"],
+    "automation_level": "SEMI_AUTO",
+    "expected_evidence_types": ["EVID_TECH_ENDPOINT_AV", "EVID_DOC_POLICY"]
+  },
+  {
+    "control_id": "A.8.13",
+    "name": "Information backup",
+    "group": "A.8 Technological",
+    "objective": "Sao lưu dữ liệu định kỳ và đảm bảo khả năng phục hồi khi gặp sự cố.",
+    "pass_criteria": ["Log hệ thống ghi nhận sao lưu thành công gần nhất", "Biên bản test khôi phục dữ liệu (restore test)"],
+    "automation_level": "HIGH_AUTO",
+    "expected_evidence_types": ["EVID_TECH_BACKUP_LOG"]
+  },
+  {
+    "control_id": "A.8.14",
+    "name": "Redundancy of information processing facilities",
+    "group": "A.8 Technological",
+    "objective": "Xây dựng hạ tầng dự phòng để đảm bảo tính sẵn sàng (Availability).",
+    "pass_criteria": ["Cấu hình High Availability (HA) hoặc Load Balancing", "Tài liệu kiến trúc hệ thống dự phòng"],
+    "automation_level": "SEMI_AUTO",
+    "expected_evidence_types": ["EVID_TECH_NET_FIREWALL", "EVID_DOC_POLICY"]
+  },
+  {
+    "control_id": "A.8.15",
+    "name": "Logging",
+    "group": "A.8 Technological",
+    "objective": "Ghi nhận đầy đủ nhật ký hệ thống và bảo vệ log khỏi bị chỉnh sửa.",
+    "pass_criteria": ["Dịch vụ rsyslog/auditd đang hoạt động", "Log được đẩy về máy chủ tập trung (Log Server)"],
+    "automation_level": "HIGH_AUTO",
+    "expected_evidence_types": ["EVID_TECH_BACKUP_LOG"]
+  },
+  {
+    "control_id": "A.8.16",
+    "name": "Monitoring activities",
+    "group": "A.8 Technological",
+    "objective": "Giám sát hệ thống mạng và ứng dụng để phát hiện dấu hiệu tấn công.",
+    "pass_criteria": ["Cấu hình rule cảnh báo (Alert) trên SIEM/Monitoring", "Nhật ký xử lý cảnh báo bảo mật"],
+    "automation_level": "HIGH_AUTO",
+    "expected_evidence_types": ["EVID_TECH_BACKUP_LOG", "EVID_DOC_POLICY"]
+  },
+  {
+    "control_id": "A.8.17",
+    "name": "Clock synchronization",
+    "group": "A.8 Technological",
+    "objective": "Đồng bộ thời gian chuẩn trên tất cả thiết bị để phục vụ phân tích log hợp lệ.",
+    "pass_criteria": ["Dịch vụ NTP/chronyd hoạt động", "Trạng thái Clock Synchronized: Yes"],
+    "automation_level": "HIGH_AUTO",
+    "expected_evidence_types": ["EVID_TECH_BACKUP_LOG"]
+  },
+  {
+    "control_id": "A.8.18",
+    "name": "Use of privileged utility programs",
+    "group": "A.8 Technological",
+    "objective": "Kiểm soát các công cụ có khả năng can thiệp sâu vào hệ thống.",
+    "pass_criteria": ["Giới hạn quyền thực thi các file SUID/SGID", "Danh sách công cụ quản trị được cấp quyền hợp lý"],
+    "automation_level": "HIGH_AUTO",
+    "expected_evidence_types": ["EVID_TECH_IAM_AUTH"]
+  },
+  {
+    "control_id": "A.8.19",
+    "name": "Installation of software on operational systems",
+    "group": "A.8 Technological",
+    "objective": "Ngăn chặn việc cài đặt phần mềm không được phê duyệt lên hệ thống.",
+    "pass_criteria": ["Người dùng thông thường không có quyền cài đặt phần mềm", "Danh sách phần mềm trùng khớp với Whitelist"],
+    "automation_level": "HIGH_AUTO",
+    "expected_evidence_types": ["EVID_TECH_ENDPOINT_AV", "EVID_DOC_POLICY"]
+  },
+  {
+    "control_id": "A.8.20",
+    "name": "Networks security",
+    "group": "A.8 Technological",
+    "objective": "Bảo vệ hệ thống mạng khỏi các luồng truy cập không được phép.",
+    "pass_criteria": ["Dịch vụ Firewall hoạt động (ufw/iptables/Windows Firewall)", "Chỉ mở các cổng (port) dịch vụ cần thiết"],
+    "automation_level": "HIGH_AUTO",
+    "expected_evidence_types": ["EVID_TECH_NET_FIREWALL"]
+  },
+  {
+    "control_id": "A.8.21",
+    "name": "Security of network services",
+    "group": "A.8 Technological",
+    "objective": "Xác định và áp dụng các yêu cầu bảo mật riêng biệt cho từng dịch vụ mạng.",
+    "pass_criteria": ["Tài liệu yêu cầu SLA bảo mật với nhà cung cấp mạng", "Cấu hình bảo mật dịch vụ mạng (DNS, VPN)"],
+    "automation_level": "SEMI_AUTO",
+    "expected_evidence_types": ["EVID_TECH_NET_FIREWALL", "EVID_DOC_POLICY"]
+  },
+  {
+    "control_id": "A.8.22",
+    "name": "Segregation of networks",
+    "group": "A.8 Technological",
+    "objective": "Phân tách các phân vùng mạng (DMZ, Server, User) để cô lập rủi ro.",
+    "pass_criteria": ["Cấu hình VLAN/Subnet rõ ràng", "Rule Firewall cấm truy cập chéo không cần thiết"],
+    "automation_level": "HIGH_AUTO",
+    "expected_evidence_types": ["EVID_TECH_NET_FIREWALL"]
+  },
+  {
+    "control_id": "A.8.23",
+    "name": "Web filtering",
+    "group": "A.8 Technological",
+    "objective": "Ngăn chặn người dùng truy cập các trang web độc hại hoặc không phù hợp.",
+    "pass_criteria": ["Cấu hình Proxy/DNS lọc web", "Danh sách blacklist tên miền/IP bị cấm"],
+    "automation_level": "SEMI_AUTO",
+    "expected_evidence_types": ["EVID_TECH_NET_FIREWALL"]
+  },
+  {
+    "control_id": "A.8.24",
+    "name": "Use of cryptography",
+    "group": "A.8 Technological",
+    "objective": "Sử dụng mật mã để bảo vệ tính bảo mật và toàn vẹn của thông tin.",
+    "pass_criteria": ["Chứng chỉ SSL/TLS còn hạn", "Chỉ hỗ trợ TLS 1.2 hoặc TLS 1.3, vô hiệu hóa cipher yếu"],
+    "automation_level": "HIGH_AUTO",
+    "expected_evidence_types": ["EVID_TECH_VULN_CONFIG", "EVID_DOC_POLICY"]
+  },
+  {
+    "control_id": "A.8.25",
+    "name": "Secure development life cycle",
+    "group": "A.8 Technological",
+    "objective": "Tích hợp các bước kiểm tra an toàn thông tin vào quy trình phát triển phần mềm.",
+    "pass_criteria": ["Tài liệu quy trình SDLC", "Có pipeline CI/CD tích hợp quét bảo mật mã nguồn"],
+    "automation_level": "SEMI_AUTO",
+    "expected_evidence_types": ["EVID_TECH_SDLC_REPORT", "EVID_DOC_POLICY"]
+  },
+  {
+    "control_id": "A.8.26",
+    "name": "Application security requirements",
+    "group": "A.8 Technological",
+    "objective": "Xác định rõ các tiêu chuẩn bảo mật ngay từ khâu thiết kế ứng dụng.",
+    "pass_criteria": ["Tài liệu đặc tả yêu cầu bảo mật phần mềm (VD: theo OWASP ASVS)"],
+    "automation_level": "SEMI_AUTO",
+    "expected_evidence_types": ["EVID_DOC_POLICY"]
+  },
+  {
+    "control_id": "A.8.27",
+    "name": "Secure system architecture and engineering principles",
+    "group": "A.8 Technological",
+    "objective": "Thiết kế kiến trúc hệ thống an toàn dựa trên các nguyên tắc Zero Trust, Least Privilege.",
+    "pass_criteria": ["Tài liệu thiết kế kiến trúc bảo mật", "Bằng chứng triển khai theo kiến trúc đã duyệt"],
+    "automation_level": "SEMI_AUTO",
+    "expected_evidence_types": ["EVID_DOC_POLICY"]
+  },
+  {
+    "control_id": "A.8.28",
+    "name": "Secure coding",
+    "group": "A.8 Technological",
+    "objective": "Đảm bảo lập trình viên viết mã an toàn, không chứa lỗ hổng cơ bản.",
+    "pass_criteria": ["Quy chuẩn lập trình an toàn (Secure Coding Guidelines)", "Kết quả quét mã tĩnh (SAST report) không có lỗi nghiêm trọng"],
+    "automation_level": "HIGH_AUTO",
+    "expected_evidence_types": ["EVID_TECH_SDLC_REPORT", "EVID_DOC_POLICY"]
+  },
+  {
+    "control_id": "A.8.29",
+    "name": "Security testing in development and acceptance",
+    "group": "A.8 Technological",
+    "objective": "Kiểm thử bảo mật kỹ lưỡng trước khi đưa phần mềm vào sử dụng thực tế.",
+    "pass_criteria": ["Báo cáo kiểm thử động (DAST) hoặc Pentest report", "Biên bản nghiệm thu bảo mật"],
+    "automation_level": "HIGH_AUTO",
+    "expected_evidence_types": ["EVID_TECH_SDLC_REPORT"]
+  },
+  {
+    "control_id": "A.8.30",
+    "name": "Outsourced development",
+    "group": "A.8 Technological",
+    "objective": "Quản lý rủi ro khi thuê bên thứ ba phát triển phần mềm.",
+    "pass_criteria": ["Hợp đồng thuê ngoài có điều khoản bảo mật", "Biên bản rà soát mã nguồn do bên gia công bàn giao"],
+    "automation_level": "SEMI_AUTO",
+    "expected_evidence_types": ["EVID_DOC_POLICY", "EVID_TECH_SDLC_REPORT"]
+  },
+  {
+    "control_id": "A.8.31",
+    "name": "Separation of development, test and production environments",
+    "group": "A.8 Technological",
+    "objective": "Phân tách hoàn toàn môi trường phát triển, kiểm thử và vận hành.",
+    "pass_criteria": ["Danh sách máy chủ/mạng phân định rõ các môi trường", "Tài khoản dev không thể truy cập DB Production"],
+    "automation_level": "HIGH_AUTO",
+    "expected_evidence_types": ["EVID_TECH_NET_FIREWALL", "EVID_TECH_IAM_AUTH"]
+  },
+  {
+    "control_id": "A.8.32",
+    "name": "Change management",
+    "group": "A.8 Technological",
+    "objective": "Mọi thay đổi đối với hệ thống phải được đánh giá rủi ro và phê duyệt.",
+    "pass_criteria": ["Quy trình quản lý thay đổi", "Nhật ký phê duyệt Change Request / Pull Request"],
+    "automation_level": "SEMI_AUTO",
+    "expected_evidence_types": ["EVID_TECH_SDLC_REPORT", "EVID_DOC_POLICY"]
+  },
+  {
+    "control_id": "A.8.33",
+    "name": "Test information",
+    "group": "A.8 Technological",
+    "objective": "Không sử dụng dữ liệu thật chứa thông tin nhạy cảm để chạy kiểm thử.",
+    "pass_criteria": ["Quy định làm ẩn danh dữ liệu test", "Bằng chứng dữ liệu trên môi trường test là dữ liệu giả lập (synthetic)"],
+    "automation_level": "SEMI_AUTO",
+    "expected_evidence_types": ["EVID_TECH_VULN_CONFIG", "EVID_DOC_POLICY"]
+  },
+  {
+    "control_id": "A.8.34",
+    "name": "Protection of information systems during audit testing",
+    "group": "A.8 Technological",
+    "objective": "Đảm bảo quá trình thu thập dữ liệu kiểm toán không làm gián đoạn hệ thống.",
+    "pass_criteria": ["Tài khoản audit chỉ được cấp quyền Read-Only", "Kế hoạch kiểm toán được phê duyệt trước khi chạy scan"],
+    "automation_level": "SEMI_AUTO",
+    "expected_evidence_types": ["EVID_TECH_IAM_AUTH", "EVID_DOC_POLICY"]
+  }
+]
