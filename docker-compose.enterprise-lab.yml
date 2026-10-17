@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  # Node 1: Máy chủ Quản lý Định danh & Truy cập Doanh nghiệp (Kiểm tra A.8.2, A.8.5, A.8.18)
+  corp-iam-auth-node:
+    image: ubuntu:22.04
+    container_name: corp-iam-auth-node
+    hostname: iam-srv-01.vietfintech.local
+    command: >
+      bash -c "apt-get update && apt-get install -y openssh-server sudo &&
+      useradd -m -s /bin/bash nv_ke_toan &&
+      useradd -m -s /bin/bash admin_it && usermod -aG sudo admin_it &&
+      sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config &&
+      tail -f /dev/null"
+
+  # Node 2: Máy chủ Web Gateway & Mạng Doanh nghiệp (Kiểm tra A.8.20, A.8.21, A.8.24)
+  corp-network-fw-node:
+    image: nginx:alpine
+    container_name: corp-network-fw-node
+    hostname: gw-fw-01.vietfintech.local
+    ports:
+      - "8088:80"
+
+  # Node 3: Máy chủ Log Tập trung & Backup Doanh nghiệp (Kiểm tra A.8.13, A.8.15, A.8.17)
+  corp-secops-log-node:
+    image: ubuntu:22.04
+    container_name: corp-secops-log-node
+    hostname: secops-log-01.vietfintech.local
+    command: >
+      bash -c "mkdir -p /var/log/enterprise_backup &&
+      echo '2026-10-16 02:00:00 [SUCCESS] Full DB Backup completed. Integrity SHA256 verified.' > /var/log/enterprise_backup/backup.log &&
+      tail -f /dev/null"
