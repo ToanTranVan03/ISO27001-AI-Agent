@@ -1,20 +1,338 @@
 {
+  "A.6.1": {
+    "control_name": "Screening",
+    "Compliant": "100% ứng viên được thẩm tra lý lịch trước khi tuyển dụng. Quy trình thẩm tra phù hợp với vai trò, luật pháp và quy định hiện hành.",
+    "Partially Compliant": "Có quy trình thẩm tra nhưng không áp dụng đồng bộ cho tất cả ứng viên hoặc thiếu hồ sơ lưu trữ cho một số trường hợp.",
+    "Non-Compliant": "Không có quy trình thẩm tra lý lịch hoặc không thực hiện thẩm tra trước khi tuyển dụng."
+  },
+  "A.6.2": {
+    "control_name": "Terms and conditions of employment",
+    "Compliant": "Hợp đồng lao động quy định rõ ràng trách nhiệm bảo mật thông tin. Nhân sự ký cam kết tuân thủ trước khi nhận việc.",
+    "Partially Compliant": "Hợp đồng có điều khoản bảo mật nhưng chưa đầy đủ hoặc một số nhân sự chưa ký cam kết tuân thủ.",
+    "Non-Compliant": "Không có điều khoản bảo mật trong hợp đồng lao động hoặc không yêu cầu ký cam kết."
+  },
+  "A.6.3": {
+    "control_name": "Information security awareness, education and training",
+    "Compliant": "100% nhân sự hoàn thành đào tạo nhận thức ATTT định kỳ. Có đánh giá hiệu quả đào tạo và lưu trữ hồ sơ đầy đủ.",
+    "Partially Compliant": "Có tổ chức đào tạo nhưng chưa đạt 100% nhân sự tham gia hoặc thiếu đánh giá hiệu quả sau đào tạo.",
+    "Non-Compliant": "Không có chương trình đào tạo nhận thức ATTT hoặc không tổ chức đào tạo định kỳ."
+  },
+  "A.6.4": {
+    "control_name": "Disciplinary process",
+    "Compliant": "Quy trình xử lý kỷ luật đối với vi phạm ATTT được ban hành, truyền đạt và áp dụng minh bạch. Có hồ sơ lưu trữ các vụ việc xử lý.",
+    "Partially Compliant": "Có quy trình kỷ luật nhưng chưa được truyền đạt rộng rãi hoặc áp dụng chưa nhất quán trong các trường hợp vi phạm.",
+    "Non-Compliant": "Không có quy trình xử lý kỷ luật đối với vi phạm ATTT."
+  },
+  "A.6.5": {
+    "control_name": "Responsibilities after termination or change of employment",
+    "Compliant": "Quy trình thu hồi tài sản và quyền truy cập được thực hiện ngay lập tức khi nhân sự nghỉ việc hoặc chuyển bộ phận. Trách nhiệm bảo mật sau khi nghỉ việc được quy định rõ.",
+    "Partially Compliant": "Có quy trình thu hồi nhưng thực hiện chậm trễ hoặc thiếu sót trong một số trường hợp. Trách nhiệm bảo mật sau nghỉ việc chưa được nhấn mạnh.",
+    "Non-Compliant": "Không có quy trình thu hồi tài sản/quyền truy cập hoặc không nhắc nhở về trách nhiệm bảo mật khi nghỉ việc."
+  },
   "A.6.6": {
     "control_name": "Confidentiality or non-disclosure agreements",
     "Compliant": "100% nhân sự chính thức và nhà thầu phụ đều đã ký NDA. Hồ sơ lưu trữ đầy đủ, chữ ký hợp lệ và có hiệu lực trước khi cấp quyền truy cập hệ thống.",
-    "Partially Compliant": "Có ký NDA nhưng phát hiện thiếu sót (ví dụ: thiếu chữ ký của nhà thầu phụ, hoặc sử dụng biểu mẫu cũ chưa cập nhật các điều khoản mới).",
-    "Non-Compliant": "Không có quy trình ký NDA, hoặc mất mát phần lớn hồ sơ chứng minh nhân viên đã ký NDA."
+    "Partially Compliant": "Có ký NDA nhưng phát hiện thiếu sót (ví dụ: thiếu chữ ký của nhà thầu phụ, hoặc biểu mẫu cũ).",
+    "Non-Compliant": "Không có quy trình ký NDA, hoặc mất mát phần lớn hồ sơ."
+  },
+  "A.6.7": {
+    "control_name": "Remote working",
+    "Compliant": "Chính sách làm việc từ xa được ban hành và tuân thủ. Các biện pháp bảo mật (VPN, mã hóa ổ cứng) được áp dụng đầy đủ cho thiết bị làm việc từ xa.",
+    "Partially Compliant": "Có chính sách nhưng việc áp dụng các biện pháp bảo mật kỹ thuật chưa đồng bộ trên tất cả các thiết bị làm việc từ xa.",
+    "Non-Compliant": "Không có chính sách làm việc từ xa hoặc không áp dụng các biện pháp bảo mật cho thiết bị làm việc từ xa."
+  },
+  "A.6.8": {
+    "control_name": "Information security event reporting",
+    "Compliant": "Quy trình báo cáo sự kiện ATTT rõ ràng, dễ tiếp cận. 100% nhân sự biết cách báo cáo. Các sự kiện được ghi nhận và xử lý kịp thời.",
+    "Partially Compliant": "Có kênh báo cáo nhưng nhân sự chưa nhận thức đầy đủ hoặc quy trình xử lý sự kiện báo cáo chưa được thực hiện triệt để.",
+    "Non-Compliant": "Không có quy trình báo cáo sự kiện ATTT hoặc kênh báo cáo không hoạt động."
+  },
+  "A.7.1": {
+    "control_name": "Physical security perimeters",
+    "Compliant": "Vành đai an ninh vật lý được xác định rõ ràng, có rào chắn vật lý và biển cảnh báo. Các khu vực nhạy cảm được bảo vệ bằng các lớp an ninh bổ sung.",
+    "Partially Compliant": "Có vành đai an ninh nhưng còn sơ hở, chưa được rào chắn toàn bộ hoặc thiếu biển cảnh báo tại một số điểm tiếp cận.",
+    "Non-Compliant": "Không có vành đai an ninh vật lý rõ ràng. Bất kỳ ai cũng có thể tiếp cận khu vực của tổ chức mà không bị kiểm soát."
   },
   "A.7.2": {
-    "control_name": "Physical entry controls",
-    "Compliant": "Tất cả các khu vực an ninh (Phòng Server, Kho tài liệu) đều có hệ thống kiểm soát ra vào (thẻ từ, sinh trắc học). Có lưu giữ log truy cập tối thiểu 90 ngày. Khách viếng thăm phải đăng ký và có người giám sát.",
-    "Partially Compliant": "Có hệ thống kiểm soát nhưng log truy cập bị thiếu hụt hoặc không lưu đủ 90 ngày. Quy trình giám sát khách viếng thăm chưa chặt chẽ.",
-    "Non-Compliant": "Không có hệ thống kiểm soát ra vào vật lý cho phòng Server. Cửa mở tự do hoặc chỉ dùng khóa cơ không thể truy vết."
+    "control_name": "Physical entry",
+    "Compliant": "Hệ thống kiểm soát truy cập vật lý (thẻ từ, sinh trắc học) được triển khai tại tất cả các lối vào khu vực an ninh. Khách viếng thăm được đăng ký, cấp thẻ khách và luôn có người giám sát.",
+    "Partially Compliant": "Có hệ thống kiểm soát nhưng áp dụng chưa đồng bộ. Khách viếng thăm đôi khi không được giám sát liên tục.",
+    "Non-Compliant": "Không có biện pháp kiểm soát truy cập vật lý. Cửa mở tự do hoặc chỉ dùng khóa cơ, khách viếng thăm ra vào không cần đăng ký."
+  },
+  "A.7.3": {
+    "control_name": "Securing offices, rooms and facilities",
+    "Compliant": "Các văn phòng, phòng ban chức năng và cơ sở vật chất quan trọng được khóa an toàn khi không sử dụng. Tài liệu nhạy cảm không để trên bàn làm việc ngoài giờ.",
+    "Partially Compliant": "Một số phòng ban quan trọng chưa tuân thủ quy định khóa cửa ngoài giờ. Thỉnh thoảng phát hiện tài liệu nhạy cảm để hớ hênh.",
+    "Non-Compliant": "Không có quy định khóa cửa văn phòng. Tài liệu nhạy cảm thường xuyên bị bỏ lại trên bàn làm việc hoặc khu vực công cộng."
+  },
+  "A.7.4": {
+    "control_name": "Physical security monitoring",
+    "Compliant": "Hệ thống camera giám sát (CCTV) hoạt động 24/7 bao phủ toàn bộ lối ra vào, khu vực an ninh, phòng Server. Dữ liệu ghi hình được lưu trữ tối thiểu 30 ngày và có hệ thống cảnh báo đột nhập.",
+    "Partially Compliant": "Có hệ thống CCTV nhưng góc quan sát chưa bao phủ hết khu vực trọng yếu, hoặc thời gian lưu trữ dữ liệu dưới 30 ngày.",
+    "Non-Compliant": "Không có hệ thống giám sát an ninh vật lý hoặc hệ thống không hoạt động."
+  },
+  "A.7.5": {
+    "control_name": "Protecting against external and environmental threats",
+    "Compliant": "Có hệ thống phòng cháy chữa cháy tự động, hệ thống làm mát dự phòng, thiết bị chống rò rỉ nước tại phòng Server. Đã thực hiện đánh giá rủi ro môi trường định kỳ.",
+    "Partially Compliant": "Các hệ thống bảo vệ vật lý (PCCC, làm mát) đã được trang bị nhưng chưa được bảo trì, kiểm định định kỳ hoặc thiếu đánh giá rủi ro.",
+    "Non-Compliant": "Phòng Server không có hệ thống báo cháy, chữa cháy tự động, không có biện pháp đối phó với rủi ro môi trường (cháy, nổ, lụt)."
+  },
+  "A.7.6": {
+    "control_name": "Working in secure areas",
+    "Compliant": "Có quy định rõ ràng về các thiết bị được phép và không được phép mang vào khu vực an ninh cao (ví dụ: không mang điện thoại cá nhân vào phòng xử lý thẻ). Tuân thủ nghiêm ngặt và có kiểm tra.",
+    "Partially Compliant": "Có quy định làm việc trong khu vực an ninh nhưng chưa có biện pháp kiểm tra, giám sát hiệu quả, thỉnh thoảng có vi phạm.",
+    "Non-Compliant": "Không có quy định nào về làm việc trong khu vực an ninh. Nhân sự tự do sử dụng thiết bị cá nhân."
+  },
+  "A.7.7": {
+    "control_name": "Clear desk and clear screen",
+    "Compliant": "Chính sách bàn làm việc sạch (Clear Desk) và màn hình sạch (Clear Screen) được áp dụng. Màn hình tự động khóa sau tối đa 5 phút không hoạt động.",
+    "Partially Compliant": "Có quy định nhưng nhân viên chưa tuân thủ tốt. Màn hình máy tính thiết lập thời gian khóa tự động quá dài (trên 15 phút).",
+    "Non-Compliant": "Không có chính sách, không cấu hình khóa màn hình tự động. Tài liệu nhạy cảm vứt bừa bãi."
+  },
+  "A.7.8": {
+    "control_name": "Equipment siting and protection",
+    "Compliant": "Thiết bị CNTT quan trọng được đặt tại vị trí an toàn, tránh rủi ro môi trường và giảm thiểu rủi ro truy cập trái phép (ví dụ: không đặt màn hình gần cửa sổ).",
+    "Partially Compliant": "Một số thiết bị quan trọng đặt ở vị trí chưa phù hợp, có thể bị nhìn trộm màn hình hoặc dễ bị ảnh hưởng bởi môi trường.",
+    "Non-Compliant": "Thiết bị quan trọng (như switch, router) đặt ngoài hành lang, khu vực công cộng không có tủ khóa bảo vệ."
+  },
+  "A.7.9": {
+    "control_name": "Security of assets off-premises",
+    "Compliant": "Tài sản mang ra ngoài công ty (laptop, USB) đều phải được phê duyệt, ghi nhận. Áp dụng mã hóa toàn bộ ổ cứng và có phần mềm quản lý thiết bị từ xa (MDM).",
+    "Partially Compliant": "Có ghi nhận việc mang tài sản ra ngoài nhưng chưa áp dụng mã hóa ổ cứng đầy đủ trên tất cả thiết bị di động.",
+    "Non-Compliant": "Nhân viên tự do mang tài sản công ty về nhà không cần phê duyệt, không có mã hóa hay biện pháp bảo vệ dữ liệu."
+  },
+  "A.7.10": {
+    "control_name": "Storage media",
+    "Compliant": "Phương tiện lưu trữ tháo rời (USB, ổ cứng ngoài) được quản lý chặt chẽ, được mã hóa dữ liệu. Tuân thủ quy định tiêu hủy an toàn khi không còn sử dụng.",
+    "Partially Compliant": "Có quy định quản lý nhưng chưa kiểm soát được toàn bộ, dữ liệu trên phương tiện tháo rời chưa được mã hóa 100%.",
+    "Non-Compliant": "Sử dụng USB cá nhân tùy tiện, không quản lý phương tiện lưu trữ. Vứt bỏ đĩa cứng cũ vào thùng rác thông thường."
+  },
+  "A.7.11": {
+    "control_name": "Supporting utilities",
+    "Compliant": "Hệ thống điện dự phòng (UPS, máy phát điện) và viễn thông được trang bị, hoạt động tốt. Có kế hoạch kiểm tra, bảo trì định kỳ.",
+    "Partially Compliant": "Có hệ thống điện dự phòng nhưng không đủ công suất hoặc không được kiểm tra, bảo dưỡng định kỳ.",
+    "Non-Compliant": "Phòng Server cắm trực tiếp vào nguồn điện lưới, không có UPS, không có đường truyền internet dự phòng."
+  },
+  "A.7.12": {
+    "control_name": "Cabling security",
+    "Compliant": "Hệ thống cáp điện và cáp mạng truyền tải dữ liệu nhạy cảm được bảo vệ, đặt trong ống luồn cáp an toàn để chống cắt phá hoặc nghe lén.",
+    "Partially Compliant": "Cáp mạng được tổ chức gọn gàng nhưng vẫn có một số đoạn phơi bày, dễ tiếp cận tại khu vực công cộng.",
+    "Non-Compliant": "Dây cáp mạng kéo lộ thiên, lộn xộn, dễ dàng bị rút hoặc cắm nối trái phép."
+  },
+  "A.7.13": {
+    "control_name": "Equipment maintenance",
+    "Compliant": "Tất cả thiết bị CNTT được bảo trì đúng định kỳ theo khuyến cáo của nhà sản xuất. Hồ sơ bảo trì được lưu giữ đầy đủ.",
+    "Partially Compliant": "Có thực hiện bảo trì khi hỏng hóc (bảo trì khắc phục) nhưng thiếu kế hoạch bảo trì phòng ngừa định kỳ.",
+    "Non-Compliant": "Không có kế hoạch bảo trì thiết bị. Hồ sơ sửa chữa không được lưu trữ."
+  },
+  "A.7.14": {
+    "control_name": "Secure disposal or re-use of equipment",
+    "Compliant": "Thiết bị lưu trữ (ổ cứng, SSD) đều phải được xóa dữ liệu an toàn (wiping) bằng phần mềm chuyên dụng hoặc phá hủy vật lý trước khi thanh lý/tái sử dụng. Có biên bản xác nhận.",
+    "Partially Compliant": "Có quy trình xóa dữ liệu nhưng chỉ thực hiện format thông thường thay vì wiping an toàn, hoặc biên bản thanh lý không đầy đủ.",
+    "Non-Compliant": "Bán thanh lý hoặc vứt bỏ máy tính cũ, ổ cứng cũ mà không xóa dữ liệu."
+  },
+  "A.8.1": {
+    "control_name": "User endpoint devices",
+    "Compliant": "100% thiết bị đầu cuối (laptop, PC) được quản lý tập trung, cài đặt Antivirus/EDR, mã hóa ổ cứng và chặn cài đặt phần mềm trái phép. Thiết bị BYOD (nếu có) phải tuân thủ chính sách MDM.",
+    "Partially Compliant": "Thiết bị công ty được quản lý nhưng thiết bị BYOD của nhân viên dùng để làm việc chưa được kiểm soát chặt chẽ bằng MDM.",
+    "Non-Compliant": "Không có phần mềm diệt virus quản lý tập trung, không mã hóa ổ cứng, người dùng có toàn quyền Admin trên máy cá nhân."
+  },
+  "A.8.2": {
+    "control_name": "Privileged access rights",
+    "Compliant": "Quyền truy cập đặc quyền (Admin/Root) được cấp phát nghiêm ngặt dựa trên nguyên tắc đặc quyền tối thiểu (Least Privilege). Yêu cầu MFA, phê duyệt và giám sát log hoạt động.",
+    "Partially Compliant": "Quản lý quyền Admin chưa chặt, một số người dùng thường vẫn có quyền Admin cục bộ, hoặc log của tài khoản Admin không được theo dõi thường xuyên.",
+    "Non-Compliant": "Tài khoản Admin được chia sẻ dùng chung, không thu hồi khi chuyển đổi công việc, không có MFA."
+  },
+  "A.8.3": {
+    "control_name": "Information access restriction",
+    "Compliant": "Kiểm soát truy cập thông tin được thực hiện dựa trên nguyên tắc Need-to-Know và RBAC (Role-Based Access Control). Thường xuyên rà soát quyền truy cập.",
+    "Partially Compliant": "Có phân quyền truy cập nhưng chưa áp dụng RBAC triệt để, hoặc không rà soát quyền truy cập định kỳ (ví dụ: nhân sự chuyển bộ phận nhưng quyền cũ vẫn còn).",
+    "Non-Compliant": "Phân quyền lỏng lẻo, mọi nhân viên đều có thể truy cập vào các thư mục chứa dữ liệu nhạy cảm của toàn công ty."
+  },
+  "A.8.4": {
+    "control_name": "Access to source code",
+    "Compliant": "Truy cập vào mã nguồn (Source Code) được bảo vệ nghiêm ngặt bằng cơ chế kiểm soát phiên bản (Git), phân quyền theo dự án, yêu cầu MFA và cấm lưu trữ cục bộ mã nguồn trên máy cá nhân khi không cần thiết.",
+    "Partially Compliant": "Có hệ thống quản lý mã nguồn nhưng phân quyền đọc/ghi chưa chặt chẽ, nhà thầu phụ dễ dàng tải toàn bộ mã nguồn.",
+    "Non-Compliant": "Mã nguồn dùng chung tài khoản, lưu trữ phân tán, không có nhật ký thay đổi code (commit log)."
   },
   "A.8.5": {
     "control_name": "Secure authentication",
     "Compliant": "Xác thực đa yếu tố (MFA) được kích hoạt và bắt buộc cho 100% người dùng truy cập từ xa và tài khoản quản trị (Admin). Chính sách mật khẩu mạnh được thực thi trên hệ thống.",
     "Partially Compliant": "Có áp dụng MFA nhưng chỉ cho tài khoản Admin, người dùng thường hoặc mạng VPN chưa bị bắt buộc. Hoặc chính sách mật khẩu chưa đủ mạnh (độ dài dưới 8 ký tự).",
     "Non-Compliant": "Hoàn toàn không sử dụng MFA cho các truy cập từ xa hoặc tài khoản đặc quyền. Mật khẩu không có chính sách bắt buộc thay đổi định kỳ."
+  },
+  "A.8.6": {
+    "control_name": "Capacity management",
+    "Compliant": "Hệ thống có công cụ giám sát tài nguyên (CPU, RAM, Storage). Có ngưỡng cảnh báo tự động khi đạt mức tới hạn (ví dụ: 80%). Thực hiện dự báo dung lượng định kỳ.",
+    "Partially Compliant": "Có giám sát dung lượng nhưng không thiết lập cảnh báo tự động, thỉnh thoảng hệ thống bị gián đoạn do hết ổ cứng.",
+    "Non-Compliant": "Không giám sát dung lượng, chỉ xử lý sự cố khi hệ thống đã sập do quá tải."
+  },
+  "A.8.7": {
+    "control_name": "Protection against malware",
+    "Compliant": "Phần mềm chống mã độc (Antivirus/EDR) được cài đặt, cập nhật mẫu virus tự động trên tất cả máy chủ và máy trạm. Quét toàn hệ thống định kỳ. Không cho phép người dùng tự ý tắt.",
+    "Partially Compliant": "Có cài đặt phần mềm diệt virus nhưng một số máy trạm không nhận được bản cập nhật mới, hoặc người dùng có thể tự ý vô hiệu hóa phần mềm.",
+    "Non-Compliant": "Không có giải pháp bảo vệ mã độc tập trung, hoặc sử dụng phần mềm crack, hết hạn bản quyền."
+  },
+  "A.8.8": {
+    "control_name": "Management of technical vulnerabilities",
+    "Compliant": "Quy trình quản lý lỗ hổng kỹ thuật (Patch Management) được tự động hóa. Các bản vá bảo mật mức độ Critical được cập nhật trong vòng 7 ngày. Thực hiện quét lỗ hổng định kỳ (Vulnerability Scanning).",
+    "Partially Compliant": "Có thực hiện cập nhật bản vá nhưng thủ công, chậm trễ, thời gian cập nhật bản vá Critical vượt quá thời hạn quy định.",
+    "Non-Compliant": "Không có quy trình cập nhật bản vá. Hệ thống sử dụng phần mềm cũ có nhiều lỗ hổng đã công bố (CVE)."
+  },
+  "A.8.9": {
+    "control_name": "Configuration management",
+    "Compliant": "Thiết lập cấu hình tiêu chuẩn (Baseline Configuration - hardening) cho tất cả hệ điều hành, cơ sở dữ liệu và thiết bị mạng. Quản lý sự thay đổi cấu hình chặt chẽ (Change Management).",
+    "Partially Compliant": "Có cấu hình tiêu chuẩn nhưng chưa bao phủ hết các hệ thống, hoặc quy trình phê duyệt thay đổi cấu hình chưa được thực thi nghiêm ngặt.",
+    "Non-Compliant": "Triển khai máy chủ bằng cấu hình mặc định (default), không đóng các cổng (ports) và dịch vụ không cần thiết."
+  },
+  "A.8.10": {
+    "control_name": "Information deletion",
+    "Compliant": "Dữ liệu được tự động xóa bỏ khi hết hạn lưu trữ theo chính sách Data Retention. Đảm bảo xóa dữ liệu nhạy cảm trên Cloud hoặc thiết bị thuê ngoài không thể khôi phục.",
+    "Partially Compliant": "Có chính sách lưu trữ nhưng việc xóa dữ liệu cũ chủ yếu làm thủ công, không nhất quán.",
+    "Non-Compliant": "Không xóa dữ liệu, tổ chức lưu trữ mọi thứ vô thời hạn gây rủi ro về pháp lý và bảo mật."
+  },
+  "A.8.11": {
+    "control_name": "Data masking",
+    "Compliant": "Sử dụng kỹ thuật che giấu dữ liệu (Data Masking, Anonymization) đối với dữ liệu nhạy cảm (như PII, số thẻ tín dụng) khi sử dụng cho mục đích phát triển, kiểm thử (Test) hoặc phân tích.",
+    "Partially Compliant": "Có che giấu dữ liệu nhưng thuật toán che giấu chưa đủ mạnh, vẫn có khả năng suy ngược (re-identification).",
+    "Non-Compliant": "Sử dụng trực tiếp cơ sở dữ liệu thật (Production) chứa dữ liệu khách hàng nhạy cảm đưa vào môi trường Test/Dev."
+  },
+  "A.8.12": {
+    "control_name": "Data leakage prevention",
+    "Compliant": "Triển khai giải pháp chống thất thoát dữ liệu (DLP - Data Loss Prevention) tại điểm cuối (Endpoint), mạng (Network) và Email để ngăn chặn việc gửi dữ liệu nhạy cảm ra ngoài trái phép.",
+    "Partially Compliant": "Có hệ thống DLP nhưng chỉ hoạt động ở chế độ giám sát (Monitor/Log), chưa kích hoạt tính năng ngăn chặn (Block).",
+    "Non-Compliant": "Không có biện pháp kỹ thuật nào ngăn chặn nhân viên chép dữ liệu ra USB hoặc gửi qua email cá nhân."
+  },
+  "A.8.13": {
+    "control_name": "Information backup",
+    "Compliant": "Dữ liệu và hệ thống quan trọng được sao lưu định kỳ, lưu trữ bản sao offline/offsite (tuân thủ nguyên tắc 3-2-1). Đã diễn tập phục hồi dữ liệu thành công trong năm.",
+    "Partially Compliant": "Có thực hiện sao lưu nhưng chỉ lưu tại cùng một vị trí với hệ thống chính, hoặc chưa thực hiện diễn tập phục hồi (Restore Test).",
+    "Non-Compliant": "Không sao lưu dữ liệu, hoặc tiến trình sao lưu đã bị lỗi trong thời gian dài mà không ai phát hiện."
+  },
+  "A.8.14": {
+    "control_name": "Redundancy of information processing facilities",
+    "Compliant": "Các hệ thống cung cấp dịch vụ trọng yếu được thiết kế dự phòng (Redundancy, High Availability, Clustering) để đảm bảo tính sẵn sàng theo cam kết (SLA).",
+    "Partially Compliant": "Có hệ thống dự phòng nhưng thời gian chuyển đổi (Failover) chậm, cần can thiệp thủ công nhiều.",
+    "Non-Compliant": "Hệ thống thiết kế theo kiến trúc Single Point of Failure (SPOF). Một thiết bị hỏng sẽ làm sập toàn bộ dịch vụ."
+  },
+  "A.8.15": {
+    "control_name": "Logging",
+    "Compliant": "Thu thập đầy đủ nhật ký hệ thống, nhật ký truy cập mạng và ứng dụng vào một hệ thống quản lý log tập trung (SIEM/Log Server). Log được bảo vệ chống giả mạo và lưu trữ tối thiểu 6 tháng.",
+    "Partially Compliant": "Có thu thập log nhưng lưu trữ phân tán cục bộ trên từng máy chủ, khó khăn trong việc điều tra sự cố.",
+    "Non-Compliant": "Hệ thống không ghi log, hoặc log bị ghi đè nhanh chóng chỉ sau vài ngày."
+  },
+  "A.8.16": {
+    "control_name": "Monitoring activities",
+    "Compliant": "Hệ thống, mạng và ứng dụng được giám sát liên tục để phát hiện các hành vi bất thường. Có quy trình tự động cảnh báo và phản ứng với sự cố (Incident Response).",
+    "Partially Compliant": "Có công cụ giám sát nhưng quy trình theo dõi và phản hồi cảnh báo còn thủ công, chậm trễ.",
+    "Non-Compliant": "Không giám sát các hoạt động mạng hoặc hệ thống, không có cơ chế phát hiện bất thường."
+  },
+  "A.8.17": {
+    "control_name": "Clock synchronization",
+    "Compliant": "Tất cả các máy chủ, thiết bị mạng và ứng dụng đều được đồng bộ hóa thời gian từ một nguồn tham chiếu tiêu chuẩn (NTP Server nội bộ hoặc quốc tế đáng tin cậy).",
+    "Partially Compliant": "Có sử dụng NTP nhưng nhiều thiết bị chưa được cấu hình đồng bộ, dẫn đến lệch thời gian trong log hệ thống.",
+    "Non-Compliant": "Thiết bị tự chạy thời gian riêng, gây khó khăn hoặc không thể điều tra khi có sự cố xảy ra."
+  },
+  "A.8.18": {
+    "control_name": "Use of privileged utility programs",
+    "Compliant": "Việc sử dụng các chương trình tiện ích có khả năng ghi đè kiểm soát hệ thống (ví dụ: công cụ khôi phục mật khẩu, sửa lỗi DB) bị hạn chế nghiêm ngặt, chỉ cấp cho người dùng được ủy quyền và có ghi log.",
+    "Partially Compliant": "Có kiểm soát nhưng thỉnh thoảng vẫn cho phép nhân sự IT tự do sử dụng công cụ đặc quyền mà không cần phê duyệt trước.",
+    "Non-Compliant": "Bất kỳ người dùng hoặc quản trị viên nào cũng có thể tải xuống và chạy các công cụ can thiệp sâu vào hệ thống."
+  },
+  "A.8.19": {
+    "control_name": "Installation of software on operational systems",
+    "Compliant": "Quy trình cài đặt phần mềm trên môi trường Production được kiểm soát chặt chẽ. Chỉ phần mềm đã qua kiểm thử và được phê duyệt (Whitelisting) mới được phép triển khai.",
+    "Partially Compliant": "Có quy trình phê duyệt nhưng thỉnh thoảng quản trị viên vẫn tự ý cài đặt phần mềm không chính thức lên máy chủ.",
+    "Non-Compliant": "Không có kiểm soát. Nhân viên và quản trị viên có thể tự do cài đặt bất kỳ phần mềm nào lên hệ thống vận hành."
+  },
+  "A.8.20": {
+    "control_name": "Networks security",
+    "Compliant": "Hệ thống mạng được bảo vệ bởi Firewall thế hệ mới (NGFW), IDS/IPS và các thiết bị định tuyến an toàn. Cấu hình mạng được rà soát định kỳ.",
+    "Partially Compliant": "Có thiết bị bảo mật mạng nhưng bộ quy tắc (rule) quá lỏng lẻo, chưa cập nhật, hoặc chưa triển khai IDS/IPS.",
+    "Non-Compliant": "Mạng nội bộ kết nối trực tiếp ra Internet mà không qua bất kỳ lớp tường lửa hoặc biện pháp kiểm soát nào."
+  },
+  "A.8.21": {
+    "control_name": "Security of network services",
+    "Compliant": "Các dịch vụ mạng nội bộ và thuê ngoài được xác định rõ ràng. Cam kết về mức độ bảo mật và dịch vụ (SLA) được ký kết và giám sát với nhà cung cấp.",
+    "Partially Compliant": "Có sử dụng dịch vụ mạng bên thứ 3 nhưng thiếu các cam kết bảo mật rõ ràng trong hợp đồng.",
+    "Non-Compliant": "Không kiểm soát và không đánh giá an toàn thông tin đối với các dịch vụ mạng đang sử dụng."
+  },
+  "A.8.22": {
+    "control_name": "Segregation of networks",
+    "Compliant": "Mạng được phân chia thành các vùng độc lập (VLAN, DMZ, Internal) dựa trên mức độ tin cậy và chức năng. Truy cập liên vùng bị kiểm soát chặt chẽ qua Firewall.",
+    "Partially Compliant": "Có phân chia VLAN nhưng các rule giao tiếp giữa các VLAN còn lỏng lẻo, cho phép truy cập (Any-Any) không cần thiết.",
+    "Non-Compliant": "Mạng phẳng (Flat Network). Tất cả máy chủ, máy trạm, thiết bị IoT nằm chung một dải mạng và có thể tự do giao tiếp."
+  },
+  "A.8.23": {
+    "control_name": "Web filtering",
+    "Compliant": "Triển khai giải pháp lọc Web/Proxy để chặn người dùng truy cập vào các trang web độc hại, lừa đảo (phishing) hoặc vi phạm chính sách của tổ chức.",
+    "Partially Compliant": "Có giải pháp lọc web nhưng danh sách đen (Blacklist) chưa được cập nhật thường xuyên.",
+    "Non-Compliant": "Không có biện pháp giới hạn hoặc kiểm duyệt truy cập internet của nhân viên."
+  },
+  "A.8.24": {
+    "control_name": "Use of cryptography",
+    "Compliant": "Chính sách mật mã được ban hành và tuân thủ. Dữ liệu nhạy cảm được mã hóa ở trạng thái nghỉ (AES-256) và đang truyền (TLS 1.2+). Quản lý khóa (Key Management) an toàn.",
+    "Partially Compliant": "Có sử dụng mã hóa nhưng dùng các thuật toán cũ (như MD5, SHA1) hoặc quy trình lưu trữ và trao đổi khóa mật mã chưa an toàn.",
+    "Non-Compliant": "Dữ liệu nhạy cảm (mật khẩu, thông tin tài chính) được lưu trữ và truyền tải dưới dạng văn bản gốc (Cleartext/Plaintext)."
+  },
+  "A.8.25": {
+    "control_name": "Secure development life cycle",
+    "Compliant": "Áp dụng vòng đời phát triển phần mềm an toàn (SSDLC / DevSecOps). Các yêu cầu bảo mật được tích hợp ngay từ khâu thiết kế, lập trình, kiểm thử đến triển khai.",
+    "Partially Compliant": "Có quy trình phát triển nhưng các bước kiểm tra bảo mật thường chỉ được thực hiện ở giai đoạn cuối trước khi Release.",
+    "Non-Compliant": "Quy trình phát triển tự phát, hoàn toàn không xem xét đến các yếu tố an toàn thông tin."
+  },
+  "A.8.26": {
+    "control_name": "Application security requirements",
+    "Compliant": "Yêu cầu về an toàn thông tin được xác định, tài liệu hóa và phê duyệt cho tất cả các ứng dụng mới phát triển hoặc mua từ bên thứ 3.",
+    "Partially Compliant": "Có đưa ra yêu cầu bảo mật nhưng chỉ mang tính hình thức, không có bước nghiệm thu thực tế dựa trên yêu cầu đó.",
+    "Non-Compliant": "Phát triển hoặc mua sắm ứng dụng không đi kèm bất kỳ tiêu chí hay đánh giá bảo mật nào."
+  },
+  "A.8.27": {
+    "control_name": "Secure system architecture and engineering principles",
+    "Compliant": "Tuân thủ các nguyên tắc thiết kế an toàn (Secure by Design, Defense in Depth). Kiến trúc hệ thống mới phải được bộ phận bảo mật đánh giá rủi ro trước khi triển khai.",
+    "Partially Compliant": "Có áp dụng thiết kế an toàn nhưng thiếu bước kiểm duyệt độc lập từ bộ phận bảo mật/ATTT.",
+    "Non-Compliant": "Thiết kế hệ thống không tính đến bảo mật, phụ thuộc hoàn toàn vào các lớp bảo vệ bên ngoài."
+  },
+  "A.8.28": {
+    "control_name": "Secure coding",
+    "Compliant": "Lập trình viên được đào tạo về Secure Coding (như chuẩn OWASP Top 10). Mã nguồn được rà soát bằng công cụ tự động (SAST/DAST) và review chéo trước khi merge.",
+    "Partially Compliant": "Có quy định viết mã an toàn nhưng không thực thi quét mã nguồn bằng công cụ tự động, chỉ dựa vào review thủ công.",
+    "Non-Compliant": "Không có chuẩn lập trình an toàn. Code chứa nhiều lỗi bảo mật cơ bản như SQL Injection, Hardcoded mật khẩu."
+  },
+  "A.8.29": {
+    "control_name": "Security testing in development and acceptance",
+    "Compliant": "Các bài kiểm thử bảo mật (Pentest, Vulnerability Scan) được thực hiện độc lập và phải vượt qua trước khi hệ thống được nghiệm thu đưa vào môi trường Production.",
+    "Partially Compliant": "Có kiểm thử bảo mật nhưng tiêu chí nghiệm thu chưa khắt khe, vẫn chấp nhận đưa hệ thống lên mạng khi còn lỗ hổng mức Medium/High.",
+    "Non-Compliant": "Hệ thống được đưa vào vận hành thực tế mà không hề trải qua bất kỳ bài kiểm tra bảo mật nào."
+  },
+  "A.8.30": {
+    "control_name": "Outsourced development",
+    "Compliant": "Tổ chức giám sát và yêu cầu đối tác phát triển phần mềm thuê ngoài phải tuân thủ nghiêm ngặt các tiêu chuẩn bảo mật, được quy định rõ trong hợp đồng. Kiểm định độc lập mã nguồn trước khi nhận bàn giao.",
+    "Partially Compliant": "Có yêu cầu đối tác tuân thủ bảo mật nhưng thiếu bước tự kiểm định (audit) lại sản phẩm bàn giao.",
+    "Non-Compliant": "Khoán trắng cho nhà thầu, không có điều khoản bảo mật, nhận bàn giao phần mềm mà không kiểm tra độ an toàn."
+  },
+  "A.8.31": {
+    "control_name": "Separation of development, test and production environments",
+    "Compliant": "Môi trường Phát triển (Dev), Kiểm thử (Test) và Vận hành thực tế (Production) được tách biệt hoàn toàn về mặt mạng lưới, máy chủ và quyền truy cập.",
+    "Partially Compliant": "Có sự tách biệt nhưng thi thoảng lập trình viên vẫn được cấp quyền truy cập trực tiếp vào cơ sở dữ liệu Production để sửa lỗi.",
+    "Non-Compliant": "Dùng chung máy chủ hoặc cơ sở dữ liệu cho cả việc viết code, kiểm thử và chạy thực tế."
+  },
+  "A.8.32": {
+    "control_name": "Change management",
+    "Compliant": "Tất cả những thay đổi lên hệ thống CNTT và phần mềm đều phải được lập kế hoạch, đánh giá rủi ro, kiểm thử (Test/Rollback plan) và được Hội đồng phê duyệt (CAB) thông qua.",
+    "Partially Compliant": "Có quy trình quản lý thay đổi nhưng các bước đánh giá rủi ro và kế hoạch khôi phục (Rollback) thực hiện sơ sài.",
+    "Non-Compliant": "Quản trị viên tự ý thay đổi cấu hình hoặc update code trực tiếp lên Production mà không báo cáo ai."
+  },
+  "A.8.33": {
+    "control_name": "Test information",
+    "Compliant": "Dữ liệu dùng để kiểm thử (Test Data) phải là dữ liệu giả (Dummy Data) hoặc dữ liệu thật đã được làm ẩn/xóa định danh (Data Masking/Anonymization) hoàn toàn.",
+    "Partially Compliant": "Có làm ẩn dữ liệu nhưng thỉnh thoảng vẫn để sót thông tin định danh cá nhân (PII) hoặc dữ liệu nhạy cảm trong môi trường Test.",
+    "Non-Compliant": "Sao chép nguyên bản toàn bộ cơ sở dữ liệu Production chứa thông tin khách hàng sang môi trường Test mà không có biện pháp bảo vệ."
+  },
+  "A.8.34": {
+    "control_name": "Protection of information systems during audit testing",
+    "Compliant": "Các hoạt động kiểm toán, đánh giá lỗ hổng (Pentest) được lên kế hoạch, kiểm soát chặt chẽ, giới hạn phạm vi và thực hiện ngoài giờ cao điểm để không làm gián đoạn hệ thống.",
+    "Partially Compliant": "Có lên kế hoạch kiểm toán nhưng phạm vi thực hiện chưa rõ ràng, đôi lúc gây ảnh hưởng nhẹ đến hiệu suất hệ thống thực tế.",
+    "Non-Compliant": "Chạy các công cụ quét lỗ hổng hoặc test bảo mật trực tiếp lên Production vào giờ làm việc mà không xin phép, gây sập dịch vụ."
   }
 }
