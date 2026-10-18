@@ -12,7 +12,7 @@
     "Non-Compliant": "Không có điều khoản bảo mật trong hợp đồng lao động hoặc không yêu cầu ký cam kết."
   },
   "A.6.3": {
-    "control_name": "Information security awareness, education and training",
+    "control_name": "Information security awareness education and training",
     "Compliant": "100% nhân sự hoàn thành đào tạo nhận thức ATTT định kỳ. Có đánh giá hiệu quả đào tạo và lưu trữ hồ sơ đầy đủ.",
     "Partially Compliant": "Có tổ chức đào tạo nhưng chưa đạt 100% nhân sự tham gia hoặc thiếu đánh giá hiệu quả sau đào tạo.",
     "Non-Compliant": "Không có chương trình đào tạo nhận thức ATTT hoặc không tổ chức đào tạo định kỳ."
@@ -60,8 +60,8 @@
     "Non-Compliant": "Không có biện pháp kiểm soát truy cập vật lý. Cửa mở tự do hoặc chỉ dùng khóa cơ, khách viếng thăm ra vào không cần đăng ký."
   },
   "A.7.3": {
-    "control_name": "Securing offices, rooms and facilities",
-    "Compliant": "Các văn phòng, phòng ban chức năng và cơ sở vật chất quan trọng được khóa an toàn khi không sử dụng. Tài liệu nhạy cảm không để trên bàn làm việc ngoài giờ.",
+    "control_name": "Securing offices rooms and facilities",
+    "Compliant": "Các văn phòng phòng ban chức năng và cơ sở vật chất quan trọng được khóa an toàn khi không sử dụng. Tài liệu nhạy cảm không để trên bàn làm việc ngoài giờ.",
     "Partially Compliant": "Một số phòng ban quan trọng chưa tuân thủ quy định khóa cửa ngoài giờ. Thỉnh thoảng phát hiện tài liệu nhạy cảm để hớ hênh.",
     "Non-Compliant": "Không có quy định khóa cửa văn phòng. Tài liệu nhạy cảm thường xuyên bị bỏ lại trên bàn làm việc hoặc khu vực công cộng."
   },
@@ -165,7 +165,7 @@
     "control_name": "Capacity management",
     "Compliant": "Hệ thống có công cụ giám sát tài nguyên (CPU, RAM, Storage). Có ngưỡng cảnh báo tự động khi đạt mức tới hạn (ví dụ: 80%). Thực hiện dự báo dung lượng định kỳ.",
     "Partially Compliant": "Có giám sát dung lượng nhưng không thiết lập cảnh báo tự động, thỉnh thoảng hệ thống bị gián đoạn do hết ổ cứng.",
-    "Non-Compliant": "Không giám sát dung lượng, chỉ xử lý sự cố khi hệ thống đã sập do quá tải."
+    "Non-Compliant": "Không giám sát dung lượng chỉ xử lý sự cố khi hệ thống đã sập do quá tải."
   },
   "A.8.7": {
     "control_name": "Protection against malware",
@@ -189,7 +189,7 @@
     "control_name": "Information deletion",
     "Compliant": "Dữ liệu được tự động xóa bỏ khi hết hạn lưu trữ theo chính sách Data Retention. Đảm bảo xóa dữ liệu nhạy cảm trên Cloud hoặc thiết bị thuê ngoài không thể khôi phục.",
     "Partially Compliant": "Có chính sách lưu trữ nhưng việc xóa dữ liệu cũ chủ yếu làm thủ công, không nhất quán.",
-    "Non-Compliant": "Không xóa dữ liệu, tổ chức lưu trữ mọi thứ vô thời hạn gây rủi ro về pháp lý và bảo mật."
+    "Non-Compliant": "Không xóa dữ liệu tổ chức lưu trữ mọi thứ vô thời hạn gây rủi ro về pháp lý và bảo mật."
   },
   "A.8.11": {
     "control_name": "Data masking",
@@ -225,13 +225,13 @@
     "control_name": "Monitoring activities",
     "Compliant": "Hệ thống, mạng và ứng dụng được giám sát liên tục để phát hiện các hành vi bất thường. Có quy trình tự động cảnh báo và phản ứng với sự cố (Incident Response).",
     "Partially Compliant": "Có công cụ giám sát nhưng quy trình theo dõi và phản hồi cảnh báo còn thủ công, chậm trễ.",
-    "Non-Compliant": "Không giám sát các hoạt động mạng hoặc hệ thống, không có cơ chế phát hiện bất thường."
+    "Non-Compliant": "Không giám sát các hoạt động mạng hoặc hệ thống không có cơ chế phát hiện bất thường."
   },
   "A.8.17": {
     "control_name": "Clock synchronization",
-    "Compliant": "Tất cả các máy chủ, thiết bị mạng và ứng dụng đều được đồng bộ hóa thời gian từ một nguồn tham chiếu tiêu chuẩn (NTP Server nội bộ hoặc quốc tế đáng tin cậy).",
+    "Compliant": "Tất cả các máy chủ thiết bị mạng và ứng dụng đều được đồng bộ hóa thời gian từ một nguồn tham chiếu tiêu chuẩn (NTP Server nội bộ hoặc quốc tế đáng tin cậy).",
     "Partially Compliant": "Có sử dụng NTP nhưng nhiều thiết bị chưa được cấu hình đồng bộ, dẫn đến lệch thời gian trong log hệ thống.",
-    "Non-Compliant": "Thiết bị tự chạy thời gian riêng, gây khó khăn hoặc không thể điều tra khi có sự cố xảy ra."
+    "Non-Compliant": "Thiết bị tự chạy thời gian riêng gây khó khăn hoặc không thể điều tra khi có sự cố xảy ra."
   },
   "A.8.18": {
     "control_name": "Use of privileged utility programs",
@@ -279,7 +279,7 @@
     "control_name": "Secure development life cycle",
     "Compliant": "Áp dụng vòng đời phát triển phần mềm an toàn (SSDLC / DevSecOps). Các yêu cầu bảo mật được tích hợp ngay từ khâu thiết kế, lập trình, kiểm thử đến triển khai.",
     "Partially Compliant": "Có quy trình phát triển nhưng các bước kiểm tra bảo mật thường chỉ được thực hiện ở giai đoạn cuối trước khi Release.",
-    "Non-Compliant": "Quy trình phát triển tự phát, hoàn toàn không xem xét đến các yếu tố an toàn thông tin."
+    "Non-Compliant": "Quy trình phát triển tự phát hoàn toàn không xem xét đến các yếu tố an toàn thông tin."
   },
   "A.8.26": {
     "control_name": "Application security requirements",
@@ -312,7 +312,7 @@
     "Non-Compliant": "Khoán trắng cho nhà thầu, không có điều khoản bảo mật, nhận bàn giao phần mềm mà không kiểm tra độ an toàn."
   },
   "A.8.31": {
-    "control_name": "Separation of development, test and production environments",
+    "control_name": "Separation of development test and production environments",
     "Compliant": "Môi trường Phát triển (Dev), Kiểm thử (Test) và Vận hành thực tế (Production) được tách biệt hoàn toàn về mặt mạng lưới, máy chủ và quyền truy cập.",
     "Partially Compliant": "Có sự tách biệt nhưng thi thoảng lập trình viên vẫn được cấp quyền truy cập trực tiếp vào cơ sở dữ liệu Production để sửa lỗi.",
     "Non-Compliant": "Dùng chung máy chủ hoặc cơ sở dữ liệu cho cả việc viết code, kiểm thử và chạy thực tế."
