@@ -6,8 +6,7 @@ from typing_extensions import TypedDict
 from pydantic import BaseModel, Field, field_validator
 from langgraph.graph import StateGraph, START, END
 
-# Lấy dữ liệu 6 tình huống doanh nghiệp từ file Tuần 1 sang
-from agent_core.enterprise_eval_and_charts import ENTERPRISE_TEST_CASES
+from backend.database import collect_evidence, get_rubric
 
 # ==========================================
 # 1. ĐỊNH NGHĨA SCHEMA & TRẠNG THÁI
@@ -52,12 +51,9 @@ def node_plan(state: AgentState):
     return state
 
 def node_collect(state: AgentState):
-    # Tìm kiếm đúng Test Case trong cơ sở dữ liệu Tuần 1
-    case = next((c for c in ENTERPRISE_TEST_CASES if c["control_id"] == state["control_id"]), None)
-    if case:
-        state["collected_evidences"] = case["evidences"]
-        state["deterministic_rule"] = case.get("deterministic_rule", {})
-    
+    evidences, deterministic_rule = collect_evidence(state["control_id"])
+    state["collected_evidences"] = evidences
+    state["deterministic_rule"] = deterministic_rule
     state["audit_trail"].append("COLLECT")
     return state
 
@@ -80,19 +76,14 @@ def node_evaluate(state: AgentState):
         ev_copy["content"] = re.sub(r"\[SYSTEM INSTRUCTION:.*?\]", "[BLOCKED_BY_GUARDRAIL]", ev_copy["content"], flags=re.I)
         safe_evidences.append(ev_copy)
 
-    # --- PHẦN MỚI: TẢI RUBRIC CỦA TÚ ---
     rubric_text = "Không có tiêu chí chấm điểm cụ thể cho Control này."
-    try:
-        # Đường dẫn tới file json vừa tạo
-        rubric_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "docs", "compliance_rubrics.json")
-        with open(rubric_path, "r", encoding="utf-8") as f:
-            all_rubrics = json.load(f)
-            if state["control_id"] in all_rubrics:
-                r = all_rubrics[state["control_id"]]
-                rubric_text = f"- Compliant: {r['Compliant']}\n- Partially Compliant: {r['Partially Compliant']}\n- Non-Compliant: {r['Non-Compliant']}"
-    except Exception as e:
-        print(f"Lỗi tải Rubric: {e}")
-    # -----------------------------------
+    rubric = get_rubric(state["control_id"])
+    if rubric:
+        rubric_text = (
+            f"- Compliant: {rubric['Compliant']}\n"
+            f"- Partially Compliant: {rubric['Partially Compliant']}\n"
+            f"- Non-Compliant: {rubric['Non-Compliant']}"
+        )
 
     # Nhồi Rubric vào System Prompt để ÉP AI phải nghe lời
     sys_prompt = f"""Bạn là AI Agent kiểm toán chuyên nghiệp ISO/IEC 27001. 
@@ -107,8 +98,11 @@ Dựa vào tiêu chí trên và bằng chứng, hãy xuất ra JSON đánh giá.
 Bằng chứng: {json.dumps(safe_evidences, ensure_ascii=False)}"""
 
     # Gọi mô hình Ollama (Phần này giữ nguyên như cũ)
-    resp = ollama.chat(
-        model="qwen2.5:7b",
+    ollama_client = ollama.Client(
+        host=os.getenv("OLLAMA_HOST", "http://localhost:11434")
+    )
+    resp = ollama_client.chat(
+        model=os.getenv("OLLAMA_MODEL", "qwen2.5:7b"),
         messages=[
             {"role": "system", "content": sys_prompt},
             {"role": "user", "content": user_prompt}
@@ -166,14 +160,21 @@ def build_iso_agent_graph():
 # 4. CHẠY HÀNG LOẠT TRÊN 6 TÌNH HUỐNG DOANH NGHIỆP
 # ==========================================
 if __name__ == "__main__":
+    from backend.database import get_control, initialize_database
+    from agent_core.enterprise_eval_and_charts import ENTERPRISE_TEST_CASES
+
+    initialize_database()
     graph = build_iso_agent_graph()
     print("=== BẮT ĐẦU CHẠY LANGGRAPH TRÊN DỮ LIỆU DOANH NGHIỆP (6 CONTROLS) ===\n")
     
     for case in ENTERPRISE_TEST_CASES:
+        control = get_control(case["control_id"])
+        if control is None:
+            raise RuntimeError(f"Control {case['control_id']} is missing from PostgreSQL.")
         initial_state = {
-            "control_id": case["control_id"],
-            "control_name": case["name"],
-            "objective": case["objective"],
+            "control_id": control["control_id"],
+            "control_name": control["name"],
+            "objective": control["objective"],
             "collected_evidences": [],
             "deterministic_rule": {},
             "compliance_status": "UNKNOWN",

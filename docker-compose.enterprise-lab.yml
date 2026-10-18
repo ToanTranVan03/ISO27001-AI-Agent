@@ -1,6 +1,23 @@
 version: '3.8'
 
 services:
+  postgres:
+    image: postgres:16
+    container_name: iso27001-postgres
+    environment:
+      POSTGRES_DB: iso27001
+      POSTGRES_USER: iso27001_app
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+    ports:
+      - "5432:5432"
+    volumes:
+      - iso27001_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U iso27001_app -d iso27001"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
   # Node 1: Máy chủ Quản lý Định danh & Truy cập Doanh nghiệp (Kiểm tra A.8.2, A.8.5, A.8.18)
   corp-iam-auth-node:
     image: ubuntu:22.04
@@ -30,3 +47,6 @@ services:
       bash -c "mkdir -p /var/log/enterprise_backup &&
       echo '2026-10-16 02:00:00 [SUCCESS] Full DB Backup completed. Integrity SHA256 verified.' > /var/log/enterprise_backup/backup.log &&
       tail -f /dev/null"
+
+volumes:
+  iso27001_postgres_data:
