@@ -63,9 +63,10 @@ def node_collect(state: AgentState):
 
 def node_evaluate(state: AgentState):
     import re
-    print(f"[NODE: EVALUATE] Gọi Qwen2.5:7B đọc bằng chứng và ra quyết định...")
+    import json
+    import os
+    print(f"[NODE: EVALUATE] Gọi Qwen2.5:7B đọc bằng chứng và Rubric ra quyết định...")
 
-    # 1. BỎ QUA GỌI AI NẾU KHÔNG CÓ BẰNG CHỨNG (Tránh treo và tiết kiệm thời gian)
     if not state["collected_evidences"]:
         state["compliance_status"] = "Insufficient Evidence"
         state["confidence"] = 1.0
@@ -73,21 +74,39 @@ def node_evaluate(state: AgentState):
         state["audit_trail"].append("EVALUATE (SKIPPED)")
         return state
 
-    # 2. Lọc Prompt Injection an toàn
     safe_evidences = []
     for ev in state["collected_evidences"]:
         ev_copy = dict(ev)
         ev_copy["content"] = re.sub(r"\[SYSTEM INSTRUCTION:.*?\]", "[BLOCKED_BY_GUARDRAIL]", ev_copy["content"], flags=re.I)
         safe_evidences.append(ev_copy)
 
-    sys_prompt = """Bạn là AI Agent kiểm toán ISO/IEC 27001. Dựa vào bằng chứng cung cấp, hãy xuất ra JSON đánh giá.
-BẮT BUỘC TRẢ LỜI TRƯỜNG 'rationale' BẰNG TIẾNG VIỆT NGẮN GỌN (TỐI ĐA 2 CÂU)."""
+    # --- PHẦN MỚI: TẢI RUBRIC CỦA TÚ ---
+    rubric_text = "Không có tiêu chí chấm điểm cụ thể cho Control này."
+    try:
+        # Đường dẫn tới file json vừa tạo
+        rubric_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "docs", "compliance_rubrics.json")
+        with open(rubric_path, "r", encoding="utf-8") as f:
+            all_rubrics = json.load(f)
+            if state["control_id"] in all_rubrics:
+                r = all_rubrics[state["control_id"]]
+                rubric_text = f"- Compliant: {r['Compliant']}\n- Partially Compliant: {r['Partially Compliant']}\n- Non-Compliant: {r['Non-Compliant']}"
+    except Exception as e:
+        print(f"Lỗi tải Rubric: {e}")
+    # -----------------------------------
+
+    # Nhồi Rubric vào System Prompt để ÉP AI phải nghe lời
+    sys_prompt = f"""Bạn là AI Agent kiểm toán chuyên nghiệp ISO/IEC 27001. 
+BẮT BUỘC TRẢ LỜI TRƯỜNG 'rationale' BẰNG TIẾNG VIỆT NGẮN GỌN (TỐI ĐA 2 CÂU).
+
+TIÊU CHÍ CHẤM ĐIỂM (RUBRIC) CHO CONTROL NÀY:
+{rubric_text}
+
+Dựa vào tiêu chí trên và bằng chứng, hãy xuất ra JSON đánh giá."""
     
     user_prompt = f"""Control: {state['control_id']} - {state['control_name']}
-Mục tiêu: {state['objective']}
 Bằng chứng: {json.dumps(safe_evidences, ensure_ascii=False)}"""
 
-    # 3. Đặt giới hạn an toàn (num_predict và num_ctx) để AI không bao giờ bị treo
+    # Gọi mô hình Ollama (Phần này giữ nguyên như cũ)
     resp = ollama.chat(
         model="qwen2.5:7b",
         messages=[
@@ -95,11 +114,7 @@ Bằng chứng: {json.dumps(safe_evidences, ensure_ascii=False)}"""
             {"role": "user", "content": user_prompt}
         ],
         format=ControlEvaluationOutput.model_json_schema(),
-        options={
-            "temperature": 0.0, 
-            "num_predict": 250,  # Khóa mõm: Không cho phép nói quá 250 tokens
-            "num_ctx": 4096      # Mở rộng Context window để đọc JSON không lỗi
-        }
+        options={"temperature": 0.0, "num_predict": 250, "num_ctx": 4096}
     )
     
     parsed = ControlEvaluationOutput.model_validate_json(resp["message"]["content"])

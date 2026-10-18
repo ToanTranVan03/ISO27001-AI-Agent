@@ -1,0 +1,20 @@
+{
+  "A.6.6": {
+    "control_name": "Confidentiality or non-disclosure agreements",
+    "Compliant": "100% nhân sự chính thức và nhà thầu phụ đều đã ký NDA. Hồ sơ lưu trữ đầy đủ, chữ ký hợp lệ và có hiệu lực trước khi cấp quyền truy cập hệ thống.",
+    "Partially Compliant": "Có ký NDA nhưng phát hiện thiếu sót (ví dụ: thiếu chữ ký của nhà thầu phụ, hoặc sử dụng biểu mẫu cũ chưa cập nhật các điều khoản mới).",
+    "Non-Compliant": "Không có quy trình ký NDA, hoặc mất mát phần lớn hồ sơ chứng minh nhân viên đã ký NDA."
+  },
+  "A.7.2": {
+    "control_name": "Physical entry controls",
+    "Compliant": "Tất cả các khu vực an ninh (Phòng Server, Kho tài liệu) đều có hệ thống kiểm soát ra vào (thẻ từ, sinh trắc học). Có lưu giữ log truy cập tối thiểu 90 ngày. Khách viếng thăm phải đăng ký và có người giám sát.",
+    "Partially Compliant": "Có hệ thống kiểm soát nhưng log truy cập bị thiếu hụt hoặc không lưu đủ 90 ngày. Quy trình giám sát khách viếng thăm chưa chặt chẽ.",
+    "Non-Compliant": "Không có hệ thống kiểm soát ra vào vật lý cho phòng Server. Cửa mở tự do hoặc chỉ dùng khóa cơ không thể truy vết."
+  },
+  "A.8.5": {
+    "control_name": "Secure authentication",
+    "Compliant": "Xác thực đa yếu tố (MFA) được kích hoạt và bắt buộc cho 100% người dùng truy cập từ xa và tài khoản quản trị (Admin). Chính sách mật khẩu mạnh được thực thi trên hệ thống.",
+    "Partially Compliant": "Có áp dụng MFA nhưng chỉ cho tài khoản Admin, người dùng thường hoặc mạng VPN chưa bị bắt buộc. Hoặc chính sách mật khẩu chưa đủ mạnh (độ dài dưới 8 ký tự).",
+    "Non-Compliant": "Hoàn toàn không sử dụng MFA cho các truy cập từ xa hoặc tài khoản đặc quyền. Mật khẩu không có chính sách bắt buộc thay đổi định kỳ."
+  }
+}
