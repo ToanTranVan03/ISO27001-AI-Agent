@@ -7,7 +7,7 @@ from pydantic import BaseModel, Field, field_validator
 from langgraph.graph import StateGraph, START, END
 
 # Lấy dữ liệu 6 tình huống doanh nghiệp từ file Tuần 1 sang
-from enterprise_eval_and_charts import ENTERPRISE_TEST_CASES
+from agent_core.enterprise_eval_and_charts import ENTERPRISE_TEST_CASES
 
 # ==========================================
 # 1. ĐỊNH NGHĨA SCHEMA & TRẠNG THÁI
