@@ -566,7 +566,7 @@
     <header class="header">
       <div class="header-badge">
         <span class="dot"></span>
-        ISO/IEC 27001 AI Agent — Tuần 2
+        ISO/IEC 27001 AI Agent — Giao diện cũ, không cập nhật tiến độ chung
       </div>
       <h1>ISO 27001 Evidence Evaluator</h1>
       <p class="header-sub">
@@ -734,6 +734,9 @@
 
     /* ── HTTP HELPER ────────────────────────────────────────────────── */
     async function request(url, options = {}) {
+      // Legacy panel still requires login through the shared workspace.
+      const accessToken = sessionStorage.getItem('iso_team_token');
+      options.headers = { ...(options.headers || {}), ...(accessToken ? {Authorization: 'Bearer ' + accessToken} : {}) };
       const res = await fetch(url, options);
       const body = await res.json().catch(() => ({ detail: `HTTP ${res.status}` }));
       if (!res.ok) throw new Error(body.detail || `Lỗi ${res.status}`);

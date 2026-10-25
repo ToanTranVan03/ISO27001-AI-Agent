@@ -33,3 +33,15 @@ This repository is a local development/demo application, not a production enterp
 The web interface uploads PDF/DOCX files to `/api/evidence`; extracted text, source metadata, and SHA-256 hashes are stored in PostgreSQL. `/api/evaluate` runs LangGraph, whose `COLLECT` node retrieves evidence from PostgreSQL. Each evaluation is also persisted in PostgreSQL. Adding real evidence for a demo control replaces its seeded sample evidence for subsequent evaluations.
 
 The other simulated enterprise hosts are optional and can be started with the same Compose file. Do not use this lab Compose configuration as a production deployment.
+
+## Shared multi-user Enterprise Lab (Giai đoạn 1)
+
+**Mới:** xem tài liệu [HUONG_DAN_GIAI_DOAN_1.md](HUONG_DAN_GIAI_DOAN_1.md) để cài và chạy phiên đánh giá chung với tài khoản riêng, job lock PostgreSQL và bảng tiến độ theo thời gian gần thực.
+
+Giao diện mới chạy tại `/`. Giao diện tuần 2 còn giữ tại `/legacy` (API legacy dùng dữ liệu không theo phiên đánh giá; **không dùng để thống kê tiến độ chung**). Chạy từ thư mục repo với:
+
+```powershell
+uvicorn backend.main:app --env-file .env --host 127.0.0.1 --port 8000
+```
+
+**Không khai báo số liệu mô phỏng thành benchmark thực nghiệm**; các chart và CSV cũ chỉ để tham khảo cho đến khi chạy lại bằng ground truth độc lập.

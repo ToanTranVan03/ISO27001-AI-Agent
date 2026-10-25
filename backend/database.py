@@ -199,18 +199,20 @@ def list_controls() -> list[dict[str, Any]]:
     ]
 
 
-def collect_evidence(control_id: str) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+def collect_evidence(control_id: str, assessment_id: str | None = None) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     with get_connection() as connection:
         with connection.cursor() as cursor:
             cursor.execute(
                 """
                 SELECT evidence_id, evidence_type, source, extracted_text,
-                       sha256_hash, is_sample
+                       sha256_hash, is_sample, created_at
                 FROM evidence
                 WHERE control_id = %s
+                  AND (%s::uuid IS NULL OR assessment_id = %s::uuid)
+                  AND (%s::uuid IS NULL OR is_sample = FALSE)
                 ORDER BY is_sample, created_at, evidence_id
                 """,
-                (control_id,),
+                (control_id, assessment_id, assessment_id, assessment_id),
             )
             rows = cursor.fetchall()
             cursor.execute(
@@ -222,6 +224,12 @@ def collect_evidence(control_id: str) -> tuple[list[dict[str, Any]], dict[str, A
     if rule_row is None:
         raise ValueError(f"Unknown control: {control_id}")
 
+    # Synthetic lab evidence is versioned/immutable. Agent may use only the latest
+    # lab snapshot for this control, never stale snapshots after an admin scenario change.
+    lab_rows = [row for row in rows if row[2].startswith('lab://')]
+    if lab_rows:
+        latest = max(lab_rows, key=lambda item: (item[6], item[0]))
+        rows = [row for row in rows if not row[2].startswith('lab://') or row[0] == latest[0]]
     real_evidence_exists = any(not row[5] for row in rows)
     evidence = [
         {
@@ -234,8 +242,8 @@ def collect_evidence(control_id: str) -> tuple[list[dict[str, Any]], dict[str, A
         for row in rows
         if not real_evidence_exists or not row[5]
     ]
-    deterministic_rule = {} if real_evidence_exists else rule_row[0]
-    return evidence, deterministic_rule
+    # Expected labels in seeded demo cases are ground truth, NEVER runtime agent input.
+    return evidence, {}
 
 
 def get_rubric(control_id: str) -> dict[str, Any] | None:
@@ -278,6 +286,8 @@ def save_evidence(
     source: str,
     extracted_text: str,
     sha256_hash: str,
+    assessment_id: str | None = None,
+    uploaded_by: str | None = None,
 ) -> None:
     with get_connection() as connection:
         with connection.cursor() as cursor:
@@ -285,9 +295,9 @@ def save_evidence(
                 """
                 INSERT INTO evidence (
                     evidence_id, control_id, evidence_type, source,
-                    extracted_text, sha256_hash
+                    extracted_text, sha256_hash, assessment_id, uploaded_by
                 )
-                VALUES (%s, %s, %s, %s, %s, %s)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
                 """,
                 (
                     evidence_id,
@@ -296,5 +306,7 @@ def save_evidence(
                     source,
                     extracted_text,
                     sha256_hash,
+                    assessment_id,
+                    uploaded_by,
                 ),
             )

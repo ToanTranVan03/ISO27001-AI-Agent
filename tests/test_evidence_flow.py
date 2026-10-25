@@ -1,3 +1,17 @@
+import pytest
+
+
+@pytest.fixture(autouse=True)
+def shared_api_test_setup(monkeypatch):
+    # The original API tests are legacy route regression tests, not login tests.
+    monkeypatch.setattr(main.teamwork, "init_teamwork", lambda: None)
+    main.app.dependency_overrides[main.require_user] = lambda: {
+        'user_id': '00000000-0000-0000-0000-000000000001',
+        'username':'tester','display_name':'Tester','role':'admin',
+    }
+    yield
+    main.app.dependency_overrides.clear()
+
 from io import BytesIO
 
 from docx import Document
@@ -115,7 +129,7 @@ def test_home_page_serves_frontend(monkeypatch):
         response = client.get("/")
 
     assert response.status_code == 200
-    assert "ISO 27001 Evidence Evaluator" in response.text
+    assert "ISO Enterprise Lab" in response.text
 
 
 def test_evaluation_uses_database_control_and_persists_result(monkeypatch):
@@ -143,6 +157,7 @@ def test_evaluation_uses_database_control_and_persists_result(monkeypatch):
                 {"evidence_id": "ev-1", "content": "Approved policy."}
             ],
             "audit_trail": ["PLAN", "COLLECT", "EVALUATE", "VERIFY", "REPORT"],
+            "validated_evidence_ids": ["ev-1"],
         },
     )
 

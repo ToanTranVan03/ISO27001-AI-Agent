@@ -13,3 +13,7 @@ data/
 
 # VS Code
 .vscode/
+.venv/
+node_modules/
+dist/
+*.pyc

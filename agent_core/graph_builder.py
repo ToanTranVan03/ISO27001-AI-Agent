@@ -7,6 +7,7 @@ from pydantic import BaseModel, Field, field_validator
 from langgraph.graph import StateGraph, START, END
 
 from backend.database import collect_evidence, get_rubric
+from backend.enterprise_spec import CONTROL_TO_NODE, NODE_SPECS
 
 # ==========================================
 # 1. ĐỊNH NGHĨA SCHEMA & TRẠNG THÁI
@@ -42,16 +43,30 @@ class AgentState(TypedDict):
     confidence: float
     rationale: str
     audit_trail: List[str]
+    assessment_id: str
+    validated_evidence_ids: List[str]
+    proposed_evidence_ids: List[str]
 
 # ==========================================
 # 2. ĐỊNH NGHĨA CÁC NODE
 # ==========================================
 def node_plan(state: AgentState):
-    state["audit_trail"].append("PLAN")
+    node_key=CONTROL_TO_NODE.get(state['control_id']) if state.get('assessment_id') else None
+    if node_key:
+        state['audit_trail'].append('PLAN → SELECT TOOL: ' + NODE_SPECS[node_key]['tool'])
+    else:
+        state['audit_trail'].append('PLAN → SELECT TOOL: uploaded-document-evidence')
     return state
 
 def node_collect(state: AgentState):
-    evidences, deterministic_rule = collect_evidence(state["control_id"])
+    if state.get('assessment_id') and state['control_id'] in CONTROL_TO_NODE:
+        from backend.enterprise_lab import collect_lab_snapshot
+        snapshot = collect_lab_snapshot(state['assessment_id'],state['control_id'])
+        state['audit_trail'].append('COLLECT SYNTHETIC LAB EVIDENCE: ' + snapshot['evidence_id'])
+    if state.get("assessment_id"):
+        evidences, deterministic_rule = collect_evidence(state["control_id"], state["assessment_id"])
+    else:
+        evidences, deterministic_rule = collect_evidence(state["control_id"])
     state["collected_evidences"] = evidences
     state["deterministic_rule"] = deterministic_rule
     state["audit_trail"].append("COLLECT")
@@ -67,6 +82,7 @@ def node_evaluate(state: AgentState):
         state["compliance_status"] = "Insufficient Evidence"
         state["confidence"] = 1.0
         state["rationale"] = "Không có bằng chứng đầu vào."
+        state["proposed_evidence_ids"] = []
         state["audit_trail"].append("EVALUATE (SKIPPED)")
         return state
 
@@ -115,22 +131,24 @@ Bằng chứng: {json.dumps(safe_evidences, ensure_ascii=False)}"""
     state["compliance_status"] = parsed.status
     state["confidence"] = parsed.confidence
     state["rationale"] = parsed.rationale
+    state["proposed_evidence_ids"] = parsed.evidence_ids
     state["audit_trail"].append("EVALUATE")
     return state
 
 def node_verify(state: AgentState):
-    # Guardrail 1: Kho bằng chứng rỗng
-    if not state["collected_evidences"]:
-        state["compliance_status"] = "Insufficient Evidence"
-        state["rationale"] = "[GUARDRAIL] Tự động ghi đè: Không tìm thấy bằng chứng hợp lệ."
-    else:
-        # Guardrail 2: Đối chiếu chéo với Deterministic Rule
-        rule_expected = state["deterministic_rule"].get("expected_status")
-        if rule_expected and state["compliance_status"] != rule_expected:
-            state["compliance_status"] = rule_expected
-            state["rationale"] = f"[GUARDRAIL] AI suy luận sai. Tự động ghi đè trạng thái chuẩn: {rule_expected}."
-            
-    state["audit_trail"].append("VERIFY")
+    # Evidence-first: keep ONLY IDs genuinely returned by the model and present in
+    # the evidence collected for this evaluation. Ground truth is never read here.
+    available = {ev['evidence_id'] for ev in state['collected_evidences']}
+    proposed = state.get('proposed_evidence_ids', [])
+    valid = [value for value in proposed if value in available]
+    state['validated_evidence_ids'] = list(dict.fromkeys(valid))
+    if not available or (state['compliance_status'] != 'Insufficient Evidence' and not valid):
+        state['compliance_status'] = 'Insufficient Evidence'
+        state['confidence'] = 0.0
+        state['rationale'] = 'Chưa đủ bằng chứng hợp lệ được viện dẫn để xác nhận kết luận.'
+    elif len(valid) < len(proposed):
+        state['audit_trail'].append('VERIFY (REJECTED UNKNOWN EVIDENCE IDS)')
+    state['audit_trail'].append('VERIFY')
     return state
 
 def node_report(state: AgentState):
