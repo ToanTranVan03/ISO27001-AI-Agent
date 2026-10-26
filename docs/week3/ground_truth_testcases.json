@@ -1,0 +1,944 @@
+{
+  "version": "1.0-week3",
+  "project": "ISO/IEC 27001:2022 AI Agent Compliance Assessment",
+  "owner": "Lê Đoàn Văn Tú (ISO/GRC & Ground Truth Lead)",
+  "description": "Bộ dữ liệu Kiểm thử Chuẩn (Ground Truth Dataset) cho 5 controls kỹ thuật thuộc nhóm A.8 Technological. Mỗi control bao gồm 3 kịch bản: Compliant, Non-Compliant, và Insufficient Evidence.",
+  "total_controls": 5,
+  "total_testcases": 15,
+  "controls_in_scope": [
+    "A.8.1",
+    "A.8.2",
+    "A.8.3",
+    "A.8.4",
+    "A.8.5"
+  ],
+  "testcases": [
+    {
+      "testcase_id": "TC-A8.1-01",
+      "control_id": "A.8.1",
+      "control_name": "User endpoint devices",
+      "group": "A.8 Technological",
+      "scenario_type": "Compliant",
+      "scenario_title": "Bằng chứng hoàn hảo - 100% Endpoint tuân thủ BitLocker/FileVault, CrowdStrike Falcon và khóa màn hình tự động",
+      "scenario_description": "Công ty VietFinTech Corp trang bị 50 thiết bị đầu cuối cho nhân viên (35 Windows 11, 10 macOS Sonoma, 5 Ubuntu LTS). Hệ thống Microsoft Intune và Jamf Pro quản lý tập trung toàn bộ thiết bị, kích hoạt mã hóa toàn ổ cứng, cài đặt EDR CrowdStrike Falcon cập nhật mẫu nhận diện mới nhất và áp dụng chính sách tự động khóa màn hình sau 5 phút.",
+      "expected_status": "Compliant",
+      "expected_confidence": 0.98,
+      "evaluation_criteria": [
+        "Bật mã hóa ổ đĩa (BitLocker/FileVault/LUKS) đạt 100%",
+        "Phần mềm diệt virus/EDR đang chạy và cập nhật mẫu chữ ký trong vòng 24 giờ",
+        "Cấu hình tự động khóa màn hình sau tối đa 5 phút không hoạt động"
+      ],
+      "expected_rationale": "Toàn bộ 50/50 (100%) thiết bị đầu cuối đều được kích hoạt mã hóa toàn bộ đĩa (BitLocker/FileVault/LUKS với TPM 2.0), EDR CrowdStrike Falcon hoạt động ở chế độ thời gian thực với signature mới nhất, và thời gian khóa màn hình tự động được thiết lập chính xác ở mức 300 giây (5 phút).",
+      "deterministic_rule": {
+        "total_endpoints": 50,
+        "encrypted_endpoints": 50,
+        "edr_active_endpoints": 50,
+        "screen_lock_enforced": true,
+        "max_screen_lock_timeout_sec": 300,
+        "compliance_ratio": 1.0,
+        "expected_status": "Compliant",
+        "rule_check": "PASS (50/50 endpoints compliant with encryption, EDR, and screen lock)"
+      },
+      "evidences": [
+        {
+          "evidence_id": "EVID-TECH-A81-TC01-01",
+          "evidence_type": "EVID_TECH_ENDPOINT_AV",
+          "related_controls": ["A.8.1"],
+          "source_host": "intune-mdm.vietfintech.local:/reports/fleet_compliance_summary.json",
+          "collection_method": "READ_ONLY_COLLECTOR",
+          "collected_at_utc": "2026-10-26T08:30:00Z",
+          "sha256_hash": "a4f783264c919d356886e88eebdbd3bf490e6616e257b441f71a41dbb8633719",
+          "content": {
+            "report_title": "Enterprise Endpoint Compliance & Security Posture Snapshot",
+            "organization": "VietFinTech Corp",
+            "total_enrolled_devices": 50,
+            "os_breakdown": {
+              "Windows_11_Enterprise": 35,
+              "macOS_Sonoma": 10,
+              "Ubuntu_24_04_LTS": 5
+            },
+            "disk_encryption": {
+              "policy_name": "CORP-ENCRYPTION-ENFORCE-AES256",
+              "technology": ["BitLocker (Windows)", "FileVault 2 (macOS)", "LUKS2 (Linux)"],
+              "encrypted_device_count": 50,
+              "encryption_percentage": 100.0,
+              "tpm_chip_enabled_count": 50,
+              "recovery_key_escrow_status": "All_Keys_Escrowed_In_AzureAD"
+            },
+            "edr_antivirus_status": {
+              "product_name": "CrowdStrike Falcon Sensor Enterprise",
+              "agent_version": "7.15.18204.0",
+              "realtime_protection_enabled_count": 50,
+              "prevention_policy": "Aggressive_AutoQuarantine",
+              "definitions_status": "Up_To_Date",
+              "last_signature_update_utc": "2026-10-26T07:15:00Z",
+              "devices_with_active_infections": 0
+            },
+            "screen_lock_policy": {
+              "policy_id": "GPO-SEC-SCREENLOCK-300S",
+              "enforced_by": "Microsoft Intune & Jamf Profile",
+              "inactivity_timeout_seconds": 300,
+              "require_password_on_wakeup": true,
+              "compliant_devices_count": 50
+            },
+            "usb_removable_media_control": {
+              "policy_enforced": true,
+              "default_action": "Read_Only_Or_Blocked_For_Unapproved_Drives"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "testcase_id": "TC-A8.1-02",
+      "control_id": "A.8.1",
+      "control_name": "User endpoint devices",
+      "group": "A.8 Technological",
+      "scenario_type": "Non-Compliant",
+      "scenario_title": "Bằng chứng vi phạm - Nhiều thiết bị tắt BitLocker, EDR quá hạn 62 ngày và không khóa màn hình",
+      "scenario_description": "Báo cáo rà soát Endpoint nội bộ của VietFinTech phát hiện bộ phận Phát triển phần mềm và Data Science tự ý gỡ bỏ chính sách MDM: 14 thiết bị bị tắt mã hóa ổ đĩa, 8 máy tính bị vô hiệu hóa phần mềm bảo vệ EDR hoặc chưa cập nhật mẫu diệt virus trong suốt 62 ngày, và 20 máy tính thiết lập thời gian tắt màn hình ở mức 'Never' hoặc trên 45 phút.",
+      "expected_status": "Non-Compliant",
+      "expected_confidence": 0.96,
+      "evaluation_criteria": [
+        "Bật mã hóa ổ đĩa (BitLocker/FileVault/LUKS) đạt 100%",
+        "Phần mềm diệt virus/EDR đang chạy và cập nhật mẫu chữ ký trong vòng 24 giờ",
+        "Cấu hình tự động khóa màn hình sau tối đa 5 phút không hoạt động"
+      ],
+      "expected_rationale": "Phát hiện 14/50 thiết bị tắt mã hóa ổ cứng (BitLocker disabled), 8 thiết bị tắt hoặc không cập nhật diệt virus quá hạn 62 ngày, và 20 thiết bị không cấu hình khóa màn hình tự động, vi phạm nghiêm trọng tiêu chí đánh giá A.8.1.",
+      "deterministic_rule": {
+        "total_endpoints": 50,
+        "encrypted_endpoints": 36,
+        "edr_active_endpoints": 42,
+        "screen_lock_enforced": false,
+        "max_screen_lock_timeout_sec": 2700,
+        "compliance_ratio": 0.72,
+        "expected_status": "Non-Compliant",
+        "rule_check": "FAIL (14 unencrypted endpoints, 8 outdated EDR, 20 screen lock violations)"
+      },
+      "evidences": [
+        {
+          "evidence_id": "EVID-TECH-A81-TC02-01",
+          "evidence_type": "EVID_TECH_ENDPOINT_AV",
+          "related_controls": ["A.8.1"],
+          "source_host": "endpoint-scanner.vietfintech.local:/audit/q4_endpoint_failures.json",
+          "collection_method": "READ_ONLY_COLLECTOR",
+          "collected_at_utc": "2026-10-26T08:35:00Z",
+          "sha256_hash": "e63d368e7343e06cf84aebeaf9bfe7203b90ca11eb4c6c975a5e3df569d90ec8",
+          "content": {
+            "audit_type": "Internal Security Audit Deficiencies",
+            "scanned_devices": 50,
+            "findings": [
+              {
+                "category": "Disk Encryption Failure",
+                "severity": "CRITICAL",
+                "affected_device_count": 14,
+                "affected_hostnames": ["DEV-PC-003", "DEV-PC-007", "DATA-MAC-002", "DEV-PC-014"],
+                "details": "BitLocker protection status is set to OFF; FileVault was disabled by local administrative users."
+              },
+              {
+                "category": "Antivirus EDR Disablement & Stale Signatures",
+                "severity": "HIGH",
+                "affected_device_count": 8,
+                "affected_hostnames": ["DEV-PC-005", "DEV-PC-012", "OPS-PC-009"],
+                "details": "CrowdStrike service stopped manually; Windows Defender signature last updated 62 days ago."
+              },
+              {
+                "category": "Screen Lock Timeout Misconfiguration",
+                "severity": "MEDIUM",
+                "affected_device_count": 20,
+                "details": "Screen saver timeout set to 'Never' or 2700 seconds (45 minutes) via local registry override."
+              }
+            ],
+            "local_admin_rights": {
+              "standard_users_with_admin_privileges": 22,
+              "risk": "Users can disable endpoint agent controls at will."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "testcase_id": "TC-A8.1-03",
+      "control_id": "A.8.1",
+      "control_name": "User endpoint devices",
+      "group": "A.8 Technological",
+      "scenario_type": "Insufficient Evidence",
+      "scenario_title": "Bằng chứng rác - Dữ liệu nhật ký máy pha cà phê IoT tại văn phòng tầng 3",
+      "scenario_description": "Bộ phận vận hành gửi nhầm file xuất telemetry từ máy pha cà phê thông minh IoT đặt tại phòng Pantry tầng 3 thay vì báo cáo kiểm toán bảo mật thiết bị đầu cuối.",
+      "expected_status": "Insufficient Evidence",
+      "expected_confidence": 1.0,
+      "evaluation_criteria": [
+        "Bật mã hóa ổ đĩa (BitLocker/FileVault/LUKS)",
+        "Phần mềm diệt virus/EDR đang chạy",
+        "Cấu hình tự động khóa màn hình"
+      ],
+      "expected_rationale": "Dữ liệu bằng chứng chỉ ghi nhận các thông số vận hành pha cà phê (nhiệt độ bình đun, lượng sữa, áp suất bơm), hoàn toàn không chứa bất kỳ thông tin nào về cấu hình bảo mật máy tính đầu cuối (BitLocker, Antivirus, Screen lock).",
+      "deterministic_rule": {
+        "has_endpoint_data": false,
+        "valid_evidence_fields": 0,
+        "expected_status": "Insufficient Evidence",
+        "rule_check": "INSUFFICIENT (Garbage/irrelevant evidence payload)"
+      },
+      "evidences": [
+        {
+          "evidence_id": "EVID-TECH-A81-TC03-01",
+          "evidence_type": "EVID_TECH_ENDPOINT_AV",
+          "related_controls": ["A.8.1"],
+          "source_host": "smart-coffee-maker-fl3.vietfintech.local:/telemetry/brew_status.json",
+          "collection_method": "READ_ONLY_COLLECTOR",
+          "collected_at_utc": "2026-10-26T08:40:00Z",
+          "sha256_hash": "c594c9f131a90dcae0f22ea811252d68969f64bfbb468205f2fa66847a988d44",
+          "content": {
+            "device_type": "IoT Smart Coffee Maker Pro 3000",
+            "location": "Pantry Room Floor 3 - VietFinTech HQ",
+            "boiler_temperature_celsius": 92.5,
+            "water_tank_level_percent": 84,
+            "coffee_beans_hopper": "Arabica Medium Roast (Full)",
+            "pump_pressure_bars": 15.2,
+            "cups_dispensed_today": 128,
+            "last_descaling_date": "2026-09-15",
+            "maintenance_status": "Normal Operation"
+          }
+        }
+      ]
+    },
+    {
+      "testcase_id": "TC-A8.2-01",
+      "control_id": "A.8.2",
+      "control_name": "Privileged access rights",
+      "group": "A.8 Technological",
+      "scenario_type": "Compliant",
+      "scenario_title": "Bằng chứng hoàn hảo - Quản lý tài khoản đặc quyền PAM CyberArk, 3 tài khoản định danh, có rà soát Q4/2026",
+      "scenario_description": "VietFinTech áp dụng giải pháp quản lý tài khoản đặc quyền (PAM) CyberArk và Azure AD PIM. Chỉ có đúng 3 kỹ sư quản trị hệ thống được cấp tài khoản đặc quyền định danh cá nhân. Toàn bộ tài khoản root/administrator dùng chung đã bị vô hiệu hóa hoặc quản lý trong Vault tự động đổi mật khẩu sau mỗi phiên, yêu cầu phê duyệt JIT và có biên bản rà soát quyền định kỳ Quý 4/2026 có chữ ký CISO.",
+      "expected_status": "Compliant",
+      "expected_confidence": 0.98,
+      "evaluation_criteria": [
+        "Danh sách tài khoản admin/sudoers giới hạn tối thiểu dựa trên nguyên tắc Least Privilege",
+        "Có bằng chứng rà soát quyền truy cập đặc quyền định kỳ",
+        "Không sử dụng tài khoản quản trị dùng chung, bắt buộc định danh cá nhân và MFA"
+      ],
+      "expected_rationale": "Quyền quản trị đặc quyền được kiểm soát chặt chẽ với duy nhất 3 tài khoản định danh (adm_khoa, adm_toan, adm_lan), không dùng tài khoản chung, có giám sát phiên qua CyberArk PAM và biên bản rà soát quyền định kỳ quý 4/2026 hoàn thành 100%.",
+      "deterministic_rule": {
+        "total_privileged_users": 3,
+        "shared_admin_accounts": 0,
+        "last_access_review_days_ago": 11,
+        "mfa_for_privileged_access": true,
+        "expected_status": "Compliant",
+        "rule_check": "PASS (Privileged accounts strictly minimized, 0 shared accounts, quarterly review completed)"
+      },
+      "evidences": [
+        {
+          "evidence_id": "EVID-TECH-A82-TC01-01",
+          "evidence_type": "EVID_TECH_IAM_AUTH",
+          "related_controls": ["A.8.2"],
+          "source_host": "pam-cyberark.vietfintech.local:/reports/privileged_access_review_q4.json",
+          "collection_method": "READ_ONLY_COLLECTOR",
+          "collected_at_utc": "2026-10-26T09:00:00Z",
+          "sha256_hash": "62db94d03da2d512a8684bb417855ddc10816cfdd95eecb77f9c8fbc2e11894b",
+          "content": {
+            "audit_entity": "VietFinTech Privileged Access Management Review",
+            "review_period": "Q4-2026",
+            "review_date": "2026-10-15",
+            "approver": "Trần Bảo Nam (Chief Information Security Officer)",
+            "active_directory_domain_admins": [
+              {
+                "username": "adm_khoa_secops",
+                "full_name": "Lê Đăng Khoa",
+                "role": "Lead SecOps Engineer",
+                "mfa_enforced": true
+              },
+              {
+                "username": "adm_toan_arch",
+                "full_name": "Nguyễn Hữu Toàn",
+                "role": "Cloud Architect",
+                "mfa_enforced": true
+              },
+              {
+                "username": "adm_lan_devops",
+                "full_name": "Phạm Hoàng Lan",
+                "role": "DevOps Lead",
+                "mfa_enforced": true
+              }
+            ],
+            "generic_accounts_status": {
+              "default_domain_admin": "Vaulted_In_CyberArk_Password_Rotated_Daily",
+              "linux_root_direct_login": "Disabled_Across_All_Nodes",
+              "shared_accounts_count": 0
+            },
+            "sudoers_rules_summary": {
+              "configuration_file": "/etc/sudoers.d/99-corp-secops",
+              "policy": "Only %secops group permitted for whitelisted maintenance binaries with MFA prompt",
+              "nopasswd_rules_found": 0
+            },
+            "access_recertification": {
+              "total_reviewed": 3,
+              "re_certified": 3,
+              "revoked_accounts_this_quarter": 2,
+              "revocation_reasons": [
+                "Contractor project completed",
+                "Employee transitioned to non-technical role"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "testcase_id": "TC-A8.2-02",
+      "control_id": "A.8.2",
+      "control_name": "Privileged access rights",
+      "group": "A.8 Technological",
+      "scenario_type": "Non-Compliant",
+      "scenario_title": "Bằng chứng vi phạm - Dùng chung tài khoản root, nhóm developers có sudo NOPASSWD và tài khoản cũ chưa thu hồi",
+      "scenario_description": "Báo cáo kiểm tra cấu hình Linux Production Cluster và Active Directory cho thấy: 25 lập trình viên đều được cấp quyền sudo NOPASSWD: ALL, tài khoản quản trị Domain Administrator được dùng chung mật khẩu qua kênh chat nội bộ, và tài khoản của 2 nhân viên đã nghỉ việc từ 4 tháng trước vẫn nằm trong nhóm Domain Admins.",
+      "expected_status": "Non-Compliant",
+      "expected_confidence": 0.97,
+      "evaluation_criteria": [
+        "Danh sách tài khoản admin/sudoers giới hạn tối thiểu dựa trên nguyên tắc Least Privilege",
+        "Có bằng chứng rà soát quyền truy cập đặc quyền định kỳ",
+        "Không sử dụng tài khoản quản trị dùng chung, bắt buộc định danh cá nhân và MFA"
+      ],
+      "expected_rationale": "Vi phạm nghiêm trọng nguyên tắc đặc quyền tối thiểu: Cấp quyền sudo NOPASSWD không mật khẩu cho toàn bộ 25 lập trình viên, tài khoản Domain Admin dùng chung không MFA và không thu hồi quyền admin của 2 nhân sự đã nghỉ việc.",
+      "deterministic_rule": {
+        "total_privileged_users": 28,
+        "shared_admin_accounts": 1,
+        "unrevoked_terminated_users": 2,
+        "nopasswd_sudo_enabled": true,
+        "expected_status": "Non-Compliant",
+        "rule_check": "FAIL (NOPASSWD sudo enabled for developers group, shared admin account, terminated users retain access)"
+      },
+      "evidences": [
+        {
+          "evidence_id": "EVID-TECH-A82-TC02-01",
+          "evidence_type": "EVID_TECH_IAM_AUTH",
+          "related_controls": ["A.8.2"],
+          "source_host": "dc01.vietfintech.local:/audit/ad_sudoers_audit_dump.json",
+          "collection_method": "READ_ONLY_COLLECTOR",
+          "collected_at_utc": "2026-10-26T09:05:00Z",
+          "sha256_hash": "2023a7bb16da39ae2fceb7d34208e928285514f7b2c93dc32e3ea86bf9a4c803",
+          "content": {
+            "audit_module": "Host & Directory Privilege Vulnerability Report",
+            "domain_controller": "dc01.vietfintech.local",
+            "findings": [
+              {
+                "issue": "Shared Generic Administrator Account In Use",
+                "severity": "CRITICAL",
+                "account_name": "vietfintech\\Administrator",
+                "concurrent_sessions_detected": 8,
+                "mfa_status": "Disabled",
+                "notes": "Password was found documented on public internal Confluence wiki page."
+              },
+              {
+                "issue": "Orphaned Privileged Accounts Of Terminated Staff",
+                "severity": "CRITICAL",
+                "accounts": ["ex_dev_minh", "contractor_steve"],
+                "termination_date": "2026-06-30",
+                "current_status": "Still Active in Domain Admins and AWS IAM Group"
+              },
+              {
+                "issue": "Excessive Sudo Privileges Without Password",
+                "severity": "HIGH",
+                "file": "/etc/sudoers",
+                "line_content": "%developers ALL=(ALL:ALL) NOPASSWD: ALL",
+                "members_in_developers_group": 25
+              }
+            ],
+            "periodic_review_status": "Never Conducted in the Past 14 Months"
+          }
+        }
+      ]
+    },
+    {
+      "testcase_id": "TC-A8.2-03",
+      "control_id": "A.8.2",
+      "control_name": "Privileged access rights",
+      "group": "A.8 Technological",
+      "scenario_type": "Insufficient Evidence",
+      "scenario_title": "Bằng chứng rác - File log truy cập web server Nginx ghi nhận lượt tải CSS/Favicon",
+      "scenario_description": "Dữ liệu đính kèm là một trích đoạn log web server Nginx ghi nhận các truy vấn HTTP GET tải file hình ảnh và stylesheet từ khách vãng lai, không liên quan đến tài khoản hay quyền quản trị.",
+      "expected_status": "Insufficient Evidence",
+      "expected_confidence": 1.0,
+      "evaluation_criteria": [
+        "Danh sách tài khoản admin/sudoers",
+        "Bằng chứng rà soát quyền định kỳ"
+      ],
+      "expected_rationale": "Bằng chứng chỉ chứa các dòng log Nginx truy cập file tĩnh (favicon.ico, style.css), hoàn toàn không chứa dữ liệu về tài khoản quản trị, danh sách sudoers hay quy trình rà soát quyền đặc quyền.",
+      "deterministic_rule": {
+        "has_privileged_account_data": false,
+        "expected_status": "Insufficient Evidence",
+        "rule_check": "INSUFFICIENT (Web server asset access log, no IAM data)"
+      },
+      "evidences": [
+        {
+          "evidence_id": "EVID-TECH-A82-TC03-01",
+          "evidence_type": "EVID_TECH_IAM_AUTH",
+          "related_controls": ["A.8.2"],
+          "source_host": "web-gateway-01.vietfintech.local:/var/log/nginx/access.log",
+          "collection_method": "READ_ONLY_COLLECTOR",
+          "collected_at_utc": "2026-10-26T09:10:00Z",
+          "sha256_hash": "2ffea77651c68f1c8413f9f6e6f1f440ce8824317ae5ee83f60b86bfabfa6c1c",
+          "content": {
+            "log_source": "/var/log/nginx/access.log",
+            "lines": [
+              "192.168.10.45 - - [26/Oct/2026:09:08:12 +0000] \"GET /static/css/theme-dark.css HTTP/1.1\" 200 1422 \"https://vietfintech.vn/\" \"Mozilla/5.0\"",
+              "192.168.10.45 - - [26/Oct/2026:09:08:12 +0000] \"GET /favicon.ico HTTP/1.1\" 200 5430 \"https://vietfintech.vn/\" \"Mozilla/5.0\"",
+              "192.168.10.88 - - [26/Oct/2026:09:08:14 +0000] \"GET /images/logo.png HTTP/1.1\" 304 0 \"https://vietfintech.vn/\" \"Mozilla/5.0\""
+            ],
+            "total_entries": 3,
+            "service": "Public Landing Page Reverse Proxy"
+          }
+        }
+      ]
+    },
+    {
+      "testcase_id": "TC-A8.3-01",
+      "control_id": "A.8.3",
+      "control_name": "Information access restriction",
+      "group": "A.8 Technological",
+      "scenario_type": "Compliant",
+      "scenario_title": "Bằng chứng hoàn hảo - Ma trận phân quyền RBAC và cấu hình AWS IAM / Data Warehouse chuẩn Need-to-Know",
+      "scenario_description": "VietFinTech ban hành Ma trận phân quyền RBAC phân loại dữ liệu theo 4 cấp độ (Công khai, Nội bộ, Bí mật, Tuyệt mật). Dữ liệu sản xuất thẻ tín dụng và KYC chỉ dịch vụ thanh toán Backend và DBA chính thức được truy cập. Nhân viên hỗ trợ khách hàng chỉ thấy dữ liệu đã che giấu (Masked PII), và lập trình viên chỉ làm việc trên môi trường Staging với dữ liệu giả lập.",
+      "expected_status": "Compliant",
+      "expected_confidence": 0.98,
+      "evaluation_criteria": [
+        "Tồn tại Ma trận phân quyền thông tin (Access Control Matrix) được phê duyệt",
+        "Cấu hình ACL/RBAC trên hệ thống thực tế khớp 100% với ma trận",
+        "Tuân thủ nguyên tắc Need-to-Know, cô lập dữ liệu nhạy cảm giữa các phòng ban"
+      ],
+      "expected_rationale": "Hệ thống triển khai phân quyền dựa trên vai trò (RBAC) đồng bộ giữa chính sách và cấu hình AWS IAM/Database, áp dụng triệt để nguyên tắc Need-to-Know, ngăn chặn hoàn toàn việc truy cập chéo dữ liệu nhạy cảm.",
+      "deterministic_rule": {
+        "rbac_matrix_defined": true,
+        "production_db_isolation": true,
+        "unauthorized_cross_dept_access": false,
+        "mismatched_permissions_count": 0,
+        "expected_status": "Compliant",
+        "rule_check": "PASS (RBAC matrix aligned with cloud & DB access controls)"
+      },
+      "evidences": [
+        {
+          "evidence_id": "EVID-TECH-A83-TC01-01",
+          "evidence_type": "EVID_TECH_IAM_AUTH",
+          "related_controls": ["A.8.3"],
+          "source_host": "keycloak-iam.vietfintech.local:/export/rbac_matrix_enforcement.json",
+          "collection_method": "READ_ONLY_COLLECTOR",
+          "collected_at_utc": "2026-10-26T09:30:00Z",
+          "sha256_hash": "23a107316bc8d8ef9e18b031c55db703a890e0b3c675c8eb3971ceb6eb2dbe4d",
+          "content": {
+            "framework": "Role-Based Access Control (RBAC) Audit",
+            "policy_reference": "POL-SEC-08-ACCESS-CONTROL-V3",
+            "roles_matrix": {
+              "Customer_Support": {
+                "Customer_PII": "Masked_Read_Only",
+                "Production_Database": "No_Access",
+                "Financial_Ledger": "No_Access"
+              },
+              "Software_Engineer": {
+                "Customer_PII": "No_Access",
+                "Staging_Database": "Read_Write",
+                "Production_Database": "No_Access"
+              },
+              "Finance_Officer": {
+                "Customer_PII": "No_Access",
+                "Financial_Ledger": "Read_Write_With_Approval",
+                "Production_Database": "No_Access"
+              },
+              "Database_Admin": {
+                "Customer_PII": "Restricted_Audit_Logged",
+                "Production_Database": "Admin_With_MFA",
+                "Staging_Database": "Admin"
+              }
+            },
+            "cloud_iam_sync_verification": {
+              "aws_account_id": "112233445566-production",
+              "least_privilege_boundary_policy": "arn:aws:iam::112233445566:policy/StrictDepartmentalBoundary",
+              "unmapped_direct_user_policies": 0,
+              "discrepancies_detected": 0
+            },
+            "access_reconciliation_date": "2026-10-18"
+          }
+        }
+      ]
+    },
+    {
+      "testcase_id": "TC-A8.3-02",
+      "control_id": "A.8.3",
+      "control_name": "Information access restriction",
+      "group": "A.8 Technological",
+      "scenario_type": "Non-Compliant",
+      "scenario_title": "Bằng chứng vi phạm - AWS S3 KYC công khai Internet và thư mục bảng lương mở cho nhóm Everyone",
+      "scenario_description": "Quét kiểm toán phát hiện bucket AWS S3 `vietfintech-kyc-documents` lưu CMND/CCCD của khách hàng mở quyền đọc công khai cho toàn mạng Internet (`Principal: *`). Đồng thời trên File Server nội bộ, thư mục chứa bảng lương nhân viên và hợp đồng kinh doanh được phân quyền cho nhóm `Everyone: Full Control`.",
+      "expected_status": "Non-Compliant",
+      "expected_confidence": 0.99,
+      "evaluation_criteria": [
+        "Tồn tại Ma trận phân quyền thông tin được phê duyệt",
+        "Cấu hình ACL/RBAC trên hệ thống thực tế khớp với ma trận",
+        "Tuân thủ nguyên tắc Need-to-Know, cô lập dữ liệu nhạy cảm"
+      ],
+      "expected_rationale": "Vi phạm nghiêm trọng chính sách hạn chế truy cập thông tin: Bucket S3 chứa tài liệu KYC định danh cá nhân bị lộ công khai cho toàn Internet và thư mục chia sẻ nội bộ chứa bảng lương cấp quyền toàn bộ cho nhóm Everyone.",
+      "deterministic_rule": {
+        "public_s3_buckets_detected": 1,
+        "everyone_share_permissions": true,
+        "expected_status": "Non-Compliant",
+        "rule_check": "FAIL (Public KYC S3 bucket and unrestricted Everyone file share)"
+      },
+      "evidences": [
+        {
+          "evidence_id": "EVID-TECH-A83-TC02-01",
+          "evidence_type": "EVID_TECH_IAM_AUTH",
+          "related_controls": ["A.8.3"],
+          "source_host": "cloudtrail-auditor.vietfintech.local:/findings/unrestricted_access_scan.json",
+          "collection_method": "READ_ONLY_COLLECTOR",
+          "collected_at_utc": "2026-10-26T09:35:00Z",
+          "sha256_hash": "a4d34a5d3f273be82527581fbff26b713296c6b3daae6a457a41fc76a445d070",
+          "content": {
+            "audit_scanner": "Automated Cloud & Storage Security Posture Scanner",
+            "critical_vulnerabilities": [
+              {
+                "resource_type": "AWS S3 Bucket",
+                "resource_id": "arn:aws:s3:::vietfintech-kyc-documents",
+                "data_classification": "RESTRICTED - PII / KYC",
+                "bucket_policy": {
+                  "Version": "2012-10-17",
+                  "Statement": [
+                    {
+                      "Sid": "PublicReadGetObject",
+                      "Effect": "Allow",
+                      "Principal": "*",
+                      "Action": "s3:GetObject",
+                      "Resource": "arn:aws:s3:::vietfintech-kyc-documents/*"
+                    }
+                  ]
+                },
+                "impact": "Anyone on the Internet can download customer ID card scans without authentication."
+              },
+              {
+                "resource_type": "Windows SMB File Share",
+                "path": "\\\\nas01.vietfintech.local\\Confidential_Payroll_2026",
+                "ntfs_acl": [
+                  {
+                    "identity": "BUILTIN\\Everyone",
+                    "rights": "FullControl",
+                    "access_type": "Allow"
+                  }
+                ],
+                "impact": "All 50 employees can view and modify executive salary records."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "testcase_id": "TC-A8.3-03",
+      "control_id": "A.8.3",
+      "control_name": "Information access restriction",
+      "group": "A.8 Technological",
+      "scenario_type": "Insufficient Evidence",
+      "scenario_title": "Bằng chứng rác - Báo cáo độ trễ Ping mạng nội bộ giữa các Switch văn phòng",
+      "scenario_description": "File đính kèm ghi lại kết quả đo độ trễ mạng ICMP ping giữa các switch hạ tầng văn phòng, hoàn toàn không liên quan đến phân quyền truy cập thông tin hay ma trận RBAC.",
+      "expected_status": "Insufficient Evidence",
+      "expected_confidence": 1.0,
+      "evaluation_criteria": [
+        "Ma trận phân quyền hệ thống",
+        "Cấu hình ACL/RBAC trùng khớp với ma trận"
+      ],
+      "expected_rationale": "Dữ liệu chỉ thể hiện độ trễ ICMP ping và tỷ lệ mất gói giữa các thiết bị mạng, không phản ánh bất kỳ cơ chế kiểm soát truy cập thông tin hay phân quyền dữ liệu nào.",
+      "deterministic_rule": {
+        "has_access_control_data": false,
+        "expected_status": "Insufficient Evidence",
+        "rule_check": "INSUFFICIENT (Network ping latency stats, no access control data)"
+      },
+      "evidences": [
+        {
+          "evidence_id": "EVID-TECH-A83-TC03-01",
+          "evidence_type": "EVID_TECH_IAM_AUTH",
+          "related_controls": ["A.8.3"],
+          "source_host": "network-nms.vietfintech.local:/reports/icmp_roundtrip_latency.json",
+          "collection_method": "READ_ONLY_COLLECTOR",
+          "collected_at_utc": "2026-10-26T09:40:00Z",
+          "sha256_hash": "2ffaa591cfaef22c1d3fb66810c9aa1654e9e03d4a6f959c5d0ce180e07174db",
+          "content": {
+            "test_type": "ICMP Ping Sweep Network Diagnostic",
+            "probes": [
+              {
+                "source": "Switch-Core-01",
+                "destination": "Switch-Floor-2",
+                "packets_sent": 100,
+                "loss_percent": 0.0,
+                "avg_rtt_ms": 0.82
+              },
+              {
+                "source": "Switch-Core-01",
+                "destination": "Switch-Floor-3",
+                "packets_sent": 100,
+                "loss_percent": 0.0,
+                "avg_rtt_ms": 0.95
+              },
+              {
+                "source": "Switch-Core-01",
+                "destination": "Router-Edge-01",
+                "packets_sent": 100,
+                "loss_percent": 0.0,
+                "avg_rtt_ms": 0.41
+              }
+            ],
+            "status": "Network Latency Optimal"
+          }
+        }
+      ]
+    },
+    {
+      "testcase_id": "TC-A8.4-01",
+      "control_id": "A.8.4",
+      "control_name": "Access to source code",
+      "group": "A.8 Technological",
+      "scenario_type": "Compliant",
+      "scenario_title": "Bằng chứng hoàn hảo - GitLab Enterprise Branch Protection, cấm push trực tiếp, bắt buộc 2 Reviewers và SAST pass",
+      "scenario_description": "Kho mã nguồn cốt lõi của VietFinTech (các repo: `core-banking-service` và `payment-gateway`) được lưu trữ trên GitLab Enterprise tự lưu trữ. Tất cả các nhánh chính (`main`, `release/*`) đều được bật chế độ Branch Protection: cấm tuyệt đối push trực tiếp, bắt buộc 2 lập trình viên cấp cao duyệt Merge Request, kiểm tra tự động SAST/DAST không có lỗi Critical trước khi merge, và yêu cầu khóa bảo mật FIDO2.",
+      "expected_status": "Compliant",
+      "expected_confidence": 0.98,
+      "evaluation_criteria": [
+        "Cấu hình Git bảo vệ nhánh chính (Branch protection enforced)",
+        "Cấm commit/push trực tiếp vào nhánh sản xuất, bắt buộc Code Review (tối thiểu 2 approvals)",
+        "Phân quyền đọc/ghi kho mã nguồn rõ ràng, tích hợp kiểm tra bảo mật CI/CD"
+      ],
+      "expected_rationale": "Kho mã nguồn được bảo vệ toàn diện: Nhánh main được bảo vệ nghiêm ngặt (push_access_level: No one), bắt buộc tối thiểu 2 lượt phê duyệt code review, kiểm tra bảo mật SAST tự động và phân quyền đọc ghi tách biệt theo từng dự án.",
+      "deterministic_rule": {
+        "branch_protection_enabled": true,
+        "direct_push_blocked": true,
+        "min_approvals_required": 2,
+        "automated_security_gate_enforced": true,
+        "expected_status": "Compliant",
+        "rule_check": "PASS (Branch protection, 2 approvals required, direct push disabled)"
+      },
+      "evidences": [
+        {
+          "evidence_id": "EVID-TECH-A84-TC01-01",
+          "evidence_type": "EVID_TECH_SDLC_REPORT",
+          "related_controls": ["A.8.4"],
+          "source_host": "gitlab.vietfintech.local:/api/v4/projects/compliance_snapshot.json",
+          "collection_method": "READ_ONLY_COLLECTOR",
+          "collected_at_utc": "2026-10-26T10:00:00Z",
+          "sha256_hash": "eb2065895e683cf461bf9691bf7da9166fefb7ec1734346faad8ebbe008c2a86",
+          "content": {
+            "vcs_platform": "GitLab Enterprise Edition 17.3",
+            "audited_repositories": [
+              "vietfintech/core-banking-service",
+              "vietfintech/payment-gateway-engine"
+            ],
+            "branch_protection_rules": {
+              "protected_branch_pattern": ["main", "release/*"],
+              "push_access_level": "No_One",
+              "merge_access_level": "Maintainers_Only",
+              "allow_force_push": false,
+              "code_owner_approval_required": true,
+              "minimum_approvals_before_merge": 2
+            },
+            "ci_cd_security_gates": {
+              "pipeline_must_succeed": true,
+              "sast_scanner": "GitLab Advanced SAST + Semgrep Ruleset",
+              "secret_detection_gate": "Block_Merge_On_Secrets_Found",
+              "latest_scan_result": "PASSED (0 Critical, 0 High vulnerabilities)"
+            },
+            "access_control": {
+              "mfa_requirement": "Mandatory_Hardware_FIDO2_Or_WebAuthn",
+              "external_contractors_permission": "Scoped_Read_Only_Submodules"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "testcase_id": "TC-A8.4-02",
+      "control_id": "A.8.4",
+      "control_name": "Access to source code",
+      "group": "A.8 Technological",
+      "scenario_type": "Non-Compliant",
+      "scenario_title": "Bằng chứng vi phạm - Repository mã nguồn thanh toán ở chế độ Public, tắt Branch Protection và cho phép Force Push",
+      "scenario_description": "Kiểm toán phát hiện kho mã nguồn chứa mô-đun xử lý giao dịch thanh toán `payment-gateway` bị đặt nhầm ở chế độ Public trên GitHub. Tính năng Branch Protection bị tắt (`protected: false`), lập trình viên có thể tùy ý force-push ghi đè trực tiếp lên nhánh master mà không cần ai duyệt.",
+      "expected_status": "Non-Compliant",
+      "expected_confidence": 0.99,
+      "evaluation_criteria": [
+        "Cấu hình Git bảo vệ nhánh chính (Branch protection)",
+        "Phân quyền read/write kho mã nguồn rõ ràng",
+        "Không cho phép ghi đè lịch sử commit trái phép"
+      ],
+      "expected_rationale": "Vi phạm nghiêm trọng an toàn mã nguồn: Kho mã nguồn thanh toán bị để công khai (Public), tính năng bảo vệ nhánh bị tắt hoàn toàn cho phép ghi đè lịch sử (force push) mà không cần qua quy trình phê duyệt code review.",
+      "deterministic_rule": {
+        "is_public_repository": true,
+        "branch_protection_enabled": false,
+        "allow_force_push": true,
+        "expected_status": "Non-Compliant",
+        "rule_check": "FAIL (Repository is public, branch protection is disabled, force push permitted)"
+      },
+      "evidences": [
+        {
+          "evidence_id": "EVID-TECH-A84-TC02-01",
+          "evidence_type": "EVID_TECH_SDLC_REPORT",
+          "related_controls": ["A.8.4"],
+          "source_host": "github.com/vietfintech-corp:/api/repos/payment-gateway.json",
+          "collection_method": "READ_ONLY_COLLECTOR",
+          "collected_at_utc": "2026-10-26T10:05:00Z",
+          "sha256_hash": "a4dce22b827e2a96a32ce12bbba2ff18e6973e449557fc9d375591cfd00e6fe1",
+          "content": {
+            "repository_name": "vietfintech-corp/payment-gateway",
+            "visibility": "public",
+            "default_branch": "master",
+            "branch_protection": {
+              "protected": false,
+              "required_status_checks": null,
+              "enforce_admins": false,
+              "required_pull_request_reviews": null,
+              "allow_force_pushes": true,
+              "allow_deletions": true
+            },
+            "collaborators_audit": {
+              "anonymous_external_contributors_with_write": 14,
+              "mfa_enforced": false
+            },
+            "secret_scanning_alerts": {
+              "active_leaked_credentials": 3,
+              "details": "AWS_SECRET_ACCESS_KEY found committed in commit hash 4f8b1a2c"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "testcase_id": "TC-A8.4-03",
+      "control_id": "A.8.4",
+      "control_name": "Access to source code",
+      "group": "A.8 Technological",
+      "scenario_type": "Insufficient Evidence",
+      "scenario_title": "Bằng chứng rác - Thực đơn ăn trưa tuần 4 của nhân viên căng tin công ty",
+      "scenario_description": "Tập tin đính kèm là bảng thống kê đăng ký món ăn trưa hàng tuần của nhân sự VietFinTech (Cơm gà sốt nấm, Bún chả Hà Nội, Cơm chay đậu hũ), không liên quan đến hệ thống quản lý mã nguồn hay Git.",
+      "expected_status": "Insufficient Evidence",
+      "expected_confidence": 1.0,
+      "evaluation_criteria": [
+        "Cấu hình Git bảo vệ branch",
+        "Phân quyền read/write kho mã nguồn rõ ràng"
+      ],
+      "expected_rationale": "Dữ liệu đính kèm chỉ chứa danh sách thực đơn và suất ăn trưa của căng tin, không có bất kỳ thông tin nào về hệ thống kiểm soát mã nguồn Git, phân quyền repository hay cấu hình bảo vệ nhánh.",
+      "deterministic_rule": {
+        "has_vcs_source_code_data": false,
+        "expected_status": "Insufficient Evidence",
+        "rule_check": "INSUFFICIENT (Canteen lunch menu spreadsheet, no source code data)"
+      },
+      "evidences": [
+        {
+          "evidence_id": "EVID-TECH-A84-TC03-01",
+          "evidence_type": "EVID_TECH_SDLC_REPORT",
+          "related_controls": ["A.8.4"],
+          "source_host": "hr-canteen.vietfintech.local:/catering/weekly_lunch_menu.json",
+          "collection_method": "READ_ONLY_COLLECTOR",
+          "collected_at_utc": "2026-10-26T10:10:00Z",
+          "sha256_hash": "fe9477e817c1bf16fa05db859cffc5a96860e0a531f8682a3928a34d852a4e21",
+          "content": {
+            "document_title": "Weekly Catering & Lunch Orders",
+            "week": "Week 43 - October 2026",
+            "menu_options": [
+              {
+                "day": "Monday",
+                "option_1": "Com ga xoi mo",
+                "option_2": "Bun cha Ha Noi",
+                "vegetarian": "Dau hu sot ca"
+              },
+              {
+                "day": "Tuesday",
+                "option_1": "Bo kho banh mi",
+                "option_2": "Com tam suon bi",
+                "vegetarian": "Nam kho tieu"
+              },
+              {
+                "day": "Wednesday",
+                "option_1": "Pho bo Dac Biet",
+                "option_2": "My Quang Ga",
+                "vegetarian": "Hu tieu chay"
+              }
+            ],
+            "total_registered_staff": 48
+          }
+        }
+      ]
+    },
+    {
+      "testcase_id": "TC-A8.5-01",
+      "control_id": "A.8.5",
+      "control_name": "Secure authentication",
+      "group": "A.8 Technological",
+      "scenario_type": "Compliant",
+      "scenario_title": "Bằng chứng hoàn hảo - Mật khẩu tối thiểu 14 ký tự, MFA bắt buộc 100% và SSH khóa root login",
+      "scenario_description": "Hệ thống xác thực tập trung Keycloak SSO và Active Directory áp dụng chính sách mật khẩu mạnh (tối thiểu 14 ký tự, độ phức tạp 4 nhóm ký tự, khóa tài khoản sau 5 lần sai). Bắt buộc xác thực đa yếu tố (MFA qua FIDO2/TOTP) cho 100% tài khoản khi kết nối VPN hoặc truy cập hạ tầng đám mây. Đồng thời, máy chủ Linux vô hiệu hóa hoàn toàn SSH root login và cấm xác thực mật khẩu (chỉ chấp nhận SSH Ed25519 key).",
+      "expected_status": "Compliant",
+      "expected_confidence": 0.98,
+      "evaluation_criteria": [
+        "Độ dài mật khẩu tối thiểu 12 ký tự (chính sách hiện tại: 14 ký tự)",
+        "Bật MFA bắt buộc cho tài khoản người dùng và tài khoản đặc quyền",
+        "Vô hiệu hóa SSH root login bằng mật khẩu trên các máy chủ"
+      ],
+      "expected_rationale": "Cơ chế xác thực an toàn được thực thi triệt để: Mật khẩu tối thiểu 14 ký tự đáp ứng chuẩn an toàn, MFA bắt buộc 100% người dùng và máy chủ vô hiệu hóa hoàn toàn đăng nhập root bằng mật khẩu qua SSH.",
+      "deterministic_rule": {
+        "min_password_length": 14,
+        "mfa_enforced_percent": 100.0,
+        "ssh_permit_root_login": "no",
+        "ssh_password_authentication": "no",
+        "expected_status": "Compliant",
+        "rule_check": "PASS (Min password length 14, MFA 100%, SSH root login disabled)"
+      },
+      "evidences": [
+        {
+          "evidence_id": "EVID-TECH-A85-TC01-01",
+          "evidence_type": "EVID_TECH_IAM_AUTH",
+          "related_controls": ["A.8.5"],
+          "source_host": "auth-idp.vietfintech.local:/etc/auth_hardening_summary.json",
+          "collection_method": "READ_ONLY_COLLECTOR",
+          "collected_at_utc": "2026-10-26T10:30:00Z",
+          "sha256_hash": "cbf3cb36a73c4f2bb7f7f502446f25974dc3e8a4bbfe1a0ae50fbba935d283c7",
+          "content": {
+            "idp_provider": "Keycloak Enterprise / Azure AD Hybrid",
+            "password_policy": {
+              "minimum_length": 14,
+              "require_uppercase": true,
+              "require_lowercase": true,
+              "require_digits": true,
+              "require_special_characters": true,
+              "max_failed_attempts_before_lockout": 5,
+              "lockout_duration_minutes": 30,
+              "password_history_kept": 10,
+              "maximum_password_age_days": 90
+            },
+            "mfa_enforcement": {
+              "policy_name": "MFA-UNIVERSAL-ENFORCE",
+              "total_users": 50,
+              "users_with_mfa_enrolled": 50,
+              "mfa_coverage_percent": 100.0,
+              "allowed_methods": [
+                "Hardware_Security_Key_FIDO2",
+                "Authenticator_App_TOTP"
+              ],
+              "sms_2fa_permitted": false,
+              "enforced_on_vpn": true,
+              "enforced_on_cloud_console": true
+            },
+            "linux_ssh_hardening": {
+              "audited_hosts_count": 12,
+              "sshd_config_parameters": {
+                "PermitRootLogin": "no",
+                "PasswordAuthentication": "no",
+                "PubkeyAuthentication": "yes",
+                "KbdInteractiveAuthentication": "no",
+                "MaxAuthTries": 3
+              },
+              "compliant_servers_count": 12
+            }
+          }
+        }
+      ]
+    },
+    {
+      "testcase_id": "TC-A8.5-02",
+      "control_id": "A.8.5",
+      "control_name": "Secure authentication",
+      "group": "A.8 Technological",
+      "scenario_type": "Non-Compliant",
+      "scenario_title": "Bằng chứng vi phạm - Mật khẩu chỉ 6 ký tự không khóa, chỉ 3 người bật MFA và máy chủ cho phép SSH root mật khẩu mặc định",
+      "scenario_description": "Kiểm toán chính sách xác thực phát hiện cấu hình Active Directory chỉ yêu cầu mật khẩu tối thiểu 6 ký tự, không bật tính năng khóa tài khoản khi nhập sai liên tục. MFA được thiết lập ở chế độ tùy chọn (Optional) nên chỉ có 3/50 nhân sự kích hoạt. Trên máy chủ Bastion Host, file cấu hình SSH vẫn cho phép đăng nhập tài khoản root bằng mật khẩu mặc định.",
+      "expected_status": "Non-Compliant",
+      "expected_confidence": 0.98,
+      "evaluation_criteria": [
+        "Độ dài mật khẩu tối thiểu 12 ký tự",
+        "Bật MFA cho tài khoản đặc quyền và người dùng",
+        "Vô hiệu hóa SSH root login bằng mật khẩu"
+      ],
+      "expected_rationale": "Vi phạm nghiêm trọng các quy tắc xác thực an toàn: Độ dài mật khẩu chỉ có 6 ký tự và không khóa khi bị brute-force, tỷ lệ áp dụng MFA chỉ đạt 6% (3/50 người dùng), và máy chủ vẫn mở quyền SSH root login bằng mật khẩu.",
+      "deterministic_rule": {
+        "min_password_length": 6,
+        "mfa_enforced_percent": 6.0,
+        "ssh_permit_root_login": "yes",
+        "ssh_password_authentication": "yes",
+        "expected_status": "Non-Compliant",
+        "rule_check": "FAIL (Password length 6, MFA coverage 6%, SSH root password login enabled)"
+      },
+      "evidences": [
+        {
+          "evidence_id": "EVID-TECH-A85-TC02-01",
+          "evidence_type": "EVID_TECH_IAM_AUTH",
+          "related_controls": ["A.8.5"],
+          "source_host": "bastion-prod.vietfintech.local:/audit/auth_vulnerabilities.json",
+          "collection_method": "READ_ONLY_COLLECTOR",
+          "collected_at_utc": "2026-10-26T10:35:00Z",
+          "sha256_hash": "f0adba104a3f124ce140c8faae9a4d3fe6cbcfc71d603a15dc211242c1fa0b5e",
+          "content": {
+            "audit_topic": "Authentication & Credential Security Posture",
+            "password_policy": {
+              "minimum_length": 6,
+              "complexity_enabled": false,
+              "lockout_threshold": 0,
+              "note": "Accounts are never locked regardless of number of failed password attempts."
+            },
+            "mfa_enforcement": {
+              "mfa_status": "OPTIONAL",
+              "total_users": 50,
+              "enrolled_users": 3,
+              "mfa_coverage_percent": 6.0,
+              "unprotected_accounts_count": 47
+            },
+            "linux_ssh_audit": {
+              "target_host": "bastion-prod.vietfintech.local",
+              "effective_config": {
+                "PermitRootLogin": "yes",
+                "PasswordAuthentication": "yes",
+                "AllowTcpForwarding": "yes"
+              },
+              "risk": "Root account can be accessed via password brute-force directly over public Internet."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "testcase_id": "TC-A8.5-03",
+      "control_id": "A.8.5",
+      "control_name": "Secure authentication",
+      "group": "A.8 Technological",
+      "scenario_type": "Insufficient Evidence",
+      "scenario_title": "Bằng chứng rác - Dữ liệu cảm biến nhiệt độ hệ thống điều hòa Data Center",
+      "scenario_description": "Tập tin đính kèm chứa thông số môi trường của dàn lạnh trung tâm HVAC phòng máy chủ (nhiệt độ gió hồi 22.4°C, áp suất gas, tốc độ quạt gió), không liên quan đến cơ chế xác thực hay mật khẩu.",
+      "expected_status": "Insufficient Evidence",
+      "expected_confidence": 1.0,
+      "evaluation_criteria": [
+        "Độ dài mật khẩu tối thiểu 12 ký tự",
+        "Bật MFA cho tài khoản đặc quyền",
+        "Vô hiệu hóa SSH root login bằng mật khẩu"
+      ],
+      "expected_rationale": "Dữ liệu chỉ bao gồm thông số đo đạc nhiệt độ và độ ẩm của hệ thống làm mát phòng máy chủ, hoàn toàn thiếu các thông tin về chính sách xác thực, mật khẩu, MFA hay cấu hình SSH.",
+      "deterministic_rule": {
+        "has_auth_data": false,
+        "expected_status": "Insufficient Evidence",
+        "rule_check": "INSUFFICIENT (Data center HVAC telemetry, no authentication data)"
+      },
+      "evidences": [
+        {
+          "evidence_id": "EVID-TECH-A85-TC03-01",
+          "evidence_type": "EVID_TECH_IAM_AUTH",
+          "related_controls": ["A.8.5"],
+          "source_host": "datacenter-hvac01.vietfintech.local:/telemetry/ambient_sensor.json",
+          "collection_method": "READ_ONLY_COLLECTOR",
+          "collected_at_utc": "2026-10-26T10:40:00Z",
+          "sha256_hash": "aa7f28ae6eb196aa0e956bc2ee8971f4fa815ca5021e9ec1fbcf4ae8080cb96b",
+          "content": {
+            "sensor_id": "CRAC-UNIT-ZONE-A",
+            "location": "Primary Server Room DC-01",
+            "supply_air_temp_celsius": 18.5,
+            "return_air_temp_celsius": 22.4,
+            "relative_humidity_percent": 48.2,
+            "fan_speed_rpm": 1420,
+            "compressor_status": "Running",
+            "alarm_status": "CLEAR"
+          }
+        }
+      ]
+    }
+  ]
+}
+
