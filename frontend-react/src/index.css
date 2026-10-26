@@ -2,7 +2,7 @@
 @import "tailwindcss";
 
 :root {
-  font-family: Inter, system-ui, sans-serif;
+  font-family: ui-rounded, "Trebuchet MS", Inter, system-ui, sans-serif;
   color-scheme: dark;
 }
 
@@ -15,5 +15,5 @@ body,
 }
 
 body {
-  background: #070e1e;
+  background: #172337;
 }

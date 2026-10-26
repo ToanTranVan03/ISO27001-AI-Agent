@@ -1,39 +1,17 @@
-
-"use client";
-
-import React, { useEffect, useRef, useState } from "react";
+import BaseLife, { AgentCrewPanel } from "./BaseLife";
+import React, { useCallback, useEffect, useState } from "react";
 import {
-  Activity,
-  BarChart3,
-  Bot,
-  CheckCircle2,
-  ChevronRight,
-  Clock3,
-  Database,
-  FileCheck2,
-  FileUp,
-  LayoutDashboard,
-  Loader2,
-  Orbit,
-  Radar,
-  Rocket,
-  Satellite,
-  Server,
-  Shield,
-  ShieldCheck,
-  Sparkles,
-  Target,
-  Thermometer,
-  UploadCloud,
-  Users,
-  Zap,
+  Activity, BarChart3, Bot, Building2, CheckCircle2,
+  ChevronRight, Clock3, FileCheck2, FileUp, LayoutDashboard,
+  Loader2, Map as MapIcon, Radar, Rocket, Shield, Sparkles, Target,
+  Thermometer, UploadCloud, Users, X
 } from "lucide-react";
 
-// ======================================================
-// ISO CONTROL CATALOG - 8 + 14 + 34 = 56
-// ======================================================
+// =========================================================
+// ISO CONTROL DATA — 8 + 14 + 34 = 56
+// =========================================================
 
-const CONTROL_CATALOG = {
+const CONTROLS = {
   "A.6": [
     "Screening",
     "Terms and conditions of employment",
@@ -98,573 +76,786 @@ const CONTROL_CATALOG = {
   ],
 };
 
-const GROUPS = [
+const ZONES = [
   {
     id: "A.6",
-    label: "Con người",
-    building: "Tòa nhà Nhân sự",
+    title: "Con người",
+    name: "Tòa nhà Nhân sự",
+    subtitle: "Phòng làm việc HR",
     Icon: Users,
+    main: "#F4A66C",
+    light: "#FFE0B5",
+    position: { left: "7%", top: "34%" },
     defaultControl: "A.6.1",
-    color: "#52e5eb",
   },
   {
     id: "A.7",
-    label: "Môi trường vật lý",
-    building: "Khu vực An ninh",
+    title: "Môi trường vật lý",
+    name: "Khu vực An ninh",
+    subtitle: "Trạm bảo vệ",
     Icon: Shield,
+    main: "#A3CDB5",
+    light: "#DBF2DC",
+    position: { left: "54%", top: "25%" },
     defaultControl: "A.7.1",
-    color: "#ffbd78",
   },
   {
     id: "A.8",
-    label: "Công nghệ",
-    building: "Trung tâm Dữ liệu",
-    Icon: Server,
+    title: "Công nghệ",
+    name: "Trung tâm Dữ liệu",
+    subtitle: "Phòng điều khiển",
+    Icon: Building2,
+    main: "#B9B2E5",
+    light: "#E9E4FF",
+    position: { left: "35%", top: "57%" },
     defaultControl: "A.8.5",
-    color: "#a293ff",
   },
 ];
 
-const DESCRIPTIONS = {
-  "A.6.1":
-    "Thẩm tra lý lịch và năng lực của nhân sự trước khi tuyển dụng để đảm bảo sự tin cậy.",
-  "A.7.1":
-    "Xác định và sử dụng các vành đai bảo vệ nhằm bảo vệ các khu vực chứa thông tin và tài sản liên quan.",
-  "A.8.5":
-    "Triển khai công nghệ và quy trình xác thực an toàn phù hợp với yêu cầu kiểm soát truy cập.",
-  "A.8.13":
-    "Duy trì bản sao lưu thông tin, phần mềm và hệ thống; kiểm tra hoạt động sao lưu theo yêu cầu.",
-  "A.8.20":
-    "Bảo vệ, quản lý và kiểm soát mạng cùng các thiết bị mạng nhằm bảo vệ thông tin trong hệ thống.",
-};
-
-const EVIDENCE_TYPES = [
-  "EVID_PPL_HR_RECORD",
-  "EVID_PPL_TRAINING",
-  "EVID_PHY_ACCESS_LOG",
-  "EVID_PHY_ASSET",
-  "EVID_TECH_IAM",
-  "EVID_TECH_BACKUP",
-  "EVID_TECH_CONFIG",
-];
-
-const ALL_CONTROLS = Object.entries(CONTROL_CATALOG).flatMap(
+const ALL_CONTROLS = Object.entries(CONTROLS).flatMap(
   ([group, titles]) =>
-    titles.map((title, index) => ({
-      id: `${group}.${index + 1}`,
+    titles.map((title, i) => ({
+      id: `${group}.${i + 1}`,
       title,
       group,
     }))
 );
 
-// ======================================================
-// DECORATIVE COMPONENTS
-// ======================================================
+const DESCRIPTIONS = {
+  "A.6.1":
+    "Thẩm tra lý lịch và năng lực của nhân sự trước khi tuyển dụng để đảm bảo sự tin cậy.",
+  "A.7.1":
+    "Thiết lập và bảo vệ khu vực vật lý chứa thông tin, thiết bị và các tài sản quan trọng.",
+  "A.8.5":
+    "Triển khai quy trình và công nghệ xác thực an toàn phù hợp với yêu cầu kiểm soát truy cập.",
+  "A.8.13":
+    "Duy trì, kiểm tra và bảo vệ các bản sao lưu thông tin và hệ thống.",
+};
 
-function GlassPanel({ children, className = "" }) {
+
+
+// =========================================================
+// UI COMPONENTS
+// =========================================================
+
+function Panel({ children, className = "" }) {
   return (
-    <div
+    <section
       className={
-        "rounded-[24px] border border-sky-300/20 " +
-        "bg-slate-950/65 backdrop-blur-xl " +
-        "shadow-[0_22px_75px_rgba(0,0,0,0.38)] " +
-        className
+        "rounded-[30px] border border-white/10 " +
+        "bg-[#203044]/95 shadow-xl shadow-[#18212b]/20 " +
+        "backdrop-blur-xl " + className
       }
     >
       {children}
-    </div>
+    </section>
   );
 }
 
-function StarField() {
-  const stars = Array.from({ length: 95 }, (_, index) => ({
-    left: `${(index * 71.7) % 100}%`,
-    top: `${(index * 37.3) % 100}%`,
-    size: index % 8 === 0 ? 3 : 1.5,
-    opacity: 0.18 + ((index * 17) % 60) / 100,
+function TinyStars() {
+  const dots = Array.from({ length: 35 }, (_, i) => ({
+    x: (i * 67.7) % 100,
+    y: (i * 39.3) % 100,
   }));
 
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
-      {stars.map((star, index) => (
+      {dots.map((dot, i) => (
         <span
-          key={index}
-          className="absolute rounded-full bg-white"
-          style={{
-            left: star.left,
-            top: star.top,
-            width: star.size,
-            height: star.size,
-            opacity: star.opacity,
-          }}
+          key={i}
+          className="absolute h-[2px] w-[2px] rounded-full bg-white/60"
+          style={{ left: `${dot.x}%`, top: `${dot.y}%` }}
         />
       ))}
     </div>
   );
 }
 
-function IsometricBuilding({ id, color, active, label, tooltip, onClick, position }) {
+// =========================================================
+// CUTE DIORAMA ROOM — SVG WITH GLASS WALLS
+// =========================================================
+
+function DioramaRoom({ zone, active, onClick, running }) {
+  const uid = zone.id.replaceAll(".", "");
+  const isHR = zone.id === "A.6";
+  const isSecurity = zone.id === "A.7";
+  const isTech = zone.id === "A.8";
+
   return (
     <button
       type="button"
       onClick={onClick}
-      aria-label={`Chọn ${label}`}
-      className="absolute z-10 w-[225px] text-left transition-all duration-300 hover:z-20 hover:scale-105 focus:outline-none"
-      style={{
-        left: position.left,
-        top: position.top,
-        transform: active ? "translateY(-10px)" : "translateY(0)",
-      }}
+      aria-label={`Chọn ${zone.name}`}
+      className={
+        "group absolute z-10 w-[270px] cursor-pointer " +
+        "transition-transform duration-300 hover:z-30 hover:scale-105"
+      }
+      style={zone.position}
     >
-      <div className="absolute bottom-[89%] left-1/2 z-30 w-max max-w-[220px] -translate-x-1/2">
-        <div className="relative rounded-2xl border border-white/80 bg-white px-3 py-2.5 text-slate-900 shadow-[0_10px_35px_rgba(0,0,0,0.35)]">
+      {/* Floating white tooltip */}
+      <div className="absolute bottom-[94%] left-1/2 z-40 w-[235px] -translate-x-1/2 pb-3">
+        <div
+          className={
+            "relative rounded-[20px] border-2 border-white " +
+            "bg-[#FFFDF8] px-4 py-3 text-left text-[#34404D] " +
+            "shadow-[0_8px_0_rgba(92,61,43,.10),0_12px_24px_rgba(86,60,48,.18)]"
+          }
+        >
           <div className="flex items-start gap-2">
-            <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-emerald-500" />
+            <span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full bg-[#6BBF93]" />
             <div>
-              <div className="text-[11px] font-black">{label}</div>
-              <div className="mt-0.5 text-[10px] font-medium text-slate-500">
-                {tooltip}
+              <div className="text-[13px] font-black">
+                {zone.name}
+              </div>
+              <div className="mt-1 text-[11px] font-semibold leading-relaxed text-[#84909B]">
+                {running
+                  ? "🤖 AI Agent đang làm việc..."
+                  : isHR
+                    ? "Nhân viên đang xử lý hồ sơ"
+                    : isSecurity
+                      ? "Robot đang tuần tra an ninh"
+                      : "Robot đang vận hành máy chủ"}
               </div>
             </div>
           </div>
-          <div className="absolute -bottom-2 left-1/2 h-4 w-4 -translate-x-1/2 rotate-45 bg-white" />
+          <span className="absolute -bottom-2 left-1/2 h-4 w-4 -translate-x-1/2 rotate-45 bg-[#FFFDF8]" />
         </div>
       </div>
 
       <svg
-        viewBox="0 0 250 235"
-        className="relative z-10 w-full drop-shadow-[0_20px_18px_rgba(0,0,0,0.5)]"
+        viewBox="0 0 300 250"
+        className="relative z-10 w-full overflow-visible"
+        style={{
+          filter: "drop-shadow(0 18px 10px rgba(91,65,48,.23))",
+          transform: active ? "translateY(-8px)" : "translateY(0)",
+          transition: "transform .25s ease",
+        }}
       >
         <defs>
-          <linearGradient id={`roof-${id}`} x1="0" x2="1" y1="0" y2="1">
-            <stop offset="0%" stopColor={color} />
-            <stop offset="100%" stopColor="#152846" />
+          <linearGradient id={`floor-${uid}`} x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#FFF4DA" />
+            <stop offset="100%" stopColor={zone.light} />
           </linearGradient>
-          <linearGradient id={`wall-${id}`} x1="0" x2="0.7" y1="0" y2="1">
-            <stop offset="0%" stopColor="#536d91" />
-            <stop offset="100%" stopColor="#16263e" />
+
+          <linearGradient id={`glass-${uid}`} x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#FFFFFF" stopOpacity=".45" />
+            <stop offset="100%" stopColor="#DDF5F9" stopOpacity=".08" />
           </linearGradient>
-          <filter id={`glow-${id}`}>
-            <feGaussianBlur stdDeviation="7" />
-          </filter>
         </defs>
 
-        {active && (
-          <ellipse
-            cx="128"
-            cy="189"
-            rx="110"
-            ry="36"
-            fill={color}
-            opacity="0.33"
-            filter={`url(#glow-${id})`}
-          />
-        )}
+        {/* Soft shadow on Martian ground */}
+        <ellipse
+          cx="151"
+          cy="207"
+          rx="125"
+          ry="25"
+          fill="#8D4F31"
+          opacity=".15"
+        />
 
-        {/* Isometric ground platform */}
+        {/* Thick, rounded-looking isometric platform */}
         <polygon
-          points="17,162 119,104 238,166 133,225"
-          fill="#101d32"
-          stroke={color}
-          strokeWidth={active ? 3 : 1.5}
+          points="14,152 147,85 287,153 153,224"
+          fill="#FDF2DD"
+          stroke="#D9AE84"
+          strokeWidth="3"
+          strokeLinejoin="round"
+        />
+        <polygon
+          points="14,152 153,224 153,234 14,163"
+          fill="#C99A75"
+        />
+        <polygon
+          points="153,224 287,153 287,163 153,234"
+          fill="#DEB08A"
+        />
+
+        {/* Transparent back walls */}
+        <polygon
+          points="38,149 38,84 149,27 149,91"
+          fill={`url(#glass-${uid})`}
+          stroke="#F4FDFF"
+          strokeWidth="4"
           strokeOpacity=".8"
         />
         <polygon
-          points="17,162 133,225 133,232 17,169"
-          fill="#243047"
-        />
-        <polygon
-          points="133,225 238,166 238,174 133,232"
-          fill="#263b56"
+          points="149,27 265,87 265,150 149,91"
+          fill="#D1EFF6"
+          fillOpacity=".3"
+          stroke="#F4FDFF"
+          strokeWidth="4"
+          strokeOpacity=".8"
         />
 
-        {/* Main building */}
+        {/* Room floor */}
         <polygon
-          points="63,106 128,70 204,108 137,148"
-          fill={`url(#roof-${id})`}
-          stroke="#e8fcff"
-          strokeOpacity=".5"
+          points="38,149 149,91 265,150 153,208"
+          fill={`url(#floor-${uid})`}
+          stroke="#F6D9B9"
           strokeWidth="2"
         />
-        <polygon
-          points="63,106 137,148 137,198 63,155"
-          fill={`url(#wall-${id})`}
-        />
-        <polygon
-          points="137,148 204,108 204,159 137,198"
-          fill="#263953"
-        />
 
-        {/* Roof inset */}
+        {/* Floor mat */}
         <polygon
-          points="91,107 130,86 173,108 134,130"
-          fill="#102137"
-          stroke={color}
-          strokeOpacity=".8"
-        />
-        <polygon
-          points="106,107 130,94 158,108 134,122"
-          fill={color}
-          opacity=".8"
+          points="67,154 143,114 228,157 151,197"
+          fill={zone.light}
+          opacity=".7"
         />
 
-        {/* Left illuminated windows */}
-        {[119, 138, 157].map((y) => (
-          <React.Fragment key={y}>
-            <polygon
-              points={`74,${y} 93,${y + 10} 93,${y + 18} 74,${y + 8}`}
-              fill={color}
-              opacity=".85"
-            />
-            <polygon
-              points={`101,${y + 15} 120,${y + 25} 120,${y + 33} 101,${y + 23}`}
-              fill="#b1f4ff"
-              opacity=".8"
-            />
-          </React.Fragment>
-        ))}
-
-        {/* Right windows */}
-        {[143, 163].map((y) => (
-          <React.Fragment key={y}>
-            <polygon
-              points={`148,${y} 169,${y - 12} 169,${y - 3} 148,${y + 9}`}
-              fill={color}
-              opacity=".9"
-            />
-            <polygon
-              points={`176,${y - 16} 195,${y - 27} 195,${y - 18} 176,${y - 7}`}
-              fill="#b1f4ff"
-              opacity=".8"
-            />
-          </React.Fragment>
-        ))}
-
-        {/* Antenna / scan light */}
+        {/* Decoration on the glass */}
         <path
-          d="M130 86 V52"
-          stroke="#bcecff"
-          strokeWidth="3"
-          strokeLinecap="round"
-        />
-        <circle cx="130" cy="49" r="7" fill={color} />
-        <circle
-          cx="130"
-          cy="49"
-          r="14"
+          d="M38 118 L149 61 L265 120"
+          stroke="#FFFFFF"
+          strokeWidth="1.5"
+          strokeOpacity=".8"
           fill="none"
-          stroke={color}
-          strokeDasharray="4 6"
-          opacity=".75"
         />
 
-        {/* Small satellite units */}
-        <polygon points="20,148 40,137 61,149 41,161" fill="#659bb2" />
-        <polygon points="195,180 215,168 234,180 214,192" fill="#659bb2" />
+        {/* Bookshelf / server rack / security desk */}
+        {isTech && (
+          <g>
+            <polygon
+              points="208,122 229,111 246,120 224,132"
+              fill="#8494B4"
+            />
+            <polygon
+              points="224,132 246,120 246,164 224,177"
+              fill="#677A9B"
+            />
+            <polygon
+              points="208,122 224,132 224,177 208,167"
+              fill="#8F9FC0"
+            />
+            {[137, 149, 161].map((y) => (
+              <g key={y}>
+                <rect
+                  x="212"
+                  y={y}
+                  width="7"
+                  height="3"
+                  rx="1.5"
+                  fill="#9EF0C1"
+                />
+                <circle cx="222" cy={y + 1} r="1.5" fill="#FFE2A4" />
+              </g>
+            ))}
+          </g>
+        )}
 
+        {isSecurity && (
+          <g>
+            <rect x="201" y="110" width="28" height="29" rx="6" fill="#D7E5D9" />
+            <rect x="206" y="115" width="18" height="15" rx="3" fill="#91BCA6" />
+            <circle cx="215" cy="122" r="5" fill="#F8F1CD" />
+            <rect x="205" y="136" width="20" height="4" rx="2" fill="#7EA88D" />
+          </g>
+        )}
+
+        {isHR && (
+          <g>
+            <rect x="211" y="124" width="24" height="25" rx="4" fill="#E4B78C" />
+            <rect x="215" y="129" width="5" height="14" rx="1" fill="#FFF2DB" />
+            <rect x="223" y="132" width="5" height="11" rx="1" fill="#91C9A2" />
+            <rect x="231" y="127" width="3" height="16" rx="1" fill="#F58B75" />
+          </g>
+        )}
+
+        {/* Small plant */}
+        <g>
+          <polygon
+            points="71,157 87,149 102,157 86,165"
+            fill="#D78B6A"
+          />
+          <polygon
+            points="71,157 86,165 86,177 71,168"
+            fill="#E5A17C"
+          />
+          <polygon
+            points="86,165 102,157 102,168 86,177"
+            fill="#C77B60"
+          />
+          <path
+            d="M86 154 L86 125 M86 145 Q66 128 74 119 M86 141 Q109 126 101 118"
+            stroke="#548F66"
+            strokeWidth="4"
+            fill="none"
+            strokeLinecap="round"
+          />
+          <ellipse cx="76" cy="123" rx="10" ry="5" fill="#82BB82" transform="rotate(28 76 123)" />
+          <ellipse cx="99" cy="120" rx="10" ry="5" fill="#A4D89B" transform="rotate(-32 99 120)" />
+          <ellipse cx="86" cy="126" rx="9" ry="13" fill="#6CA976" />
+        </g>
+
+        {/* Cute robot employee */}
+        <g>
+          {/* Legs */}
+          <rect x="150" y="150" width="9" height="15" rx="4" fill="#8F9FC4" />
+          <rect x="166" y="150" width="9" height="15" rx="4" fill="#8F9FC4" />
+
+          {/* Body */}
+          <rect x="146" y="116" width="35" height="39" rx="13" fill={zone.main} stroke="#FFF9EF" strokeWidth="3" />
+          <rect x="156" y="125" width="15" height="12" rx="5" fill="#FFF4E4" />
+          <circle cx="163" cy="131" r="3" fill="#F7A679" />
+
+          {/* Arms */}
+          <rect x="135" y="125" width="12" height="26" rx="6" fill={zone.main} transform="rotate(20 141 138)" />
+          <rect x="179" y="122" width="12" height="25" rx="6" fill={zone.main} transform="rotate(-20 185 135)" />
+
+          {/* Ears */}
+          <circle cx="143" cy="101" r="9" fill={zone.main} />
+          <circle cx="185" cy="101" r="9" fill={zone.main} />
+
+          {/* Robot head */}
+          <rect x="138" y="83" width="51" height="42" rx="18" fill="#FFF7EA" stroke={zone.main} strokeWidth="4" />
+
+          {/* Face */}
+          <rect x="147" y="94" width="33" height="21" rx="10" fill="#4B6372" />
+          <ellipse cx="157" cy="103" rx="3" ry="4" fill="#FFFFFF" />
+          <ellipse cx="171" cy="103" rx="3" ry="4" fill="#FFFFFF" />
+          <path d="M159 110 Q164 114 169 110" stroke="#FFDC9D" strokeWidth="2" fill="none" strokeLinecap="round" />
+
+          {/* Blush */}
+          <circle cx="150" cy="111" r="3" fill="#F7A1A3" opacity=".8" />
+          <circle cx="177" cy="111" r="3" fill="#F7A1A3" opacity=".8" />
+
+          {/* Antenna */}
+          <path d="M164 83 L164 73" stroke="#7990A0" strokeWidth="3" />
+          <circle cx="164" cy="71" r="5" fill="#F9B663" />
+        </g>
+
+        {/* Cute desk */}
+        <g>
+          <polygon
+            points="115,154 152,135 202,159 162,181"
+            fill="#F6C48E"
+            stroke="#D8A779"
+            strokeWidth="2"
+          />
+          <polygon
+            points="115,154 162,181 162,188 115,161"
+            fill="#DBA779"
+          />
+          <polygon
+            points="162,181 202,159 202,166 162,188"
+            fill="#C88F68"
+          />
+
+          {/* Laptop */}
+          <polygon
+            points="142,143 159,134 177,143 160,153"
+            fill="#768B9D"
+          />
+          <polygon
+            points="159,134 159,113 177,122 177,143"
+            fill="#556B80"
+          />
+          <polygon
+            points="162,119 173,125 173,136 162,130"
+            fill="#C8EBDD"
+          />
+        </g>
+
+        {/* Glass wall framing */}
+        <path
+          d="M38 149 V84 L149 27 L265 87 V150"
+          stroke="#E8FAFC"
+          strokeWidth="4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+        />
+
+        <path
+          d="M149 27 V91"
+          stroke="#FFFFFF"
+          strokeWidth="3"
+          opacity=".7"
+        />
+
+        {/* Bottom plate label */}
+        <rect x="119" y="217" width="66" height="24" rx="12" fill="#FFF7E9" stroke="#E2BB90" strokeWidth="2" />
         <text
-          x="132"
-          y="215"
-          fill="#e8faff"
-          fontSize="12"
-          fontWeight="900"
+          x="152"
+          y="233"
           textAnchor="middle"
+          fill="#9E5D3C"
+          fontSize="13"
+          fontWeight="900"
         >
-          {id}
+          {zone.id}
         </text>
-      </svg>
 
-      {active && (
-        <div className="absolute bottom-3 left-1/2 h-1 w-28 -translate-x-1/2 rounded-full bg-cyan-300 shadow-[0_0_22px_#22d3ee]" />
-      )}
+        {/* Task status indicator */}
+        {active && (
+          <circle cx="270" cy="189" r="9" fill="#FF873B" stroke="#FFF4E4" strokeWidth="3" />
+        )}
+      </svg>
     </button>
   );
 }
 
-// ======================================================
-// MAIN APP
-// ======================================================
+// =========================================================
+// MAIN DASHBOARD
+// =========================================================
 
-export default function SpaceBaseDashboard() {
+export default function SpaceBaseDashboard({ user, assessment, request, onLogout }) {
   const [selectedGroup, setSelectedGroup] = useState("A.6");
   const [selectedId, setSelectedId] = useState("A.6.1");
   const [activeTab, setActiveTab] = useState("Tổng quan");
-  const [completed, setCompleted] = useState({});
+  const [board, setBoard] = useState([]);
+  const [dataLoading, setDataLoading] = useState(true);
+  const [dataError, setDataError] = useState("");
   const [runningId, setRunningId] = useState(null);
-  const [agentsRunning, setAgentsRunning] = useState(1);
-  const [approvedCount, setApprovedCount] = useState(12);
-  const [selectedEvidence, setSelectedEvidence] = useState(EVIDENCE_TYPES[0]);
+  const [activeJobId, setActiveJobId] = useState(null);
+  const [launching, setLaunching] = useState(false);
+  const [missionStep, setMissionStep] = useState(-1);
+  const [marsTemp, setMarsTemp] = useState(-45);
+  const [evidenceType, setEvidenceType] = useState("");
   const [file, setFile] = useState(null);
+  const [uploading, setUploading] = useState(false);
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [history, setHistory] = useState([]);
-  const [toast, setToast] = useState("");
-  const timerRef = useRef(null);
+  const [notification, setNotification] = useState("");
+  const [showMemberForm, setShowMemberForm] = useState(false);
+  const [member, setMember] = useState({ username: "", display_name: "", password: "" });
+  const [memberBusy, setMemberBusy] = useState(false);
+
+  const assessmentId = assessment.assessment_id;
+  const boardById = new Map(board.map(item => [item.control_id, item]));
+  const currentProgress = boardById.get(selectedId);
+  const control = currentProgress
+    ? { ...currentProgress, id: currentProgress.control_id, title: currentProgress.name }
+    : ALL_CONTROLS.find((item) => item.id === selectedId) || ALL_CONTROLS[0];
+  const zone = ZONES.find((item) => item.id === selectedGroup) || ZONES[0];
+  const totalCompleted = board.filter(c => c.workflow_status === "COMPLETED").length;
+  const totalRunning = board.filter(c => c.workflow_status === "RUNNING").length;
+  const runningOnMap = board.find(c => c.workflow_status === "RUNNING")?.control_id || runningId;
+  const countCompleted = group => board.filter(c =>
+    c.control_id.startsWith(group + ".") && c.workflow_status === "COMPLETED").length;
+  const statusLabels = {
+    NOT_STARTED: "Chưa bắt đầu", RUNNING: "Đang chạy", FAILED: "Chạy lỗi",
+    WAITING_EVIDENCE: "Chờ bằng chứng", NEEDS_REVIEW: "Cần xác nhận",
+    COMPLETED: "Đã hoàn tất quy trình",
+  };
+
+  const reloadBoard = useCallback(async (silent = false) => {
+    try {
+      const data = await request(`/api/assessments/${assessmentId}/progress`);
+      setBoard(data.controls || []);
+      setDataError("");
+    } catch (err) {
+      setDataError(err.message);
+      if (!silent) setNotification(`⚠️ ${err.message}`);
+    } finally { setDataLoading(false); }
+  }, [assessmentId, request]);
+
+  const reloadHistory = useCallback(async (id) => {
+    if (!id) return;
+    try {
+      const rows = await request(`/api/assessments/${assessmentId}/controls/${encodeURIComponent(id)}/history`);
+      setHistory(rows.map(row => ({
+        control: id, time: row.created_at ? new Date(row.created_at).toLocaleString("vi-VN") : "",
+        text: `${row.status} · ${(row.rationale || "").slice(0, 220)}`,
+        evidence: Array.isArray(row.evidence_ids) ? row.evidence_ids : [],
+      })));
+    } catch (err) { setDataError(err.message); }
+  }, [assessmentId, request]);
 
   useEffect(() => {
-    return () => {
-      if (timerRef.current) clearTimeout(timerRef.current);
-    };
+    reloadBoard();
+    const poll = setInterval(() => reloadBoard(true), 3000);
+    return () => clearInterval(poll);
+  }, [reloadBoard]);
+
+  useEffect(() => { reloadHistory(selectedId); }, [selectedId, reloadHistory]);
+  useEffect(() => {
+    setEvidenceType(currentProgress?.expected_evidence_types?.[0] || "");
+    setFile(null);
+  }, [selectedId, currentProgress?.expected_evidence_types?.join("|")]);
+
+  useEffect(() => {
+    const weather = setInterval(() => setMarsTemp(n =>
+      Math.max(-48, Math.min(-42, n + (Math.random() > 0.5 ? 1 : -1)))), 6000);
+    return () => clearInterval(weather);
   }, []);
 
-  const selectedControl =
-    ALL_CONTROLS.find((control) => control.id === selectedId) ||
-    ALL_CONTROLS[0];
+  // Illustration only. The backend currently exposes job status, not internal LangGraph nodes.
+  useEffect(() => {
+    if (!runningId) return;
+    const animation = setInterval(() => setMissionStep(n => Math.min(4, n + 1)), 1800);
+    return () => clearInterval(animation);
+  }, [runningId]);
 
-  const selectedZone =
-    GROUPS.find((group) => group.id === selectedGroup) || GROUPS[0];
+  useEffect(() => {
+    if (!activeJobId) return;
+    let cancelled = false;
+    const pollJob = async () => {
+      try {
+        const job = await request(`/api/jobs/${activeJobId}`);
+        if (cancelled || job.status === "RUNNING") return;
+        setRunningId(null);
+        setActiveJobId(null);
+        setMissionStep(-1);
+        setNotification(job.status === "SUCCEEDED"
+          ? `✅ Agent đã xử lý ${job.control_id}. Xem kết luận và bằng chứng trong tiến độ.`
+          : `⚠️ Agent ${job.control_id} thất bại: ${job.error_message || "Xem log FastAPI"}`);
+        reloadBoard(true);
+        reloadHistory(job.control_id);
+      } catch (err) { if (!cancelled) setDataError(err.message); }
+    };
+    pollJob();
+    const timer = setInterval(pollJob, 3000);
+    return () => { cancelled = true; clearInterval(timer); };
+  }, [activeJobId, request, reloadBoard, reloadHistory]);
 
-  const totalCompleted = Object.keys(completed).length;
-
-  const countCompleted = (groupId) =>
-    Object.keys(completed).filter((id) => id.startsWith(groupId + ".")).length;
-
-  const selectGroup = (group) => {
-    setSelectedGroup(group.id);
-    setSelectedId(group.defaultControl);
+  function selectZone(item) {
+    setSelectedGroup(item.id);
+    setSelectedId(item.defaultControl);
     setActiveTab("Bản đồ Sao Hỏa");
-  };
+  }
 
-  const selectControl = (control) => {
-    setSelectedId(control.id);
-    setSelectedGroup(control.group);
-  };
+  function selectControl(item) {
+    setSelectedId(item.id);
+    setSelectedGroup(item.group);
+  }
 
-  const launchAgent = () => {
-    if (runningId) return;
+  async function launchAgent() {
+    if (launching || currentProgress?.workflow_status === "RUNNING") return;
+    setLaunching(true);
+    setDataError("");
+    try {
+      const job = await request(`/api/assessments/${assessmentId}/controls/${encodeURIComponent(selectedId)}/run`, {
+        method: "POST",
+      });
+      setRunningId(selectedId);
+      setMissionStep(0);
+      setActiveJobId(job.job_id);
+      setNotification(`🚀 Đã tạo job ${job.job_id} cho ${selectedId}. Robot đang di chuyển minh họa.`);
+      await reloadBoard(true);
+    } catch (err) {
+      setDataError(err.message);
+      setNotification(`⚠️ Không khởi động được Agent: ${err.message}`);
+      await reloadBoard(true);
+    } finally { setLaunching(false); }
+  }
 
-    const targetId = selectedControl.id;
-    const zone = selectedZone.building;
-
-    setRunningId(targetId);
-    setAgentsRunning((previous) => previous + 1);
-    setToast(`🚀 AI Agent đang bay đến ${zone}...`);
-
-    timerRef.current = setTimeout(() => {
-      setCompleted((previous) => ({
-        ...previous,
-        [targetId]: true,
-      }));
-
-      setAgentsRunning((previous) => Math.max(1, previous - 1));
-      setApprovedCount((previous) => previous + 1);
-      setRunningId(null);
-
-      setHistory((previous) =>
-        [
-          {
-            id: targetId,
-            time: new Date().toLocaleTimeString("vi-VN"),
-            text: "Đã hoàn tất tác vụ demo",
-          },
-          ...previous,
-        ].slice(0, 8)
-      );
-
-      setToast(
-        `✅ Agent đã hoàn tất mô phỏng ${targetId}. Chưa có kết luận ISO thực tế.`
-      );
-    }, 3000);
-  };
-
-  const attachEvidence = () => {
-    if (!file) {
-      setToast("Vui lòng chọn tài liệu trước.");
+  async function addEvidence() {
+    if (!file || !evidenceType) {
+      setNotification("Hãy chọn PDF/DOCX và loại bằng chứng hợp lệ.");
       return;
     }
+    if (!/\.(pdf|docx)$/i.test(file.name)) {
+      setNotification("Backend chỉ chấp nhận tệp PDF hoặc DOCX.");
+      return;
+    }
+    if (file.size > 15 * 1024 * 1024) {
+      setNotification("Tệp phải không vượt quá 15MB.");
+      return;
+    }
+    setUploading(true);
+    try {
+      const body = new FormData();
+      body.append("evidence_type", evidenceType);
+      body.append("file", file);
+      const result = await request(`/api/assessments/${assessmentId}/controls/${encodeURIComponent(selectedId)}/evidence`, {
+        method: "POST", body,
+      });
+      setUploadedFiles(prev => [{ name: file.name, type: evidenceType, control: selectedId, id: result.evidence_id }, ...prev]);
+      setFile(null);
+      setNotification(`✅ Đã lưu evidence ${result.evidence_id} trên PostgreSQL.`);
+      await reloadBoard(true);
+    } catch (err) { setNotification(`⚠️ Upload thất bại: ${err.message}`); }
+    finally { setUploading(false); }
+  }
 
-    setUploadedFiles((previous) => [
-      {
-        id: selectedEvidence,
-        name: file.name,
-        control: selectedId,
-      },
-      ...previous,
-    ]);
+  async function createMember(event) {
+    event.preventDefault();
+    setMemberBusy(true);
+    try {
+      await request("/api/team/users", { method: "POST", body: JSON.stringify(member) });
+      setShowMemberForm(false);
+      setMember({ username: "", display_name: "", password: "" });
+      setNotification("✅ Đã tạo thành viên và thêm vào đợt đánh giá chung.");
+    } catch (err) { setNotification(`⚠️ ${err.message}`); }
+    finally { setMemberBusy(false); }
+  }
 
-    setToast(`Đã thêm ${file.name} vào danh sách demo. Chưa upload lên server.`);
-    setFile(null);
-  };
+  const metrics = [
+    { name: "Nhiệt độ Sao Hỏa", value: `${marsTemp}°C`, hint: "Thời tiết giả lập", Icon: Thermometer, color: "#F5B078" },
+    { name: "Phạm vi kiểm toán", value: `${board.length || 56} Controls`, hint: "A.6 • A.7 • A.8", Icon: Target, color: "#EDC57F" },
+    { name: "Agents đang chạy", value: totalRunning, hint: "Job thực trong PostgreSQL", Icon: Bot, color: "#B8D6F3" },
+    { name: "Hoàn tất quy trình", value: totalCompleted,
+      hint: `${board.length ? Math.round(totalCompleted / board.length * 100) : 0}% đã đánh giá · không đồng nghĩa tuân thủ`,
+      Icon: CheckCircle2, color: "#A3D2AA" },
+  ];
 
-  const tabItems = [
-    { title: "Tổng quan", Icon: LayoutDashboard },
-    { title: "Bản đồ Sao Hỏa", Icon: Orbit },
-    { title: "Báo cáo tiến độ", Icon: BarChart3 },
+  const tabs = [
+    { name: "Tổng quan", Icon: LayoutDashboard },
+    { name: "Bản đồ Sao Hỏa", Icon: MapIcon },
+    { name: "Báo cáo tiến độ", Icon: BarChart3 },
   ];
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#070e1e] font-sans text-white">
+    <div
+      className="relative min-h-screen overflow-hidden bg-[#172337] text-[#FFF7EB]"
+      style={{
+        fontFamily:
+          'ui-rounded, "Trebuchet MS", Inter, system-ui, sans-serif',
+      }}
+    >
       <style>{`
-        @keyframes spaceFloat {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-9px); }
+        @keyframes cuteBob {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-7px); }
         }
-
-        @keyframes scanPulse {
-          0%, 100% { opacity: .2; transform: scale(1); }
-          50% { opacity: .65; transform: scale(1.12); }
+        .cute-bob {
+          animation: cuteBob 3s ease-in-out infinite;
         }
-
-        .space-float {
-          animation: spaceFloat 5s ease-in-out infinite;
+        .cute-scroll::-webkit-scrollbar {
+          width: 6px;
+          height: 6px;
         }
-
-        .scan-pulse {
-          animation: scanPulse 3s ease-in-out infinite;
+        .cute-scroll::-webkit-scrollbar-thumb {
+          background: #53616f;
+          border-radius: 20px;
         }
-
-        .space-scroll::-webkit-scrollbar {
-          width: 5px;
-          height: 5px;
-        }
-
-        .space-scroll::-webkit-scrollbar-thumb {
-          background: rgba(125,211,252,.23);
-          border-radius: 99px;
-        }
+        button { touch-action: manipulation; }
       `}</style>
 
-      {/* Cosmic background */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_55%,#29375b_0%,#121b35_42%,#070e1e_78%)]" />
-      <StarField />
+      {/* Soft space background */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_70%,#4F4350_0%,#293247_43%,#172337_85%)]" />
+      <TinyStars />
 
-      <div className="relative z-10 mx-auto max-w-[1900px] px-3 py-4 sm:px-5">
+      <div className="relative z-10 mx-auto max-w-[1900px] p-3 sm:p-5">
+
         {/* HEADER */}
-        <header className="mb-4 flex flex-wrap items-center justify-between gap-3">
+        <header className="mb-5 flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-cyan-300/30 bg-cyan-400/10 shadow-[0_0_30px_rgba(34,211,238,.16)]">
-              <Satellite className="h-7 w-7 text-cyan-300" />
+            <div className="flex h-13 w-13 items-center justify-center rounded-[20px] border border-white/20 bg-[#FF914D] shadow-md">
+              <Sparkles className="h-7 w-7 text-white" />
             </div>
 
             <div>
-              <h1 className="text-lg font-black tracking-wide sm:text-xl">
+              <h1 className="text-xl font-black tracking-wide">
                 ISO ENTERPRISE LAB
               </h1>
-              <p className="text-xs text-cyan-200/60">
-                MARS SECURITY COMMAND • ISO/IEC 27001:2022
+              <p className="text-xs font-semibold text-[#B8BFCA]">
+                MARS TYCOON • SECURITY COMMAND • ISO 27001
               </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-2 text-[11px] font-bold text-emerald-300">
-            <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
-            MÔ PHỎNG ĐANG HOẠT ĐỘNG
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="rounded-full bg-[#334457] px-3 py-2 text-xs text-[#FFE0B7]">👤 {user.display_name} · {user.role}</span>
+            {user.role === "admin" && <button onClick={() => setShowMemberForm(true)} className="rounded-full bg-[#374e60] px-4 py-2 text-xs font-bold hover:bg-[#456175]">+ Thành viên</button>}
+            <button onClick={onLogout} className="rounded-full bg-[#FF914D] px-4 py-2 text-xs font-bold text-white hover:bg-[#F77D32]">Đăng xuất</button>
+          </div>
+          <div className="flex items-center gap-2 rounded-full bg-[#334457] px-4 py-2.5 text-xs font-bold text-[#B7E6C0]">
+            <span className="h-2.5 w-2.5 rounded-full bg-[#85D5A1]" />
+            CĂN CỨ ĐANG HOẠT ĐỘNG
           </div>
         </header>
 
+        {dataError && <div role="alert" className="mb-3 rounded-2xl bg-red-500/15 p-3 text-sm text-red-100">⚠️ {dataError} <button className="ml-2 underline" onClick={() => reloadBoard()}>Thử lại</button></div>}
+        {dataLoading && <div className="mb-3 text-sm text-[#FFCB9C]">Đang tải 56 controls và tiến độ từ PostgreSQL...</div>}
         {/* TOP HUD */}
-        <div className="space-scroll mb-4 flex gap-3 overflow-x-auto pb-1">
-          {[
-            {
-              label: "Nhiệt độ hệ thống",
-              value: "-45°C",
-              sub: "Môi trường mô phỏng",
-              Icon: Thermometer,
-              color: "text-sky-300",
-            },
-            {
-              label: "Phạm vi ISO",
-              value: "56 Controls",
-              sub: "A.6 · A.7 · A.8",
-              Icon: Target,
-              color: "text-amber-300",
-            },
-            {
-              label: "Agents đang chạy",
-              value: agentsRunning,
-              sub: "Thông số demo",
-              Icon: Bot,
-              color: "text-cyan-300",
-            },
-            {
-              label: "Đã phê duyệt",
-              value: approvedCount,
-              sub: "Thông số demo",
-              Icon: CheckCircle2,
-              color: "text-emerald-300",
-            },
-          ].map((metric) => (
-            <GlassPanel
-              key={metric.label}
-              className="min-w-[190px] flex-1 px-4 py-3"
+        <div className="cute-scroll mb-4 flex gap-3 overflow-x-auto pb-1">
+          {metrics.map((metric) => (
+            <Panel
+              key={metric.name}
+              className="min-w-[185px] flex-1 px-4 py-3"
             >
-              <div className="flex items-start gap-3">
-                <metric.Icon
-                  className={`mt-1 h-6 w-6 shrink-0 ${metric.color}`}
-                />
+              <div className="flex items-center gap-3">
+                <div
+                  className="rounded-[17px] bg-white/10 p-2.5"
+                  style={{ color: metric.color }}
+                >
+                  <metric.Icon className="h-6 w-6" />
+                </div>
+
                 <div>
-                  <div className="text-[11px] text-slate-400">
-                    {metric.label}
+                  <div className="text-[11px] font-semibold text-[#AEBACA]">
+                    {metric.name}
                   </div>
-                  <div className="mt-1 text-xl font-black tracking-tight">
+                  <div className="mt-0.5 text-xl font-black">
                     {metric.value}
                   </div>
-                  <div className="text-[10px] text-slate-500">
-                    {metric.sub}
+                  <div className="text-[10px] text-[#8997A9]">
+                    {metric.hint}
                   </div>
                 </div>
               </div>
-            </GlassPanel>
+            </Panel>
           ))}
         </div>
 
-        {/* MAIN 3-COLUMN COMMAND CENTER */}
-        <div className="grid grid-cols-1 gap-4 xl:grid-cols-[250px_minmax(0,1fr)_345px]">
-          {/* LEFT MISSIONS */}
-          <GlassPanel className="flex max-h-[760px] min-h-[400px] flex-col p-4 xl:h-[760px]">
-            <div className="mb-5 flex items-center gap-2">
-              <div className="rounded-xl bg-sky-400/10 p-2">
-                <Radar className="h-5 w-5 text-cyan-300" />
+        <div className="grid grid-cols-1 gap-4 xl:grid-cols-[260px_minmax(0,1fr)_350px]">
+
+          {/* LEFT PANEL */}
+          <Panel className="cute-scroll flex max-h-[760px] flex-col overflow-y-auto p-4 xl:h-[760px]">
+
+            <div className="mb-6 flex items-center gap-3">
+              <div className="rounded-[17px] bg-[#FF914D]/20 p-3">
+                <Radar className="h-5 w-5 text-[#FFB780]" />
               </div>
               <div>
-                <div className="text-sm font-black">TRUNG TÂM NHIỆM VỤ</div>
-                <div className="text-[11px] text-slate-500">
+                <h2 className="text-sm font-black">
+                  TRUNG TÂM NHIỆM VỤ
+                </h2>
+                <p className="text-xs text-[#AEBACA]">
                   ISO Enterprise Lab
-                </div>
+                </p>
               </div>
             </div>
 
-            <p className="mb-3 text-[10px] font-extrabold uppercase tracking-[.18em] text-slate-500">
-              Chọn khu vực
-            </p>
+            <div className="mb-3 text-[11px] font-black tracking-widest text-[#AEBACA]">
+              CHỌN KHU VỰC
+            </div>
 
-            <div className="space-y-2">
-              {GROUPS.map((group) => {
-                const progress = countCompleted(group.id);
-                const isActive = selectedGroup === group.id;
+            <div className="space-y-3">
+              {ZONES.map((item) => {
+                const active = selectedGroup === item.id;
+                const done = countCompleted(item.id);
+                const total = CONTROLS[item.id].length;
 
                 return (
                   <button
-                    key={group.id}
-                    onClick={() => selectGroup(group)}
-                    className={`w-full rounded-xl border p-3 text-left transition-all ${
-                      isActive
-                        ? "border-cyan-400/50 bg-cyan-400/10 shadow-[inset_0_0_18px_rgba(34,211,238,.05)]"
-                        : "border-white/5 bg-white/[.035] hover:border-sky-400/25 hover:bg-white/[.07]"
+                    key={item.id}
+                    type="button"
+                    onClick={() => selectZone(item)}
+                    className={`w-full rounded-[20px] border p-3 text-left transition-all ${
+                      active
+                        ? "border-[#F4A46D]/70 bg-[#F4A46D]/15"
+                        : "border-white/10 bg-[#2A3A4E] hover:bg-[#35465A]"
                     }`}
                   >
                     <div className="flex items-center gap-3">
-                      <group.Icon
-                        className="h-5 w-5"
-                        style={{ color: group.color }}
-                      />
+                      <div
+                        className="rounded-[13px] p-2"
+                        style={{
+                          background: item.main + "28",
+                          color: item.light,
+                        }}
+                      >
+                        <item.Icon className="h-5 w-5" />
+                      </div>
+
                       <div className="min-w-0 flex-1">
-                        <div className="text-sm font-bold">
-                          {group.id} — {group.label}
+                        <div className="text-sm font-black">
+                          {item.id} — {item.title}
                         </div>
-                        <div className="mt-1 text-[11px] text-slate-400">
-                          {progress}/{CONTROL_CATALOG[group.id].length} hoàn tất
+                        <div className="mt-1 text-xs text-[#B9C2CE]">
+                          {done}/{total} hoàn tất quy trình
                         </div>
                       </div>
-                      <ChevronRight className="h-4 w-4 text-slate-500" />
+
+                      <ChevronRight className="h-4 w-4 text-[#AEBACA]" />
                     </div>
-                    <div className="mt-3 h-1 overflow-hidden rounded-full bg-slate-700">
+
+                    <div className="mt-3 h-2 overflow-hidden rounded-full bg-[#152234]">
                       <div
-                        className="h-full rounded-full bg-cyan-400 transition-all"
-                        style={{
-                          width: `${
-                            (progress / CONTROL_CATALOG[group.id].length) * 100
-                          }%`,
-                        }}
+                        className="h-full rounded-full bg-[#FF984F]"
+                        style={{ width: `${done / total * 100}%` }}
                       />
                     </div>
                   </button>
@@ -672,516 +863,470 @@ export default function SpaceBaseDashboard() {
               })}
             </div>
 
-            <div className="mt-5 min-h-0 flex-1">
-              <div className="mb-2 flex items-center justify-between">
-                <span className="text-[10px] font-bold tracking-widest text-slate-500">
-                  DANH SÁCH CONTROL
-                </span>
-                <span className="text-[10px] text-cyan-300">
-                  {selectedGroup}
-                </span>
-              </div>
+            <div className="my-5 h-px bg-white/10" />
 
-              <div className="space-scroll h-full max-h-[180px] space-y-1 overflow-y-auto pr-1 xl:max-h-none">
-                {ALL_CONTROLS.filter(
-                  (control) => control.group === selectedGroup
-                ).map((control) => (
-                  <button
-                    key={control.id}
-                    onClick={() => selectControl(control)}
-                    className={`flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-xs transition-colors ${
-                      selectedId === control.id
-                        ? "bg-sky-500/20 text-sky-100"
-                        : "text-slate-400 hover:bg-white/5 hover:text-white"
-                    }`}
-                  >
-                    {completed[control.id] ? (
-                      <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-emerald-400" />
-                    ) : (
-                      <span className="h-2.5 w-2.5 shrink-0 rounded-full border border-slate-600" />
-                    )}
-                    <span className="w-12 shrink-0 font-bold">
-                      {control.id}
-                    </span>
-                    <span className="truncate">{control.title}</span>
-                  </button>
-                ))}
-              </div>
+            <div className="mb-3 flex items-center justify-between text-xs font-black text-[#B9C2CE]">
+              <span>DANH SÁCH CONTROL</span>
+              <span className="rounded-full bg-[#F49C63]/20 px-2 py-1 text-[#FFC38C]">
+                {selectedGroup}
+              </span>
             </div>
 
-            {/* ROBOT MASCOT */}
-            <div className="mt-5 flex items-center gap-3 rounded-2xl border border-cyan-400/20 bg-gradient-to-r from-sky-500/10 to-indigo-500/10 p-3">
-              <div className="space-float relative flex h-14 w-14 shrink-0 items-center justify-center rounded-[20px] border-2 border-sky-300/50 bg-gradient-to-br from-sky-400 to-indigo-600 shadow-[0_0_22px_rgba(59,130,246,.28)]">
-                <Bot className="h-9 w-9 text-white" />
-                <div className="absolute -top-2 left-1/2 h-3 w-1 -translate-x-1/2 rounded-full bg-cyan-300" />
+            <div className="cute-scroll min-h-[130px] flex-1 space-y-1 overflow-y-auto pr-1">
+              {ALL_CONTROLS.filter(
+                (item) => item.group === selectedGroup
+              ).map((item) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => selectControl(item)}
+                  className={`flex w-full items-center gap-2 rounded-[12px] px-3 py-2.5 text-left text-xs transition-colors ${
+                    selectedId === item.id
+                      ? "bg-[#F49C63]/20 text-[#FFCB9C]"
+                      : "text-[#C6CED8] hover:bg-white/10"
+                  }`}
+                >
+                  {boardById.get(item.id)?.workflow_status === "COMPLETED" ? (
+                    <CheckCircle2 className="h-4 w-4 shrink-0 text-[#A4D8AA]" />
+                  ) : (
+                    <span className="h-3 w-3 shrink-0 rounded-full border-2 border-[#8392A6]" />
+                  )}
+
+                  <span className="w-12 shrink-0 font-black">{item.id}</span>
+                  <span className="truncate">{item.title}</span>
+                </button>
+              ))}
+            </div>
+
+            {/* Cute mascot */}
+            <div className="mt-4 flex items-center gap-3 rounded-[22px] bg-[#30455A] p-3">
+              <div className="cute-bob flex h-15 w-15 shrink-0 items-center justify-center rounded-[22px] bg-[#F7B879]">
+                <Bot className="h-10 w-10 text-[#624C5D]" />
               </div>
               <div>
-                <p className="text-xs font-black text-cyan-200">
-                  ISO-BOT / V1
-                </p>
-                <p className="mt-1 text-[10px] leading-relaxed text-slate-400">
-                  Sẵn sàng nhận nhiệm vụ bảo vệ căn cứ!
-                </p>
+                <div className="font-black text-[#FFE0A9]">
+                  ISO-BOT 🧡
+                </div>
+                <div className="mt-1 text-[11px] leading-relaxed text-[#C5D1DD]">
+                  Mình sẵn sàng khám phá căn cứ cùng bạn!
+                </div>
               </div>
             </div>
-          </GlassPanel>
+          </Panel>
 
-          {/* CENTER 3D MARS BASE */}
-          <div className="space-scroll relative h-[760px] overflow-x-auto overflow-y-hidden rounded-[28px] border border-sky-400/15 bg-[#141b30]">
-            <div className="relative h-full min-w-[750px] overflow-hidden">
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_65%,#80533c_0%,#3d3441_36%,#19223e_70%,#0d1730_100%)]" />
+          {/* CENTER SPACE BASE */}
+          <div className="cute-scroll relative h-[760px] overflow-x-auto overflow-y-hidden rounded-[36px] border-4 border-[#B58164]/30 bg-[#EAA167] shadow-2xl shadow-black/20">
+            <div className="relative h-full min-w-[850px] overflow-hidden">
 
-              <StarField />
+              {/* Warm planet background */}
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,#686C82_0%,#E3A270_38%,#F6BA7B_75%,#EFA464_100%)]" />
 
-              {/* Planet horizon */}
-              <div className="pointer-events-none absolute -bottom-[430px] left-1/2 h-[920px] w-[1240px] -translate-x-1/2 rounded-[50%] border border-orange-200/10 bg-[radial-gradient(ellipse_at_45%_25%,#b66f48_0%,#704d44_32%,#393a4f_67%,#152038_88%)] shadow-[inset_0_35px_100px_rgba(255,184,112,.12),0_-30px_100px_rgba(241,113,52,.08)]" />
+              <TinyStars />
 
-              {/* Isometric ground grid */}
+              {/* Martian planet surface */}
+              <div className="absolute -bottom-[470px] left-1/2 h-[1100px] w-[1450px] -translate-x-1/2 rounded-[50%] border-[12px] border-[#F9C997]/40 bg-[radial-gradient(ellipse_at_46%_20%,#FFD8A0_0%,#F7BD80_37%,#E89E63_67%,#C87F53_100%)] shadow-[inset_0_25px_100px_rgba(255,255,255,.18)]" />
+
+              {/* Sandy isometric tiles */}
               <div
-                className="pointer-events-none absolute left-[-18%] top-[10%] h-[1000px] w-[140%] opacity-25"
+                className="pointer-events-none absolute -left-[25%] top-[13%] h-[1100px] w-[150%] opacity-[.12]"
                 style={{
                   backgroundImage:
-                    "linear-gradient(rgba(255,220,190,.18) 1px,transparent 1px),linear-gradient(90deg,rgba(255,220,190,.18) 1px,transparent 1px)",
-                  backgroundSize: "52px 52px",
+                    "linear-gradient(#A86442 1px,transparent 1px),linear-gradient(90deg,#A86442 1px,transparent 1px)",
+                  backgroundSize: "58px 58px",
                   transform:
-                    "perspective(760px) rotateX(58deg) rotateZ(-24deg)",
+                    "perspective(750px) rotateX(55deg) rotateZ(-23deg)",
                 }}
               />
 
               {/* Craters */}
               {[
-                ["9%", "47%", 78],
-                ["76%", "26%", 54],
-                ["76%", "79%", 110],
-                ["23%", "84%", 42],
-              ].map(([left, top, size], i) => (
+                { x: "9%", y: "52%", w: 100 },
+                { x: "80%", y: "70%", w: 120 },
+                { x: "67%", y: "22%", w: 65 },
+                { x: "27%", y: "83%", w: 75 },
+              ].map((c, i) => (
                 <div
                   key={i}
-                  className="pointer-events-none absolute rounded-full border-[9px] border-orange-200/10 bg-orange-950/10 shadow-[inset_6px_8px_12px_rgba(14,10,25,.35)]"
+                  className="pointer-events-none absolute rounded-full border-[10px] border-[#C98057]/30 bg-[#DEA075]/30 shadow-[inset_5px_7px_14px_rgba(148,82,42,.18)]"
                   style={{
-                    left,
-                    top,
-                    width: size,
-                    height: size * 0.48,
-                    transform: "rotate(-22deg)",
+                    left: c.x,
+                    top: c.y,
+                    width: c.w,
+                    height: c.w * .48,
+                    transform: "rotate(-20deg)",
                   }}
                 />
               ))}
 
-              {/* Routes between zones */}
+              {/* Soft pathway between buildings */}
               <svg
                 viewBox="0 0 850 760"
                 preserveAspectRatio="none"
                 className="pointer-events-none absolute inset-0 h-full w-full"
               >
                 <path
-                  d="M240 460 L430 345 L650 420 L520 610 L240 460"
-                  stroke="#77dcff"
-                  strokeWidth="3"
-                  strokeDasharray="9 10"
-                  opacity=".32"
+                  d="M210 455 L560 355 L670 470 L455 625 L210 455"
                   fill="none"
+                  stroke="#FDF0CF"
+                  strokeWidth="8"
+                  strokeDasharray="16 17"
+                  strokeLinecap="round"
+                  opacity=".65"
                 />
-                <circle cx="430" cy="345" r="48" fill="none" stroke="#67e8f9" strokeOpacity=".12" strokeDasharray="3 12" />
-                <circle cx="650" cy="420" r="45" fill="none" stroke="#67e8f9" strokeOpacity=".12" strokeDasharray="3 12" />
               </svg>
 
-              {/* Screen header */}
-              <div className="absolute left-5 top-5 z-20">
-                <div className="flex items-center gap-2 text-xs font-black tracking-[.22em] text-cyan-200">
-                  <Orbit className="h-4 w-4" />
-                  MARS BASE / SECTOR 27001
+              {/* Map heading */}
+              <div className="absolute left-6 top-6 z-20 rounded-full bg-[#FFF9EC]/90 px-5 py-3 text-[#815236] shadow-md">
+                <div className="flex items-center gap-2 text-sm font-black">
+                  <MapIcon className="h-5 w-5" />
+                  MARS BASE • SECTOR 27001
                 </div>
-                <p className="mt-1 text-[11px] text-white/45">
-                  Bấm vào tòa nhà để chọn nhóm ISO
-                </p>
               </div>
 
-              {/* Planet decoration */}
-              <div className="pointer-events-none absolute right-7 top-8 h-24 w-24 rounded-full bg-gradient-to-br from-cyan-300 via-blue-500 to-indigo-900 opacity-70 shadow-[0_0_35px_rgba(59,130,246,.22)]">
-                <div className="absolute left-2 top-6 h-3 w-12 rotate-[-18deg] rounded-full bg-cyan-100/25" />
-                <div className="absolute right-2 top-12 h-4 w-6 rounded-full bg-indigo-950/30" />
+              {/* Planet */}
+              <div className="absolute right-9 top-12 h-24 w-24 rounded-full bg-gradient-to-br from-[#B5E1DA] via-[#78BAD1] to-[#6897C2] shadow-xl">
+                <div className="absolute left-3 top-5 h-5 w-12 -rotate-20 rounded-full bg-white/30" />
+                <div className="absolute bottom-5 right-3 h-4 w-9 rounded-full bg-[#8ED8AD]/65" />
               </div>
 
-              {/* Three clickable buildings */}
-              <IsometricBuilding
-                id="A.6"
-                label="Tòa nhà Nhân sự"
-                tooltip={
-                  runningId?.startsWith("A.6")
-                    ? "Đang quét hồ sơ ứng viên..."
-                    : "Khu Nhân sự: sẵn sàng kiểm tra"
-                }
-                color="#54e4ea"
-                active={selectedGroup === "A.6"}
-                position={{ left: "7%", top: "36%" }}
-                onClick={() => selectGroup(GROUPS[0])}
-              />
-
-              <IsometricBuilding
-                id="A.7"
-                label="Khu vực An ninh"
-                tooltip="Đang giám sát vành đai bảo vệ"
-                color="#ffb869"
-                active={selectedGroup === "A.7"}
-                position={{ left: "48%", top: "25%" }}
-                onClick={() => selectGroup(GROUPS[1])}
-              />
-
-              <IsometricBuilding
-                id="A.8"
-                label="Trung tâm Dữ liệu"
-                tooltip="15 Agents đang trực (demo)"
-                color="#9e94ff"
-                active={selectedGroup === "A.8"}
-                position={{ left: "34%", top: "57%" }}
-                onClick={() => selectGroup(GROUPS[2])}
-              />
-
-              {/* Scan marker */}
-              <div className="pointer-events-none absolute bottom-24 right-8 flex items-center gap-2 rounded-full border border-sky-300/20 bg-slate-950/50 px-3 py-2 text-[10px] text-cyan-200 backdrop-blur-md">
-                <Activity className="h-3.5 w-3.5 animate-pulse" />
-                LIVE SIMULATION
-              </div>
-
-              {/* Tab-specific overlays */}
-              {activeTab === "Báo cáo tiến độ" && (
-                <div className="absolute left-1/2 top-[12%] z-30 w-[350px] -translate-x-1/2 rounded-2xl border border-cyan-300/30 bg-slate-950/90 p-5 shadow-2xl backdrop-blur-xl">
-                  <div className="flex items-center gap-2">
-                    <BarChart3 className="h-5 w-5 text-cyan-300" />
-                    <h3 className="font-black">Báo cáo nhiệm vụ</h3>
-                  </div>
-
-                  <p className="mb-4 mt-1 text-xs text-slate-400">
-                    {totalCompleted}/56 tác vụ demo hoàn tất
-                  </p>
-
-                  {GROUPS.map((group) => (
-                    <div key={group.id} className="mb-4">
-                      <div className="mb-1 flex justify-between text-xs">
-                        <span>{group.id} — {group.label}</span>
-                        <span>
-                          {countCompleted(group.id)}/
-                          {CONTROL_CATALOG[group.id].length}
-                        </span>
-                      </div>
-                      <div className="h-2 overflow-hidden rounded-full bg-slate-700">
-                        <div
-                          className="h-full rounded-full bg-cyan-400"
-                          style={{
-                            width: `${
-                              (countCompleted(group.id) /
-                                CONTROL_CATALOG[group.id].length) *
-                              100
-                            }%`,
-                          }}
-                        />
-                      </div>
-                    </div>
-                  ))}
-
-                  <p className="text-[10px] text-slate-500">
-                    Dữ liệu được lưu trong React State của phiên demo.
-                  </p>
-                </div>
-              )}
-
+              {/* Rooms */}
+              {ZONES.map((item) => (
+                <DioramaRoom
+                  key={item.id}
+                  zone={item}
+                  active={selectedGroup === item.id}
+                  running={runningOnMap?.startsWith(item.id)}
+                  onClick={() => selectZone(item)}
+                />
+              ))}
+              <BaseLife runningZone={runningOnMap ? runningOnMap.split(".").slice(0, 2).join(".") : null} />
+              {/* Current mission */}
               {activeTab === "Tổng quan" && (
-                <div className="absolute bottom-28 left-5 z-20 rounded-2xl border border-white/10 bg-slate-950/55 px-4 py-3 backdrop-blur-md">
-                  <div className="flex items-center gap-2 text-xs font-black text-cyan-200">
+                <div className="absolute bottom-28 left-6 z-30 max-w-[290px] rounded-[22px] border border-white/70 bg-[#FFF9EB]/95 p-4 text-[#76513C] shadow-xl">
+                  <div className="flex items-center gap-2 text-xs font-black text-[#D07843]">
                     <Sparkles className="h-4 w-4" />
                     NHIỆM VỤ HIỆN TẠI
                   </div>
-                  <div className="mt-1 text-sm font-bold">
-                    {selectedControl.id} — {selectedControl.title}
+                  <div className="mt-2 text-sm font-black">
+                    {control.id} — {control.title}
                   </div>
-                  <div className="mt-1 text-[11px] text-slate-400">
-                    Khu vực: {selectedZone.building}
+                  <div className="mt-1 text-xs font-semibold text-[#9C806E]">
+                    {zone.name}
                   </div>
                 </div>
               )}
 
               {activeTab === "Bản đồ Sao Hỏa" && (
-                <div className="absolute bottom-28 left-5 z-20 rounded-xl border border-cyan-300/20 bg-slate-950/60 px-4 py-2 text-xs text-cyan-200 backdrop-blur-md">
-                  <Radar className="mr-2 inline h-4 w-4" />
-                  BẢN ĐỒ CĂN CỨ • 3 KHU VỰC HOẠT ĐỘNG
+                <div className="absolute bottom-28 left-6 z-30 rounded-full bg-[#FFF9EC]/95 px-5 py-3 text-xs font-black text-[#986144] shadow-md">
+                  🪐 3 KHU VỰC ĐANG HOẠT ĐỘNG
                 </div>
               )}
 
-              {/* QUICK ACTION BAR */}
-              <div className="absolute bottom-5 left-1/2 z-40 flex w-max max-w-[96%] -translate-x-1/2 items-center gap-1 rounded-full border border-sky-300/20 bg-slate-950/80 p-1.5 shadow-[0_12px_40px_rgba(0,0,0,.45)] backdrop-blur-xl">
-                {tabItems.map((tab) => (
+              {activeTab === "Báo cáo tiến độ" && (
+                <div className="absolute left-1/2 top-[15%] z-40 w-[360px] -translate-x-1/2 rounded-[30px] border border-white/60 bg-[#FFF9EC]/95 p-5 text-[#76513C] shadow-xl">
+                  <h3 className="flex items-center gap-2 text-base font-black">
+                    <BarChart3 className="h-5 w-5 text-[#F38C4B]" />
+                    Tiến độ căn cứ
+                  </h3>
+                  <p className="my-3 text-xs text-[#997C68]">
+                    {totalCompleted}/{board.length || 56} controls đã xử lý xong
+                  </p>
+
+                  {ZONES.map((item) => {
+                    const done = countCompleted(item.id);
+                    const total = CONTROLS[item.id].length;
+
+                    return (
+                      <div key={item.id} className="mb-4">
+                        <div className="mb-2 flex justify-between text-xs font-bold">
+                          <span>{item.id} — {item.title}</span>
+                          <span>{done}/{total}</span>
+                        </div>
+                        <div className="h-3 rounded-full bg-[#EEDAC6]">
+                          <div
+                            className="h-full rounded-full bg-[#F69C5B]"
+                            style={{ width: `${done / total * 100}%` }}
+                          />
+                        </div>
+                      </div>
+                    );
+                  })}
+                  <p className="text-[11px] text-[#A08C7D]">
+                    Số liệu từ PostgreSQL; hoàn tất quy trình không đồng nghĩa đạt ISO.
+                  </p>
+                </div>
+              )}
+
+              {/* Bottom pill toolbar */}
+              <div className="absolute bottom-5 left-1/2 z-40 flex max-w-[97%] -translate-x-1/2 gap-1 rounded-full border-2 border-[#E8B98F] bg-[#FFF9EE] p-1.5 shadow-lg">
+                {tabs.map((tab) => (
                   <button
-                    key={tab.title}
+                    key={tab.name}
                     type="button"
-                    onClick={() => setActiveTab(tab.title)}
-                    className={`flex items-center gap-2 rounded-full px-3 py-3 text-[11px] font-bold transition-all sm:px-5 ${
-                      activeTab === tab.title
-                        ? "bg-cyan-400 text-slate-950 shadow-[0_0_20px_rgba(34,211,238,.3)]"
-                        : "text-slate-300 hover:bg-white/10"
+                    onClick={() => setActiveTab(tab.name)}
+                    className={`flex items-center gap-2 rounded-full px-4 py-3 text-xs font-black transition-all ${
+                      activeTab === tab.name
+                        ? "bg-[#FF984F] text-white"
+                        : "text-[#8B6A55] hover:bg-[#FCE4CE]"
                     }`}
                   >
                     <tab.Icon className="h-4 w-4" />
-                    <span>{tab.title}</span>
+                    <span>{tab.name}</span>
                   </button>
                 ))}
               </div>
             </div>
           </div>
 
-          {/* RIGHT COMMAND PANEL */}
-          <GlassPanel className="space-scroll max-h-[760px] overflow-y-auto p-5 xl:h-[760px]">
-            <div className="mb-4 flex items-center justify-between">
-              <div className="flex items-center gap-2 text-xs font-black tracking-[.16em] text-cyan-300">
-                <Zap className="h-4 w-4" />
+          {/* RIGHT PANEL */}
+          <Panel className="cute-scroll max-h-[760px] overflow-y-auto p-5 xl:h-[760px]">
+
+            <div className="mb-5 flex items-center justify-between gap-2">
+              <div className="flex items-center gap-2 text-sm font-black text-[#FFC18D]">
+                <Activity className="h-5 w-5" />
                 COMMAND CENTER
               </div>
-              <div className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-2.5 py-1 text-[10px] text-emerald-300">
-                ONLINE
-              </div>
+              <span className="rounded-full bg-[#3F6657] px-3 py-1.5 text-[11px] font-black text-[#C2E6C7]">
+                ● ONLINE
+              </span>
             </div>
 
-            <div className="rounded-2xl border border-sky-300/15 bg-slate-900/65 p-4">
-              <div className="text-xs font-black tracking-widest text-cyan-300">
+            {/* Control detail */}
+            <div className="rounded-[25px] border border-white/10 bg-[#2C3C50] p-5">
+              <div className="text-xs font-black tracking-wider text-[#FFBE85]">
                 CHI TIẾT CONTROL
               </div>
 
-              <h2 className="mt-3 text-2xl font-black leading-tight">
-                {selectedControl.id}
+              <h2 className="mt-3 text-3xl font-black">
+                {control.id}
               </h2>
-              <h3 className="mt-1 text-lg font-bold">
-                {selectedControl.title}
+
+              <h3 className="mt-1 text-lg font-black text-[#FFE0C0]">
+                {control.title}
               </h3>
 
-              <p className="mt-3 text-sm leading-relaxed text-slate-400">
-                {DESCRIPTIONS[selectedControl.id] ||
-                  `Đánh giá biện pháp kiểm soát ${selectedControl.id} dựa trên tài liệu và bằng chứng được cung cấp.`}
+              <p className="mt-3 text-sm font-medium leading-relaxed text-[#C8D2DF]">
+                {currentProgress?.objective || DESCRIPTIONS[control.id] ||
+                  `Đánh giá biện pháp kiểm soát ${control.id} dựa trên bằng chứng của doanh nghiệp.`}
               </p>
 
-              <div className="my-4 h-px bg-white/10" />
+              <div className="my-5 h-px bg-white/10" />
 
-              <div className="flex items-center justify-between gap-3">
-                <span className="text-xs text-slate-400">
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-xs text-[#B9C6D2]">
                   Trạng thái
                 </span>
+
                 <span
-                  className={`rounded-full border px-3 py-1 text-[11px] font-bold ${
-                    completed[selectedId]
-                      ? "border-emerald-400/30 bg-emerald-400/10 text-emerald-300"
-                      : runningId === selectedId
-                      ? "border-cyan-400/30 bg-cyan-400/10 text-cyan-300"
-                      : "border-amber-300/20 bg-amber-400/10 text-amber-200"
+                  className={`rounded-full px-3 py-2 text-[11px] font-black ${
+                    currentProgress?.workflow_status === "RUNNING"
+                      ? "bg-[#E8B97D]/20 text-[#FFD7A1]"
+                      : currentProgress?.workflow_status === "COMPLETED"
+                        ? "bg-[#83BD90]/20 text-[#BCE5B9]"
+                        : "bg-[#F5BA72]/15 text-[#FFE0A0]"
                   }`}
                 >
-                  {runningId === selectedId
-                    ? "Đang thực hiện"
-                    : completed[selectedId]
-                    ? "Hoàn tất mô phỏng"
-                    : "Chưa có kết luận"}
+                  {statusLabels[currentProgress?.workflow_status] || "Chưa có kết luận"}
                 </span>
               </div>
+              <div className="mt-3 text-xs text-[#E6C2A5]">Kết luận ISO: {currentProgress?.compliance_status || "Chưa có kết luận"}</div>
+              <div className="mt-2 text-xs text-[#B9C6D2]">Phụ trách: {currentProgress?.assigned_to || "Chưa phân công"}</div>
             </div>
 
-            {/* LAUNCH BUTTON */}
+            {/* Orange launch button */}
             <button
               type="button"
-              disabled={!!runningId}
+              disabled={launching || dataLoading || !currentProgress || currentProgress.workflow_status === "RUNNING"}
               onClick={launchAgent}
-              className="group relative mt-5 w-full overflow-hidden rounded-2xl border border-cyan-200/40 bg-gradient-to-r from-blue-600 via-sky-500 to-cyan-400 px-4 py-5 text-sm font-black text-white shadow-[0_0_30px_rgba(37,99,235,.36)] transition-all hover:-translate-y-0.5 hover:shadow-[0_0_42px_rgba(34,211,238,.52)] disabled:cursor-wait disabled:opacity-75"
+              className={
+                "mt-5 flex w-full items-center justify-center gap-3 " +
+                "rounded-full bg-[#FF842F] px-5 py-5 text-sm font-black text-white " +
+                "shadow-[0_5px_0_#D66222] transition-all " +
+                "hover:bg-[#F77926] hover:-translate-y-0.5 " +
+                "active:translate-y-1 active:shadow-none " +
+                "disabled:cursor-wait disabled:opacity-70"
+              }
             >
-              <div className="absolute inset-0 bg-gradient-to-t from-transparent to-white/15" />
-              <span className="relative flex items-center justify-center gap-2">
-                {runningId ? (
-                  <>
-                    <Loader2 className="h-6 w-6 animate-spin" />
-                    <span className="text-center">
-                      Đang bay đến {GROUPS.find(
-                        (group) => group.id === runningId.split(".").slice(0, 2).join(".")
-                      )?.building || "khu vực mục tiêu"}...
-                    </span>
-                  </>
-                ) : (
-                  <>
-                    <Rocket className="h-6 w-6 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
-                    🚀 PHÁI AI AGENT ĐI KIỂM TOÁN
-                  </>
-                )}
-              </span>
+              {launching || currentProgress?.workflow_status === "RUNNING" ? (
+                <>
+                  <Loader2 className="h-6 w-6 animate-spin" />
+                  <span>Agent đang chạy trên backend...</span>
+                </>
+              ) : (
+                <>
+                  <Rocket className="h-6 w-6" />
+                  <span>🚀 PHÁI AI AGENT ĐI KIỂM TOÁN</span>
+                </>
+              )}
             </button>
+              <AgentCrewPanel
+                running={currentProgress?.workflow_status === "RUNNING"}
+                stage={missionStep}
+                completed={false}
+                live={true}
+                realStatus={statusLabels[currentProgress?.workflow_status] || "Chưa bắt đầu"}
+                controlId={selectedId}
+              />
+            <p className="mt-3 text-center text-[11px] font-semibold text-[#AAB6C5]">
+              🤖 AI Agent chạy trên FastAPI · chuyển động robot chỉ minh họa
+            </p>
 
-            <div className="mt-2 text-center text-[10px] text-slate-500">
-              Chế độ mô phỏng • Thời gian nhiệm vụ 3 giây
-            </div>
-
-            {/* EVIDENCE UPLOAD */}
-            <div className="mt-6">
-              <div className="mb-3 flex items-center gap-2 text-xs font-black tracking-wider">
-                <FileCheck2 className="h-4 w-4 text-cyan-300" />
+            {/* Evidence */}
+            <div className="mt-7">
+              <div className="mb-3 flex items-center gap-2 text-sm font-black">
+                <FileCheck2 className="h-5 w-5 text-[#FFC18D]" />
                 EVIDENCE REPOSITORY
               </div>
 
-              <div className="rounded-2xl border border-dashed border-sky-300/25 bg-slate-900/50 p-4">
-                <label className="mb-2 block text-[11px] text-slate-400">
+              <div className="rounded-[26px] border-2 border-dashed border-[#A0ADBA]/30 bg-[#2B3B4F] p-4">
+                <label className="mb-2 block text-xs font-bold text-[#C4CDD8]">
                   Loại bằng chứng
                 </label>
 
                 <select
-                  value={selectedEvidence}
-                  onChange={(event) =>
-                    setSelectedEvidence(event.target.value)
-                  }
-                  className="mb-3 w-full rounded-xl border border-slate-600 bg-[#101b31] px-3 py-3 text-xs text-white outline-none focus:border-cyan-400"
+                  value={evidenceType}
+                  onChange={(e) => setEvidenceType(e.target.value)}
+                  className="mb-4 w-full rounded-[15px] border border-white/10 bg-[#1B2A3B] px-3 py-3 text-xs font-semibold text-white outline-none focus:border-[#FFAB70]"
                 >
-                  {EVIDENCE_TYPES.map((type) => (
-                    <option key={type} value={type}>
-                      {type}
+                  {(currentProgress?.expected_evidence_types || []).map((item) => (
+                    <option key={item} value={item}>
+                      {item}
                     </option>
                   ))}
                 </select>
 
-                <label
-                  htmlFor="iso-evidence-file"
-                  className="flex cursor-pointer flex-col items-center justify-center rounded-xl border border-sky-300/15 bg-white/[.04] px-3 py-5 text-center hover:bg-white/[.07]"
-                >
-                  <UploadCloud className="mb-2 h-8 w-8 text-cyan-300" />
-                  <span className="text-xs font-bold">
+                <label className="flex cursor-pointer flex-col items-center rounded-[22px] bg-[#3A4A5D] p-5 text-center transition hover:bg-[#435367]">
+                  <UploadCloud className="mb-3 h-9 w-9 text-[#FFBF8E]" />
+
+                  <span className="max-w-full truncate text-sm font-black">
                     {file ? file.name : "Chọn tài liệu"}
                   </span>
-                  <span className="mt-1 text-[10px] text-slate-500">
-                    PDF, DOCX, JSON, CSV
-                  </span>
-                </label>
 
-                <input
-                  id="iso-evidence-file"
-                  type="file"
-                  accept=".pdf,.docx,.doc,.json,.csv"
-                  className="sr-only"
-                  onChange={(event) =>
-                    setFile(event.target.files?.[0] || null)
-                  }
-                />
+                  <span className="mt-1 text-xs text-[#B8C4D1]">
+                    PDF hoặc DOCX · Tối đa 15MB
+                  </span>
+
+                  <input
+                    type="file"
+                    className="hidden"
+                    accept=".pdf,.docx"
+                    onChange={(e) =>
+                      setFile(e.target.files?.[0] || null)
+                    }
+                  />
+                </label>
 
                 <button
                   type="button"
-                  onClick={attachEvidence}
-                  className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl border border-cyan-300/20 bg-cyan-400/10 px-4 py-3 text-xs font-bold text-cyan-200 transition hover:bg-cyan-400/20"
+                  onClick={addEvidence}
+                  disabled={uploading || currentProgress?.workflow_status === "RUNNING"}
+                  className="mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-[#F7B477] px-4 py-3 text-xs font-black text-[#624631] transition hover:bg-[#FFC591]"
                 >
                   <FileUp className="h-4 w-4" />
-                  Tải lên tài liệu
+                  {uploading ? "Đang lưu bằng chứng..." : "TẢI LÊN TÀI LIỆU"}
                 </button>
-              </div>
 
-              {uploadedFiles.length > 0 && (
-                <div className="mt-3 space-y-2">
-                  {uploadedFiles.slice(0, 3).map((item, index) => (
-                    <div
-                      key={`${item.name}-${index}`}
-                      className="rounded-lg border border-white/10 bg-slate-900/60 p-2 text-[11px]"
-                    >
-                      <div className="truncate font-bold text-slate-200">
-                        {item.name}
+                {uploadedFiles.length > 0 && (
+                  <div className="mt-4 space-y-2">
+                    {uploadedFiles.slice(0, 3).map((item, i) => (
+                      <div
+                        key={`${item.name}-${i}`}
+                        className="rounded-[14px] bg-[#1D2C3C] p-3 text-xs"
+                      >
+                        <div className="truncate font-black">
+                          {item.name}
+                        </div>
+                        <div className="mt-1 text-[#B8C4D1]">
+                          {item.type} • {item.control} • ID {item.id}
+                        </div>
                       </div>
-                      <div className="mt-1 text-slate-500">
-                        {item.id} • {item.control} • Chờ tích hợp API
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* STATUS */}
-            <div className="mt-6 rounded-2xl border border-indigo-400/20 bg-indigo-400/[.07] p-4">
-              <div className="flex items-center gap-2 text-xs font-bold text-indigo-200">
-                <ShieldCheck className="h-4 w-4" />
-                TRẠNG THÁI CĂN CỨ
-              </div>
-              <div className="mt-3 grid grid-cols-2 gap-3">
-                <div>
-                  <div className="text-[10px] text-slate-500">
-                    Nhiệm vụ hoàn tất
+                    ))}
                   </div>
-                  <div className="mt-1 text-lg font-black">
-                    {totalCompleted} / 56
-                  </div>
-                </div>
-                <div>
-                  <div className="text-[10px] text-slate-500">
-                    AI Agent
-                  </div>
-                  <div className="mt-1 flex items-center gap-2 text-sm font-bold text-emerald-300">
-                    <Activity className="h-4 w-4" />
-                    {runningId ? "Đang xử lý" : "Sẵn sàng"}
-                  </div>
-                </div>
+                )}
               </div>
             </div>
 
-            {/* ACTIVITY LOG */}
-            <div className="mt-5">
-              <div className="mb-3 flex items-center gap-2 text-xs font-black tracking-wide">
-                <Clock3 className="h-4 w-4 text-cyan-300" />
+            {/* Mission status */}
+            <div className="mt-5 rounded-[22px] bg-[#324657] p-4">
+              <div className="mb-2 flex items-center gap-2 font-black text-[#FFD2A7]">
+                <CheckCircle2 className="h-5 w-5" />
+                TIẾN ĐỘ NHIỆM VỤ
+              </div>
+              <div className="text-2xl font-black">
+                {totalCompleted} / {board.length || 56}
+              </div>
+              <div className="mt-1 text-xs text-[#BFC9D5]">
+                Hoàn tất quy trình đánh giá · chưa có nghĩa đạt ISO
+              </div>
+            </div>
+
+            {/* Activity log */}
+            <div className="mt-6">
+              <div className="mb-3 flex items-center gap-2 font-black">
+                <Clock3 className="h-4 w-4 text-[#FFC18D]" />
                 NHẬT KÝ HOẠT ĐỘNG
               </div>
 
               {history.length === 0 ? (
-                <div className="rounded-xl border border-white/10 bg-white/[.03] p-4 text-xs text-slate-500">
-                  Chưa có nhiệm vụ nào hoàn tất trong phiên demo.
+                <div className="rounded-[18px] bg-[#2B3B4F] p-4 text-xs text-[#B8C4D1]">
+                  Chưa có kết quả đánh giá trong PostgreSQL cho control này.
                 </div>
               ) : (
                 <div className="space-y-2">
-                  {history.map((event, index) => (
+                  {history.map((item, i) => (
                     <div
-                      key={`${event.id}-${index}`}
-                      className="flex items-start gap-2 rounded-lg bg-white/[.04] p-3 text-[11px]"
+                      key={`${item.control}-${i}`}
+                      className="rounded-[16px] bg-[#2B3B4F] p-3 text-xs"
                     >
-                      <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-400" />
-                      <div>
-                        <div className="font-bold text-slate-200">
-                          {event.id} — {event.text}
-                        </div>
-                        <div className="mt-1 text-slate-500">
-                          {event.time}
-                        </div>
+                      <div className="font-black text-[#BCDFBD]">
+                        ✓ {item.control} — {item.text}
+                      </div>
+                      <div className="mt-1 text-[#AEBAC9]">
+                        {item.time}
                       </div>
                     </div>
                   ))}
                 </div>
               )}
             </div>
-          </GlassPanel>
+
+          </Panel>
         </div>
 
-        {/* NOTIFICATIONS */}
-        {toast && (
-          <div
-            role="status"
-            aria-live="polite"
-            className="fixed bottom-5 right-5 z-50 max-w-sm rounded-2xl border border-cyan-300/30 bg-slate-900/95 px-5 py-4 text-sm font-medium text-cyan-100 shadow-2xl backdrop-blur-xl"
-          >
-            <div className="flex items-start gap-3">
-              <Bot className="h-5 w-5 shrink-0 text-cyan-300" />
-              <span>{toast}</span>
-              <button
-                type="button"
-                onClick={() => setToast("")}
-                className="ml-auto text-slate-400 hover:text-white"
-                aria-label="Đóng thông báo"
-              >
-                ×
-              </button>
-            </div>
-          </div>
-        )}
-
-        <footer className="mt-4 flex flex-wrap items-center justify-between gap-2 px-2 text-[10px] text-slate-500">
-          <span>ISO ENTERPRISE LAB • MARS SECURITY SIMULATION</span>
-          <span>
-            UI Prototype · React + Tailwind CSS · Chưa kết nối backend
-          </span>
+        <footer className="mt-4 flex flex-wrap justify-between gap-2 px-3 text-[11px] text-[#A6B0BD]">
+          <span>🪐 ISO ENTERPRISE LAB — MARS TYCOON EDITION</span>
+          <span>FastAPI + PostgreSQL · ISO workflow thực · Trái đất/Sao Hỏa minh họa</span>
         </footer>
       </div>
+
+      {showMemberForm && <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/70 p-4">
+        <form onSubmit={createMember} className="w-full max-w-md rounded-[28px] bg-[#26394e] p-6 text-white shadow-2xl">
+          <div className="mb-4 text-lg font-black text-[#FFD3A9]">Tạo thành viên mới</div>
+          <label className="block text-sm">Tên đăng nhập<input className="mb-3 mt-1 w-full rounded-xl bg-[#142335] p-3" required minLength={3} maxLength={40} value={member.username} onChange={e=>setMember({...member,username:e.target.value})}/></label>
+          <label className="block text-sm">Tên hiển thị<input className="mb-3 mt-1 w-full rounded-xl bg-[#142335] p-3" required maxLength={100} value={member.display_name} onChange={e=>setMember({...member,display_name:e.target.value})}/></label>
+          <label className="block text-sm">Mật khẩu (ít nhất 12 ký tự)<input className="mb-4 mt-1 w-full rounded-xl bg-[#142335] p-3" type="password" required minLength={12} value={member.password} onChange={e=>setMember({...member,password:e.target.value})}/></label>
+          <div className="flex gap-3"><button type="button" className="flex-1 rounded-full bg-[#41566b] p-3" onClick={()=>setShowMemberForm(false)}>Hủy</button><button disabled={memberBusy} className="flex-1 rounded-full bg-[#FF914D] p-3 font-black">{memberBusy ? "Đang tạo..." : "Tạo thành viên"}</button></div>
+        </form>
+      </div>}
+      {/* Notification */}
+      {notification && (
+        <div
+          role="status"
+          aria-live="polite"
+          className="fixed bottom-5 right-5 z-50 flex max-w-sm items-start gap-3 rounded-[24px] border-2 border-[#F4C49A] bg-[#FFF9EC] px-5 py-4 text-sm font-bold text-[#8A5A3D] shadow-xl"
+        >
+          <Bot className="h-6 w-6 shrink-0 text-[#ED8B50]" />
+          <span>{notification}</span>
+          <button
+            type="button"
+            onClick={() => setNotification("")}
+            aria-label="Đóng thông báo"
+            className="ml-auto rounded-full p-1 hover:bg-[#F7E6D5]"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+      )}
     </div>
   );
 }

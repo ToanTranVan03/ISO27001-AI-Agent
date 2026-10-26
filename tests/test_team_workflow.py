@@ -10,6 +10,7 @@ from agent_core import graph_builder
 def suppress_db_startup(monkeypatch):
     monkeypatch.setattr(main.database,'initialize_database',lambda:None)
     monkeypatch.setattr(main.teamwork,'init_teamwork',lambda:None)
+    monkeypatch.setattr(main.enterprise_lab,'init_enterprise_lab',lambda:None)
     yield
     main.app.dependency_overrides.clear()
 

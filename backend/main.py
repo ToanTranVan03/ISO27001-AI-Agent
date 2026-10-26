@@ -42,16 +42,11 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# Đường dẫn giao diện React đã build
-BASE_DIR = Path(__file__).resolve().parent.parent
-REACT_DIST = BASE_DIR / "frontend-react" / "dist"
-
-if REACT_DIST.is_dir():
-    app.mount(
-        "/assets",
-        StaticFiles(directory=str(REACT_DIST / "assets")),
-        name="react-assets"
-    )
+# React is the primary frontend; FastAPI still owns the protected API.
+REACT_DIST = ROOT_DIR / "frontend-react" / "dist"
+ASSETS_DIR = REACT_DIST / "assets"
+if ASSETS_DIR.is_dir():
+    app.mount("/assets", StaticFiles(directory=str(ASSETS_DIR)), name="react-assets")
 
 agent_graph = build_iso_agent_graph()
 app.include_router(team_router)
@@ -63,13 +58,26 @@ class EvaluationRequest(BaseModel):
 
 
 
+
+def react_frontend():
+    index = REACT_DIST / "index.html"
+    if not index.is_file():
+        raise HTTPException(status_code=503, detail="React chưa build. Chạy npm run build trong frontend-react.")
+    return FileResponse(index)
+
+
 @app.get("/", include_in_schema=False)
 def home():
-    return FileResponse(
-        REACT_DIST / "index.html"
-    )
+    return react_frontend()
 
-async def root():
+
+@app.get("/spacebase", include_in_schema=False)
+def spacebase_page():
+    return react_frontend()
+
+
+@app.get("/workspace", include_in_schema=False)
+def workspace_page():
     return FileResponse(FRONTEND_PATH)
 
 
