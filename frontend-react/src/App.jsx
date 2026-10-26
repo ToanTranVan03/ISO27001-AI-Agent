@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Bot, KeyRound, LogIn, ShieldCheck, UserRound } from "lucide-react";
 import SpaceBaseDashboard from "./SpaceBaseDashboard";
 import { ApiError, apiRequest } from "./api";
-import AutonomousAuditDemo from "./AutonomousAuditDemo";
+import EnterpriseIncident3D from "./EnterpriseIncident3D";
 const SESSION_KEY = "iso_team_token"; // Compatible with existing /workspace session.
 
 export default function App() {
@@ -14,7 +14,7 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
-const [demoMode, setDemoMode] = useState(true);
+const [view, setView] = useState("incidents");
   const clearSession = useCallback(() => {
     sessionStorage.removeItem(SESSION_KEY);
     setToken("");
@@ -75,6 +75,7 @@ const [demoMode, setDemoMode] = useState(true);
       setToken(session.access_token);
       setUser(session.user);
       setAssessment(campaigns[0]);
+      setView("incidents");
     } catch (err) {
       setError(err.message || "Không thể đăng nhập.");
     } finally {
@@ -99,32 +100,26 @@ const [demoMode, setDemoMode] = useState(true);
 if (user && assessment && token) {
   return (
     <>
-      {/* Thanh chuyển chế độ để kiểm thử */}
-      <div className="fixed right-4 top-3 z-[100] flex gap-2">
+      <div className="fixed left-1/2 top-3 z-[100] flex -translate-x-1/2 gap-2 rounded-full border border-white/10 bg-[#172337]/95 p-1 shadow-xl backdrop-blur">
         <button
           type="button"
-          onClick={() => setDemoMode(value => !value)}
-          className="rounded-full bg-[#FF914D] px-4 py-2 text-xs font-bold text-white shadow-lg"
+          onClick={() => setView("incidents")}
+          className={`rounded-full px-4 py-2 text-xs font-bold ${view === "incidents" ? "bg-emerald-400 text-[#102116]" : "text-slate-200 hover:bg-white/10"}`}
         >
-          {demoMode
-            ? "Xem Dashboard hiện tại"
-            : "Xem Auto-Audit mới"}
+          Mô phỏng 3D
         </button>
-
         <button
           type="button"
-          onClick={logout}
-          className="rounded-full bg-[#34465B] px-4 py-2 text-xs font-bold text-white shadow-lg"
+          onClick={() => setView("dashboard")}
+          className={`rounded-full px-4 py-2 text-xs font-bold ${view === "dashboard" ? "bg-sky-300 text-[#102116]" : "text-slate-200 hover:bg-white/10"}`}
         >
-          Đăng xuất
+          Dashboard cũ
         </button>
+        <button type="button" onClick={logout} className="rounded-full px-4 py-2 text-xs font-bold text-slate-200 hover:bg-white/10">Đăng xuất</button>
       </div>
 
-      {demoMode ? (
-        <AutonomousAuditDemo
-          request={request}
-          assessment={assessment}
-        />
+      {view === "incidents" ? (
+        <EnterpriseIncident3D assessment={assessment} request={request} token={token} />
       ) : (
         <SpaceBaseDashboard
           key={assessment.assessment_id}

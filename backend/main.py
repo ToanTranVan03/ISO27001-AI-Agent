@@ -18,6 +18,7 @@ from agent_core.graph_builder import build_iso_agent_graph
 from backend import database, teamwork, enterprise_lab
 from backend.team_api import router as team_router, require_user
 from backend.enterprise_api import router as enterprise_router
+from backend.incident_api import router as incident_router
 from evidence_collectors.document_parser import extract_document_text
 
 logger = logging.getLogger(__name__)
@@ -33,6 +34,8 @@ async def lifespan(_: FastAPI):
     database.initialize_database()
     teamwork.init_teamwork()
     enterprise_lab.init_enterprise_lab()
+    from backend.incident_simulation import initialize_incident_simulation
+    initialize_incident_simulation()
     yield
 
 
@@ -51,6 +54,7 @@ if ASSETS_DIR.is_dir():
 agent_graph = build_iso_agent_graph()
 app.include_router(team_router)
 app.include_router(enterprise_router)
+app.include_router(incident_router)
 
 
 class EvaluationRequest(BaseModel):
