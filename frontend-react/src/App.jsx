@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Bot, KeyRound, LogIn, ShieldCheck, UserRound } from "lucide-react";
 import SpaceBaseDashboard from "./SpaceBaseDashboard";
+import ISOAgentCity from "./ISOAgentCity";
 import { ApiError, apiRequest } from "./api";
 import AutonomousAuditDemo from "./AutonomousAuditDemo";
 const SESSION_KEY = "iso_team_token"; // Compatible with existing /workspace session.
@@ -107,8 +108,8 @@ if (user && assessment && token) {
           className="rounded-full bg-[#FF914D] px-4 py-2 text-xs font-bold text-white shadow-lg"
         >
           {demoMode
-            ? "Xem Dashboard hiện tại"
-            : "Xem Auto-Audit mới"}
+          ? "Xem Dashboard 3D cũ"
+          : "Xem ISO Agent City"}
         </button>
 
         <button
@@ -120,10 +121,13 @@ if (user && assessment && token) {
         </button>
       </div>
 
+      
       {demoMode ? (
-        <AutonomousAuditDemo
-          request={request}
+        <ISOAgentCity
+          user={user}
           assessment={assessment}
+          request={request}
+          onLogout={logout}
         />
       ) : (
         <SpaceBaseDashboard

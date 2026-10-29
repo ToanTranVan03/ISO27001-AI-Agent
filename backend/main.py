@@ -15,7 +15,7 @@ from pydantic import BaseModel, Field
 from psycopg import Error as PostgresError
 
 from agent_core.graph_builder import build_iso_agent_graph
-from backend import database, teamwork, enterprise_lab
+from backend import database, teamwork, enterprise_lab, auto_audit
 from backend.team_api import router as team_router, require_user
 from backend.enterprise_api import router as enterprise_router
 from evidence_collectors.document_parser import extract_document_text
@@ -33,6 +33,7 @@ async def lifespan(_: FastAPI):
     database.initialize_database()
     teamwork.init_teamwork()
     enterprise_lab.init_enterprise_lab()
+    auto_audit.initialize_auto_audit()
     yield
 
 
@@ -51,6 +52,7 @@ if ASSETS_DIR.is_dir():
 agent_graph = build_iso_agent_graph()
 app.include_router(team_router)
 app.include_router(enterprise_router)
+app.include_router(auto_audit.router)
 
 
 class EvaluationRequest(BaseModel):
