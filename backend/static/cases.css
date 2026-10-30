@@ -1,0 +1,24 @@
+.case-workspace{padding:28px;border-bottom:1px solid var(--line);background:#fbfcf8}.case-heading{display:flex;align-items:center;justify-content:space-between;gap:16px}.case-heading h2{margin:8px 0;font-size:25px}.evidence-export{font-size:13px;color:var(--green);text-decoration:underline;white-space:nowrap}.case-lifecycle{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));list-style:none;padding:0;margin:24px 0;gap:12px}.case-lifecycle li{border-top:3px solid #adc5b2;padding:12px 0}.case-lifecycle strong{display:block;font-size:13px}.case-lifecycle span{display:block;margin-top:8px;font-size:12px;line-height:1.6;color:#52665d}.case-columns{display:grid;grid-template-columns:1fr 1fr;gap:32px}.case-columns>div{min-width:0}.case-columns h3{font-size:16px;margin:8px 0 16px}.case-changes{overflow:auto}.case-changes table,.research-panel table{width:100%;border-collapse:collapse;font-size:12px}.case-changes th,.case-changes td,.research-panel th,.research-panel td{text-align:left;vertical-align:top;padding:12px 8px;border-bottom:1px solid var(--line);overflow-wrap:anywhere}.case-changes th:first-child{width:50%}.case-control{padding:12px 0;border-top:1px solid var(--line)}.case-control summary{font-size:13px;color:#3c5c4d}.case-control.needs-action summary{color:#85551d;font-weight:650}.case-control ul{font-size:13px;line-height:1.8;padding-left:20px}.case-control p{font-size:13px;line-height:1.6}.case-control small{font-size:11px;overflow-wrap:anywhere;color:#52665d}.case-control button{margin-top:8px;font-size:12px}.research-panel{padding:24px;margin-bottom:24px}.research-panel summary{font-size:14px}.research-panel #research-results{overflow:auto}.intro h1{font-size:clamp(26px,3vw,36px)}.tool-observation{white-space:pre-wrap;font-size:11px;line-height:1.6;overflow-wrap:anywhere;background:#f4f6f0;padding:12px;border-radius:6px}
+.scene-case{position:absolute;top:16px;right:16px;max-width:260px;padding:12px 16px;background:#fffffff0;border:1px solid #c6d3c8;border-radius:8px;pointer-events:none;color:#244f46;box-shadow:0 4px 12px #203a3708}.scene-case strong{display:block;font-size:13px}.scene-case span{display:block;font-size:11px;line-height:1.6;margin-top:4px}
+.case-triad{margin:20px 0 24px}
+.triad-wrapper{background:#f6f8f4;border:1px solid #d4dfd4;border-radius:10px;padding:16px 20px}
+.triad-header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid #e1e9df}
+.triad-header strong{font-size:14px;color:#244f46}
+.risk-badge-ok{font-size:12px;color:#2e6930;background:#e8f5e9;padding:3px 10px;border-radius:12px;font-weight:600}
+.risk-badge-warn{font-size:12px;color:#9c4221;background:#fbe9e7;padding:3px 10px;border-radius:12px;font-weight:600}
+.triad-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.triad-col{background:#fff;border:1px solid #e2ece0;border-radius:8px;padding:12px 14px}
+.triad-col h4{font-size:13px;margin:0 0 8px;color:#244f46;border-bottom:1px solid #edf3eb;padding-bottom:4px}
+.triad-col p{font-size:12px;line-height:1.6;margin:4px 0;color:#3e5248}
+.triad-risk-box{margin-top:14px;padding:12px 14px;background:#fff8f3;border-left:4px solid #d96b27;border-radius:4px}
+.triad-risk-box strong{font-size:13px;color:#85370d;display:block;margin-bottom:6px}
+.triad-risk-item{margin-top:6px;font-size:12px}
+.triad-risk-item .risk-title{font-weight:650;color:#9c4221}
+.triad-risk-item .risk-detail{margin:2px 0 0;color:#5c351b;line-height:1.5}
+.iso-citation{font-size:11px;color:#456654;background:#edf5ee;padding:6px 10px;border-radius:4px;margin-top:6px;line-height:1.5}
+@media(max-width:800px){.triad-grid{grid-template-columns:1fr;gap:10px}}
+@media(max-width:800px){.case-workspace{padding:22px}.case-columns{grid-template-columns:1fr;gap:24px}.case-lifecycle{grid-template-columns:repeat(2,minmax(0,1fr))}.case-heading{align-items:flex-start;flex-direction:column}.case-heading h2{font-size:23px}.research-panel{padding:20px}.scene-case{top:12px;right:12px;max-width:210px;padding:8px 12px}}
+.agent-tasks-box{margin:14px 0;padding:14px 16px;background:#f0f7f3;border:1px solid #c2ded0;border-left:4px solid #2e7d56;border-radius:8px}
+.agent-tasks-box h3{font-size:14px;color:#1a4a34;margin:0 0 8px}
+.agent-tasks-list{margin:0;padding-left:18px;font-size:12.5px;color:#244837;line-height:1.6}
+.agent-tasks-list li{margin:3px 0}

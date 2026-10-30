@@ -5,7 +5,7 @@ services:
   corp-iam-auth-node:
     image: ubuntu:22.04
     container_name: corp-iam-auth-node
-    hostname: iam-srv-01.vietfintech.local
+    hostname: iam-srv-01.hivefive.local
     command: >
       bash -c "apt-get update && apt-get install -y openssh-server sudo &&
       useradd -m -s /bin/bash nv_ke_toan &&
@@ -17,7 +17,7 @@ services:
   corp-network-fw-node:
     image: nginx:alpine
     container_name: corp-network-fw-node
-    hostname: gw-fw-01.vietfintech.local
+    hostname: gw-fw-01.hivefive.local
     ports:
       - "8088:80"
 
@@ -25,7 +25,7 @@ services:
   corp-secops-log-node:
     image: ubuntu:22.04
     container_name: corp-secops-log-node
-    hostname: secops-log-01.vietfintech.local
+    hostname: secops-log-01.hivefive.local
     command: >
       bash -c "mkdir -p /var/log/enterprise_backup &&
       echo '2026-10-16 02:00:00 [SUCCESS] Full DB Backup completed. Integrity SHA256 verified.' > /var/log/enterprise_backup/backup.log &&
