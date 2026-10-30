@@ -11,6 +11,7 @@ import json
 import threading
 from contextlib import asynccontextmanager
 
+# Thêm thư mục gốc vào đường dẫn hệ thống để gọi được code từ agent_core
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from agent_core.simulation import SCENARIOS, ModelUnavailable, build_enterprise, run_simulation
 from agent_core.autonomous import AgentStore, agent_events
@@ -129,115 +130,13 @@ def simulate(req: SimulationRequest):
     except ModelUnavailable as exc:
         raise HTTPException(status_code=503, detail=str(exc)) from exc
 
+# Cấu trúc dữ liệu yêu cầu từ Frontend gửi lên
 class EvaluationRequest(BaseModel):
-    control_id: str = Field(min_length=1, max_length=20)
+    control_id: str
 
-
-
-
-def react_frontend():
-    index = REACT_DIST / "index.html"
-    if not index.is_file():
-        raise HTTPException(status_code=503, detail="React chưa build. Chạy npm run build trong frontend-react.")
-    return FileResponse(index)
-
-
-@app.get("/", include_in_schema=False)
-def home():
-    return react_frontend()
-
-
-@app.get("/spacebase", include_in_schema=False)
-def spacebase_page():
-    return react_frontend()
-
-
-@app.get("/workspace", include_in_schema=False)
-def workspace_page():
-    return FileResponse(FRONTEND_PATH)
-
-
-@app.get("/enterprise")
-async def enterprise_page():
-    return FileResponse(ENTERPRISE_PATH)
-
-
-@app.get("/legacy")
-async def legacy_page():
-    return FileResponse(LEGACY_FRONTEND_PATH)
-
-
-@app.get("/api/controls")
-async def get_controls(user: dict = Depends(require_user)):
-    try:
-        return database.list_controls()
-    except (PostgresError, RuntimeError) as exc:
-        logger.exception("Could not list ISO controls.")
-        raise HTTPException(status_code=503, detail="Database is unavailable.") from exc
-
-
-@app.post("/api/evidence", status_code=201)
-async def upload_evidence(
-    control_id: str = Form(...),
-    evidence_type: str = Form(...),
-    file: UploadFile = File(...),
-    user: dict = Depends(require_user),
-):
-    try:
-        control = database.get_control(control_id)
-    except (PostgresError, RuntimeError) as exc:
-        logger.exception("Could not load control for evidence upload.")
-        raise HTTPException(status_code=503, detail="Database is unavailable.") from exc
-
-    if control is None:
-        raise HTTPException(status_code=404, detail="Control not found.")
-    if evidence_type not in control["expected_evidence_types"]:
-        raise HTTPException(
-            status_code=422,
-            detail="Evidence type is not allowed for this control.",
-        )
-
-    filename = Path(file.filename or "").name
-    if Path(filename).suffix.lower() not in {".pdf", ".docx"}:
-        raise HTTPException(
-            status_code=415,
-            detail="Only PDF and DOCX files are supported.",
-        )
-
-    content = await file.read(MAX_UPLOAD_BYTES + 1)
-    if len(content) > MAX_UPLOAD_BYTES:
-        raise HTTPException(status_code=413, detail="Maximum file size is 15 MB.")
-
-    try:
-        extracted_text = extract_document_text(filename, content)
-    except ValueError as exc:
-        raise HTTPException(status_code=422, detail=str(exc)) from exc
-
-    digest = hashlib.sha256(content).hexdigest()
-    try:
-        database.save_evidence(
-            evidence_id=str(uuid4()),
-            control_id=control_id,
-            evidence_type=evidence_type,
-            source=filename,
-            extracted_text=extracted_text,
-            sha256_hash=digest,
-        )
-    except (PostgresError, RuntimeError) as exc:
-        logger.exception("Could not save uploaded evidence.")
-        raise HTTPException(
-            status_code=503,
-            detail="Could not save evidence to database.",
-        ) from exc
-
-    return {
-        "control_id": control_id,
-        "evidence_type": evidence_type,
-        "source": filename,
-        "sha256_hash": digest,
-        "extracted_characters": len(extracted_text),
-    }
-
+@app.get("/")
+async def root():
+    return {"message": "Hệ thống AI Agent ISO 27001 Backend đang hoạt động!"}
 
 @app.post("/api/evaluate")
 def evaluate_control(req: EvaluationRequest):
@@ -253,27 +152,29 @@ def evaluate_control(req: EvaluationRequest):
     if not case:
         raise HTTPException(status_code=404, detail="Không tìm thấy mã Control này trong hệ thống.")
 
+    # 2. Chuẩn bị State ban đầu để đưa vào LangGraph
     initial_state = {
-        "control_id": control["control_id"],
-        "control_name": control["name"],
-        "objective": control["objective"],
+        "control_id": case["control_id"],
+        "control_name": case["name"],
+        "objective": case["objective"],
         "collected_evidences": [],
         "deterministic_rule": {},
         "compliance_status": "UNKNOWN",
         "confidence": 0.0,
         "rationale": "",
-        "audit_trail": [],
+        "audit_trail": []
     }
 
+    # 3. Kích hoạt Agent chạy luồng Đồ thị
     try:
         final_state = agent_graph.invoke(initial_state)
-        result = {
+        # 4. Trả kết quả JSON sạch sẽ về cho Web/Frontend
+        return {
             "control_id": final_state["control_id"],
             "status": final_state["compliance_status"],
             "confidence": final_state["confidence"],
             "rationale": final_state["rationale"],
-            "evidence_ids": final_state.get("validated_evidence_ids", []),
-            "audit_trail": final_state["audit_trail"],
+            "audit_trail": final_state["audit_trail"]
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
