@@ -421,6 +421,10 @@ def initialize_incident_simulation() -> None:
                          summary, Jsonb(event_details)))
 
 
+    from backend.employee_commands import initialize_workstations
+    initialize_workstations()
+
+
 def list_people(assessment_id: str) -> list[dict]:
     """Return the synthetic staff directory with linked devices/apps and incident counts."""
     with get_connection() as con:
@@ -472,6 +476,7 @@ def inspect_asset_activity(assessment_id: str, asset_id: str, reported_at: str |
     usb_events = [event for event in after if event["event_type"] == "unapproved_usb_inserted"]
     software_events = [event for event in after if event["event_type"] == "unapproved_software_installed"]
     admin_events = [event for event in after if event["event_type"] == "unauthorized_admin_tool_executed"]
+    screen_events = [event for event in after if event["event_type"] == "unattended_screen_unlocked"]
     drill_events = [event for event in after if event["event_type"] == "scenario_signal"]
     online = any(event["event_type"] in online_types for event in after)
     interaction = any(event["event_type"] in authenticated_types for event in after)
@@ -484,6 +489,9 @@ def inspect_asset_activity(assessment_id: str, asset_id: str, reported_at: str |
     elif admin_events:
         verdict = "UNAUTHORIZED_ADMIN_TOOL_DETECTED"
         conclusion = "Nhật ký endpoint ghi nhận tiện ích quản trị không được phép được chạy sau mốc thời gian; cần hạn chế công cụ và bảo toàn log."
+    elif screen_events:
+        verdict = "UNATTENDED_SCREEN_DETECTED"
+        conclusion = "Nhật ký ghi nhận nhân viên rời vị trí khi màn hình chứa dữ liệu khách hàng chưa khóa; cần bảo vệ màn hình và kiểm tra quy trình rời bàn."
     elif drill_events:
         verdict = "CONTROL_SCENARIO_SIGNAL_DETECTED"
         control_id = (drill_events[-1].get("details") or {}).get("control_id", "")
@@ -516,6 +524,7 @@ def inspect_asset_activity(assessment_id: str, asset_id: str, reported_at: str |
 def scan_enterprise_activity(assessment_id: str) -> dict:
     """Scan recent synthetic endpoint events and return rule-backed findings."""
     mappings = {
+        "unattended_screen_unlocked": ("A.7.7", "Rời vị trí khi màn hình chưa khóa"),
         "unapproved_usb_inserted": ("A.7.10", "USB chưa đăng ký được kết nối"),
         "unapproved_software_installed": ("A.8.19", "Phần mềm chưa được phê duyệt được cài đặt"),
         "unauthorized_admin_tool_executed": ("A.8.18", "Công cụ quản trị trái phép được chạy"),
@@ -532,10 +541,13 @@ def scan_enterprise_activity(assessment_id: str) -> dict:
                     AND asset.asset_id=activity.asset_id
                 LEFT JOIN enterprise_sim_asset_people link ON link.assessment_id=asset.assessment_id
                     AND link.asset_id=asset.asset_id
+                    AND (activity.details->>'employee_id' IS NULL
+                         OR link.employee_id=activity.details->>'employee_id')
                 LEFT JOIN enterprise_sim_people person ON person.assessment_id=link.assessment_id
                     AND person.employee_id=link.employee_id
                 WHERE activity.assessment_id=%s
-                    AND activity.observed_at >= NOW() - INTERVAL '7 days'
+                    AND (activity.observed_at >= NOW() - INTERVAL '7 days' OR activity.details ? 'command_receipt')
+                    AND activity.observed_at <= NOW()
                     AND activity.details->>'triaged_by_incident' IS NULL
                     AND activity.event_type = ANY(%s)
                 ORDER BY activity.asset_id,activity.event_id,person.employee_id""",
@@ -837,6 +849,19 @@ def _apply_simulated_tool(cur, assessment_id: str, incident_id: str, scenario: d
             "result": result}
 
 
+def scenario_for_finding(finding):
+    scenario = SCENARIO_BY_CONTROL[finding["control_id"]]
+    if not finding["asset_id"].startswith("OFFICE-"):
+        return scenario
+    employee_id = finding.get("employee_id")
+    expected = {"unattended_screen_unlocked":"A.7.7", "unapproved_usb_inserted":"A.7.10", "unapproved_software_installed":"A.8.19"}
+    if finding["asset_id"] != f"OFFICE-{employee_id}" or expected.get(finding["event_type"]) != finding["control_id"]:
+        raise ValueError("Nhật ký không khớp nhân viên, tài sản hoặc loại vi phạm.")
+    return {**scenario, "target":{"asset_id":finding["asset_id"],"name":finding["asset_name"],"type":"hardware"},
+            "department":finding["department"],
+            "human_context":{**scenario["human_context"],"employee_id":employee_id,"department":finding["department"],"relationship":"responsible_employee"}}
+
+
 def run_incident(
     assessment_id: str,
     control_id: str,
@@ -848,6 +873,15 @@ def run_incident(
     scenario = SCENARIO_BY_CONTROL.get(control_id)
     if scenario is None:
         raise ValueError("Không có kịch bản sự cố cho kiểm soát này.")
+    finding = (classification or {}).get("telemetry_finding")
+    if finding and finding["asset_id"].startswith("OFFICE-"):
+        scenario = scenario_for_finding(finding)
+        with get_connection() as con:
+            with con.cursor() as cur:
+                cur.execute("""SELECT 1 FROM enterprise_sim_asset_people WHERE assessment_id=%s AND asset_id=%s AND employee_id=%s""",
+                            (assessment_id, finding["asset_id"], finding["employee_id"]))
+                if not cur.fetchone():
+                    raise ValueError("Máy làm việc không thuộc nhân viên trong đợt đánh giá.")
 
     def emit(event_type: str, text: str, **details) -> None:
         if on_progress:

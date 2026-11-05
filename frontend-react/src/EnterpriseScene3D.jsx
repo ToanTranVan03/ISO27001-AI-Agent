@@ -8,6 +8,7 @@ import {
   SpriteMaterial, SRGBColorSpace, TorusGeometry, Vector3, WebGLRenderer,
 } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import { ROUTINE_EVENTS } from "./officeLive";
 
 const AREAS = {
   people: { title: "CON NGƯỜI · TRỤ SỞ", color: 0xffb777, position: [-5.1, 0, 0], size: [4.9, 3.3] },
@@ -428,18 +429,19 @@ export default function EnterpriseScene3D({ room, visited, selected, working, re
         item.group.scale.y = active && isWorking ? 1 + Math.sin(t * 3.4) * 0.012 : 1;
         const usbIncident = key === "hardware" && incidentActivity?.type === "unapproved_usb_inserted";
         const softwareIncident = key === "software" && incidentActivity?.type === "unapproved_software_installed";
+        const normalWork = ROUTINE_EVENTS.has(incidentActivity?.type) && incidentActivity?.room === key && incidentActivity?.command !== "/nghi";
         const showingActivity = usbIncident || softwareIncident;
         if (item.activityWorker) {
           const home = key === "hardware" ? [-0.65, 0.76] : [-1.12, 0.72];
           const workingPosition = key === "hardware" ? [-0.15, 0.36] : [-0.72, 0.96];
-          const destination = showingActivity ? workingPosition : home;
+          const destination = showingActivity || normalWork ? workingPosition : home;
           item.activityWorker.position.x += (destination[0] - item.activityWorker.position.x) * 0.035;
           item.activityWorker.position.z += (destination[1] - item.activityWorker.position.z) * 0.035;
-          item.activityWorker.rotation.y = showingActivity ? -0.35 : 0;
+          item.activityWorker.rotation.y = showingActivity || normalWork ? -0.35 : 0;
           const arms = item.activityWorker.userData.actionArms || [];
           arms.forEach((arm, index) => {
             const side = index === 0 ? -1 : 1;
-            arm.rotation.z = showingActivity
+            arm.rotation.z = showingActivity || normalWork
               ? side * (-0.72 + Math.sin(t * 7) * 0.08)
               : side * -0.38;
           });
@@ -449,7 +451,7 @@ export default function EnterpriseScene3D({ room, visited, selected, working, re
           item.usbDrive.position.y = 0.77 + (usbIncident && incidentActivity?.phase !== "contained" ? Math.sin(t * 5) * 0.025 : 0);
         }
         if (item.laptopScreen) {
-          const unsafeColor = usbIncident ? 0xff5966 : 0xc084fc;
+          const unsafeColor = incidentActivity?.phase === "contained" ? 0x34d399 : usbIncident ? 0xff5966 : 0xc084fc;
           item.laptopScreen.material.color.setHex(showingActivity ? unsafeColor : key === "software" ? 0x69c5d2 : 0x76cdd5);
           item.laptopScreen.material.emissive?.setHex(showingActivity ? unsafeColor : 0x207e92);
           item.laptopScreen.material.emissiveIntensity = showingActivity ? 0.58 : 0.3;
@@ -478,15 +480,21 @@ export default function EnterpriseScene3D({ room, visited, selected, working, re
   }, []);
 
   const area = AREAS[room];
-  const position = area?.position || [0, 0, -0.25];
+  const routine = ROUTINE_EVENTS.has(activity?.type);
+  const activityTitle = routine ? "NHÂN VIÊN THỰC HIỆN HOẠT ĐỘNG THEO QUY TRÌNH"
+    : activity?.phase === "contained" ? "AGENT ĐÃ XỬ LÝ VÀ XÁC MINH"
+    : activity?.phase === "agent_check" ? "AGENT ĐANG KIỂM TRA THIẾT BỊ"
+    : activity?.type === "unattended_screen_unlocked" ? "MÔ PHỎNG: RỜI MÁY CHƯA KHÓA MÀN HÌNH"
+    : activity?.type === "unapproved_usb_inserted" ? "MÔ PHỎNG: NHÂN VIÊN CẮM USB LẠ VÀO LAPTOP" : "MÔ PHỎNG: NHÂN VIÊN ĐANG CÀI APP LẠ";
   return <div className="relative h-[500px] overflow-hidden rounded-[30px] border-2 border-[#f3bd91]/70 bg-[#b9d5e2] shadow-2xl md:h-[580px]">
     <div ref={hostRef} className="absolute inset-0" />
     <div className="pointer-events-none absolute left-4 top-4 z-10 rounded-full bg-[#fff9ee]/95 px-4 py-2 text-xs font-black text-[#71513e] shadow">🏢 VIỆT TÍN LOGISTICS · DOANH NGHIỆP GIẢ LẬP</div>
-    {activity&&<div aria-live="polite" className={`pointer-events-none absolute left-4 top-[58px] z-10 rounded-xl border px-3 py-2 text-[9px] font-black shadow-lg ${activity.phase==="contained"?"border-emerald-300/40 bg-emerald-950/90 text-emerald-100":"border-rose-300/40 bg-rose-950/90 text-rose-100"}`}>
-      {activity.phase==="contained"?"AGENT ĐÃ CÔ LẬP / CHẶN TÌNH HUỐNG":activity.phase==="agent_check"?"AGENT ĐANG KIỂM TRA THIẾT BỊ":activity.type==="unapproved_usb_inserted"?"MÔ PHỎNG: NHÂN VIÊN CẮM USB LẠ VÀO LAPTOP":"MÔ PHỎNG: NHÂN VIÊN ĐANG CÀI APP LẠ"}
+    {activity&&<div aria-live="polite" className={`pointer-events-none absolute left-4 right-4 top-[58px] z-10 w-fit rounded-xl border px-3 py-2 text-[9px] font-black shadow-lg ${activity.type==="approved_work_session"||activity.phase==="contained"?"border-emerald-300/40 bg-emerald-950/90 text-emerald-100":"border-rose-300/40 bg-rose-950/90 text-rose-100"}`}>
+      {activityTitle}
       {activity.employee_id&&<span className="ml-2 font-mono text-white/70">{activity.employee_id} · {activity.asset_id}{activity.accessory_id?` · ${activity.accessory_id}`:""}</span>}
       {activity.source==="issue_description"&&<span className="ml-2 font-normal text-white/60">(minh họa theo mô tả)</span>}
     </div>}
+    {activity?.command && <div className="pointer-events-none absolute bottom-32 left-4 right-4 z-10 mx-auto max-w-sm rounded-2xl border border-cyan-200/30 bg-[#102334]/95 p-3 shadow-xl"><div className="text-[10px] font-bold text-cyan-200">{activity.employee_name || activity.employee_id} · nhận lệnh</div><div className="mt-1 break-words text-sm text-white">“{activity.command}”</div><div className="mt-1 text-[9px] text-slate-400">{activity.asset_id} · {new Date(activity.observed_at).toLocaleTimeString("vi-VN")}</div></div>}
     {selected&&<div className="pointer-events-none absolute right-4 top-4 z-10 rounded-xl border border-white/40 bg-[#172337]/90 px-3 py-2 text-right shadow-lg"><div className="text-[9px] font-black uppercase tracking-wider text-[#ffca91]">Đối tượng Agent đang kiểm tra</div><div className="mt-1 max-w-52 truncate font-mono text-xs font-bold text-white">{selected.target.asset_id}</div><div className="max-w-52 truncate text-[10px] text-slate-300">{selected.human_context?.employee_id} · {selected.department}</div></div>}
     <div className="pointer-events-none absolute bottom-[78px] left-4 rounded-xl border border-white/30 bg-[#172337]/85 px-3 py-2 text-[9px] font-bold text-white/90 shadow">{room === "hub" ? "GÓC NHÌN TỔNG THỂ" : `${area?.title} · ${selected?.control_id || "KHU VỰC DOANH NGHIỆP"}`}{selected&&<span className="ml-2 text-[#ffca91]">{selected.target.name}</span>}</div>
     <div className="pointer-events-none absolute bottom-4 left-4 rounded-2xl border border-white/50 bg-[#fff9ed]/95 px-4 py-3 text-[#604a3b] shadow-lg">

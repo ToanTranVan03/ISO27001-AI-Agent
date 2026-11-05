@@ -6,8 +6,8 @@ from typing_extensions import TypedDict
 from pydantic import BaseModel, Field, field_validator
 from langgraph.graph import StateGraph, START, END
 
-# Lấy dữ liệu 6 tình huống doanh nghiệp từ file Tuần 1 sang
-from agent_core.enterprise_eval_and_charts import ENTERPRISE_TEST_CASES
+from backend.database import collect_evidence, get_rubric
+from backend.enterprise_spec import CONTROL_TO_NODE, NODE_SPECS
 
 # ==========================================
 # 1. ĐỊNH NGHĨA SCHEMA & TRẠNG THÁI
@@ -43,21 +43,32 @@ class AgentState(TypedDict):
     confidence: float
     rationale: str
     audit_trail: List[str]
+    assessment_id: str
+    validated_evidence_ids: List[str]
+    proposed_evidence_ids: List[str]
 
 # ==========================================
 # 2. ĐỊNH NGHĨA CÁC NODE
 # ==========================================
 def node_plan(state: AgentState):
-    state["audit_trail"].append("PLAN")
+    node_key=CONTROL_TO_NODE.get(state['control_id']) if state.get('assessment_id') else None
+    if node_key:
+        state['audit_trail'].append('PLAN → SELECT TOOL: ' + NODE_SPECS[node_key]['tool'])
+    else:
+        state['audit_trail'].append('PLAN → SELECT TOOL: uploaded-document-evidence')
     return state
 
 def node_collect(state: AgentState):
-    # Tìm kiếm đúng Test Case trong cơ sở dữ liệu Tuần 1
-    case = next((c for c in ENTERPRISE_TEST_CASES if c["control_id"] == state["control_id"]), None)
-    if case:
-        state["collected_evidences"] = case["evidences"]
-        state["deterministic_rule"] = case.get("deterministic_rule", {})
-    
+    if state.get('assessment_id') and state['control_id'] in CONTROL_TO_NODE:
+        from backend.enterprise_lab import collect_lab_snapshot
+        snapshot = collect_lab_snapshot(state['assessment_id'],state['control_id'])
+        state['audit_trail'].append('COLLECT SYNTHETIC LAB EVIDENCE: ' + snapshot['evidence_id'])
+    if state.get("assessment_id"):
+        evidences, deterministic_rule = collect_evidence(state["control_id"], state["assessment_id"])
+    else:
+        evidences, deterministic_rule = collect_evidence(state["control_id"])
+    state["collected_evidences"] = evidences
+    state["deterministic_rule"] = deterministic_rule
     state["audit_trail"].append("COLLECT")
     return state
 
@@ -71,6 +82,7 @@ def node_evaluate(state: AgentState):
         state["compliance_status"] = "Insufficient Evidence"
         state["confidence"] = 1.0
         state["rationale"] = "Không có bằng chứng đầu vào."
+        state["proposed_evidence_ids"] = []
         state["audit_trail"].append("EVALUATE (SKIPPED)")
         return state
 
@@ -80,19 +92,14 @@ def node_evaluate(state: AgentState):
         ev_copy["content"] = re.sub(r"\[SYSTEM INSTRUCTION:.*?\]", "[BLOCKED_BY_GUARDRAIL]", ev_copy["content"], flags=re.I)
         safe_evidences.append(ev_copy)
 
-    # --- PHẦN MỚI: TẢI RUBRIC CỦA TÚ ---
     rubric_text = "Không có tiêu chí chấm điểm cụ thể cho Control này."
-    try:
-        # Đường dẫn tới file json vừa tạo
-        rubric_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "docs", "compliance_rubrics.json")
-        with open(rubric_path, "r", encoding="utf-8") as f:
-            all_rubrics = json.load(f)
-            if state["control_id"] in all_rubrics:
-                r = all_rubrics[state["control_id"]]
-                rubric_text = f"- Compliant: {r['Compliant']}\n- Partially Compliant: {r['Partially Compliant']}\n- Non-Compliant: {r['Non-Compliant']}"
-    except Exception as e:
-        print(f"Lỗi tải Rubric: {e}")
-    # -----------------------------------
+    rubric = get_rubric(state["control_id"])
+    if rubric:
+        rubric_text = (
+            f"- Compliant: {rubric['Compliant']}\n"
+            f"- Partially Compliant: {rubric['Partially Compliant']}\n"
+            f"- Non-Compliant: {rubric['Non-Compliant']}"
+        )
 
     # Nhồi Rubric vào System Prompt để ÉP AI phải nghe lời
     sys_prompt = f"""Bạn là AI Agent kiểm toán chuyên nghiệp ISO/IEC 27001. 
@@ -107,8 +114,11 @@ Dựa vào tiêu chí trên và bằng chứng, hãy xuất ra JSON đánh giá.
 Bằng chứng: {json.dumps(safe_evidences, ensure_ascii=False)}"""
 
     # Gọi mô hình Ollama (Phần này giữ nguyên như cũ)
-    resp = ollama.chat(
-        model="qwen2.5:7b",
+    ollama_client = ollama.Client(
+        host=os.getenv("OLLAMA_HOST", "http://localhost:11434")
+    )
+    resp = ollama_client.chat(
+        model=os.getenv("OLLAMA_MODEL", "qwen2.5:7b"),
         messages=[
             {"role": "system", "content": sys_prompt},
             {"role": "user", "content": user_prompt}
@@ -121,22 +131,24 @@ Bằng chứng: {json.dumps(safe_evidences, ensure_ascii=False)}"""
     state["compliance_status"] = parsed.status
     state["confidence"] = parsed.confidence
     state["rationale"] = parsed.rationale
+    state["proposed_evidence_ids"] = parsed.evidence_ids
     state["audit_trail"].append("EVALUATE")
     return state
 
 def node_verify(state: AgentState):
-    # Guardrail 1: Kho bằng chứng rỗng
-    if not state["collected_evidences"]:
-        state["compliance_status"] = "Insufficient Evidence"
-        state["rationale"] = "[GUARDRAIL] Tự động ghi đè: Không tìm thấy bằng chứng hợp lệ."
-    else:
-        # Guardrail 2: Đối chiếu chéo với Deterministic Rule
-        rule_expected = state["deterministic_rule"].get("expected_status")
-        if rule_expected and state["compliance_status"] != rule_expected:
-            state["compliance_status"] = rule_expected
-            state["rationale"] = f"[GUARDRAIL] AI suy luận sai. Tự động ghi đè trạng thái chuẩn: {rule_expected}."
-            
-    state["audit_trail"].append("VERIFY")
+    # Evidence-first: keep ONLY IDs genuinely returned by the model and present in
+    # the evidence collected for this evaluation. Ground truth is never read here.
+    available = {ev['evidence_id'] for ev in state['collected_evidences']}
+    proposed = state.get('proposed_evidence_ids', [])
+    valid = [value for value in proposed if value in available]
+    state['validated_evidence_ids'] = list(dict.fromkeys(valid))
+    if not available or (state['compliance_status'] != 'Insufficient Evidence' and not valid):
+        state['compliance_status'] = 'Insufficient Evidence'
+        state['confidence'] = 0.0
+        state['rationale'] = 'Chưa đủ bằng chứng hợp lệ được viện dẫn để xác nhận kết luận.'
+    elif len(valid) < len(proposed):
+        state['audit_trail'].append('VERIFY (REJECTED UNKNOWN EVIDENCE IDS)')
+    state['audit_trail'].append('VERIFY')
     return state
 
 def node_report(state: AgentState):
@@ -166,14 +178,21 @@ def build_iso_agent_graph():
 # 4. CHẠY HÀNG LOẠT TRÊN 6 TÌNH HUỐNG DOANH NGHIỆP
 # ==========================================
 if __name__ == "__main__":
+    from backend.database import get_control, initialize_database
+    from agent_core.enterprise_eval_and_charts import ENTERPRISE_TEST_CASES
+
+    initialize_database()
     graph = build_iso_agent_graph()
     print("=== BẮT ĐẦU CHẠY LANGGRAPH TRÊN DỮ LIỆU DOANH NGHIỆP (6 CONTROLS) ===\n")
     
     for case in ENTERPRISE_TEST_CASES:
+        control = get_control(case["control_id"])
+        if control is None:
+            raise RuntimeError(f"Control {case['control_id']} is missing from PostgreSQL.")
         initial_state = {
-            "control_id": case["control_id"],
-            "control_name": case["name"],
-            "objective": case["objective"],
+            "control_id": control["control_id"],
+            "control_name": control["name"],
+            "objective": control["objective"],
             "collected_evidences": [],
             "deterministic_rule": {},
             "compliance_status": "UNKNOWN",

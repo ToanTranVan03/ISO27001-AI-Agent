@@ -1,5 +1,8 @@
 import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Activity, AlertTriangle, Bot, CheckCircle2, Cpu, Download, HardDrive, Loader2, Send, Shield, Terminal, Users } from "lucide-react";
+import EmployeeCommandConsole from "./EmployeeCommandConsole";
+import OfficeCompanyControls from "./OfficeCompanyControls";
+import OfficeLiveScene from "./OfficeLiveScene";
 const EnterpriseScene3D = lazy(() => import("./EnterpriseScene3D"));
 
 const DOMAINS = {
@@ -47,6 +50,11 @@ function activityVisualization(controlId) {
 }
 
 export default function EnterpriseIncident3D({ assessment, request, token }) {
+  const [officeView, setOfficeView] = useState("live");
+  const [commandEntries, setCommandEntries] = useState([]);
+  const [commandEmployee, setCommandEmployee] = useState("EMP-006");
+  const [officeWorkspace, setOfficeWorkspace] = useState([]);
+  const [suggestedCommand, setSuggestedCommand] = useState(null);
   const [scenarios, setScenarios] = useState([]);
   const [employees, setEmployees] = useState([]);
   const [history, setHistory] = useState([]);
@@ -77,6 +85,8 @@ export default function EnterpriseIncident3D({ assessment, request, token }) {
   const chatEnd = useRef(null);
   const monitorReady = useRef(false);
   const monitorDetectionSeen = useRef("");
+  const scenarioRef = useRef(scenarios);
+  useEffect(() => { scenarioRef.current = scenarios; }, [scenarios]);
   const base = `/api/assessments/${encodeURIComponent(assessment.assessment_id)}/enterprise`;
 
   const refresh = useCallback(async () => {
@@ -113,7 +123,8 @@ export default function EnterpriseIncident3D({ assessment, request, token }) {
           monitorDetectionSeen.current=detection?.at||"";
         } else if(detection?.at&&detection.at!==monitorDetectionSeen.current) {
           monitorDetectionSeen.current=detection.at;
-          setSceneActivity(current=>current?{...current,phase:detection.verified?"contained":"agent_check"}:current);
+          setSceneActivity(current => current && (!current.event_id || detection.findings?.some(finding => finding.event_id === current.event_id))
+            ? {...current,phase:detection.verified?"contained":"agent_check"} : current);
           const items=await request(`${base}/incidents?limit=20`);
           if(disposed) return;
           setHistory(items||[]);
@@ -122,7 +133,7 @@ export default function EnterpriseIncident3D({ assessment, request, token }) {
           if(primary) {
             const control=primary.control_id;
             setControlId(control);
-            const controlDomain=scenarios.find(item=>item.control_id===control)?.domain||"people";
+            const controlDomain=scenarioRef.current.find(item=>item.control_id===control)?.domain||"people";
             setDomain(controlDomain); setRoom(controlDomain); setClassification(primary.event?.ai_classification||null);
             setChatIncidentId(primary.incident_id);
             setResult({...primary,event:primary.event?.reported_event||primary.event,
@@ -143,12 +154,15 @@ export default function EnterpriseIncident3D({ assessment, request, token }) {
     pollMonitor();
     const timer=setInterval(pollMonitor,2500);
     return ()=>{disposed=true;clearInterval(timer);};
-  },[base,request,refresh,scenarios]);
+  },[base,request,refresh]);
 
   useEffect(() => { logEnd.current?.scrollIntoView({ behavior: "smooth", block: "end" }); }, [events]);
   useEffect(() => { chatEnd.current?.scrollIntoView({ behavior: "smooth", block: "end" }); }, [chatMessages, chatLoading, status]);
 
-  const selected = scenarios.find((item) => item.control_id === controlId) || null;
+  const catalogSelection = scenarios.find((item) => item.control_id === controlId) || null;
+  const selected = catalogSelection ? {...catalogSelection,
+    target: classification?.simulation_target || catalogSelection.target,
+    human_context: classification?.human_context || catalogSelection.human_context} : null;
   const selectedEmployee = employees.find((item) => item.employee_id === selected?.human_context?.employee_id) || selected?.employee_profile;
   const counts = useMemo(() => Object.fromEntries(Object.keys(DOMAINS).map((key) => [key, scenarios.filter((item) => item.domain === key).length])), [scenarios]);
 
@@ -465,6 +479,26 @@ export default function EnterpriseIncident3D({ assessment, request, token }) {
     setEvents([]); setVisited([]); setSceneActivity(null); setStatus("idle"); setRoom("hub"); setCurrentStep(""); setCurrentTool("");
   }
 
+  function showEmployeeCommand(receipt) {
+    setCommandEntries(current => [receipt, ...current.filter(item => item.event_id !== receipt.event_id)].slice(0,30));
+    setRoom(receipt.room);
+    setSceneActivity({type: receipt.event_type, phase: "employee_action", event_id: receipt.event_id,
+      employee_id: receipt.employee_id, employee_name: receipt.employee_name,
+      asset_id: receipt.host_asset_id, room: receipt.room, command: receipt.text, observed_at: receipt.observed_at});
+    setControlId(""); setResult(null); setClassification(null); setStatus("idle");
+    setCurrentStep("Nhân viên đã nhận lệnh · chờ giám sát nhật ký");
+    setMonitoring(current => ({...current, active: receipt.monitor_active}));
+  }
+
+  async function inspectCommand(receipt) {
+    try {
+      const incidents = await request(`${base}/incidents?limit=100`);
+      const incident = incidents.find(item => item.incident_id === receipt.incident_id);
+      if (incident) await openHistoryIncident(incident);
+      else setError("Hồ sơ này không còn trong danh sách sự cố gần nhất.");
+    } catch (err) { setError(err.message); }
+  }
+
   const activeArea = selected ? DOMAINS[selected.domain]?.label : "";
 
   if (loading) return <div className="flex min-h-screen items-center justify-center bg-[#101827] text-slate-200"><Loader2 className="mr-3 animate-spin"/>Đang nạp doanh nghiệp 3D…</div>;
@@ -489,6 +523,18 @@ export default function EnterpriseIncident3D({ assessment, request, token }) {
           {label:"Bộ mô phỏng ISO",ok:readiness?.scenario_catalog?.status==="ready",detail:`${readiness?.scenario_catalog?.controls||0}/56 tình huống sẵn sàng`},
           {label:"Mô hình AI",ok:readiness?.ollama?.status==="ready",detail:readiness?.ollama?.status==="ready"?`${readiness.ollama.configured_model} · AI trực tuyến`:readiness?.ollama?`Đang dùng fallback · cần Ollama ${readiness.ollama.configured_model}`:"Đang kiểm tra Ollama…"},
         ].map(item=><div key={item.label} className={`rounded-xl border px-3 py-2 ${item.ok?"border-emerald-300/15 bg-emerald-300/5":"border-amber-300/15 bg-amber-300/5"}`}><div className={`flex items-center gap-2 text-[9px] font-black uppercase tracking-wider ${item.ok?"text-emerald-200":"text-amber-200"}`}><span className={`h-1.5 w-1.5 rounded-full ${item.ok?"bg-emerald-300":"bg-amber-300"}`}/>{item.label} · {item.ok?"SẴN SÀNG":readiness?"CHÚ Ý":"ĐANG KIỂM TRA"}</div><div className="mt-1 truncate text-[9px] text-slate-400">{item.detail}</div></div>)}
+      </section>
+
+      <section className="mb-5 grid items-start gap-4 xl:grid-cols-[minmax(0,1fr)_380px]">
+        <div className="min-w-0">
+          <OfficeCompanyControls base={base} request={request} workspace={officeWorkspace} onWorkspace={setOfficeWorkspace} onEntries={setCommandEntries}/>
+          <div className="mb-3 flex items-center justify-between gap-2"><div className="flex rounded-xl border border-white/10 bg-white/5 p-1">{[{id:"live",label:"Văn phòng tương tác"},{id:"3d",label:"Toàn cảnh 3D"}].map(view=><button key={view.id} onClick={()=>setOfficeView(view.id)} aria-pressed={officeView===view.id} className={`rounded-lg px-4 py-2 text-xs font-bold ${officeView===view.id?"bg-[#e7edda] text-[#31564a]":"text-slate-400 hover:text-white"}`}>{view.label}</button>)}</div><span className="hidden text-[10px] text-slate-500 sm:block">Bình luận → hành động → dấu vết → xác minh</span></div>
+          {officeView==="live" ? <OfficeLiveScene employees={employees} entries={commandEntries} selectedEmployee={commandEmployee} onSelect={setCommandEmployee} monitoring={monitoring} workspace={officeWorkspace} onSuggest={text=>setSuggestedCommand({text,at:Date.now()})}/> : <Suspense fallback={<div className="flex h-[500px] items-center justify-center rounded-[30px] border border-white/10 bg-[#172337] text-sm text-slate-300 md:h-[580px]"><Loader2 className="mr-3 animate-spin"/>Nạp mô hình doanh nghiệp 3D…</div>}>
+            <EnterpriseScene3D room={room} visited={visited} selected={selected} working={status==="running" || monitoring.state==="processing"} resolved={status==="completed"&&Boolean(result?.verified)} currentTool={currentTool} currentStep={monitoring.state==="processing" ? "Agent đang kiểm tra dấu vết và xử lý" : currentStep} activity={sceneActivity}/>
+          </Suspense>}
+          <div className="mt-3 flex flex-wrap gap-3 px-2 text-[10px] text-slate-400"><span>01 · Bình luận ra lệnh</span><span>02 · Nhân viên hành động</span><span>03 · Agent quét dấu vết</span><span>04 · Xử lý và xác minh</span></div>
+        </div>
+        <EmployeeCommandConsole base={base} request={request} employees={employees} monitoring={monitoring} onActivity={showEmployeeCommand} onInspect={inspectCommand} disabled={status === "running" || chatLoading || drillLoading} selectedEmployee={commandEmployee} onSelect={setCommandEmployee} onEntries={setCommandEntries} onWorkspace={setOfficeWorkspace} suggestedCommand={suggestedCommand}/>
       </section>
 
       <section className="mb-4 overflow-hidden rounded-3xl border border-white/10 bg-[#172337] shadow-xl">
@@ -549,7 +595,7 @@ export default function EnterpriseIncident3D({ assessment, request, token }) {
 
       <section className="grid items-start gap-4 xl:grid-cols-[minmax(0,1fr)_335px]">
         <div className="space-y-4">
-          <Suspense fallback={<div className="flex h-[500px] items-center justify-center rounded-[30px] border border-white/10 bg-[#172337] text-sm text-slate-300 md:h-[580px]"><Loader2 className="mr-3 animate-spin"/>Nạp mô hình doanh nghiệp 3D…</div>}><EnterpriseScene3D room={room} visited={visited} selected={selected} working={status==="running"} resolved={status==="completed"&&Boolean(result?.verified)} currentTool={currentTool} currentStep={currentStep} activity={sceneActivity}/></Suspense>
+
           {selected&&<div className="rounded-2xl border border-[#ffb777]/20 bg-[#172337] p-4"><div className="flex flex-wrap items-center gap-2"><span className="rounded-md bg-white/10 px-2 py-1 font-mono text-xs font-bold text-sky-200">AI chọn {selected.control_id}</span><span className="text-xs font-bold text-slate-400">{activeArea} · {selected.department}</span>{classification?.confidence!=null&&<span className="rounded-full bg-sky-300/10 px-2.5 py-1 text-[10px] text-sky-200">Độ tin cậy {Math.round(classification.confidence*100)}%</span>}</div><h2 className="mt-2 font-black">{selected.control_name}</h2><p className="mt-1 text-xs leading-5 text-slate-400">Điều khoản yêu cầu: {selected.objective}</p><div className="mt-3 rounded-xl border border-white/5 bg-black/15 p-3"><div className="text-[9px] font-black uppercase tracking-wider text-slate-500">Mô tả bạn đưa</div><p className="mt-1 text-sm leading-6 text-slate-200">{classification?.original_issue||result?.event||issueText||selected.event}</p></div><p className="mt-3 text-xs leading-5 text-[#ffca91]">Kết luận phân loại: {classification?.rationale||"AI đã đối chiếu sự cố với mục tiêu điều khoản."}</p><div className="mt-3 flex flex-wrap items-center gap-2 rounded-xl border border-[#ffb777]/15 bg-[#ffb777]/5 px-3 py-2"><Users size={15} className="text-[#ffca91]"/><span className="text-xs font-bold text-[#ffca91]">{selectedEmployee?.employee_id||selected.human_context?.employee_id||"Nhân sự phụ trách"}</span><span className="text-xs text-slate-300">· {selectedEmployee?.job_title||selected.human_context?.role||"Nhân viên liên quan"}</span><span className="text-[10px] text-slate-500">· {selected.human_context?.relationship === "affected_employee" ? "người trong tình huống" : "đầu mối phòng ban"}</span><span className="text-xs text-slate-500">· Tài sản liên quan: {selected.target.name} ({selected.target.asset_id})</span></div><div className="mt-3 rounded-xl bg-black/20 p-3 text-xs"><div className="text-slate-500">Trạng thái tài sản lab</div><div className="mt-1 text-slate-200">{formatState(selected.current_state)}</div></div></div>}
           {selectedEmployee&&<div className="rounded-2xl border border-[#ffb777]/25 bg-gradient-to-br from-[#302b2e] to-[#172337] p-4"><div className="flex flex-wrap items-start justify-between gap-3"><div className="flex items-center gap-3"><div className="rounded-xl bg-[#ffb777]/15 p-2.5 text-[#ffca91]"><Users size={20}/></div><div><div className="text-[10px] font-black uppercase tracking-wider text-[#ffca91]">Hồ sơ nhân sự · dữ liệu giả lập</div><h3 className="mt-1 text-sm font-black">{selectedEmployee.display_name} · {selectedEmployee.employee_id}</h3><p className="mt-1 text-xs text-slate-400">{selectedEmployee.job_title} · {selectedEmployee.department}</p></div></div><div className="flex gap-2 text-[9px]"><span className="rounded-full bg-white/5 px-2.5 py-1 text-slate-300">Nhân sự: {selectedEmployee.employment_status}</span><span className="rounded-full bg-white/5 px-2.5 py-1 text-slate-300">Tài khoản: {selectedEmployee.account_status}</span></div></div><div className="mt-4 border-t border-white/10 pt-3"><div className="mb-2 text-[10px] font-bold text-slate-400">THIẾT BỊ / ỨNG DỤNG CÓ LIÊN KẾT ({selectedEmployee.linked_assets?.length||0})</div>{selectedEmployee.linked_assets?.length?<div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">{selectedEmployee.linked_assets.map((asset)=><div key={`${asset.asset_id}-${asset.relationship}`} className="rounded-xl border border-white/5 bg-black/15 p-2.5"><div className="flex items-center justify-between gap-2"><span className="truncate text-xs font-bold text-slate-200">{asset.name}</span><span className="shrink-0 rounded bg-white/5 px-1.5 py-0.5 text-[8px] uppercase text-slate-500">{asset.type}</span></div><div className="mt-1 font-mono text-[9px] text-slate-500">{asset.asset_id} · {asset.relationship === "affected_employee" ? "đối tượng sự cố" : "nhân sự phụ trách"}</div></div>)}</div>:<p className="text-xs text-slate-500">Chưa có thiết bị/ứng dụng được gán trong kịch bản này.</p>}</div></div>}
           {result&&<div className="rounded-2xl border border-emerald-300/20 bg-[#14251f] p-4"><div className="flex flex-wrap items-center justify-between gap-2"><h3 className="flex items-center gap-2 font-black"><CheckCircle2 size={18} className="text-emerald-300"/>{result.scan_only?"Kết quả quét thiết bị":"Báo cáo sau xử lý"}</h3><span className="rounded-full bg-emerald-300/10 px-3 py-1 text-xs font-bold text-emerald-200">{result.scan_only&&result.status==="NO_FINDINGS"?"KHÔNG CÓ SỰ CỐ MỚI":result.verified||result.status==="RESOLVED"?"ĐÃ XÁC MINH":"CẦN RÀ SOÁT"}</span></div><p className="mt-2 text-sm leading-6 text-slate-300">{result.agent_rationale||result.scan_summary}</p>{result.scan_findings?.length>0&&<div className="mt-3 space-y-2">{result.scan_findings.map((finding,index)=><div key={`${finding.asset_id}-${finding.event_type}-${index}`} className="rounded-xl border border-amber-200/15 bg-amber-200/5 p-3"><div className="flex flex-wrap items-center gap-2 text-xs font-bold text-amber-100"><span>{finding.control_id} · {finding.control_name}</span><span className="rounded bg-white/5 px-2 py-0.5 text-[9px]">{finding.asset_id}</span></div><p className="mt-1 text-xs text-slate-300">{finding.summary}</p><p className="mt-1 text-[10px] text-slate-500">{finding.employee_id?`Nhân sự liên quan ${finding.employee_id} · `:""}{new Date(finding.observed_at).toLocaleString("vi-VN")} · dữ liệu giả lập</p></div>)}</div>}{result.activity_assessment&&<div className="mt-3 rounded-xl border border-[#78d7e9]/20 bg-[#78d7e9]/5 p-3"><div className="text-[10px] font-black uppercase tracking-wider text-[#9be5f0]">Kết quả kiểm tra thiết bị {result.activity_assessment.reported_at?`sau ${new Date(result.activity_assessment.reported_at).toLocaleTimeString("vi-VN",{hour:"2-digit",minute:"2-digit"})}`:"· chưa có mốc giờ"}</div><p className="mt-1 text-xs leading-5 text-slate-200">{result.activity_assessment.conclusion}</p>{result.activity_assessment.limitation&&<p className="mt-1 text-[9px] text-slate-500">Giới hạn: {result.activity_assessment.limitation}</p>}<div className="mt-2 space-y-1">{result.activity_assessment.events_after_reported_time?.map((event)=><div key={`${event.observed_at}-${event.event_type}`} className="flex flex-wrap gap-x-2 text-[9px] text-slate-400"><span className="font-mono text-[#9be5f0]">{new Date(event.observed_at).toLocaleTimeString("vi-VN",{hour:"2-digit",minute:"2-digit"})}</span><span className="font-mono">{event.event_type}</span><span>{event.summary}</span></div>)}</div></div>}<div className="mt-3 grid gap-2 sm:grid-cols-2">{result.actions?.map((action,i)=><div key={`${action.action_id||action.tool_id}-${i}`} className="rounded-xl border border-white/5 bg-black/15 p-3"><div className="text-sm font-bold">{action.label}</div><div className="mt-1 text-xs text-emerald-200">{action.status} · {action.target_asset_id}</div><div className="mt-2 text-[10px] text-slate-500">Trước: {formatState(action.before_state)}</div><div className="mt-1 text-[10px] text-slate-400">Sau: {formatState(action.after_state)}</div>{action.person_before_state&&<details className="mt-3 border-t border-white/5 pt-2"><summary className="cursor-pointer text-[10px] font-bold text-[#ffca91]">Xem trạng thái nhân sự trước / sau</summary><div className="mt-2 text-[10px] text-slate-500">Nhân sự trước: {formatState(action.person_before_state)}</div><div className="mt-1 text-[10px] text-slate-300">Nhân sự sau: {formatState(action.person_after_state)}</div></details>}</div>)}</div>{result.evidence_id&&<div className="mt-3 break-all rounded-xl bg-black/20 p-3 font-mono text-[10px] text-slate-500">Biên nhận: {result.evidence_id}{result.sha256_hash&&<><br/>SHA-256: {result.sha256_hash}</>}</div>}</div>}

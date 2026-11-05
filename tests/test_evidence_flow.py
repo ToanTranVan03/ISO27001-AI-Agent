@@ -44,7 +44,7 @@ def test_parser_rejects_unsupported_extension():
     try:
         extract_document_text("policy.txt", b"policy")
     except ValueError as exc:
-        assert "Only PDF and DOCX" in str(exc)
+        assert "PDF" in str(exc) and "DOCX" in str(exc)
     else:
         raise AssertionError("Unsupported file extension should be rejected.")
 

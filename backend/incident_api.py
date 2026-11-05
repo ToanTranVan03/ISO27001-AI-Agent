@@ -14,9 +14,11 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 
-from backend import incident_simulation
+from backend import incident_simulation, employee_commands
 from backend.incident_catalog import SCENARIO_BY_CONTROL
 from backend.team_api import require_campaign, require_user
+from backend.database import get_connection
+from backend.office_logic import lock_key
 
 
 router = APIRouter(
@@ -38,35 +40,59 @@ def _scan_lock(assessment_id: str) -> Lock:
 def _process_monitor_findings(assessment_id: str, user_id: str, scan: dict, emit=None) -> list[dict]:
     reports = []
     for finding in scan["findings"]:
-        scenario = incident_simulation.SCENARIO_BY_CONTROL[finding["control_id"]]
-        issue = (
-            f"Quét tự động phát hiện {finding['summary']} "
-            f"Tài sản {finding['asset_name']} ({finding['asset_id']}), "
-            f"nhân sự phụ trách {finding.get('employee_id') or 'chưa xác định'}; "
-            f"thời điểm {finding['observed_at']}."
-        )
-        classification = {
-            "control_id": scenario["control_id"], "severity": scenario["severity"],
-            "confidence": 0.96, "needs_more_info": False,
-            "rationale": f"Telemetry endpoint ghi nhận {finding['event_type']}; Agent đối chiếu mục tiêu kiểm soát {scenario['control_id']}.",
-            "reported_at": (datetime.fromisoformat(finding["observed_at"])-timedelta(seconds=1)).isoformat(), "model": "enterprise-telemetry-agent",
-            "original_issue": issue, "domain": scenario["domain"],
-            "domain_label": scenario["domain_label"],
-            "matched_control": {"control_id": scenario["control_id"], "name": scenario["control_name"], "objective": scenario["objective"]},
-            "simulation_target": scenario["target"], "human_context": scenario["human_context"],
-            "telemetry_finding": finding, "is_synthetic": True,
-        }
-        if emit:
-            emit({"type": "finding_detected", "text": finding["summary"], "finding": finding})
-        report = incident_simulation.run_incident(
-            assessment_id, scenario["control_id"], user_id,
-            on_progress=emit, reported_issue=issue, classification=classification,
-        )
-        incident_simulation.mark_activity_triaged(
-            assessment_id, finding["asset_id"], finding["event_id"], report["incident_id"]
-        )
-        reports.append(report)
+        if finding["asset_id"].startswith("OFFICE-"):
+            with get_connection() as con:
+                with con.cursor() as cur:
+                    cur.execute("SELECT pg_advisory_xact_lock(hashtextextended(%s, 0))",
+                                (lock_key(assessment_id, finding["employee_id"]),))
+                    reports.append(_process_one_finding(assessment_id, user_id, finding, emit))
+        else:
+            reports.append(_process_one_finding(assessment_id, user_id, finding, emit))
     return reports
+
+
+def _process_one_finding(assessment_id, user_id, finding, emit=None):
+    if finding["asset_id"].startswith("OFFICE-"):
+        # Recover a completed result if the process stopped before linking the event,
+        # or another scanner handled this stale snapshot while we waited for its lock.
+        with get_connection() as con:
+            with con.cursor() as cur:
+                cur.execute("""SELECT incident_id,control_id,status FROM enterprise_incidents
+                    WHERE assessment_id=%s AND event->'ai_classification'->'telemetry_finding'->>'event_id'=%s
+                    AND event->'affected_target'->>'asset_id'=%s ORDER BY created_at LIMIT 1""",
+                    (assessment_id,finding["event_id"],finding["asset_id"]))
+                previous=cur.fetchone()
+        if previous:
+            incident_simulation.mark_activity_triaged(assessment_id,finding["asset_id"],finding["event_id"],str(previous[0]))
+            return {"incident_id":str(previous[0]),"control_id":previous[1],"verified":previous[2]=="RESOLVED"}
+    scenario = incident_simulation.scenario_for_finding(finding)
+    issue = (
+        f"Quét tự động phát hiện {finding['summary']} "
+        f"Tài sản {finding['asset_name']} ({finding['asset_id']}), "
+        f"nhân sự phụ trách {finding.get('employee_id') or 'chưa xác định'}; "
+        f"thời điểm {finding['observed_at']}."
+    )
+    classification = {
+        "control_id": scenario["control_id"], "severity": scenario["severity"],
+        "confidence": 0.96, "needs_more_info": False,
+        "rationale": f"Telemetry endpoint ghi nhận {finding['event_type']}; Agent đối chiếu mục tiêu kiểm soát {scenario['control_id']}.",
+        "reported_at": (datetime.fromisoformat(finding["observed_at"])-timedelta(seconds=1)).isoformat(), "model": "enterprise-telemetry-agent",
+        "original_issue": issue, "domain": scenario["domain"],
+        "domain_label": scenario["domain_label"],
+        "matched_control": {"control_id": scenario["control_id"], "name": scenario["control_name"], "objective": scenario["objective"]},
+        "simulation_target": scenario["target"], "human_context": scenario["human_context"],
+        "telemetry_finding": finding, "is_synthetic": True,
+    }
+    if emit:
+        emit({"type": "finding_detected", "text": finding["summary"], "finding": finding})
+    report = incident_simulation.run_incident(
+        assessment_id, scenario["control_id"], user_id,
+        on_progress=emit, reported_issue=issue, classification=classification,
+    )
+    incident_simulation.mark_activity_triaged(
+        assessment_id, finding["asset_id"], finding["event_id"], report["incident_id"]
+    )
+    return report
 
 
 def _automatic_monitor_worker(assessment_id: str, user_id: str, stop_event: Event, state: dict) -> None:
@@ -79,7 +105,10 @@ def _automatic_monitor_worker(assessment_id: str, user_id: str, stop_event: Even
                 state["last_error"] = None
                 if scan["findings"]:
                     state["state"] = "processing"
-                    reports = _process_monitor_findings(assessment_id, user_id, scan)
+                    def progress(event):
+                        if event.get("type") == "finding_detected":
+                            state["current_finding"] = event["finding"]
+                    reports = _process_monitor_findings(assessment_id, user_id, scan, progress)
                     if reports:
                         state["last_detection"] = {
                             "at": datetime.now(ZoneInfo("Asia/Ho_Chi_Minh")).isoformat(),
@@ -88,6 +117,7 @@ def _automatic_monitor_worker(assessment_id: str, user_id: str, stop_event: Even
                             "control_ids": [report["control_id"] for report in reports],
                             "verified": all(report["verified"] for report in reports),
                         }
+                state["current_finding"] = None
                 state["state"] = "monitoring"
             stop_event.wait(5)
     except Exception as exc:
@@ -110,6 +140,55 @@ class IncidentChatRequest(BaseModel):
 
 class SimulatedEmployeeActivityRequest(BaseModel):
     activity_type: Literal["unapproved_usb_inserted", "unapproved_software_installed"]
+
+
+class OfficeCommandRequest(BaseModel):
+    action: Literal["start_shift", "work", "break", "end_shift"]
+    request_id: UUID
+
+
+@router.post("/office-commands")
+def send_office_command(assessment_id: UUID, body: OfficeCommandRequest, user: dict = Depends(require_user)):
+    require_campaign(assessment_id, user)
+    result = employee_commands.execute_office_command(str(assessment_id), body.action, body.request_id, user["user_id"])
+    start_automatic_monitor(assessment_id, user)
+    return result
+
+
+class EmployeeCommandRequest(BaseModel):
+    employee_id: str = Field(min_length=1, max_length=40)
+    text: str = Field(min_length=1, max_length=240)
+    request_id: UUID
+
+
+@router.get("/employee-commands")
+def employee_command_history(assessment_id: UUID, user: dict = Depends(require_user)):
+    require_campaign(assessment_id, user)
+    return employee_commands.command_history(str(assessment_id))
+
+
+@router.get("/employee-commands/catalog")
+def employee_command_catalog(assessment_id: UUID, user: dict = Depends(require_user)):
+    require_campaign(assessment_id, user)
+    return employee_commands.command_catalog()
+
+
+@router.get("/office-state")
+def office_state(assessment_id: UUID, user: dict = Depends(require_user)):
+    require_campaign(assessment_id, user)
+    return employee_commands.workspace_state(str(assessment_id))
+
+
+@router.post("/employee-commands")
+def send_employee_command(assessment_id: UUID, body: EmployeeCommandRequest, user: dict = Depends(require_user)):
+    require_campaign(assessment_id, user)
+    try:
+        receipt = employee_commands.execute_command(str(assessment_id), body.employee_id, body.text, body.request_id, user["user_id"])
+    except ValueError as exc:
+        raise HTTPException(422, detail=str(exc)) from exc
+    # The command only writes telemetry. The independent monitor discovers it.
+    monitor = start_automatic_monitor(assessment_id, user)
+    return {**receipt, "monitor_active": monitor["active"]}
 
 
 @router.get("/scenarios")

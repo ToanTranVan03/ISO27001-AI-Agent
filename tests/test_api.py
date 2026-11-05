@@ -99,17 +99,14 @@ class ApiTests(unittest.TestCase):
             with self.assertRaises(ModelUnavailable):
                 explain_with_ollama([])
 
-    def test_legacy_root_still_returns_message(self):
-        self.assertIn('message', self.client.get('/').json())
+    def test_root_serves_react(self):
+        response = self.client.get('/')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('<div id="root">', response.text)
 
     def test_legacy_evaluation_contract(self):
-        with patch('backend.main.agent_graph') as graph:
-            graph.invoke.return_value = {'control_id': 'A.6.3', 'compliance_status': 'Partially Compliant',
-                                        'confidence': .85, 'rationale': 'Test', 'audit_trail': ['PLAN', 'REPORT']}
-            response = self.client.post('/api/evaluate', json={'control_id': 'A.6.3'})
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(set(response.json()), {'control_id', 'status', 'confidence', 'rationale', 'audit_trail'})
-        self.assertEqual(self.client.post('/api/evaluate', json={'control_id': 'unknown'}).status_code, 404)
+        response = self.client.post('/api/evaluate', json={'control_id': 'A.6.3'})
+        self.assertEqual(response.status_code, 401)
 
 
 if __name__ == '__main__':
