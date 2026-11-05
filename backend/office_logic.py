@@ -10,7 +10,13 @@ RISK_EVENTS = {"unattended_screen_unlocked", "unapproved_usb_inserted", "unappro
 def transition(command, current, pending=0):
     state = {**DEFAULT_STATE, **current}
     after = dict(state)
-    if command == "/vao-ca":
+    if command == "/di-lam":
+        if state["shift"] == "on":
+            raise ValueError("Nhân viên đã tham gia ca. Dùng /lam-viec để quay lại bàn.")
+        blocked = state["device_status"] == "locked" or state["network_isolated"] or pending or state["media_status"] == "unregistered" or state["software_status"] == "unapproved"
+        after.update(shift="on", location="desk", screen_state="locked" if blocked else "unlocked")
+        event = "employee_returned_to_locked_device" if blocked else "approved_work_session"
+    elif command == "/vao-ca":
         if state["shift"] == "on":
             raise ValueError("Nhân viên đã vào ca. Dùng /lam-viec để quay lại bàn.")
         after.update(shift="on", location="desk", screen_state="locked")

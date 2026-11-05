@@ -3,25 +3,33 @@
 ## Cách thử
 
 Mở http://127.0.0.1:5173, đăng nhập và chọn **Mô phỏng 3D**.
-Bản đồ **Văn phòng tương tác** và bảng **Bạn bình luận. Nhân viên hành động.** nằm cạnh nhau ở đầu trang.
+Bản đồ **Văn phòng tương tác** và bảng **Bình luận → nhân vật của bạn** nằm cạnh nhau ở đầu trang trên màn hình rộng.
 Có thể chuyển sang **Toàn cảnh 3D** để dùng mô hình cũ.
+
+Luồng chính là **một bình luận → một nhân vật → một hành động riêng**.
+Chọn người trong danh sách hoặc trên bản đồ, nhập `đi làm` rồi gửi để người đó
+vào ca và làm việc bằng một lệnh. Những người khác giữ hoạt động riêng;
+không cần đưa cả văn phòng vào cùng trạng thái. Các nút ra lệnh đồng loạt đã bỏ
+khỏi giao diện chính. Danh sách hiển thị trạng thái từng người; bình luận mới
+nổi trên đúng nhân vật trong 12 giây, người đang chọn luôn hiện lệnh gần nhất.
 
 Chọn nhân viên trên bản đồ hoặc trong danh sách; cũng có thể gõ trực tiếp
 `@EMP-025 /cai-app-la` để chỉ định người nhận.
 
 | Lệnh | Người nhận | Hoạt động |
 |---|---|---|
-| `/vao-ca` hoặc `vào ca` | Cả 14 nhân viên | Nhận ca, về vị trí làm việc |
-| `/lam-viec` hoặc `làm việc` | Cả 14 nhân viên | Hoạt động làm việc bình thường |
-| `/nghi` hoặc `nghỉ giải lao` | Cả 14 nhân viên | Ghi nhật ký nghỉ theo quy trình, chuyển tới góc nghỉ |
-| `/khoa-may` hoặc `khóa màn hình` | Cả 14 nhân viên | Ghi sự kiện khóa màn hình |
-| `/roi-may` hoặc `rời máy` | Cả 14 nhân viên | Rời bàn giữ nguyên màn hình; chỉ khi còn mở mới tạo dấu hiệu A.7.7 |
-| `/usb-la` hoặc `cắm USB lạ` | Cả 14 nhân viên | USB chưa đăng ký trên máy riêng; Agent kiểm tra A.7.10 |
-| `/cai-app-la` hoặc `cài phần mềm chưa duyệt` | Cả 14 nhân viên | Cài ứng dụng chưa duyệt trên máy riêng; Agent kiểm tra A.8.19 |
-| `/rut-usb` | Cả 14 nhân viên | Rút USB đang cắm, giữ nguyên lịch sử vi phạm |
-| `/go-app` | Cả 14 nhân viên | Gỡ app chưa duyệt hoặc đã bị chặn |
-| `/mo-khoa` | Cả 14 nhân viên | Mở lại máy sau khi hết sự kiện chờ xử lý và dấu hiệu đang hoạt động |
-| `/tan-ca` | Cả 14 nhân viên | Kết thúc ca khi máy đã khóa, USB đã rút và không còn sự kiện chưa xử lý |
+| `/di-lam` hoặc `đi làm`, `tham gia` | Một nhân viên đang chọn | Vào ca và làm việc bằng một lệnh; máy còn bị bảo vệ vẫn khóa |
+| `/vao-ca` hoặc `vào ca` | Một người đang chọn | Nhận ca, về vị trí làm việc |
+| `/lam-viec` hoặc `làm việc` | Một người đang chọn | Hoạt động làm việc bình thường |
+| `/nghi` hoặc `nghỉ giải lao` | Một người đang chọn | Ghi nhật ký nghỉ theo quy trình, chuyển tới góc nghỉ |
+| `/khoa-may` hoặc `khóa màn hình` | Một người đang chọn | Ghi sự kiện khóa màn hình |
+| `/roi-may` hoặc `rời máy` | Một người đang chọn | Rời bàn giữ nguyên màn hình; chỉ khi còn mở mới tạo dấu hiệu A.7.7 |
+| `/usb-la` hoặc `cắm USB lạ` | Một người đang chọn | USB chưa đăng ký trên máy riêng; Agent kiểm tra A.7.10 |
+| `/cai-app-la` hoặc `cài phần mềm chưa duyệt` | Một người đang chọn | Cài ứng dụng chưa duyệt trên máy riêng; Agent kiểm tra A.8.19 |
+| `/rut-usb` | Một người đang chọn | Rút USB đang cắm, giữ nguyên lịch sử vi phạm |
+| `/go-app` | Một người đang chọn | Gỡ app chưa duyệt hoặc đã bị chặn |
+| `/mo-khoa` | Một người đang chọn | Mở lại máy sau khi hết sự kiện chờ xử lý và dấu hiệu đang hoạt động |
+| `/tan-ca` | Một người đang chọn | Kết thúc ca khi máy đã khóa, USB đã rút và không còn sự kiện chưa xử lý |
 
 1. Chọn bất kỳ nhân viên, gửi `/vao-ca` rồi `/lam-viec` để vào ca và mở màn hình làm việc.
 2. Gửi `/usb-la`. Sự kiện được ghi vào đúng máy riêng `OFFICE-EMP-xxx` của nhân viên đó.
@@ -60,7 +68,7 @@ Hành động chỉ cập nhật dữ liệu doanh nghiệp giả lập, không 
 
 ## Phạm vi
 
-- Có 14 nhân viên trên bản đồ; 11 loại lệnh dùng trên máy riêng của cả 14 người. Phạm vi tương tác này gồm ba hành vi vi phạm; không đồng nghĩa toàn bộ 56 điều khoản đều đã có lệnh hành vi riêng.
+- Có 14 nhân viên trên bản đồ; 12 loại lệnh dùng riêng cho bất kỳ người nào trong 14 người. Phạm vi tương tác này gồm ba hành vi vi phạm; không đồng nghĩa toàn bộ 56 điều khoản đều đã có lệnh hành vi riêng.
 - Bình luận trong ứng dụng, chưa kết nối bình luận livestream TikTok.
 - Bản đồ văn phòng minh họa gồm bàn làm việc, khu giám sát, lễ tân, góc nghỉ; nhân viên có tên và lời thoại, Agent có đường tuần tra. Bản đồ 3D được giữ ở chế độ riêng.
 - Lệnh tạo hoạt động bình thường không được dùng như bằng chứng chứng nhận tuân thủ toàn bộ ISO.
@@ -74,7 +82,7 @@ Hành động chỉ cập nhật dữ liệu doanh nghiệp giả lập, không 
 A.7.10/A.8.19 và xác minh thành công; retry không tạo trùng; lệnh sai bị từ chối.
 Đợt bổ sung đã kiểm tra cả 14 người nhận lệnh vào ca, lệnh nghỉ/khóa máy không có cảnh báo liên kết,
 và rời máy không khóa được phát hiện A.7.7, xử lý và xác minh bằng Qwen2.5:7b.
-131 test Python và 8 test JavaScript đạt. Đã chạy luồng trạng thái trên ba nhân viên khác nhau: điều kiện trước lệnh,
+136 test Python và 6 test JavaScript về văn phòng đạt. Đã chạy luồng trạng thái trên ba nhân viên khác nhau: điều kiện trước lệnh,
 rời máy đã khóa không vi phạm, cả ba loại vi phạm được xử lý đúng máy, sau đó dọn dẹp và tan ca.
 Đã kiểm tra ảnh SVG dựng từ chính component và dữ liệu local;
 chưa xác minh toàn bộ thao tác trực tiếp trên trình duyệt.

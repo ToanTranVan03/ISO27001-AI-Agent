@@ -7,6 +7,8 @@ from backend.team_api import require_user
 
 
 @pytest.mark.parametrize("text,actor,expected", [
+    ("đi làm", "EMP-006", "/di-lam"),
+    ("@EMP-025 tham gia", "EMP-025", "/di-lam"),
     ("  Cắm USB lạ  ", "EMP-006", "/usb-la"),
     ("/cai-app-la", "EMP-025", "/cai-app-la"),
     ("CÀI PHẦN MỀM CHƯA DUYỆT", "EMP-025", "/cai-app-la"),

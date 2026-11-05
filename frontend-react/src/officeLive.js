@@ -24,6 +24,21 @@ export function commandRecipient(text, selected) {
   return text.trim().match(/^@?(EMP-\d{3})\s+/i)?.[1].toUpperCase() || selected;
 }
 
+export function employeeStatus(workstation) {
+  if (!workstation) return "Đang đồng bộ";
+  const {state:s,pending_count:pending}=workstation;
+  if(pending>0) return "Chờ Agent kiểm tra";
+  if(s.network_isolated || s.device_status==="locked") return "Máy được Agent bảo vệ";
+  if(s.shift==="off") return "Chưa tham gia ca";
+  if(s.location==="break") return "Đang nghỉ";
+  if(s.screen_state==="locked") return "Tại bàn · máy khóa";
+  return "Đang làm việc";
+}
+
+export function recentSpeech(entry, now) {
+  return !!entry && now-Date.parse(entry.observed_at)>=0 && now-Date.parse(entry.observed_at)<12000;
+}
+
 export function employeePosition(index, entry, state) {
   if (state?.location === "reception") return [348+(index%7)*77,640+Math.floor(index/7)*45];
   if (state?.location === "break" || (!state && (entry?.command === "/nghi" || entry?.command === "/roi-may"))) {

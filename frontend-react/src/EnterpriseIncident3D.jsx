@@ -1,7 +1,8 @@
 import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Activity, AlertTriangle, Bot, CheckCircle2, Cpu, Download, HardDrive, Loader2, Send, Shield, Terminal, Users } from "lucide-react";
 import EmployeeCommandConsole from "./EmployeeCommandConsole";
-import OfficeCompanyControls from "./OfficeCompanyControls";
+import OfficeRoster from "./OfficeRoster";
+import EnterpriseMissionControl from "./EnterpriseMissionControl";
 import OfficeLiveScene from "./OfficeLiveScene";
 const EnterpriseScene3D = lazy(() => import("./EnterpriseScene3D"));
 
@@ -525,9 +526,10 @@ export default function EnterpriseIncident3D({ assessment, request, token }) {
         ].map(item=><div key={item.label} className={`rounded-xl border px-3 py-2 ${item.ok?"border-emerald-300/15 bg-emerald-300/5":"border-amber-300/15 bg-amber-300/5"}`}><div className={`flex items-center gap-2 text-[9px] font-black uppercase tracking-wider ${item.ok?"text-emerald-200":"text-amber-200"}`}><span className={`h-1.5 w-1.5 rounded-full ${item.ok?"bg-emerald-300":"bg-amber-300"}`}/>{item.label} · {item.ok?"SẴN SÀNG":readiness?"CHÚ Ý":"ĐANG KIỂM TRA"}</div><div className="mt-1 truncate text-[9px] text-slate-400">{item.detail}</div></div>)}
       </section>
 
-      <section className="mb-5 grid items-start gap-4 xl:grid-cols-[minmax(0,1fr)_380px]">
+      <EnterpriseMissionControl base={base} request={request}/>
+      <section className="mb-5 grid items-start gap-4 lg:grid-cols-[minmax(0,1fr)_340px]">
         <div className="min-w-0">
-          <OfficeCompanyControls base={base} request={request} workspace={officeWorkspace} onWorkspace={setOfficeWorkspace} onEntries={setCommandEntries}/>
+          <OfficeRoster employees={employees} workspace={officeWorkspace} selectedEmployee={commandEmployee} onSelect={setCommandEmployee}/>
           <div className="mb-3 flex items-center justify-between gap-2"><div className="flex rounded-xl border border-white/10 bg-white/5 p-1">{[{id:"live",label:"Văn phòng tương tác"},{id:"3d",label:"Toàn cảnh 3D"}].map(view=><button key={view.id} onClick={()=>setOfficeView(view.id)} aria-pressed={officeView===view.id} className={`rounded-lg px-4 py-2 text-xs font-bold ${officeView===view.id?"bg-[#e7edda] text-[#31564a]":"text-slate-400 hover:text-white"}`}>{view.label}</button>)}</div><span className="hidden text-[10px] text-slate-500 sm:block">Bình luận → hành động → dấu vết → xác minh</span></div>
           {officeView==="live" ? <OfficeLiveScene employees={employees} entries={commandEntries} selectedEmployee={commandEmployee} onSelect={setCommandEmployee} monitoring={monitoring} workspace={officeWorkspace} onSuggest={text=>setSuggestedCommand({text,at:Date.now()})}/> : <Suspense fallback={<div className="flex h-[500px] items-center justify-center rounded-[30px] border border-white/10 bg-[#172337] text-sm text-slate-300 md:h-[580px]"><Loader2 className="mr-3 animate-spin"/>Nạp mô hình doanh nghiệp 3D…</div>}>
             <EnterpriseScene3D room={room} visited={visited} selected={selected} working={status==="running" || monitoring.state==="processing"} resolved={status==="completed"&&Boolean(result?.verified)} currentTool={currentTool} currentStep={monitoring.state==="processing" ? "Agent đang kiểm tra dấu vết và xử lý" : currentStep} activity={sceneActivity}/>

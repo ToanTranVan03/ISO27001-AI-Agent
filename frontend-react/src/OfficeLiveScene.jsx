@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Radio, ScanLine, Users, ZoomIn, ZoomOut } from "lucide-react";
-import { employeePhase, employeePosition, latestByEmployee } from "./officeLive";
+import { employeePhase, employeePosition, employeeStatus, recentSpeech, latestByEmployee } from "./officeLive";
 import "./office-live.css";
 
 const COLORS = ["#6c9e9b", "#df976c", "#8b83b8", "#628fb7", "#b38b5c", "#bd798d"];
@@ -10,14 +10,14 @@ function Plant({x,y}) {
   return <g transform={`translate(${x} ${y})`}><ellipse cy="16" rx="17" ry="7" fill="#223c39" opacity=".12"/><path d="M-10 0h20l-3 18H-7z" fill="#c69975"/><path d="M0 4V-28M0-8Q-29-36-14-34Q0-32 0-8M0-15Q12-45 23-30Q24-15 0-8M0-2Q-29-17-22-24Q-10-30 0-2" fill="#568e70" stroke="#3c6e54" strokeWidth="2"/></g>;
 }
 
-function Person({employee,index,position,entry,selected,onSelect,workstation}) {
+function Person({employee,index,position,entry,selected,onSelect,workstation,now}) {
   const phase = employeePhase(entry,workstation);
   const color = phase === "resolved" ? "#219b79" : phase === "review" ? "#ce6659" : phase === "pending" ? "#cc8d39" : COLORS[index % COLORS.length];
   const name = employee.display_name || employee.employee_id;
   const shortName = name.includes("mô phỏng") ? `Nhân viên ${employee.employee_id.slice(-3)}` : name.split(" ").slice(-2).join(" ");
   return <g className={`office-person ${selected ? "is-selected" : ""}`} style={{transform:`translate(${position[0]}px,${position[1]}px)`}} role="button" tabIndex={0} aria-label={`Chọn ${name} ${employee.employee_id}`} aria-pressed={selected} onClick={()=>onSelect(employee.employee_id)} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();onSelect(employee.employee_id);}}}>
     <g transform={workstation?.state.location==="reception"?"scale(.65)":undefined}>
-    <title>{`${name} · ${employee.employee_id} · ${PHASES[phase]}`}</title>
+    <title>{`${name} · ${employee.employee_id} · ${employeeStatus(workstation)}`}</title>
     <ellipse cy="23" rx="22" ry="8" fill="#26483f" opacity=".14"/>
     {(selected || phase==="pending" || phase==="review") && <ellipse className={phase==="pending"?"office-signal":""} cy="23" rx="27" ry="11" fill="none" stroke={color} strokeWidth="2" strokeDasharray={selected?undefined:"4 3"}/>}
     <g className={workstation?.state.location==="desk" && workstation?.state.screen_state==="unlocked" ? "office-person-action" : ""}>
@@ -34,8 +34,8 @@ function Person({employee,index,position,entry,selected,onSelect,workstation}) {
     </g>
     <rect x="-51" y="32" width="102" height="21" rx="10" fill={selected?"#21453f":"#f9f5e9"} stroke={selected?"#21453f":"#d9d5c7"}/>
     <text y="46" textAnchor="middle" fontSize="10" fontWeight="700" fill={selected?"#fff9ed":"#38554d"}>{shortName}</text>
-    {selected && <text y="64" textAnchor="middle" fontSize="8" fill="#55736a">{employee.employee_id}</text>}
-    {entry && selected && <g transform="translate(-68 -67)"><rect width="136" height="29" rx="10" fill="#fffdf4" stroke={color}/><path d="M59 29l9 7 8-7" fill="#fffdf4" stroke={color}/><text x="68" y="19" textAnchor="middle" fontSize="10" fill="#3c534b">{entry.command}</text></g>}
+    <circle cx="-43" cy="42" r="3" fill={workstation?.pending_count ? "#cc8d39" : workstation?.state.location==="break" ? "#df976c" : workstation?.state.shift==="on" ? "#219b79" : "#9ba69c"}/>
+    {entry && (selected || recentSpeech(entry,now)) && <g transform="translate(-58 -67)"><rect width="116" height="29" rx="10" fill="#fffdf4" stroke={color}/><path d="M49 29l9 7 8-7" fill="#fffdf4" stroke={color}/><text x="58" y="19" textAnchor="middle" fontSize="10" fill="#3c534b">{entry.command}</text></g>}
     {entry?.incident_id && <g transform="translate(23 -39)"><circle r="10" fill={color}/><text textAnchor="middle" y="4" fill="white" fontSize="12" fontWeight="bold">{entry.verified?"✓":"!"}</text></g>}
     </g>
   </g>;
@@ -44,6 +44,8 @@ function Person({employee,index,position,entry,selected,onSelect,workstation}) {
 export default function OfficeLiveScene({employees,entries,selectedEmployee,onSelect,monitoring,workspace=[],onSuggest=()=>{}}) {
   const [patrol,setPatrol] = useState(0);
   const [zoom,setZoom] = useState(false);
+  const [now,setNow] = useState(Date.now);
+  useEffect(()=>{const timer=setInterval(()=>setNow(Date.now()),1000);return ()=>clearInterval(timer);},[]);
   useEffect(()=>{
     if (!monitoring.active) return;
     const timer=setInterval(()=>setPatrol(value=>(value+1)%4),4000);
@@ -86,7 +88,8 @@ export default function OfficeLiveScene({employees,entries,selectedEmployee,onSe
       <text x="660" y="695" fill="#829381" fontSize="10" letterSpacing="3">VIỆT TÍN LOGISTICS / SIMULATION</text>
       {people.map((employee,index)=>{const [x,y]=employeePosition(index,null); const state=machines[employee.employee_id]?.state;return <g key={employee.employee_id} transform={`translate(${x-41} ${y-60})`}><rect x="0" y="4" width="83" height="37" rx="6" fill="#d0b996"/><rect width="83" height="35" rx="6" fill="#e3d0ad"/><rect x="24" y="-12" width="35" height="25" rx="3" fill="#415960"/><rect x="27" y="-9" width="29" height="19" rx="1" fill={state?.screen_state==="unlocked"&&state?.location!=="desk"?"#e6b76c":state?.screen_state==="locked"?"#758d91":"#a7c5c6"}/><rect x="36" y="13" width="11" height="4" rx="1" fill="#6e8785"/><rect x="19" y="21" width="40" height="6" rx="2" fill="#b0b7ab"/><circle cx="70" cy="18" r="4" fill="#f6f2de"/></g>;})}
       {target&&<path d={`M${agent[0]} ${agent[1]}L${target[0]-23} ${target[1]-25}L${target[0]+23} ${target[1]-25}Z`} fill="url(#office-beam)" className="office-signal"/>}
-      {people.map((employee,index)=><Person key={employee.employee_id} employee={employee} index={index} position={employeePosition(index,latest[employee.employee_id],machines[employee.employee_id]?.state)} entry={latest[employee.employee_id]} workstation={machines[employee.employee_id]} selected={employee.employee_id===selectedEmployee} onSelect={onSelect}/>)}
+      {people.map((employee,index)=>{const [x,y]=employeePosition(index,null);return <text key={employee.employee_id} x={x+26} y={y-28} textAnchor="middle" fontSize="7" fill="#70877c">{employee.employee_id.slice(-3)}</text>;})}
+      {people.map((employee,index)=><Person key={employee.employee_id} employee={employee} index={index} position={employeePosition(index,latest[employee.employee_id],machines[employee.employee_id]?.state)} entry={latest[employee.employee_id]} workstation={machines[employee.employee_id]} selected={employee.employee_id===selectedEmployee} onSelect={onSelect} now={now}/>)}
       <g className="office-robot" style={{transform:`translate(${agent[0]}px,${agent[1]}px)`}}><ellipse cy="19" rx="23" ry="9" fill="#264a40" opacity=".13"/><circle r="30" fill="none" stroke="#50ad91" strokeDasharray="4 5" className={monitoring.active?"office-signal":""}/><rect x="-17" y="-24" width="34" height="34" rx="12" fill="#fff9e7" stroke="#5d9d86" strokeWidth="2"/><rect x="-12" y="-17" width="24" height="15" rx="6" fill="#315952"/><circle cx="-5" cy="-10" r="2.3" fill="#9cebc0"/><circle cx="5" cy="-10" r="2.3" fill="#9cebc0"/><path d="M0-25v-8" stroke="#598b75" strokeWidth="2"/><circle cy="-34" r="4" fill="#e9b360"/><rect x="-9" y="9" width="18" height="9" rx="4" fill="#4f8571"/><text y="42" textAnchor="middle" fontSize="9" fontWeight="bold" fill="#2e6955">AI AUDITOR</text></g>
     </svg></div>
     <div className="office-toolbar" aria-label="Chọn nhiệm vụ theo khu vực"><span>Giao việc cho {selectedEmployee}:</span>{[{text:"/vao-ca",label:"Lễ tân · vào ca"},{text:"/lam-viec",label:"Bàn làm việc"},{text:"/nghi",label:"Góc nghỉ"},{text:"/tan-ca",label:"Tan ca"}].map(task=><button key={task.text} onClick={()=>onSuggest(task.text)} title="Điền lệnh vào bảng bình luận; nhấn Gửi để thực hiện">{task.label}</button>)}</div>

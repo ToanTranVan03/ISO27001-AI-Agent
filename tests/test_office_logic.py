@@ -6,6 +6,19 @@ def working():
     state,_=transition('/vao-ca',DEFAULT_STATE)
     return transition('/lam-viec',state)[0]
 
+
+def test_join_is_one_person_one_transition_and_preserves_containment():
+    after,event=transition('/di-lam',DEFAULT_STATE)
+    assert after['shift']=='on' and after['screen_state']=='unlocked'
+    assert after['revision']==1 and event=='approved_work_session'
+    assert DEFAULT_STATE['shift']=='off'
+    with pytest.raises(ValueError): transition('/di-lam',after)
+    blocked,event=transition('/di-lam',{**DEFAULT_STATE,'network_isolated':True})
+    assert blocked['screen_state']=='locked' and blocked['network_isolated']
+    assert event=='employee_returned_to_locked_device'
+    pending,_=transition('/di-lam',DEFAULT_STATE,pending=1)
+    assert pending['screen_state']=='locked'
+
 @pytest.mark.parametrize('command',['/lam-viec','/usb-la','/cai-app-la','/nghi','/roi-may','/khoa-may','/mo-khoa','/rut-usb','/go-app','/tan-ca'])
 def test_off_shift_cannot_operate(command):
     with pytest.raises(ValueError): transition(command,DEFAULT_STATE)

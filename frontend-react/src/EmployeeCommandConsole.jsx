@@ -64,8 +64,8 @@ export default function EmployeeCommandConsole({ base, request, employees, monit
   return <section className="flex min-h-[540px] flex-col overflow-hidden rounded-[28px] border border-cyan-200/20 bg-[#142334] shadow-xl" aria-label="Bình luận điều khiển nhân viên">
     <div className="border-b border-white/10 bg-gradient-to-br from-cyan-300/10 via-transparent to-violet-400/10 p-5">
       <div className="flex items-center justify-between gap-2 text-[10px] font-bold uppercase tracking-widest text-cyan-200"><span className="flex items-center gap-2"><Radio size={14}/> Phòng diễn tập trực tiếp</span><span className="rounded-full border border-white/10 px-2 py-1 text-slate-400">Giả lập</span></div>
-      <h2 className="mt-3 text-xl font-black text-white">Bạn bình luận.<br/>Nhân viên hành động.</h2>
-      <p className="mt-2 text-xs leading-5 text-slate-400">Vào ca, làm việc, nghỉ giải lao… Agent quan sát dấu vết và xử lý khi phát hiện vi phạm.</p>
+      <h2 className="mt-3 text-xl font-black text-white">Bình luận → nhân vật của bạn</h2>
+      <p className="mt-2 text-xs leading-5 text-slate-400">Gõ “đi làm” để người đang chọn tham gia ca. Mỗi người nhận lệnh riêng, có trạng thái và dấu vết riêng.</p>
       <label htmlFor="command-employee" className="mt-4 block text-[10px] font-bold uppercase tracking-wider text-cyan-200">Nhân viên nhận lệnh</label>
       <select id="command-employee" value={actorId} disabled={busy} onChange={event=>{onSelect(event.target.value);setText("");setError("");}} className="mt-2 w-full rounded-xl border border-white/15 bg-[#142334] p-3 text-xs text-white">{employees.filter(person=>catalog.actors.some(item=>item.employee_id===person.employee_id)).map(person=><option key={person.employee_id} value={person.employee_id}>{person.display_name} · {person.employee_id}</option>)}</select>
       <p className="mt-2 text-[10px] text-slate-400">Hoặc gõ <code>@EMP-025 /cai-app-la</code> để chỉ định người nhận.</p>

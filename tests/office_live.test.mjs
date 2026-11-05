@@ -1,6 +1,17 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {commandPhase, employeePhase, commandRecipient, latestByEmployee, employeePosition} from '../frontend-react/src/officeLive.js';
+import {commandPhase, employeePhase, commandRecipient, latestByEmployee, employeePosition,employeeStatus,recentSpeech} from '../frontend-react/src/officeLive.js';
+
+test('individual status and short-lived speech reflect each employee independently',()=>{
+  const now=Date.parse('2026-11-05T10:00:10Z');
+  assert.equal(recentSpeech({observed_at:'2026-11-05T10:00:00Z'},now),true);
+  assert.equal(recentSpeech({observed_at:'2026-11-05T09:59:00Z'},now),false);
+  assert.equal(recentSpeech({observed_at:'2026-11-05T10:00:20Z'},now),false);
+  assert.equal(employeeStatus({state:{shift:'off'}}),'Chưa tham gia ca');
+  assert.equal(employeeStatus({state:{shift:'on',location:'break'}}),'Đang nghỉ');
+  assert.equal(employeeStatus({state:{shift:'on',location:'desk',screen_state:'unlocked'}}),'Đang làm việc');
+  assert.equal(employeeStatus({state:{shift:'on',network_isolated:true}}),'Máy được Agent bảo vệ');
+});
 
 test('pending command is never presented as detected before evidence is linked', () => {
   assert.equal(commandPhase({event_type:'unattended_screen_unlocked'}), 'pending');

@@ -21,7 +21,9 @@ ACTORS.update({
 ACTORS = {employee_id: {"asset_id": f"OFFICE-{employee_id}", "host_asset_id": f"OFFICE-{employee_id}", "room": "hardware"}
           for employee_id in ACTORS}
 COMMANDS = {
-    "/vao-ca": {"aliases": ["vao ca", "di lam", "cham cong"], "event_type": "employee_shift_started",
+    "/di-lam": {"aliases": ["di lam", "tham gia", "vao van phong"], "event_type": "approved_work_session",
+                 "label": "Đi làm · tham gia bằng một lệnh", "employee_id": None},
+    "/vao-ca": {"aliases": ["vao ca", "cham cong"], "event_type": "employee_shift_started",
                  "label": "Vào ca tại văn phòng", "employee_id": None},
     "/nghi": {"aliases": ["nghi", "nghi giai lao"], "event_type": "approved_break_started",
                "label": "Khóa máy và nghỉ giải lao", "employee_id": None},

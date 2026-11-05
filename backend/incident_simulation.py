@@ -423,6 +423,8 @@ def initialize_incident_simulation() -> None:
 
     from backend.employee_commands import initialize_workstations
     initialize_workstations()
+    from backend.enterprise_missions import initialize_missions
+    initialize_missions()
 
 
 def list_people(assessment_id: str) -> list[dict]:

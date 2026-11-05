@@ -14,7 +14,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 
-from backend import incident_simulation, employee_commands
+from backend import incident_simulation, employee_commands, enterprise_missions
 from backend.incident_catalog import SCENARIO_BY_CONTROL
 from backend.team_api import require_campaign, require_user
 from backend.database import get_connection
@@ -140,6 +140,51 @@ class IncidentChatRequest(BaseModel):
 
 class SimulatedEmployeeActivityRequest(BaseModel):
     activity_type: Literal["unapproved_usb_inserted", "unapproved_software_installed"]
+
+
+class MissionRequest(BaseModel):
+    request_id: UUID
+    goal: str = Field(min_length=8, max_length=600)
+    scope: Literal["all", "people", "hardware", "software"] = "all"
+
+
+class MissionReviewRequest(BaseModel):
+    decision: Literal["approve", "request_changes"]
+    note: str = Field(min_length=3, max_length=1000)
+
+
+@router.get("/missions")
+def missions(assessment_id: UUID, user: dict = Depends(require_user)):
+    require_campaign(assessment_id, user)
+    return enterprise_missions.list_missions(str(assessment_id))
+
+
+@router.post("/missions")
+def create_enterprise_mission(assessment_id: UUID, body: MissionRequest, user: dict = Depends(require_user)):
+    require_campaign(assessment_id, user)
+    goal = " ".join(body.goal.split())
+    if len(goal) < 8:
+        raise HTTPException(422, detail="Mô tả chủ đề kiểm tra cần ít nhất 8 ký tự.")
+    try:
+        doc, created = enterprise_missions.create_mission(str(assessment_id), body.request_id, goal, body.scope, user["user_id"])
+    except ValueError as exc:
+        raise HTTPException(409, detail=str(exc)) from exc
+    if created:
+        simulation_workers.submit(enterprise_missions.run_mission, str(assessment_id), str(body.request_id))
+    return doc
+
+
+@router.post("/missions/{mission_id}/review")
+def review_enterprise_mission(assessment_id: UUID, mission_id: UUID, body: MissionReviewRequest, user: dict = Depends(require_user)):
+    require_campaign(assessment_id, user)
+    if len(body.note.strip()) < 3:
+        raise HTTPException(422, detail="Nhận xét cần ít nhất 3 ký tự.")
+    try:
+        return enterprise_missions.review_mission(str(assessment_id), str(mission_id), body.decision, body.note.strip(), user["user_id"])
+    except LookupError as exc:
+        raise HTTPException(404, detail=str(exc)) from exc
+    except ValueError as exc:
+        raise HTTPException(409, detail=str(exc)) from exc
 
 
 class OfficeCommandRequest(BaseModel):
