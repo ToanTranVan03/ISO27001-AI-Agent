@@ -53,3 +53,20 @@ def evidence(assessment_id: UUID, control_id: str,user: dict=Depends(require_use
     if control_id not in CONTROL_TO_NODE:
         raise HTTPException(404,detail='Control này chưa có lab collector.')
     return enterprise_lab.list_lab_evidence(str(assessment_id),control_id)
+
+
+@router.get('/live-nodes')
+def live_nodes_status(assessment_id: UUID, user: dict = Depends(require_user)):
+    """Trang thai truc tiep tu cac container ha tang doanh nghiep dang chay."""
+    require_campaign(assessment_id, user)
+    from evidence_collectors.enterprise_container_collector import (
+        collect_live_iam_evidence,
+        collect_live_network_evidence,
+        collect_live_secops_evidence,
+    )
+    return {
+        'iam': collect_live_iam_evidence(),
+        'network': collect_live_network_evidence(),
+        'secops': collect_live_secops_evidence(),
+    }
+

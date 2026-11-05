@@ -178,6 +178,9 @@ def build_iso_agent_graph():
 # 4. CHẠY HÀNG LOẠT TRÊN 6 TÌNH HUỐNG DOANH NGHIỆP
 # ==========================================
 if __name__ == "__main__":
+    from pathlib import Path
+    from dotenv import load_dotenv
+    load_dotenv(Path(__file__).resolve().parent.parent / '.env')
     from backend.database import get_control, initialize_database
     from agent_core.enterprise_eval_and_charts import ENTERPRISE_TEST_CASES
 
