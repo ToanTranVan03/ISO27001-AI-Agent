@@ -4,6 +4,7 @@ import EmployeeCommandConsole from "./EmployeeCommandConsole";
 import OfficeRoster from "./OfficeRoster";
 import EnterpriseMissionControl from "./EnterpriseMissionControl";
 import OfficeLiveScene from "./OfficeLiveScene";
+import { employeeTarget, missionLiveFocus, refreshLinkedRecord } from "./missionLink";
 const EnterpriseScene3D = lazy(() => import("./EnterpriseScene3D"));
 
 const DOMAINS = {
@@ -56,6 +57,11 @@ export default function EnterpriseIncident3D({ assessment, request, token }) {
   const [commandEmployee, setCommandEmployee] = useState("EMP-006");
   const [officeWorkspace, setOfficeWorkspace] = useState([]);
   const [suggestedCommand, setSuggestedCommand] = useState(null);
+  const [missionDraft,setMissionDraft]=useState(null);
+  const [missionLink,setMissionLink]=useState({selected:null,active:null});
+  const [linkedRecord,setLinkedRecord]=useState(null);
+  const missionPanel=useRef(null);
+  const officePanel=useRef(null);
   const [scenarios, setScenarios] = useState([]);
   const [employees, setEmployees] = useState([]);
   const [history, setHistory] = useState([]);
@@ -89,6 +95,21 @@ export default function EnterpriseIncident3D({ assessment, request, token }) {
   const scenarioRef = useRef(scenarios);
   useEffect(() => { scenarioRef.current = scenarios; }, [scenarios]);
   const base = `/api/assessments/${encodeURIComponent(assessment.assessment_id)}/enterprise`;
+  const officeTarget=employeeTarget(employees.find(item=>item.employee_id===commandEmployee),officeWorkspace.find(item=>item.employee_id===commandEmployee));
+  const liveFocus=missionLiveFocus(missionLink.active,monitoring);
+  const officeLinkedRecord=refreshLinkedRecord(linkedRecord,commandEntries,[missionLink.active,missionLink.selected]);
+  function selectOfficeEmployee(employeeId){setCommandEmployee(employeeId);setLinkedRecord(null);}
+  function requestEmployeeAudit(eventId){
+    const target=employeeTarget(employees.find(item=>item.employee_id===commandEmployee),officeWorkspace.find(item=>item.employee_id===commandEmployee),eventId);
+    if(!target)return;
+    setMissionDraft({target,at:Date.now()});
+    missionPanel.current?.scrollIntoView({behavior:"smooth",block:"start"});
+  }
+  function focusOfficeRecord(record){
+    if(record.employee_id)setCommandEmployee(record.employee_id);
+    setLinkedRecord(record);setOfficeView("live");
+    officePanel.current?.scrollIntoView({behavior:"smooth",block:"start"});
+  }
 
   const refresh = useCallback(async () => {
     const [catalog, staff, incidents, evaluation, system] = await Promise.all([
@@ -526,17 +547,17 @@ export default function EnterpriseIncident3D({ assessment, request, token }) {
         ].map(item=><div key={item.label} className={`rounded-xl border px-3 py-2 ${item.ok?"border-emerald-300/15 bg-emerald-300/5":"border-amber-300/15 bg-amber-300/5"}`}><div className={`flex items-center gap-2 text-[9px] font-black uppercase tracking-wider ${item.ok?"text-emerald-200":"text-amber-200"}`}><span className={`h-1.5 w-1.5 rounded-full ${item.ok?"bg-emerald-300":"bg-amber-300"}`}/>{item.label} · {item.ok?"SẴN SÀNG":readiness?"CHÚ Ý":"ĐANG KIỂM TRA"}</div><div className="mt-1 truncate text-[9px] text-slate-400">{item.detail}</div></div>)}
       </section>
 
-      <EnterpriseMissionControl base={base} request={request}/>
-      <section className="mb-5 grid items-start gap-4 lg:grid-cols-[minmax(0,1fr)_340px]">
+      <div ref={missionPanel} style={{scrollMarginTop:90}}><EnterpriseMissionControl base={base} request={request} officeTarget={officeTarget} draftRequest={missionDraft} onMissionChange={setMissionLink} onFocusEmployee={focusOfficeRecord} officeLiveFocus={liveFocus} onInspect={async receipt=>{await inspectCommand(receipt);chatEnd.current?.scrollIntoView({behavior:"smooth",block:"center"});}}/></div>
+      <section ref={officePanel} style={{scrollMarginTop:90}} className="mb-5 grid items-start gap-4 lg:grid-cols-[minmax(0,1fr)_340px]">
         <div className="min-w-0">
-          <OfficeRoster employees={employees} workspace={officeWorkspace} selectedEmployee={commandEmployee} onSelect={setCommandEmployee}/>
+          <OfficeRoster employees={employees} workspace={officeWorkspace} selectedEmployee={commandEmployee} onSelect={selectOfficeEmployee}/>
           <div className="mb-3 flex items-center justify-between gap-2"><div className="flex rounded-xl border border-white/10 bg-white/5 p-1">{[{id:"live",label:"Văn phòng tương tác"},{id:"3d",label:"Toàn cảnh 3D"}].map(view=><button key={view.id} onClick={()=>setOfficeView(view.id)} aria-pressed={officeView===view.id} className={`rounded-lg px-4 py-2 text-xs font-bold ${officeView===view.id?"bg-[#e7edda] text-[#31564a]":"text-slate-400 hover:text-white"}`}>{view.label}</button>)}</div><span className="hidden text-[10px] text-slate-500 sm:block">Bình luận → hành động → dấu vết → xác minh</span></div>
-          {officeView==="live" ? <OfficeLiveScene employees={employees} entries={commandEntries} selectedEmployee={commandEmployee} onSelect={setCommandEmployee} monitoring={monitoring} workspace={officeWorkspace} onSuggest={text=>setSuggestedCommand({text,at:Date.now()})}/> : <Suspense fallback={<div className="flex h-[500px] items-center justify-center rounded-[30px] border border-white/10 bg-[#172337] text-sm text-slate-300 md:h-[580px]"><Loader2 className="mr-3 animate-spin"/>Nạp mô hình doanh nghiệp 3D…</div>}>
+          {officeView==="live" ? <OfficeLiveScene employees={employees} entries={commandEntries} selectedEmployee={commandEmployee} onSelect={selectOfficeEmployee} monitoring={monitoring} workspace={officeWorkspace} liveFocus={liveFocus} linkedRecord={officeLinkedRecord} onRequestAudit={requestEmployeeAudit} onOpenIncident={async record=>{await inspectCommand(record);chatEnd.current?.scrollIntoView({behavior:"smooth",block:"center"});}} onSuggest={text=>setSuggestedCommand({text,at:Date.now()})}/> : <Suspense fallback={<div className="flex h-[500px] items-center justify-center rounded-[30px] border border-white/10 bg-[#172337] text-sm text-slate-300 md:h-[580px]"><Loader2 className="mr-3 animate-spin"/>Nạp mô hình doanh nghiệp 3D…</div>}>
             <EnterpriseScene3D room={room} visited={visited} selected={selected} working={status==="running" || monitoring.state==="processing"} resolved={status==="completed"&&Boolean(result?.verified)} currentTool={currentTool} currentStep={monitoring.state==="processing" ? "Agent đang kiểm tra dấu vết và xử lý" : currentStep} activity={sceneActivity}/>
           </Suspense>}
           <div className="mt-3 flex flex-wrap gap-3 px-2 text-[10px] text-slate-400"><span>01 · Bình luận ra lệnh</span><span>02 · Nhân viên hành động</span><span>03 · Agent quét dấu vết</span><span>04 · Xử lý và xác minh</span></div>
         </div>
-        <EmployeeCommandConsole base={base} request={request} employees={employees} monitoring={monitoring} onActivity={showEmployeeCommand} onInspect={inspectCommand} disabled={status === "running" || chatLoading || drillLoading} selectedEmployee={commandEmployee} onSelect={setCommandEmployee} onEntries={setCommandEntries} onWorkspace={setOfficeWorkspace} suggestedCommand={suggestedCommand}/>
+        <EmployeeCommandConsole base={base} request={request} employees={employees} monitoring={monitoring} onActivity={showEmployeeCommand} onInspect={inspectCommand} disabled={status === "running" || chatLoading || drillLoading} selectedEmployee={commandEmployee} onSelect={selectOfficeEmployee} onEntries={setCommandEntries} onWorkspace={setOfficeWorkspace} suggestedCommand={suggestedCommand}/>
       </section>
 
       <section className="mb-4 overflow-hidden rounded-3xl border border-white/10 bg-[#172337] shadow-xl">

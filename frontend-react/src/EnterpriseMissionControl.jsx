@@ -1,86 +1,134 @@
 import { useEffect, useRef, useState } from "react";
-import { Building2, CheckCircle2, FileDown, Loader2, Send } from "lucide-react";
-import DepartmentHeadquarters from "./DepartmentHeadquarters";
+import { ArrowRight, Bot, Building2, FileDown, Loader2, Send, User } from "lucide-react";
+import AgentOfficeScene from "./AgentOfficeScene";
+import MissionRoleInspector from "./MissionRoleInspector";
+import { ROLES, STATUS_LABELS, activeRole, messagesOf, subtasksOf } from "./missionView";
+import "./mission-workspace.css";
+import { missionLiveFocus } from "./missionLink";
 
-const DEPARTMENTS=[
-  {id:"coordination",name:"Điều phối",role:"Nhận chủ đề · chia bước",icon:"01",color:"#78d7e9"},
-  {id:"inventory",name:"Tài sản & nhân sự",role:"Thu thập danh mục · bàn giao",icon:"02",color:"#ffca91"},
-  {id:"security",name:"SOC · ứng phó",role:"Quét dấu hiệu · gọi công cụ",icon:"03",color:"#c4b5ff"},
-  {id:"report",name:"Kiểm soát nội bộ",role:"Lập hồ sơ · chờ người duyệt",icon:"04",color:"#6ee7b7"},
-];
-const LABELS={waiting:"Chờ bàn giao",running:"Đang thực hiện",completed:"Đã bàn giao",blocked:"Bị chặn",failed:"Gặp lỗi",queued:"Đã nhận nhiệm vụ",awaiting_review:"Chờ người phụ trách duyệt",approved:"Đã duyệt hồ sơ",revision_requested:"Yêu cầu bổ sung",interrupted:"Bị gián đoạn"};
 const SCOPES={all:"Toàn bộ dữ liệu lab",people:"Con người",hardware:"Phần cứng",software:"Phần mềm"};
 
-function outputSummary(task) {
-  if(!task?.output) return null;
-  const data=task.output;
-  if(task.id==="coordination") return `Phạm vi: ${SCOPES[data.scope]}`;
-  if(task.id==="inventory") return `${data.people.length} hồ sơ nhân sự · ${data.assets.length} tài sản`;
-  if(task.id==="security") return `${data.scan.findings.length} dấu hiệu · ${data.reports.length} kết quả xử lý`;
-  return data.summary;
+export function MissionConversation({mission,onOpen}) {
+  const messages=messagesOf(mission);const feed=useRef(null);
+  useEffect(()=>{if(feed.current)feed.current.scrollTop=feed.current.scrollHeight;},[mission?.mission_id,messages.length]);
+  return <section className="mw-feed" aria-label="Phản hồi công việc của các Agent">
+    <div className="mw-feed-head"><h3>Trao đổi và bàn giao</h3><span>Phản hồi được ghi từ sự kiện thực thi</span></div>
+    {!mission?<p className="mw-empty">Khi nhận việc, từng vai trò sẽ phản hồi tại đây. Chưa có nhiệm vụ thì không tạo lời hoàn thành.</p>:<div className="mw-feed-list" ref={feed} role="log" aria-live="polite" aria-relevant="additions">
+      <article className="mw-message is-user"><div className="mw-message-avatar"><User size={15}/></div><div><b>Bạn → {ROLES.find(role=>role.id===mission.requested_role)?.agent||"Agent điều phối"}</b><time>{new Date(mission.created_at).toLocaleTimeString("vi-VN")}</time><p>{mission.goal}</p></div></article>
+      {messages.map(message=>{const role=ROLES.find(item=>item.id===message.role)||ROLES[0];return <article key={message.id} className="mw-message" style={{"--role-color":role.color}}><div className="mw-message-avatar"><Bot size={16}/></div><div><b>{role.agent}</b><time>{new Date(message.at).toLocaleTimeString("vi-VN")}</time><p>{message.text}</p><small>{message.source==="legacy_trace"?"Sự kiện từ hồ sơ cũ":"Ghi nhận từ hệ thống thực thi"}</small>{message.artifact_id&&<button onClick={()=>onOpen(message.role,message.tool)}>Mở kết quả bàn giao <ArrowRight size={12}/></button>}</div></article>;})}
+      {!messages.length&&<p className="mw-empty">Hồ sơ này chưa lưu phản hồi theo vai trò. Xem đầu ra hoặc nhật ký kỹ thuật.</p>}
+    </div>}
+  </section>;
 }
 
-export default function EnterpriseMissionControl({base,request}) {
+export function MissionWorkView({mission,focused="coordination",selectedTool,onFocus,onTool,onInspect,onFocusEmployee}) {
+  return <><div className="mw-live-layout"><AgentOfficeScene mission={mission} focused={focused} onFocus={onFocus}/><MissionRoleInspector mission={mission} roleId={focused} selectedTool={selectedTool} onTool={onTool} onInspect={onInspect} onFocusEmployee={onFocusEmployee}/></div><MissionConversation mission={mission} onOpen={(role,tool)=>{onFocus(role);onTool(tool);}}/></>;
+}
+
+export default function EnterpriseMissionControl({base,request,onInspect,officeTarget,draftRequest,onMissionChange,onFocusEmployee,officeLiveFocus}) {
   const [goal,setGoal]=useState("Kiểm tra các dấu hiệu vi phạm và lập hồ sơ bàn giao ISO");
   const [scope,setScope]=useState("all");
+  const [requestedRole,setRequestedRole]=useState("coordination");
+  const [mode,setMode]=useState("agent");
+  const [allowFallback,setAllowFallback]=useState(false);
+  const [modelStatus,setModelStatus]=useState(null);
   const [missions,setMissions]=useState([]);
   const [selected,setSelected]=useState("");
   const [busy,setBusy]=useState(false);
   const [error,setError]=useState("");
   const [syncError,setSyncError]=useState("");
   const [note,setNote]=useState("");
-  const [focused,setFocused]=useState(null);
-  const pending=useRef(null);
-  const sending=useRef(false);
+  const [focused,setFocused]=useState("coordination");
+  const [selectedTool,setSelectedTool]=useState(null);
+  const [follow,setFollow]=useState(true);
+  const [useEmployee,setUseEmployee]=useState(true);
+  const [eventSelection,setEventSelection]=useState(null);
+  const pending=useRef(null),sending=useRef(false),mutation=useRef(0);
   const current=missions.find(item=>item.mission_id===selected)||missions[0];
   const active=missions.some(item=>["queued","running"].includes(item.status));
+  const activeMission=missions.find(item=>["queued","running"].includes(item.status))||null;
+  const live=officeLiveFocus||missionLiveFocus(activeMission,null);
+  const target=useEmployee&&officeTarget?{employee_id:officeTarget.employee_id,asset_id:officeTarget.asset_id,...(eventSelection?.employee_id===officeTarget.employee_id&&eventSelection.event_id?{event_id:eventSelection.event_id}:{})}:null;
+  const receiver=ROLES.find(role=>role.id===requestedRole);
   const blockers=current?.tasks.find(task=>task.id==="report")?.output?.blockers||[];
+  const visibleRole=follow?(activeRole(current)||(["awaiting_review","approved","revision_requested"].includes(current?.status)?"report":current?.requested_role||focused)):focused;
+  const jobs=subtasksOf(current);const done=jobs.filter(task=>task.status==="completed").length;
+  function focus(role){setFocused(role);setSelectedTool(null);setFollow(false);}
+  useEffect(()=>{onMissionChange?.({selected:current||null,active:activeMission});},[current,activeMission,onMissionChange]);
+  useEffect(()=>{
+    if(!draftRequest)return;
+    setUseEmployee(true);setRequestedRole("security");setScope("all");setEventSelection(draftRequest.target);
+    setGoal("Kiểm tra trạng thái máy, dấu hiệu vi phạm và hồ sơ liên quan của nhân viên đang chọn");
+    setFocused("security");setFollow(false);
+  },[draftRequest]);
+
+  useEffect(()=>{
+    let cancelled=false,timer;
+    async function check(){
+      try {const data=await request(`${base}/system-readiness`);if(!cancelled)setModelStatus(data.ollama);}
+      catch {if(!cancelled)setModelStatus({status:"unknown"});}
+      finally {if(!cancelled)timer=setTimeout(check,15000);}
+    }
+    check();return ()=>{cancelled=true;clearTimeout(timer);};
+  },[base,request]);
   useEffect(()=>{
     let cancelled=false,timer;
     async function poll(){
-      try {const data=await request(`${base}/missions`);if(!cancelled){setMissions(data);setSyncError("");}}
+      const version=mutation.current;
+      try {const data=await request(`${base}/missions`);if(!cancelled&&version===mutation.current){setMissions(data);setSyncError("");}}
       catch(err){if(!cancelled)setSyncError(err.message);}
       finally {if(!cancelled)timer=setTimeout(poll,2500);}
     }
     poll();return ()=>{cancelled=true;clearTimeout(timer);};
   },[base,request]);
-  async function create(event){
+
+  async function create(event,previous){
     event.preventDefault();if(sending.current||active)return;
-    sending.current=true;setBusy(true);setError("");
-    const key=JSON.stringify({goal:goal.trim(),scope});
+    sending.current=true;mutation.current++;setBusy(true);setError("");
+    const payload=previous?{goal:previous.goal,scope:previous.scope,mode:previous.mode||"workflow",allow_fallback:previous.allow_fallback||false,requested_role:previous.requested_role||"coordination",target:previous.target?{employee_id:previous.target.employee_id,asset_id:previous.target.asset_id,event_id:previous.target.event_id}:null}:{goal:goal.trim(),scope,mode,allow_fallback:allowFallback,requested_role:requestedRole,target};
+    const key=JSON.stringify(payload);
     if(pending.current?.key!==key)pending.current={key,request_id:crypto.randomUUID()};
     try{
-      const doc=await request(`${base}/missions`,{method:"POST",body:JSON.stringify({goal:goal.trim(),scope,request_id:pending.current.request_id})});
-      setMissions(items=>[doc,...items.filter(item=>item.mission_id!==doc.mission_id)]);setSelected(doc.mission_id);setNote("");pending.current=null;
+      const doc=await request(`${base}/missions`,{method:"POST",body:JSON.stringify({...payload,request_id:pending.current.request_id})});
+      setMissions(items=>[doc,...items.filter(item=>item.mission_id!==doc.mission_id)]);setSelected(doc.mission_id);setNote("");setSelectedTool(null);setFollow(true);pending.current=null;
     }catch(err){setError(err.message);}
-    finally{sending.current=false;setBusy(false);}
+    finally{sending.current=false;setBusy(false);mutation.current++;}
   }
   async function review(decision){
     if(sending.current||!current)return;
-    sending.current=true;setBusy(true);setError("");
+    sending.current=true;mutation.current++;setBusy(true);setError("");
     try{
-      const doc=await request(`${base}/missions/${current.mission_id}/review`,{method:"POST",body:JSON.stringify({decision,note:note.trim()})});
+      const doc=await request(`${base}/missions/${current.mission_id}/review`,{method:"POST",body:JSON.stringify({decision,note:note.trim(),artifact_hash:current.artifact_hash})});
       setMissions(items=>items.map(item=>item.mission_id===doc.mission_id?doc:item));
     }catch(err){setError(err.message);}
-    finally{sending.current=false;setBusy(false);}
+    finally{sending.current=false;setBusy(false);mutation.current++;}
   }
   function download(){
     const url=URL.createObjectURL(new Blob([JSON.stringify(current,null,2)],{type:"application/json"}));
     const link=document.createElement("a");link.href=url;link.download=`mission-${current.mission_id}.json`;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
   }
-  return <section className="mb-5 overflow-hidden rounded-[28px] border border-cyan-200/20 bg-[#142334]" aria-label="Trụ sở điều phối doanh nghiệp">
-    <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 bg-gradient-to-r from-cyan-300/10 to-emerald-300/5 p-5"><div><div className="flex items-center gap-2 text-[10px] font-black tracking-widest text-cyan-200"><Building2 size={16}/> VIỆT TÍN · TRỤ SỞ ĐIỀU PHỐI</div><h2 className="mt-2 text-xl font-black">Một nhiệm vụ. Mỗi phòng một phần việc.</h2><p className="mt-2 max-w-3xl text-xs leading-5 text-slate-400">Giao chủ đề kiểm tra ISO. Các phòng bàn giao dữ liệu, SOC dùng Agent hiện có để xử lý dấu hiệu, hồ sơ cuối cùng chờ bạn duyệt.</p></div><span className="rounded-full border border-white/15 px-3 py-2 text-[10px] text-emerald-200">DỮ LIỆU DOANH NGHIỆP GIẢ LẬP</span></div>
-    <form onSubmit={create} className="flex flex-wrap items-end gap-3 border-b border-white/10 p-5"><label className="min-w-56 flex-1 text-xs text-slate-300">Chủ đề kiểm tra<input value={goal} onChange={e=>setGoal(e.target.value)} minLength={8} maxLength={600} disabled={busy} className="mt-2 block w-full rounded-xl border border-white/15 bg-[#0d1b2a] p-3 text-sm text-white"/></label><label className="text-xs text-slate-300">Phạm vi<select value={scope} onChange={e=>setScope(e.target.value)} disabled={busy} className="mt-2 block rounded-xl border border-white/15 bg-[#0d1b2a] p-3 text-sm text-white">{Object.entries(SCOPES).map(([id,label])=><option key={id} value={id}>{label}</option>)}</select></label><button disabled={busy||active||goal.trim().length<8||!!syncError} className="flex items-center gap-2 rounded-xl bg-cyan-200 px-4 py-3 text-xs font-black text-slate-950 disabled:opacity-40">{busy?<Loader2 size={16} className="animate-spin"/>:<Send size={16}/>}Giao nhiệm vụ kiểm tra</button></form>
-    <DepartmentHeadquarters tasks={current?.tasks} focused={focused} onFocus={setFocused}/>
-    <div className="p-5"><div className="mb-4 flex flex-wrap items-center justify-between gap-3"><p role="status" className="text-xs text-cyan-100">{current?`${LABELS[current.status]} · ${current.tasks.filter(task=>task.status==="completed").length}/4 phần việc`:"Các phòng sẵn sàng nhận nhiệm vụ"}</p>{missions.length>0&&<label className="text-[10px] text-slate-400">Lịch sử nhiệm vụ<select aria-label="Chọn nhiệm vụ" value={current?.mission_id||""} onChange={e=>{setSelected(e.target.value);setNote("");setError("");}} className="ml-2 max-w-64 rounded-lg bg-[#0d1b2a] p-2 text-xs text-slate-200">{missions.map(item=><option key={item.mission_id} value={item.mission_id}>{item.goal.slice(0,45)} · {LABELS[item.status]}</option>)}</select></label>}</div>
-      {current&&<p className="mb-4 text-sm font-bold text-white">{current.goal} <span className="ml-2 text-[10px] font-normal text-slate-400">{SCOPES[current.scope]}</span></p>}
-      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">{DEPARTMENTS.map(dept=>{const task=current?.tasks.find(item=>item.id===dept.id);return <article key={dept.id} className="rounded-2xl border bg-[#0e1c2b] p-4" style={{borderColor:`${dept.color}40`}}><div className="flex items-center justify-between"><span className="flex h-10 w-10 items-center justify-center rounded-xl border text-sm font-black" style={{color:dept.color,borderColor:`${dept.color}50`}}>{dept.icon}</span>{task?.status==="running"?<Loader2 size={18} className="animate-spin text-cyan-200"/>:task?.status==="completed"?<CheckCircle2 size={18} className="text-emerald-300"/>:null}</div><h3 className="mt-3 text-sm font-black" style={{color:dept.color}}>{dept.name}</h3><p className="mt-1 text-[10px] leading-5 text-slate-400">{dept.role}</p><p className="mt-3 text-xs font-bold text-slate-200">{task?LABELS[task.status]:"Chưa có nhiệm vụ"}</p>{outputSummary(task)&&<p className="mt-2 text-[11px] leading-5 text-slate-300">{outputSummary(task)}</p>}{task?.output&&<details open={focused===dept.id} className="mt-3 text-[10px] text-slate-400"><summary className="cursor-pointer">Xem đầu ra bàn giao</summary><pre className="mt-2 max-h-48 overflow-auto whitespace-pre-wrap break-all rounded-lg bg-black/25 p-2">{JSON.stringify(task.output,null,2)}</pre></details>}</article>;})}</div>
-      {current?.handoffs.length>0&&<ol className="mt-4 flex flex-wrap gap-2 text-[10px] text-slate-400">{current.handoffs.map((item,index)=><li key={index} className="rounded-lg bg-white/5 px-3 py-2">{item.from} → {item.to}</li>)}</ol>}
-      {blockers.length>0&&<div className="mt-4 rounded-xl border border-amber-200/20 bg-amber-200/5 p-3 text-xs text-amber-100"><b>Hồ sơ cần bổ sung</b><ul className="mt-2 list-inside list-disc space-y-1">{blockers.map(item=><li key={item}>{item}</li>)}</ul></div>}
-      {current?.status==="awaiting_review"&&<div className="mt-4 rounded-xl border border-white/10 p-4"><label className="block text-xs text-slate-300">Nhận xét người duyệt<textarea value={note} onChange={e=>setNote(e.target.value)} maxLength={1000} rows={2} className="mt-2 block w-full rounded-lg bg-[#0d1b2a] p-3 text-xs text-white" placeholder="Nhận xét hồ sơ, hoặc yêu cầu bổ sung dữ liệu…"/></label><div className="mt-3 flex flex-wrap gap-2"><button onClick={()=>review("approve")} disabled={busy||note.trim().length<3||blockers.length>0} className="rounded-lg bg-emerald-200 px-3 py-2 text-xs font-bold text-emerald-950 disabled:opacity-35">Duyệt hồ sơ kiểm tra</button><button onClick={()=>review("request_changes")} disabled={busy||note.trim().length<3} className="rounded-lg border border-amber-200/30 px-3 py-2 text-xs text-amber-100 disabled:opacity-35">Yêu cầu bổ sung</button></div></div>}
-      {current?.review&&<p className="mt-4 text-xs leading-5 text-emerald-100">Nhận xét đã lưu: {current.review.note}</p>}
-      <div className="mt-4 flex flex-wrap items-center justify-between gap-3"><p className="max-w-3xl text-[10px] leading-5 text-slate-500">Các bước được điều phối theo quy trình có giới hạn. Chỉ bước xử lý sự cố gọi cơ chế AI/công cụ hiện có. Duyệt hồ sơ là xác nhận lượt kiểm tra dữ liệu lab, không phải chứng nhận tuân thủ toàn bộ ISO.</p>{current&&<button onClick={download} className="flex items-center gap-2 rounded-lg border border-white/10 px-3 py-2 text-[10px] text-cyan-200"><FileDown size={14}/>Tải hồ sơ JSON</button>}</div>
-      {(error||syncError||current?.error)&&<p role="alert" className="mt-3 text-xs text-rose-200">{error||syncError||current.error}</p>}
+  return <section className="mw-workspace" aria-label="Văn phòng làm việc của các Agent">
+    <header className="mw-head"><div><div className="mw-eyebrow"><Building2 size={15}/> VIỆT TÍN · AGENT WORKSPACE</div><h2>Giao một mục tiêu. Theo dõi từng vai trò làm việc.</h2><p>Chọn Agent nhận yêu cầu, theo dõi công việc con và mở kết quả của từng phòng ngay trong văn phòng.</p></div><span className="mw-head-tag">DOANH NGHIỆP GIẢ LẬP</span></header>
+    <form onSubmit={create} className="mw-assign">
+      <p className="mw-field" style={{marginBottom:8}}>Giao yêu cầu cho</p><div className="mw-role-choices">{ROLES.map(role=><button key={role.id} type="button" className={`mw-role-choice ${requestedRole===role.id?"is-selected":""}`} style={{"--role-color":role.color}} aria-pressed={requestedRole===role.id} disabled={busy} onClick={()=>{setRequestedRole(role.id);focus(role.id);}}><Bot size={21}/><span><b>{role.agent}</b><small>{role.job}</small></span></button>)}</div>
+      <div className="mw-form-grid"><label className="mw-field">Yêu cầu gửi tới {receiver.agent}<input value={goal} onChange={e=>setGoal(e.target.value)} minLength={8} maxLength={600} disabled={busy} required/></label><label className="mw-field">Phạm vi<select value={scope} onChange={e=>setScope(e.target.value)} disabled={busy}>{Object.entries(SCOPES).map(([id,label])=><option key={id} value={id}>{label}</option>)}</select></label><button disabled={busy||active||goal.trim().length<8||!!syncError} className="mw-primary">{busy?<Loader2 size={15} className="mw-spin"/>:<Send size={15}/>}Giao nhiệm vụ</button></div>
+      <div className="mw-presets"><span>Gợi ý cho vai trò này:</span><button type="button" disabled={busy} onClick={()=>{setGoal(receiver.preset);setScope(receiver.scope);}}>Điền yêu cầu mẫu</button></div>
+      <div className="mw-target"><label><input type="checkbox" checked={useEmployee&&!!officeTarget} disabled={!officeTarget||busy} onChange={event=>{setUseEmployee(event.target.checked);setEventSelection(null);}}/>Kiểm tra nhân viên đang chọn ở văn phòng</label>{target?<div><b>{officeTarget.employee_name||target.employee_id}</b><code>{target.employee_id} · {target.asset_id}</code>{target.event_id&&<small>Sự kiện: {target.event_id}</small>}</div>:<p>Phạm vi toàn doanh nghiệp theo loại dữ liệu đã chọn. Chọn nhân viên bên dưới để kiểm tra riêng.</p>}</div>
+      <div className="mw-options"><label>Điều phối<select value={mode} onChange={e=>setMode(e.target.value)} disabled={busy}><option value="agent">AI lập kế hoạch</option><option value="workflow">Quy trình cố định</option></select></label>{mode==="agent"&&<label><input type="checkbox" checked={allowFallback} onChange={e=>setAllowFallback(e.target.checked)} disabled={busy}/>Cho phép quy trình dự phòng nếu lập kế hoạch lỗi</label>}<span className="mw-ready">{!modelStatus?"Đang kiểm tra mô hình…":modelStatus.status==="ready"?`Ollama sẵn sàng · ${modelStatus.configured_model}`:"Mô hình chưa sẵn sàng"}</span></div>
+      <p className="mw-caption">Vai trò được chọn tiếp nhận yêu cầu; Điều phối vẫn chia đủ các bước kiểm tra và bàn giao cho các phòng liên quan.</p>
+    </form>
+    <div className="mw-topbar"><div><strong>{current?`${STATUS_LABELS[current.status]} · ${done}/${jobs.length} công việc có kết quả`:"Chưa có nhiệm vụ"}</strong><small>{current?current.goal:"Bắt đầu bằng một yêu cầu ở phía trên."}</small></div><div className="mw-options" style={{marginTop:0}}><label><input type="checkbox" checked={follow} onChange={event=>setFollow(event.target.checked)}/>Theo dõi Agent đang làm</label>{missions.length>0&&<select aria-label="Lịch sử nhiệm vụ" value={current?.mission_id||""} onChange={event=>{setSelected(event.target.value);setNote("");setSelectedTool(null);setFollow(true);setError("");}}>{missions.map(item=><option key={item.mission_id} value={item.mission_id}>{item.goal.slice(0,40)} · {STATUS_LABELS[item.status]}</option>)}</select>}</div></div>
+    {current?.target&&<div className="mw-link-banner"><span>Nhiệm vụ đang xem: <b>{current.target.employee_id}</b> · {current.target.asset_id}{current.target.event_id?` · ${current.target.event_id}`:""}</span><button onClick={()=>onFocusEmployee?.(current.target)}>Về nhân viên này <ArrowRight size={13}/></button></div>}
+    {live&&<div className="mw-link-banner is-live" role="status"><span>{live.text}</span><button onClick={()=>onFocusEmployee?.(live)}>Theo dõi tại văn phòng <ArrowRight size={13}/></button></div>}
+    <MissionWorkView mission={current} focused={visibleRole} selectedTool={selectedTool} onFocus={focus} onTool={setSelectedTool} onInspect={onInspect} onFocusEmployee={onFocusEmployee}/>
+    <div className="mw-bottom">
+      {blockers.length>0&&<div className="mw-error"><b>Hồ sơ còn hạng mục cần xử lý</b><ul className="mw-blockers">{blockers.map(item=><li key={item}>{item}</li>)}</ul></div>}
+      {current?.status==="awaiting_review"&&<div className="mw-review"><h3>Hồ sơ đã bàn giao — cần bạn quyết định</h3><p>Xem kết quả của Agent kiểm soát trước khi nhận xét. Việc duyệt gắn với đúng phiên bản đầu ra.</p><textarea value={note} onChange={e=>setNote(e.target.value)} maxLength={1000} rows={2} aria-label="Nhận xét hồ sơ" placeholder="Nhận xét hoặc yêu cầu bổ sung…"/><div className="mw-review-actions"><button onClick={()=>review("approve")} disabled={busy||note.trim().length<3||blockers.length>0} className="mw-primary">Duyệt hồ sơ</button><button onClick={()=>review("request_changes")} disabled={busy||note.trim().length<3} className="mw-secondary">Yêu cầu bổ sung</button></div></div>}
+      {current?.review&&<p className="mw-output-text">Nhận xét đã lưu: {current.review.note}</p>}
+      {(error||syncError||current?.error)&&<p role="alert" className="mw-error">{error||syncError||current.error}</p>}
+      {current&&["blocked","failed","interrupted","revision_requested"].includes(current.status)&&<div><button onClick={event=>create(event,current)} disabled={busy||active} className="mw-primary">Chạy lại mục tiêu từ dữ liệu mới</button></div>}
+      {current?.trace?.length>0&&<details className="mw-trace"><summary>Nhật ký kỹ thuật · {current.trace.length} sự kiện</summary><ol>{current.trace.map((item,index)=><li key={index}><time>{new Date(item.at).toLocaleTimeString("vi-VN")}</time> <code>{item.tool} · {item.kind}</code>{item.text}{item.elapsed_ms!=null&&` · ${item.elapsed_ms} ms`}</li>)}</ol></details>}
+      <div className="mw-footer"><p>Các nhân vật thể hiện vai trò dùng chung hệ thống điều phối, không phải bốn mô hình độc lập. Hoạt động và phản hồi lấy từ backend. Kết quả thuộc lab, chưa phải chứng nhận ISO.</p>{current&&<button onClick={download} className="mw-secondary"><FileDown size={14}/>Tải toàn bộ hồ sơ</button>}</div>
     </div>
   </section>;
 }

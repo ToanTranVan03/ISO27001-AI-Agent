@@ -15,6 +15,7 @@ export default function DepartmentHeadquarters({tasks=[],focused,onFocus}) {
     {ROOMS.map((room,index)=>{
       const task=tasks.find(item=>item.id===room.id);
       const running=task?.status==="running",complete=task?.status==="completed";
+      const stopped=["failed","blocked"].includes(task?.status);
       const status=running?"ĐANG THỰC HIỆN":complete?"ĐÃ BÀN GIAO":task?.status==="failed"?"GẶP LỖI":task?.status==="blocked"?"BỊ CHẶN":"CHỜ NHIỆM VỤ";
       return <g key={room.id} transform={`translate(${55+index*230} 38)`} role="button" tabIndex={0} aria-label={`Mở phòng ${room.name}`} aria-pressed={focused===room.id} onClick={()=>onFocus(room.id)} onKeyDown={event=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();onFocus(room.id);}}} className="cursor-pointer outline-none focus-visible:opacity-75">
         <title>{`${room.name} · ${status}`}</title>
@@ -28,9 +29,9 @@ export default function DepartmentHeadquarters({tasks=[],focused,onFocus}) {
         <rect x="78" y="88" width="25" height="23" rx="2" fill={running?room.color:"#496b76"} opacity=".7"/>
         <path d="M53 88V111M39 99H67M90 88V111M78 99H103" stroke="#254653"/>
         <rect x="111" y="92" width="23" height="51" rx="3" fill="#112632"/>
-        <circle cx="130" cy="52" r="7" fill={running?"#fbbf24":complete?"#6ee7b7":"#526876"}>{running&&<animate attributeName="opacity" values="1;.35;1" dur="1.5s" repeatCount="indefinite"/>}</circle>
+        <circle cx="130" cy="52" r="7" fill={running?"#fbbf24":complete?"#6ee7b7":stopped?"#fb7185":"#526876"}>{running&&<animate attributeName="opacity" values="1;.35;1" dur="1.5s" repeatCount="indefinite"/>}</circle>
         <g transform="translate(80 145)"><ellipse cy="15" rx="17" ry="5" fill="#06141a" opacity=".4"/><rect x="-10" y="-5" width="20" height="20" rx="5" fill={room.color}/><rect x="-13" y="-23" width="26" height="23" rx="8" fill="#eaf6ef"/><rect x="-9" y="-17" width="18" height="11" rx="4" fill="#244a50"/><circle cx="-4" cy="-12" r="1.5" fill={room.color}/><circle cx="4" cy="-12" r="1.5" fill={room.color}/></g>
-        <text x="85" y="198" textAnchor="middle" fill={running?"#fcd34d":complete?"#6ee7b7":"#8ca5ae"} fontSize="9" fontWeight="700">{status}</text>
+        <text x="85" y="198" textAnchor="middle" fill={running?"#fcd34d":complete?"#6ee7b7":stopped?"#fda4af":"#8ca5ae"} fontSize="9" fontWeight="700">{status}</text>
       </g>;
     })}
   </svg></div>;

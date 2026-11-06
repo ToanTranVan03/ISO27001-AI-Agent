@@ -142,15 +142,26 @@ class SimulatedEmployeeActivityRequest(BaseModel):
     activity_type: Literal["unapproved_usb_inserted", "unapproved_software_installed"]
 
 
+class MissionTargetRequest(BaseModel):
+    employee_id: str = Field(pattern=r"^EMP-\d{3}$")
+    asset_id: str | None = Field(default=None,max_length=80)
+    event_id: str | None = Field(default=None,max_length=120)
+
+
 class MissionRequest(BaseModel):
     request_id: UUID
     goal: str = Field(min_length=8, max_length=600)
     scope: Literal["all", "people", "hardware", "software"] = "all"
+    mode: Literal["agent", "workflow"] = "workflow"
+    allow_fallback: bool = False
+    requested_role: Literal["coordination","inventory","security","report"] = "coordination"
+    target: MissionTargetRequest | None = None
 
 
 class MissionReviewRequest(BaseModel):
     decision: Literal["approve", "request_changes"]
     note: str = Field(min_length=3, max_length=1000)
+    artifact_hash: str | None = Field(default=None, min_length=64, max_length=64)
 
 
 @router.get("/missions")
@@ -166,7 +177,7 @@ def create_enterprise_mission(assessment_id: UUID, body: MissionRequest, user: d
     if len(goal) < 8:
         raise HTTPException(422, detail="Mô tả chủ đề kiểm tra cần ít nhất 8 ký tự.")
     try:
-        doc, created = enterprise_missions.create_mission(str(assessment_id), body.request_id, goal, body.scope, user["user_id"])
+        doc, created = enterprise_missions.create_mission(str(assessment_id), body.request_id, goal, body.scope, user["user_id"], body.mode, body.allow_fallback, body.requested_role, body.target.model_dump() if body.target else None)
     except ValueError as exc:
         raise HTTPException(409, detail=str(exc)) from exc
     if created:
@@ -180,7 +191,7 @@ def review_enterprise_mission(assessment_id: UUID, mission_id: UUID, body: Missi
     if len(body.note.strip()) < 3:
         raise HTTPException(422, detail="Nhận xét cần ít nhất 3 ký tự.")
     try:
-        return enterprise_missions.review_mission(str(assessment_id), str(mission_id), body.decision, body.note.strip(), user["user_id"])
+        return enterprise_missions.review_mission(str(assessment_id), str(mission_id), body.decision, body.note.strip(), user["user_id"], body.artifact_hash)
     except LookupError as exc:
         raise HTTPException(404, detail=str(exc)) from exc
     except ValueError as exc:

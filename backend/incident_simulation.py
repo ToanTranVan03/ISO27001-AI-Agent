@@ -176,7 +176,7 @@ def classify_issue(issue: str, on_progress: Callable[[dict], None] | None = None
     } for scenario in SCENARIOS]
     model = os.getenv("OLLAMA_MODEL", "qwen2.5:7b")
     try:
-        response = ollama.Client(host=os.getenv("OLLAMA_HOST", "http://localhost:11434")).chat(
+        response = ollama.Client(host=os.getenv("OLLAMA_HOST", "http://localhost:11434"), timeout=45).chat(
             model=model,
             messages=[
                 {"role": "system", "content": (
@@ -735,7 +735,7 @@ def _ask_agent(
         "mandatory_containment_actions": scenario["mandatory_actions"],
     }
     try:
-        response = ollama.Client(host=os.getenv("OLLAMA_HOST", "http://localhost:11434")).chat(
+        response = ollama.Client(host=os.getenv("OLLAMA_HOST", "http://localhost:11434"), timeout=45).chat(
             model=model,
             messages=[
                 {"role": "system", "content": (
