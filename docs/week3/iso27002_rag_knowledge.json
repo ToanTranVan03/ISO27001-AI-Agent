@@ -1,0 +1,238 @@
+{
+  "version": "1.0-week3",
+  "project": "ISO/IEC 27001:2022 AI Agent Compliance Assessment",
+  "document_name": "ISO/IEC 27002:2022 RAG Knowledge Base & Auditor Guidance",
+  "owner": "Lê Đoàn Văn Tú (ISO/GRC & Ground Truth Lead)",
+  "purpose": "Cung cấp tri thức kiểm toán chuyên sâu, hướng dẫn triển khai kỹ thuật và kinh nghiệm thực chiến từ chuyên gia ISO/IEC 27002:2022 cho LangGraph RAG Agent trước khi thực hiện chấm điểm tuân thủ.",
+  "target_controls_count": 5,
+  "controls_scope": ["A.8.1", "A.8.2", "A.8.3", "A.8.4", "A.8.5"],
+  "knowledge_items": [
+    {
+      "knowledge_id": "RAG-KB-A8.1",
+      "control_id": "A.8.1",
+      "iso27002_clause": "8.1",
+      "control_name": "User endpoint devices",
+      "group": "A.8 Technological",
+      "control_attributes": {
+        "control_type": ["#Preventive", "#Detective"],
+        "information_security_properties": ["#Confidentiality", "#Integrity", "#Availability"],
+        "cybersecurity_concepts": ["#Protect", "#Detect"],
+        "operational_capabilities": ["#Asset_management", "#Information_protection", "#Endpoint_security"],
+        "security_domains": ["#Protection", "#Defense"]
+      },
+      "iso27002_summary": "Thông tin lưu trữ, xử lý hoặc truyền qua các thiết bị đầu cuối của người dùng phải được bảo vệ đầy đủ khỏi việc truy cập trái phép, mất mát dữ liệu hoặc lây nhiễm mã độc. Các biện pháp bắt buộc gồm mã hóa ổ cứng toàn phần (Full Disk Encryption), quản trị tập trung qua MDM, giám sát EDR thời gian thực và khóa tự động khi không sử dụng.",
+      "auditor_guidance": {
+        "auditor_role_brief": "Dặn dò AI Agent khi thẩm định Control A.8.1: Thiết bị đầu cuối là bề mặt tấn công rộng nhất của doanh nghiệp. Khi kiểm tra file log hoặc báo cáo MDM, bạn không được chỉ nhìn vào con số tổng kết của IT mà phải soi kỹ từng trường dữ liệu kỹ thuật bên dưới.",
+        "must_search_keywords": [
+          "BitLocker", "FileVault", "LUKS", "TPM 2.0", "AES-256", "ProtectionStatus", "EncryptionPercentage",
+          "CrowdStrike", "Falcon", "Defender", "EDR", "RealTimeProtection", "AntivirusEnabled", "SignatureUpToDate",
+          "ScreenSaverTimeout", "InactivityTimeout", "LockWorkstation", "MDM", "Intune", "Jamf"
+        ],
+        "positive_indicators": [
+          "Trường 'encryption_percentage' hoặc 'EncryptedPercentage' đạt 100% trên tất cả máy tính đang hoạt động.",
+          "Trường 'ProtectionStatus' của BitLocker là 'Protection On' hoặc FileVault 'Enabled'.",
+          "Khóa khôi phục (Recovery Key) được lưu tập trung (Escrowed) trên Active Directory hoặc Azure AD / MDM.",
+          "Phần mềm EDR (CrowdStrike/SentinelOne/Defender) có trạng thái 'Active', chính sách ngăn chặn 'Aggressive/Enforced', chữ ký virus cập nhật trong vòng 24 giờ qua.",
+          "Thời gian khóa màn hình tự động ('inactivity_timeout' hoặc 'ScreenSaverTimeout') <= 300 giây (5 phút) và bắt buộc nhập mật khẩu khi mở lại."
+        ],
+        "red_flag_indicators": [
+          "Xuất hiện bất kỳ thiết bị nào có 'BitLocker Protection: Off' hoặc 'Decrypted' (kể cả máy cá nhân mang đi làm - BYOD).",
+          "Phần mềm diệt virus bị tắt dịch vụ (Service Stopped), chế độ bảo vệ thời gian thực bị tắt (Real-time Protection: Disabled) hoặc bản cập nhật mẫu chữ ký cũ quá 7 ngày.",
+          "Thời gian khóa màn hình bị vô hiệu hóa ('Never') hoặc thiết lập quá dài (> 15 phút, ví dụ: 900s, 1800s, 2700s).",
+          "Người dùng thông thường (Standard User) được cấp quyền Local Administrator trên máy trạm của họ."
+        ],
+        "deception_tactics_to_detect": [
+          "Bẫy mã hóa nửa vời: Báo cáo ghi 'BitLocker On' nhưng chỉ mã hóa phân vùng C:, còn ổ dữ liệu D: hoặc ổ ngoài USB không mã hóa -> Đánh giá vi phạm hoặc Partially Compliant.",
+          "Bẫy EDR cài tượng trưng: Agent EDR được cài đặt nhưng ở chế độ 'Monitor Only' / 'Audit Only' không tự động chặn mã độc.",
+          "Bẫy ngoại lệ phòng ban: IT khai báo 100% nhân viên tuân thủ nhưng loại trừ nhóm 'Developer' hoặc 'Ban Giám Đốc' khỏi chính sách khóa màn hình và mã hóa -> Bắt buộc chấm Non-Compliant."
+        ],
+        "decision_logic": {
+          "Compliant": "100% thiết bị doanh nghiệp được quản lý MDM, mã hóa ổ cứng toàn phần đạt 100%, EDR đang chạy có bản cập nhật dưới 24h, và timeout khóa màn hình <= 5 phút.",
+          "Partially_Compliant": "Đạt 100% máy trạm công ty nhưng thiếu kiểm soát thiết bị BYOD cá nhân, hoặc thời gian khóa màn hình từ 5 đến 15 phút.",
+          "Non_Compliant": "Có thiết bị công ty không mã hóa ổ đĩa, diệt virus bị tắt hoặc hết hạn trên 7 ngày, hoặc không có cấu hình khóa màn hình tự động.",
+          "Insufficient_Evidence": "Tài liệu gửi lên không chứa thông tin về thiết bị người dùng (như log máy in, log thiết bị mạng switch, thông số IoT điều hòa, máy pha cà phê)."
+        }
+      },
+      "rag_chunk_text": "ISO/IEC 27002:2022 Clause 8.1 (User endpoint devices) yêu cầu bảo vệ toàn diện các thiết bị đầu cuối người dùng. Khi kiểm toán tự động, AI Agent cần trích xuất ba thông số kỹ thuật cốt lõi: 1) Mã hóa ổ đĩa (BitLocker, FileVault, LUKS) phải đạt 100% với thuật toán AES-256 và kích hoạt chip TPM 2.0; 2) Giải pháp bảo vệ mã độc EDR (như CrowdStrike Falcon, Windows Defender for Endpoint) phải ở chế độ Active Prevention với chữ ký cập nhật trong 24 giờ; 3) Khóa màn hình tự động không được vượt quá 300 giây (5 phút). Nếu phát hiện bất kỳ thiết bị nào bị tắt BitLocker hoặc người dùng có quyền Local Admin tự ý tắt EDR, Agent phải phân loại Non-Compliant ngay lập tức."
+    },
+    {
+      "knowledge_id": "RAG-KB-A8.2",
+      "control_id": "A.8.2",
+      "control_name": "Privileged access rights",
+      "group": "A.8 Technological",
+      "control_attributes": {
+        "control_type": ["#Preventive", "#Detective"],
+        "information_security_properties": ["#Confidentiality", "#Integrity", "#Availability"],
+        "cybersecurity_concepts": ["#Identify", "#Protect", "#Detect"],
+        "operational_capabilities": ["#Identity_and_access_management", "#Privileged_access_management"],
+        "security_domains": ["#Defense", "#Governance"]
+      },
+      "iso27002_summary": "Việc cấp phát, sử dụng và duy trì các quyền truy cập đặc quyền (như root, Administrator, cloud owner, database superuser) phải được kiểm soát nghiêm ngặt theo nguyên tắc đặc quyền tối thiểu (Least Privilege). Phải loại bỏ tài khoản dùng chung, kích hoạt MFA, ghi nhật ký phiên đặc quyền và tiến hành rà soát quyền định kỳ.",
+      "auditor_guidance": {
+        "auditor_role_brief": "Dặn dò AI Agent khi thẩm định Control A.8.2: Tài khoản đặc quyền là mục tiêu số một của tin tặc. Là Auditor, bạn phải kiểm tra xem tổ chức có biết chính xác AI ĐANG NẮM QUYỀN ADMIN hay không. Tuyệt đối không chấp nhận các tài khoản chung chung kiểu 'admin', 'root' được chia sẻ mật khẩu.",
+        "must_search_keywords": [
+          "PrivilegedAccess", "DomainAdmins", "sudoers", "NOPASSWD", "CyberArk", "PIM", "PAM", "JustInTime",
+          "LeastPrivilege", "AccessReview", "Recertification", "RootLogin", "NamedAccounts", "MFA", "Superuser"
+        ],
+        "positive_indicators": [
+          "Tài khoản quản trị được đặt tên định danh cá nhân riêng biệt (ví dụ: 'adm_khoa', 'adm_toan'), tách biệt hoàn toàn với tài khoản làm việc hàng ngày.",
+          "Số lượng tài khoản Domain Admins hoặc AWS AdministratorAccess được thu hẹp tối thiểu (dưới 5 người đối với công ty quy mô 50-100 nhân sự).",
+          "Tồn tại bằng chứng rà soát quyền đặc quyền (Privileged Access Review) được thực hiện định kỳ (hàng quý hoặc tối thiểu 6 tháng/lần) có chữ ký phê duyệt của CISO/IT Director.",
+          "File `/etc/sudoers` chỉ cấp quyền thực thi các lệnh cụ thể cho nhóm quản trị và bắt buộc xác thực mật khẩu/MFA khi gọi lệnh sudo."
+        ],
+        "red_flag_indicators": [
+          "Xuất hiện dòng lệnh `%developers ALL=(ALL:ALL) NOPASSWD: ALL` hoặc cấp quyền sudo không giới hạn cho người dùng không phải sysadmin.",
+          "Sử dụng tài khoản quản trị dùng chung (Shared Administrator Account) mà nhiều người cùng biết mật khẩu.",
+          "Tài khoản đặc quyền của nhân viên đã nghỉ việc (Terminated / Offboarded) hoặc nhà thầu hết hạn hợp đồng vẫn còn kích hoạt trong hệ thống.",
+          "Không có bằng chứng rà soát quyền đặc quyền trong hơn 12 tháng qua."
+        ],
+        "deception_tactics_to_detect": [
+          "Bẫy tài khoản ẩn (Shadow Admin): IT báo cáo chỉ có 2 Domain Admins, nhưng lại tạo các tài khoản phụ thuộc nhóm Backup Operators, Account Operators hoặc phân quyền Reset Password trên OU chứa Admin -> AI cần cảnh báo nếu thấy danh sách nhóm đặc quyền mở rộng.",
+          "Bẫy rà soát hình thức: Biên bản rà soát quyền copy-paste từ quý trước, không có chữ ký xác nhận của cấp thẩm quyền hoặc không phản ánh việc thu hồi quyền nhân sự đã chuyển vị trí."
+        ],
+        "decision_logic": {
+          "Compliant": "Quyền đặc quyền chỉ cấp cho số lượng tối thiểu tài khoản định danh cá nhân, 100% có MFA/PAM, sudoers không có NOPASSWD, có biên bản rà soát quyền định kỳ hợp lệ trong vòng 6 tháng gần nhất.",
+          "Partially_Compliant": "Có danh sách tài khoản định danh nhưng một số tài khoản admin cục bộ chưa được quản lý tập trung, hoặc kỳ rà soát quyền bị trễ hạn từ 6-12 tháng.",
+          "Non_Compliant": "Tài khoản admin dùng chung, nhóm developers được gán sudo NOPASSWD, tài khoản nhân viên cũ chưa bị thu hồi quyền admin, hoặc không bao giờ rà soát quyền.",
+          "Insufficient_Evidence": "Bằng chứng chỉ là file log truy cập web, log ứng dụng thông thường, hoặc báo cáo không đề cập đến danh sách tài khoản admin và cấu hình sudo/PAM."
+        }
+      },
+      "rag_chunk_text": "ISO/IEC 27002:2022 Clause 8.2 (Privileged access rights) tập trung kiểm soát các tài khoản có khả năng thay đổi cấu hình hệ thống hoặc vượt qua các biện pháp bảo vệ. AI Agent cần thẩm tra: 1) Toàn bộ quyền đặc quyền (root/admin) phải gắn liền với tài khoản định danh cá nhân cụ thể, không được dùng chung; 2) Áp dụng nguyên tắc Least Privilege, cấm triệt để cấu hình NOPASSWD trên `/etc/sudoers` cho các nhóm người dùng chung như developers; 3) Bắt buộc có biên bản rà soát quyền định kỳ (Access Recertification) được phê duyệt trong vòng 6 tháng. Vi phạm bất kỳ điều khoản nào trên đều dẫn tới kết luận Non-Compliant."
+    },
+    {
+      "knowledge_id": "RAG-KB-A8.3",
+      "control_id": "A.8.3",
+      "control_name": "Information access restriction",
+      "group": "A.8 Technological",
+      "control_attributes": {
+        "control_type": ["#Preventive"],
+        "information_security_properties": ["#Confidentiality", "#Integrity"],
+        "cybersecurity_concepts": ["#Protect"],
+        "operational_capabilities": ["#Information_protection", "#Identity_and_access_management"],
+        "security_domains": ["#Protection"]
+      },
+      "iso27002_summary": "Việc truy cập thông tin và tài sản xử lý thông tin phải được hạn chế dựa trên yêu cầu kinh doanh, phân loại dữ liệu và nguyên tắc 'Cần phải biết' (Need-to-Know). Doanh nghiệp phải ban hành Ma trận phân quyền (Access Control Matrix) và cấu hình kỹ thuật ACL/RBAC phải trùng khớp hoàn toàn với chính sách.",
+      "auditor_guidance": {
+        "auditor_role_brief": "Dặn dò AI Agent khi thẩm định Control A.8.3: Kiểm soát truy cập thông tin không chỉ nằm trên văn bản chính sách mà phải được thực thi trực tiếp trên hệ thống lưu trữ (Storage, Database, Cloud Buckets). Khi kiểm tra, AI phải so khớp giữa Ma trận quyền hạn (Policy Matrix) và Danh sách kiểm soát truy cập thực tế (Effective ACL).",
+        "must_search_keywords": [
+          "NeedToKnow", "RBAC", "AccessControlMatrix", "ACL", "DataClassification", "Confidential", "Restricted",
+          "S3BucketPolicy", "PublicAccessBlock", "NTFSPermissions", "Everyone", "AnonymousAccess", "DataIsolation"
+        ],
+        "positive_indicators": [
+          "Tồn tại Ma trận phân quyền RBAC quy định rõ từng vai trò chức danh chỉ được truy cập vào đúng phạm vi dữ liệu nghiệp vụ.",
+          "Dữ liệu khách hàng nhạy cảm (PII, thẻ thanh toán) được cô lập trong phân vùng riêng, lập trình viên và người dùng văn phòng không thể truy cập trực tiếp.",
+          "Cấu hình lưu trữ đám mây (như AWS S3, Azure Blob) đã bật tính năng 'Block Public Access' 100%.",
+          "Phân quyền thư mục chia sẻ (File Share) chỉ cấp cho các Security Groups cụ thể, không cấp quyền mở rộng cho các nhóm mặc định toàn quyền."
+        ],
+        "red_flag_indicators": [
+          "Bucket S3 hoặc Blob Storage chứa dữ liệu nhạy cảm, thông tin định danh (KYC) hoặc báo cáo tài chính có quyền truy cập công khai ('Principal: *' hoặc 'Allow Public Read').",
+          "Thư mục mạng SMB/NFS nội bộ gán quyền 'Everyone' hoặc 'Domain Users' với quyền 'Full Control' hoặc 'Modify' trên các tài liệu mật (bảng lương, hợp đồng).",
+          "Nhân viên phòng ban này có thể xem và tải dữ liệu nhạy cảm của phòng ban khác mà không có lý do công việc (vi phạm Need-to-Know)."
+        ],
+        "deception_tactics_to_detect": [
+          "Bẫy chính sách trên giấy: Doanh nghiệp gửi file PDF 'Chính sách phân quyền RBAC' rất đẹp nhưng khi kiểm tra file cấu hình kỹ thuật thực tế thì không thấy triển khai trên IAM/Database.",
+          "Bẫy ẩn danh qua API: Ứng dụng Frontend che mờ thông tin (Masking) nhưng API Backend lại trả về nguyên vẹn toàn bộ dữ liệu nhạy cảm không cần xác thực phân quyền."
+        ],
+        "decision_logic": {
+          "Compliant": "Có Ma trận phân quyền RBAC được phê duyệt chính thức, cấu hình IAM/ACL thực tế khớp 100% với ma trận, các kho dữ liệu nhạy cảm được cô lập và cấm truy cập công khai.",
+          "Partially_Compliant": "Có áp dụng RBAC cho các hệ thống chính nhưng vẫn còn một số thư mục dùng chung hoặc tài nguyên thứ cấp chưa được phân loại và cấp quyền chặt chẽ.",
+          "Non_Compliant": "Dữ liệu nhạy cảm/KYC bị phơi nhiễm công khai trên Internet, hoặc các thư mục bảo mật cấp quyền Full Control cho nhóm Everyone, vi phạm hoàn toàn nguyên tắc Need-to-Know.",
+          "Insufficient_Evidence": "Bằng chứng chỉ là kết quả ping mạng, băng thông đường truyền, hoặc tài liệu không thể hiện danh sách phân quyền người dùng đối với dữ liệu."
+        }
+      },
+      "rag_chunk_text": "ISO/IEC 27002:2022 Clause 8.3 (Information access restriction) quy định quyền truy cập thông tin phải được giới hạn theo nguyên tắc Need-to-Know và phân loại dữ liệu. AI Agent cần kiểm tra sự nhất quán giữa hai yếu tố: 1) Ma trận phân quyền RBAC đã được ban hành; 2) Cấu hình kỹ thuật thực tế (AWS S3 Bucket Policy, NTFS ACL, Database Roles). Tuyệt đối không chấp nhận các tài nguyên lưu trữ nhạy cảm có chính sách cho phép 'Principal: *' hoặc phân quyền cho nhóm 'Everyone'. Bất kỳ sự phơi nhiễm dữ liệu nào ra bên ngoài phạm vi nghiệp vụ đều là căn cứ để đánh giá Non-Compliant."
+    },
+    {
+      "knowledge_id": "RAG-KB-A8.4",
+      "control_id": "A.8.4",
+      "control_name": "Access to source code",
+      "group": "A.8 Technological",
+      "control_attributes": {
+        "control_type": ["#Preventive", "#Detective"],
+        "information_security_properties": ["#Confidentiality", "#Integrity"],
+        "cybersecurity_concepts": ["#Protect", "#Detect"],
+        "operational_capabilities": ["#Application_security", "#Information_protection"],
+        "security_domains": ["#Protection"]
+      },
+      "iso27002_summary": "Việc truy cập đọc và ghi vào mã nguồn chương trình, các thư viện dùng chung và cấu hình ứng dụng phải được kiểm soát nghiêm ngặt nhằm ngăn chặn sửa đổi trái phép, chèn backdoor hoặc đánh cắp tài sản trí tuệ. Bắt buộc sử dụng hệ thống quản lý phiên bản (Git), bảo vệ nhánh chính (Branch Protection), quy trình Code Review và khóa bảo mật MFA.",
+      "auditor_guidance": {
+        "auditor_role_brief": "Dặn dò AI Agent khi thẩm định Control A.8.4: Mã nguồn là tài sản cốt lõi của công ty công nghệ và fintech. Khi kiểm tra GitLab/GitHub, bạn phải tập trung xem xét nhánh 'main/master' có được bảo vệ chống ghi đè hay không và lập trình viên có thể tùy tiện commit thẳng mã nguồn lên sản xuất hay không.",
+        "must_search_keywords": [
+          "SourceCode", "GitLab", "GitHub", "BranchProtection", "ProtectedBranch", "PushAccessLevel",
+          "MergeAccessLevel", "ApprovalsBeforeMerge", "CodeReview", "ForcePush", "AllowForcePushes",
+          "PublicRepository", "SecretDetection", "SAST", "CommitLog", "FIDO2"
+        ],
+        "positive_indicators": [
+          "Tính năng Branch Protection được kích hoạt trên tất cả các nhánh sản xuất (`main`, `master`, `release/*`).",
+          "Thông số `push_access_level` được thiết lập là `No one` (cấm hoàn toàn việc push trực tiếp).",
+          "Bắt buộc quy trình Code Review thông qua Merge Request / Pull Request với tối thiểu 2 lập trình viên cấp cao phê duyệt (`minimum_approvals >= 2`).",
+          "Tích hợp cổng kiểm tra an toàn tự động trong CI/CD (SAST, phát hiện lộ lọt Secrets) ngăn chặn merge code có lỗ hổng.",
+          "Kho mã nguồn được đặt ở chế độ Riêng tư (Private Repository) và yêu cầu xác thực bằng SSH Key bảo vệ bởi FIDO2."
+        ],
+        "red_flag_indicators": [
+          "Kho mã nguồn chứa logic thanh toán, xác thực hoặc dữ liệu cốt lõi bị đặt ở chế độ Công khai (Public).",
+          "Tính năng Branch Protection bị vô hiệu hóa (`protected: false`), cho phép bất kỳ ai cũng có thể push trực tiếp lên main.",
+          "Cấu hình cho phép ghi đè lịch sử commit (`allow_force_push: true`), tạo điều kiện xóa dấu vết can thiệp mã nguồn.",
+          "Cấp quyền cộng tác viên (Collaborator/Maintainer) cho các tài khoản email cá nhân ẩn danh không thuộc tổ chức mà không có MFA."
+        ],
+        "deception_tactics_to_detect": [
+          "Bẫy nhánh bảo vệ giả tạo: Nhánh `main` được bảo vệ nhưng nhánh `develop` hoặc `staging` dùng để deploy tự động lên production lại hoàn toàn mở toang không bảo vệ.",
+          "Bẫy tự duyệt mã nguồn (Self-approval): Cho phép tác giả của Pull Request tự bấm Approve và tự Merge code của chính mình mà không cần ai kiểm tra chéo."
+        ],
+        "decision_logic": {
+          "Compliant": "Toàn bộ kho mã nguồn là Private, nhánh chính được bảo vệ (cấm push trực tiếp, cấm force-push), bắt buộc Code Review tối thiểu 2 người duyệt và có kiểm tra bảo mật CI/CD.",
+          "Partially_Compliant": "Có bật bảo vệ nhánh nhưng chỉ yêu cầu 1 người duyệt (hoặc cho phép tự duyệt), hoặc chưa tích hợp quét mã nguồn SAST/Secret tự động.",
+          "Non_Compliant": "Kho mã nguồn để Public, tắt bảo vệ nhánh, cho phép force-push, hoặc không lưu vết lịch sử commit.",
+          "Insufficient_Evidence": "Bằng chứng là thực đơn ăn uống, danh sách thiết bị bàn ghế, hoặc tài liệu văn bản không chứa dữ liệu cấu hình hệ thống quản lý mã nguồn Git."
+        }
+      },
+      "rag_chunk_text": "ISO/IEC 27002:2022 Clause 8.4 (Access to source code) yêu cầu kiểm soát chặt chẽ quyền đọc/ghi vào kho mã nguồn nhằm ngăn chặn sửa đổi mã độc hoặc rò rỉ bí mật công nghệ. Khi đánh giá bằng chứng kỹ thuật từ GitHub/GitLab, AI Agent cần thẩm định: 1) Trạng thái Repository Visibility bắt buộc là Private; 2) Tính năng Branch Protection trên nhánh main/release phải được bật với `allow_force_push: false`; 3) Bắt buộc cấm push trực tiếp (`push_access_level: No one`) và yêu cầu tối thiểu 2 phê duyệt trong quy trình Code Review; 4) Tích hợp quét SAST và ngăn chặn rò rỉ Secret. Nếu phát hiện repo ở chế độ Public hoặc cho phép force-push, Agent phải chấm Non-Compliant ngay lập tức."
+    },
+    {
+      "knowledge_id": "RAG-KB-A8.5",
+      "control_id": "A.8.5",
+      "control_name": "Secure authentication",
+      "group": "A.8 Technological",
+      "control_attributes": {
+        "control_type": ["#Preventive"],
+        "information_security_properties": ["#Confidentiality", "#Integrity"],
+        "cybersecurity_concepts": ["#Protect"],
+        "operational_capabilities": ["#Identity_and_access_management"],
+        "security_domains": ["#Protection", "#Defense"]
+      },
+      "iso27002_summary": "Các công nghệ và quy trình xác thực người dùng an toàn phải được thiết lập dựa trên mức độ rủi ro của thông tin. Bắt buộc áp dụng Xác thực đa yếu tố (MFA) cho tất cả các truy cập từ xa, tài khoản quản trị và hệ thống đám mây. Chính sách mật khẩu phải đủ mạnh (độ dài tối thiểu, độ phức tạp, chống vét cạn) và máy chủ phải cấm các phương thức xác thực yếu (như SSH mật khẩu root).",
+      "auditor_guidance": {
+        "auditor_role_brief": "Dặn dò AI Agent khi thẩm định Control A.8.5: Xác thực là lớp cửa ngõ đầu tiên. Bạn phải phân tích chi tiết cấu hình xác thực của cả hai tầng: Tầng Người dùng (IdP/Active Directory/MFA) và Tầng Hạ tầng Máy chủ (Linux sshd_config). Một chính sách mật khẩu mạnh nhưng không có MFA thì trong thời đại ngày nay vẫn bị coi là không đạt chuẩn.",
+        "must_search_keywords": [
+          "Authentication", "MFA", "MultiFactorAuthentication", "TOTP", "FIDO2", "WebAuthn", "PasswordPolicy",
+          "MinimumPasswordLength", "Complexity", "LockoutThreshold", "PermitRootLogin", "PasswordAuthentication",
+          "PubkeyAuthentication", "sshd_config", "BruteForceProtection", "Keycloak"
+        ],
+        "positive_indicators": [
+          "Chính sách mật khẩu yêu cầu độ dài tối thiểu >= 12 ký tự (khuyến nghị 14 ký tự), yêu cầu kết hợp chữ hoa, chữ thường, số và ký tự đặc biệt.",
+          "Cấu hình khóa tài khoản tự động (Lockout) sau tối đa 5 lần đăng nhập thất bại để chống brute-force.",
+          "MFA được bắt buộc (Enforced) 100% cho toàn bộ nhân sự khi kết nối VPN hoặc đăng nhập cổng Cloud/IdP bằng ứng dụng xác thực (Authenticator) hoặc khóa bảo mật FIDO2.",
+          "Cấu hình máy chủ Linux (`/etc/ssh/sshd_config`) bắt buộc: `PermitRootLogin no` và `PasswordAuthentication no` (chỉ cho phép đăng nhập bằng SSH Public Key)."
+        ],
+        "red_flag_indicators": [
+          "Độ dài mật khẩu tối thiểu < 8 ký tự hoặc cho phép mật khẩu đơn giản không yêu cầu độ phức tạp.",
+          "Tính năng khóa tài khoản bị tắt (`LockoutThreshold: 0`), cho phép tin tặc thử mật khẩu vô hạn lần.",
+          "MFA ở trạng thái 'Tùy chọn' (Optional) dẫn tới phần lớn người dùng không kích hoạt.",
+          "Cấu hình SSH máy chủ cho phép `PermitRootLogin yes` hoặc `PasswordAuthentication yes`, đặc biệt là các máy chủ mở cổng ra Internet."
+        ],
+        "deception_tactics_to_detect": [
+          "Bẫy MFA danh nghĩa: Doanh nghiệp báo cáo 'Đã triển khai MFA' nhưng khi kiểm tra tỷ lệ kích hoạt thực tế (Enrollment Rate) thì chỉ có vài tài khoản IT bật, còn 90% nhân sự khác vẫn dùng mật khẩu thông thường.",
+          "Bẫy mật khẩu không hết hạn: Mật khẩu được thiết lập phức tạp nhưng được duy trì vĩnh viễn không bao giờ đổi (`PasswordNeverExpires: True`) trên toàn bộ tài khoản nhân sự."
+        ],
+        "decision_logic": {
+          "Compliant": "Mật khẩu tối thiểu >= 12 ký tự có độ phức tạp và khóa khi nhập sai, MFA bắt buộc 100% người dùng truy cập từ xa/đặc quyền, máy chủ vô hiệu hóa SSH root login và cấm xác thực bằng mật khẩu.",
+          "Partially_Compliant": "Mật khẩu đạt độ dài nhưng MFA chỉ áp dụng cho nhóm Admin mà chưa bắt buộc cho người dùng thường trên VPN, hoặc thời gian khóa tài khoản chưa tối ưu.",
+          "Non_Compliant": "Mật khẩu dưới 8 ký tự, không bật MFA cho tài khoản quản trị/VPN, hoặc máy chủ cho phép SSH root login bằng mật khẩu.",
+          "Insufficient_Evidence": "Bằng chứng là thông số nhiệt độ phòng Server, dữ liệu vận hành phần cứng, hoặc không chứa bất kỳ cấu hình mật khẩu hay xác thực nào."
+        }
+      },
+      "rag_chunk_text": "ISO/IEC 27002:2022 Clause 8.5 (Secure authentication) bắt buộc thiết lập các cơ chế xác thực mạnh để ngăn chặn truy cập trái phép. AI Agent phải đánh giá hai mặt kỹ thuật: 1) Chính sách định danh người dùng: Độ dài mật khẩu tối thiểu 12-14 ký tự kèm độ phức tạp, có khóa tài khoản sau tối đa 5 lần thử sai; 100% tài khoản truy cập từ xa (VPN/Cloud) bắt buộc kích hoạt MFA (TOTP/FIDO2); 2) Cấu hình bảo mật máy chủ hạ tầng: Trong `/etc/ssh/sshd_config`, thông số `PermitRootLogin` và `PasswordAuthentication` bắt buộc phải là `no`. Nếu phát hiện MFA ở chế độ Optional hoặc máy chủ cho phép root đăng nhập bằng mật khẩu mặc định, Agent phải chấm Non-Compliant ngay lập tức."
+    }
+  ]
+}
+

@@ -1,0 +1,908 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ISO 27001 AI Agent - Hệ thống đánh giá tuân thủ bảo mật thông tin tự động bằng AI">
+  <title>ISO 27001 AI Agent — Evidence Evaluator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ── DESIGN TOKENS ────────────────────────────────────────────────── */
+    :root {
+      --bg:          #0a0f1e;
+      --surface:     #0f1729;
+      --surface-2:   #141f35;
+      --surface-3:   #1a2742;
+      --border:      rgba(99,130,200,0.18);
+      --border-glow: rgba(99,130,200,0.40);
+      --accent:      #4f8cff;
+      --accent-2:    #7c5cfc;
+      --accent-grad: linear-gradient(135deg, #4f8cff 0%, #7c5cfc 100%);
+      --green:       #22c55e;
+      --yellow:      #eab308;
+      --red:         #ef4444;
+      --orange:      #f97316;
+      --muted:       #64748b;
+      --text:        #e2e8f0;
+      --text-dim:    #94a3b8;
+      --radius:      14px;
+      --radius-sm:   8px;
+      --shadow:      0 8px 32px rgba(0,0,0,0.5);
+    }
+
+    /* ── RESET & BASE ─────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── ANIMATED BACKGROUND GRID ─────────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(79,140,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(79,140,255,0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── LAYOUT ───────────────────────────────────────────────────────── */
+    .app {
+      position: relative;
+      z-index: 1;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    /* ── HEADER ───────────────────────────────────────────────────────── */
+    .header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(79,140,255,0.1);
+      border: 1px solid rgba(79,140,255,0.3);
+      border-radius: 40px;
+      padding: 6px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .header-badge .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+    h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      background: var(--accent-grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .header-sub {
+      color: var(--text-dim);
+      font-size: 1rem;
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ── CARDS ────────────────────────────────────────────────────────── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(79,140,255,0.03) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .card:hover {
+      border-color: var(--border-glow);
+      box-shadow: 0 0 0 1px var(--border-glow), var(--shadow);
+    }
+    .card-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .card-title .icon {
+      width: 28px; height: 28px;
+      border-radius: 7px;
+      background: rgba(79,140,255,0.12);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+    }
+
+    /* ── FORM ELEMENTS ────────────────────────────────────────────────── */
+    .form-group { margin-bottom: 18px; }
+    label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 8px;
+    }
+    select, input[type="file"] {
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font: inherit;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 40px;
+    }
+    select:focus, input[type="file"]:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(79,140,255,0.15);
+      background: var(--surface-3);
+    }
+    select option { background: var(--surface-2); }
+
+    /* File input custom wrapper */
+    .file-wrapper {
+      position: relative;
+    }
+    .file-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      background: var(--surface-2);
+      border: 1px dashed var(--border);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 0.9rem;
+      color: var(--text-dim);
+    }
+    .file-label:hover {
+      border-color: var(--accent);
+      color: var(--text);
+      background: var(--surface-3);
+    }
+    .file-label .file-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    #file {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+    #file-name {
+      font-size: 0.85rem;
+      color: var(--accent);
+      margin-top: 6px;
+      min-height: 18px;
+    }
+
+    /* ── BUTTONS ──────────────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 13px 24px;
+      border: none;
+      border-radius: var(--radius-sm);
+      font: inherit;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 0.02em;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0);
+      transition: background 0.15s;
+    }
+    .btn:hover::after { background: rgba(255,255,255,0.06); }
+    .btn:active { transform: scale(0.98); }
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .btn-primary {
+      background: var(--accent-grad);
+      color: white;
+      box-shadow: 0 4px 16px rgba(79,140,255,0.3);
+    }
+    .btn-primary:hover:not(:disabled) {
+      box-shadow: 0 6px 24px rgba(79,140,255,0.45);
+      transform: translateY(-1px);
+    }
+    .btn-secondary {
+      background: rgba(79,140,255,0.1);
+      color: var(--accent);
+      border: 1px solid rgba(79,140,255,0.25);
+    }
+    .btn-secondary:hover:not(:disabled) {
+      background: rgba(79,140,255,0.18);
+      border-color: rgba(79,140,255,0.4);
+    }
+
+    /* ── DIVIDER ──────────────────────────────────────────────────────── */
+    .or-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 20px 0;
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+    .or-divider::before, .or-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── SPINNER ──────────────────────────────────────────────────────── */
+    .spinner {
+      display: none;
+      width: 18px; height: 18px;
+      border: 2.5px solid rgba(255,255,255,0.25);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    .btn.loading .spinner { display: block; }
+    .btn.loading .btn-text { opacity: 0.6; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── RESULT PANEL ─────────────────────────────────────────────────── */
+    #result-section { display: none; }
+    #result-section.visible { display: block; }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border: 1px solid transparent;
+    }
+    .status-badge.compliant {
+      background: rgba(34,197,94,0.12);
+      color: var(--green);
+      border-color: rgba(34,197,94,0.25);
+    }
+    .status-badge.partial {
+      background: rgba(234,179,8,0.12);
+      color: var(--yellow);
+      border-color: rgba(234,179,8,0.25);
+    }
+    .status-badge.non-compliant {
+      background: rgba(239,68,68,0.12);
+      color: var(--red);
+      border-color: rgba(239,68,68,0.25);
+    }
+    .status-badge.insufficient {
+      background: rgba(249,115,22,0.12);
+      color: var(--orange);
+      border-color: rgba(249,115,22,0.25);
+    }
+    .status-badge.na {
+      background: rgba(100,116,139,0.15);
+      color: var(--muted);
+      border-color: rgba(100,116,139,0.25);
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 20px;
+    }
+    @media (max-width: 600px) { .result-grid { grid-template-columns: 1fr; } }
+
+    .stat-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      margin-bottom: 8px;
+    }
+    .stat-value {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    /* Confidence bar */
+    .confidence-bar-wrap {
+      height: 6px;
+      background: var(--surface-3);
+      border-radius: 3px;
+      margin-top: 8px;
+      overflow: hidden;
+    }
+    .confidence-bar {
+      height: 100%;
+      border-radius: 3px;
+      background: var(--accent-grad);
+      transition: width 0.8s cubic-bezier(.22,1,.36,1);
+    }
+
+    .rationale-box {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 16px 20px;
+      margin-top: 16px;
+      line-height: 1.7;
+      color: var(--text-dim);
+      font-size: 0.9rem;
+    }
+
+    /* Audit trail */
+    .audit-trail {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .audit-step {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 40px;
+      padding: 5px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-dim);
+    }
+    .audit-step .check {
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: rgba(34,197,94,0.15);
+      color: var(--green);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 9px;
+      font-weight: 800;
+    }
+
+    /* Evidence list */
+    .evidence-list {
+      list-style: none;
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .evidence-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    }
+    .evidence-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* ── TOAST / NOTIFICATION ─────────────────────────────────────────── */
+    #toast {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      padding: 14px 20px;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: white;
+      pointer-events: none;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(.22,1,.36,1);
+      z-index: 100;
+      max-width: 340px;
+    }
+    #toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    #toast.success { background: linear-gradient(135deg, #059669, #10b981); }
+    #toast.error   { background: linear-gradient(135deg, #dc2626, #ef4444); }
+    #toast.info    { background: linear-gradient(135deg, #2563eb, #4f8cff); }
+
+    /* ── UPLOAD SUCCESS STRIP ─────────────────────────────────────────── */
+    #upload-result {
+      display: none;
+      margin-top: 12px;
+      padding: 12px 16px;
+      background: rgba(34,197,94,0.08);
+      border: 1px solid rgba(34,197,94,0.22);
+      border-radius: var(--radius-sm);
+      color: var(--green);
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+    #upload-result.error {
+      background: rgba(239,68,68,0.08);
+      border-color: rgba(239,68,68,0.22);
+      color: var(--red);
+    }
+
+    /* ── STEPS INDICATOR ──────────────────────────────────────────────── */
+    .steps {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 32px;
+    }
+    .step {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+    }
+    .step-num {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--muted);
+      flex-shrink: 0;
+      transition: all 0.3s;
+    }
+    .step.active .step-num {
+      background: var(--accent-grad);
+      border-color: transparent;
+      color: white;
+      box-shadow: 0 0 16px rgba(79,140,255,0.4);
+    }
+    .step.done .step-num {
+      background: rgba(34,197,94,0.15);
+      border-color: rgba(34,197,94,0.3);
+      color: var(--green);
+    }
+    .step-text { font-size: 0.78rem; color: var(--muted); font-weight: 600; }
+    .step.active .step-text { color: var(--text); }
+    .step.done .step-text { color: var(--green); }
+    .step-line { flex: 1; height: 1px; background: var(--border); margin: 0 12px; }
+
+    /* ── RESPONSIVE ───────────────────────────────────────────────────── */
+    @media (max-width: 640px) {
+      .steps { display: none; }
+      .card { padding: 20px 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <!-- HEADER -->
+    <header class="header">
+      <div class="header-badge">
+        <span class="dot"></span>
+        ISO/IEC 27001 AI Agent — Giao diện cũ, không cập nhật tiến độ chung
+      </div>
+      <h1>ISO 27001 Evidence Evaluator</h1>
+      <p class="header-sub">
+        Nạp tài liệu bằng chứng PDF/DOCX, AI sẽ tự động trích xuất và đánh giá mức độ tuân thủ theo tiêu chuẩn ISO 27001.
+      </p>
+    </header>
+
+    <!-- STEPS INDICATOR -->
+    <div class="steps" id="steps">
+      <div class="step active" id="step-1">
+        <div class="step-num">1</div>
+        <span class="step-text">Chọn Control</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step" id="step-2">
+        <div class="step-num">2</div>
+        <span class="step-text">Nạp bằng chứng</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step" id="step-3">
+        <div class="step-num">3</div>
+        <span class="step-text">Đánh giá AI</span>
+      </div>
+    </div>
+
+    <!-- STEP 1: SELECT CONTROL + UPLOAD EVIDENCE -->
+    <div class="card" id="card-upload">
+      <div class="card-title">
+        <span class="icon">📋</span>
+        Bước 1 — Chọn Control &amp; Nạp Bằng Chứng
+      </div>
+
+      <form id="evidence-form">
+        <div class="form-group">
+          <label for="control">Control ISO 27001</label>
+          <select id="control" required>
+            <option value="" disabled selected>Đang tải danh sách controls…</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="evidence-type">Loại bằng chứng</label>
+          <select id="evidence-type" required>
+            <option value="" disabled selected>— Chọn loại —</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Tài liệu bằng chứng (PDF hoặc DOCX, tối đa 15 MB)</label>
+          <div class="file-wrapper">
+            <label class="file-label" for="file">
+              <span class="file-icon">📎</span>
+              <span id="file-label-text">Chọn file hoặc kéo thả vào đây…</span>
+            </label>
+            <input id="file" type="file" accept=".pdf,.docx" required>
+          </div>
+          <div id="file-name"></div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="btn-upload">
+          <div class="spinner"></div>
+          <span class="btn-text">⬆&nbsp; Trích xuất &amp; lưu bằng chứng</span>
+        </button>
+        <div id="upload-result"></div>
+      </form>
+    </div>
+
+    <!-- STEP 2: EVALUATE -->
+    <div class="card" id="card-evaluate">
+      <div class="card-title">
+        <span class="icon">🤖</span>
+        Bước 2 — Đánh Giá Tuân Thủ Bằng AI
+      </div>
+      <p style="color:var(--text-dim);font-size:0.88rem;margin-bottom:20px;line-height:1.6;">
+        Agent sẽ thu thập bằng chứng từ database, chạy qua pipeline
+        <strong style="color:var(--accent)">PLAN → COLLECT → EVALUATE → VERIFY → REPORT</strong>
+        và trả về kết quả tuân thủ.
+      </p>
+      <button id="btn-evaluate" class="btn btn-secondary" type="button">
+        <div class="spinner"></div>
+        <span class="btn-text">🚀&nbsp; Chạy đánh giá AI</span>
+      </button>
+    </div>
+
+    <!-- RESULTS -->
+    <div class="card" id="result-section">
+      <div class="card-title">
+        <span class="icon">📊</span>
+        Kết Quả Đánh Giá
+      </div>
+
+      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+        <div>
+          <div class="stat-label">Control ID</div>
+          <div class="stat-value" id="res-control-id">—</div>
+        </div>
+        <div id="res-status-badge" class="status-badge">—</div>
+      </div>
+
+      <div class="result-grid">
+        <div class="stat-card">
+          <div class="stat-label">Độ tin cậy</div>
+          <div class="stat-value" id="res-confidence">—</div>
+          <div class="confidence-bar-wrap">
+            <div class="confidence-bar" id="res-confidence-bar" style="width:0%"></div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Số bằng chứng đã xử lý</div>
+          <div class="stat-value" id="res-evidence-count">—</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="stat-label" style="margin-top:20px;">Lý giải của AI</div>
+        <div class="rationale-box" id="res-rationale">—</div>
+      </div>
+
+      <div>
+        <div class="stat-label" style="margin-top:20px;">Audit Trail (Pipeline)</div>
+        <div class="audit-trail" id="res-audit-trail"></div>
+      </div>
+
+      <div id="res-evidence-section">
+        <div class="stat-label" style="margin-top:20px;">Evidence IDs</div>
+        <ul class="evidence-list" id="res-evidence-list"></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" role="alert" aria-live="assertive"></div>
+
+  <script>
+    /* ── DOM REFS ───────────────────────────────────────────────────── */
+    const controlSelect    = document.getElementById('control');
+    const evidenceTypeSelect = document.getElementById('evidence-type');
+    const fileInput        = document.getElementById('file');
+    const fileLabelText    = document.getElementById('file-label-text');
+    const fileNameEl       = document.getElementById('file-name');
+    const btnUpload        = document.getElementById('btn-upload');
+    const btnEvaluate      = document.getElementById('btn-evaluate');
+    const uploadResult     = document.getElementById('upload-result');
+    const resultSection    = document.getElementById('result-section');
+
+    /* ── TOAST ──────────────────────────────────────────────────────── */
+    const toastEl = document.getElementById('toast');
+    let toastTimer;
+    function showToast(msg, type = 'info', duration = 3500) {
+      clearTimeout(toastTimer);
+      toastEl.textContent = msg;
+      toastEl.className = `show ${type}`;
+      toastTimer = setTimeout(() => { toastEl.className = ''; }, duration);
+    }
+
+    /* ── STEPS ──────────────────────────────────────────────────────── */
+    function setStep(n) {
+      [1, 2, 3].forEach(i => {
+        const el = document.getElementById(`step-${i}`);
+        el.classList.remove('active', 'done');
+        if (i < n) el.classList.add('done');
+        if (i === n) el.classList.add('active');
+      });
+    }
+
+    /* ── HTTP HELPER ────────────────────────────────────────────────── */
+    async function request(url, options = {}) {
+      // Legacy panel still requires login through the shared workspace.
+      const accessToken = sessionStorage.getItem('iso_team_token');
+      options.headers = { ...(options.headers || {}), ...(accessToken ? {Authorization: 'Bearer ' + accessToken} : {}) };
+      const res = await fetch(url, options);
+      const body = await res.json().catch(() => ({ detail: `HTTP ${res.status}` }));
+      if (!res.ok) throw new Error(body.detail || `Lỗi ${res.status}`);
+      return body;
+    }
+
+    /* ── LOADING STATE ──────────────────────────────────────────────── */
+    function setLoading(btn, on) {
+      btn.disabled = on;
+      btn.classList.toggle('loading', on);
+    }
+
+    /* ── CONTROLS ───────────────────────────────────────────────────── */
+    function updateEvidenceTypes() {
+      const opt = controlSelect.selectedOptions[0];
+      const types = JSON.parse(opt?.dataset.evidenceTypes || '[]');
+      evidenceTypeSelect.replaceChildren(
+        ...types.map(t => new Option(t, t))
+      );
+      if (types.length === 0) {
+        evidenceTypeSelect.add(new Option('— Không có loại nào —', ''));
+      }
+    }
+
+    async function loadControls() {
+      try {
+        const controls = await request('/api/controls');
+        controlSelect.replaceChildren(
+          ...controls.map(c => {
+            const opt = new Option(`${c.control_id} — ${c.name}`, c.control_id);
+            opt.dataset.evidenceTypes = JSON.stringify(c.expected_evidence_types);
+            return opt;
+          })
+        );
+        updateEvidenceTypes();
+        setStep(1);
+      } catch (err) {
+        controlSelect.replaceChildren(new Option('Lỗi tải controls', ''));
+        showToast('Không thể tải danh sách controls: ' + err.message, 'error', 5000);
+      }
+    }
+
+    controlSelect.addEventListener('change', updateEvidenceTypes);
+
+    /* ── FILE INPUT ─────────────────────────────────────────────────── */
+    fileInput.addEventListener('change', () => {
+      const f = fileInput.files[0];
+      if (f) {
+        fileLabelText.textContent = f.name;
+        fileNameEl.textContent = `📄 ${f.name} · ${(f.size / 1024).toFixed(1)} KB`;
+        setStep(2);
+      }
+    });
+
+    /* ── UPLOAD EVIDENCE ────────────────────────────────────────────── */
+    document.getElementById('evidence-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      uploadResult.style.display = 'none';
+      setLoading(btnUpload, true);
+      try {
+        const form = new FormData();
+        form.append('control_id', controlSelect.value);
+        form.append('evidence_type', evidenceTypeSelect.value);
+        form.append('file', fileInput.files[0]);
+        const data = await request('/api/evidence', { method: 'POST', body: form });
+        uploadResult.className = '';
+        uploadResult.style.display = 'block';
+        uploadResult.innerHTML = `✅ Đã lưu bằng chứng · <strong>${data.extracted_characters.toLocaleString()} ký tự</strong> trích xuất · SHA256: <code style="font-size:0.78rem">${data.sha256_hash.slice(0, 16)}…</code>`;
+        showToast('Bằng chứng đã được lưu thành công!', 'success');
+      } catch (err) {
+        uploadResult.className = 'error';
+        uploadResult.style.display = 'block';
+        uploadResult.textContent = '❌ ' + err.message;
+        showToast(err.message, 'error', 5000);
+      } finally {
+        setLoading(btnUpload, false);
+      }
+    });
+
+    /* ── STATUS HELPERS ─────────────────────────────────────────────── */
+    const STATUS_MAP = {
+      'Compliant':             { cls: 'compliant',      icon: '✅', label: 'Tuân thủ' },
+      'Partially Compliant':   { cls: 'partial',        icon: '⚠️', label: 'Tuân thủ một phần' },
+      'Non-Compliant':         { cls: 'non-compliant',  icon: '❌', label: 'Không tuân thủ' },
+      'Insufficient Evidence': { cls: 'insufficient',   icon: '📭', label: 'Thiếu bằng chứng' },
+      'Not Applicable':        { cls: 'na',             icon: '➖', label: 'Không áp dụng' },
+    };
+
+    /* ── EVALUATE ───────────────────────────────────────────────────── */
+    btnEvaluate.addEventListener('click', async () => {
+      if (!controlSelect.value) {
+        showToast('Vui lòng chọn một Control trước', 'error');
+        return;
+      }
+      setLoading(btnEvaluate, true);
+      resultSection.classList.remove('visible');
+      try {
+        const data = await request('/api/evaluate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ control_id: controlSelect.value }),
+        });
+        renderResult(data);
+        setStep(3);
+        showToast('Đánh giá hoàn tất!', 'success');
+        resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } catch (err) {
+        showToast('Đánh giá thất bại: ' + err.message, 'error', 6000);
+      } finally {
+        setLoading(btnEvaluate, false);
+      }
+    });
+
+    /* ── RENDER RESULT ──────────────────────────────────────────────── */
+    function renderResult(data) {
+      // Control ID
+      document.getElementById('res-control-id').textContent = data.control_id || '—';
+
+      // Status badge
+      const badge = document.getElementById('res-status-badge');
+      const info = STATUS_MAP[data.status] || { cls: 'na', icon: '❓', label: data.status };
+      badge.className = `status-badge ${info.cls}`;
+      badge.textContent = `${info.icon} ${info.label}`;
+
+      // Confidence
+      const pct = Math.round((data.confidence || 0) * 100);
+      document.getElementById('res-confidence').textContent = `${pct}%`;
+      document.getElementById('res-confidence-bar').style.width = `${pct}%`;
+
+      // Evidence count
+      const ids = data.evidence_ids || [];
+      document.getElementById('res-evidence-count').textContent = ids.length;
+
+      // Rationale
+      document.getElementById('res-rationale').textContent = data.rationale || '—';
+
+      // Audit trail
+      const trailEl = document.getElementById('res-audit-trail');
+      trailEl.innerHTML = '';
+      (data.audit_trail || []).forEach(step => {
+        const div = document.createElement('div');
+        div.className = 'audit-step';
+        div.innerHTML = `<div class="check">✓</div>${step}`;
+        trailEl.appendChild(div);
+      });
+
+      // Evidence IDs
+      const listEl = document.getElementById('res-evidence-list');
+      listEl.innerHTML = '';
+      if (ids.length > 0) {
+        ids.forEach(id => {
+          const li = document.createElement('li');
+          li.className = 'evidence-item';
+          li.innerHTML = `<div class="evidence-dot"></div>${id}`;
+          listEl.appendChild(li);
+        });
+        document.getElementById('res-evidence-section').style.display = 'block';
+      } else {
+        document.getElementById('res-evidence-section').style.display = 'none';
+      }
+
+      resultSection.classList.add('visible');
+    }
+
+    /* ── INIT ───────────────────────────────────────────────────────── */
+    loadControls();
+  </script>
+</body>
+</html>

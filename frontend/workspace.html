@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>ISO Enterprise Lab · Nhóm 11</title>
+<style>
+:root{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:#e9edf8;background:#0c1220;font-size:14px;--panel:#161f30;--panel2:#1b263a;--muted:#9daec9;--border:#2a3850;--brand:#6294ff;--ok:#49d4ad;--warn:#ffc774;--bad:#ff8b99}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 80% -10%,#17345f 0%,transparent 38%),#0c1220}button,input,select{font:inherit}button{cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}.hidden{display:none!important}
+.top{height:70px;padding:0 28px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);background:#10192acc;gap:12px}.brand{display:flex;align-items:center;gap:12px;font-weight:760;font-size:16px}.brandmark{background:linear-gradient(135deg,#458cf6,#39ccb1);padding:10px 12px;border-radius:13px;color:#fff}.muted{color:var(--muted)}.tiny{font-size:11px}.topRight{display:flex;align-items:center;gap:12px}.btn{border:1px solid var(--border);border-radius:10px;background:#23334d;color:#ecf3ff;padding:10px 14px;font-weight:650}.btn:hover:not(:disabled){border-color:var(--brand);background:#2c4367}.btn.primary{background:#447aff;border-color:#538aff;color:#fff}.btn.primary:hover{background:#3469e8}.btn.ghost{background:transparent}.btn.sm{font-size:12px;padding:7px 10px}input,select{background:#0e1727;color:#f1f5fd;border:1px solid #35465d;border-radius:10px;padding:11px 12px;outline:none;width:100%}input:focus,select:focus{border-color:#6795ff}.label{font-size:12px;color:#b5c3db;display:block;margin-bottom:7px}.layout{display:grid;grid-template-columns:250px minmax(350px,1fr) minmax(320px,410px);min-height:calc(100vh - 70px)}aside,.content,.detail{padding:23px;min-width:0}.sidebar{border-right:1px solid var(--border)}.detail{border-left:1px solid var(--border);background:#111a2b}.eyebrow{font-size:11px;color:#86a8e8;font-weight:760;letter-spacing:1.2px;text-transform:uppercase}.title{font-size:24px;line-height:1.25;margin:10px 0 8px;letter-spacing:-.7px}.description{color:var(--muted);font-size:12px;line-height:1.7}.sidehead{margin:22px 0 14px;color:#c0cce0;font-size:12px;font-weight:700}.nav{display:flex;width:100%;border:1px solid transparent;background:transparent;align-items:center;justify-content:space-between;color:#c8d4e7;border-radius:11px;padding:13px 12px;margin-bottom:7px;text-align:left}.nav.active{background:#20304c;border-color:#334f80;color:#fff}.nav:hover{background:#1d2c45}.nav .count{padding:4px 7px;font-size:11px;border-radius:6px;background:#2c3f5e}.divider{height:1px;background:var(--border);margin:22px 0}.panel{border:1px solid var(--border);border-radius:14px;background:var(--panel);padding:17px}.mutedNote{border-left:3px solid var(--brand);background:#17263e;color:#bdcbe1;padding:12px;font-size:12px;line-height:1.6;border-radius:5px}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:18px 0 20px}.stat{border:1px solid var(--border);border-radius:14px;background:var(--panel);padding:16px}.stat .value{font-size:28px;font-weight:790;margin:7px 0}.stat .statlabel{color:#9fb3d4;font-size:12px}.progress{height:7px;background:#2a3750;overflow:hidden;border-radius:30px}.bar{height:100%;background:linear-gradient(90deg,#5793ff,#3cd8ad);width:0;transition:width .3s}.bar.sm{height:5px}.groupHeader{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:23px 0 13px}.groupHeader h2{font-size:17px;margin:0}.control{width:100%;border:1px solid var(--border);background:#151f30;color:#edf4ff;border-radius:12px;padding:15px;text-align:left;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;gap:12px}.control:hover,.control.selected{border-color:#587eaf;background:#192b43}.control .id{font-size:11px;font-weight:780;color:#88afff;margin-bottom:4px}.control .name{font-size:13px;font-weight:700;line-height:1.4}.control .who{font-size:11px;color:#a5b3cc;margin-top:5px}.pill{white-space:nowrap;font-size:10px;border-radius:20px;border:1px solid #455772;padding:5px 9px;color:#b5c5db;background:#25324a}.pill.COMPLETED{color:#66dbb0;border-color:#2e756b;background:#13342f}.pill.RUNNING{color:#89b6ff;border-color:#3c6296;background:#1b3458}.pill.NEEDS_REVIEW,.pill.WAITING_EVIDENCE{color:#f3c57a;border-color:#946d36;background:#3b301e}.pill.FAILED{color:#ff98a4;border-color:#944855;background:#3c222a}.detail h2{font-size:20px;line-height:1.4}.line{margin:18px 0;border-bottom:1px solid var(--border)}.field{margin:18px 0}.field strong{display:block;font-size:12px;color:#a3b6d6;margin-bottom:8px}.field p{font-size:13px;line-height:1.65;color:#e2eaf9;margin:0}.split{display:flex;justify-content:space-between;align-items:center;gap:10px}.meta{display:grid;grid-template-columns:110px 1fr;gap:9px;font-size:12px;color:#e4eaf5}.meta .k{color:#9caec9}.stack{display:flex;gap:8px;flex-wrap:wrap}.history{display:grid;gap:10px;max-height:350px;overflow:auto}.historyItem{border:1px solid #30435d;border-radius:11px;background:#18263c;padding:12px}.historyItem p{font-size:12px;line-height:1.6}.historyItem code{font-size:10px;overflow-wrap:anywhere;color:#98bfef}.smallheading{font-size:11px;color:#a2b6d5;text-transform:uppercase;letter-spacing:.8px;font-weight:750;margin:20px 0 10px}.alert{margin-top:13px;color:#ffb2b6;font-size:12px;line-height:1.5;min-height:17px}.upload{border:1px dashed #475e82;border-radius:12px;padding:14px;background:#14233a}.upload input{margin:8px 0 12px}dialog{border:1px solid #3b5274;border-radius:18px;background:#18263a;color:#fff;max-width:440px;width:95%;padding:24px}dialog::backdrop{background:#040913bb}dialog h2{margin-top:0}.loginWrap{min-height:calc(100vh - 70px);display:grid;place-items:center;padding:20px}.login{width:min(440px,100%);background:#19253a;border:1px solid #395173;padding:30px;border-radius:20px;box-shadow:0 40px 80px #03061260}.login h1{font-size:25px;margin:8px 0}.login .row{margin-top:16px}.spinner{display:inline-block;width:9px;height:9px;background:#65d9bc;border-radius:50%;box-shadow:0 0 0 5px #65d9bc20;margin-right:6px}.sys{border-radius:9px;padding:11px 12px;color:#b4c4de;background:#23334a;font-size:11px;margin-top:20px}.empty{border:1px dashed #3c5072;text-align:center;padding:30px;border-radius:12px;color:#a6bad6}
+@media(max-width:1240px){.layout{grid-template-columns:200px minmax(270px,1fr)}.detail{grid-column:2;border-top:1px solid var(--border);border-left:none}.stats{grid-template-columns:repeat(2,1fr)}}@media(max-width:700px){.top{padding:10px 14px;height:auto;flex-wrap:wrap}.layout{display:block}.sidebar,.content,.detail{padding:17px;border:0}.sidebar{border-bottom:1px solid var(--border)}.nav{display:inline-flex;width:48%;margin-right:2%}.stats{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<header class="top"><div class="brand"><div class="brandmark">◆</div><div>ISO Enterprise Lab <div class="tiny muted">AI Agent · Nhóm 11 · ISO/IEC 27001:2022</div></div></div><div id="topRight" class="topRight hidden"><a href="/enterprise" class="btn sm" style="text-decoration:none">🏢 Doanh nghiệp giả lập</a><span class="tiny muted" id="loggedUser">—</span><button class="btn sm hidden" id="addMemberBtn">+ Thành viên</button><button class="btn sm ghost" id="logoutBtn">Đăng xuất</button></div></header>
+<div id="loginView" class="loginWrap"><form id="loginForm" class="login"><div class="eyebrow">Đăng nhập hệ thống</div><h1>Chào mừng đến doanh nghiệp giả lập</h1><p class="description">Tất cả thành viên cùng xem một tiến độ đánh giá và lịch sử bằng chứng trên PostgreSQL.</p><div class="row"><label class="label">Tên đăng nhập</label><input id="username" required autocomplete="username"/></div><div class="row"><label class="label">Mật khẩu</label><input id="password" type="password" autocomplete="current-password" required/></div><button class="btn primary" style="width:100%;margin-top:22px" type="submit">Đăng nhập →</button><div id="loginError" class="alert"></div><div class="sys">Tài khoản admin đầu tiên được tạo từ <code>.env</code>; admin có thể thêm thành viên trong bảng điều hành.</div></form></div>
+<main id="workView" class="layout hidden"><aside class="sidebar"><div class="eyebrow">Phạm vi đánh giá</div><h2 style="margin:8px 0 0">Control Workspace</h2><p id="campaignName" class="description">Đang tải đợt đánh giá...</p><div class="sidehead">NHÓM ISO</div><div id="navGroups"></div><div class="divider"></div><div class="sidehead">TIẾN ĐỘ TOÀN NHÓM</div><div class="split"><strong id="progressCount">0 / 56</strong><span class="tiny muted">Hoàn tất quy trình</span></div><div class="progress" style="margin:13px 0"><div class="bar" id="progressBar"></div></div><div class="mutedNote">"Hoàn tất" là hoàn thành quy trình đánh giá, không đồng nghĩa control đã tuân thủ ISO.</div><div class="sys">🔄 Dữ liệu tự làm mới 3 giây/lần từ PostgreSQL. Nếu bạn đăng nhập ở máy khác, tiến độ vẫn được giữ nguyên.</div></aside>
+<section class="content"><div class="eyebrow">Tổng quan doanh nghiệp</div><div class="split" style="align-items:flex-start"><div><h1 class="title">Bảng điều hành đánh giá</h1><p class="description">Chọn control → nạp bằng chứng → bấm chạy AI Agent → theo dõi trạng thái chung.</p></div><button class="btn sm" id="refreshBtn">↻ Làm mới</button></div><div class="stats"><div class="stat"><div class="statlabel">Controls trong phạm vi</div><div class="value" id="sTotal">—</div></div><div class="stat"><div class="statlabel">Đã đánh giá xong</div><div class="value" id="sDone" style="color:#4ee1b1">—</div></div><div class="stat"><div class="statlabel">Agent đang chạy</div><div class="value" id="sRunning" style="color:#8bbaff">—</div></div><div class="stat"><div class="statlabel">Cần bổ sung / review</div><div class="value" id="sWaiting" style="color:#ffd086">—</div></div></div><div class="split" style="margin-bottom:14px"><div><h2 style="margin:0 0 4px" id="groupTitle">A.6 — People</h2><span class="tiny muted" id="groupSubtitle">Con người</span></div><div style="max-width:225px"><input id="search" placeholder="🔎 Tìm control..." aria-label="Tìm control" /></div></div><div id="controlList"></div></section>
+<aside class="detail"><div class="eyebrow">Chi tiết control</div><div id="detailEmpty" class="empty" style="margin-top:20px">Chọn một control để xem trạng thái, người phụ trách và bằng chứng.</div><div id="detailBody" class="hidden"><div class="split" style="margin-top:16px"><span class="eyebrow" id="detailId">A.6.1</span><span class="pill" id="detailStatus">Chưa bắt đầu</span></div><h2 id="detailName">—</h2><p class="description" id="detailObjective">—</p><div class="line"></div><div class="meta"><span class="k">Đang phụ trách</span><span id="detailOwner">—</span><span class="k">Kết quả ISO</span><span id="detailCompliance">—</span><span class="k">Cập nhật</span><span id="detailTime">—</span></div><div class="line"></div><button id="runBtn" class="btn primary" style="width:100%">▶ Chạy AI Agent</button><p class="description">Người khác sẽ thấy ngay control đang chạy. Sau khi hoàn thành có thể đánh giá lại và giữ lịch sử.</p><div id="reviewBox" class="hidden"><label class="label">Xác nhận kết quả cần review (admin)</label><input id="reviewNote" placeholder="Lý do xác nhận..."/><button class="btn sm" id="approveBtn" style="margin-top:8px">Xác nhận đánh giá</button></div><div class="smallheading">Nạp bằng chứng PDF / DOCX</div><form id="uploadForm" class="upload"><label class="label">Loại bằng chứng</label><select id="evidenceType"></select><input id="evidenceFile" type="file" accept=".pdf,.docx" required/><button class="btn sm" type="submit">↑ Lưu bằng chứng</button></form><div class="smallheading">Lịch sử đánh giá</div><div id="historyList" class="history"><p class="description">Chưa có lần đánh giá nào.</p></div><div id="detailError" class="alert"></div></div></aside></main>
+<dialog id="memberDialog"><h2>Thêm thành viên</h2><p class="description">Thành viên mới được quyền truy cập đợt đánh giá chung và chạy control chưa bị khóa.</p><form id="memberForm"><label class="label">Tên đăng nhập</label><input id="mUsername" required minlength="3"/><label class="label" style="margin-top:12px">Tên hiển thị</label><input id="mDisplay" required/><label class="label" style="margin-top:12px">Mật khẩu (ít nhất 12 ký tự)</label><input id="mPassword" type="password" required minlength="12"/><div class="stack" style="margin-top:17px"><button class="btn primary" type="submit">Tạo thành viên</button><button class="btn ghost" id="closeMember" type="button">Đóng</button></div><div class="alert" id="memberError"></div></form></dialog>
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+let token=sessionStorage.getItem('iso_team_token')||'', me=null, assessmentId='', board=[], selectedId='', group='A.6', polling=null, lastEval='';
+const labels={NOT_STARTED:'Chưa bắt đầu',RUNNING:'Đang chạy',WAITING_EVIDENCE:'Chờ bằng chứng',NEEDS_REVIEW:'Cần xác nhận',COMPLETED:'Đã hoàn tất',FAILED:'Chạy lỗi'};
+const cnames={'A.6':'Con người','A.7':'Môi trường vật lý','A.8':'Công nghệ'};
+function err(target,message){$(target).textContent=message||''}
+function formatTime(v){if(!v)return '—';try{return new Date(v).toLocaleString('vi-VN')}catch{return v}}
+async function api(path,opts={}){
+ const headers={...(opts.headers||{})}; if(token)headers.Authorization='Bearer '+token;
+ const res=await fetch(path,{...opts,headers}); const body=await res.json().catch(()=>({}));
+ if(res.status===401 && !path.includes('/auth/login')){exit();throw Error('Phiên đăng nhập đã hết hạn.')}
+ if(!res.ok)throw Error(typeof body.detail==='string'?body.detail:'Lỗi HTTP '+res.status);
+ return body;
+}
+function exit(){token='';me=null;sessionStorage.removeItem('iso_team_token');$('workView').classList.add('hidden');$('loginView').classList.remove('hidden');$('topRight').classList.add('hidden');clearInterval(polling)}
+async function start(){
+ me=await api('/api/auth/me');const campaigns=await api('/api/assessments');if(!campaigns.length)throw Error('Tài khoản chưa được phân công đợt đánh giá.');
+ assessmentId=campaigns[0].assessment_id;$('campaignName').textContent=campaigns[0].name;
+ $('loggedUser').textContent=me.display_name+' · '+me.role;
+ $('addMemberBtn').classList.toggle('hidden',me.role!=='admin');
+ $('loginView').classList.add('hidden');$('workView').classList.remove('hidden');$('topRight').classList.remove('hidden');
+ await reload();clearInterval(polling);polling=setInterval(()=>reload(true).catch(()=>{}),3000);
+}
+$('loginForm').onsubmit=async e=>{e.preventDefault();err('loginError','');try{
+ const data=await api('/api/auth/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:$('username').value,password:$('password').value})});
+ token=data.access_token;sessionStorage.setItem('iso_team_token',token);$('password').value='';await start();
+ }catch(ex){err('loginError',ex.message)}};
+$('logoutBtn').onclick=async()=>{try{await api('/api/auth/logout',{method:'POST'})}catch{}exit()};
+$('refreshBtn').onclick=()=>reload();
+$('search').oninput=()=>renderList();
+function setGroup(g){group=g;renderNav();renderList()}
+function renderNav(){const host=$('navGroups');host.replaceChildren();for(const g of ['A.6','A.7','A.8']){
+ const items=board.filter(c=>c.control_id.startsWith(g+'.'));const done=items.filter(c=>c.workflow_status==='COMPLETED').length;
+ const b=document.createElement('button');b.className='nav'+(group===g?' active':'');
+ const caption=document.createElement('span');caption.textContent=g+' — '+cnames[g];const count=document.createElement('span');count.className='count';count.textContent=done+'/'+items.length;
+ b.append(caption,count);b.onclick=()=>setGroup(g);host.append(b);
+ }}
+function renderList(){const root=$('controlList');root.replaceChildren();$('groupTitle').textContent=group+' — '+cnames[group];
+ const items=board.filter(c=>c.control_id.startsWith(group+'.')&&(c.control_id+' '+c.name).toLowerCase().includes($('search').value.toLowerCase()));
+ $('groupSubtitle').textContent=items.length+' controls · Bấm vào control để xem chi tiết';
+ if(!items.length){const empty=document.createElement('div');empty.className='empty';empty.textContent='Không tìm thấy control.';root.append(empty);return}
+ for(const c of items){const b=document.createElement('button');b.className='control'+(selectedId===c.control_id?' selected':'');
+ const left=document.createElement('div');const id=document.createElement('div');id.className='id';id.textContent=c.control_id;
+ const name=document.createElement('div');name.className='name';name.textContent=c.name;
+ const who=document.createElement('div');who.className='who';who.textContent=c.assigned_to?'👤 '+c.assigned_to:'Chưa có người phụ trách';left.append(id,name,who);
+ const pill=document.createElement('span');pill.className='pill '+c.workflow_status;pill.textContent=labels[c.workflow_status]||c.workflow_status;
+ b.append(left,pill);b.onclick=()=>{selectedId=c.control_id;renderList();renderDetail(true)};root.append(b);
+ }}
+async function reload(silent=false){if(!assessmentId)return;
+ try{const data=await api('/api/assessments/'+assessmentId+'/progress');board=data.controls;
+ if (!selectedId && board.length) { selectedId=board[0].control_id; group=selectedId.split('.').slice(0,2).join('.'); }
+ const done=board.filter(c=>c.workflow_status==='COMPLETED').length;
+ $('sTotal').textContent=board.length;$('sDone').textContent=done;$('sRunning').textContent=board.filter(c=>c.workflow_status==='RUNNING').length;
+ $('sWaiting').textContent=board.filter(c=>['WAITING_EVIDENCE','NEEDS_REVIEW'].includes(c.workflow_status)).length;
+ $('progressCount').textContent=done+' / '+board.length;$('progressBar').style.width=(board.length?done/board.length*100:0)+'%';
+ renderNav();renderList();renderDetail(false);
+ }catch(e){if(!silent)err('detailError',e.message)}}
+function selected(){return board.find(c=>c.control_id===selectedId)}
+function renderDetail(force){const c=selected();$('detailEmpty').classList.toggle('hidden',!!c);$('detailBody').classList.toggle('hidden',!c);if(!c)return;
+ $('detailId').textContent=c.control_id;$('detailName').textContent=c.name;$('detailObjective').textContent=c.objective;
+ $('detailStatus').textContent=labels[c.workflow_status]||c.workflow_status;$('detailStatus').className='pill '+c.workflow_status;
+ $('detailOwner').textContent=c.assigned_to||'—';$('detailCompliance').textContent=c.compliance_status||'Chưa có kết luận';
+ $('detailTime').textContent=formatTime(c.updated_at);$('runBtn').disabled=c.workflow_status==='RUNNING';
+ $('runBtn').textContent=c.workflow_status==='RUNNING'?'⏳ Agent đang chạy (đã khóa)':(c.latest_evaluation_id?'↻ Đánh giá lại bằng AI':'▶ Chạy AI Agent');
+ $('uploadForm').querySelector('button').disabled=c.workflow_status==='RUNNING';$('reviewBox').classList.toggle('hidden',!(me?.role==='admin'&&c.workflow_status==='NEEDS_REVIEW'));
+ const sel=$('evidenceType');const prior=sel.value;const types=c.expected_evidence_types||[];
+ if(force || [...sel.options].map(o=>o.value).join('|')!==types.join('|')){
+  sel.replaceChildren();types.forEach(t=>sel.append(new Option(t,t)));if(types.includes(prior))sel.value=prior;
+ }
+ if(force || String(c.latest_evaluation_id||'')!==lastEval){lastEval=String(c.latest_evaluation_id||'');loadHistory().catch(e=>err('detailError',e.message))}
+}
+async function loadHistory(){const id=selectedId;if(!id)return;const data=await api('/api/assessments/'+assessmentId+'/controls/'+encodeURIComponent(id)+'/history');if(selectedId!==id)return;
+ const host=$('historyList');host.replaceChildren();if(!data.length){const p=document.createElement('p');p.className='description';p.textContent='Chưa có lần đánh giá nào.';host.append(p);return}
+ for(const r of data){const box=document.createElement('div');box.className='historyItem';
+ const strong=document.createElement('strong');strong.textContent='#'+r.evaluation_id+' · '+r.status;
+ const who=document.createElement('p');who.className='muted';who.textContent=(r.performed_by||'—')+' · '+formatTime(r.created_at)+' · Confidence '+Math.round(r.confidence*100)+'%';
+ const reason=document.createElement('p');reason.textContent=r.rationale;
+ const eid=document.createElement('code');eid.textContent='Evidence IDs: '+(r.evidence_ids||[]).join(', ');
+ const steps=document.createElement('p');steps.className='tiny muted';steps.textContent='Pipeline: '+(r.audit_trail||[]).join(' → ');
+ box.append(strong,who,reason,eid,steps);host.append(box);
+ }}
+$('runBtn').onclick=async()=>{const c=selected();if(!c)return;err('detailError','');
+ try{const out=await api('/api/assessments/'+assessmentId+'/controls/'+encodeURIComponent(c.control_id)+'/run',{method:'POST'});
+  err('detailError','Đã tạo job '+out.job_id+'. Theo dõi trạng thái tự động bên dưới.');await reload();
+ }catch(e){err('detailError',e.message);await reload()}}
+$('uploadForm').onsubmit=async e=>{e.preventDefault();const c=selected();if(!c)return;err('detailError','');
+ try{const file=$('evidenceFile').files[0];if(!file)throw Error('Chọn tệp PDF/DOCX.');const f=new FormData();f.append('evidence_type',$('evidenceType').value);f.append('file',file);
+ const result=await api('/api/assessments/'+assessmentId+'/controls/'+encodeURIComponent(c.control_id)+'/evidence',{method:'POST',body:f});
+ err('detailError','Đã lưu evidence '+result.evidence_id+'. Bấm Chạy AI Agent để đánh giá lại.');$('evidenceFile').value='';
+ }catch(ex){err('detailError',ex.message)}};
+$('approveBtn').onclick=async()=>{const c=selected();if(!c)return;try{
+ await api('/api/assessments/'+assessmentId+'/controls/'+encodeURIComponent(c.control_id)+'/review',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({note:$('reviewNote').value})});$('reviewNote').value='';await reload();
+ }catch(e){err('detailError',e.message)}};
+$('addMemberBtn').onclick=()=>$('memberDialog').showModal();$('closeMember').onclick=()=>$('memberDialog').close();
+$('memberForm').onsubmit=async e=>{e.preventDefault();err('memberError','');try{
+ await api('/api/team/users',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:$('mUsername').value,display_name:$('mDisplay').value,password:$('mPassword').value})});
+ $('memberDialog').close();$('memberForm').reset();err('detailError','Đã tạo tài khoản. Thành viên có thể đăng nhập từ máy khác.');
+ }catch(ex){err('memberError',ex.message)}};
+if(token)start().catch(ex=>{exit();err('loginError',ex.message)});
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HiveFive · Diễn tập ISO 27001</title>
+<link rel="stylesheet" href="/static/style.css"><link rel="stylesheet" href="/static/campus.css"><link rel="stylesheet" href="/static/guided.css">
+<script type="importmap">{"imports":{"three":"/static/vendor/three.module.min.js"}}</script>
+<script src="/static/app.js" defer></script><script src="/static/live.js" defer></script><script type="module" src="/static/campus.js"></script>
+<link rel="stylesheet" href="/static/live.css">
+<link rel="stylesheet" href="/static/cases.css">
+</head>
+<body>
+<header><a class="brand" href="/simulation"><span class="mark" aria-hidden="true">H5</span> HiveFive <span class="brand-note">ISO 27001 Lab</span></a><span class="pill">Dữ liệu giả lập</span></header>
+<main>
+<div class="intro"><div><p class="eyebrow">HIVEFIVE / SECURITY OPERATIONS LAB</p><h1>Một văn phòng sống.<br><span>Agent luôn quan sát.</span></h1><p class="muted">Bạn tạo sự việc. Agent tự phát hiện, đối chiếu kiểm soát và hướng dẫn xử lý.</p></div><div class="live-badge"><span class="live-dot"></span> GIÁM SÁT SỰ KIỆN<small>Nhân sự · Tài khoản · Thiết bị</small></div></div>
+
+<section class="campus-section" aria-labelledby="campus-title">
+<div class="campus-top"><div><p class="eyebrow">HIVEFIVE / VĂN PHÒNG TƯƠNG TÁC</p><h2 id="campus-title">Phòng kinh doanh · Tầng 3</h2></div><span id="scene-status" role="status">Đang khởi tạo 3D…</span></div>
+<div class="guided-layout"><div class="scene-column">
+<div class="campus-stage">
+<div id="campus-canvas" tabindex="0" role="application" aria-label="Văn phòng 3D. Chọn nhân vật rồi bấm sàn để đi hoặc dùng WASD và phím mũi tên. Kéo chuột để xoay. Có nút di chuyển và danh sách nhân sự bên dưới."></div>
+<div class="scene-case" aria-label="Nhân sự và tài sản đang quan sát"><strong id="scene-case-title">Đang đọc hồ sơ…</strong><span id="scene-case-detail"></span><span id="scene-case-issue"></span></div>
+<div class="campus-caption"><span class="live-dot"></span> <span id="scene-scenario">Khám phá văn phòng</span><small id="scene-help">Chọn nhân vật · Bấm sàn để đi · WASD / phím mũi tên</small></div>
+<div class="movement-pad" aria-label="Điều khiển nhân vật"><button data-move="up" aria-label="Đi lên">↑</button><button data-move="left" aria-label="Đi sang trái">←</button><button data-move="down" aria-label="Đi xuống">↓</button><button data-move="right" aria-label="Đi sang phải">→</button></div>
+<p id="scene-error" role="alert" hidden></p>
+</div>
+<div class="scene-navigation"><button type="button" id="focus-agent">Theo dõi AI Agent 🤖</button><button type="button" id="focus-scene">Về phòng diễn tập</button><button type="button" data-view="all" aria-pressed="false">Xem tòa nhà</button><details class="camera-options"><summary>Đổi phòng / góc nhìn</summary><div class="campus-tools"><button type="button" data-view="IT" aria-pressed="false">Tầng 2 · IT</button><button type="button" data-view="Ops" aria-pressed="false">Tầng 2 · Vận hành</button><button type="button" data-view="Finance" aria-pressed="false">Tầng 3 · Tài chính</button><button type="button" data-view="Sales" aria-pressed="true">Tầng 3 · Kinh doanh</button><button type="button" id="interior-scene" aria-pressed="false">Nội thất: tắt</button><button type="button" id="rotate-scene" aria-pressed="false">Tự xoay: tắt</button></div></details></div>
+<p id="movement-status" role="status">Đang chuẩn bị nhân vật…</p>
+</div><aside class="story-panel" aria-labelledby="live-title"><div class="business-controls"><p class="eyebrow">01 / THAO TÁC TRONG DOANH NGHIỆP</p><h2 id="live-title">Tạo một sự việc</h2><p class="muted">Chọn nhân sự trong mô hình hoặc danh sách. Cập nhật hồ sơ để thấy Agent phản ứng.</p>
+<form id="business-form"><label for="business-person">Nhân sự</label><select id="business-person" disabled></select><label for="business-action">Thao tác nghiệp vụ</label><select id="business-action" disabled></select><button id="business-submit" disabled>Ghi nhận thay đổi <span aria-hidden="true">↗</span></button></form><p id="business-feedback" role="status" aria-live="polite"></p><p id="live-error" role="alert" hidden></p><p class="hint">Các thao tác chỉ cập nhật dữ liệu giả lập. Agent tự chạy ở máy chủ khi có thay đổi; không cần nút kiểm tra.</p></div>
+<details class="simulation-notes"><summary>Thông tin mô phỏng và nhân vật</summary>
+<p id="story-kicker" class="eyebrow">CÁCH SỬ DỤNG</p><nav id="story-steps" aria-label="Các bước diễn tập" hidden><button data-step="0" aria-current="step"><span>1</span> Sự việc</button><button data-step="1"><span>2</span> Agent kiểm tra</button><button data-step="2"><span>3</span> Cách xử lý</button></nav>
+<h3 id="story-title">Khám phá rồi bắt đầu diễn tập</h3><p id="story-description">Mỗi lần chỉ hiển thị một phòng. Chọn một nhân vật để đi lại, hoặc chọn tình huống phía trên để xem sự việc cụ thể.</p><div id="story-facts"><ol class="welcome-steps"><li>Xem ai đang gặp vấn đề.</li><li>Hiểu bằng chứng agent kiểm tra.</li><li>Xem việc cần làm và ai phụ trách.</li></ol></div><div id="story-person" hidden></div>
+<div class="story-buttons"><button id="story-back" class="secondary" hidden>Quay lại</button><button id="story-next" hidden>Agent kiểm tra gì? →</button></div><p id="story-boundary" class="hint">Đi lại là tương tác minh họa. Kết quả ISO chỉ thay đổi khi thay đổi bằng chứng, không thay đổi khi nhân vật di chuyển.</p>
+</details></aside></div>
+<div class="campus-bottom"><span><i class="legend-dot orange"></i> Cần xử lý</span><span><i class="legend-dot blue"></i> Đang điều khiển</span><span class="campus-note">Kéo để xoay · Cuộn để phóng to</span></div>
+</section>
+<section class="panel live-workspace" aria-labelledby="observer-title">
+<div class="case-workspace" aria-labelledby="case-title">
+<div class="case-heading"><div><p class="eyebrow">HỒ SƠ SỰ VIỆC / THEO NHÂN SỰ</p><h2 id="case-title">Chọn một nhân sự</h2></div><a class="evidence-export" href="/api/live/report" download>Xuất bằng chứng JSON ↗</a></div>
+<p id="case-summary" class="muted">Đang đọc bằng chứng…</p>
+<ol id="case-lifecycle" class="case-lifecycle" aria-label="Vòng đời xử lý sự việc"></ol>
+<div id="case-triad" class="case-triad" aria-label="Tam giác An toàn thông tin: Con người · Phần mềm · Phần cứng"></div>
+<div class="case-columns"><div><h3>Thay đổi gần nhất</h3><p id="case-event"></p><div id="case-changes" class="case-changes"></div><p class="hint">Hiển thị trong 20 sự kiện gần nhất. SHA-256 dùng đối chiếu nội dung, không phải chữ ký số.</p></div><div><h3>Bằng chứng & cách xử lý</h3><div id="case-controls"></div></div></div>
+</div>
+<div class="live-observer"><div class="section-top"><div><p class="eyebrow">02 / AGENT PHÁT HIỆN & ĐỐI CHIẾU</p><h2 id="observer-title">Trạm giám sát</h2></div><span class="pill" id="live-state-badge">Đang kết nối</span></div><p id="live-status" role="status" aria-live="polite">Đang kết nối nguồn doanh nghiệp…</p><div id="live-findings"></div><p id="live-evidence" class="hint"></p><div id="live-tasks-section"></div><details open id="live-tools-details"><summary>Agent đang dùng công cụ nào?</summary><ol id="live-tools"></ol></details><details><summary>Nhật ký thay đổi doanh nghiệp</summary><ol id="business-events"></ol></details><details><summary>Phạm vi và giới hạn đánh giá</summary><p>Đã triển khai 8 kiểm soát con người A.6.1–A.6.8 theo quy tắc của đồ án. 48 kiểm soát A.7/A.8 trong danh mục chưa có bộ đánh giá. Phụ lục A của ISO/IEC 27001:2022 có 93 kiểm soát; danh mục 56 là phạm vi riêng của đồ án. Kết quả này không xác nhận chứng nhận ISO.</p></details></div>
+</section>
+<details class="panel research-panel"><summary>Thực nghiệm học thuật · Luật / Workflow / AI</summary><p class="hint">Cùng bộ đánh giá bằng chứng; khác cơ chế điều phối. Kết quả tổng hợp tự xây dựng chưa chứng minh hiệu quả trên doanh nghiệp thật.</p><div id="research-results">Đang tải kết quả thực nghiệm…</div><a href="/api/research" target="_blank" rel="noopener">Xem dữ liệu thực nghiệm JSON ↗</a></details>
+<details id="manual-simulation" class="panel"><summary>Diễn tập thủ công theo tình huống (tùy chọn)</summary>
+<section class="panel scenario-panel" aria-labelledby="scenario-title">
+<div class="scenario-choice"><p class="eyebrow">BẮT ĐẦU TẠI ĐÂY</p><h2 id="scenario-title">Bạn muốn diễn tập điều gì?</h2><label for="scenario">Chọn tình huống</label><select id="scenario" disabled></select></div>
+<div class="scenario-explanation"><p id="scenario-description" class="muted description">Đang tải các tình huống…</p><p id="scenario-goal"></p><p id="pending-scenario" role="status" hidden>Đã đổi lựa chọn. Bấm bắt đầu để chạy tình huống mới.</p></div>
+<div class="scenario-actions"><button id="run" disabled>Bắt đầu diễn tập <span aria-hidden="true">→</span></button><details class="mode-options"><summary>Tùy chọn AI</summary><label for="mode">Chế độ giải thích</label><select id="mode"><option value="rules">Quy tắc · không cần model</option><option value="ai">Thêm giải thích từ Ollama</option></select><p class="hint">Agent đối chiếu bằng chứng theo quy tắc. Ollama bổ sung đề xuất xử lý.</p></details><p id="progress" role="status" aria-live="polite"></p><p id="error" role="alert" hidden></p><button id="retry" class="secondary" hidden>Thử lại</button></div>
+</section>
+</details>
+<section id="outcome-section" class="panel results-panel" aria-labelledby="results-title" hidden><div class="section-top"><div><p class="eyebrow">KẾT QUẢ CỦA TÌNH HUỐNG</p><h2 id="results-title">Vấn đề cần xử lý</h2></div><span id="result-mode" class="pill">Chưa chạy</span></div><p id="result-context" class="muted"></p><div id="results"></div><details id="other-controls"><summary id="other-controls-label">Các kiểm soát còn lại</summary><div id="other-results"></div></details><section id="ai-section" hidden><h3>Đề xuất bổ sung từ Ollama</h3><p class="hint">Đối chiếu với bằng chứng trước khi áp dụng.</p><p id="ai-text"></p></section><details id="trace-section" hidden><summary>Nhật ký kỹ thuật của lần chạy</summary><ol id="trace"></ol></details></section>
+<details id="people-section" class="panel people-panel"><summary>Tra cứu chi tiết doanh nghiệp & hồ sơ nhân sự</summary><div class="company-summary">HiveFive · <span id="people-count">—</span> nhân sự · <span id="account-count">—</span> tài khoản · <span id="device-count">—</span> laptop · <span id="affected-count">—</span> người cần xử lý <span id="affected-note"></span></div>
+<div class="person-inspector"><label for="person-select">Xem hồ sơ / chọn nhân vật điều khiển</label><select id="person-select"><option value="">Chọn nhân sự…</option></select><div id="person-detail" aria-live="polite"><p class="muted">Chọn nhân vật trong mô hình hoặc chọn từ danh sách.</p></div></div>
+<div class="section-top"><h2 id="people-title">Danh sách nhân sự & tài sản</h2><div><label for="department">Lọc phòng ban</label><select id="department"><option value="">Tất cả phòng ban</option><option>IT</option><option>Ops</option><option>Finance</option><option>Sales</option></select></div></div><p id="people-context" class="muted">Dữ liệu mẫu trước khi diễn tập.</p><div class="table-wrap" role="region" aria-label="Danh sách nhân sự và tài sản" tabindex="0"><table><thead><tr><th>Nhân sự</th><th>Phòng ban</th><th>Đào tạo</th><th>NDA</th><th>Phần mềm</th><th>Phần cứng</th><th>Trạng thái</th></tr></thead><tbody id="people"></tbody></table></div></details>
+<footer>Đồ án mô phỏng ISO/IEC 27001:2022 · Nhóm con người A.6.1–A.6.8 · Theo quy tắc dự án, không phải chứng nhận ISO.</footer>
+</main></body></html>

@@ -1,0 +1,42 @@
+# Nâng cấp học thuật HiveFive
+
+- [x] Hồ sơ sự việc: trước/sau, bằng chứng, thiếu dữ liệu, khắc phục và tái kiểm tra.
+- [x] Agent: kiểm tra sâu dữ liệu thiếu; số đo thời gian và quyết định công cụ.
+- [x] Thực nghiệm: ca tổng hợp có nhãn riêng, ba chế độ, báo cáo kết quả có thể tái lập.
+- [x] Kiểm tra Python/JS, trình duyệt và tài liệu nghiên cứu.
+
+Minh chứng: 40 test Python, 3 test tìm đường; Ollama thật 3 ca; UI HF-042
+thiếu bằng chứng revision 5 → khắc phục revision 6 → AI xác minh và đóng việc.
+Đây là hoàn tất phần nâng cấp kỹ thuật đã lên kế hoạch. Thẩm định chuyên gia,
+dữ liệu doanh nghiệp thật, nghiên cứu người dùng vẫn là giới hạn học thuật.
+
+## Đào sâu nghiệp vụ và so sánh công bằng
+- [x] Đào tạo hết hạn, nguồn LMS mâu thuẫn, chuyển vai trò và ngoại lệ giữ tài khoản có phê duyệt/thời hạn.
+- [x] Agent kiểm tra ngữ cảnh nghiệp vụ và giải thích căn cứ xử lý.
+- [x] Thực nghiệm ba chế độ cùng tập ca, lặp nhiều lần; báo cáo độ phân tán và lỗi.
+- [x] UI thao tác/căn cứ mới, kiểm thử và tài liệu bảo vệ/khảo sát người dùng.
+
+Kiểm chứng: 47 test Python, 3 test tìm đường; 72 lượt thực nghiệm Ollama/luật/
+workflow cùng 8 ca, 3 lần lặp. UI mâu thuẫn nguồn và rà soát vai trò đã xác minh.
+Chưa nạp hai sửa logic cuối vào server đang chạy vì lệnh khởi động lại bị
+automatic policy chặn. Chi tiết ở docs/VALIDATION.md; không coi runtime đã cập nhật đủ.
+
+## Củng cố đúng trọng tâm đề tài (06/11/2026)
+- [x] Sửa README; cảnh báo tuyên bố khảo sát cũ và phân biệt keyword retrieval/chính sách lab.
+- [x] Ma trận kiểm soát – tiêu chí – nguồn bằng chứng, phân biệt ba engine.
+- [x] Màn hình Hồ sơ ISO: dữ liệu database, lịch sử, tái đánh giá, xuất JSON; đường dẫn từ Agent Workspace.
+- [x] Benchmark Ollama thật 8 ca chung và 8 ca fault injection phục hồi, tách nguồn/lỗi.
+- [x] Rà giao diện vai trò: nối hồ sơ đánh giá, không thêm hoạt ảnh hoặc lời hoàn thành giả.
+- [ ] Thẩm định tiêu chí và nhãn bởi chuyên gia; thử tập kiểm định ẩn.
+- [ ] SoA có lý do áp dụng/loại trừ, phê duyệt và nguồn tiêu chuẩn được cấp quyền.
+- [ ] Dữ liệu doanh nghiệp thật, khảo sát người tham gia và đánh giá UI đầy đủ.
+
+## Thống nhất doanh nghiệp giữa các màn hình
+- [x] Nguồn PostgreSQL theo đợt, chuẩn hóa EMP và mã nhập HF.
+- [x] Migration bổ sung danh bạ 50 người, tài khoản, máy; bảo toàn trạng thái và quan hệ cũ.
+- [x] Live/simulation web, Agent inventory và collector cùng đọc snapshot có hash.
+- [x] Bằng chứng gắn entity_refs; Dashboard và hồ sơ cùng cảnh báo dữ liệu cũ.
+- [x] Giao diện Doanh nghiệp; văn phòng chia 4 khu cho đủ 50 người.
+- [x] Kiểm tra API xuyên phần: đào tạo, alias, tái đánh giá, lệnh máy, số liệu IAM và phân quyền.
+- [ ] Kiểm thử đầy đủ thao tác bấm UI có đăng nhập.
+- [ ] Tích hợp nguồn doanh nghiệp thật; tối ưu kiểm tra độ mới theo phụ thuộc từng trường.

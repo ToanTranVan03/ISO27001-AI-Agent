@@ -1,0 +1,20 @@
+# Tuần 7 — Kế hoạch và nhật ký
+
+- Thời gian: **23/11/2026–29/11/2026 (thứ Hai–Chủ nhật).**
+- Trạng thái: **Chưa đến tuần — cập nhật sau.**
+
+## Mục tiêu và kế hoạch
+
+Chưa lập. Bổ sung khi đến tuần này theo tiến độ thực tế.
+
+## Nhật ký
+
+Chưa có ghi chép.
+
+## Kết quả và minh chứng
+
+Chưa cập nhật.
+
+## Vướng mắc và việc chuyển tiếp
+
+Chưa cập nhật.

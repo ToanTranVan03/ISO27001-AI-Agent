@@ -1,0 +1,292 @@
+{
+  "run_timestamp": "2026-10-18T12:39:17.322604",
+  "total_testcases": 15,
+  "accuracy_percent": 33.33,
+  "results": [
+    {
+      "testcase_id": "TC-A8.1-01",
+      "control_id": "A.8.1",
+      "scenario_type": "Compliant",
+      "expected_status": "Compliant",
+      "ai_status": "Insufficient Evidence",
+      "ai_confidence": 1.0,
+      "ai_rationale": "[GUARDRAIL BLOCKED] Tem thời gian ở tương lai — nghi ngờ giả mạo",
+      "match": false,
+      "guardrail_triggered": true,
+      "blocked_evidences": [
+        {
+          "evidence_id": "EVID-TECH-A81-TC01-01",
+          "code": "GUARD_ERR_001",
+          "reason": "Tem thời gian ở tương lai — nghi ngờ giả mạo"
+        }
+      ],
+      "latency_sec": 0.0
+    },
+    {
+      "testcase_id": "TC-A8.1-02",
+      "control_id": "A.8.1",
+      "scenario_type": "Non-Compliant",
+      "expected_status": "Non-Compliant",
+      "ai_status": "Insufficient Evidence",
+      "ai_confidence": 1.0,
+      "ai_rationale": "[GUARDRAIL BLOCKED] Tem thời gian ở tương lai — nghi ngờ giả mạo",
+      "match": false,
+      "guardrail_triggered": true,
+      "blocked_evidences": [
+        {
+          "evidence_id": "EVID-TECH-A81-TC02-01",
+          "code": "GUARD_ERR_001",
+          "reason": "Tem thời gian ở tương lai — nghi ngờ giả mạo"
+        }
+      ],
+      "latency_sec": 0.0
+    },
+    {
+      "testcase_id": "TC-A8.1-03",
+      "control_id": "A.8.1",
+      "scenario_type": "Insufficient Evidence",
+      "expected_status": "Insufficient Evidence",
+      "ai_status": "Insufficient Evidence",
+      "ai_confidence": 1.0,
+      "ai_rationale": "[GUARDRAIL BLOCKED] Tem thời gian ở tương lai — nghi ngờ giả mạo",
+      "match": true,
+      "guardrail_triggered": true,
+      "blocked_evidences": [
+        {
+          "evidence_id": "EVID-TECH-A81-TC03-01",
+          "code": "GUARD_ERR_001",
+          "reason": "Tem thời gian ở tương lai — nghi ngờ giả mạo"
+        }
+      ],
+      "latency_sec": 0.0
+    },
+    {
+      "testcase_id": "TC-A8.2-01",
+      "control_id": "A.8.2",
+      "scenario_type": "Compliant",
+      "expected_status": "Compliant",
+      "ai_status": "Insufficient Evidence",
+      "ai_confidence": 1.0,
+      "ai_rationale": "[GUARDRAIL BLOCKED] Tem thời gian ở tương lai — nghi ngờ giả mạo",
+      "match": false,
+      "guardrail_triggered": true,
+      "blocked_evidences": [
+        {
+          "evidence_id": "EVID-TECH-A82-TC01-01",
+          "code": "GUARD_ERR_001",
+          "reason": "Tem thời gian ở tương lai — nghi ngờ giả mạo"
+        }
+      ],
+      "latency_sec": 0.0
+    },
+    {
+      "testcase_id": "TC-A8.2-02",
+      "control_id": "A.8.2",
+      "scenario_type": "Non-Compliant",
+      "expected_status": "Non-Compliant",
+      "ai_status": "Insufficient Evidence",
+      "ai_confidence": 1.0,
+      "ai_rationale": "[GUARDRAIL BLOCKED] Tem thời gian ở tương lai — nghi ngờ giả mạo",
+      "match": false,
+      "guardrail_triggered": true,
+      "blocked_evidences": [
+        {
+          "evidence_id": "EVID-TECH-A82-TC02-01",
+          "code": "GUARD_ERR_001",
+          "reason": "Tem thời gian ở tương lai — nghi ngờ giả mạo"
+        }
+      ],
+      "latency_sec": 0.0
+    },
+    {
+      "testcase_id": "TC-A8.2-03",
+      "control_id": "A.8.2",
+      "scenario_type": "Insufficient Evidence",
+      "expected_status": "Insufficient Evidence",
+      "ai_status": "Insufficient Evidence",
+      "ai_confidence": 1.0,
+      "ai_rationale": "[GUARDRAIL BLOCKED] Tem thời gian ở tương lai — nghi ngờ giả mạo",
+      "match": true,
+      "guardrail_triggered": true,
+      "blocked_evidences": [
+        {
+          "evidence_id": "EVID-TECH-A82-TC03-01",
+          "code": "GUARD_ERR_001",
+          "reason": "Tem thời gian ở tương lai — nghi ngờ giả mạo"
+        }
+      ],
+      "latency_sec": 0.0
+    },
+    {
+      "testcase_id": "TC-A8.3-01",
+      "control_id": "A.8.3",
+      "scenario_type": "Compliant",
+      "expected_status": "Compliant",
+      "ai_status": "Insufficient Evidence",
+      "ai_confidence": 1.0,
+      "ai_rationale": "[GUARDRAIL BLOCKED] Tem thời gian ở tương lai — nghi ngờ giả mạo",
+      "match": false,
+      "guardrail_triggered": true,
+      "blocked_evidences": [
+        {
+          "evidence_id": "EVID-TECH-A83-TC01-01",
+          "code": "GUARD_ERR_001",
+          "reason": "Tem thời gian ở tương lai — nghi ngờ giả mạo"
+        }
+      ],
+      "latency_sec": 0.0
+    },
+    {
+      "testcase_id": "TC-A8.3-02",
+      "control_id": "A.8.3",
+      "scenario_type": "Non-Compliant",
+      "expected_status": "Non-Compliant",
+      "ai_status": "Insufficient Evidence",
+      "ai_confidence": 1.0,
+      "ai_rationale": "[GUARDRAIL BLOCKED] Tem thời gian ở tương lai — nghi ngờ giả mạo",
+      "match": false,
+      "guardrail_triggered": true,
+      "blocked_evidences": [
+        {
+          "evidence_id": "EVID-TECH-A83-TC02-01",
+          "code": "GUARD_ERR_001",
+          "reason": "Tem thời gian ở tương lai — nghi ngờ giả mạo"
+        }
+      ],
+      "latency_sec": 0.0
+    },
+    {
+      "testcase_id": "TC-A8.3-03",
+      "control_id": "A.8.3",
+      "scenario_type": "Insufficient Evidence",
+      "expected_status": "Insufficient Evidence",
+      "ai_status": "Insufficient Evidence",
+      "ai_confidence": 1.0,
+      "ai_rationale": "[GUARDRAIL BLOCKED] Tem thời gian ở tương lai — nghi ngờ giả mạo",
+      "match": true,
+      "guardrail_triggered": true,
+      "blocked_evidences": [
+        {
+          "evidence_id": "EVID-TECH-A83-TC03-01",
+          "code": "GUARD_ERR_001",
+          "reason": "Tem thời gian ở tương lai — nghi ngờ giả mạo"
+        }
+      ],
+      "latency_sec": 0.0
+    },
+    {
+      "testcase_id": "TC-A8.4-01",
+      "control_id": "A.8.4",
+      "scenario_type": "Compliant",
+      "expected_status": "Compliant",
+      "ai_status": "Insufficient Evidence",
+      "ai_confidence": 1.0,
+      "ai_rationale": "[GUARDRAIL BLOCKED] Tem thời gian ở tương lai — nghi ngờ giả mạo",
+      "match": false,
+      "guardrail_triggered": true,
+      "blocked_evidences": [
+        {
+          "evidence_id": "EVID-TECH-A84-TC01-01",
+          "code": "GUARD_ERR_001",
+          "reason": "Tem thời gian ở tương lai — nghi ngờ giả mạo"
+        }
+      ],
+      "latency_sec": 0.0
+    },
+    {
+      "testcase_id": "TC-A8.4-02",
+      "control_id": "A.8.4",
+      "scenario_type": "Non-Compliant",
+      "expected_status": "Non-Compliant",
+      "ai_status": "Insufficient Evidence",
+      "ai_confidence": 1.0,
+      "ai_rationale": "[GUARDRAIL BLOCKED] Tem thời gian ở tương lai — nghi ngờ giả mạo",
+      "match": false,
+      "guardrail_triggered": true,
+      "blocked_evidences": [
+        {
+          "evidence_id": "EVID-TECH-A84-TC02-01",
+          "code": "GUARD_ERR_001",
+          "reason": "Tem thời gian ở tương lai — nghi ngờ giả mạo"
+        }
+      ],
+      "latency_sec": 0.0
+    },
+    {
+      "testcase_id": "TC-A8.4-03",
+      "control_id": "A.8.4",
+      "scenario_type": "Insufficient Evidence",
+      "expected_status": "Insufficient Evidence",
+      "ai_status": "Insufficient Evidence",
+      "ai_confidence": 1.0,
+      "ai_rationale": "[GUARDRAIL BLOCKED] Tem thời gian ở tương lai — nghi ngờ giả mạo",
+      "match": true,
+      "guardrail_triggered": true,
+      "blocked_evidences": [
+        {
+          "evidence_id": "EVID-TECH-A84-TC03-01",
+          "code": "GUARD_ERR_001",
+          "reason": "Tem thời gian ở tương lai — nghi ngờ giả mạo"
+        }
+      ],
+      "latency_sec": 0.0
+    },
+    {
+      "testcase_id": "TC-A8.5-01",
+      "control_id": "A.8.5",
+      "scenario_type": "Compliant",
+      "expected_status": "Compliant",
+      "ai_status": "Insufficient Evidence",
+      "ai_confidence": 1.0,
+      "ai_rationale": "[GUARDRAIL BLOCKED] Tem thời gian ở tương lai — nghi ngờ giả mạo",
+      "match": false,
+      "guardrail_triggered": true,
+      "blocked_evidences": [
+        {
+          "evidence_id": "EVID-TECH-A85-TC01-01",
+          "code": "GUARD_ERR_001",
+          "reason": "Tem thời gian ở tương lai — nghi ngờ giả mạo"
+        }
+      ],
+      "latency_sec": 0.0
+    },
+    {
+      "testcase_id": "TC-A8.5-02",
+      "control_id": "A.8.5",
+      "scenario_type": "Non-Compliant",
+      "expected_status": "Non-Compliant",
+      "ai_status": "Insufficient Evidence",
+      "ai_confidence": 1.0,
+      "ai_rationale": "[GUARDRAIL BLOCKED] Tem thời gian ở tương lai — nghi ngờ giả mạo",
+      "match": false,
+      "guardrail_triggered": true,
+      "blocked_evidences": [
+        {
+          "evidence_id": "EVID-TECH-A85-TC02-01",
+          "code": "GUARD_ERR_001",
+          "reason": "Tem thời gian ở tương lai — nghi ngờ giả mạo"
+        }
+      ],
+      "latency_sec": 0.0
+    },
+    {
+      "testcase_id": "TC-A8.5-03",
+      "control_id": "A.8.5",
+      "scenario_type": "Insufficient Evidence",
+      "expected_status": "Insufficient Evidence",
+      "ai_status": "Insufficient Evidence",
+      "ai_confidence": 1.0,
+      "ai_rationale": "[GUARDRAIL BLOCKED] Tem thời gian ở tương lai — nghi ngờ giả mạo",
+      "match": true,
+      "guardrail_triggered": true,
+      "blocked_evidences": [
+        {
+          "evidence_id": "EVID-TECH-A85-TC03-01",
+          "code": "GUARD_ERR_001",
+          "reason": "Tem thời gian ở tương lai — nghi ngờ giả mạo"
+        }
+      ],
+      "latency_sec": 0.0
+    }
+  ]
+}

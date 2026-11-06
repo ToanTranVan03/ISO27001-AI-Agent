@@ -1,0 +1,4241 @@
+{
+  "generated_at": "2026-10-30T12:07:00.603909+00:00",
+  "case_count": 28,
+  "dataset_sha256": "f8885edfe317dfe4a667feefc0aa180cb7f6ed48d94043583f9f5e98ccd07f61",
+  "cases": [
+    {
+      "id": "A.6.1-violation",
+      "patches": [
+        {
+          "collection": "people",
+          "id": "HF-004",
+          "fields": {
+            "screened": false
+          }
+        }
+      ],
+      "expected": [
+        [
+          "A.6.1",
+          "HF-004",
+          "finding"
+        ]
+      ]
+    },
+    {
+      "id": "A.6.1-unknown",
+      "patches": [
+        {
+          "collection": "people",
+          "id": "HF-004",
+          "fields": {
+            "screened": null
+          }
+        }
+      ],
+      "expected": [
+        [
+          "A.6.1",
+          "HF-004",
+          "missing"
+        ]
+      ]
+    },
+    {
+      "id": "A.6.1-clean",
+      "patches": [
+        {
+          "collection": "people",
+          "id": "HF-004",
+          "fields": {
+            "screened": true
+          }
+        }
+      ],
+      "expected": []
+    },
+    {
+      "id": "A.6.2-violation",
+      "patches": [
+        {
+          "collection": "people",
+          "id": "HF-012",
+          "fields": {
+            "terms_signed": false
+          }
+        }
+      ],
+      "expected": [
+        [
+          "A.6.2",
+          "HF-012",
+          "finding"
+        ]
+      ]
+    },
+    {
+      "id": "A.6.2-unknown",
+      "patches": [
+        {
+          "collection": "people",
+          "id": "HF-012",
+          "fields": {
+            "terms_signed": null
+          }
+        }
+      ],
+      "expected": [
+        [
+          "A.6.2",
+          "HF-012",
+          "missing"
+        ]
+      ]
+    },
+    {
+      "id": "A.6.2-clean",
+      "patches": [
+        {
+          "collection": "people",
+          "id": "HF-012",
+          "fields": {
+            "terms_signed": true
+          }
+        }
+      ],
+      "expected": []
+    },
+    {
+      "id": "A.6.3-violation",
+      "patches": [
+        {
+          "collection": "people",
+          "id": "HF-042",
+          "fields": {
+            "training_passed": false
+          }
+        }
+      ],
+      "expected": [
+        [
+          "A.6.3",
+          "HF-042",
+          "finding"
+        ]
+      ]
+    },
+    {
+      "id": "A.6.3-unknown",
+      "patches": [
+        {
+          "collection": "people",
+          "id": "HF-042",
+          "fields": {
+            "training_passed": null
+          }
+        }
+      ],
+      "expected": [
+        [
+          "A.6.3",
+          "HF-042",
+          "missing"
+        ]
+      ]
+    },
+    {
+      "id": "A.6.3-clean",
+      "patches": [
+        {
+          "collection": "people",
+          "id": "HF-042",
+          "fields": {
+            "training_passed": true
+          }
+        }
+      ],
+      "expected": []
+    },
+    {
+      "id": "A.6.4-violation",
+      "patches": [
+        {
+          "collection": "people",
+          "id": "HF-018",
+          "fields": {
+            "disciplinary_informed": false
+          }
+        }
+      ],
+      "expected": [
+        [
+          "A.6.4",
+          "HF-018",
+          "finding"
+        ]
+      ]
+    },
+    {
+      "id": "A.6.4-unknown",
+      "patches": [
+        {
+          "collection": "people",
+          "id": "HF-018",
+          "fields": {
+            "disciplinary_informed": null
+          }
+        }
+      ],
+      "expected": [
+        [
+          "A.6.4",
+          "HF-018",
+          "missing"
+        ]
+      ]
+    },
+    {
+      "id": "A.6.4-clean",
+      "patches": [
+        {
+          "collection": "people",
+          "id": "HF-018",
+          "fields": {
+            "disciplinary_informed": true
+          }
+        }
+      ],
+      "expected": []
+    },
+    {
+      "id": "A.6.5-violation",
+      "patches": [
+        {
+          "collection": "people",
+          "id": "HF-025",
+          "fields": {
+            "post_employment_ack": false
+          }
+        }
+      ],
+      "expected": [
+        [
+          "A.6.5",
+          "HF-025",
+          "finding"
+        ]
+      ]
+    },
+    {
+      "id": "A.6.5-unknown",
+      "patches": [
+        {
+          "collection": "people",
+          "id": "HF-025",
+          "fields": {
+            "post_employment_ack": null
+          }
+        }
+      ],
+      "expected": [
+        [
+          "A.6.5",
+          "HF-025",
+          "missing"
+        ]
+      ]
+    },
+    {
+      "id": "A.6.5-clean",
+      "patches": [
+        {
+          "collection": "people",
+          "id": "HF-025",
+          "fields": {
+            "post_employment_ack": true
+          }
+        }
+      ],
+      "expected": []
+    },
+    {
+      "id": "A.6.6-violation",
+      "patches": [
+        {
+          "collection": "people",
+          "id": "HF-033",
+          "fields": {
+            "nda_signed": false
+          }
+        }
+      ],
+      "expected": [
+        [
+          "A.6.6",
+          "HF-033",
+          "finding"
+        ]
+      ]
+    },
+    {
+      "id": "A.6.6-unknown",
+      "patches": [
+        {
+          "collection": "people",
+          "id": "HF-033",
+          "fields": {
+            "nda_signed": null
+          }
+        }
+      ],
+      "expected": [
+        [
+          "A.6.6",
+          "HF-033",
+          "missing"
+        ]
+      ]
+    },
+    {
+      "id": "A.6.6-clean",
+      "patches": [
+        {
+          "collection": "people",
+          "id": "HF-033",
+          "fields": {
+            "nda_signed": true
+          }
+        }
+      ],
+      "expected": []
+    },
+    {
+      "id": "A.6.7-violation",
+      "patches": [
+        {
+          "collection": "people",
+          "id": "HF-028",
+          "fields": {
+            "remote_policy_ack": false
+          }
+        }
+      ],
+      "expected": [
+        [
+          "A.6.7",
+          "HF-028",
+          "finding"
+        ]
+      ]
+    },
+    {
+      "id": "A.6.7-unknown",
+      "patches": [
+        {
+          "collection": "people",
+          "id": "HF-028",
+          "fields": {
+            "remote_policy_ack": null
+          }
+        }
+      ],
+      "expected": [
+        [
+          "A.6.7",
+          "HF-028",
+          "missing"
+        ]
+      ]
+    },
+    {
+      "id": "A.6.7-clean",
+      "patches": [
+        {
+          "collection": "people",
+          "id": "HF-028",
+          "fields": {
+            "remote_policy_ack": true
+          }
+        }
+      ],
+      "expected": []
+    },
+    {
+      "id": "A.6.8-violation",
+      "patches": [
+        {
+          "collection": "people",
+          "id": "HF-049",
+          "fields": {
+            "reporting_trained": false
+          }
+        }
+      ],
+      "expected": [
+        [
+          "A.6.8",
+          "HF-049",
+          "finding"
+        ]
+      ]
+    },
+    {
+      "id": "A.6.8-unknown",
+      "patches": [
+        {
+          "collection": "people",
+          "id": "HF-049",
+          "fields": {
+            "reporting_trained": null
+          }
+        }
+      ],
+      "expected": [
+        [
+          "A.6.8",
+          "HF-049",
+          "missing"
+        ]
+      ]
+    },
+    {
+      "id": "A.6.8-clean",
+      "patches": [
+        {
+          "collection": "people",
+          "id": "HF-049",
+          "fields": {
+            "reporting_trained": true
+          }
+        }
+      ],
+      "expected": []
+    },
+    {
+      "id": "offboarding-open-assets",
+      "patches": [
+        {
+          "collection": "people",
+          "id": "HF-025",
+          "fields": {
+            "status": "terminated"
+          }
+        }
+      ],
+      "expected": [
+        [
+          "A.6.5",
+          "HF-025",
+          "finding"
+        ]
+      ]
+    },
+    {
+      "id": "offboarding-repaired",
+      "patches": [
+        {
+          "collection": "people",
+          "id": "HF-025",
+          "fields": {
+            "status": "terminated"
+          }
+        },
+        {
+          "collection": "accounts",
+          "id": "HF-025-HR",
+          "fields": {
+            "active": false
+          }
+        },
+        {
+          "collection": "accounts",
+          "id": "HF-025-Email",
+          "fields": {
+            "active": false
+          }
+        },
+        {
+          "collection": "accounts",
+          "id": "HF-025-VPN",
+          "fields": {
+            "active": false
+          }
+        },
+        {
+          "collection": "accounts",
+          "id": "HF-025-Nghiệp vụ",
+          "fields": {
+            "active": false
+          }
+        },
+        {
+          "collection": "devices",
+          "id": "LT-025",
+          "fields": {
+            "returned": true
+          }
+        }
+      ],
+      "expected": []
+    },
+    {
+      "id": "remote-asset-risk",
+      "patches": [
+        {
+          "collection": "people",
+          "id": "HF-028",
+          "fields": {
+            "remote": true
+          }
+        },
+        {
+          "collection": "accounts",
+          "id": "HF-028-VPN",
+          "fields": {
+            "mfa": false
+          }
+        },
+        {
+          "collection": "devices",
+          "id": "LT-028",
+          "fields": {
+            "encrypted": false
+          }
+        }
+      ],
+      "expected": [
+        [
+          "A.6.7",
+          "HF-028",
+          "finding"
+        ]
+      ]
+    },
+    {
+      "id": "compound-known-and-unknown",
+      "patches": [
+        {
+          "collection": "people",
+          "id": "HF-012",
+          "fields": {
+            "nda_signed": false,
+            "terms_signed": false
+          }
+        },
+        {
+          "collection": "people",
+          "id": "HF-042",
+          "fields": {
+            "training_passed": null
+          }
+        }
+      ],
+      "expected": [
+        [
+          "A.6.6",
+          "HF-012",
+          "finding"
+        ],
+        [
+          "A.6.2",
+          "HF-012",
+          "finding"
+        ],
+        [
+          "A.6.3",
+          "HF-042",
+          "missing"
+        ]
+      ]
+    }
+  ],
+  "trials": [
+    {
+      "case_id": "A.6.1-violation",
+      "mode": "rules",
+      "snapshot_hash": "450555e767c5a8d913764a70ca7c1e5ed6fcd6b452d4c194b60ba591c9a81c4b",
+      "success": true,
+      "tool_calls": 0,
+      "model_calls": 0,
+      "exact_match": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.1",
+          "HF-004",
+          "finding"
+        ]
+      ],
+      "elapsed_ms": 2.44,
+      "decisions": []
+    },
+    {
+      "case_id": "A.6.1-violation",
+      "mode": "workflow",
+      "snapshot_hash": "450555e767c5a8d913764a70ca7c1e5ed6fcd6b452d4c194b60ba591c9a81c4b",
+      "success": true,
+      "tool_calls": 6,
+      "model_calls": 0,
+      "metrics": {
+        "elapsed_ms": 9.35,
+        "tool_calls": 6,
+        "model_calls": 0,
+        "decision_ms": 0.0
+      },
+      "exact_match": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.1",
+          "HF-004",
+          "finding"
+        ]
+      ],
+      "elapsed_ms": 28.74,
+      "decisions": [
+        {
+          "type": "action",
+          "step": 1,
+          "tool": "read_people",
+          "reason": "Đọc hồ sơ nhân sự và chính sách từ nguồn doanh nghiệp giả lập.",
+          "available_tools": [
+            "read_people",
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 2,
+          "tool": "read_assets",
+          "reason": "Đọc tài khoản HR/Email/VPN và laptop, liên kết theo mã nhân sự.",
+          "available_tools": [
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 3,
+          "tool": "assess_people",
+          "reason": "Đánh giá A.6.1–A.6.8 bằng bằng chứng đã thu thập.",
+          "available_tools": [
+            "assess_people",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 4,
+          "tool": "check_scope",
+          "reason": "Đối chiếu 56 kiểm soát, phân biệt phần có evaluator và phần chưa triển khai.",
+          "available_tools": [
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 5,
+          "tool": "create_tasks",
+          "reason": "Lưu công việc đề xuất nội bộ HR/IT, chống trùng và kiểm tra lại công việc cũ.",
+          "available_tools": [
+            "create_tasks"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 6,
+          "tool": "verify_report",
+          "reason": "Xác minh báo cáo, mã bằng chứng và giới hạn phạm vi trước khi kết thúc.",
+          "available_tools": [
+            "verify_report"
+          ],
+          "decision_ms": 0.0
+        }
+      ]
+    },
+    {
+      "case_id": "A.6.1-unknown",
+      "mode": "rules",
+      "snapshot_hash": "b160117fb31f2ae301cf51df0e45754ca9f4c10eb945f549304a70b197ab18db",
+      "success": true,
+      "tool_calls": 0,
+      "model_calls": 0,
+      "exact_match": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.1",
+          "HF-004",
+          "missing"
+        ]
+      ],
+      "elapsed_ms": 2.9,
+      "decisions": []
+    },
+    {
+      "case_id": "A.6.1-unknown",
+      "mode": "workflow",
+      "snapshot_hash": "b160117fb31f2ae301cf51df0e45754ca9f4c10eb945f549304a70b197ab18db",
+      "success": true,
+      "tool_calls": 7,
+      "model_calls": 0,
+      "metrics": {
+        "elapsed_ms": 7.93,
+        "tool_calls": 7,
+        "model_calls": 0,
+        "decision_ms": 0.0
+      },
+      "exact_match": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.1",
+          "HF-004",
+          "missing"
+        ]
+      ],
+      "elapsed_ms": 25.34,
+      "decisions": [
+        {
+          "type": "action",
+          "step": 1,
+          "tool": "read_people",
+          "reason": "Đọc hồ sơ nhân sự và chính sách từ nguồn doanh nghiệp giả lập.",
+          "available_tools": [
+            "read_people",
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 2,
+          "tool": "read_assets",
+          "reason": "Đọc tài khoản HR/Email/VPN và laptop, liên kết theo mã nhân sự.",
+          "available_tools": [
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 3,
+          "tool": "assess_people",
+          "reason": "Đánh giá A.6.1–A.6.8 bằng bằng chứng đã thu thập.",
+          "available_tools": [
+            "assess_people",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 4,
+          "tool": "inspect_evidence",
+          "reason": "Xác định trường bằng chứng bị thiếu và yêu cầu nguồn xác minh; không suy diễn dữ liệu chưa có.",
+          "available_tools": [
+            "inspect_evidence",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 5,
+          "tool": "check_scope",
+          "reason": "Đối chiếu 56 kiểm soát, phân biệt phần có evaluator và phần chưa triển khai.",
+          "available_tools": [
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 6,
+          "tool": "create_tasks",
+          "reason": "Lưu công việc đề xuất nội bộ HR/IT, chống trùng và kiểm tra lại công việc cũ.",
+          "available_tools": [
+            "create_tasks"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 7,
+          "tool": "verify_report",
+          "reason": "Xác minh báo cáo, mã bằng chứng và giới hạn phạm vi trước khi kết thúc.",
+          "available_tools": [
+            "verify_report"
+          ],
+          "decision_ms": 0.0
+        }
+      ]
+    },
+    {
+      "case_id": "A.6.1-clean",
+      "mode": "rules",
+      "snapshot_hash": "5e104b56da4ff60000887a7f8a63bb80842d790ea0271226dfed9c15d8ae9cff",
+      "success": true,
+      "tool_calls": 0,
+      "model_calls": 0,
+      "exact_match": true,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [],
+      "elapsed_ms": 3.2,
+      "decisions": []
+    },
+    {
+      "case_id": "A.6.1-clean",
+      "mode": "workflow",
+      "snapshot_hash": "5e104b56da4ff60000887a7f8a63bb80842d790ea0271226dfed9c15d8ae9cff",
+      "success": true,
+      "tool_calls": 6,
+      "model_calls": 0,
+      "metrics": {
+        "elapsed_ms": 7.35,
+        "tool_calls": 6,
+        "model_calls": 0,
+        "decision_ms": 0.0
+      },
+      "exact_match": true,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [],
+      "elapsed_ms": 25.14,
+      "decisions": [
+        {
+          "type": "action",
+          "step": 1,
+          "tool": "read_people",
+          "reason": "Đọc hồ sơ nhân sự và chính sách từ nguồn doanh nghiệp giả lập.",
+          "available_tools": [
+            "read_people",
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 2,
+          "tool": "read_assets",
+          "reason": "Đọc tài khoản HR/Email/VPN và laptop, liên kết theo mã nhân sự.",
+          "available_tools": [
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 3,
+          "tool": "assess_people",
+          "reason": "Đánh giá A.6.1–A.6.8 bằng bằng chứng đã thu thập.",
+          "available_tools": [
+            "assess_people",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 4,
+          "tool": "check_scope",
+          "reason": "Đối chiếu 56 kiểm soát, phân biệt phần có evaluator và phần chưa triển khai.",
+          "available_tools": [
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 5,
+          "tool": "create_tasks",
+          "reason": "Lưu công việc đề xuất nội bộ HR/IT, chống trùng và kiểm tra lại công việc cũ.",
+          "available_tools": [
+            "create_tasks"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 6,
+          "tool": "verify_report",
+          "reason": "Xác minh báo cáo, mã bằng chứng và giới hạn phạm vi trước khi kết thúc.",
+          "available_tools": [
+            "verify_report"
+          ],
+          "decision_ms": 0.0
+        }
+      ]
+    },
+    {
+      "case_id": "A.6.2-violation",
+      "mode": "rules",
+      "snapshot_hash": "34f226e6d70ed051cb07fea0fc0620fc2d1d2b3a1705ca6cf9e9d9a867f4d87a",
+      "success": true,
+      "tool_calls": 0,
+      "model_calls": 0,
+      "exact_match": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.2",
+          "HF-012",
+          "finding"
+        ]
+      ],
+      "elapsed_ms": 2.71,
+      "decisions": []
+    },
+    {
+      "case_id": "A.6.2-violation",
+      "mode": "workflow",
+      "snapshot_hash": "34f226e6d70ed051cb07fea0fc0620fc2d1d2b3a1705ca6cf9e9d9a867f4d87a",
+      "success": true,
+      "tool_calls": 6,
+      "model_calls": 0,
+      "metrics": {
+        "elapsed_ms": 8.06,
+        "tool_calls": 6,
+        "model_calls": 0,
+        "decision_ms": 0.0
+      },
+      "exact_match": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.2",
+          "HF-012",
+          "finding"
+        ]
+      ],
+      "elapsed_ms": 26.03,
+      "decisions": [
+        {
+          "type": "action",
+          "step": 1,
+          "tool": "read_people",
+          "reason": "Đọc hồ sơ nhân sự và chính sách từ nguồn doanh nghiệp giả lập.",
+          "available_tools": [
+            "read_people",
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 2,
+          "tool": "read_assets",
+          "reason": "Đọc tài khoản HR/Email/VPN và laptop, liên kết theo mã nhân sự.",
+          "available_tools": [
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 3,
+          "tool": "assess_people",
+          "reason": "Đánh giá A.6.1–A.6.8 bằng bằng chứng đã thu thập.",
+          "available_tools": [
+            "assess_people",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 4,
+          "tool": "check_scope",
+          "reason": "Đối chiếu 56 kiểm soát, phân biệt phần có evaluator và phần chưa triển khai.",
+          "available_tools": [
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 5,
+          "tool": "create_tasks",
+          "reason": "Lưu công việc đề xuất nội bộ HR/IT, chống trùng và kiểm tra lại công việc cũ.",
+          "available_tools": [
+            "create_tasks"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 6,
+          "tool": "verify_report",
+          "reason": "Xác minh báo cáo, mã bằng chứng và giới hạn phạm vi trước khi kết thúc.",
+          "available_tools": [
+            "verify_report"
+          ],
+          "decision_ms": 0.0
+        }
+      ]
+    },
+    {
+      "case_id": "A.6.2-unknown",
+      "mode": "rules",
+      "snapshot_hash": "e38d80cc6b59fe5c58c6e2735cfb558fe7ae4cf781241f9032ec1339e5b92c50",
+      "success": true,
+      "tool_calls": 0,
+      "model_calls": 0,
+      "exact_match": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.2",
+          "HF-012",
+          "missing"
+        ]
+      ],
+      "elapsed_ms": 2.82,
+      "decisions": []
+    },
+    {
+      "case_id": "A.6.2-unknown",
+      "mode": "workflow",
+      "snapshot_hash": "e38d80cc6b59fe5c58c6e2735cfb558fe7ae4cf781241f9032ec1339e5b92c50",
+      "success": true,
+      "tool_calls": 7,
+      "model_calls": 0,
+      "metrics": {
+        "elapsed_ms": 6.97,
+        "tool_calls": 7,
+        "model_calls": 0,
+        "decision_ms": 0.0
+      },
+      "exact_match": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.2",
+          "HF-012",
+          "missing"
+        ]
+      ],
+      "elapsed_ms": 23.75,
+      "decisions": [
+        {
+          "type": "action",
+          "step": 1,
+          "tool": "read_people",
+          "reason": "Đọc hồ sơ nhân sự và chính sách từ nguồn doanh nghiệp giả lập.",
+          "available_tools": [
+            "read_people",
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 2,
+          "tool": "read_assets",
+          "reason": "Đọc tài khoản HR/Email/VPN và laptop, liên kết theo mã nhân sự.",
+          "available_tools": [
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 3,
+          "tool": "assess_people",
+          "reason": "Đánh giá A.6.1–A.6.8 bằng bằng chứng đã thu thập.",
+          "available_tools": [
+            "assess_people",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 4,
+          "tool": "inspect_evidence",
+          "reason": "Xác định trường bằng chứng bị thiếu và yêu cầu nguồn xác minh; không suy diễn dữ liệu chưa có.",
+          "available_tools": [
+            "inspect_evidence",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 5,
+          "tool": "check_scope",
+          "reason": "Đối chiếu 56 kiểm soát, phân biệt phần có evaluator và phần chưa triển khai.",
+          "available_tools": [
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 6,
+          "tool": "create_tasks",
+          "reason": "Lưu công việc đề xuất nội bộ HR/IT, chống trùng và kiểm tra lại công việc cũ.",
+          "available_tools": [
+            "create_tasks"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 7,
+          "tool": "verify_report",
+          "reason": "Xác minh báo cáo, mã bằng chứng và giới hạn phạm vi trước khi kết thúc.",
+          "available_tools": [
+            "verify_report"
+          ],
+          "decision_ms": 0.0
+        }
+      ]
+    },
+    {
+      "case_id": "A.6.2-clean",
+      "mode": "rules",
+      "snapshot_hash": "5e104b56da4ff60000887a7f8a63bb80842d790ea0271226dfed9c15d8ae9cff",
+      "success": true,
+      "tool_calls": 0,
+      "model_calls": 0,
+      "exact_match": true,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [],
+      "elapsed_ms": 2.62,
+      "decisions": []
+    },
+    {
+      "case_id": "A.6.2-clean",
+      "mode": "workflow",
+      "snapshot_hash": "5e104b56da4ff60000887a7f8a63bb80842d790ea0271226dfed9c15d8ae9cff",
+      "success": true,
+      "tool_calls": 6,
+      "model_calls": 0,
+      "metrics": {
+        "elapsed_ms": 7.77,
+        "tool_calls": 6,
+        "model_calls": 0,
+        "decision_ms": 0.0
+      },
+      "exact_match": true,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [],
+      "elapsed_ms": 24.49,
+      "decisions": [
+        {
+          "type": "action",
+          "step": 1,
+          "tool": "read_people",
+          "reason": "Đọc hồ sơ nhân sự và chính sách từ nguồn doanh nghiệp giả lập.",
+          "available_tools": [
+            "read_people",
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 2,
+          "tool": "read_assets",
+          "reason": "Đọc tài khoản HR/Email/VPN và laptop, liên kết theo mã nhân sự.",
+          "available_tools": [
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 3,
+          "tool": "assess_people",
+          "reason": "Đánh giá A.6.1–A.6.8 bằng bằng chứng đã thu thập.",
+          "available_tools": [
+            "assess_people",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 4,
+          "tool": "check_scope",
+          "reason": "Đối chiếu 56 kiểm soát, phân biệt phần có evaluator và phần chưa triển khai.",
+          "available_tools": [
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 5,
+          "tool": "create_tasks",
+          "reason": "Lưu công việc đề xuất nội bộ HR/IT, chống trùng và kiểm tra lại công việc cũ.",
+          "available_tools": [
+            "create_tasks"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 6,
+          "tool": "verify_report",
+          "reason": "Xác minh báo cáo, mã bằng chứng và giới hạn phạm vi trước khi kết thúc.",
+          "available_tools": [
+            "verify_report"
+          ],
+          "decision_ms": 0.0
+        }
+      ]
+    },
+    {
+      "case_id": "A.6.3-violation",
+      "mode": "rules",
+      "snapshot_hash": "d861177de5536e30019318962a3a1c2d5de55e55465f6893ddb092fa64dba4a9",
+      "success": true,
+      "tool_calls": 0,
+      "model_calls": 0,
+      "exact_match": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.3",
+          "HF-042",
+          "finding"
+        ]
+      ],
+      "elapsed_ms": 2.37,
+      "decisions": []
+    },
+    {
+      "case_id": "A.6.3-violation",
+      "mode": "workflow",
+      "snapshot_hash": "d861177de5536e30019318962a3a1c2d5de55e55465f6893ddb092fa64dba4a9",
+      "success": true,
+      "tool_calls": 6,
+      "model_calls": 0,
+      "metrics": {
+        "elapsed_ms": 8.58,
+        "tool_calls": 6,
+        "model_calls": 0,
+        "decision_ms": 0.0
+      },
+      "exact_match": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.3",
+          "HF-042",
+          "finding"
+        ]
+      ],
+      "elapsed_ms": 25.17,
+      "decisions": [
+        {
+          "type": "action",
+          "step": 1,
+          "tool": "read_people",
+          "reason": "Đọc hồ sơ nhân sự và chính sách từ nguồn doanh nghiệp giả lập.",
+          "available_tools": [
+            "read_people",
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 2,
+          "tool": "read_assets",
+          "reason": "Đọc tài khoản HR/Email/VPN và laptop, liên kết theo mã nhân sự.",
+          "available_tools": [
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 3,
+          "tool": "assess_people",
+          "reason": "Đánh giá A.6.1–A.6.8 bằng bằng chứng đã thu thập.",
+          "available_tools": [
+            "assess_people",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 4,
+          "tool": "check_scope",
+          "reason": "Đối chiếu 56 kiểm soát, phân biệt phần có evaluator và phần chưa triển khai.",
+          "available_tools": [
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 5,
+          "tool": "create_tasks",
+          "reason": "Lưu công việc đề xuất nội bộ HR/IT, chống trùng và kiểm tra lại công việc cũ.",
+          "available_tools": [
+            "create_tasks"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 6,
+          "tool": "verify_report",
+          "reason": "Xác minh báo cáo, mã bằng chứng và giới hạn phạm vi trước khi kết thúc.",
+          "available_tools": [
+            "verify_report"
+          ],
+          "decision_ms": 0.0
+        }
+      ]
+    },
+    {
+      "case_id": "A.6.3-unknown",
+      "mode": "rules",
+      "snapshot_hash": "53905c4a4a3cf4e09a1838e459e9479465554eb40122d937d15d01c56ce0f3c0",
+      "success": true,
+      "tool_calls": 0,
+      "model_calls": 0,
+      "exact_match": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.3",
+          "HF-042",
+          "missing"
+        ]
+      ],
+      "elapsed_ms": 2.49,
+      "decisions": []
+    },
+    {
+      "case_id": "A.6.3-unknown",
+      "mode": "workflow",
+      "snapshot_hash": "53905c4a4a3cf4e09a1838e459e9479465554eb40122d937d15d01c56ce0f3c0",
+      "success": true,
+      "tool_calls": 7,
+      "model_calls": 0,
+      "metrics": {
+        "elapsed_ms": 7.93,
+        "tool_calls": 7,
+        "model_calls": 0,
+        "decision_ms": 0.0
+      },
+      "exact_match": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.3",
+          "HF-042",
+          "missing"
+        ]
+      ],
+      "elapsed_ms": 26.1,
+      "decisions": [
+        {
+          "type": "action",
+          "step": 1,
+          "tool": "read_people",
+          "reason": "Đọc hồ sơ nhân sự và chính sách từ nguồn doanh nghiệp giả lập.",
+          "available_tools": [
+            "read_people",
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 2,
+          "tool": "read_assets",
+          "reason": "Đọc tài khoản HR/Email/VPN và laptop, liên kết theo mã nhân sự.",
+          "available_tools": [
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 3,
+          "tool": "assess_people",
+          "reason": "Đánh giá A.6.1–A.6.8 bằng bằng chứng đã thu thập.",
+          "available_tools": [
+            "assess_people",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 4,
+          "tool": "inspect_evidence",
+          "reason": "Xác định trường bằng chứng bị thiếu và yêu cầu nguồn xác minh; không suy diễn dữ liệu chưa có.",
+          "available_tools": [
+            "inspect_evidence",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 5,
+          "tool": "check_scope",
+          "reason": "Đối chiếu 56 kiểm soát, phân biệt phần có evaluator và phần chưa triển khai.",
+          "available_tools": [
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 6,
+          "tool": "create_tasks",
+          "reason": "Lưu công việc đề xuất nội bộ HR/IT, chống trùng và kiểm tra lại công việc cũ.",
+          "available_tools": [
+            "create_tasks"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 7,
+          "tool": "verify_report",
+          "reason": "Xác minh báo cáo, mã bằng chứng và giới hạn phạm vi trước khi kết thúc.",
+          "available_tools": [
+            "verify_report"
+          ],
+          "decision_ms": 0.0
+        }
+      ]
+    },
+    {
+      "case_id": "A.6.3-clean",
+      "mode": "rules",
+      "snapshot_hash": "5e104b56da4ff60000887a7f8a63bb80842d790ea0271226dfed9c15d8ae9cff",
+      "success": true,
+      "tool_calls": 0,
+      "model_calls": 0,
+      "exact_match": true,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [],
+      "elapsed_ms": 2.28,
+      "decisions": []
+    },
+    {
+      "case_id": "A.6.3-clean",
+      "mode": "workflow",
+      "snapshot_hash": "5e104b56da4ff60000887a7f8a63bb80842d790ea0271226dfed9c15d8ae9cff",
+      "success": true,
+      "tool_calls": 6,
+      "model_calls": 0,
+      "metrics": {
+        "elapsed_ms": 7.03,
+        "tool_calls": 6,
+        "model_calls": 0,
+        "decision_ms": 0.0
+      },
+      "exact_match": true,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [],
+      "elapsed_ms": 23.24,
+      "decisions": [
+        {
+          "type": "action",
+          "step": 1,
+          "tool": "read_people",
+          "reason": "Đọc hồ sơ nhân sự và chính sách từ nguồn doanh nghiệp giả lập.",
+          "available_tools": [
+            "read_people",
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 2,
+          "tool": "read_assets",
+          "reason": "Đọc tài khoản HR/Email/VPN và laptop, liên kết theo mã nhân sự.",
+          "available_tools": [
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 3,
+          "tool": "assess_people",
+          "reason": "Đánh giá A.6.1–A.6.8 bằng bằng chứng đã thu thập.",
+          "available_tools": [
+            "assess_people",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 4,
+          "tool": "check_scope",
+          "reason": "Đối chiếu 56 kiểm soát, phân biệt phần có evaluator và phần chưa triển khai.",
+          "available_tools": [
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 5,
+          "tool": "create_tasks",
+          "reason": "Lưu công việc đề xuất nội bộ HR/IT, chống trùng và kiểm tra lại công việc cũ.",
+          "available_tools": [
+            "create_tasks"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 6,
+          "tool": "verify_report",
+          "reason": "Xác minh báo cáo, mã bằng chứng và giới hạn phạm vi trước khi kết thúc.",
+          "available_tools": [
+            "verify_report"
+          ],
+          "decision_ms": 0.0
+        }
+      ]
+    },
+    {
+      "case_id": "A.6.4-violation",
+      "mode": "rules",
+      "snapshot_hash": "ae3a80d70f617bfb6f698c9e3fad7a322b927a211ed372256a1296ebb827c5be",
+      "success": true,
+      "tool_calls": 0,
+      "model_calls": 0,
+      "exact_match": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.4",
+          "HF-018",
+          "finding"
+        ]
+      ],
+      "elapsed_ms": 3.39,
+      "decisions": []
+    },
+    {
+      "case_id": "A.6.4-violation",
+      "mode": "workflow",
+      "snapshot_hash": "ae3a80d70f617bfb6f698c9e3fad7a322b927a211ed372256a1296ebb827c5be",
+      "success": true,
+      "tool_calls": 6,
+      "model_calls": 0,
+      "metrics": {
+        "elapsed_ms": 8.44,
+        "tool_calls": 6,
+        "model_calls": 0,
+        "decision_ms": 0.0
+      },
+      "exact_match": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.4",
+          "HF-018",
+          "finding"
+        ]
+      ],
+      "elapsed_ms": 24.57,
+      "decisions": [
+        {
+          "type": "action",
+          "step": 1,
+          "tool": "read_people",
+          "reason": "Đọc hồ sơ nhân sự và chính sách từ nguồn doanh nghiệp giả lập.",
+          "available_tools": [
+            "read_people",
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 2,
+          "tool": "read_assets",
+          "reason": "Đọc tài khoản HR/Email/VPN và laptop, liên kết theo mã nhân sự.",
+          "available_tools": [
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 3,
+          "tool": "assess_people",
+          "reason": "Đánh giá A.6.1–A.6.8 bằng bằng chứng đã thu thập.",
+          "available_tools": [
+            "assess_people",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 4,
+          "tool": "check_scope",
+          "reason": "Đối chiếu 56 kiểm soát, phân biệt phần có evaluator và phần chưa triển khai.",
+          "available_tools": [
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 5,
+          "tool": "create_tasks",
+          "reason": "Lưu công việc đề xuất nội bộ HR/IT, chống trùng và kiểm tra lại công việc cũ.",
+          "available_tools": [
+            "create_tasks"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 6,
+          "tool": "verify_report",
+          "reason": "Xác minh báo cáo, mã bằng chứng và giới hạn phạm vi trước khi kết thúc.",
+          "available_tools": [
+            "verify_report"
+          ],
+          "decision_ms": 0.0
+        }
+      ]
+    },
+    {
+      "case_id": "A.6.4-unknown",
+      "mode": "rules",
+      "snapshot_hash": "d3a04780d5dcdac0c6ab2a03b5892f857aacd21307d49d1155079b66b34a16d2",
+      "success": true,
+      "tool_calls": 0,
+      "model_calls": 0,
+      "exact_match": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.4",
+          "HF-018",
+          "missing"
+        ]
+      ],
+      "elapsed_ms": 2.44,
+      "decisions": []
+    },
+    {
+      "case_id": "A.6.4-unknown",
+      "mode": "workflow",
+      "snapshot_hash": "d3a04780d5dcdac0c6ab2a03b5892f857aacd21307d49d1155079b66b34a16d2",
+      "success": true,
+      "tool_calls": 7,
+      "model_calls": 0,
+      "metrics": {
+        "elapsed_ms": 7.23,
+        "tool_calls": 7,
+        "model_calls": 0,
+        "decision_ms": 0.0
+      },
+      "exact_match": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.4",
+          "HF-018",
+          "missing"
+        ]
+      ],
+      "elapsed_ms": 22.92,
+      "decisions": [
+        {
+          "type": "action",
+          "step": 1,
+          "tool": "read_people",
+          "reason": "Đọc hồ sơ nhân sự và chính sách từ nguồn doanh nghiệp giả lập.",
+          "available_tools": [
+            "read_people",
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 2,
+          "tool": "read_assets",
+          "reason": "Đọc tài khoản HR/Email/VPN và laptop, liên kết theo mã nhân sự.",
+          "available_tools": [
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 3,
+          "tool": "assess_people",
+          "reason": "Đánh giá A.6.1–A.6.8 bằng bằng chứng đã thu thập.",
+          "available_tools": [
+            "assess_people",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 4,
+          "tool": "inspect_evidence",
+          "reason": "Xác định trường bằng chứng bị thiếu và yêu cầu nguồn xác minh; không suy diễn dữ liệu chưa có.",
+          "available_tools": [
+            "inspect_evidence",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 5,
+          "tool": "check_scope",
+          "reason": "Đối chiếu 56 kiểm soát, phân biệt phần có evaluator và phần chưa triển khai.",
+          "available_tools": [
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 6,
+          "tool": "create_tasks",
+          "reason": "Lưu công việc đề xuất nội bộ HR/IT, chống trùng và kiểm tra lại công việc cũ.",
+          "available_tools": [
+            "create_tasks"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 7,
+          "tool": "verify_report",
+          "reason": "Xác minh báo cáo, mã bằng chứng và giới hạn phạm vi trước khi kết thúc.",
+          "available_tools": [
+            "verify_report"
+          ],
+          "decision_ms": 0.0
+        }
+      ]
+    },
+    {
+      "case_id": "A.6.4-clean",
+      "mode": "rules",
+      "snapshot_hash": "5e104b56da4ff60000887a7f8a63bb80842d790ea0271226dfed9c15d8ae9cff",
+      "success": true,
+      "tool_calls": 0,
+      "model_calls": 0,
+      "exact_match": true,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [],
+      "elapsed_ms": 2.24,
+      "decisions": []
+    },
+    {
+      "case_id": "A.6.4-clean",
+      "mode": "workflow",
+      "snapshot_hash": "5e104b56da4ff60000887a7f8a63bb80842d790ea0271226dfed9c15d8ae9cff",
+      "success": true,
+      "tool_calls": 6,
+      "model_calls": 0,
+      "metrics": {
+        "elapsed_ms": 7.5,
+        "tool_calls": 6,
+        "model_calls": 0,
+        "decision_ms": 0.0
+      },
+      "exact_match": true,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [],
+      "elapsed_ms": 23.69,
+      "decisions": [
+        {
+          "type": "action",
+          "step": 1,
+          "tool": "read_people",
+          "reason": "Đọc hồ sơ nhân sự và chính sách từ nguồn doanh nghiệp giả lập.",
+          "available_tools": [
+            "read_people",
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 2,
+          "tool": "read_assets",
+          "reason": "Đọc tài khoản HR/Email/VPN và laptop, liên kết theo mã nhân sự.",
+          "available_tools": [
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 3,
+          "tool": "assess_people",
+          "reason": "Đánh giá A.6.1–A.6.8 bằng bằng chứng đã thu thập.",
+          "available_tools": [
+            "assess_people",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 4,
+          "tool": "check_scope",
+          "reason": "Đối chiếu 56 kiểm soát, phân biệt phần có evaluator và phần chưa triển khai.",
+          "available_tools": [
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 5,
+          "tool": "create_tasks",
+          "reason": "Lưu công việc đề xuất nội bộ HR/IT, chống trùng và kiểm tra lại công việc cũ.",
+          "available_tools": [
+            "create_tasks"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 6,
+          "tool": "verify_report",
+          "reason": "Xác minh báo cáo, mã bằng chứng và giới hạn phạm vi trước khi kết thúc.",
+          "available_tools": [
+            "verify_report"
+          ],
+          "decision_ms": 0.0
+        }
+      ]
+    },
+    {
+      "case_id": "A.6.5-violation",
+      "mode": "rules",
+      "snapshot_hash": "9b04527407f51999506d0d24a828701e4d9b026b9fe244906ffdf36608cd5f4e",
+      "success": true,
+      "tool_calls": 0,
+      "model_calls": 0,
+      "exact_match": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.5",
+          "HF-025",
+          "finding"
+        ]
+      ],
+      "elapsed_ms": 2.54,
+      "decisions": []
+    },
+    {
+      "case_id": "A.6.5-violation",
+      "mode": "workflow",
+      "snapshot_hash": "9b04527407f51999506d0d24a828701e4d9b026b9fe244906ffdf36608cd5f4e",
+      "success": true,
+      "tool_calls": 7,
+      "model_calls": 0,
+      "metrics": {
+        "elapsed_ms": 7.32,
+        "tool_calls": 7,
+        "model_calls": 0,
+        "decision_ms": 0.0
+      },
+      "exact_match": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.5",
+          "HF-025",
+          "finding"
+        ]
+      ],
+      "elapsed_ms": 24.26,
+      "decisions": [
+        {
+          "type": "action",
+          "step": 1,
+          "tool": "read_people",
+          "reason": "Đọc hồ sơ nhân sự và chính sách từ nguồn doanh nghiệp giả lập.",
+          "available_tools": [
+            "read_people",
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 2,
+          "tool": "read_assets",
+          "reason": "Đọc tài khoản HR/Email/VPN và laptop, liên kết theo mã nhân sự.",
+          "available_tools": [
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 3,
+          "tool": "assess_people",
+          "reason": "Đánh giá A.6.1–A.6.8 bằng bằng chứng đã thu thập.",
+          "available_tools": [
+            "assess_people",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 4,
+          "tool": "inspect_offboarding",
+          "reason": "Kiểm tra sâu tài khoản còn mở và thiết bị chưa trả của người nghỉ việc.",
+          "available_tools": [
+            "inspect_offboarding",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 5,
+          "tool": "check_scope",
+          "reason": "Đối chiếu 56 kiểm soát, phân biệt phần có evaluator và phần chưa triển khai.",
+          "available_tools": [
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 6,
+          "tool": "create_tasks",
+          "reason": "Lưu công việc đề xuất nội bộ HR/IT, chống trùng và kiểm tra lại công việc cũ.",
+          "available_tools": [
+            "create_tasks"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 7,
+          "tool": "verify_report",
+          "reason": "Xác minh báo cáo, mã bằng chứng và giới hạn phạm vi trước khi kết thúc.",
+          "available_tools": [
+            "verify_report"
+          ],
+          "decision_ms": 0.0
+        }
+      ]
+    },
+    {
+      "case_id": "A.6.5-unknown",
+      "mode": "rules",
+      "snapshot_hash": "10be64a97cd3a65e3f277e781e8472dcf2cf40f9aef6d96f39e87ddb7a0d3e53",
+      "success": true,
+      "tool_calls": 0,
+      "model_calls": 0,
+      "exact_match": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.5",
+          "HF-025",
+          "missing"
+        ]
+      ],
+      "elapsed_ms": 2.52,
+      "decisions": []
+    },
+    {
+      "case_id": "A.6.5-unknown",
+      "mode": "workflow",
+      "snapshot_hash": "10be64a97cd3a65e3f277e781e8472dcf2cf40f9aef6d96f39e87ddb7a0d3e53",
+      "success": true,
+      "tool_calls": 8,
+      "model_calls": 0,
+      "metrics": {
+        "elapsed_ms": 7.84,
+        "tool_calls": 8,
+        "model_calls": 0,
+        "decision_ms": 0.0
+      },
+      "exact_match": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.5",
+          "HF-025",
+          "missing"
+        ]
+      ],
+      "elapsed_ms": 24.44,
+      "decisions": [
+        {
+          "type": "action",
+          "step": 1,
+          "tool": "read_people",
+          "reason": "Đọc hồ sơ nhân sự và chính sách từ nguồn doanh nghiệp giả lập.",
+          "available_tools": [
+            "read_people",
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 2,
+          "tool": "read_assets",
+          "reason": "Đọc tài khoản HR/Email/VPN và laptop, liên kết theo mã nhân sự.",
+          "available_tools": [
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 3,
+          "tool": "assess_people",
+          "reason": "Đánh giá A.6.1–A.6.8 bằng bằng chứng đã thu thập.",
+          "available_tools": [
+            "assess_people",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 4,
+          "tool": "inspect_offboarding",
+          "reason": "Kiểm tra sâu tài khoản còn mở và thiết bị chưa trả của người nghỉ việc.",
+          "available_tools": [
+            "inspect_offboarding",
+            "inspect_evidence",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 5,
+          "tool": "inspect_evidence",
+          "reason": "Xác định trường bằng chứng bị thiếu và yêu cầu nguồn xác minh; không suy diễn dữ liệu chưa có.",
+          "available_tools": [
+            "inspect_evidence",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 6,
+          "tool": "check_scope",
+          "reason": "Đối chiếu 56 kiểm soát, phân biệt phần có evaluator và phần chưa triển khai.",
+          "available_tools": [
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 7,
+          "tool": "create_tasks",
+          "reason": "Lưu công việc đề xuất nội bộ HR/IT, chống trùng và kiểm tra lại công việc cũ.",
+          "available_tools": [
+            "create_tasks"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 8,
+          "tool": "verify_report",
+          "reason": "Xác minh báo cáo, mã bằng chứng và giới hạn phạm vi trước khi kết thúc.",
+          "available_tools": [
+            "verify_report"
+          ],
+          "decision_ms": 0.0
+        }
+      ]
+    },
+    {
+      "case_id": "A.6.5-clean",
+      "mode": "rules",
+      "snapshot_hash": "5e104b56da4ff60000887a7f8a63bb80842d790ea0271226dfed9c15d8ae9cff",
+      "success": true,
+      "tool_calls": 0,
+      "model_calls": 0,
+      "exact_match": true,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [],
+      "elapsed_ms": 2.38,
+      "decisions": []
+    },
+    {
+      "case_id": "A.6.5-clean",
+      "mode": "workflow",
+      "snapshot_hash": "5e104b56da4ff60000887a7f8a63bb80842d790ea0271226dfed9c15d8ae9cff",
+      "success": true,
+      "tool_calls": 6,
+      "model_calls": 0,
+      "metrics": {
+        "elapsed_ms": 7.85,
+        "tool_calls": 6,
+        "model_calls": 0,
+        "decision_ms": 0.0
+      },
+      "exact_match": true,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [],
+      "elapsed_ms": 25.53,
+      "decisions": [
+        {
+          "type": "action",
+          "step": 1,
+          "tool": "read_people",
+          "reason": "Đọc hồ sơ nhân sự và chính sách từ nguồn doanh nghiệp giả lập.",
+          "available_tools": [
+            "read_people",
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 2,
+          "tool": "read_assets",
+          "reason": "Đọc tài khoản HR/Email/VPN và laptop, liên kết theo mã nhân sự.",
+          "available_tools": [
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 3,
+          "tool": "assess_people",
+          "reason": "Đánh giá A.6.1–A.6.8 bằng bằng chứng đã thu thập.",
+          "available_tools": [
+            "assess_people",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 4,
+          "tool": "check_scope",
+          "reason": "Đối chiếu 56 kiểm soát, phân biệt phần có evaluator và phần chưa triển khai.",
+          "available_tools": [
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 5,
+          "tool": "create_tasks",
+          "reason": "Lưu công việc đề xuất nội bộ HR/IT, chống trùng và kiểm tra lại công việc cũ.",
+          "available_tools": [
+            "create_tasks"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 6,
+          "tool": "verify_report",
+          "reason": "Xác minh báo cáo, mã bằng chứng và giới hạn phạm vi trước khi kết thúc.",
+          "available_tools": [
+            "verify_report"
+          ],
+          "decision_ms": 0.0
+        }
+      ]
+    },
+    {
+      "case_id": "A.6.6-violation",
+      "mode": "rules",
+      "snapshot_hash": "be2f4761325a08c2901dcf90f33c6f1f93f87f15321f58833e34ae7bbd9c4ec8",
+      "success": true,
+      "tool_calls": 0,
+      "model_calls": 0,
+      "exact_match": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.6",
+          "HF-033",
+          "finding"
+        ]
+      ],
+      "elapsed_ms": 2.9,
+      "decisions": []
+    },
+    {
+      "case_id": "A.6.6-violation",
+      "mode": "workflow",
+      "snapshot_hash": "be2f4761325a08c2901dcf90f33c6f1f93f87f15321f58833e34ae7bbd9c4ec8",
+      "success": true,
+      "tool_calls": 6,
+      "model_calls": 0,
+      "metrics": {
+        "elapsed_ms": 8.06,
+        "tool_calls": 6,
+        "model_calls": 0,
+        "decision_ms": 0.0
+      },
+      "exact_match": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.6",
+          "HF-033",
+          "finding"
+        ]
+      ],
+      "elapsed_ms": 24.12,
+      "decisions": [
+        {
+          "type": "action",
+          "step": 1,
+          "tool": "read_people",
+          "reason": "Đọc hồ sơ nhân sự và chính sách từ nguồn doanh nghiệp giả lập.",
+          "available_tools": [
+            "read_people",
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 2,
+          "tool": "read_assets",
+          "reason": "Đọc tài khoản HR/Email/VPN và laptop, liên kết theo mã nhân sự.",
+          "available_tools": [
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 3,
+          "tool": "assess_people",
+          "reason": "Đánh giá A.6.1–A.6.8 bằng bằng chứng đã thu thập.",
+          "available_tools": [
+            "assess_people",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 4,
+          "tool": "check_scope",
+          "reason": "Đối chiếu 56 kiểm soát, phân biệt phần có evaluator và phần chưa triển khai.",
+          "available_tools": [
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 5,
+          "tool": "create_tasks",
+          "reason": "Lưu công việc đề xuất nội bộ HR/IT, chống trùng và kiểm tra lại công việc cũ.",
+          "available_tools": [
+            "create_tasks"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 6,
+          "tool": "verify_report",
+          "reason": "Xác minh báo cáo, mã bằng chứng và giới hạn phạm vi trước khi kết thúc.",
+          "available_tools": [
+            "verify_report"
+          ],
+          "decision_ms": 0.0
+        }
+      ]
+    },
+    {
+      "case_id": "A.6.6-unknown",
+      "mode": "rules",
+      "snapshot_hash": "9cd81ed8bdf6dc7ca9bacdf5e9693529ae7b5233927d345febe292c3856e30c6",
+      "success": true,
+      "tool_calls": 0,
+      "model_calls": 0,
+      "exact_match": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.6",
+          "HF-033",
+          "missing"
+        ]
+      ],
+      "elapsed_ms": 2.59,
+      "decisions": []
+    },
+    {
+      "case_id": "A.6.6-unknown",
+      "mode": "workflow",
+      "snapshot_hash": "9cd81ed8bdf6dc7ca9bacdf5e9693529ae7b5233927d345febe292c3856e30c6",
+      "success": true,
+      "tool_calls": 7,
+      "model_calls": 0,
+      "metrics": {
+        "elapsed_ms": 7.33,
+        "tool_calls": 7,
+        "model_calls": 0,
+        "decision_ms": 0.0
+      },
+      "exact_match": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.6",
+          "HF-033",
+          "missing"
+        ]
+      ],
+      "elapsed_ms": 31.3,
+      "decisions": [
+        {
+          "type": "action",
+          "step": 1,
+          "tool": "read_people",
+          "reason": "Đọc hồ sơ nhân sự và chính sách từ nguồn doanh nghiệp giả lập.",
+          "available_tools": [
+            "read_people",
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 2,
+          "tool": "read_assets",
+          "reason": "Đọc tài khoản HR/Email/VPN và laptop, liên kết theo mã nhân sự.",
+          "available_tools": [
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 3,
+          "tool": "assess_people",
+          "reason": "Đánh giá A.6.1–A.6.8 bằng bằng chứng đã thu thập.",
+          "available_tools": [
+            "assess_people",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 4,
+          "tool": "inspect_evidence",
+          "reason": "Xác định trường bằng chứng bị thiếu và yêu cầu nguồn xác minh; không suy diễn dữ liệu chưa có.",
+          "available_tools": [
+            "inspect_evidence",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 5,
+          "tool": "check_scope",
+          "reason": "Đối chiếu 56 kiểm soát, phân biệt phần có evaluator và phần chưa triển khai.",
+          "available_tools": [
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 6,
+          "tool": "create_tasks",
+          "reason": "Lưu công việc đề xuất nội bộ HR/IT, chống trùng và kiểm tra lại công việc cũ.",
+          "available_tools": [
+            "create_tasks"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 7,
+          "tool": "verify_report",
+          "reason": "Xác minh báo cáo, mã bằng chứng và giới hạn phạm vi trước khi kết thúc.",
+          "available_tools": [
+            "verify_report"
+          ],
+          "decision_ms": 0.0
+        }
+      ]
+    },
+    {
+      "case_id": "A.6.6-clean",
+      "mode": "rules",
+      "snapshot_hash": "5e104b56da4ff60000887a7f8a63bb80842d790ea0271226dfed9c15d8ae9cff",
+      "success": true,
+      "tool_calls": 0,
+      "model_calls": 0,
+      "exact_match": true,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [],
+      "elapsed_ms": 2.46,
+      "decisions": []
+    },
+    {
+      "case_id": "A.6.6-clean",
+      "mode": "workflow",
+      "snapshot_hash": "5e104b56da4ff60000887a7f8a63bb80842d790ea0271226dfed9c15d8ae9cff",
+      "success": true,
+      "tool_calls": 6,
+      "model_calls": 0,
+      "metrics": {
+        "elapsed_ms": 8.22,
+        "tool_calls": 6,
+        "model_calls": 0,
+        "decision_ms": 0.0
+      },
+      "exact_match": true,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [],
+      "elapsed_ms": 24.92,
+      "decisions": [
+        {
+          "type": "action",
+          "step": 1,
+          "tool": "read_people",
+          "reason": "Đọc hồ sơ nhân sự và chính sách từ nguồn doanh nghiệp giả lập.",
+          "available_tools": [
+            "read_people",
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 2,
+          "tool": "read_assets",
+          "reason": "Đọc tài khoản HR/Email/VPN và laptop, liên kết theo mã nhân sự.",
+          "available_tools": [
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 3,
+          "tool": "assess_people",
+          "reason": "Đánh giá A.6.1–A.6.8 bằng bằng chứng đã thu thập.",
+          "available_tools": [
+            "assess_people",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 4,
+          "tool": "check_scope",
+          "reason": "Đối chiếu 56 kiểm soát, phân biệt phần có evaluator và phần chưa triển khai.",
+          "available_tools": [
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 5,
+          "tool": "create_tasks",
+          "reason": "Lưu công việc đề xuất nội bộ HR/IT, chống trùng và kiểm tra lại công việc cũ.",
+          "available_tools": [
+            "create_tasks"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 6,
+          "tool": "verify_report",
+          "reason": "Xác minh báo cáo, mã bằng chứng và giới hạn phạm vi trước khi kết thúc.",
+          "available_tools": [
+            "verify_report"
+          ],
+          "decision_ms": 0.0
+        }
+      ]
+    },
+    {
+      "case_id": "A.6.7-violation",
+      "mode": "rules",
+      "snapshot_hash": "43a9345fc4d1ba9fefd618c1ab3130333c22ee46b2bf057005cc7ccc07f6132f",
+      "success": true,
+      "tool_calls": 0,
+      "model_calls": 0,
+      "exact_match": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.7",
+          "HF-028",
+          "finding"
+        ]
+      ],
+      "elapsed_ms": 2.44,
+      "decisions": []
+    },
+    {
+      "case_id": "A.6.7-violation",
+      "mode": "workflow",
+      "snapshot_hash": "43a9345fc4d1ba9fefd618c1ab3130333c22ee46b2bf057005cc7ccc07f6132f",
+      "success": true,
+      "tool_calls": 7,
+      "model_calls": 0,
+      "metrics": {
+        "elapsed_ms": 8.59,
+        "tool_calls": 7,
+        "model_calls": 0,
+        "decision_ms": 0.0
+      },
+      "exact_match": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.7",
+          "HF-028",
+          "finding"
+        ]
+      ],
+      "elapsed_ms": 25.45,
+      "decisions": [
+        {
+          "type": "action",
+          "step": 1,
+          "tool": "read_people",
+          "reason": "Đọc hồ sơ nhân sự và chính sách từ nguồn doanh nghiệp giả lập.",
+          "available_tools": [
+            "read_people",
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 2,
+          "tool": "read_assets",
+          "reason": "Đọc tài khoản HR/Email/VPN và laptop, liên kết theo mã nhân sự.",
+          "available_tools": [
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 3,
+          "tool": "assess_people",
+          "reason": "Đánh giá A.6.1–A.6.8 bằng bằng chứng đã thu thập.",
+          "available_tools": [
+            "assess_people",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 4,
+          "tool": "inspect_remote",
+          "reason": "Kiểm tra sâu mã hóa thiết bị và MFA VPN của người làm từ xa.",
+          "available_tools": [
+            "inspect_remote",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 5,
+          "tool": "check_scope",
+          "reason": "Đối chiếu 56 kiểm soát, phân biệt phần có evaluator và phần chưa triển khai.",
+          "available_tools": [
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 6,
+          "tool": "create_tasks",
+          "reason": "Lưu công việc đề xuất nội bộ HR/IT, chống trùng và kiểm tra lại công việc cũ.",
+          "available_tools": [
+            "create_tasks"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 7,
+          "tool": "verify_report",
+          "reason": "Xác minh báo cáo, mã bằng chứng và giới hạn phạm vi trước khi kết thúc.",
+          "available_tools": [
+            "verify_report"
+          ],
+          "decision_ms": 0.0
+        }
+      ]
+    },
+    {
+      "case_id": "A.6.7-unknown",
+      "mode": "rules",
+      "snapshot_hash": "b9a7f476791fde2623047231354b310b80507077832921f34be2cba585a268c7",
+      "success": true,
+      "tool_calls": 0,
+      "model_calls": 0,
+      "exact_match": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.7",
+          "HF-028",
+          "missing"
+        ]
+      ],
+      "elapsed_ms": 2.57,
+      "decisions": []
+    },
+    {
+      "case_id": "A.6.7-unknown",
+      "mode": "workflow",
+      "snapshot_hash": "b9a7f476791fde2623047231354b310b80507077832921f34be2cba585a268c7",
+      "success": true,
+      "tool_calls": 8,
+      "model_calls": 0,
+      "metrics": {
+        "elapsed_ms": 8.45,
+        "tool_calls": 8,
+        "model_calls": 0,
+        "decision_ms": 0.0
+      },
+      "exact_match": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.7",
+          "HF-028",
+          "missing"
+        ]
+      ],
+      "elapsed_ms": 25.69,
+      "decisions": [
+        {
+          "type": "action",
+          "step": 1,
+          "tool": "read_people",
+          "reason": "Đọc hồ sơ nhân sự và chính sách từ nguồn doanh nghiệp giả lập.",
+          "available_tools": [
+            "read_people",
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 2,
+          "tool": "read_assets",
+          "reason": "Đọc tài khoản HR/Email/VPN và laptop, liên kết theo mã nhân sự.",
+          "available_tools": [
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 3,
+          "tool": "assess_people",
+          "reason": "Đánh giá A.6.1–A.6.8 bằng bằng chứng đã thu thập.",
+          "available_tools": [
+            "assess_people",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 4,
+          "tool": "inspect_remote",
+          "reason": "Kiểm tra sâu mã hóa thiết bị và MFA VPN của người làm từ xa.",
+          "available_tools": [
+            "inspect_remote",
+            "inspect_evidence",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 5,
+          "tool": "inspect_evidence",
+          "reason": "Xác định trường bằng chứng bị thiếu và yêu cầu nguồn xác minh; không suy diễn dữ liệu chưa có.",
+          "available_tools": [
+            "inspect_evidence",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 6,
+          "tool": "check_scope",
+          "reason": "Đối chiếu 56 kiểm soát, phân biệt phần có evaluator và phần chưa triển khai.",
+          "available_tools": [
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 7,
+          "tool": "create_tasks",
+          "reason": "Lưu công việc đề xuất nội bộ HR/IT, chống trùng và kiểm tra lại công việc cũ.",
+          "available_tools": [
+            "create_tasks"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 8,
+          "tool": "verify_report",
+          "reason": "Xác minh báo cáo, mã bằng chứng và giới hạn phạm vi trước khi kết thúc.",
+          "available_tools": [
+            "verify_report"
+          ],
+          "decision_ms": 0.0
+        }
+      ]
+    },
+    {
+      "case_id": "A.6.7-clean",
+      "mode": "rules",
+      "snapshot_hash": "5e104b56da4ff60000887a7f8a63bb80842d790ea0271226dfed9c15d8ae9cff",
+      "success": true,
+      "tool_calls": 0,
+      "model_calls": 0,
+      "exact_match": true,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [],
+      "elapsed_ms": 2.49,
+      "decisions": []
+    },
+    {
+      "case_id": "A.6.7-clean",
+      "mode": "workflow",
+      "snapshot_hash": "5e104b56da4ff60000887a7f8a63bb80842d790ea0271226dfed9c15d8ae9cff",
+      "success": true,
+      "tool_calls": 6,
+      "model_calls": 0,
+      "metrics": {
+        "elapsed_ms": 7.09,
+        "tool_calls": 6,
+        "model_calls": 0,
+        "decision_ms": 0.0
+      },
+      "exact_match": true,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [],
+      "elapsed_ms": 23.4,
+      "decisions": [
+        {
+          "type": "action",
+          "step": 1,
+          "tool": "read_people",
+          "reason": "Đọc hồ sơ nhân sự và chính sách từ nguồn doanh nghiệp giả lập.",
+          "available_tools": [
+            "read_people",
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 2,
+          "tool": "read_assets",
+          "reason": "Đọc tài khoản HR/Email/VPN và laptop, liên kết theo mã nhân sự.",
+          "available_tools": [
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 3,
+          "tool": "assess_people",
+          "reason": "Đánh giá A.6.1–A.6.8 bằng bằng chứng đã thu thập.",
+          "available_tools": [
+            "assess_people",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 4,
+          "tool": "check_scope",
+          "reason": "Đối chiếu 56 kiểm soát, phân biệt phần có evaluator và phần chưa triển khai.",
+          "available_tools": [
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 5,
+          "tool": "create_tasks",
+          "reason": "Lưu công việc đề xuất nội bộ HR/IT, chống trùng và kiểm tra lại công việc cũ.",
+          "available_tools": [
+            "create_tasks"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 6,
+          "tool": "verify_report",
+          "reason": "Xác minh báo cáo, mã bằng chứng và giới hạn phạm vi trước khi kết thúc.",
+          "available_tools": [
+            "verify_report"
+          ],
+          "decision_ms": 0.0
+        }
+      ]
+    },
+    {
+      "case_id": "A.6.8-violation",
+      "mode": "rules",
+      "snapshot_hash": "94dce056b5c8f9747d4b19da2b545b72cd304ddc1bcf024a730d982283b597a0",
+      "success": true,
+      "tool_calls": 0,
+      "model_calls": 0,
+      "exact_match": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.8",
+          "HF-049",
+          "finding"
+        ]
+      ],
+      "elapsed_ms": 2.51,
+      "decisions": []
+    },
+    {
+      "case_id": "A.6.8-violation",
+      "mode": "workflow",
+      "snapshot_hash": "94dce056b5c8f9747d4b19da2b545b72cd304ddc1bcf024a730d982283b597a0",
+      "success": true,
+      "tool_calls": 6,
+      "model_calls": 0,
+      "metrics": {
+        "elapsed_ms": 7.37,
+        "tool_calls": 6,
+        "model_calls": 0,
+        "decision_ms": 0.0
+      },
+      "exact_match": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.8",
+          "HF-049",
+          "finding"
+        ]
+      ],
+      "elapsed_ms": 23.96,
+      "decisions": [
+        {
+          "type": "action",
+          "step": 1,
+          "tool": "read_people",
+          "reason": "Đọc hồ sơ nhân sự và chính sách từ nguồn doanh nghiệp giả lập.",
+          "available_tools": [
+            "read_people",
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 2,
+          "tool": "read_assets",
+          "reason": "Đọc tài khoản HR/Email/VPN và laptop, liên kết theo mã nhân sự.",
+          "available_tools": [
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 3,
+          "tool": "assess_people",
+          "reason": "Đánh giá A.6.1–A.6.8 bằng bằng chứng đã thu thập.",
+          "available_tools": [
+            "assess_people",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 4,
+          "tool": "check_scope",
+          "reason": "Đối chiếu 56 kiểm soát, phân biệt phần có evaluator và phần chưa triển khai.",
+          "available_tools": [
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 5,
+          "tool": "create_tasks",
+          "reason": "Lưu công việc đề xuất nội bộ HR/IT, chống trùng và kiểm tra lại công việc cũ.",
+          "available_tools": [
+            "create_tasks"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 6,
+          "tool": "verify_report",
+          "reason": "Xác minh báo cáo, mã bằng chứng và giới hạn phạm vi trước khi kết thúc.",
+          "available_tools": [
+            "verify_report"
+          ],
+          "decision_ms": 0.0
+        }
+      ]
+    },
+    {
+      "case_id": "A.6.8-unknown",
+      "mode": "rules",
+      "snapshot_hash": "57746a75ad8745663670f354a9de926af9238a7220b491a3aec113c4017fa330",
+      "success": true,
+      "tool_calls": 0,
+      "model_calls": 0,
+      "exact_match": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.8",
+          "HF-049",
+          "missing"
+        ]
+      ],
+      "elapsed_ms": 3.57,
+      "decisions": []
+    },
+    {
+      "case_id": "A.6.8-unknown",
+      "mode": "workflow",
+      "snapshot_hash": "57746a75ad8745663670f354a9de926af9238a7220b491a3aec113c4017fa330",
+      "success": true,
+      "tool_calls": 7,
+      "model_calls": 0,
+      "metrics": {
+        "elapsed_ms": 7.14,
+        "tool_calls": 7,
+        "model_calls": 0,
+        "decision_ms": 0.0
+      },
+      "exact_match": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.8",
+          "HF-049",
+          "missing"
+        ]
+      ],
+      "elapsed_ms": 23.71,
+      "decisions": [
+        {
+          "type": "action",
+          "step": 1,
+          "tool": "read_people",
+          "reason": "Đọc hồ sơ nhân sự và chính sách từ nguồn doanh nghiệp giả lập.",
+          "available_tools": [
+            "read_people",
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 2,
+          "tool": "read_assets",
+          "reason": "Đọc tài khoản HR/Email/VPN và laptop, liên kết theo mã nhân sự.",
+          "available_tools": [
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 3,
+          "tool": "assess_people",
+          "reason": "Đánh giá A.6.1–A.6.8 bằng bằng chứng đã thu thập.",
+          "available_tools": [
+            "assess_people",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 4,
+          "tool": "inspect_evidence",
+          "reason": "Xác định trường bằng chứng bị thiếu và yêu cầu nguồn xác minh; không suy diễn dữ liệu chưa có.",
+          "available_tools": [
+            "inspect_evidence",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 5,
+          "tool": "check_scope",
+          "reason": "Đối chiếu 56 kiểm soát, phân biệt phần có evaluator và phần chưa triển khai.",
+          "available_tools": [
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 6,
+          "tool": "create_tasks",
+          "reason": "Lưu công việc đề xuất nội bộ HR/IT, chống trùng và kiểm tra lại công việc cũ.",
+          "available_tools": [
+            "create_tasks"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 7,
+          "tool": "verify_report",
+          "reason": "Xác minh báo cáo, mã bằng chứng và giới hạn phạm vi trước khi kết thúc.",
+          "available_tools": [
+            "verify_report"
+          ],
+          "decision_ms": 0.0
+        }
+      ]
+    },
+    {
+      "case_id": "A.6.8-clean",
+      "mode": "rules",
+      "snapshot_hash": "5e104b56da4ff60000887a7f8a63bb80842d790ea0271226dfed9c15d8ae9cff",
+      "success": true,
+      "tool_calls": 0,
+      "model_calls": 0,
+      "exact_match": true,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [],
+      "elapsed_ms": 2.51,
+      "decisions": []
+    },
+    {
+      "case_id": "A.6.8-clean",
+      "mode": "workflow",
+      "snapshot_hash": "5e104b56da4ff60000887a7f8a63bb80842d790ea0271226dfed9c15d8ae9cff",
+      "success": true,
+      "tool_calls": 6,
+      "model_calls": 0,
+      "metrics": {
+        "elapsed_ms": 7.38,
+        "tool_calls": 6,
+        "model_calls": 0,
+        "decision_ms": 0.0
+      },
+      "exact_match": true,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [],
+      "elapsed_ms": 25.44,
+      "decisions": [
+        {
+          "type": "action",
+          "step": 1,
+          "tool": "read_people",
+          "reason": "Đọc hồ sơ nhân sự và chính sách từ nguồn doanh nghiệp giả lập.",
+          "available_tools": [
+            "read_people",
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 2,
+          "tool": "read_assets",
+          "reason": "Đọc tài khoản HR/Email/VPN và laptop, liên kết theo mã nhân sự.",
+          "available_tools": [
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 3,
+          "tool": "assess_people",
+          "reason": "Đánh giá A.6.1–A.6.8 bằng bằng chứng đã thu thập.",
+          "available_tools": [
+            "assess_people",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 4,
+          "tool": "check_scope",
+          "reason": "Đối chiếu 56 kiểm soát, phân biệt phần có evaluator và phần chưa triển khai.",
+          "available_tools": [
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 5,
+          "tool": "create_tasks",
+          "reason": "Lưu công việc đề xuất nội bộ HR/IT, chống trùng và kiểm tra lại công việc cũ.",
+          "available_tools": [
+            "create_tasks"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 6,
+          "tool": "verify_report",
+          "reason": "Xác minh báo cáo, mã bằng chứng và giới hạn phạm vi trước khi kết thúc.",
+          "available_tools": [
+            "verify_report"
+          ],
+          "decision_ms": 0.0
+        }
+      ]
+    },
+    {
+      "case_id": "offboarding-open-assets",
+      "mode": "rules",
+      "snapshot_hash": "f381577c1417bbc19a3903c0771ebeb50451260751efb2200cd1abc8bd0df303",
+      "success": true,
+      "tool_calls": 0,
+      "model_calls": 0,
+      "exact_match": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.5",
+          "HF-025",
+          "finding"
+        ]
+      ],
+      "elapsed_ms": 2.52,
+      "decisions": []
+    },
+    {
+      "case_id": "offboarding-open-assets",
+      "mode": "workflow",
+      "snapshot_hash": "f381577c1417bbc19a3903c0771ebeb50451260751efb2200cd1abc8bd0df303",
+      "success": true,
+      "tool_calls": 7,
+      "model_calls": 0,
+      "metrics": {
+        "elapsed_ms": 8.49,
+        "tool_calls": 7,
+        "model_calls": 0,
+        "decision_ms": 0.0
+      },
+      "exact_match": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.5",
+          "HF-025",
+          "finding"
+        ]
+      ],
+      "elapsed_ms": 25.06,
+      "decisions": [
+        {
+          "type": "action",
+          "step": 1,
+          "tool": "read_people",
+          "reason": "Đọc hồ sơ nhân sự và chính sách từ nguồn doanh nghiệp giả lập.",
+          "available_tools": [
+            "read_people",
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 2,
+          "tool": "read_assets",
+          "reason": "Đọc tài khoản HR/Email/VPN và laptop, liên kết theo mã nhân sự.",
+          "available_tools": [
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 3,
+          "tool": "assess_people",
+          "reason": "Đánh giá A.6.1–A.6.8 bằng bằng chứng đã thu thập.",
+          "available_tools": [
+            "assess_people",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 4,
+          "tool": "inspect_offboarding",
+          "reason": "Kiểm tra sâu tài khoản còn mở và thiết bị chưa trả của người nghỉ việc.",
+          "available_tools": [
+            "inspect_offboarding",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 5,
+          "tool": "check_scope",
+          "reason": "Đối chiếu 56 kiểm soát, phân biệt phần có evaluator và phần chưa triển khai.",
+          "available_tools": [
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 6,
+          "tool": "create_tasks",
+          "reason": "Lưu công việc đề xuất nội bộ HR/IT, chống trùng và kiểm tra lại công việc cũ.",
+          "available_tools": [
+            "create_tasks"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 7,
+          "tool": "verify_report",
+          "reason": "Xác minh báo cáo, mã bằng chứng và giới hạn phạm vi trước khi kết thúc.",
+          "available_tools": [
+            "verify_report"
+          ],
+          "decision_ms": 0.0
+        }
+      ]
+    },
+    {
+      "case_id": "offboarding-repaired",
+      "mode": "rules",
+      "snapshot_hash": "88bff3f0ea562aebecd941cb7325a580650ea73ff0b78d0bc67c9a36ac970363",
+      "success": true,
+      "tool_calls": 0,
+      "model_calls": 0,
+      "exact_match": true,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [],
+      "elapsed_ms": 2.49,
+      "decisions": []
+    },
+    {
+      "case_id": "offboarding-repaired",
+      "mode": "workflow",
+      "snapshot_hash": "88bff3f0ea562aebecd941cb7325a580650ea73ff0b78d0bc67c9a36ac970363",
+      "success": true,
+      "tool_calls": 6,
+      "model_calls": 0,
+      "metrics": {
+        "elapsed_ms": 7.42,
+        "tool_calls": 6,
+        "model_calls": 0,
+        "decision_ms": 0.0
+      },
+      "exact_match": true,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [],
+      "elapsed_ms": 25.48,
+      "decisions": [
+        {
+          "type": "action",
+          "step": 1,
+          "tool": "read_people",
+          "reason": "Đọc hồ sơ nhân sự và chính sách từ nguồn doanh nghiệp giả lập.",
+          "available_tools": [
+            "read_people",
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 2,
+          "tool": "read_assets",
+          "reason": "Đọc tài khoản HR/Email/VPN và laptop, liên kết theo mã nhân sự.",
+          "available_tools": [
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 3,
+          "tool": "assess_people",
+          "reason": "Đánh giá A.6.1–A.6.8 bằng bằng chứng đã thu thập.",
+          "available_tools": [
+            "assess_people",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 4,
+          "tool": "check_scope",
+          "reason": "Đối chiếu 56 kiểm soát, phân biệt phần có evaluator và phần chưa triển khai.",
+          "available_tools": [
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 5,
+          "tool": "create_tasks",
+          "reason": "Lưu công việc đề xuất nội bộ HR/IT, chống trùng và kiểm tra lại công việc cũ.",
+          "available_tools": [
+            "create_tasks"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 6,
+          "tool": "verify_report",
+          "reason": "Xác minh báo cáo, mã bằng chứng và giới hạn phạm vi trước khi kết thúc.",
+          "available_tools": [
+            "verify_report"
+          ],
+          "decision_ms": 0.0
+        }
+      ]
+    },
+    {
+      "case_id": "remote-asset-risk",
+      "mode": "rules",
+      "snapshot_hash": "43d83d8879bf2e1e37310e4c7abd4877639e45ce83cc18e8e0fb911ab632c346",
+      "success": true,
+      "tool_calls": 0,
+      "model_calls": 0,
+      "exact_match": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.7",
+          "HF-028",
+          "finding"
+        ]
+      ],
+      "elapsed_ms": 2.32,
+      "decisions": []
+    },
+    {
+      "case_id": "remote-asset-risk",
+      "mode": "workflow",
+      "snapshot_hash": "43d83d8879bf2e1e37310e4c7abd4877639e45ce83cc18e8e0fb911ab632c346",
+      "success": true,
+      "tool_calls": 7,
+      "model_calls": 0,
+      "metrics": {
+        "elapsed_ms": 6.97,
+        "tool_calls": 7,
+        "model_calls": 0,
+        "decision_ms": 0.0
+      },
+      "exact_match": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.7",
+          "HF-028",
+          "finding"
+        ]
+      ],
+      "elapsed_ms": 23.95,
+      "decisions": [
+        {
+          "type": "action",
+          "step": 1,
+          "tool": "read_people",
+          "reason": "Đọc hồ sơ nhân sự và chính sách từ nguồn doanh nghiệp giả lập.",
+          "available_tools": [
+            "read_people",
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 2,
+          "tool": "read_assets",
+          "reason": "Đọc tài khoản HR/Email/VPN và laptop, liên kết theo mã nhân sự.",
+          "available_tools": [
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 3,
+          "tool": "assess_people",
+          "reason": "Đánh giá A.6.1–A.6.8 bằng bằng chứng đã thu thập.",
+          "available_tools": [
+            "assess_people",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 4,
+          "tool": "inspect_remote",
+          "reason": "Kiểm tra sâu mã hóa thiết bị và MFA VPN của người làm từ xa.",
+          "available_tools": [
+            "inspect_remote",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 5,
+          "tool": "check_scope",
+          "reason": "Đối chiếu 56 kiểm soát, phân biệt phần có evaluator và phần chưa triển khai.",
+          "available_tools": [
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 6,
+          "tool": "create_tasks",
+          "reason": "Lưu công việc đề xuất nội bộ HR/IT, chống trùng và kiểm tra lại công việc cũ.",
+          "available_tools": [
+            "create_tasks"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 7,
+          "tool": "verify_report",
+          "reason": "Xác minh báo cáo, mã bằng chứng và giới hạn phạm vi trước khi kết thúc.",
+          "available_tools": [
+            "verify_report"
+          ],
+          "decision_ms": 0.0
+        }
+      ]
+    },
+    {
+      "case_id": "compound-known-and-unknown",
+      "mode": "rules",
+      "snapshot_hash": "427628d02545a539d5ac0cce8e5d7316cccddd0196077fe9466c06b8f46dca0f",
+      "success": true,
+      "tool_calls": 0,
+      "model_calls": 0,
+      "exact_match": true,
+      "tp": 3,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.2",
+          "HF-012",
+          "finding"
+        ],
+        [
+          "A.6.3",
+          "HF-042",
+          "missing"
+        ],
+        [
+          "A.6.6",
+          "HF-012",
+          "finding"
+        ]
+      ],
+      "elapsed_ms": 4.28,
+      "decisions": []
+    },
+    {
+      "case_id": "compound-known-and-unknown",
+      "mode": "workflow",
+      "snapshot_hash": "427628d02545a539d5ac0cce8e5d7316cccddd0196077fe9466c06b8f46dca0f",
+      "success": true,
+      "tool_calls": 7,
+      "model_calls": 0,
+      "metrics": {
+        "elapsed_ms": 9.08,
+        "tool_calls": 7,
+        "model_calls": 0,
+        "decision_ms": 0.0
+      },
+      "exact_match": true,
+      "tp": 3,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.2",
+          "HF-012",
+          "finding"
+        ],
+        [
+          "A.6.3",
+          "HF-042",
+          "missing"
+        ],
+        [
+          "A.6.6",
+          "HF-012",
+          "finding"
+        ]
+      ],
+      "elapsed_ms": 29.04,
+      "decisions": [
+        {
+          "type": "action",
+          "step": 1,
+          "tool": "read_people",
+          "reason": "Đọc hồ sơ nhân sự và chính sách từ nguồn doanh nghiệp giả lập.",
+          "available_tools": [
+            "read_people",
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 2,
+          "tool": "read_assets",
+          "reason": "Đọc tài khoản HR/Email/VPN và laptop, liên kết theo mã nhân sự.",
+          "available_tools": [
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 3,
+          "tool": "assess_people",
+          "reason": "Đánh giá A.6.1–A.6.8 bằng bằng chứng đã thu thập.",
+          "available_tools": [
+            "assess_people",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 4,
+          "tool": "inspect_evidence",
+          "reason": "Xác định trường bằng chứng bị thiếu và yêu cầu nguồn xác minh; không suy diễn dữ liệu chưa có.",
+          "available_tools": [
+            "inspect_evidence",
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 5,
+          "tool": "check_scope",
+          "reason": "Đối chiếu 56 kiểm soát, phân biệt phần có evaluator và phần chưa triển khai.",
+          "available_tools": [
+            "check_scope"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 6,
+          "tool": "create_tasks",
+          "reason": "Lưu công việc đề xuất nội bộ HR/IT, chống trùng và kiểm tra lại công việc cũ.",
+          "available_tools": [
+            "create_tasks"
+          ],
+          "decision_ms": 0.0
+        },
+        {
+          "type": "action",
+          "step": 7,
+          "tool": "verify_report",
+          "reason": "Xác minh báo cáo, mã bằng chứng và giới hạn phạm vi trước khi kết thúc.",
+          "available_tools": [
+            "verify_report"
+          ],
+          "decision_ms": 0.0
+        }
+      ]
+    },
+    {
+      "case_id": "A.6.3-unknown",
+      "mode": "ai",
+      "snapshot_hash": "53905c4a4a3cf4e09a1838e459e9479465554eb40122d937d15d01c56ce0f3c0",
+      "success": true,
+      "tool_calls": 7,
+      "model_calls": 7,
+      "metrics": {
+        "elapsed_ms": 8500.63,
+        "tool_calls": 7,
+        "model_calls": 7,
+        "decision_ms": 8491.52
+      },
+      "exact_match": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.3",
+          "HF-042",
+          "missing"
+        ]
+      ],
+      "elapsed_ms": 8520.27,
+      "decisions": [
+        {
+          "type": "action",
+          "step": 1,
+          "tool": "check_scope",
+          "reason": "Đối chiếu 56 kiểm soát để xác định phạm vi kiểm tra và đề xuất xử lý cho HiveFive.",
+          "available_tools": [
+            "read_people",
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 1281.82
+        },
+        {
+          "type": "action",
+          "step": 2,
+          "tool": "read_assets",
+          "reason": "Đọc tài khoản HR/Email/VPN và laptop để xác minh bằng chứng thực tế về việc triển khai các kiểm soát.",
+          "available_tools": [
+            "read_people",
+            "read_assets"
+          ],
+          "decision_ms": 1139.85
+        },
+        {
+          "type": "action",
+          "step": 3,
+          "tool": "read_people",
+          "reason": "Để hiểu rõ hơn về nhân sự và chính sách, từ đó đánh giá hiệu quả thực hiện các kiểm tra ISO.",
+          "available_tools": [
+            "read_people"
+          ],
+          "decision_ms": 1084.94
+        },
+        {
+          "type": "action",
+          "step": 4,
+          "tool": "assess_people",
+          "reason": "Để đánh giá việc triển khai các điều khoản A.6.1–A.6.8 dựa trên hồ sơ người đã thu thập.",
+          "available_tools": [
+            "assess_people"
+          ],
+          "decision_ms": 1290.18
+        },
+        {
+          "type": "action",
+          "step": 5,
+          "tool": "inspect_evidence",
+          "reason": "Yêu cầu xác minh bằng chứng cho các trường bị thiếu và kiểm tra thực tế.",
+          "available_tools": [
+            "inspect_evidence"
+          ],
+          "decision_ms": 982.74
+        },
+        {
+          "type": "action",
+          "step": 6,
+          "tool": "create_tasks",
+          "reason": "Tạo công việc để bổ sung hồ sơ và kiểm tra lại cho người có ID HF-042 về kiểm tra A.6.3.",
+          "available_tools": [
+            "create_tasks"
+          ],
+          "decision_ms": 1240.84
+        },
+        {
+          "type": "action",
+          "step": 7,
+          "tool": "verify_report",
+          "reason": "Để xác minh các bằng chứng và đề xuất xử lý cho HiveFive, cần xác minh báo cáo, mã bằng chứng và giới hạn phạm vi trước khi kết thúc.",
+          "available_tools": [
+            "verify_report"
+          ],
+          "decision_ms": 1471.15
+        }
+      ]
+    },
+    {
+      "case_id": "offboarding-open-assets",
+      "mode": "ai",
+      "snapshot_hash": "f381577c1417bbc19a3903c0771ebeb50451260751efb2200cd1abc8bd0df303",
+      "success": true,
+      "tool_calls": 7,
+      "model_calls": 7,
+      "metrics": {
+        "elapsed_ms": 7833.91,
+        "tool_calls": 7,
+        "model_calls": 7,
+        "decision_ms": 7825.39
+      },
+      "exact_match": true,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [
+        [
+          "A.6.5",
+          "HF-025",
+          "finding"
+        ]
+      ],
+      "elapsed_ms": 7850.54,
+      "decisions": [
+        {
+          "type": "action",
+          "step": 1,
+          "tool": "check_scope",
+          "reason": "Đối chiếu 56 kiểm soát để xác định phạm vi kiểm tra và đề xuất xử lý cho HiveFive.",
+          "available_tools": [
+            "read_people",
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 1022.57
+        },
+        {
+          "type": "action",
+          "step": 2,
+          "tool": "read_assets",
+          "reason": "Đọc tài khoản HR/Email/VPN và laptop để xác minh bằng chứng thực tế về việc triển khai các kiểm soát.",
+          "available_tools": [
+            "read_people",
+            "read_assets"
+          ],
+          "decision_ms": 1157.38
+        },
+        {
+          "type": "action",
+          "step": 3,
+          "tool": "read_people",
+          "reason": "Để hiểu rõ hơn về nhân sự và chính sách, từ đó đánh giá hiệu quả thực hiện các kiểm tra ISO.",
+          "available_tools": [
+            "read_people"
+          ],
+          "decision_ms": 1062.66
+        },
+        {
+          "type": "action",
+          "step": 4,
+          "tool": "assess_people",
+          "reason": "Để đánh giá việc triển khai các điều khoản A.6.1–A.6.8 dựa trên hồ sơ người đã thu thập.",
+          "available_tools": [
+            "assess_people"
+          ],
+          "decision_ms": 1263.62
+        },
+        {
+          "type": "action",
+          "step": 5,
+          "tool": "inspect_offboarding",
+          "reason": "Để kiểm tra tài khoản và thiết bị còn mở của nhân viên nghỉ việc, đảm bảo tuân thủ quy trình khi nhân viên rời công ty.",
+          "available_tools": [
+            "inspect_offboarding"
+          ],
+          "decision_ms": 1355.38
+        },
+        {
+          "type": "action",
+          "step": 6,
+          "tool": "create_tasks",
+          "reason": "Để lưu công việc đề xuất nội bộ và chống trùng công việc cũ.",
+          "available_tools": [
+            "create_tasks"
+          ],
+          "decision_ms": 974.32
+        },
+        {
+          "type": "action",
+          "step": 7,
+          "tool": "verify_report",
+          "reason": "Để xác minh báo cáo và mã bằng chứng trước khi kết thúc quá trình kiểm tra.",
+          "available_tools": [
+            "verify_report"
+          ],
+          "decision_ms": 989.46
+        }
+      ]
+    },
+    {
+      "case_id": "offboarding-repaired",
+      "mode": "ai",
+      "snapshot_hash": "88bff3f0ea562aebecd941cb7325a580650ea73ff0b78d0bc67c9a36ac970363",
+      "success": true,
+      "tool_calls": 6,
+      "model_calls": 6,
+      "metrics": {
+        "elapsed_ms": 8152.66,
+        "tool_calls": 6,
+        "model_calls": 6,
+        "decision_ms": 8144.02
+      },
+      "exact_match": true,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "unexpected": [],
+      "missed": [],
+      "actual": [],
+      "elapsed_ms": 8169.76,
+      "decisions": [
+        {
+          "type": "action",
+          "step": 1,
+          "tool": "check_scope",
+          "reason": "Đối chiếu 56 kiểm soát để xác định phạm vi kiểm tra và đề xuất xử lý cho HiveFive.",
+          "available_tools": [
+            "read_people",
+            "read_assets",
+            "check_scope"
+          ],
+          "decision_ms": 1030.34
+        },
+        {
+          "type": "action",
+          "step": 2,
+          "tool": "read_assets",
+          "reason": "Đọc tài khoản HR/Email/VPN và laptop để xác minh bằng chứng thực tế về việc triển khai các kiểm soát.",
+          "available_tools": [
+            "read_people",
+            "read_assets"
+          ],
+          "decision_ms": 1244.33
+        },
+        {
+          "type": "action",
+          "step": 3,
+          "tool": "read_people",
+          "reason": "Để hiểu rõ hơn về nhân sự và chính sách, từ đó đánh giá hiệu quả thực hiện các kiểm tra ISO.",
+          "available_tools": [
+            "read_people"
+          ],
+          "decision_ms": 1170.74
+        },
+        {
+          "type": "action",
+          "step": 4,
+          "tool": "assess_people",
+          "reason": "Để đánh giá việc triển khai các điều khoản A.6.1–A.6.8 dựa trên hồ sơ người đã thu thập.",
+          "available_tools": [
+            "assess_people"
+          ],
+          "decision_ms": 1302.45
+        },
+        {
+          "type": "action",
+          "step": 5,
+          "tool": "create_tasks",
+          "reason": "Để lưu công việc đề xuất nội bộ và chống trùng lặp, đồng thời kiểm tra lại công việc cũ.",
+          "available_tools": [
+            "create_tasks"
+          ],
+          "decision_ms": 1148.85
+        },
+        {
+          "type": "action",
+          "step": 6,
+          "tool": "verify_report",
+          "reason": "Để xác minh báo cáo và mã bằng chứng trước khi kết thúc quá trình kiểm tra.",
+          "available_tools": [
+            "verify_report"
+          ],
+          "decision_ms": 2247.31
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "rules": {
+      "trials": 28,
+      "completed": 28,
+      "exact_matches": 28,
+      "precision_completed": 1.0,
+      "recall_completed": 1.0,
+      "mean_ms": 2.68,
+      "tool_calls": 0,
+      "model_calls": 0
+    },
+    "workflow": {
+      "trials": 28,
+      "completed": 28,
+      "exact_matches": 28,
+      "precision_completed": 1.0,
+      "recall_completed": 1.0,
+      "mean_ms": 25.18,
+      "tool_calls": 183,
+      "model_calls": 0
+    },
+    "ai": {
+      "trials": 3,
+      "completed": 3,
+      "exact_matches": 3,
+      "precision_completed": 1.0,
+      "recall_completed": 1.0,
+      "mean_ms": 8180.19,
+      "tool_calls": 20,
+      "model_calls": 20
+    }
+  },
+  "limitations": [
+    "Bộ ca tổng hợp tự xây dựng, chưa đánh giá mù bởi chuyên gia độc lập.",
+    "Ba chế độ dùng chung evaluator: accuracy không chứng minh LLM tốt hơn luật.",
+    "AI chỉ chạy trên các ca được chỉ định; không so trung bình thời gian giữa hai tập khác nhau.",
+    "Precision/recall chỉ tính lần chạy hoàn tất; lỗi được báo riêng và exact-match tính lỗi là thất bại.",
+    "Chưa đo token/chi phí, tải đồng thời hoặc khả năng khái quát trên doanh nghiệp thật."
+  ]
+}
