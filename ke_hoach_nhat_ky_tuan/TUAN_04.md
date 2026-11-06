@@ -105,3 +105,20 @@ Chưa chốt. Cuối tuần 4, rà lại các mục còn mở và chỉ chuyển
 - Nội dung: bổ sung lập kế hoạch Agent, công việc con và phản hồi theo kết quả; liên kết trực quan Agent với nhân viên/máy/sự kiện/hồ sơ; thêm kiểm thử, tài liệu kiến trúc và kế hoạch/nhật ký 10 tuần.
 - Thông điệp commit: **Hoàn thiện điều phối Agent và liên kết tương tác với văn phòng nhân viên**.
 - Kiểm chứng trước đợt push: 169 test Python, 15 test JavaScript và build đạt; lint còn cảnh báo.
+
+## Củng cố trọng tâm đánh giá tuân thủ — 18:39 ngày 06/11/2026 (UTC+7)
+
+- Hiệu chỉnh tuyên bố thực nghiệm; ghi rõ khảo sát cũ là số liệu tổng hợp và truy hồi hiện tại dùng từ khóa.
+- Chốt ma trận kiểm soát, tiêu chí lab, nguồn bằng chứng và giới hạn từng engine.
+- Bổ sung Hồ sơ ISO: xem kết luận, căn cứ, lịch sử, tái đánh giá và xuất JSON; nối với Agent Workspace.
+- Benchmark thật 8 ca x 3 chế độ: đều khớp 8/8; luật/workflow nhanh hơn AI. 8 ca lỗi model có chủ đích phục hồi riêng bằng workflow.
+- 176 test Python, 18 test JavaScript và build đạt. Chưa có kiểm định chuyên gia hoặc khảo sát người thật; đưa vào đợt commit/push ghi dưới đây.
+
+- Kiểm chứng API thật: hồ sơ đọc 56 kiểm soát và 27 metadata bằng chứng; truy cập không đăng nhập trả 401. Tái đánh giá A.6.1 thành công, lưu Partially Compliant cùng lịch sử/bằng chứng. Sửa lỗi log Unicode Windows và định dạng JSON không tương thích Ollama SDK; chưa kiểm thử bấm toàn bộ UI.
+
+## Commit và push GitHub — 18:54:25 ngày 06/11/2026 (UTC+7)
+
+- Nhánh nhận thay đổi: **Toant3**, remote **origin**.
+- Commit: **Bổ sung hồ sơ đánh giá ISO và kiểm chứng Agent theo nguồn thực thi**.
+- Nội dung: hồ sơ đánh giá, phạm vi kiểm soát, benchmark phân biệt luật/LLM/phục hồi, sửa lỗi SDK và hiệu chỉnh tài liệu thực nghiệm.
+- Kiểm chứng: 176 test Python, 18 test JavaScript và build đạt; API tái đánh giá thành công.

@@ -20,3 +20,13 @@ Kiểm chứng: 47 test Python, 3 test tìm đường; 72 lượt thực nghiệ
 workflow cùng 8 ca, 3 lần lặp. UI mâu thuẫn nguồn và rà soát vai trò đã xác minh.
 Chưa nạp hai sửa logic cuối vào server đang chạy vì lệnh khởi động lại bị
 automatic policy chặn. Chi tiết ở docs/VALIDATION.md; không coi runtime đã cập nhật đủ.
+
+## Củng cố đúng trọng tâm đề tài (06/11/2026)
+- [x] Sửa README; cảnh báo tuyên bố khảo sát cũ và phân biệt keyword retrieval/chính sách lab.
+- [x] Ma trận kiểm soát – tiêu chí – nguồn bằng chứng, phân biệt ba engine.
+- [x] Màn hình Hồ sơ ISO: dữ liệu database, lịch sử, tái đánh giá, xuất JSON; đường dẫn từ Agent Workspace.
+- [x] Benchmark Ollama thật 8 ca chung và 8 ca fault injection phục hồi, tách nguồn/lỗi.
+- [x] Rà giao diện vai trò: nối hồ sơ đánh giá, không thêm hoạt ảnh hoặc lời hoàn thành giả.
+- [ ] Thẩm định tiêu chí và nhãn bởi chuyên gia; thử tập kiểm định ẩn.
+- [ ] SoA có lý do áp dụng/loại trừ, phê duyệt và nguồn tiêu chuẩn được cấp quyền.
+- [ ] Dữ liệu doanh nghiệp thật, khảo sát người tham gia và đánh giá UI đầy đủ.

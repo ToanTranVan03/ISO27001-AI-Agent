@@ -25,7 +25,7 @@ export function MissionWorkView({mission,focused="coordination",selectedTool,onF
   return <><div className="mw-live-layout"><AgentOfficeScene mission={mission} focused={focused} onFocus={onFocus}/><MissionRoleInspector mission={mission} roleId={focused} selectedTool={selectedTool} onTool={onTool} onInspect={onInspect} onFocusEmployee={onFocusEmployee}/></div><MissionConversation mission={mission} onOpen={(role,tool)=>{onFocus(role);onTool(tool);}}/></>;
 }
 
-export default function EnterpriseMissionControl({base,request,onInspect,officeTarget,draftRequest,onMissionChange,onFocusEmployee,officeLiveFocus}) {
+export default function EnterpriseMissionControl({base,request,onInspect,officeTarget,draftRequest,onMissionChange,onFocusEmployee,officeLiveFocus,onOpenDossier}) {
   const [goal,setGoal]=useState("Kiểm tra các dấu hiệu vi phạm và lập hồ sơ bàn giao ISO");
   const [scope,setScope]=useState("all");
   const [requestedRole,setRequestedRole]=useState("coordination");
@@ -128,7 +128,7 @@ export default function EnterpriseMissionControl({base,request,onInspect,officeT
       {(error||syncError||current?.error)&&<p role="alert" className="mw-error">{error||syncError||current.error}</p>}
       {current&&["blocked","failed","interrupted","revision_requested"].includes(current.status)&&<div><button onClick={event=>create(event,current)} disabled={busy||active} className="mw-primary">Chạy lại mục tiêu từ dữ liệu mới</button></div>}
       {current?.trace?.length>0&&<details className="mw-trace"><summary>Nhật ký kỹ thuật · {current.trace.length} sự kiện</summary><ol>{current.trace.map((item,index)=><li key={index}><time>{new Date(item.at).toLocaleTimeString("vi-VN")}</time> <code>{item.tool} · {item.kind}</code>{item.text}{item.elapsed_ms!=null&&` · ${item.elapsed_ms} ms`}</li>)}</ol></details>}
-      <div className="mw-footer"><p>Các nhân vật thể hiện vai trò dùng chung hệ thống điều phối, không phải bốn mô hình độc lập. Hoạt động và phản hồi lấy từ backend. Kết quả thuộc lab, chưa phải chứng nhận ISO.</p>{current&&<button onClick={download} className="mw-secondary"><FileDown size={14}/>Tải toàn bộ hồ sơ</button>}</div>
+      <div className="mw-footer">{onOpenDossier&&<button onClick={onOpenDossier} className="mw-secondary">Mở hồ sơ đánh giá ISO</button>}<p>Các nhân vật thể hiện vai trò dùng chung hệ thống điều phối, không phải bốn mô hình độc lập. Hoạt động và phản hồi lấy từ backend. Kết quả thuộc lab, chưa phải chứng nhận ISO.</p>{current&&<button onClick={download} className="mw-secondary"><FileDown size={14}/>Tải toàn bộ hồ sơ</button>}</div>
     </div>
   </section>;
 }

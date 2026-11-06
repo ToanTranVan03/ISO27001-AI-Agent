@@ -53,3 +53,13 @@ def evidence(assessment_id: UUID, control_id: str,user: dict=Depends(require_use
     if control_id not in CONTROL_TO_NODE:
         raise HTTPException(404,detail='Control này chưa có lab collector.')
     return enterprise_lab.list_lab_evidence(str(assessment_id),control_id)
+
+
+@router.get('/compliance-report')
+def compliance_report(assessment_id: UUID, user: dict = Depends(require_user)):
+    from backend.compliance_report import build_dossier, campaign_evidence
+    require_campaign(assessment_id, user)
+    board = teamwork.progress_board(str(assessment_id))
+    evidence = campaign_evidence(str(assessment_id))
+    history = {item['control_id']: teamwork.list_history(str(assessment_id), item['control_id']) for item in board if item.get('latest_evaluation_id')}
+    return build_dossier(assessment_id, board, evidence, history)

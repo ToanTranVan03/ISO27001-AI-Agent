@@ -3,6 +3,7 @@ import { Bot, KeyRound, LogIn, ShieldCheck, UserRound } from "lucide-react";
 import SpaceBaseDashboard from "./SpaceBaseDashboard";
 import { ApiError, apiRequest } from "./api";
 import EnterpriseIncident3D from "./EnterpriseIncident3D";
+import ComplianceDossier from "./ComplianceDossier";
 const SESSION_KEY = "iso_team_token"; // Compatible with existing /workspace session.
 
 export default function App() {
@@ -100,7 +101,7 @@ const [view, setView] = useState("incidents");
 if (user && assessment && token) {
   return (
     <>
-      <div className="fixed left-1/2 top-3 z-[100] flex -translate-x-1/2 gap-2 rounded-full border border-white/10 bg-[#172337]/95 p-1 shadow-xl backdrop-blur">
+      <div className="fixed left-1/2 top-3 z-[100] flex max-w-[96vw] -translate-x-1/2 gap-2 overflow-x-auto rounded-full border border-white/10 bg-[#172337]/95 p-1 shadow-xl backdrop-blur">
         <button
           type="button"
           onClick={() => setView("incidents")}
@@ -113,13 +114,14 @@ if (user && assessment && token) {
           onClick={() => setView("dashboard")}
           className={`rounded-full px-4 py-2 text-xs font-bold ${view === "dashboard" ? "bg-sky-300 text-[#102116]" : "text-slate-200 hover:bg-white/10"}`}
         >
-          Dashboard cũ
+          Dashboard
         </button>
+        <button type="button" onClick={() => setView("dossier")} className="rounded-full px-4 py-2 text-xs font-bold text-slate-200 hover:bg-white/10">Hồ sơ ISO</button>
         <button type="button" onClick={logout} className="rounded-full px-4 py-2 text-xs font-bold text-slate-200 hover:bg-white/10">Đăng xuất</button>
       </div>
 
-      {view === "incidents" ? (
-        <EnterpriseIncident3D assessment={assessment} request={request} token={token} />
+      {view === "dossier" ? <ComplianceDossier assessment={assessment} request={request} onOpenDashboard={() => setView("dashboard")} /> : view === "incidents" ? (
+        <EnterpriseIncident3D assessment={assessment} request={request} token={token} onOpenDossier={() => setView("dossier")} />
       ) : (
         <SpaceBaseDashboard
           key={assessment.assessment_id}

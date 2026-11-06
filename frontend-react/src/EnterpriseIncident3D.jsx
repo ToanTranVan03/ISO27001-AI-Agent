@@ -51,7 +51,7 @@ function activityVisualization(controlId) {
   return null;
 }
 
-export default function EnterpriseIncident3D({ assessment, request, token }) {
+export default function EnterpriseIncident3D({ assessment, request, token, onOpenDossier }) {
   const [officeView, setOfficeView] = useState("live");
   const [commandEntries, setCommandEntries] = useState([]);
   const [commandEmployee, setCommandEmployee] = useState("EMP-006");
@@ -547,7 +547,7 @@ export default function EnterpriseIncident3D({ assessment, request, token }) {
         ].map(item=><div key={item.label} className={`rounded-xl border px-3 py-2 ${item.ok?"border-emerald-300/15 bg-emerald-300/5":"border-amber-300/15 bg-amber-300/5"}`}><div className={`flex items-center gap-2 text-[9px] font-black uppercase tracking-wider ${item.ok?"text-emerald-200":"text-amber-200"}`}><span className={`h-1.5 w-1.5 rounded-full ${item.ok?"bg-emerald-300":"bg-amber-300"}`}/>{item.label} · {item.ok?"SẴN SÀNG":readiness?"CHÚ Ý":"ĐANG KIỂM TRA"}</div><div className="mt-1 truncate text-[9px] text-slate-400">{item.detail}</div></div>)}
       </section>
 
-      <div ref={missionPanel} style={{scrollMarginTop:90}}><EnterpriseMissionControl base={base} request={request} officeTarget={officeTarget} draftRequest={missionDraft} onMissionChange={setMissionLink} onFocusEmployee={focusOfficeRecord} officeLiveFocus={liveFocus} onInspect={async receipt=>{await inspectCommand(receipt);chatEnd.current?.scrollIntoView({behavior:"smooth",block:"center"});}}/></div>
+      <div ref={missionPanel} style={{scrollMarginTop:90}}><EnterpriseMissionControl onOpenDossier={onOpenDossier} base={base} request={request} officeTarget={officeTarget} draftRequest={missionDraft} onMissionChange={setMissionLink} onFocusEmployee={focusOfficeRecord} officeLiveFocus={liveFocus} onInspect={async receipt=>{await inspectCommand(receipt);chatEnd.current?.scrollIntoView({behavior:"smooth",block:"center"});}}/></div>
       <section ref={officePanel} style={{scrollMarginTop:90}} className="mb-5 grid items-start gap-4 lg:grid-cols-[minmax(0,1fr)_340px]">
         <div className="min-w-0">
           <OfficeRoster employees={employees} workspace={officeWorkspace} selectedEmployee={commandEmployee} onSelect={selectOfficeEmployee}/>

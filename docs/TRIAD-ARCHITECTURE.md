@@ -1,3 +1,5 @@
+> **Tài liệu cũ cần hiệu chỉnh:** số liệu SUS, N=16, giảm thời gian và độ chính xác ở đây chưa được xác nhận bằng khảo sát người thật/đánh giá độc lập. Không trích dẫn làm kết quả thực nghiệm. Xem README và BAO-VE-VA-KHAO-SAT.md; đối chiếu mô tả RAG và công thức với mã nguồn hiện tại.
+
 # Kiến trúc Tam giác An toàn thông tin: Con người · Phần mềm · Phần cứng
 **Đồ án:** Hệ thống AI Agent Giám sát Tuân thủ ISO/IEC 27001:2022 theo Sự kiện  
 **Mô hình hạt nhân:** Con người (Focal Point) liên kết Phần mềm (IAM/Access) và Phần cứng (Devices/Physical)

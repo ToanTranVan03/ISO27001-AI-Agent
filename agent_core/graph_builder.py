@@ -1,4 +1,5 @@
 import os
+import logging
 import json
 import ollama
 from typing import List, Dict, Any, Literal
@@ -76,7 +77,7 @@ def node_evaluate(state: AgentState):
     import re
     import json
     import os
-    print(f"[NODE: EVALUATE] Gọi Qwen2.5:7B đọc bằng chứng và Rubric ra quyết định...")
+    logging.getLogger(__name__).info("Evaluating evidence and rubric with configured model")
 
     if not state["collected_evidences"]:
         state["compliance_status"] = "Insufficient Evidence"
@@ -115,15 +116,17 @@ Bằng chứng: {json.dumps(safe_evidences, ensure_ascii=False)}"""
 
     # Gọi mô hình Ollama (Phần này giữ nguyên như cũ)
     ollama_client = ollama.Client(
-        host=os.getenv("OLLAMA_HOST", "http://localhost:11434")
+        host=os.getenv("OLLAMA_HOST", "http://localhost:11434"), timeout=45
     )
     resp = ollama_client.chat(
         model=os.getenv("OLLAMA_MODEL", "qwen2.5:7b"),
         messages=[
-            {"role": "system", "content": sys_prompt},
+            {"role": "system", "content": sys_prompt + "\nJSON schema: " + json.dumps(ControlEvaluationOutput.model_json_schema())},
             {"role": "user", "content": user_prompt}
         ],
-        format=ControlEvaluationOutput.model_json_schema(),
+        # ollama==0.4.0 accepts JSON mode but not a schema dict. Keep strict
+        # Pydantic validation below; invalid model output still fails visibly.
+        format="json",
         options={"temperature": 0.0, "num_predict": 250, "num_ctx": 4096}
     )
     

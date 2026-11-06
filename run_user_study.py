@@ -1,3 +1,6 @@
+"""SYNTHETIC DEMONSTRATION ONLY: random-generated records, no human participants.
+Outputs must never be cited as an empirical usability study.
+"""
 """Empirical User Study Runner & Statistical Analysis for Research Question 3 (RQ3).
 
 Evaluates User Performance and Cognitive Load across two conditions:

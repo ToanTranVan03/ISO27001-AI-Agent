@@ -1,6 +1,6 @@
 """ISO/IEC 27002:2022 Knowledge Retrieval-Augmented Generation (RAG) Engine.
 
-Provides authoritative standard text, implementation guidance, CIA impact analysis,
+Provides project-authored paraphrases (not authoritative standard text), implementation guidance, CIA impact analysis,
 and actionable remediation recommendations across People (A.6), Software/Tech (A.8),
 and Physical/Hardware (A.7) controls.
 """
@@ -158,7 +158,7 @@ ISO_27002_KB: Dict[str, dict] = {
 
 
 class IsoRagEngine:
-    """Dynamic retrieval and compliance reasoning engine for ISO/IEC 27002:2022."""
+    """Keyword retrieval over a static project knowledge base for ISO/IEC 27002:2022."""
 
     def __init__(self, kb: Optional[Dict[str, dict]] = None):
         self.kb = kb or ISO_27002_KB
@@ -168,7 +168,7 @@ class IsoRagEngine:
         return self.kb.get(clause_code.strip().upper())
 
     def search(self, query: str, pillar_filter: Optional[str] = None, top_k: int = 3) -> List[dict]:
-        """Perform semantic keyword search across ISO controls with relevance scoring."""
+        """Perform lexical keyword search across ISO controls with relevance scoring."""
         query_tokens = [t.lower() for t in re.findall(r"\w+", query)]
         if not query_tokens:
             return []
