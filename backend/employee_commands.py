@@ -19,7 +19,7 @@ ACTORS.update({
     "EMP-025": {"asset_id": "SRV-APP-02", "host_asset_id": "SRV-APP-02", "room": "software"},
 })
 ACTORS = {employee_id: {"asset_id": f"OFFICE-{employee_id}", "host_asset_id": f"OFFICE-{employee_id}", "room": "hardware"}
-          for employee_id in ACTORS}
+          for employee_id in [f"EMP-{i:03}" for i in range(1, 51)]}
 COMMANDS = {
     "/di-lam": {"aliases": ["di lam", "tham gia", "vao van phong"], "event_type": "approved_work_session",
                  "label": "Đi làm · tham gia bằng một lệnh", "employee_id": None},

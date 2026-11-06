@@ -53,7 +53,9 @@ export default function OfficeLiveScene({employees,entries,selectedEmployee,onSe
   },[monitoring.active]);
   const machines=useMemo(()=>Object.fromEntries(workspace.map(item=>[item.employee_id,item])),[workspace]);
   const latest=useMemo(()=>({...latestByEmployee(entries),...Object.fromEntries(workspace.map(item=>[item.employee_id,item.state.last_receipt || null]))}),[entries,workspace]);
-  const people=useMemo(()=>[...employees].sort((a,b)=>a.employee_id.localeCompare(b.employee_id)),[employees]);
+  const allPeople=useMemo(()=>[...employees].sort((a,b)=>a.employee_id.localeCompare(b.employee_id)),[employees]);
+  const page=Math.floor(Math.max(0,allPeople.findIndex(p=>p.employee_id===selectedEmployee))/14);
+  const people=allPeople.slice(page*14,(page+1)*14);
   const current=latest[selectedEmployee];
   const focus=liveFocus||(monitoring.state==="processing"?monitoring.current_finding:null);
   const targetIndex=people.findIndex(item=>item.employee_id===focus?.employee_id);
@@ -62,9 +64,10 @@ export default function OfficeLiveScene({employees,entries,selectedEmployee,onSe
   const agent=target?[target[0]+45,target[1]+25]:route[patrol];
   const resolved=entries.filter(item=>item.incident_id&&item.verified).length;
   return <section className="office-live" aria-label="Văn phòng tương tác trực tiếp">
+    <nav className="office-link-status" aria-label="Khu làm việc">{Array.from({length:Math.ceil(allPeople.length/14)},(_,i)=><button key={i} type="button" aria-pressed={page===i} onClick={()=>onSelect(allPeople[i*14].employee_id)} style={{padding:'8px 14px',fontWeight:page===i?800:400}}>Khu {i+1} · {allPeople.slice(i*14,(i+1)*14).length} người</button>)}{focus?.employee_id&&targetIndex<0&&<button type="button" onClick={()=>onSelect(focus.employee_id)}>Theo dõi SOC · {focus.employee_id}</button>}</nav>
     {liveFocus&&<div className="office-link-status" role="status"><b>{liveFocus.text}</b><span>{liveFocus.event_id?`Sự kiện ${liveFocus.event_id}`:"Đang đối chiếu dữ liệu của máy"}</span></div>}
     <div className="office-live-heading"><div><div className="office-eyebrow"><Radio size={13}/> VIỆT TÍN · OFFICE LIVE</div><h2>Hôm nay ở văn phòng</h2><p>Mỗi nhân viên một câu chuyện. Mỗi hành động một dấu vết.</p></div><span className="office-live-badge"><span/>{liveFocus?.active?"SOC ĐANG KIỂM TRA":monitoring.active?"ĐANG GIÁM SÁT":"CHỜ BẮT ĐẦU"}</span></div>
-    <div className="office-toolbar"><span><Users size={13}/>{people.length} nhân viên</span><span><ScanLine size={13}/>{workspace.reduce((sum,item)=>sum+item.pending_count,0)} sự kiện chờ kiểm tra</span><span>{resolved} đã xác minh / {entries.length} lệnh gần nhất</span><button onClick={()=>setZoom(!zoom)} aria-label={zoom?"Xem toàn văn phòng":"Phóng to khu làm việc"}>{zoom?<ZoomOut size={15}/>:<ZoomIn size={15}/>}</button></div>
+    <div className="office-toolbar"><span><Users size={13}/>{allPeople.length} nhân viên · khu {page+1}</span><span><ScanLine size={13}/>{workspace.reduce((sum,item)=>sum+item.pending_count,0)} sự kiện chờ kiểm tra</span><span>{resolved} đã xác minh / {entries.length} lệnh gần nhất</span><button onClick={()=>setZoom(!zoom)} aria-label={zoom?"Xem toàn văn phòng":"Phóng to khu làm việc"}>{zoom?<ZoomOut size={15}/>:<ZoomIn size={15}/>}</button></div>
     <div className="office-map"><svg viewBox={zoom?"35 65 600 550":"0 0 1000 740"} role="group" aria-label="Bản đồ văn phòng; chọn nhân viên để gửi bình luận">
       <defs><pattern id="office-floor" width="35" height="35" patternUnits="userSpaceOnUse"><path d="M35 0H0V35" fill="none" stroke="#b8c9ba" strokeWidth=".7" opacity=".35"/></pattern><linearGradient id="office-beam" x1="0" x2="1"><stop stopColor="#65c6ac" stopOpacity=".05"/><stop offset="1" stopColor="#65c6ac" stopOpacity=".45"/></linearGradient></defs>
       <rect width="1000" height="740" fill="#dce7dc"/>

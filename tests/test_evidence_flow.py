@@ -5,6 +5,7 @@ import pytest
 def shared_api_test_setup(monkeypatch):
     # The original API tests are legacy route regression tests, not login tests.
     monkeypatch.setattr(main.teamwork, "init_teamwork", lambda: None)
+    monkeypatch.setattr(main, "resolve_company", lambda *args: "00000000-0000-0000-0000-000000000001")
     main.app.dependency_overrides[main.require_user] = lambda: {
         'user_id': '00000000-0000-0000-0000-000000000001',
         'username':'tester','display_name':'Tester','role':'admin',

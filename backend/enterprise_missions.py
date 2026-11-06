@@ -132,16 +132,20 @@ def scoped_scan(scan, scope, target=None):
 
 
 def inventory_snapshot(assessment_id, scope, target=None):
-    with get_connection() as con, con.cursor() as cur:
-        cur.execute("SELECT employee_id,display_name,department,job_title FROM enterprise_sim_people WHERE assessment_id=%s ORDER BY employee_id", (assessment_id,))
-        people = [dict(zip(("employee_id", "name", "department", "role"), row)) for row in cur.fetchall()]
-        cur.execute("SELECT asset_id,asset_type,asset_name,department FROM enterprise_sim_assets WHERE assessment_id=%s ORDER BY asset_id", (assessment_id,))
-        assets = [dict(zip(("asset_id", "type", "name", "department"), row)) for row in cur.fetchall() if scope == "all" or row[1] == scope or (target and row[0]==target["asset_id"])]
+    from backend.company import snapshot
+    data = snapshot(assessment_id)
+    people = [{**p, 'employee_id':p['id']} for p in data['people']]
+    assets = [{**a, 'type':a['asset_type'],'name':a['asset_name']} for a in data['assets']
+              if scope == 'all' or a['asset_type'] == scope or (target and a['asset_id']==target['asset_id'])]
+    accounts = data['accounts']
     if target:
-        people=[person for person in people if person["employee_id"]==target["employee_id"]]
-        assets=[asset for asset in assets if asset["asset_id"]==target["asset_id"]]
-    return {"captured_at": now(), "people": people if target or scope in {"all", "people"} else [], "assets": assets,
-            "source": "enterprise_sim_people / enterprise_sim_assets"}
+        people = [p for p in people if p['employee_id']==target['employee_id']]
+        assets = [a for a in assets if a['asset_id']==target['asset_id']]
+        accounts = [a for a in accounts if a['person_id']==target['employee_id']]
+    return {'captured_at':now(), 'assessment_id':str(assessment_id),
+            'people':people if target or scope in {'all','people'} else [], 'assets':assets,
+            'accounts':accounts if target or scope in {'all','people','software'} else [],
+            'source':data['source'], 'snapshot_hash':data['snapshot_hash']}
 
 
 def unresolved_incidents(assessment_id,scope,target=None):

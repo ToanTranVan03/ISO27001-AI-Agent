@@ -35,6 +35,7 @@ class ControlEvaluationOutput(BaseModel):
             return 0.85
 
 class AgentState(TypedDict):
+    company_evaluation: Dict[str, Any]
     control_id: str
     control_name: str
     objective: str
@@ -52,6 +53,11 @@ class AgentState(TypedDict):
 # 2. ĐỊNH NGHĨA CÁC NODE
 # ==========================================
 def node_plan(state: AgentState):
+    if state.get('assessment_id'):
+        from backend.company_evidence import PEOPLE_CONTROLS
+        if state['control_id'] in PEOPLE_CONTROLS:
+            state['audit_trail'].append('PLAN → SELECT TOOL: shared-company-evidence')
+            return state
     node_key=CONTROL_TO_NODE.get(state['control_id']) if state.get('assessment_id') else None
     if node_key:
         state['audit_trail'].append('PLAN → SELECT TOOL: ' + NODE_SPECS[node_key]['tool'])
@@ -60,7 +66,14 @@ def node_plan(state: AgentState):
     return state
 
 def node_collect(state: AgentState):
-    if state.get('assessment_id') and state['control_id'] in CONTROL_TO_NODE:
+    shared = None
+    if state.get('assessment_id'):
+        from backend.company_evidence import collect_people
+        shared = collect_people(state['assessment_id'], state['control_id'])
+        if shared:
+            state['company_evaluation'] = shared
+            state['audit_trail'].append('COLLECT SHARED COMPANY: ' + shared['evidence_id'])
+    if not shared and state.get('assessment_id') and state['control_id'] in CONTROL_TO_NODE:
         from backend.enterprise_lab import collect_lab_snapshot
         snapshot = collect_lab_snapshot(state['assessment_id'],state['control_id'])
         state['audit_trail'].append('COLLECT SYNTHETIC LAB EVIDENCE: ' + snapshot['evidence_id'])
@@ -74,6 +87,12 @@ def node_collect(state: AgentState):
     return state
 
 def node_evaluate(state: AgentState):
+    shared = state.get('company_evaluation')
+    if shared:
+        state.update(compliance_status=shared['status'], confidence=shared['confidence'],
+            rationale=shared['rationale'], proposed_evidence_ids=[shared['evidence_id']])
+        state['audit_trail'].append('EVALUATE (SHARED COMPANY RULES; NO LLM CLASSIFICATION)')
+        return state
     import re
     import json
     import os

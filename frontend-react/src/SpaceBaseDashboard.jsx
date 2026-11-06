@@ -1130,6 +1130,7 @@ export default function SpaceBaseDashboard({ user, assessment, request, onLogout
                 </span>
               </div>
               <div className="mt-3 text-xs text-[#E6C2A5]">Kết luận ISO: {currentProgress?.compliance_status || "Chưa có kết luận"}</div>
+              {currentProgress?.data_freshness === "stale" && <p className="mt-2 text-xs text-amber-300">Dữ liệu doanh nghiệp đã thay đổi. Chạy lại đánh giá; kết luận cũ được giữ trong lịch sử.</p>}
               <div className="mt-2 text-xs text-[#B9C6D2]">Phụ trách: {currentProgress?.assigned_to || "Chưa phân công"}</div>
             </div>
 

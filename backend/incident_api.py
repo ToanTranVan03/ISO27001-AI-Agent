@@ -265,8 +265,22 @@ def people(assessment_id: UUID, user: dict = Depends(require_user)):
     """Synthetic staff directory and their relationships to lab devices/apps."""
     require_campaign(assessment_id, user)
     items = incident_simulation.list_people(str(assessment_id))
+    from backend.company import snapshot
+    data = snapshot(str(assessment_id))
+    profiles = {p['id']: p for p in data['people']}
+    assets = {a['asset_id']: a for a in data['assets']}
+    for item in items:
+        p = profiles[item['employee_id']]
+        item.update(display_name=p['name'],department=p['department'],job_title=p['role'],
+                    employment_status=p['status'],account_status=p['account_status'])
+        item['state'] = {k:v for k,v in p.items() if k not in {'id','employee_id','legacy_id','name','department','role','status','account_status'}}
+        item['linked_assets'] = [{**a,'state':assets[a['asset_id']]['state']} for a in item['linked_assets'] if a['asset_id'] in assets]
+        item['linked_accounts'] = [a for a in data['accounts'] if a['person_id'] == item['employee_id']]
+        item['legacy_id'] = 'HF-' + item['employee_id'][-3:]
     return {
         "is_synthetic": True,
+        "assessment_id": str(assessment_id),
+        "company_snapshot_hash": data['snapshot_hash'],
         "employee_count": len(items),
         "linked_asset_count": sum(len(item["linked_assets"]) for item in items),
         "employees": items,

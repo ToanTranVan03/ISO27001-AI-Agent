@@ -12,6 +12,10 @@ CONTROLS_PATH = ROOT_DIR / "docs" / "56_controls_scope.json"
 RUBRICS_PATH = ROOT_DIR / "docs" / "compliance_rubrics.json"
 
 
+class EvaluationBusy(ValueError):
+    pass
+
+
 @contextmanager
 def get_connection() -> Iterator[psycopg.Connection[Any]]:
     database_url = os.getenv("DATABASE_URL")
@@ -260,12 +264,19 @@ def get_rubric(control_id: str) -> dict[str, Any] | None:
 def save_evaluation(result: dict[str, Any]) -> None:
     with get_connection() as connection:
         with connection.cursor() as cursor:
+            if result.get('assessment_id'):
+                cursor.execute('''SELECT workflow_status FROM control_progress
+                    WHERE assessment_id=%s AND control_id=%s FOR UPDATE''',
+                    (result['assessment_id'],result['control_id']))
+                progress = cursor.fetchone()
+                if not progress or progress[0] == 'RUNNING':
+                    raise EvaluationBusy('Control is running or outside this assessment.')
             cursor.execute(
                 """
                 INSERT INTO evaluations (
-                    control_id, status, confidence, rationale, evidence_ids, audit_trail
+                    control_id, status, confidence, rationale, evidence_ids, audit_trail, assessment_id, evaluated_by
                 )
-                VALUES (%s, %s, %s, %s, %s, %s)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s) RETURNING evaluation_id
                 """,
                 (
                     result["control_id"],
@@ -274,8 +285,16 @@ def save_evaluation(result: dict[str, Any]) -> None:
                     result["rationale"],
                     Jsonb(result["evidence_ids"]),
                     Jsonb(result["audit_trail"]),
+                    result.get("assessment_id"), result.get("evaluated_by"),
                 ),
             )
+            evaluation_id = cursor.fetchone()[0]
+            if result.get('assessment_id'):
+                flow = 'WAITING_EVIDENCE' if result['status']=='Insufficient Evidence' else ('NEEDS_REVIEW' if result['status']=='Not Applicable' else 'COMPLETED')
+                cursor.execute('''UPDATE control_progress SET latest_evaluation_id=%s,compliance_status=%s,
+                    workflow_status=%s,updated_at=NOW(),completed_at=CASE WHEN %s='COMPLETED' THEN NOW() ELSE NULL END
+                    WHERE assessment_id=%s AND control_id=%s''',
+                    (evaluation_id,result['status'],flow,flow,result['assessment_id'],result['control_id']))
 
 
 def save_evidence(

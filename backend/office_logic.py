@@ -9,6 +9,8 @@ RISK_EVENTS = {"unattended_screen_unlocked", "unapproved_usb_inserted", "unappro
 
 def transition(command, current, pending=0):
     state = {**DEFAULT_STATE, **current}
+    if state.get('returned') is True and command in {'/di-lam','/vao-ca','/lam-viec','/usb-la','/cai-app-la','/mo-khoa'}:
+        raise ValueError('Thiết bị đã được thu hồi; cần phân công lại trước khi sử dụng.')
     after = dict(state)
     if command == "/di-lam":
         if state["shift"] == "on":

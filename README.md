@@ -10,6 +10,10 @@ Hệ thống hỗ trợ thu thập bằng chứng, đánh giá một số kiểm
 - `iso_rag.py` hiện truy hồi từ khóa trên kho kiến thức viết sẵn, chưa phải vector RAG.
 - Ngưỡng thời gian và công thức rủi ro lab là chính sách dự án, không phải yêu cầu bắt buộc của ISO.
 
+## Doanh nghiệp dùng chung
+
+Các màn hình web vận hành đọc cùng dữ liệu PostgreSQL theo đợt đánh giá: 50 nhân viên, 50 máy riêng và tài sản/tài khoản lab liên quan. Xem [kiến trúc và migration](docs/DOANH_NGHIEP_DUNG_CHUNG.md). CLI nghiên cứu và benchmark vẫn dùng fixture cô lập.
+
 ## Thực nghiệm và giới hạn
 
 - Ca benchmark tổng hợp tự xây dựng, chưa thẩm định mù bởi chuyên gia.

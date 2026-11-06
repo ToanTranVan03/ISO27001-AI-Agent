@@ -30,3 +30,13 @@ automatic policy chặn. Chi tiết ở docs/VALIDATION.md; không coi runtime �
 - [ ] Thẩm định tiêu chí và nhãn bởi chuyên gia; thử tập kiểm định ẩn.
 - [ ] SoA có lý do áp dụng/loại trừ, phê duyệt và nguồn tiêu chuẩn được cấp quyền.
 - [ ] Dữ liệu doanh nghiệp thật, khảo sát người tham gia và đánh giá UI đầy đủ.
+
+## Thống nhất doanh nghiệp giữa các màn hình
+- [x] Nguồn PostgreSQL theo đợt, chuẩn hóa EMP và mã nhập HF.
+- [x] Migration bổ sung danh bạ 50 người, tài khoản, máy; bảo toàn trạng thái và quan hệ cũ.
+- [x] Live/simulation web, Agent inventory và collector cùng đọc snapshot có hash.
+- [x] Bằng chứng gắn entity_refs; Dashboard và hồ sơ cùng cảnh báo dữ liệu cũ.
+- [x] Giao diện Doanh nghiệp; văn phòng chia 4 khu cho đủ 50 người.
+- [x] Kiểm tra API xuyên phần: đào tạo, alias, tái đánh giá, lệnh máy, số liệu IAM và phân quyền.
+- [ ] Kiểm thử đầy đủ thao tác bấm UI có đăng nhập.
+- [ ] Tích hợp nguồn doanh nghiệp thật; tối ưu kiểm tra độ mới theo phụ thuộc từng trường.

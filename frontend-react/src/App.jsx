@@ -4,6 +4,7 @@ import SpaceBaseDashboard from "./SpaceBaseDashboard";
 import { ApiError, apiRequest } from "./api";
 import EnterpriseIncident3D from "./EnterpriseIncident3D";
 import ComplianceDossier from "./ComplianceDossier";
+import CompanyInventory from "./CompanyInventory";
 const SESSION_KEY = "iso_team_token"; // Compatible with existing /workspace session.
 
 export default function App() {
@@ -18,10 +19,15 @@ export default function App() {
 const [view, setView] = useState("incidents");
   const clearSession = useCallback(() => {
     sessionStorage.removeItem(SESSION_KEY);
+    sessionStorage.removeItem("iso_team_assessment");
     setToken("");
     setUser(null);
     setAssessment(null);
   }, []);
+
+  useEffect(() => {
+    if (assessment?.assessment_id) sessionStorage.setItem('iso_team_assessment', assessment.assessment_id);
+  }, [assessment]);
 
   // Restore existing session and verify against the database.
   useEffect(() => {
@@ -116,11 +122,12 @@ if (user && assessment && token) {
         >
           Dashboard
         </button>
+        <button type="button" onClick={() => setView("company")} className="rounded-full px-4 py-2 text-xs font-bold text-slate-200 hover:bg-white/10">Doanh nghiệp</button>
         <button type="button" onClick={() => setView("dossier")} className="rounded-full px-4 py-2 text-xs font-bold text-slate-200 hover:bg-white/10">Hồ sơ ISO</button>
         <button type="button" onClick={logout} className="rounded-full px-4 py-2 text-xs font-bold text-slate-200 hover:bg-white/10">Đăng xuất</button>
       </div>
 
-      {view === "dossier" ? <ComplianceDossier assessment={assessment} request={request} onOpenDashboard={() => setView("dashboard")} /> : view === "incidents" ? (
+      {view === "company" ? <CompanyInventory assessment={assessment} request={request} onOpenDossier={() => setView("dossier")} /> : view === "dossier" ? <ComplianceDossier assessment={assessment} request={request} onOpenCompany={() => setView("company")} onOpenDashboard={() => setView("dashboard")} /> : view === "incidents" ? (
         <EnterpriseIncident3D assessment={assessment} request={request} token={token} onOpenDossier={() => setView("dossier")} />
       ) : (
         <SpaceBaseDashboard

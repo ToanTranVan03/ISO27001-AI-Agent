@@ -176,14 +176,17 @@ def explain_with_ollama(controls):
         raise ModelUnavailable('Không kết nối được Ollama hoặc model chưa trả lời hợp lệ. Kiểm tra Ollama và qwen2.5:7b, hoặc chọn chế độ Quy tắc để chạy lại.') from exc
 
 
-def run_simulation(scenario_id, mode='rules'):
+def run_simulation(scenario_id, mode='rules', enterprise=None, apply_selected=True):
     if mode not in ('rules', 'ai'):
         raise ValueError('Chế độ không hợp lệ.')
     scenario = next((s for s in SCENARIOS if s['id'] == scenario_id), None)
     if scenario is None:
         raise ValueError('Không tìm thấy tình huống mô phỏng.')
-    enterprise = build_enterprise()
-    apply_scenario(enterprise, scenario_id)
+    enterprise = build_enterprise() if enterprise is None else enterprise
+    if enterprise.get('source') == 'postgresql://assessment/company' and scenario_id == 'baseline':
+        scenario = {**scenario, 'name':'Hiện trạng doanh nghiệp', 'description':'Đọc dữ liệu dùng chung; không đặt lại hồ sơ.'}
+    if apply_selected:
+        apply_scenario(enterprise, scenario_id)
     controls = evaluate_enterprise(enterprise)
     explanation = explain_with_ollama(controls) if mode == 'ai' else None
     affected = {f['person_id'] for c in controls for f in c['findings']}

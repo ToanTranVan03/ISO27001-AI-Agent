@@ -357,7 +357,7 @@ def initialize_incident_simulation() -> None:
             # Link every scenario target to its affected employee or departmental
             # owner, making people the common thread across all three lab areas.
             targets = {}
-            cur.execute("DELETE FROM enterprise_sim_asset_people")
+            # Preserve existing ownership links and historical references.
             for scenario in SCENARIOS:
                 target = scenario["target"]
                 targets[target["asset_id"]] = (
@@ -421,6 +421,8 @@ def initialize_incident_simulation() -> None:
                          summary, Jsonb(event_details)))
 
 
+    from backend.company import initialize_company
+    initialize_company()
     from backend.employee_commands import initialize_workstations
     initialize_workstations()
     from backend.enterprise_missions import initialize_missions

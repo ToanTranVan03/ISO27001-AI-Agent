@@ -88,7 +88,7 @@ async function runMission() {
     }
   }
   try {
-    const response = await fetch('/api/agent/run', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({goal: $('agent-goal').value.trim(), mode: $('agent-mode').value})});
+    const response = await companyFetch('/api/agent/run', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({goal: $('agent-goal').value.trim(), mode: $('agent-mode').value})});
     if (!response.ok) throw new Error(`Không khởi chạy được Agent (${response.status}).`);
     const reader = response.body.getReader(), decoder = new TextDecoder();
     let buffer = '';

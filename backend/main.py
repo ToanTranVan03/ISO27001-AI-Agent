@@ -19,12 +19,14 @@ from agent_core.live import LiveMonitor
 
 import hashlib
 import logging
-from uuid import uuid4
+from uuid import uuid4, UUID
 from dotenv import load_dotenv
 from fastapi import Depends, File, Form, UploadFile
 from psycopg import Error as PostgresError
 from backend import database, teamwork, enterprise_lab, incident_simulation
-from backend.team_api import router as team_router, require_user
+from backend.team_api import router as team_router, require_user, require_campaign
+from backend import company
+from backend.company_monitor import CompanyMonitor
 from backend.enterprise_api import router as enterprise_router
 from backend.incident_api import router as incident_router
 from agent_core.graph_builder import build_iso_agent_graph
@@ -39,17 +41,27 @@ ENTERPRISE_PATH = ROOT_DIR / 'frontend' / 'enterprise.html'
 REACT_DIST = ROOT_DIR / 'frontend-react' / 'dist'
 MAX_UPLOAD_BYTES = 15 * 1024 * 1024
 
-live_monitor = None
+live_monitors = {}
 live_lock = threading.Lock()
 
 
-def get_live_monitor():
-    global live_monitor
+def resolve_company(user, assessment_id=None):
+    if assessment_id is None:
+        campaigns = teamwork.list_assessments(user['user_id'])
+        if not campaigns:
+            raise HTTPException(403, detail='Chưa thuộc đợt đánh giá nào.')
+        assessment_id = str(campaigns[0]['assessment_id'])
+    require_campaign(assessment_id, user)
+    return str(assessment_id)
+
+
+def get_live_monitor(assessment_id):
     with live_lock:
-        if live_monitor is None:
-            live_monitor = LiveMonitor()
-        live_monitor.start()
-        return live_monitor
+        if assessment_id not in live_monitors:
+            live_monitors[assessment_id] = CompanyMonitor(assessment_id)
+        monitor = live_monitors[assessment_id]
+        monitor.start()
+        return monitor
 
 
 @asynccontextmanager
@@ -58,10 +70,10 @@ async def lifespan(app):
     teamwork.init_teamwork()
     enterprise_lab.init_enterprise_lab()
     incident_simulation.initialize_incident_simulation()
-    get_live_monitor()
     yield
-    if live_monitor:
-        live_monitor.stop()
+    for monitor in live_monitors.values():
+        monitor.stop()
+    live_monitors.clear()
 
 # Khởi tạo API Server
 app = FastAPI(title="ISO 27001 AI Agent API", version="1.0", lifespan=lifespan)
@@ -94,13 +106,13 @@ class BusinessEventRequest(BaseModel):
 
 
 @app.get('/api/live')
-def live_state():
-    return get_live_monitor().state()
+def live_state(assessment_id: UUID | None = None, user: dict = Depends(require_user)):
+    return get_live_monitor(resolve_company(user, assessment_id)).state()
 
 
 @app.get('/api/live/report')
-def live_report():
-    state = get_live_monitor().state()
+def live_report(assessment_id: UUID | None = None, user: dict = Depends(require_user)):
+    state = get_live_monitor(resolve_company(user, assessment_id)).state()
     return Response(json.dumps(state, ensure_ascii=False, indent=2), media_type='application/json',
                     headers={'Content-Disposition': f'attachment; filename="hivefive-evidence-r{state["revision"]}.json"'})
 
@@ -114,31 +126,37 @@ def research_results():
 
 
 @app.post('/api/live/events')
-def business_event(req: BusinessEventRequest):
+def business_event(req: BusinessEventRequest, assessment_id: UUID | None = None, user: dict = Depends(require_user)):
+    aid = resolve_company(user, assessment_id)
+    if req.action == 'retention_approve' and user['role'] != 'admin':
+        raise HTTPException(403,detail='Chỉ admin ghi nhận phê duyệt ngoại lệ.')
     try:
-        return get_live_monitor().change(req.person_id, req.action)
+        return get_live_monitor(aid).change(req.person_id, req.action, actor_id=user['user_id'])
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
 
 @app.post('/api/agent/run')
-def run_agent(req: AgentRequest):
+def run_agent(req: AgentRequest, assessment_id: UUID | None = None, user: dict = Depends(require_user)):
+    aid = resolve_company(user, assessment_id)
+    data = company.snapshot(aid)
+    store = get_live_monitor(aid).store
     if not req.goal.strip():
         raise HTTPException(status_code=422, detail='Hãy nhập mục tiêu kiểm tra.')
     def stream():
-        for event in agent_events(req.goal.strip(), req.mode):
+        for event in agent_events(req.goal.strip(), req.mode, store, snapshot=(data, f"company:{aid}", data["snapshot_hash"])):
             yield json.dumps(event, ensure_ascii=False) + '\n'
     return StreamingResponse(stream(), media_type='application/x-ndjson', headers={'Cache-Control': 'no-store'})
 
 
 @app.get('/api/agent/history')
-def agent_history():
-    return AgentStore().history()
+def agent_history(assessment_id: UUID | None = None, user: dict = Depends(require_user)):
+    return get_live_monitor(resolve_company(user, assessment_id)).store.history()
 
 
 @app.get('/api/agent/latest')
-def agent_latest():
-    return AgentStore().latest()
+def agent_latest(assessment_id: UUID | None = None, user: dict = Depends(require_user)):
+    return get_live_monitor(resolve_company(user, assessment_id)).store.latest()
 
 
 @app.get('/simulation', include_in_schema=False)
@@ -147,14 +165,16 @@ def simulation_page():
 
 
 @app.get('/api/simulation')
-def simulation_catalog():
-    return {'enterprise': build_enterprise(), 'scenarios': SCENARIOS}
+def simulation_catalog(assessment_id: UUID | None = None, user: dict = Depends(require_user)):
+    scenarios = [{**s, 'name':'Hiện trạng doanh nghiệp', 'description':'Đọc dữ liệu dùng chung; không đặt lại hồ sơ.'} if s['id']=='baseline' else s for s in SCENARIOS]
+    return {'enterprise': company.snapshot(resolve_company(user, assessment_id)), 'scenarios': scenarios}
 
 
 @app.post('/api/simulation/run')
-def simulate(req: SimulationRequest):
+def simulate(req: SimulationRequest, assessment_id: UUID | None = None, user: dict = Depends(require_user)):
+    aid = resolve_company(user, assessment_id)
     try:
-        return run_simulation(req.scenario_id, req.mode)
+        return run_simulation(req.scenario_id, req.mode, company.apply_scenario(aid, req.scenario_id, actor_id=user['user_id']), apply_selected=False)
     except ValueError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from exc
     except ModelUnavailable as exc:
@@ -214,7 +234,9 @@ async def upload_evidence(
     evidence_type: str = Form(...),
     file: UploadFile = File(...),
     user: dict = Depends(require_user),
+    assessment_id: UUID | None = None,
 ):
+    aid = resolve_company(user, assessment_id)
     try:
         control = database.get_control(control_id)
     except (PostgresError, RuntimeError) as exc:
@@ -253,7 +275,7 @@ async def upload_evidence(
             evidence_type=evidence_type,
             source=filename,
             extracted_text=extracted_text,
-            sha256_hash=digest,
+            sha256_hash=digest, assessment_id=aid, uploaded_by=user["user_id"],
         )
     except (PostgresError, RuntimeError) as exc:
         logger.exception("Could not save uploaded evidence.")
@@ -272,7 +294,8 @@ async def upload_evidence(
 
 
 @app.post("/api/evaluate")
-async def evaluate_control(req: EvaluationRequest, user: dict = Depends(require_user)):
+async def evaluate_control(req: EvaluationRequest, user: dict = Depends(require_user), assessment_id: UUID | None = None):
+    aid = resolve_company(user, assessment_id)
     try:
         control = database.get_control(req.control_id)
     except (PostgresError, RuntimeError) as exc:
@@ -283,6 +306,7 @@ async def evaluate_control(req: EvaluationRequest, user: dict = Depends(require_
         raise HTTPException(status_code=404, detail="Control not found.")
 
     initial_state = {
+        "assessment_id": aid,
         "control_id": control["control_id"],
         "control_name": control["name"],
         "objective": control["objective"],
@@ -304,8 +328,11 @@ async def evaluate_control(req: EvaluationRequest, user: dict = Depends(require_
             "evidence_ids": final_state.get("validated_evidence_ids", []),
             "audit_trail": final_state["audit_trail"],
         }
+        result.update(assessment_id=aid, evaluated_by=user["user_id"])
         database.save_evaluation(result)
         return result
+    except database.EvaluationBusy as exc:
+        raise HTTPException(status_code=409, detail=str(exc)) from exc
     except PostgresError as exc:
         logger.exception("Could not persist evaluation.")
         raise HTTPException(

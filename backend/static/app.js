@@ -76,10 +76,20 @@ function el(tag, text, className) {
   return node;
 }
 
+function companyFetch(url, options = {}) {
+  const target = new URL(url, window.location.origin);
+  const assessment = sessionStorage.getItem('iso_team_assessment');
+  if (assessment) target.searchParams.set('assessment_id', assessment);
+  const headers = new Headers(options.headers || {});
+  const token = sessionStorage.getItem('iso_team_token');
+  if (token) headers.set('Authorization', `Bearer ${token}`);
+  return fetch(target, {...options, headers});
+}
 async function request(url, options) {
-  const response = await fetch(url, options);
+  const response = await companyFetch(url, options);
   if (!response.ok) {
     const body = await response.json().catch(() => ({}));
+    if (response.status === 401) throw new Error("Hãy đăng nhập tại / trên cùng địa chỉ trình duyệt, rồi mở lại mô phỏng.");
     throw new Error(typeof body.detail === 'string' ? body.detail : `Yêu cầu thất bại (${response.status}).`);
   }
   return response.json();

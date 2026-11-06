@@ -32,7 +32,7 @@ def start_subtask(doc, tool):
 
 def outcome_summary(tool, output):
     if tool=="coordination":return f"Đã lập {len(output.get('steps',[]))} công việc con. Nguồn lập kế hoạch: {output.get('model') or output.get('source','quy trình')}."
-    if tool=="inventory":return f"Đã thu thập {len(output.get('people',[]))} hồ sơ nhân sự và {len(output.get('assets',[]))} tài sản."
+    if tool=="inventory":return f"Đã thu thập {len(output.get('people',[]))} hồ sơ nhân sự và {len(output.get('assets',[]))} tài sản, {len(output.get('accounts',[]))} tài khoản."
     if tool=="workstations":
         rows=output.get("workstations",[])
         isolated=sum(bool(item.get("state",{}).get("network_isolated")) for item in rows)

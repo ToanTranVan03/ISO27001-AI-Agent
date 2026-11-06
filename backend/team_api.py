@@ -94,6 +94,8 @@ def assessments(user: dict = Depends(require_user)):
 def progress(assessment_id: UUID, user: dict = Depends(require_user)):
     require_campaign(assessment_id,user)
     data = teamwork.progress_board(str(assessment_id))
+    from backend.company_evidence import fresh_progress
+    data = fresh_progress(str(assessment_id),data)
     return {'assessment_id':str(assessment_id),'controls':data,
             'summary':{'total':len(data),
                        'completed':sum(x['workflow_status']=='COMPLETED' for x in data),

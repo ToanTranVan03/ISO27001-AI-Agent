@@ -122,3 +122,20 @@ Chưa chốt. Cuối tuần 4, rà lại các mục còn mở và chỉ chuyển
 - Commit: **Bổ sung hồ sơ đánh giá ISO và kiểm chứng Agent theo nguồn thực thi**.
 - Nội dung: hồ sơ đánh giá, phạm vi kiểm soát, benchmark phân biệt luật/LLM/phục hồi, sửa lỗi SDK và hiệu chỉnh tài liệu thực nghiệm.
 - Kiểm chứng: 176 test Python, 18 test JavaScript và build đạt; API tái đánh giá thành công.
+
+## Thống nhất doanh nghiệp — 19:40 ngày 06/11/2026 (UTC+7)
+
+- Thống nhất nguồn PostgreSQL theo đợt cho văn phòng, Live/mô phỏng web, Agent inventory và collector. Chuẩn hóa EMP; HF là mã nhập tương thích, không trộn dữ liệu lịch sử mâu thuẫn.
+- Bổ sung danh bạ 50 người, 50 máy riêng; hiện có 202 tài khoản và 70 thiết bị phần cứng. Migration bổ sung, giữ hồ sơ và quan hệ cũ; chạy lại không nhân đôi.
+- Thêm màn hình Doanh nghiệp và chia văn phòng thành 4 khu; liên kết bằng chứng qua entity_refs và snapshot_hash.
+- Dashboard và Hồ sơ ISO cùng yêu cầu tái đánh giá khi dữ liệu nguồn đổi. Kiểm tra thành viên theo đợt; ghi người thực hiện thay đổi, chỉ admin ghi nhận phê duyệt ngoại lệ.
+- API thật xác nhận alias HF-050 → EMP-050, luồng đào tạo/tái đánh giá, số liệu IAM, lệnh máy và SOC USB trên EMP-050. SOC lượt kiểm chứng dùng policy-fallback, được ghi rõ nguồn.
+- Cả 8 job A.6 dùng dữ liệu chung hoàn tất; 188 test Python, 18 test JavaScript và build đạt. Đã xem ảnh render khu cuối; chưa kiểm thử bấm toàn bộ UI.
+- Đưa vào đợt commit/push ghi bên dưới. Chi tiết: docs/DOANH_NGHIEP_DUNG_CHUNG.md.
+
+## Commit và push GitHub — 19:44:58 ngày 06/11/2026 (UTC+7)
+
+- Nhánh nhận thay đổi: **Toant3**, remote **origin**, kho ISO27001-AI-Agent.
+- Commit: **Thống nhất dữ liệu doanh nghiệp giữa văn phòng, Agent và hồ sơ ISO**.
+- Nội dung: nguồn PostgreSQL theo đợt; danh bạ, tài khoản và thiết bị chung; bằng chứng gắn snapshot; cảnh báo kết luận cũ; giao diện Doanh nghiệp và văn phòng 4 khu.
+- Kiểm chứng: 188 test Python, 18 test JavaScript và build đạt; các luồng API và migration đã được kiểm tra.

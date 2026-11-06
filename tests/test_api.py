@@ -15,6 +15,27 @@ from agent_core.live import LiveMonitor
 class ApiTests(unittest.TestCase):
     def setUp(self):
         self.client = TestClient(app)
+        from backend.team_api import require_user
+        from agent_core.simulation import build_enterprise, apply_scenario
+        app.dependency_overrides[require_user] = lambda: {'user_id': 'test-user', 'role': 'admin'}
+        self.addCleanup(lambda: app.dependency_overrides.pop(require_user, None))
+        self.directory = tempfile.TemporaryDirectory()
+        self.addCleanup(self.directory.cleanup)
+        monitor = LiveMonitor(self.directory.name, mode='workflow')
+        self.addCleanup(monitor.stop)
+        def fixture_snapshot(*args):
+            data = build_enterprise()
+            data['snapshot_hash'] = 'fixture-shared-snapshot'
+            return data
+        def fixture_scenario(aid, scenario, **kwargs):
+            data = fixture_snapshot()
+            apply_scenario(data, scenario)
+            return data
+        for target, replacement in [('backend.main.resolve_company', lambda *args: 'test-campaign'),
+                ('backend.main.company.snapshot', fixture_snapshot),
+                ('backend.main.company.apply_scenario', fixture_scenario),
+                ('backend.main.get_live_monitor', lambda *args: monitor)]:
+            mocked = patch(target, replacement); mocked.start(); self.addCleanup(mocked.stop)
 
     def test_business_event_automatically_produces_rule_findings(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -33,7 +54,8 @@ class ApiTests(unittest.TestCase):
     def test_agent_stream_history_and_input_validation(self):
         with tempfile.TemporaryDirectory() as directory:
             store = AgentStore(directory)
-            with patch('backend.main.agent_events', side_effect=lambda goal, mode: agent_events(goal, mode, store)), patch('backend.main.AgentStore', return_value=store):
+            with patch('backend.main.agent_events', side_effect=lambda goal, mode, *args, **kwargs: agent_events(goal, mode, store, **kwargs)), patch('backend.main.AgentStore', return_value=store), patch('backend.main.get_live_monitor') as monitored:
+                monitored.return_value.store = store
                 response = self.client.post('/api/agent/run', json={'goal': 'Kiểm tra HiveFive', 'mode': 'workflow'})
                 self.assertIn('application/x-ndjson', response.headers['content-type'])
                 events = [json.loads(line) for line in response.text.splitlines()]
@@ -105,6 +127,8 @@ class ApiTests(unittest.TestCase):
         self.assertIn('<div id="root">', response.text)
 
     def test_legacy_evaluation_contract(self):
+        from backend.team_api import require_user
+        app.dependency_overrides.pop(require_user, None)
         response = self.client.post('/api/evaluate', json={'control_id': 'A.6.3'})
         self.assertEqual(response.status_code, 401)
 

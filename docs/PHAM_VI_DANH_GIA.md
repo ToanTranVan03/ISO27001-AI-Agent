@@ -1,6 +1,6 @@
 # Phạm vi kiểm soát và bằng chứng
 
-Đây là phạm vi kỹ thuật, chưa phải SoA được phê duyệt. Không suy từ chưa hỗ trợ thành không áp dụng. Các engine dùng bộ dữ liệu riêng, không cộng thành tỷ lệ bao phủ toàn ISO.
+Đây là phạm vi kỹ thuật, chưa phải SoA được phê duyệt. Không suy từ chưa hỗ trợ thành không áp dụng. Các màn hình web hiện hành dùng chung snapshot PostgreSQL theo đợt; benchmark/CLI dùng fixture cô lập. Không cộng số kiểm soát của các engine thành tỷ lệ bao phủ toàn ISO.
 
 ## Enterprise Lab — hồ sơ lưu trong đợt đánh giá
 
@@ -42,3 +42,7 @@ Các dấu hiệu này chỉ bao phủ một phần kiểm soát. Khắc phục 
 ## Kết luận
 
 Đáp ứng / không đáp ứng / chưa đủ bằng chứng theo rubric của từng engine. Không áp dụng phải có lý do và người duyệt. Còn thiếu: nguồn tiêu chuẩn có phiên bản/định vị, thẩm định chuyên gia, dữ liệu doanh nghiệp thật và đánh giá toàn bộ ISMS.
+
+## Cập nhật nguồn doanh nghiệp dùng chung
+
+Collector A.6.1–A.6.8 đọc snapshot chung và đánh giá bằng luật minh bạch; audit trail phân biệt với LLM. Các collector lab A.7.1, A.8.5, A.8.13, A.8.20 liên kết cùng snapshot/định danh; IAM lấy số liệu tài khoản hiện hành. Tổng 12 kiểm soát có collector trong phạm vi này, chưa phải đánh giá đầy đủ mọi yêu cầu của mỗi kiểm soát. Chi tiết tại DOANH_NGHIEP_DUNG_CHUNG.md.

@@ -28,7 +28,8 @@ def campaign_evidence(assessment_id):
         grouped.setdefault(cid, []).append({'evidence_id': eid, 'evidence_type': kind,
             'source': source, 'sha256_hash': digest, 'created_at': created.isoformat(),
             'is_synthetic': synthetic, 'revision': payload.get('revision'),
-            'facts': payload.get('facts', {}), 'origin': 'lab' if synthetic else 'uploaded_or_imported'})
+            'facts': payload.get('facts', {}), 'entity_refs': payload.get('entity_refs', {}),
+            'snapshot_hash': payload.get('snapshot_hash'), 'origin': 'lab' if synthetic else 'uploaded_or_imported'})
     return grouped
 
 
@@ -40,7 +41,10 @@ def newer_evidence(evidence, evaluation):
         return True
 
 
-def build_dossier(assessment_id, board, evidence_by_control, history_by_control=None):
+def build_dossier(assessment_id, board, evidence_by_control, history_by_control=None, company_snapshot=None):
+    from backend.company_evidence import PEOPLE_CONTROLS
+    from agent_core.simulation import CONTROLS
+    criteria = {c[0]: {'required_checks': c[2], 'owner': c[3], 'recommended_action': c[4]} for c in CONTROLS}
     records = []
     for item in board:
         cid = item['control_id']
@@ -49,8 +53,12 @@ def build_dossier(assessment_id, board, evidence_by_control, history_by_control=
         history = (history_by_control or {}).get(cid, [])
         latest = next((h for h in history if h['evaluation_id'] == item.get('latest_evaluation_id')), None)
         stale = bool(latest and any(newer_evidence(e, latest) for e in evidence_by_control.get(cid, [])))
-        records.append({**item, 'collector_supported': bool(node),
-            'source': node.get('title'), 'criteria': node.get('values', {}).get('healthy', {}),
+        used = [e for e in evidence_by_control.get(cid, []) if latest and e.get('evidence_id') in latest.get('evidence_ids', [])]
+        if evaluated and company_snapshot and (cid in PEOPLE_CONTROLS | set(CONTROL_TO_NODE) or any(e.get('snapshot_hash') for e in used)):
+            stale = stale or not any(e.get('snapshot_hash') for e in used) or any(e.get('snapshot_hash') and e['snapshot_hash'] != company_snapshot['snapshot_hash'] for e in used)
+        records.append({**item, 'collector_supported': bool(node) or cid in PEOPLE_CONTROLS,
+            'source': 'Doanh nghiệp dùng chung' if cid in PEOPLE_CONTROLS else node.get('title'),
+            'criteria': criteria[cid] if cid in criteria else node.get('values', {}).get('healthy', {}),
             'evidence': evidence_by_control.get(cid, []),
             'evaluation_history': (history_by_control or {}).get(cid, []),
             'historical_conclusion': item.get('compliance_status') if evaluated else None,
@@ -58,7 +66,10 @@ def build_dossier(assessment_id, board, evidence_by_control, history_by_control=
             'assessment_state': 'stale' if stale else ('evaluated' if evaluated else 'not_evaluated')})
     payload = {'assessment_id': str(assessment_id), 'is_synthetic': True,
         'generated_at': datetime.now(timezone.utc).isoformat(),
-        'supported_collectors': sorted(CONTROL_TO_NODE), 'controls': records,
+        'supported_collectors': sorted(set(CONTROL_TO_NODE) | PEOPLE_CONTROLS), 'controls': records,
+        'company_snapshot_hash': company_snapshot['snapshot_hash'] if company_snapshot else None,
+        'company_summary': {'employees':len(company_snapshot['people']), 'accounts':len(company_snapshot['accounts']),
+                            'devices':len(company_snapshot['devices'])} if company_snapshot else None,
         'summary': dict(Counter(r['conclusion'] for r in records)),
         'limitations': ['Không suy ra tuân thủ từ việc xử lý sự cố.',
           'Chưa có SoA được phê duyệt; chưa đánh giá toàn bộ ISMS.',
