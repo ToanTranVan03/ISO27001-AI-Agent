@@ -1,16 +1,33 @@
-# React + Vite
+# Frontend doanh nghiệp AI Agent
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Giao diện React/Vite của đồ án đánh giá tuân thủ ISO/IEC 27001: văn phòng 3D, giao nhiệm vụ Agent, danh mục doanh nghiệp và Hồ sơ ISO.
 
-Currently, two official plugins are available:
+## Chạy local
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Làm theo [CHAY_LOCAL.md](../CHAY_LOCAL.md) để chuẩn bị PostgreSQL, backend và Ollama. Từ thư mục `frontend-react`:
 
-## React Compiler
+```powershell
+npm install
+npm run dev -- --host 127.0.0.1 --port 5173 --strictPort
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Truy cập http://127.0.0.1:5173. Cấu hình API xem [vite.config.js](vite.config.js) và [src/api.js](src/api.js).
 
-## Expanding the Oxlint configuration
+## Kiểm tra và build
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+```powershell
+npm run lint
+npm run build
+```
+
+Bản build nằm trong `dist/`. Không đưa `node_modules/`, `dist/` hoặc thông tin đăng nhập vào Git.
+
+## Thành phần chính
+
+- `src/App.jsx`: đăng nhập và điều hướng.
+- `src/EnterpriseIncident3D.jsx`: tích hợp văn phòng và nhiệm vụ.
+- `src/OfficeInteractive3D.jsx`, `src/office3dEngine.js`: giao diện và cảnh Three.js.
+- `src/AgentOfficeConsole.jsx`, `src/EnterpriseMissionControl.jsx`: giao việc và theo dõi thực thi.
+- `src/CompanyInventory.jsx`, `src/ComplianceDossier.jsx`: dữ liệu doanh nghiệp và hồ sơ đánh giá.
+
+Phạm vi và giới hạn: [README đồ án](../README.md), [văn phòng Agent 3D](../docs/VAN_PHONG_AGENT_3D.md).
