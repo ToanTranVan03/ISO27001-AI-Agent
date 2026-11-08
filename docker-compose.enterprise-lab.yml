@@ -48,5 +48,27 @@ services:
       echo '2026-10-16 02:00:00 [SUCCESS] Full DB Backup completed. Integrity SHA256 verified.' > /var/log/enterprise_backup/backup.log &&
       tail -f /dev/null"
 
+  # Node 4: Máy chủ Quản lý Nhân sự & Hồ sơ Thẩm tra Nhân viên (Kiểm tra A.6.1, A.6.2, A.6.4)
+  corp-hr-directory:
+    image: ubuntu:22.04
+    container_name: corp-hr-directory
+    hostname: hr-srv-01.hivefive.local
+    command: >
+      bash -c "mkdir -p /var/corporate/hr &&
+      echo '[{\"emp_id\":\"EMP-001\",\"name\":\"Nguyen Van Admin\",\"role\":\"admin_it\",\"background_check\":\"VERIFIED\",\"nda_signed\":true,\"status\":\"ACTIVE\"},{\"emp_id\":\"EMP-002\",\"name\":\"Tran Thi Ke Toan\",\"role\":\"nv_ke_toan\",\"background_check\":\"VERIFIED\",\"nda_signed\":true,\"status\":\"TERMINATED\",\"access_revoked\":true},{\"emp_id\":\"EMP-003\",\"name\":\"Le Van Dev\",\"role\":\"dev_lead\",\"background_check\":\"VERIFIED\",\"nda_signed\":false,\"status\":\"ACTIVE\"}]' > /var/corporate/hr/employees.json &&
+      echo '[{\"course\":\"ISO 27001 Security Awareness 2026\",\"completion_rate\":\"100%\",\"last_audited\":\"2026-10-01\"}]' > /var/corporate/hr/training.json &&
+      tail -f /dev/null"
+
+  # Node 5: Máy chủ Giám sát An ninh SIEM & Audit Trail Tập trung (Kiểm tra A.8.15, A.8.16)
+  corp-siem-audit-node:
+    image: ubuntu:22.04
+    container_name: corp-siem-audit-node
+    hostname: siem-audit-01.hivefive.local
+    command: >
+      bash -c "mkdir -p /var/log/siem &&
+      echo 'retention_days=365\ntamper_proof_checksum=enabled\nsiem_profile=enterprise_production' > /var/log/siem/retention_policy.conf &&
+      echo '2026-11-08 08:00:00 [SIEM-INFO] Enterprise SIEM Audit Engine Online. Monitoring nodes: iam, network, hr, secops.' > /var/log/siem/audit_events.log &&
+      tail -f /dev/null"
+
 volumes:
   iso27001_postgres_data:

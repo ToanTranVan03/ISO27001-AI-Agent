@@ -39,6 +39,9 @@ def get_lab_nodes(assessment_id: str) -> list[dict[str, Any]]:
                            FROM enterprise_lab_nodes WHERE assessment_id=%s''', (assessment_id,))
             found = {row[0]: row for row in cur.fetchall()}
     result=[]
+    from backend.company import snapshot as company_snapshot
+    from backend.company_evidence import bind_lab
+    data=company_snapshot(assessment_id)
     for key, spec in NODE_SPECS.items():
         row = found.get(key)
         if row is None:
@@ -48,7 +51,8 @@ def get_lab_nodes(assessment_id: str) -> list[dict[str, Any]]:
             'department':spec['department'], 'icon':spec['icon'],
             'controls':spec['controls'], 'tool':spec['tool'],
             'scenario':row[1], 'revision':row[2],
-            'facts':spec['values'][row[1]], 'updated_at':row[3].isoformat(),
+            'facts':json.loads(bind_lab(make_snapshot(assessment_id,key,row[1],row[2]),data,key)['extracted_text'])['facts'],
+            'company_snapshot_hash':data['snapshot_hash'], 'updated_at':row[3].isoformat(),
             'is_synthetic':True,
         })
     return result
@@ -73,13 +77,25 @@ def change_scenario(assessment_id: str, node_key: str, scenario: str, user_id: s
             progress = cur.fetchall()
             if any(row[1] == 'RUNNING' for row in progress):
                 raise RuntimeError('Agent đang chạy control này. Hãy đổi tình huống sau khi job hoàn thành.')
-            if scenario == previous[0]:
+            if scenario == previous[0] and node_key not in {'hr','iam'}:
                 return {'node_key':node_key,'scenario':scenario,'revision':previous[1], 'changed':False}
             cur.execute('''UPDATE enterprise_lab_nodes SET scenario=%s,revision=revision+1,
                            changed_by=%s,updated_at=NOW()
                            WHERE assessment_id=%s AND node_key=%s RETURNING revision''',
                         (scenario,user_id,assessment_id,node_key))
             revision = cur.fetchone()[0]
+            if node_key == 'hr':
+                cur.execute('SELECT employee_id FROM enterprise_sim_people WHERE assessment_id=%s ORDER BY employee_id FOR UPDATE', (assessment_id,))
+                for index, (eid,) in enumerate(cur.fetchall()):
+                    screened = True if scenario == 'healthy' else (False if scenario == 'gap' else (True if index % 2 == 0 else None))
+                    cur.execute('UPDATE enterprise_sim_people SET state=state||%s,updated_at=NOW() WHERE assessment_id=%s AND employee_id=%s',
+                        (Jsonb({'screened':screened}),assessment_id,eid))
+            if node_key == 'iam':
+                cur.execute('SELECT account_id FROM enterprise_company_accounts WHERE assessment_id=%s ORDER BY account_id FOR UPDATE', (assessment_id,))
+                for index, (account_id,) in enumerate(cur.fetchall()):
+                    mfa = True if scenario == 'healthy' else (False if scenario == 'gap' else index % 2 == 0)
+                    cur.execute('UPDATE enterprise_company_accounts SET state=state||%s,updated_at=NOW() WHERE assessment_id=%s AND account_id=%s',
+                        (Jsonb({'mfa':mfa}),assessment_id,account_id))
             # Old evaluations remain in history, but are now stale in the progress board.
             cur.execute('''UPDATE control_progress SET workflow_status='NOT_STARTED',
                            compliance_status=NULL,latest_evaluation_id=NULL,
@@ -100,8 +116,8 @@ def change_scenario(assessment_id: str, node_key: str, scenario: str, user_id: s
 def collect_lab_snapshot(assessment_id: str, control_id: str) -> dict | None:
     """A stateful collector: READ lab config, WRITE immutable evidence snapshot.
 
-    Tự động gắn kết nối thu thập trực tiếp từ các máy chủ container doanh nghiệp thật
-    (corp-iam-auth-node, corp-network-fw-node, corp-secops-log-node) khi các dịch vụ này đang chạy.
+    This is called by the Agent graph. It never reads ground-truth labels or
+    claims that synthetic records represent a real corporate service.
     """
     node_key = CONTROL_TO_NODE.get(control_id)
     if node_key is None:
@@ -115,6 +131,9 @@ def collect_lab_snapshot(assessment_id: str, control_id: str) -> dict | None:
             if not row:
                 raise ValueError('Enterprise lab not initialized.')
             snapshot=make_snapshot(assessment_id,node_key,row[0],row[1])
+            from backend.company import snapshot as company_snapshot
+            from backend.company_evidence import bind_lab
+            snapshot=bind_lab(snapshot,company_snapshot(assessment_id,cur),node_key)
             cur.execute('''INSERT INTO evidence
                            (evidence_id,control_id,evidence_type,source,extracted_text,
                             sha256_hash,is_sample,assessment_id,is_synthetic,evidence_origin)
@@ -134,7 +153,7 @@ def collect_lab_snapshot(assessment_id: str, control_id: str) -> dict | None:
                                 'is_synthetic':True,
                             })))
 
-            # TÍCH HỢP BẰNG CHỨNG TRỰC TIẾP TỪ CONTAINER DOANH NGHIỆP THẬT (READ-ONLY)
+            # TÍCH HỢP THU THẬP TỪ CONTAINER DOANH NGHIỆP THẬT (LIVE INSPECTION)
             try:
                 from evidence_collectors.enterprise_container_collector import collect_live_node_evidence
                 import hashlib
@@ -162,7 +181,7 @@ def collect_lab_snapshot(assessment_id: str, control_id: str) -> dict | None:
                                     'origin': 'LIVE_CONTAINER_INSPECTION',
                                 })))
             except Exception:
-                pass  # An toàn: nếu không có docker hoặc lỗi subprocess thì vẫn giữ snapshot lab
+                pass
     return {k:snapshot[k] for k in ('evidence_id','control_id','source','sha256_hash')}
 
 
