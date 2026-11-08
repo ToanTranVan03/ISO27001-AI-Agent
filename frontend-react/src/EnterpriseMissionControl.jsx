@@ -25,7 +25,7 @@ export function MissionWorkView({mission,focused="coordination",selectedTool,onF
   return <><div className="mw-live-layout"><AgentOfficeScene mission={mission} focused={focused} onFocus={onFocus}/><MissionRoleInspector mission={mission} roleId={focused} selectedTool={selectedTool} onTool={onTool} onInspect={onInspect} onFocusEmployee={onFocusEmployee}/></div><MissionConversation mission={mission} onOpen={(role,tool)=>{onFocus(role);onTool(tool);}}/></>;
 }
 
-export default function EnterpriseMissionControl({base,request,onInspect,officeTarget,draftRequest,onMissionChange,onFocusEmployee,officeLiveFocus,onOpenDossier}) {
+export default function EnterpriseMissionControl({base,request,onInspect,officeTarget,draftRequest,onMissionChange,onFocusEmployee,officeLiveFocus,onOpenDossier,externalMission}) {
   const [goal,setGoal]=useState("Kiểm tra các dấu hiệu vi phạm và lập hồ sơ bàn giao ISO");
   const [scope,setScope]=useState("all");
   const [requestedRole,setRequestedRole]=useState("coordination");
@@ -56,10 +56,18 @@ export default function EnterpriseMissionControl({base,request,onInspect,officeT
   function focus(role){setFocused(role);setSelectedTool(null);setFollow(false);}
   useEffect(()=>{onMissionChange?.({selected:current||null,active:activeMission});},[current,activeMission,onMissionChange]);
   useEffect(()=>{
+    if(!externalMission)return;
+    mutation.current++;
+    setMissions(items=>[externalMission,...items.filter(item=>item.mission_id!==externalMission.mission_id)]);
+    setSelected(externalMission.mission_id);setFollow(true);setSelectedTool(null);setError("");
+  },[externalMission]);
+  useEffect(()=>{
     if(!draftRequest)return;
-    setUseEmployee(true);setRequestedRole("security");setScope("all");setEventSelection(draftRequest.target);
+    const role=ROLES.find(r=>r.id===draftRequest.role)||ROLES.find(r=>r.id==="security");
+    if(draftRequest.inspectOnly){setFocused(role.id);setFollow(false);setSelectedTool(null);return;}
+    setUseEmployee(true);setRequestedRole(role.id);setScope("all");setEventSelection(draftRequest.target);
     setGoal("Kiểm tra trạng thái máy, dấu hiệu vi phạm và hồ sơ liên quan của nhân viên đang chọn");
-    setFocused("security");setFollow(false);
+    setFocused(role.id);setFollow(false);
   },[draftRequest]);
 
   useEffect(()=>{

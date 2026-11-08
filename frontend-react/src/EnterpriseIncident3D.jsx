@@ -4,6 +4,8 @@ import EmployeeCommandConsole from "./EmployeeCommandConsole";
 import OfficeRoster from "./OfficeRoster";
 import EnterpriseMissionControl from "./EnterpriseMissionControl";
 import OfficeLiveScene from "./OfficeLiveScene";
+import OfficeInteractive3D from "./OfficeInteractive3D";
+import AgentOfficeConsole from "./AgentOfficeConsole";
 import { employeeTarget, missionLiveFocus, refreshLinkedRecord } from "./missionLink";
 const EnterpriseScene3D = lazy(() => import("./EnterpriseScene3D"));
 
@@ -52,7 +54,9 @@ function activityVisualization(controlId) {
 }
 
 export default function EnterpriseIncident3D({ assessment, request, token, onOpenDossier }) {
-  const [officeView, setOfficeView] = useState("live");
+  const [officeView, setOfficeView] = useState("office3d");
+  const [officeRole,setOfficeRole]=useState(null);
+  const [officeMission,setOfficeMission]=useState(null);
   const [commandEntries, setCommandEntries] = useState([]);
   const [commandEmployee, setCommandEmployee] = useState("EMP-006");
   const [officeWorkspace, setOfficeWorkspace] = useState([]);
@@ -98,16 +102,20 @@ export default function EnterpriseIncident3D({ assessment, request, token, onOpe
   const officeTarget=employeeTarget(employees.find(item=>item.employee_id===commandEmployee),officeWorkspace.find(item=>item.employee_id===commandEmployee));
   const liveFocus=missionLiveFocus(missionLink.active,monitoring);
   const officeLinkedRecord=refreshLinkedRecord(linkedRecord,commandEntries,[missionLink.active,missionLink.selected]);
-  function selectOfficeEmployee(employeeId){setCommandEmployee(employeeId);setLinkedRecord(null);}
-  function requestEmployeeAudit(eventId){
+  function selectOfficeEmployee(employeeId){setCommandEmployee(employeeId);setLinkedRecord(null);setOfficeRole(null);}
+  function requestEmployeeAudit(eventId,role="security"){
     const target=employeeTarget(employees.find(item=>item.employee_id===commandEmployee),officeWorkspace.find(item=>item.employee_id===commandEmployee),eventId);
     if(!target)return;
-    setMissionDraft({target,at:Date.now()});
+    setMissionDraft({target,role,at:Date.now()});
+    missionPanel.current?.scrollIntoView({behavior:"smooth",block:"start"});
+  }
+  function openOfficeAgentDetails(role){
+    setMissionDraft({role,inspectOnly:true,at:Date.now()});
     missionPanel.current?.scrollIntoView({behavior:"smooth",block:"start"});
   }
   function focusOfficeRecord(record){
     if(record.employee_id)setCommandEmployee(record.employee_id);
-    setLinkedRecord(record);setOfficeView("live");
+    setLinkedRecord(record);setOfficeRole(null);setOfficeView("office3d");
     officePanel.current?.scrollIntoView({behavior:"smooth",block:"start"});
   }
 
@@ -529,7 +537,7 @@ export default function EnterpriseIncident3D({ assessment, request, token, onOpe
     <style>{`@keyframes labBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}@keyframes labPulse{0%,100%{opacity:.25}50%{opacity:.75}}@keyframes labSpin{to{transform:rotate(360deg)}}.lab-agent-float{animation:labBob 1.9s ease-in-out infinite}.lab-pulse{animation:labPulse 1.5s ease-in-out infinite}.lab-spin{transform-box:fill-box;transform-origin:center;animation:labSpin 4s linear infinite}.lab-target{animation:labPulse .9s ease-in-out infinite}@media(prefers-reduced-motion:reduce){.lab-agent-float,.lab-pulse,.lab-spin,.lab-target{animation:none}}`}</style>
     <div className="mx-auto max-w-[1900px]">
       <header className="mb-4 flex flex-wrap items-center justify-between gap-3">
-        <div className="flex items-center gap-3"><div className="rounded-2xl bg-[#ff9457] p-3"><Bot size={24}/></div><div><h1 className="text-lg font-black sm:text-xl">ISO ENTERPRISE LAB · MÔ PHỎNG 3D</h1><p className="text-xs text-slate-400">Lấy con người làm trọng tâm; phần cứng và phần mềm là tài sản liên quan</p></div></div>
+        <div className="flex items-center gap-3"><div className="rounded-2xl bg-[#ff9457] p-3"><Bot size={24}/></div><div><h1 className="text-lg font-black sm:text-xl">VIỆT TÍN · VĂN PHÒNG AGENT 3D</h1><p className="text-xs text-slate-400">Lấy con người làm trọng tâm; phần cứng và phần mềm là tài sản liên quan</p></div></div>
         <div className={`flex items-center gap-2 rounded-full border border-white/10 px-4 py-2 text-xs font-bold ${status === "running" ? "bg-orange-300/10 text-orange-200" : status === "completed" ? "bg-emerald-300/10 text-emerald-200" : status === "needs_input" ? "bg-amber-300/10 text-amber-200" : "bg-white/5 text-slate-300"}`}><span className={`h-2 w-2 rounded-full ${status === "running" ? "animate-pulse bg-orange-300" : status === "completed" ? "bg-emerald-300" : status === "needs_input" ? "bg-amber-300" : "bg-slate-500"}`}/>{status === "running" ? "AI ĐANG PHÂN TÍCH" : status === "completed" ? "MÔ PHỎNG HOÀN TẤT" : status === "needs_input" ? "CẦN MÔ TẢ RÕ HƠN" : status === "error" ? "CẦN KIỂM TRA" : "SẴN SÀNG NHẬN MÔ TẢ"}</div>
       </header>
 
@@ -547,18 +555,22 @@ export default function EnterpriseIncident3D({ assessment, request, token, onOpe
         ].map(item=><div key={item.label} className={`rounded-xl border px-3 py-2 ${item.ok?"border-emerald-300/15 bg-emerald-300/5":"border-amber-300/15 bg-amber-300/5"}`}><div className={`flex items-center gap-2 text-[9px] font-black uppercase tracking-wider ${item.ok?"text-emerald-200":"text-amber-200"}`}><span className={`h-1.5 w-1.5 rounded-full ${item.ok?"bg-emerald-300":"bg-amber-300"}`}/>{item.label} · {item.ok?"SẴN SÀNG":readiness?"CHÚ Ý":"ĐANG KIỂM TRA"}</div><div className="mt-1 truncate text-[9px] text-slate-400">{item.detail}</div></div>)}
       </section>
 
-      <div ref={missionPanel} style={{scrollMarginTop:90}}><EnterpriseMissionControl onOpenDossier={onOpenDossier} base={base} request={request} officeTarget={officeTarget} draftRequest={missionDraft} onMissionChange={setMissionLink} onFocusEmployee={focusOfficeRecord} officeLiveFocus={liveFocus} onInspect={async receipt=>{await inspectCommand(receipt);chatEnd.current?.scrollIntoView({behavior:"smooth",block:"center"});}}/></div>
+
       <section ref={officePanel} style={{scrollMarginTop:90}} className="mb-5 grid items-start gap-4 lg:grid-cols-[minmax(0,1fr)_340px]">
         <div className="min-w-0">
-          <OfficeRoster employees={employees} workspace={officeWorkspace} selectedEmployee={commandEmployee} onSelect={selectOfficeEmployee}/>
-          <div className="mb-3 flex items-center justify-between gap-2"><div className="flex rounded-xl border border-white/10 bg-white/5 p-1">{[{id:"live",label:"Văn phòng tương tác"},{id:"3d",label:"Toàn cảnh 3D"}].map(view=><button key={view.id} onClick={()=>setOfficeView(view.id)} aria-pressed={officeView===view.id} className={`rounded-lg px-4 py-2 text-xs font-bold ${officeView===view.id?"bg-[#e7edda] text-[#31564a]":"text-slate-400 hover:text-white"}`}>{view.label}</button>)}</div><span className="hidden text-[10px] text-slate-500 sm:block">Bình luận → hành động → dấu vết → xác minh</span></div>
-          {officeView==="live" ? <OfficeLiveScene employees={employees} entries={commandEntries} selectedEmployee={commandEmployee} onSelect={selectOfficeEmployee} monitoring={monitoring} workspace={officeWorkspace} liveFocus={liveFocus} linkedRecord={officeLinkedRecord} onRequestAudit={requestEmployeeAudit} onOpenIncident={async record=>{await inspectCommand(record);chatEnd.current?.scrollIntoView({behavior:"smooth",block:"center"});}} onSuggest={text=>setSuggestedCommand({text,at:Date.now()})}/> : <Suspense fallback={<div className="flex h-[500px] items-center justify-center rounded-[30px] border border-white/10 bg-[#172337] text-sm text-slate-300 md:h-[580px]"><Loader2 className="mr-3 animate-spin"/>Nạp mô hình doanh nghiệp 3D…</div>}>
+          <details className="mb-3 rounded-xl border border-white/10 p-3"><summary className="cursor-pointer text-xs text-slate-300">Danh sách {employees.length} nhân viên · chọn theo mã</summary><OfficeRoster employees={employees} workspace={officeWorkspace} selectedEmployee={commandEmployee} onSelect={selectOfficeEmployee}/></details>
+          <div className="mb-3 flex items-center justify-between gap-2"><div className="flex rounded-xl border border-white/10 bg-white/5 p-1">{[{id:"office3d",label:"Văn phòng 3D"},{id:"live",label:"Sơ đồ 2D"},{id:"3d",label:"Khuôn viên"}].map(view=><button key={view.id} onClick={()=>setOfficeView(view.id)} aria-pressed={officeView===view.id} className={`rounded-lg px-4 py-2 text-xs font-bold ${officeView===view.id?"bg-[#e7edda] text-[#31564a]":"text-slate-400 hover:text-white"}`}>{view.label}</button>)}</div><span className="hidden text-[10px] text-slate-500 sm:block">Bình luận → hành động → dấu vết → xác minh</span></div>
+          {officeView==="office3d" ? <OfficeInteractive3D employees={employees} workspace={officeWorkspace} entries={commandEntries} selectedEmployee={commandEmployee} onSelect={selectOfficeEmployee} monitoring={monitoring} liveFocus={liveFocus} mission={missionLink.active||missionLink.selected} selectedRole={officeRole} onSelectRole={setOfficeRole} onSuggest={text=>setSuggestedCommand({text,at:Date.now()})} linkedRecord={officeLinkedRecord} onOpenIncident={async record=>{await inspectCommand(record);chatEnd.current?.scrollIntoView({behavior:"smooth",block:"center"});}} onFallback={()=>setOfficeView("live")}/> : officeView==="live" ? <OfficeLiveScene employees={employees} entries={commandEntries} selectedEmployee={commandEmployee} onSelect={selectOfficeEmployee} monitoring={monitoring} workspace={officeWorkspace} liveFocus={liveFocus} linkedRecord={officeLinkedRecord} onRequestAudit={requestEmployeeAudit} onOpenIncident={async record=>{await inspectCommand(record);chatEnd.current?.scrollIntoView({behavior:"smooth",block:"center"});}} onSuggest={text=>setSuggestedCommand({text,at:Date.now()})}/> : <Suspense fallback={<div className="flex h-[500px] items-center justify-center rounded-[30px] border border-white/10 bg-[#172337] text-sm text-slate-300 md:h-[580px]"><Loader2 className="mr-3 animate-spin"/>Nạp mô hình doanh nghiệp 3D…</div>}>
             <EnterpriseScene3D room={room} visited={visited} selected={selected} working={status==="running" || monitoring.state==="processing"} resolved={status==="completed"&&Boolean(result?.verified)} currentTool={currentTool} currentStep={monitoring.state==="processing" ? "Agent đang kiểm tra dấu vết và xử lý" : currentStep} activity={sceneActivity}/>
           </Suspense>}
           <div className="mt-3 flex flex-wrap gap-3 px-2 text-[10px] text-slate-400"><span>01 · Bình luận ra lệnh</span><span>02 · Nhân viên hành động</span><span>03 · Agent quét dấu vết</span><span>04 · Xử lý và xác minh</span></div>
         </div>
-        <EmployeeCommandConsole base={base} request={request} employees={employees} monitoring={monitoring} onActivity={showEmployeeCommand} onInspect={inspectCommand} disabled={status === "running" || chatLoading || drillLoading} selectedEmployee={commandEmployee} onSelect={selectOfficeEmployee} onEntries={setCommandEntries} onWorkspace={setOfficeWorkspace} suggestedCommand={suggestedCommand}/>
+        <div className="min-w-0">
+          {officeRole&&officeView==="office3d"&&<AgentOfficeConsole key={officeRole} roleId={officeRole} base={base} request={request} employees={employees} target={officeTarget} onTargetChange={id=>{setCommandEmployee(id);setLinkedRecord(null);}} mission={missionLink.active||missionLink.selected} onCreated={setOfficeMission} onOpenDetails={openOfficeAgentDetails} onBack={()=>setOfficeRole(null)}/>}
+          <div style={{display:officeRole&&officeView==="office3d"?'none':undefined}}><EmployeeCommandConsole autoPrepare={officeView==="office3d"} base={base} request={request} employees={employees} monitoring={monitoring} onActivity={showEmployeeCommand} onInspect={inspectCommand} disabled={status === "running" || chatLoading || drillLoading} selectedEmployee={commandEmployee} onSelect={selectOfficeEmployee} onEntries={setCommandEntries} onWorkspace={setOfficeWorkspace} suggestedCommand={suggestedCommand}/></div></div>
       </section>
+
+      <div ref={missionPanel} style={{scrollMarginTop:90}}><EnterpriseMissionControl externalMission={officeMission} onOpenDossier={onOpenDossier} base={base} request={request} officeTarget={officeTarget} draftRequest={missionDraft} onMissionChange={setMissionLink} onFocusEmployee={focusOfficeRecord} officeLiveFocus={liveFocus} onInspect={async receipt=>{await inspectCommand(receipt);chatEnd.current?.scrollIntoView({behavior:"smooth",block:"center"});}}/></div>
 
       <section className="mb-4 overflow-hidden rounded-3xl border border-white/10 bg-[#172337] shadow-xl">
         <div className="flex items-center justify-between border-b border-white/10 px-4 py-3 sm:px-5"><div className="flex items-center gap-3"><div className="rounded-xl bg-[#ff9457]/15 p-2 text-[#ffb777]"><Bot size={20}/></div><div><h2 className="text-sm font-black text-white">Chat với AI Agent</h2><p className="text-[10px] text-slate-400">Mô tả tình huống hoặc để Agent tự giám sát thiết bị</p></div></div><div className="flex flex-wrap items-center justify-end gap-2">{chatMessages.length>0&&<button onClick={startNewChat} disabled={status==="running"||chatLoading} className="rounded-lg border border-white/10 px-2.5 py-1.5 text-[9px] font-bold text-slate-300 hover:bg-white/5 disabled:opacity-40">Chat mới</button>}<button onClick={toggleAutomaticMonitoring} disabled={status==="running"||chatLoading} className={`rounded-lg border px-3 py-1.5 text-[9px] font-black disabled:opacity-40 ${monitoring.active?"border-emerald-300/30 bg-emerald-300/10 text-emerald-200":"border-white/10 text-slate-300 hover:bg-white/5"}`}>{monitoring.active?"Tắt giám sát tự động":"Bật giám sát tự động"}</button><button onClick={scanCompanyDevices} disabled={status==="running"||chatLoading} className="rounded-lg border border-[#78d7e9]/30 bg-[#78d7e9]/10 px-3 py-1.5 text-[9px] font-black text-[#a6eaf2] hover:bg-[#78d7e9]/20 disabled:opacity-40">Quét ngay</button><span className={`flex items-center gap-2 rounded-full px-3 py-1.5 text-[9px] font-bold ${status==="running"||chatLoading?"bg-amber-300/10 text-amber-200":"bg-emerald-300/10 text-emerald-200"}`}><span className={`h-1.5 w-1.5 rounded-full ${status==="running"||chatLoading?"animate-pulse bg-amber-300":"bg-emerald-300"}`}/>{status==="running"?"ĐANG PHÂN TÍCH":chatLoading?"ĐANG TRẢ LỜI":monitoring.active?"ĐANG GIÁM SÁT":"SẴN SÀNG"}</span></div></div>

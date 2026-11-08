@@ -8,7 +8,7 @@ from zoneinfo import ZoneInfo
 from psycopg.types.json import Jsonb
 from backend.database import get_connection
 from backend.incident_catalog import SCENARIOS
-from backend.office_logic import DEFAULT_STATE, RISK_EVENTS, transition, lock_key
+from backend.office_logic import DEFAULT_STATE, RISK_EVENTS, transition, lock_key, preparation_steps
 
 
 ACTORS = {scenario["human_context"]["employee_id"]: {
@@ -141,6 +141,41 @@ def execute_command(assessment_id: str, employee_id: str, text: str, request_id:
             return receipt
 
 
+def execute_prepared_command(assessment_id, employee_id, text, request_id, user_id):
+    """One comment can approach the desk first; every step remains durable and guarded."""
+    command,_=parse_command(text,employee_id)
+    event_id=f'CMD-{request_id}'
+    with get_connection() as con, con.cursor() as cur:
+        def read_preparation():
+            event_ids=[f'CMD-{uuid5(request_id,"prepare:"+step)}' for step in ('/di-lam','/lam-viec')]
+            cur.execute('''SELECT event_id,details->'command_receipt'->>'command' FROM enterprise_sim_asset_activity
+                WHERE assessment_id=%s AND event_id=ANY(%s) ORDER BY observed_at''',(assessment_id,event_ids))
+            return [{'command':row[1],'event_id':row[0]} for row in cur.fetchall()]
+        cur.execute('SELECT pg_advisory_xact_lock(hashtextextended(%s,0))',(f'prepared:{assessment_id}:{request_id}',))
+        cur.execute('SELECT details FROM enterprise_sim_asset_activity WHERE assessment_id=%s AND event_id=%s',
+                    (assessment_id,event_id))
+        if cur.fetchone():
+            # Base executor validates the same person/command/user on every retry.
+            result=execute_command(assessment_id,employee_id,text,request_id,user_id)
+            return {**result,'preparation':read_preparation()}
+        asset_id=f'OFFICE-{employee_id}'
+        cur.execute('SELECT state FROM enterprise_sim_assets WHERE assessment_id=%s AND asset_id=%s',(assessment_id,asset_id))
+        found=cur.fetchone()
+        if not found:raise ValueError('Không tìm thấy máy của nhân viên trong đợt đánh giá.')
+        cur.execute('''SELECT COUNT(*) FROM enterprise_sim_asset_activity WHERE assessment_id=%s AND asset_id=%s
+            AND event_type=ANY(%s) AND details ? 'command_receipt' AND details->>'triaged_by_incident' IS NULL''',
+                    (assessment_id,asset_id,list(RISK_EVENTS)))
+        steps=preparation_steps(command,found[0],cur.fetchone()[0])
+        prepared=[]
+        for step in steps:
+            receipt=execute_command(assessment_id,employee_id,step,uuid5(request_id,'prepare:'+step),user_id)
+            prepared.append({'command':step,'event_id':receipt['event_id']})
+        result=execute_command(assessment_id,employee_id,text,request_id,user_id)
+        # Receipts are already durable. Do not rewrite the asset/event here while
+        # the independent SOC may be locking them in the opposite order.
+        return {**result,'preparation':prepared}
+
+
 def workspace_state(assessment_id):
     with get_connection() as con:
         with con.cursor() as cur:
@@ -171,7 +206,13 @@ def workspace_state(assessment_id):
                         reason=None
                     except ValueError as exc:
                         reason=str(exc)
+                    try:
+                        preparation_steps(command,state,pending)
+                        prepared_reason=None
+                    except ValueError as exc:
+                        prepared_reason=str(exc)
                     actions.append({"command":command,"label":spec["label"],"enabled":reason is None,"reason":reason,
+                                    "prepared_enabled":prepared_reason is None,"prepared_reason":prepared_reason,
                                     "risk":command in {"/roi-may","/usb-la","/cai-app-la"}})
                 result.append({"employee_id":employee_id,"asset_id":asset_id,"state":state,"pending_count":pending,"actions":actions})
             return result

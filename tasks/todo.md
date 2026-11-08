@@ -40,3 +40,12 @@ automatic policy chặn. Chi tiết ở docs/VALIDATION.md; không coi runtime �
 - [x] Kiểm tra API xuyên phần: đào tạo, alias, tái đánh giá, lệnh máy, số liệu IAM và phân quyền.
 - [ ] Kiểm thử đầy đủ thao tác bấm UI có đăng nhập.
 - [ ] Tích hợp nguồn doanh nghiệp thật; tối ưu kiểm tra độ mới theo phụ thuộc từng trường.
+
+## Văn phòng 3D theo video doanh nghiệp Agent
+- [x] Xem hình ảnh xuyên video và lời thoại đầy đủ; đối chiếu cách giao việc, phòng kính, nghỉ và bàn duyệt.
+- [x] Three.js isometric có phòng, nhân vật, máy, điều khiển camera và đường đi tránh vật cản.
+- [x] Chọn người/Agent nối bình luận, target máy, subtask và kết quả backend.
+- [x] Một bình luận có chuẩn bị vào ca/về bàn, giữ guard bảo vệ và chống trùng khi retry.
+- [x] Kiểm thử API thật: Qwen lập kế hoạch, sự kiện xác minh, SOC fallback được ghi rõ.
+- [x] 195 Python, 25 JavaScript và build đạt; xem ảnh dựng WebGL desktop/mobile.
+- [ ] Kiểm thử bấm đầy đủ UI có đăng nhập khi computer-use kết nối lại.

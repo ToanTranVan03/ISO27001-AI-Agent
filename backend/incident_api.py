@@ -215,6 +215,7 @@ class EmployeeCommandRequest(BaseModel):
     employee_id: str = Field(min_length=1, max_length=40)
     text: str = Field(min_length=1, max_length=240)
     request_id: UUID
+    prepare_workstation: bool = False
 
 
 @router.get("/employee-commands")
@@ -239,7 +240,8 @@ def office_state(assessment_id: UUID, user: dict = Depends(require_user)):
 def send_employee_command(assessment_id: UUID, body: EmployeeCommandRequest, user: dict = Depends(require_user)):
     require_campaign(assessment_id, user)
     try:
-        receipt = employee_commands.execute_command(str(assessment_id), body.employee_id, body.text, body.request_id, user["user_id"])
+        executor=employee_commands.execute_prepared_command if body.prepare_workstation else employee_commands.execute_command
+        receipt = executor(str(assessment_id), body.employee_id, body.text, body.request_id, user["user_id"])
     except ValueError as exc:
         raise HTTPException(422, detail=str(exc)) from exc
     # The command only writes telemetry. The independent monitor discovers it.

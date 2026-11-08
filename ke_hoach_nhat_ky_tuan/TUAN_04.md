@@ -139,3 +139,19 @@ Chưa chốt. Cuối tuần 4, rà lại các mục còn mở và chỉ chuyển
 - Commit: **Thống nhất dữ liệu doanh nghiệp giữa văn phòng, Agent và hồ sơ ISO**.
 - Nội dung: nguồn PostgreSQL theo đợt; danh bạ, tài khoản và thiết bị chung; bằng chứng gắn snapshot; cảnh báo kết luận cũ; giao diện Doanh nghiệp và văn phòng 4 khu.
 - Kiểm chứng: 188 test Python, 18 test JavaScript và build đạt; các luồng API và migration đã được kiểm tra.
+
+## Văn phòng tương tác Agent 3D theo video — 07:11 ngày 08/11/2026 (UTC+7)
+
+- Đối chiếu video doanh nghiệp Agent 05:50.70: phòng kính, nhân vật, giao việc theo phòng, khu nghỉ và bàn duyệt. Áp dụng vào nghiệp vụ ISO, giữ bốn vai trò chung bộ điều phối.
+- Bổ sung văn phòng Three.js mặc định, đủ 50 người qua 4 khu, chọn người/máy/phòng; camera xoay, zoom và theo nhân viên. Nhân vật đi theo trạng thái và tránh vật cản; SOC theo đúng target máy đang xử lý.
+- Bình luận cho nhân viên và Agent nối API thực. Bổ sung chuỗi chuẩn bị vào ca/về bàn cho lệnh USB/app/rời máy, có receipt từng bước, chống trùng và không vượt bảo vệ.
+- Nhiệm vụ thử dùng Qwen2.5:7b lập kế hoạch thật (ollama_plan_and_execute), xử lý/xác minh và chờ duyệt. SOC lượt thử dùng policy-fallback, ghi rõ nguồn.
+- 195 test Python, 25 test JavaScript và build đạt. Đã xem ảnh WebGL desktop/mobile; chưa bấm toàn bộ UI do native pipe computer-use không kết nối.
+- Đưa vào đợt commit/push ghi bên dưới. Chi tiết: docs/VAN_PHONG_AGENT_3D.md.
+
+## Commit và push GitHub — 07:18:53 ngày 08/11/2026 (UTC+7)
+
+- Nhánh nhận thay đổi: **Toant3**, remote **origin**, kho ISO27001-AI-Agent.
+- Commit: **Phát triển văn phòng Agent 3D và giao việc bằng bình luận**.
+- Nội dung: văn phòng Three.js, nhân vật/phòng Agent tương tác, bình luận giao việc nối backend, chuẩn bị vào ca/về bàn có kiểm tra điều kiện và chống trùng yêu cầu.
+- Kiểm chứng: 195 test Python, 25 test JavaScript và build đạt; đã kiểm tra API thực và ảnh dựng WebGL desktop/mobile.

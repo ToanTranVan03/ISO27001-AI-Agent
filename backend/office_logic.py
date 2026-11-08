@@ -7,6 +7,25 @@ DEFAULT_STATE = {
 RISK_EVENTS = {"unattended_screen_unlocked", "unapproved_usb_inserted", "unapproved_software_installed"}
 
 
+def preparation_steps(command, current, pending=0):
+    """Validate an explicitly requested approach-to-workstation sequence first.
+
+    No unlock/isolation bypass: each actual step still passes transition().
+    Unknown commands must already have been rejected by the command parser.
+    """
+    state={**DEFAULT_STATE,**current}
+    steps=[]
+    if command in {'/usb-la','/cai-app-la','/roi-may'}:
+        if state['network_isolated'] or state['device_status']=='locked' or state.get('returned') or pending:
+            raise ValueError('Máy đang bị bảo vệ hoặc có sự kiện chưa xử lý; không tự mở khóa để thực hiện lệnh.')
+        if state['shift']=='off':steps.append('/di-lam')
+        elif state['location']!='desk' or state['screen_state']!='unlocked':steps.append('/lam-viec')
+    for step in steps:
+        state,_=transition(step,state,pending)
+    transition(command,state,pending)
+    return steps
+
+
 def transition(command, current, pending=0):
     state = {**DEFAULT_STATE, **current}
     if state.get('returned') is True and command in {'/di-lam','/vao-ca','/lam-viec','/usb-la','/cai-app-la','/mo-khoa'}:

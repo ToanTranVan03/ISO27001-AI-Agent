@@ -14,6 +14,10 @@ Hệ thống hỗ trợ thu thập bằng chứng, đánh giá một số kiểm
 
 Các màn hình web vận hành đọc cùng dữ liệu PostgreSQL theo đợt đánh giá: 50 nhân viên, 50 máy riêng và tài sản/tài khoản lab liên quan. Xem [kiến trúc và migration](docs/DOANH_NGHIEP_DUNG_CHUNG.md). CLI nghiên cứu và benchmark vẫn dùng fixture cô lập.
 
+## Văn phòng Agent 3D
+
+Văn phòng mặc định dùng Three.js theo phong cách video tham khảo: chọn nhân viên/phòng Agent, bình luận giao việc, theo dõi hành động và hồ sơ thật trong lab. Xem [cách dùng và kiểm chứng](docs/VAN_PHONG_AGENT_3D.md).
+
 ## Thực nghiệm và giới hạn
 
 - Ca benchmark tổng hợp tự xây dựng, chưa thẩm định mù bởi chuyên gia.

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { MessageSquare, Send, Radio, Loader2, CheckCircle2 } from "lucide-react";
 import { commandPhase, commandRecipient } from "./officeLive";
 
-export default function EmployeeCommandConsole({ base, request, employees, monitoring, onActivity, onInspect, disabled, selectedEmployee: actorId, onSelect, onEntries, onWorkspace, suggestedCommand }) {
+export default function EmployeeCommandConsole({ base, request, employees, monitoring, onActivity, onInspect, disabled, selectedEmployee: actorId, onSelect, onEntries, onWorkspace, suggestedCommand, autoPrepare=false }) {
   const [catalog, setCatalog] = useState({actors:[],commands:[]});
   const [workspace, setWorkspace] = useState([]);
   const [text, setText] = useState("");
@@ -15,7 +15,8 @@ export default function EmployeeCommandConsole({ base, request, employees, monit
   const recipient = commandRecipient(text, actorId);
   const actor = employees.find(item => item.employee_id === recipient);
   const machine = workspace.find(item=>item.employee_id===recipient);
-  const commands = machine?.actions || [];
+  const commands = (machine?.actions || []).map(command=>autoPrepare&&command.prepared_enabled!==undefined?
+    {...command,enabled:command.prepared_enabled,reason:command.prepared_reason}:command);
 
   useEffect(()=>{if(suggestedCommand) setText(suggestedCommand.text);},[suggestedCommand]);
 
@@ -43,7 +44,7 @@ export default function EmployeeCommandConsole({ base, request, employees, monit
   async function send(event) {
     event.preventDefault();
     if (!text.trim() || inFlight.current || disabled) return;
-    const payload = { employee_id: recipient, text: text.trim() };
+    const payload = { employee_id: recipient, text: text.trim(), prepare_workstation:autoPrepare };
     const key = JSON.stringify(payload);
     if (pending.current?.key !== key) pending.current = { key, request_id: crypto.randomUUID() };
     inFlight.current = true; setBusy(true); setError("");
@@ -69,6 +70,7 @@ export default function EmployeeCommandConsole({ base, request, employees, monit
       <label htmlFor="command-employee" className="mt-4 block text-[10px] font-bold uppercase tracking-wider text-cyan-200">Nhân viên nhận lệnh</label>
       <select id="command-employee" value={actorId} disabled={busy} onChange={event=>{onSelect(event.target.value);setText("");setError("");}} className="mt-2 w-full rounded-xl border border-white/15 bg-[#142334] p-3 text-xs text-white">{employees.filter(person=>catalog.actors.some(item=>item.employee_id===person.employee_id)).map(person=><option key={person.employee_id} value={person.employee_id}>{person.display_name} · {person.employee_id}</option>)}</select>
       <p className="mt-2 text-[10px] text-slate-400">Hoặc gõ <code>@EMP-025 /cai-app-la</code> để chỉ định người nhận.</p>
+      {autoPrepare&&<p className="mt-2 text-[10px] leading-5 text-emerald-200/70">Lệnh USB/app/rời máy sẽ tự vào ca hoặc về bàn nếu cần. Không tự mở máy đang bị cô lập, thu hồi hoặc chờ xử lý.</p>}
       {machine && <div className="mt-3 rounded-xl border border-white/10 bg-black/15 p-3 text-[10px] leading-5 text-slate-300"><b className="block font-mono text-cyan-200">{machine.asset_id}</b><div>{machine.state.shift==="on"?"Trong ca":"Ngoài ca"} · {machine.state.location==="desk"?"Tại bàn":machine.state.location==="break"?"Đang nghỉ":"Lễ tân"} · Màn hình {machine.state.screen_state==="locked"?"đã khóa":"đang mở"}</div><div>USB: {machine.state.usb_connected?machine.state.media_status:"chưa kết nối"} · App: {machine.state.software_status}</div><div>{machine.state.network_isolated?"Máy đang bị cô lập · ":""}{machine.pending_count} sự kiện chưa xử lý</div></div>}
     </div>
     <div className="flex items-center gap-2 border-b border-white/5 px-5 py-3 text-[10px] text-slate-300"><span className={`h-2 w-2 rounded-full ${monitoring.active ? "bg-emerald-300" : "bg-slate-500"}`}/>{monitoring.active ? "Agent đang giám sát" : "Gửi lệnh sẽ bật giám sát tự động"}</div>
