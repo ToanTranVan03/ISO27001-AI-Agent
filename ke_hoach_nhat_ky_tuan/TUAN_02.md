@@ -20,7 +20,7 @@
 ## Kết quả và minh chứng
 
 - [ ] Xác nhận công việc đã hoàn thành trong tuần.
-- [ ] Đính kèm đường dẫn file, commit hoặc kết quả kiểm thử tương ứng.
+- [ ] Đính kèm đường dẫn file hoặc kết quả kiểm thử tương ứng.
 
 ## Vướng mắc và việc chuyển tiếp
 
