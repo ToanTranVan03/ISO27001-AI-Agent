@@ -92,3 +92,33 @@ def compliance_report(assessment_id: UUID, user: dict = Depends(require_user)):
     history = {item['control_id']: teamwork.list_history(str(assessment_id), item['control_id']) for item in board if item.get('latest_evaluation_id')}
     from backend.company import snapshot
     return build_dossier(assessment_id, board, evidence, history, snapshot(str(assessment_id)))
+
+
+class SharedWorkInput(BaseModel):
+    control_id: str | None = None
+    force: bool = False
+
+
+@router.get('/shared-work')
+def shared_work_board(assessment_id: UUID, user: dict = Depends(require_user)):
+    from backend.shared_work import board
+    require_campaign(assessment_id, user)
+    return board(str(assessment_id))
+
+
+@router.post('/shared-work/start')
+def shared_work_start(assessment_id: UUID, req: SharedWorkInput, user: dict = Depends(require_user)):
+    from backend.shared_work import start
+    from backend.team_api import executor, execute_agent_job
+    require_campaign(assessment_id, user)
+    try:
+        result = start(str(assessment_id), user['user_id'], req.control_id, req.force)
+    except ValueError as exc:
+        raise HTTPException(409, detail=str(exc)) from exc
+    if result['action'] == 'started':
+        try:
+            executor.submit(execute_agent_job, result['job_id'], str(assessment_id), result['control_id'])
+        except RuntimeError as exc:
+            teamwork.finish_job(result['job_id'], None, 'Không thể khởi tạo worker.')
+            raise HTTPException(503, detail='Worker không khả dụng.') from exc
+    return result

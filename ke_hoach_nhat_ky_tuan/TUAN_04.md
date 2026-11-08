@@ -44,11 +44,19 @@ Không bổ sung công việc cho ngày chưa có ghi chép. Số lượng và k
 | 08/11/2026 | Kiểm tra bình luận và nhiệm vụ mục tiêu | EMP-045 từ ngoài ca tạo bước vào ca và USB; gửi lại request_id không nhân đôi. Nhiệm vụ dùng Qwen2.5:7b lập kế hoạch thật, hoàn tất bước và chờ duyệt; SOC xử lý USB bằng policy-fallback |
 | 08/11/2026 | Tổng hợp cuối tuần và kế hoạch chuyển tiếp | Rà lại kết quả, giới hạn, vướng mắc; lập các việc dự kiến cho tuần 5, chưa ghi là đã thực hiện |
 
+## Bổ sung cuối ngày 08/11/2026 — Công việc chung và tiếp tục tự động
+
+- Bổ sung tiến độ chung trong Hồ sơ ISO: người phụ trách, thời điểm, đang xử lý, chờ bằng chứng/duyệt, đã kiểm tra và cần tái đánh giá; kết luận tuân thủ được hiển thị riêng.
+- Dùng lại kết quả còn mới, theo dõi job chung khi người khác đã chạy; bổ sung khóa chọn/claim và giữ bảo vệ nguyên tử theo đợt/kiểm soát của hệ thống.
+- Thêm lượt tiếp tục tự động tối đa 12 kiểm soát có collector khi trang đang mở; bỏ qua kết quả mới và hồ sơ chờ xử lý thủ công, dừng khi lỗi. Chưa phải scheduler nền hoặc đánh giá tăng dần theo nhân viên.
+- 210 test Python và build đạt; API thật bốn yêu cầu đồng thời A.6.1 chỉ tạo một job, hoàn tất rồi dùng lại kết quả. Chưa kiểm thử toàn bộ luồng tự động qua UI.
+- Minh chứng và giới hạn: [Công việc chung Agent](../docs/CONG_VIEC_CHUNG_AGENT.md).
+
 ## Kết quả và minh chứng
 
 ### Kết quả kiểm chứng đã có
 
-- Bản cuối được ghi nhận **195 test Python, 25 test JavaScript và build frontend đạt**. Đây là kết quả lượt triển khai trước, không phải một lượt chạy lại khi chỉnh nhật ký. Lint còn cảnh báo và build còn cảnh báo kích thước chunk Three.js.
+- Bản cuối được ghi nhận **195 test Python, 25 test JavaScript và build frontend đạt** ở mốc văn phòng 3D (trước phần công việc chung). Đây là kết quả lượt triển khai trước, không phải một lượt chạy lại khi chỉnh nhật ký. Lint còn cảnh báo và build còn cảnh báo kích thước chunk Three.js.
 - API đã kiểm tra mục tiêu nhân viên/máy, chống trùng yêu cầu, liên kết sự cố, nhiệm vụ chờ duyệt, dữ liệu chung và tái đánh giá. Các lượt SOC được viện dẫn ở trên dùng `policy-fallback`; không tính là LLM xử lý thành công.
 - Lượt nhiệm vụ 08/11 có nguồn lập kế hoạch `ollama_plan_and_execute` thật. Bốn phòng vẫn là bốn vai trò dùng chung bộ điều phối, không phải bốn mô hình độc lập.
 - Benchmark ngày 06/11 gồm 8 ca tổng hợp tự xây dựng, mỗi ca một lần lặp. Ba chế độ cùng evaluator và đều khớp 8/8; không chứng minh LLM phân loại tốt hơn luật, chưa đủ kết luận thống kê hoặc hiệu quả trên doanh nghiệp thật.

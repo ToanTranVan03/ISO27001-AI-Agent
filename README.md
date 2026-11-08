@@ -36,3 +36,7 @@ Không đưa `.env`, mật khẩu hoặc token lên Git.
 - [Trụ sở điều phối](docs/TRU_SO_DIEU_PHOI.md)
 - [Kết quả kiểm chứng hiện tại](docs/KIEM_CHUNG_DANH_GIA.md)
 - [Nhật ký tuần](ke_hoach_nhat_ky_tuan/README.md)
+
+## Công việc chung theo đợt đánh giá
+
+Hồ sơ ISO hiển thị tiến độ dùng chung, theo dõi job có sẵn, dùng lại kết quả còn mới và tiếp tục các kiểm soát còn thiếu khi trang đang mở. Xem [cơ chế, cách dùng và giới hạn](docs/CONG_VIEC_CHUNG_AGENT.md).
