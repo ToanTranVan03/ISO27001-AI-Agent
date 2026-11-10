@@ -1,0 +1,11 @@
+{
+  "case_id": "A.8.12-mixed",
+  "control_id": "A.8.12",
+  "asset_id": "LAB-DATA",
+  "source_system": "Data",
+  "is_synthetic": true,
+  "observations": {
+    "dlp_enforced": true,
+    "dlp_test_passed": false
+  }
+}

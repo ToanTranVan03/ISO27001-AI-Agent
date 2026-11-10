@@ -1,3 +1,7 @@
+> **Phạm vi thống nhất:** triển khai đủ 56 control; 18 A.8 là nhóm ưu tiên thực nghiệm sâu. Theo dõi phần chưa có collector và phần lab đại diện tại [ma trận 56](../docs/MA_TRAN_56_CONTROL.md).
+
+> **Trọng tâm từ 10/11/2026:** dừng 3D/bình luận. Luồng A.8 raw v2 là phần đang nghiệm thu; xem [quy trình 5 bước](../docs/QUY_TRINH_NGHIEM_THU_A8.md) và [kết quả đo](../docs/a8-results/KET_QUA_RAW_V2.md). Các checklist 3D bên dưới là lịch sử, không phải ưu tiên phát triển tiếp. Chờ người thật duyệt rubric, chấm độc lập và quyết định SoA; không đánh dấu hoàn thành bằng test tự động.
+
 # Nâng cấp học thuật HiveFive
 
 - [x] Hồ sơ sự việc: trước/sau, bằng chứng, thiếu dữ liệu, khắc phục và tái kiểm tra.

@@ -1,0 +1,315 @@
+{
+  "title": "Dự thảo SoA — phạm vi 18 control A.8",
+  "approval": "DRAFT_NOT_APPROVED",
+  "scope": "Doanh nghiệp lab; chỉ 18 control trong catalog, không phải SoA đầy đủ của ISMS.",
+  "report_sha256": "309bc286d6ef65c754f9f514f7655a2a4a34aa9fb1748cbae8d23080f2c99e6d",
+  "generated_at": "2026-11-10T01:56:05.535860+00:00",
+  "entries": [
+    {
+      "control_id": "A.8.1",
+      "name": "User endpoint devices",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Endpoint; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "IT Endpoint",
+      "implementation_status": "Partially Compliant",
+      "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+      "evidence_ids": [
+        "A8-09d7eeb89e2e869bfbaf9a7e"
+      ],
+      "evidence_source": "lab_a8\\sources\\mixed\\A.8.1.json",
+      "evidence_sha256": "09d7eeb89e2e869bfbaf9a7e562d647fe160e52a0c4eede5db9d57c8ae1b2f9e",
+      "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.2",
+      "name": "Privileged access rights",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ IAM; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "IAM",
+      "implementation_status": "Partially Compliant",
+      "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+      "evidence_ids": [
+        "A8-ef106de989586b79cea0662a"
+      ],
+      "evidence_source": "lab_a8\\sources\\mixed\\A.8.2.json",
+      "evidence_sha256": "ef106de989586b79cea0662ac94e3084b03d318b72c94f4943d74b3208541e6e",
+      "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.3",
+      "name": "Information access restriction",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ IAM; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "IAM",
+      "implementation_status": "Partially Compliant",
+      "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+      "evidence_ids": [
+        "A8-441723ec4a3359cadee6c08b"
+      ],
+      "evidence_source": "lab_a8\\sources\\mixed\\A.8.3.json",
+      "evidence_sha256": "441723ec4a3359cadee6c08b36a9c7fc638d5f0ad200991dc242c0c63cc6aa13",
+      "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.5",
+      "name": "Secure authentication",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ IAM; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "IAM",
+      "implementation_status": "Partially Compliant",
+      "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+      "evidence_ids": [
+        "A8-ea6b40c30a917b6ff72b50da"
+      ],
+      "evidence_source": "lab_a8\\sources\\mixed\\A.8.5.json",
+      "evidence_sha256": "ea6b40c30a917b6ff72b50dab3aab5bf23c3ee5806743382626af7a5880a7944",
+      "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.7",
+      "name": "Protection against malware",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Endpoint; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "SOC",
+      "implementation_status": "Partially Compliant",
+      "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+      "evidence_ids": [
+        "A8-aae885af93bc288dea74abf3"
+      ],
+      "evidence_source": "lab_a8\\sources\\mixed\\A.8.7.json",
+      "evidence_sha256": "aae885af93bc288dea74abf36d64ca501ee8bbb290d5349119a8b017033e3378",
+      "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.8",
+      "name": "Management of technical vulnerabilities",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Vulnerability; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "SecOps",
+      "implementation_status": "Partially Compliant",
+      "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+      "evidence_ids": [
+        "A8-2185525f9d15e11a8b0693b1"
+      ],
+      "evidence_source": "lab_a8\\sources\\mixed\\A.8.8.json",
+      "evidence_sha256": "2185525f9d15e11a8b0693b1874dfc5277a074ec3634171025c7a2a3e729683d",
+      "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.9",
+      "name": "Configuration management",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Configuration; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "IT Operations",
+      "implementation_status": "Partially Compliant",
+      "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+      "evidence_ids": [
+        "A8-1f455df1ac5ce4283e01472f"
+      ],
+      "evidence_source": "lab_a8\\sources\\mixed\\A.8.9.json",
+      "evidence_sha256": "1f455df1ac5ce4283e01472fff02344bef0b1fcbd0eb3a0ee999386567745882",
+      "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.10",
+      "name": "Information deletion",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Data; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "Data owner",
+      "implementation_status": "Partially Compliant",
+      "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+      "evidence_ids": [
+        "A8-ffcd6354c86527953c7a760a"
+      ],
+      "evidence_source": "lab_a8\\sources\\mixed\\A.8.10.json",
+      "evidence_sha256": "ffcd6354c86527953c7a760a40e52209d502877f898f61fa25aeb175085376df",
+      "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.12",
+      "name": "Data leakage prevention",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Data; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "SOC",
+      "implementation_status": "Partially Compliant",
+      "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+      "evidence_ids": [
+        "A8-29347db4f7fdd066a4d25055"
+      ],
+      "evidence_source": "lab_a8\\sources\\mixed\\A.8.12.json",
+      "evidence_sha256": "29347db4f7fdd066a4d25055c24f5381bc5f3a1c23c181a562c2bd6bd7073520",
+      "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.13",
+      "name": "Information backup",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Backup; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "IT Operations",
+      "implementation_status": "Partially Compliant",
+      "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+      "evidence_ids": [
+        "A8-02d636afb058729e3b43d121"
+      ],
+      "evidence_source": "lab_a8\\sources\\mixed\\A.8.13.json",
+      "evidence_sha256": "02d636afb058729e3b43d121008348c8f742da15d8f45c810f30705770f0e473",
+      "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.15",
+      "name": "Logging",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Logging; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "SOC",
+      "implementation_status": "Partially Compliant",
+      "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+      "evidence_ids": [
+        "A8-f08b21a28ec30c27be9126bf"
+      ],
+      "evidence_source": "lab_a8\\sources\\mixed\\A.8.15.json",
+      "evidence_sha256": "f08b21a28ec30c27be9126bfe50259d3687ee31eaf68dea89860d6d268de1b3b",
+      "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.16",
+      "name": "Monitoring activities",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Monitoring; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "SOC",
+      "implementation_status": "Partially Compliant",
+      "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+      "evidence_ids": [
+        "A8-6f4636dede968def7c040d1b"
+      ],
+      "evidence_source": "lab_a8\\sources\\mixed\\A.8.16.json",
+      "evidence_sha256": "6f4636dede968def7c040d1b73418411bc830f1593a0bc1103317acc56f85354",
+      "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.17",
+      "name": "Clock synchronization",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Time; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "IT Operations",
+      "implementation_status": "Partially Compliant",
+      "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+      "evidence_ids": [
+        "A8-f9172e5edb1fa649155a6d56"
+      ],
+      "evidence_source": "lab_a8\\sources\\mixed\\A.8.17.json",
+      "evidence_sha256": "f9172e5edb1fa649155a6d56430c11bdee6ff26885a8c680c96c1b6ecff01201",
+      "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.19",
+      "name": "Installation of software on operational systems",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Software; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "IT Operations",
+      "implementation_status": "Partially Compliant",
+      "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+      "evidence_ids": [
+        "A8-c9759d6078785e7ed09f2f25"
+      ],
+      "evidence_source": "lab_a8\\sources\\mixed\\A.8.19.json",
+      "evidence_sha256": "c9759d6078785e7ed09f2f254a340449103d2ae4e2783fbe767b014dfb294644",
+      "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.20",
+      "name": "Networks security",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Network; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "Network",
+      "implementation_status": "Partially Compliant",
+      "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+      "evidence_ids": [
+        "A8-7dcce73e9f96ed21dc3755d3"
+      ],
+      "evidence_source": "lab_a8\\sources\\mixed\\A.8.20.json",
+      "evidence_sha256": "7dcce73e9f96ed21dc3755d30d25f735dcda975a8949a70b5e62155600edcc1f",
+      "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.22",
+      "name": "Segregation of networks",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Network; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "Network",
+      "implementation_status": "Partially Compliant",
+      "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+      "evidence_ids": [
+        "A8-83c3f7561236143e4da531b2"
+      ],
+      "evidence_source": "lab_a8\\sources\\mixed\\A.8.22.json",
+      "evidence_sha256": "83c3f7561236143e4da531b25c64e780b8188b598b0d1f7113480e8f3a36b4bd",
+      "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.24",
+      "name": "Use of cryptography",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Crypto; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "Security",
+      "implementation_status": "Partially Compliant",
+      "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+      "evidence_ids": [
+        "A8-d6136fae39a87475b0b306a9"
+      ],
+      "evidence_source": "lab_a8\\sources\\mixed\\A.8.24.json",
+      "evidence_sha256": "d6136fae39a87475b0b306a9049d5a67215beab53cc5a983a436c57077cddb07",
+      "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.32",
+      "name": "Change management",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Change; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "IT Operations",
+      "implementation_status": "Partially Compliant",
+      "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+      "evidence_ids": [
+        "A8-81a433f083618daee6621f37"
+      ],
+      "evidence_source": "lab_a8\\sources\\mixed\\A.8.32.json",
+      "evidence_sha256": "81a433f083618daee6621f37fd822436f7d6a4a5dea93318b9eb9b6b20532e2f",
+      "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    }
+  ]
+}

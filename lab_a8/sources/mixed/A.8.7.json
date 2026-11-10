@@ -1,0 +1,11 @@
+{
+  "case_id": "A.8.7-mixed",
+  "control_id": "A.8.7",
+  "asset_id": "LAB-ENDPOINT",
+  "source_system": "Endpoint",
+  "is_synthetic": true,
+  "observations": {
+    "antimalware_active": true,
+    "signatures_current": false
+  }
+}

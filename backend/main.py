@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
-from fastapi.responses import FileResponse, StreamingResponse, Response
+from fastapi.responses import FileResponse, StreamingResponse, Response, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from pathlib import Path
 from typing import Literal
@@ -29,6 +29,7 @@ from backend import company
 from backend.company_monitor import CompanyMonitor
 from backend.enterprise_api import router as enterprise_router
 from backend.incident_api import router as incident_router
+from backend.a8_api import router as a8_router, recover_interrupted
 from agent_core.graph_builder import build_iso_agent_graph
 from evidence_collectors.document_parser import extract_document_text
 
@@ -70,6 +71,7 @@ async def lifespan(app):
     teamwork.init_teamwork()
     enterprise_lab.init_enterprise_lab()
     incident_simulation.initialize_incident_simulation()
+    recover_interrupted()
     yield
     for monitor in live_monitors.values():
         monitor.stop()
@@ -83,6 +85,7 @@ agent_graph = build_iso_agent_graph()
 app.include_router(team_router)
 app.include_router(enterprise_router)
 app.include_router(incident_router)
+app.include_router(a8_router)
 app.mount('/assets', StaticFiles(directory=REACT_DIST / 'assets', check_dir=False), name='react-assets')
 
 STATIC_DIR = Path(__file__).parent / 'static'
@@ -161,7 +164,7 @@ def agent_latest(assessment_id: UUID | None = None, user: dict = Depends(require
 
 @app.get('/simulation', include_in_schema=False)
 def simulation_page():
-    return FileResponse(STATIC_DIR / 'index.html')
+    return RedirectResponse(url='/',status_code=307)
 
 
 @app.get('/api/simulation')

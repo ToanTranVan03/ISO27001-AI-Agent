@@ -54,7 +54,8 @@ def build_dossier(assessment_id, board, evidence_by_control, history_by_control=
         latest = next((h for h in history if h['evaluation_id'] == item.get('latest_evaluation_id')), None)
         stale = bool(latest and any(newer_evidence(e, latest) for e in evidence_by_control.get(cid, [])))
         used = [e for e in evidence_by_control.get(cid, []) if latest and e.get('evidence_id') in latest.get('evidence_ids', [])]
-        if evaluated and company_snapshot and (cid in PEOPLE_CONTROLS | set(CONTROL_TO_NODE) or any(e.get('snapshot_hash') for e in used)):
+        document_only=bool(latest and any('USER_EVIDENCE_ONLY' in str(t) for t in latest.get('audit_trail',[])))
+        if evaluated and not document_only and company_snapshot and (cid in PEOPLE_CONTROLS | set(CONTROL_TO_NODE) or any(e.get('snapshot_hash') for e in used)):
             stale = stale or not any(e.get('snapshot_hash') for e in used) or any(e.get('snapshot_hash') and e['snapshot_hash'] != company_snapshot['snapshot_hash'] for e in used)
         records.append({**item, 'collector_supported': bool(node) or cid in PEOPLE_CONTROLS,
             'source': 'Doanh nghiệp dùng chung' if cid in PEOPLE_CONTROLS else node.get('title'),

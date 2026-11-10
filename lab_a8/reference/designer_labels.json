@@ -1,0 +1,974 @@
+[
+  {
+    "case_id": "A.8.1-conforming",
+    "control_id": "A.8.1",
+    "profile": "conforming",
+    "expected": "Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích conforming; kiểm tra thủ công theo hai thuộc tính lab edr_active, disk_encrypted. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.1-mixed",
+    "control_id": "A.8.1",
+    "profile": "mixed",
+    "expected": "Partially Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích mixed; kiểm tra thủ công theo hai thuộc tính lab edr_active, disk_encrypted. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.1-nonconforming",
+    "control_id": "A.8.1",
+    "profile": "nonconforming",
+    "expected": "Non-Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích nonconforming; kiểm tra thủ công theo hai thuộc tính lab edr_active, disk_encrypted. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.1-incomplete",
+    "control_id": "A.8.1",
+    "profile": "incomplete",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích incomplete; kiểm tra thủ công theo hai thuộc tính lab edr_active, disk_encrypted. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.2-conforming",
+    "control_id": "A.8.2",
+    "profile": "conforming",
+    "expected": "Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích conforming; kiểm tra thủ công theo hai thuộc tính lab privileged_approved, privileged_review_current. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.2-mixed",
+    "control_id": "A.8.2",
+    "profile": "mixed",
+    "expected": "Partially Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích mixed; kiểm tra thủ công theo hai thuộc tính lab privileged_approved, privileged_review_current. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.2-nonconforming",
+    "control_id": "A.8.2",
+    "profile": "nonconforming",
+    "expected": "Non-Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích nonconforming; kiểm tra thủ công theo hai thuộc tính lab privileged_approved, privileged_review_current. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.2-incomplete",
+    "control_id": "A.8.2",
+    "profile": "incomplete",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích incomplete; kiểm tra thủ công theo hai thuộc tính lab privileged_approved, privileged_review_current. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.3-conforming",
+    "control_id": "A.8.3",
+    "profile": "conforming",
+    "expected": "Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích conforming; kiểm tra thủ công theo hai thuộc tính lab access_default_deny, access_review_current. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.3-mixed",
+    "control_id": "A.8.3",
+    "profile": "mixed",
+    "expected": "Partially Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích mixed; kiểm tra thủ công theo hai thuộc tính lab access_default_deny, access_review_current. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.3-nonconforming",
+    "control_id": "A.8.3",
+    "profile": "nonconforming",
+    "expected": "Non-Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích nonconforming; kiểm tra thủ công theo hai thuộc tính lab access_default_deny, access_review_current. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.3-incomplete",
+    "control_id": "A.8.3",
+    "profile": "incomplete",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích incomplete; kiểm tra thủ công theo hai thuộc tính lab access_default_deny, access_review_current. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.5-conforming",
+    "control_id": "A.8.5",
+    "profile": "conforming",
+    "expected": "Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích conforming; kiểm tra thủ công theo hai thuộc tính lab mfa_enforced, legacy_auth_disabled. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.5-mixed",
+    "control_id": "A.8.5",
+    "profile": "mixed",
+    "expected": "Partially Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích mixed; kiểm tra thủ công theo hai thuộc tính lab mfa_enforced, legacy_auth_disabled. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.5-nonconforming",
+    "control_id": "A.8.5",
+    "profile": "nonconforming",
+    "expected": "Non-Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích nonconforming; kiểm tra thủ công theo hai thuộc tính lab mfa_enforced, legacy_auth_disabled. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.5-incomplete",
+    "control_id": "A.8.5",
+    "profile": "incomplete",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích incomplete; kiểm tra thủ công theo hai thuộc tính lab mfa_enforced, legacy_auth_disabled. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.7-conforming",
+    "control_id": "A.8.7",
+    "profile": "conforming",
+    "expected": "Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích conforming; kiểm tra thủ công theo hai thuộc tính lab antimalware_active, signatures_current. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.7-mixed",
+    "control_id": "A.8.7",
+    "profile": "mixed",
+    "expected": "Partially Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích mixed; kiểm tra thủ công theo hai thuộc tính lab antimalware_active, signatures_current. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.7-nonconforming",
+    "control_id": "A.8.7",
+    "profile": "nonconforming",
+    "expected": "Non-Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích nonconforming; kiểm tra thủ công theo hai thuộc tính lab antimalware_active, signatures_current. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.7-incomplete",
+    "control_id": "A.8.7",
+    "profile": "incomplete",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích incomplete; kiểm tra thủ công theo hai thuộc tính lab antimalware_active, signatures_current. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.8-conforming",
+    "control_id": "A.8.8",
+    "profile": "conforming",
+    "expected": "Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích conforming; kiểm tra thủ công theo hai thuộc tính lab scan_current, critical_findings_remediated. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.8-mixed",
+    "control_id": "A.8.8",
+    "profile": "mixed",
+    "expected": "Partially Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích mixed; kiểm tra thủ công theo hai thuộc tính lab scan_current, critical_findings_remediated. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.8-nonconforming",
+    "control_id": "A.8.8",
+    "profile": "nonconforming",
+    "expected": "Non-Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích nonconforming; kiểm tra thủ công theo hai thuộc tính lab scan_current, critical_findings_remediated. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.8-incomplete",
+    "control_id": "A.8.8",
+    "profile": "incomplete",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích incomplete; kiểm tra thủ công theo hai thuộc tính lab scan_current, critical_findings_remediated. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.9-conforming",
+    "control_id": "A.8.9",
+    "profile": "conforming",
+    "expected": "Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích conforming; kiểm tra thủ công theo hai thuộc tính lab baseline_approved, drift_resolved. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.9-mixed",
+    "control_id": "A.8.9",
+    "profile": "mixed",
+    "expected": "Partially Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích mixed; kiểm tra thủ công theo hai thuộc tính lab baseline_approved, drift_resolved. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.9-nonconforming",
+    "control_id": "A.8.9",
+    "profile": "nonconforming",
+    "expected": "Non-Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích nonconforming; kiểm tra thủ công theo hai thuộc tính lab baseline_approved, drift_resolved. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.9-incomplete",
+    "control_id": "A.8.9",
+    "profile": "incomplete",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích incomplete; kiểm tra thủ công theo hai thuộc tính lab baseline_approved, drift_resolved. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.10-conforming",
+    "control_id": "A.8.10",
+    "profile": "conforming",
+    "expected": "Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích conforming; kiểm tra thủ công theo hai thuộc tính lab deletion_policy_enforced, deletion_verified. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.10-mixed",
+    "control_id": "A.8.10",
+    "profile": "mixed",
+    "expected": "Partially Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích mixed; kiểm tra thủ công theo hai thuộc tính lab deletion_policy_enforced, deletion_verified. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.10-nonconforming",
+    "control_id": "A.8.10",
+    "profile": "nonconforming",
+    "expected": "Non-Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích nonconforming; kiểm tra thủ công theo hai thuộc tính lab deletion_policy_enforced, deletion_verified. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.10-incomplete",
+    "control_id": "A.8.10",
+    "profile": "incomplete",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích incomplete; kiểm tra thủ công theo hai thuộc tính lab deletion_policy_enforced, deletion_verified. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.12-conforming",
+    "control_id": "A.8.12",
+    "profile": "conforming",
+    "expected": "Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích conforming; kiểm tra thủ công theo hai thuộc tính lab dlp_enforced, dlp_test_passed. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.12-mixed",
+    "control_id": "A.8.12",
+    "profile": "mixed",
+    "expected": "Partially Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích mixed; kiểm tra thủ công theo hai thuộc tính lab dlp_enforced, dlp_test_passed. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.12-nonconforming",
+    "control_id": "A.8.12",
+    "profile": "nonconforming",
+    "expected": "Non-Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích nonconforming; kiểm tra thủ công theo hai thuộc tính lab dlp_enforced, dlp_test_passed. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.12-incomplete",
+    "control_id": "A.8.12",
+    "profile": "incomplete",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích incomplete; kiểm tra thủ công theo hai thuộc tính lab dlp_enforced, dlp_test_passed. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.13-conforming",
+    "control_id": "A.8.13",
+    "profile": "conforming",
+    "expected": "Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích conforming; kiểm tra thủ công theo hai thuộc tính lab backup_success, restore_test_passed. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.13-mixed",
+    "control_id": "A.8.13",
+    "profile": "mixed",
+    "expected": "Partially Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích mixed; kiểm tra thủ công theo hai thuộc tính lab backup_success, restore_test_passed. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.13-nonconforming",
+    "control_id": "A.8.13",
+    "profile": "nonconforming",
+    "expected": "Non-Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích nonconforming; kiểm tra thủ công theo hai thuộc tính lab backup_success, restore_test_passed. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.13-incomplete",
+    "control_id": "A.8.13",
+    "profile": "incomplete",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích incomplete; kiểm tra thủ công theo hai thuộc tính lab backup_success, restore_test_passed. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.15-conforming",
+    "control_id": "A.8.15",
+    "profile": "conforming",
+    "expected": "Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích conforming; kiểm tra thủ công theo hai thuộc tính lab audit_logs_enabled, logs_integrity_protected. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.15-mixed",
+    "control_id": "A.8.15",
+    "profile": "mixed",
+    "expected": "Partially Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích mixed; kiểm tra thủ công theo hai thuộc tính lab audit_logs_enabled, logs_integrity_protected. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.15-nonconforming",
+    "control_id": "A.8.15",
+    "profile": "nonconforming",
+    "expected": "Non-Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích nonconforming; kiểm tra thủ công theo hai thuộc tính lab audit_logs_enabled, logs_integrity_protected. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.15-incomplete",
+    "control_id": "A.8.15",
+    "profile": "incomplete",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích incomplete; kiểm tra thủ công theo hai thuộc tính lab audit_logs_enabled, logs_integrity_protected. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.16-conforming",
+    "control_id": "A.8.16",
+    "profile": "conforming",
+    "expected": "Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích conforming; kiểm tra thủ công theo hai thuộc tính lab alerts_enabled, alert_response_test_passed. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.16-mixed",
+    "control_id": "A.8.16",
+    "profile": "mixed",
+    "expected": "Partially Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích mixed; kiểm tra thủ công theo hai thuộc tính lab alerts_enabled, alert_response_test_passed. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.16-nonconforming",
+    "control_id": "A.8.16",
+    "profile": "nonconforming",
+    "expected": "Non-Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích nonconforming; kiểm tra thủ công theo hai thuộc tính lab alerts_enabled, alert_response_test_passed. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.16-incomplete",
+    "control_id": "A.8.16",
+    "profile": "incomplete",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích incomplete; kiểm tra thủ công theo hai thuộc tính lab alerts_enabled, alert_response_test_passed. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.17-conforming",
+    "control_id": "A.8.17",
+    "profile": "conforming",
+    "expected": "Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích conforming; kiểm tra thủ công theo hai thuộc tính lab trusted_time_configured, clock_offset_within_policy. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.17-mixed",
+    "control_id": "A.8.17",
+    "profile": "mixed",
+    "expected": "Partially Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích mixed; kiểm tra thủ công theo hai thuộc tính lab trusted_time_configured, clock_offset_within_policy. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.17-nonconforming",
+    "control_id": "A.8.17",
+    "profile": "nonconforming",
+    "expected": "Non-Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích nonconforming; kiểm tra thủ công theo hai thuộc tính lab trusted_time_configured, clock_offset_within_policy. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.17-incomplete",
+    "control_id": "A.8.17",
+    "profile": "incomplete",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích incomplete; kiểm tra thủ công theo hai thuộc tính lab trusted_time_configured, clock_offset_within_policy. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.19-conforming",
+    "control_id": "A.8.19",
+    "profile": "conforming",
+    "expected": "Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích conforming; kiểm tra thủ công theo hai thuộc tính lab installation_restricted, installed_software_approved. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.19-mixed",
+    "control_id": "A.8.19",
+    "profile": "mixed",
+    "expected": "Partially Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích mixed; kiểm tra thủ công theo hai thuộc tính lab installation_restricted, installed_software_approved. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.19-nonconforming",
+    "control_id": "A.8.19",
+    "profile": "nonconforming",
+    "expected": "Non-Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích nonconforming; kiểm tra thủ công theo hai thuộc tính lab installation_restricted, installed_software_approved. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.19-incomplete",
+    "control_id": "A.8.19",
+    "profile": "incomplete",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích incomplete; kiểm tra thủ công theo hai thuộc tính lab installation_restricted, installed_software_approved. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.20-conforming",
+    "control_id": "A.8.20",
+    "profile": "conforming",
+    "expected": "Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích conforming; kiểm tra thủ công theo hai thuộc tính lab firewall_default_deny, firewall_rules_reviewed. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.20-mixed",
+    "control_id": "A.8.20",
+    "profile": "mixed",
+    "expected": "Partially Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích mixed; kiểm tra thủ công theo hai thuộc tính lab firewall_default_deny, firewall_rules_reviewed. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.20-nonconforming",
+    "control_id": "A.8.20",
+    "profile": "nonconforming",
+    "expected": "Non-Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích nonconforming; kiểm tra thủ công theo hai thuộc tính lab firewall_default_deny, firewall_rules_reviewed. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.20-incomplete",
+    "control_id": "A.8.20",
+    "profile": "incomplete",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích incomplete; kiểm tra thủ công theo hai thuộc tính lab firewall_default_deny, firewall_rules_reviewed. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.22-conforming",
+    "control_id": "A.8.22",
+    "profile": "conforming",
+    "expected": "Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích conforming; kiểm tra thủ công theo hai thuộc tính lab zones_separated, segmentation_test_passed. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.22-mixed",
+    "control_id": "A.8.22",
+    "profile": "mixed",
+    "expected": "Partially Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích mixed; kiểm tra thủ công theo hai thuộc tính lab zones_separated, segmentation_test_passed. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.22-nonconforming",
+    "control_id": "A.8.22",
+    "profile": "nonconforming",
+    "expected": "Non-Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích nonconforming; kiểm tra thủ công theo hai thuộc tính lab zones_separated, segmentation_test_passed. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.22-incomplete",
+    "control_id": "A.8.22",
+    "profile": "incomplete",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích incomplete; kiểm tra thủ công theo hai thuộc tính lab zones_separated, segmentation_test_passed. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.24-conforming",
+    "control_id": "A.8.24",
+    "profile": "conforming",
+    "expected": "Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích conforming; kiểm tra thủ công theo hai thuộc tính lab approved_crypto_configured, key_rotation_current. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.24-mixed",
+    "control_id": "A.8.24",
+    "profile": "mixed",
+    "expected": "Partially Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích mixed; kiểm tra thủ công theo hai thuộc tính lab approved_crypto_configured, key_rotation_current. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.24-nonconforming",
+    "control_id": "A.8.24",
+    "profile": "nonconforming",
+    "expected": "Non-Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích nonconforming; kiểm tra thủ công theo hai thuộc tính lab approved_crypto_configured, key_rotation_current. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.24-incomplete",
+    "control_id": "A.8.24",
+    "profile": "incomplete",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích incomplete; kiểm tra thủ công theo hai thuộc tính lab approved_crypto_configured, key_rotation_current. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.32-conforming",
+    "control_id": "A.8.32",
+    "profile": "conforming",
+    "expected": "Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích conforming; kiểm tra thủ công theo hai thuộc tính lab change_approved, rollback_test_recorded. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.32-mixed",
+    "control_id": "A.8.32",
+    "profile": "mixed",
+    "expected": "Partially Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích mixed; kiểm tra thủ công theo hai thuộc tính lab change_approved, rollback_test_recorded. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.32-nonconforming",
+    "control_id": "A.8.32",
+    "profile": "nonconforming",
+    "expected": "Non-Compliant",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích nonconforming; kiểm tra thủ công theo hai thuộc tính lab change_approved, rollback_test_recorded. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.32-incomplete",
+    "control_id": "A.8.32",
+    "profile": "incomplete",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Hồ sơ chủ đích incomplete; kiểm tra thủ công theo hai thuộc tính lab change_approved, rollback_test_recorded. Chưa được người đánh giá độc lập xác nhận."
+  },
+  {
+    "case_id": "A.8.1-stale",
+    "control_id": "A.8.1",
+    "profile": "stale",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Nguồn hết hạn hoặc digest bản thu độc lập mâu thuẫn; chưa đủ bằng chứng tin cậy."
+  },
+  {
+    "case_id": "A.8.2-stale",
+    "control_id": "A.8.2",
+    "profile": "stale",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Nguồn hết hạn hoặc digest bản thu độc lập mâu thuẫn; chưa đủ bằng chứng tin cậy."
+  },
+  {
+    "case_id": "A.8.3-stale",
+    "control_id": "A.8.3",
+    "profile": "stale",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Nguồn hết hạn hoặc digest bản thu độc lập mâu thuẫn; chưa đủ bằng chứng tin cậy."
+  },
+  {
+    "case_id": "A.8.5-stale",
+    "control_id": "A.8.5",
+    "profile": "stale",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Nguồn hết hạn hoặc digest bản thu độc lập mâu thuẫn; chưa đủ bằng chứng tin cậy."
+  },
+  {
+    "case_id": "A.8.7-stale",
+    "control_id": "A.8.7",
+    "profile": "stale",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Nguồn hết hạn hoặc digest bản thu độc lập mâu thuẫn; chưa đủ bằng chứng tin cậy."
+  },
+  {
+    "case_id": "A.8.8-stale",
+    "control_id": "A.8.8",
+    "profile": "stale",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Nguồn hết hạn hoặc digest bản thu độc lập mâu thuẫn; chưa đủ bằng chứng tin cậy."
+  },
+  {
+    "case_id": "A.8.9-stale",
+    "control_id": "A.8.9",
+    "profile": "stale",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Nguồn hết hạn hoặc digest bản thu độc lập mâu thuẫn; chưa đủ bằng chứng tin cậy."
+  },
+  {
+    "case_id": "A.8.10-stale",
+    "control_id": "A.8.10",
+    "profile": "stale",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Nguồn hết hạn hoặc digest bản thu độc lập mâu thuẫn; chưa đủ bằng chứng tin cậy."
+  },
+  {
+    "case_id": "A.8.12-stale",
+    "control_id": "A.8.12",
+    "profile": "stale",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Nguồn hết hạn hoặc digest bản thu độc lập mâu thuẫn; chưa đủ bằng chứng tin cậy."
+  },
+  {
+    "case_id": "A.8.13-stale",
+    "control_id": "A.8.13",
+    "profile": "stale",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Nguồn hết hạn hoặc digest bản thu độc lập mâu thuẫn; chưa đủ bằng chứng tin cậy."
+  },
+  {
+    "case_id": "A.8.15-stale",
+    "control_id": "A.8.15",
+    "profile": "stale",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Nguồn hết hạn hoặc digest bản thu độc lập mâu thuẫn; chưa đủ bằng chứng tin cậy."
+  },
+  {
+    "case_id": "A.8.16-stale",
+    "control_id": "A.8.16",
+    "profile": "stale",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Nguồn hết hạn hoặc digest bản thu độc lập mâu thuẫn; chưa đủ bằng chứng tin cậy."
+  },
+  {
+    "case_id": "A.8.17-stale",
+    "control_id": "A.8.17",
+    "profile": "stale",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Nguồn hết hạn hoặc digest bản thu độc lập mâu thuẫn; chưa đủ bằng chứng tin cậy."
+  },
+  {
+    "case_id": "A.8.19-stale",
+    "control_id": "A.8.19",
+    "profile": "stale",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Nguồn hết hạn hoặc digest bản thu độc lập mâu thuẫn; chưa đủ bằng chứng tin cậy."
+  },
+  {
+    "case_id": "A.8.20-stale",
+    "control_id": "A.8.20",
+    "profile": "stale",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Nguồn hết hạn hoặc digest bản thu độc lập mâu thuẫn; chưa đủ bằng chứng tin cậy."
+  },
+  {
+    "case_id": "A.8.22-stale",
+    "control_id": "A.8.22",
+    "profile": "stale",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Nguồn hết hạn hoặc digest bản thu độc lập mâu thuẫn; chưa đủ bằng chứng tin cậy."
+  },
+  {
+    "case_id": "A.8.24-stale",
+    "control_id": "A.8.24",
+    "profile": "stale",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Nguồn hết hạn hoặc digest bản thu độc lập mâu thuẫn; chưa đủ bằng chứng tin cậy."
+  },
+  {
+    "case_id": "A.8.32-stale",
+    "control_id": "A.8.32",
+    "profile": "stale",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Nguồn hết hạn hoặc digest bản thu độc lập mâu thuẫn; chưa đủ bằng chứng tin cậy."
+  },
+  {
+    "case_id": "A.8.1-conflicting",
+    "control_id": "A.8.1",
+    "profile": "conflicting",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Nguồn hết hạn hoặc digest bản thu độc lập mâu thuẫn; chưa đủ bằng chứng tin cậy."
+  },
+  {
+    "case_id": "A.8.2-conflicting",
+    "control_id": "A.8.2",
+    "profile": "conflicting",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Nguồn hết hạn hoặc digest bản thu độc lập mâu thuẫn; chưa đủ bằng chứng tin cậy."
+  },
+  {
+    "case_id": "A.8.3-conflicting",
+    "control_id": "A.8.3",
+    "profile": "conflicting",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Nguồn hết hạn hoặc digest bản thu độc lập mâu thuẫn; chưa đủ bằng chứng tin cậy."
+  },
+  {
+    "case_id": "A.8.5-conflicting",
+    "control_id": "A.8.5",
+    "profile": "conflicting",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Nguồn hết hạn hoặc digest bản thu độc lập mâu thuẫn; chưa đủ bằng chứng tin cậy."
+  },
+  {
+    "case_id": "A.8.7-conflicting",
+    "control_id": "A.8.7",
+    "profile": "conflicting",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Nguồn hết hạn hoặc digest bản thu độc lập mâu thuẫn; chưa đủ bằng chứng tin cậy."
+  },
+  {
+    "case_id": "A.8.8-conflicting",
+    "control_id": "A.8.8",
+    "profile": "conflicting",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Nguồn hết hạn hoặc digest bản thu độc lập mâu thuẫn; chưa đủ bằng chứng tin cậy."
+  },
+  {
+    "case_id": "A.8.9-conflicting",
+    "control_id": "A.8.9",
+    "profile": "conflicting",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Nguồn hết hạn hoặc digest bản thu độc lập mâu thuẫn; chưa đủ bằng chứng tin cậy."
+  },
+  {
+    "case_id": "A.8.10-conflicting",
+    "control_id": "A.8.10",
+    "profile": "conflicting",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Nguồn hết hạn hoặc digest bản thu độc lập mâu thuẫn; chưa đủ bằng chứng tin cậy."
+  },
+  {
+    "case_id": "A.8.12-conflicting",
+    "control_id": "A.8.12",
+    "profile": "conflicting",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Nguồn hết hạn hoặc digest bản thu độc lập mâu thuẫn; chưa đủ bằng chứng tin cậy."
+  },
+  {
+    "case_id": "A.8.13-conflicting",
+    "control_id": "A.8.13",
+    "profile": "conflicting",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Nguồn hết hạn hoặc digest bản thu độc lập mâu thuẫn; chưa đủ bằng chứng tin cậy."
+  },
+  {
+    "case_id": "A.8.15-conflicting",
+    "control_id": "A.8.15",
+    "profile": "conflicting",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Nguồn hết hạn hoặc digest bản thu độc lập mâu thuẫn; chưa đủ bằng chứng tin cậy."
+  },
+  {
+    "case_id": "A.8.16-conflicting",
+    "control_id": "A.8.16",
+    "profile": "conflicting",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Nguồn hết hạn hoặc digest bản thu độc lập mâu thuẫn; chưa đủ bằng chứng tin cậy."
+  },
+  {
+    "case_id": "A.8.17-conflicting",
+    "control_id": "A.8.17",
+    "profile": "conflicting",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Nguồn hết hạn hoặc digest bản thu độc lập mâu thuẫn; chưa đủ bằng chứng tin cậy."
+  },
+  {
+    "case_id": "A.8.19-conflicting",
+    "control_id": "A.8.19",
+    "profile": "conflicting",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Nguồn hết hạn hoặc digest bản thu độc lập mâu thuẫn; chưa đủ bằng chứng tin cậy."
+  },
+  {
+    "case_id": "A.8.20-conflicting",
+    "control_id": "A.8.20",
+    "profile": "conflicting",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Nguồn hết hạn hoặc digest bản thu độc lập mâu thuẫn; chưa đủ bằng chứng tin cậy."
+  },
+  {
+    "case_id": "A.8.22-conflicting",
+    "control_id": "A.8.22",
+    "profile": "conflicting",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Nguồn hết hạn hoặc digest bản thu độc lập mâu thuẫn; chưa đủ bằng chứng tin cậy."
+  },
+  {
+    "case_id": "A.8.24-conflicting",
+    "control_id": "A.8.24",
+    "profile": "conflicting",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Nguồn hết hạn hoặc digest bản thu độc lập mâu thuẫn; chưa đủ bằng chứng tin cậy."
+  },
+  {
+    "case_id": "A.8.32-conflicting",
+    "control_id": "A.8.32",
+    "profile": "conflicting",
+    "expected": "Insufficient Evidence",
+    "label_origin": "designer-authored",
+    "reviewer": null,
+    "basis": "Nguồn hết hạn hoặc digest bản thu độc lập mâu thuẫn; chưa đủ bằng chứng tin cậy."
+  }
+]

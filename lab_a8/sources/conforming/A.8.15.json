@@ -1,0 +1,11 @@
+{
+  "case_id": "A.8.15-conforming",
+  "control_id": "A.8.15",
+  "asset_id": "LAB-LOGGING",
+  "source_system": "Logging",
+  "is_synthetic": true,
+  "observations": {
+    "audit_logs_enabled": true,
+    "logs_integrity_protected": true
+  }
+}

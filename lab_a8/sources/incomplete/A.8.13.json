@@ -1,0 +1,11 @@
+{
+  "case_id": "A.8.13-incomplete",
+  "control_id": "A.8.13",
+  "asset_id": "LAB-BACKUP",
+  "source_system": "Backup",
+  "is_synthetic": true,
+  "observations": {
+    "backup_success": true,
+    "restore_test_passed": null
+  }
+}

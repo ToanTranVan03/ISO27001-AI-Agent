@@ -1,0 +1,11 @@
+{
+  "case_id": "A.8.22-incomplete",
+  "control_id": "A.8.22",
+  "asset_id": "LAB-NETWORK",
+  "source_system": "Network",
+  "is_synthetic": true,
+  "observations": {
+    "zones_separated": true,
+    "segmentation_test_passed": null
+  }
+}

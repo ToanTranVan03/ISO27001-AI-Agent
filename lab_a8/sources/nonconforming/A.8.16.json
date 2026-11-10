@@ -1,0 +1,11 @@
+{
+  "case_id": "A.8.16-nonconforming",
+  "control_id": "A.8.16",
+  "asset_id": "LAB-MONITORING",
+  "source_system": "Monitoring",
+  "is_synthetic": true,
+  "observations": {
+    "alerts_enabled": false,
+    "alert_response_test_passed": false
+  }
+}

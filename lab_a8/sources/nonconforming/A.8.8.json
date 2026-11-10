@@ -1,0 +1,11 @@
+{
+  "case_id": "A.8.8-nonconforming",
+  "control_id": "A.8.8",
+  "asset_id": "LAB-VULNERABILITY",
+  "source_system": "Vulnerability",
+  "is_synthetic": true,
+  "observations": {
+    "scan_current": false,
+    "critical_findings_remediated": false
+  }
+}

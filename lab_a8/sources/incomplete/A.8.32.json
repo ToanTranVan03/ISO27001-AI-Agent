@@ -1,0 +1,11 @@
+{
+  "case_id": "A.8.32-incomplete",
+  "control_id": "A.8.32",
+  "asset_id": "LAB-CHANGE",
+  "source_system": "Change",
+  "is_synthetic": true,
+  "observations": {
+    "change_approved": true,
+    "rollback_test_recorded": null
+  }
+}

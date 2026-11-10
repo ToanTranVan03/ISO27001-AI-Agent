@@ -1,0 +1,11 @@
+{
+  "case_id": "A.8.20-incomplete",
+  "control_id": "A.8.20",
+  "asset_id": "LAB-NETWORK",
+  "source_system": "Network",
+  "is_synthetic": true,
+  "observations": {
+    "firewall_default_deny": true,
+    "firewall_rules_reviewed": null
+  }
+}

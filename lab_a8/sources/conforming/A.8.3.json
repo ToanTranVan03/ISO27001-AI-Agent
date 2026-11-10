@@ -1,0 +1,11 @@
+{
+  "case_id": "A.8.3-conforming",
+  "control_id": "A.8.3",
+  "asset_id": "LAB-IAM",
+  "source_system": "IAM",
+  "is_synthetic": true,
+  "observations": {
+    "access_default_deny": true,
+    "access_review_current": true
+  }
+}

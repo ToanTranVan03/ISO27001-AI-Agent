@@ -1,0 +1,11 @@
+{
+  "case_id": "A.8.24-incomplete",
+  "control_id": "A.8.24",
+  "asset_id": "LAB-CRYPTO",
+  "source_system": "Crypto",
+  "is_synthetic": true,
+  "observations": {
+    "approved_crypto_configured": true,
+    "key_rotation_current": null
+  }
+}

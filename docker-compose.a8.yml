@@ -1,0 +1,16 @@
+services:
+  a8-lab:
+    image: ubuntu:22.04
+    container_name: iso-a8-lab
+    network_mode: none
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - ./lab_a8/raw:/fixtures:ro
+      - ./lab_a8/runtime.sh:/runtime.sh:ro
+    command: ["/bin/sh", "/runtime.sh"]
+    healthcheck:
+      test: ["CMD", "test", "-f", "/lab/ready"]
+      interval: 3s
+      timeout: 2s
+      retries: 10

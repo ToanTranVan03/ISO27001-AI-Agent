@@ -8,6 +8,8 @@ venv/
 # Data & Evidences
 data/
 *.csv
+!docs/a8-results/*.csv
+!lab_a8/raw/**/*.csv
 *.pdf
 *.docx
 

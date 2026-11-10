@@ -35,6 +35,7 @@ class ControlEvaluationOutput(BaseModel):
             return 0.85
 
 class AgentState(TypedDict):
+    source_mode: str
     company_evaluation: Dict[str, Any]
     control_id: str
     control_name: str
@@ -53,6 +54,9 @@ class AgentState(TypedDict):
 # 2. ĐỊNH NGHĨA CÁC NODE
 # ==========================================
 def node_plan(state: AgentState):
+    if state.get("source_mode")=="user_evidence_only":
+        state["audit_trail"].append("PLAN USER_EVIDENCE_ONLY")
+        return state
     if state.get('assessment_id'):
         from backend.company_evidence import PEOPLE_CONTROLS
         if state['control_id'] in PEOPLE_CONTROLS:
@@ -66,6 +70,11 @@ def node_plan(state: AgentState):
     return state
 
 def node_collect(state: AgentState):
+    if state.get("source_mode")=="user_evidence_only":
+        from backend.database import collect_user_evidence
+        state["collected_evidences"],state["deterministic_rule"]=collect_user_evidence(state["control_id"],state["assessment_id"])
+        state["audit_trail"].append("COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS")
+        return state
     shared = None
     if state.get('assessment_id'):
         from backend.company_evidence import collect_people
@@ -87,6 +96,10 @@ def node_collect(state: AgentState):
     return state
 
 def node_evaluate(state: AgentState):
+    if state.get("source_mode")=="user_evidence_only" and not state.get("collected_evidences"):
+        state.update(compliance_status="Insufficient Evidence",confidence=0.0,rationale="Chưa có hồ sơ người phụ trách cung cấp cho control này.",proposed_evidence_ids=[])
+        state["audit_trail"].append("EVALUATE NO USER EVIDENCE; NO MODEL CALL")
+        return state
     shared = state.get('company_evaluation')
     if shared:
         state.update(compliance_status=shared['status'], confidence=shared['confidence'],

@@ -1,0 +1,11 @@
+{
+  "case_id": "A.8.17-mixed",
+  "control_id": "A.8.17",
+  "asset_id": "LAB-TIME",
+  "source_system": "Time",
+  "is_synthetic": true,
+  "observations": {
+    "trusted_time_configured": true,
+    "clock_offset_within_policy": false
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "case_id": "A.8.2-nonconforming",
+  "control_id": "A.8.2",
+  "asset_id": "LAB-IAM",
+  "source_system": "IAM",
+  "is_synthetic": true,
+  "observations": {
+    "privileged_approved": false,
+    "privileged_review_current": false
+  }
+}

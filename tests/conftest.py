@@ -10,3 +10,5 @@ def isolate_database_startup(monkeypatch):
     monkeypatch.setattr(teamwork, "init_teamwork", lambda: None)
     monkeypatch.setattr(enterprise_lab, "init_enterprise_lab", lambda: None)
     monkeypatch.setattr(incident_simulation, "initialize_incident_simulation", lambda: None)
+    from backend import main
+    monkeypatch.setattr(main, "recover_interrupted", lambda: None)

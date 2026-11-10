@@ -1,0 +1,2 @@
+-PermitRootLogin no
++PermitRootLogin yes

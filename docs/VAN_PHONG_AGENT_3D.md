@@ -1,3 +1,5 @@
+> **Tài liệu lịch sử:** mã và tài nguyên 3D đã được xóa khỏi bản hiện tại ngày 10/11/2026. Nội dung dưới đây chỉ ghi nhận phiên bản trước.
+
 # Văn phòng Agent 3D từ video tham khảo
 
 ## Đối chiếu video

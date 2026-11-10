@@ -1,0 +1,11 @@
+{
+  "case_id": "A.8.9-nonconforming",
+  "control_id": "A.8.9",
+  "asset_id": "LAB-CONFIGURATION",
+  "source_system": "Configuration",
+  "is_synthetic": true,
+  "observations": {
+    "baseline_approved": false,
+    "drift_resolved": false
+  }
+}

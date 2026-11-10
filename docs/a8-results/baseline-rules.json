@@ -1,0 +1,5403 @@
+{
+  "mode": "rules",
+  "reports": [
+    {
+      "profile": "conforming",
+      "mode": "rules",
+      "created_at": "2026-11-10T01:56:05.517993+00:00",
+      "is_synthetic": true,
+      "rubric_version": "a8-lab-v1",
+      "catalog_sha256": "dae9f51935be7dbbf950a54bdebbc9b039a44d4d84ba7d937e08b4acaa8b7f48",
+      "model": null,
+      "generation_options": null,
+      "records": [
+        {
+          "control_id": "A.8.1",
+          "case_id": "A.8.1-conforming",
+          "name": "User endpoint devices",
+          "criteria_checks": [
+            "edr_active",
+            "disk_encrypted"
+          ],
+          "evidence": {
+            "evidence_id": "A8-f29d0203e5bcb4ff7b5fe73e",
+            "source": "lab_a8\\sources\\conforming\\A.8.1.json",
+            "source_sha256": "f29d0203e5bcb4ff7b5fe73e6571bc1a7c0a1d8608c0a8c6058d2b0875e48f91",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.1",
+            "asset_id": "LAB-ENDPOINT",
+            "facts": {
+              "edr_active": true,
+              "disk_encrypted": true
+            }
+          },
+          "owner": "IT Endpoint",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Endpoint; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-f29d0203e5bcb4ff7b5fe73e"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.21
+        },
+        {
+          "control_id": "A.8.2",
+          "case_id": "A.8.2-conforming",
+          "name": "Privileged access rights",
+          "criteria_checks": [
+            "privileged_approved",
+            "privileged_review_current"
+          ],
+          "evidence": {
+            "evidence_id": "A8-c64f6ebdd7892d2be7bda356",
+            "source": "lab_a8\\sources\\conforming\\A.8.2.json",
+            "source_sha256": "c64f6ebdd7892d2be7bda3561de67d03a9ec869b346cddaf26ab0c3b82c8cd52",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.2",
+            "asset_id": "LAB-IAM",
+            "facts": {
+              "privileged_approved": true,
+              "privileged_review_current": true
+            }
+          },
+          "owner": "IAM",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ IAM; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-c64f6ebdd7892d2be7bda356"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.15
+        },
+        {
+          "control_id": "A.8.3",
+          "case_id": "A.8.3-conforming",
+          "name": "Information access restriction",
+          "criteria_checks": [
+            "access_default_deny",
+            "access_review_current"
+          ],
+          "evidence": {
+            "evidence_id": "A8-064184c89136711a00cee596",
+            "source": "lab_a8\\sources\\conforming\\A.8.3.json",
+            "source_sha256": "064184c89136711a00cee59644e0a40126352d37db30aed4c0d7dd66ad0098b8",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.3",
+            "asset_id": "LAB-IAM",
+            "facts": {
+              "access_default_deny": true,
+              "access_review_current": true
+            }
+          },
+          "owner": "IAM",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ IAM; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-064184c89136711a00cee596"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.13
+        },
+        {
+          "control_id": "A.8.5",
+          "case_id": "A.8.5-conforming",
+          "name": "Secure authentication",
+          "criteria_checks": [
+            "mfa_enforced",
+            "legacy_auth_disabled"
+          ],
+          "evidence": {
+            "evidence_id": "A8-a3100a4098f78c72d40e233c",
+            "source": "lab_a8\\sources\\conforming\\A.8.5.json",
+            "source_sha256": "a3100a4098f78c72d40e233c1f9c59658cfe893794365544b87f13dffbae870f",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.5",
+            "asset_id": "LAB-IAM",
+            "facts": {
+              "mfa_enforced": true,
+              "legacy_auth_disabled": true
+            }
+          },
+          "owner": "IAM",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ IAM; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-a3100a4098f78c72d40e233c"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.11
+        },
+        {
+          "control_id": "A.8.7",
+          "case_id": "A.8.7-conforming",
+          "name": "Protection against malware",
+          "criteria_checks": [
+            "antimalware_active",
+            "signatures_current"
+          ],
+          "evidence": {
+            "evidence_id": "A8-3db14b2af7f9054d963c5c4b",
+            "source": "lab_a8\\sources\\conforming\\A.8.7.json",
+            "source_sha256": "3db14b2af7f9054d963c5c4b66afd5df48b8d9017927fc1f80c05a010b0598d0",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.7",
+            "asset_id": "LAB-ENDPOINT",
+            "facts": {
+              "antimalware_active": true,
+              "signatures_current": true
+            }
+          },
+          "owner": "SOC",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Endpoint; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-3db14b2af7f9054d963c5c4b"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.11
+        },
+        {
+          "control_id": "A.8.8",
+          "case_id": "A.8.8-conforming",
+          "name": "Management of technical vulnerabilities",
+          "criteria_checks": [
+            "scan_current",
+            "critical_findings_remediated"
+          ],
+          "evidence": {
+            "evidence_id": "A8-18169eef434bd2930022cfc5",
+            "source": "lab_a8\\sources\\conforming\\A.8.8.json",
+            "source_sha256": "18169eef434bd2930022cfc596ac48b7551e1de72450ed6ca9c9e83ae334b071",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.8",
+            "asset_id": "LAB-VULNERABILITY",
+            "facts": {
+              "scan_current": true,
+              "critical_findings_remediated": true
+            }
+          },
+          "owner": "SecOps",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Vulnerability; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-18169eef434bd2930022cfc5"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.11
+        },
+        {
+          "control_id": "A.8.9",
+          "case_id": "A.8.9-conforming",
+          "name": "Configuration management",
+          "criteria_checks": [
+            "baseline_approved",
+            "drift_resolved"
+          ],
+          "evidence": {
+            "evidence_id": "A8-7e24a5783594ffb05dc68d69",
+            "source": "lab_a8\\sources\\conforming\\A.8.9.json",
+            "source_sha256": "7e24a5783594ffb05dc68d69f6bd7710b74bb6469f9ddc0cdfe0861344622698",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.9",
+            "asset_id": "LAB-CONFIGURATION",
+            "facts": {
+              "baseline_approved": true,
+              "drift_resolved": true
+            }
+          },
+          "owner": "IT Operations",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Configuration; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-7e24a5783594ffb05dc68d69"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.11
+        },
+        {
+          "control_id": "A.8.10",
+          "case_id": "A.8.10-conforming",
+          "name": "Information deletion",
+          "criteria_checks": [
+            "deletion_policy_enforced",
+            "deletion_verified"
+          ],
+          "evidence": {
+            "evidence_id": "A8-c08e018e70d004fe9f20f966",
+            "source": "lab_a8\\sources\\conforming\\A.8.10.json",
+            "source_sha256": "c08e018e70d004fe9f20f9667649b9af053b544214cb0a7af09baa65aa7cfd41",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.10",
+            "asset_id": "LAB-DATA",
+            "facts": {
+              "deletion_policy_enforced": true,
+              "deletion_verified": true
+            }
+          },
+          "owner": "Data owner",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Data; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-c08e018e70d004fe9f20f966"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.11
+        },
+        {
+          "control_id": "A.8.12",
+          "case_id": "A.8.12-conforming",
+          "name": "Data leakage prevention",
+          "criteria_checks": [
+            "dlp_enforced",
+            "dlp_test_passed"
+          ],
+          "evidence": {
+            "evidence_id": "A8-de1fb7fd6a9e466971978e4c",
+            "source": "lab_a8\\sources\\conforming\\A.8.12.json",
+            "source_sha256": "de1fb7fd6a9e466971978e4c465ec1021e64e12a9b663de7f317dcdfee10a7a6",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.12",
+            "asset_id": "LAB-DATA",
+            "facts": {
+              "dlp_enforced": true,
+              "dlp_test_passed": true
+            }
+          },
+          "owner": "SOC",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Data; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-de1fb7fd6a9e466971978e4c"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.1
+        },
+        {
+          "control_id": "A.8.13",
+          "case_id": "A.8.13-conforming",
+          "name": "Information backup",
+          "criteria_checks": [
+            "backup_success",
+            "restore_test_passed"
+          ],
+          "evidence": {
+            "evidence_id": "A8-3eba8a94a5023459a3be7e4c",
+            "source": "lab_a8\\sources\\conforming\\A.8.13.json",
+            "source_sha256": "3eba8a94a5023459a3be7e4c3f58d3c78e64942ca8e3d77c6fa93bf61a99baf9",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.13",
+            "asset_id": "LAB-BACKUP",
+            "facts": {
+              "backup_success": true,
+              "restore_test_passed": true
+            }
+          },
+          "owner": "IT Operations",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Backup; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-3eba8a94a5023459a3be7e4c"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.11
+        },
+        {
+          "control_id": "A.8.15",
+          "case_id": "A.8.15-conforming",
+          "name": "Logging",
+          "criteria_checks": [
+            "audit_logs_enabled",
+            "logs_integrity_protected"
+          ],
+          "evidence": {
+            "evidence_id": "A8-2e05525d922358b20833584d",
+            "source": "lab_a8\\sources\\conforming\\A.8.15.json",
+            "source_sha256": "2e05525d922358b20833584d5182a36d0837aec8329116f6ee5438897fa7bc39",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.15",
+            "asset_id": "LAB-LOGGING",
+            "facts": {
+              "audit_logs_enabled": true,
+              "logs_integrity_protected": true
+            }
+          },
+          "owner": "SOC",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Logging; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-2e05525d922358b20833584d"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.11
+        },
+        {
+          "control_id": "A.8.16",
+          "case_id": "A.8.16-conforming",
+          "name": "Monitoring activities",
+          "criteria_checks": [
+            "alerts_enabled",
+            "alert_response_test_passed"
+          ],
+          "evidence": {
+            "evidence_id": "A8-8bb6ad40ed01d6731e0f7a6f",
+            "source": "lab_a8\\sources\\conforming\\A.8.16.json",
+            "source_sha256": "8bb6ad40ed01d6731e0f7a6f33b8d5471573248759f34f915347043866b6dc14",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.16",
+            "asset_id": "LAB-MONITORING",
+            "facts": {
+              "alerts_enabled": true,
+              "alert_response_test_passed": true
+            }
+          },
+          "owner": "SOC",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Monitoring; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-8bb6ad40ed01d6731e0f7a6f"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.1
+        },
+        {
+          "control_id": "A.8.17",
+          "case_id": "A.8.17-conforming",
+          "name": "Clock synchronization",
+          "criteria_checks": [
+            "trusted_time_configured",
+            "clock_offset_within_policy"
+          ],
+          "evidence": {
+            "evidence_id": "A8-912c0bf446cacbeb9b64e931",
+            "source": "lab_a8\\sources\\conforming\\A.8.17.json",
+            "source_sha256": "912c0bf446cacbeb9b64e93105fcf3571da7e4562e45c12f4cbaa3eda99a9c32",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.17",
+            "asset_id": "LAB-TIME",
+            "facts": {
+              "trusted_time_configured": true,
+              "clock_offset_within_policy": true
+            }
+          },
+          "owner": "IT Operations",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Time; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-912c0bf446cacbeb9b64e931"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.11
+        },
+        {
+          "control_id": "A.8.19",
+          "case_id": "A.8.19-conforming",
+          "name": "Installation of software on operational systems",
+          "criteria_checks": [
+            "installation_restricted",
+            "installed_software_approved"
+          ],
+          "evidence": {
+            "evidence_id": "A8-d50a4a0eef89d15c5b1665d1",
+            "source": "lab_a8\\sources\\conforming\\A.8.19.json",
+            "source_sha256": "d50a4a0eef89d15c5b1665d1df8f02b29c4b35c5b8497078bc3ddc8998f2516e",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.19",
+            "asset_id": "LAB-SOFTWARE",
+            "facts": {
+              "installation_restricted": true,
+              "installed_software_approved": true
+            }
+          },
+          "owner": "IT Operations",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Software; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-d50a4a0eef89d15c5b1665d1"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.1
+        },
+        {
+          "control_id": "A.8.20",
+          "case_id": "A.8.20-conforming",
+          "name": "Networks security",
+          "criteria_checks": [
+            "firewall_default_deny",
+            "firewall_rules_reviewed"
+          ],
+          "evidence": {
+            "evidence_id": "A8-606d2fe2d0d412db30b979f6",
+            "source": "lab_a8\\sources\\conforming\\A.8.20.json",
+            "source_sha256": "606d2fe2d0d412db30b979f646de268ccafa44011a815b752a4ec0a513bb00cf",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.20",
+            "asset_id": "LAB-NETWORK",
+            "facts": {
+              "firewall_default_deny": true,
+              "firewall_rules_reviewed": true
+            }
+          },
+          "owner": "Network",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Network; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-606d2fe2d0d412db30b979f6"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.1
+        },
+        {
+          "control_id": "A.8.22",
+          "case_id": "A.8.22-conforming",
+          "name": "Segregation of networks",
+          "criteria_checks": [
+            "zones_separated",
+            "segmentation_test_passed"
+          ],
+          "evidence": {
+            "evidence_id": "A8-203a1c0180804ee1624798ec",
+            "source": "lab_a8\\sources\\conforming\\A.8.22.json",
+            "source_sha256": "203a1c0180804ee1624798ec45ba464dbc6c109dbfd4cb8e5e01a6ed5812d940",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.22",
+            "asset_id": "LAB-NETWORK",
+            "facts": {
+              "zones_separated": true,
+              "segmentation_test_passed": true
+            }
+          },
+          "owner": "Network",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Network; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-203a1c0180804ee1624798ec"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.11
+        },
+        {
+          "control_id": "A.8.24",
+          "case_id": "A.8.24-conforming",
+          "name": "Use of cryptography",
+          "criteria_checks": [
+            "approved_crypto_configured",
+            "key_rotation_current"
+          ],
+          "evidence": {
+            "evidence_id": "A8-d9d29f2b1ac189a147eb47a2",
+            "source": "lab_a8\\sources\\conforming\\A.8.24.json",
+            "source_sha256": "d9d29f2b1ac189a147eb47a2d90a98a24bebd4473d452c61e3f6a88796f81846",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.24",
+            "asset_id": "LAB-CRYPTO",
+            "facts": {
+              "approved_crypto_configured": true,
+              "key_rotation_current": true
+            }
+          },
+          "owner": "Security",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Crypto; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-d9d29f2b1ac189a147eb47a2"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.11
+        },
+        {
+          "control_id": "A.8.32",
+          "case_id": "A.8.32-conforming",
+          "name": "Change management",
+          "criteria_checks": [
+            "change_approved",
+            "rollback_test_recorded"
+          ],
+          "evidence": {
+            "evidence_id": "A8-bd21d545bd64893e761c2073",
+            "source": "lab_a8\\sources\\conforming\\A.8.32.json",
+            "source_sha256": "bd21d545bd64893e761c20732c6875465cdd3906d20047f784b73914f9988312",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.32",
+            "asset_id": "LAB-CHANGE",
+            "facts": {
+              "change_approved": true,
+              "rollback_test_recorded": true
+            }
+          },
+          "owner": "IT Operations",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Change; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-bd21d545bd64893e761c2073"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.1
+        }
+      ],
+      "sha256": "28c21465d703840948fef9b3e7280fabfab4ea3c6902d9a0321bc95abe1d2c30"
+    },
+    {
+      "profile": "mixed",
+      "mode": "rules",
+      "created_at": "2026-11-10T01:56:05.517993+00:00",
+      "is_synthetic": true,
+      "rubric_version": "a8-lab-v1",
+      "catalog_sha256": "dae9f51935be7dbbf950a54bdebbc9b039a44d4d84ba7d937e08b4acaa8b7f48",
+      "model": null,
+      "generation_options": null,
+      "records": [
+        {
+          "control_id": "A.8.1",
+          "case_id": "A.8.1-mixed",
+          "name": "User endpoint devices",
+          "criteria_checks": [
+            "edr_active",
+            "disk_encrypted"
+          ],
+          "evidence": {
+            "evidence_id": "A8-09d7eeb89e2e869bfbaf9a7e",
+            "source": "lab_a8\\sources\\mixed\\A.8.1.json",
+            "source_sha256": "09d7eeb89e2e869bfbaf9a7e562d647fe160e52a0c4eede5db9d57c8ae1b2f9e",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.1",
+            "asset_id": "LAB-ENDPOINT",
+            "facts": {
+              "edr_active": true,
+              "disk_encrypted": false
+            }
+          },
+          "owner": "IT Endpoint",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Endpoint; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Partially Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-09d7eeb89e2e869bfbaf9a7e"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.15
+        },
+        {
+          "control_id": "A.8.2",
+          "case_id": "A.8.2-mixed",
+          "name": "Privileged access rights",
+          "criteria_checks": [
+            "privileged_approved",
+            "privileged_review_current"
+          ],
+          "evidence": {
+            "evidence_id": "A8-ef106de989586b79cea0662a",
+            "source": "lab_a8\\sources\\mixed\\A.8.2.json",
+            "source_sha256": "ef106de989586b79cea0662ac94e3084b03d318b72c94f4943d74b3208541e6e",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.2",
+            "asset_id": "LAB-IAM",
+            "facts": {
+              "privileged_approved": true,
+              "privileged_review_current": false
+            }
+          },
+          "owner": "IAM",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ IAM; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Partially Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-ef106de989586b79cea0662a"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.12
+        },
+        {
+          "control_id": "A.8.3",
+          "case_id": "A.8.3-mixed",
+          "name": "Information access restriction",
+          "criteria_checks": [
+            "access_default_deny",
+            "access_review_current"
+          ],
+          "evidence": {
+            "evidence_id": "A8-441723ec4a3359cadee6c08b",
+            "source": "lab_a8\\sources\\mixed\\A.8.3.json",
+            "source_sha256": "441723ec4a3359cadee6c08b36a9c7fc638d5f0ad200991dc242c0c63cc6aa13",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.3",
+            "asset_id": "LAB-IAM",
+            "facts": {
+              "access_default_deny": true,
+              "access_review_current": false
+            }
+          },
+          "owner": "IAM",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ IAM; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Partially Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-441723ec4a3359cadee6c08b"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.11
+        },
+        {
+          "control_id": "A.8.5",
+          "case_id": "A.8.5-mixed",
+          "name": "Secure authentication",
+          "criteria_checks": [
+            "mfa_enforced",
+            "legacy_auth_disabled"
+          ],
+          "evidence": {
+            "evidence_id": "A8-ea6b40c30a917b6ff72b50da",
+            "source": "lab_a8\\sources\\mixed\\A.8.5.json",
+            "source_sha256": "ea6b40c30a917b6ff72b50dab3aab5bf23c3ee5806743382626af7a5880a7944",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.5",
+            "asset_id": "LAB-IAM",
+            "facts": {
+              "mfa_enforced": true,
+              "legacy_auth_disabled": false
+            }
+          },
+          "owner": "IAM",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ IAM; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Partially Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-ea6b40c30a917b6ff72b50da"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.1
+        },
+        {
+          "control_id": "A.8.7",
+          "case_id": "A.8.7-mixed",
+          "name": "Protection against malware",
+          "criteria_checks": [
+            "antimalware_active",
+            "signatures_current"
+          ],
+          "evidence": {
+            "evidence_id": "A8-aae885af93bc288dea74abf3",
+            "source": "lab_a8\\sources\\mixed\\A.8.7.json",
+            "source_sha256": "aae885af93bc288dea74abf36d64ca501ee8bbb290d5349119a8b017033e3378",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.7",
+            "asset_id": "LAB-ENDPOINT",
+            "facts": {
+              "antimalware_active": true,
+              "signatures_current": false
+            }
+          },
+          "owner": "SOC",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Endpoint; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Partially Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-aae885af93bc288dea74abf3"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.11
+        },
+        {
+          "control_id": "A.8.8",
+          "case_id": "A.8.8-mixed",
+          "name": "Management of technical vulnerabilities",
+          "criteria_checks": [
+            "scan_current",
+            "critical_findings_remediated"
+          ],
+          "evidence": {
+            "evidence_id": "A8-2185525f9d15e11a8b0693b1",
+            "source": "lab_a8\\sources\\mixed\\A.8.8.json",
+            "source_sha256": "2185525f9d15e11a8b0693b1874dfc5277a074ec3634171025c7a2a3e729683d",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.8",
+            "asset_id": "LAB-VULNERABILITY",
+            "facts": {
+              "scan_current": true,
+              "critical_findings_remediated": false
+            }
+          },
+          "owner": "SecOps",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Vulnerability; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Partially Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-2185525f9d15e11a8b0693b1"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.11
+        },
+        {
+          "control_id": "A.8.9",
+          "case_id": "A.8.9-mixed",
+          "name": "Configuration management",
+          "criteria_checks": [
+            "baseline_approved",
+            "drift_resolved"
+          ],
+          "evidence": {
+            "evidence_id": "A8-1f455df1ac5ce4283e01472f",
+            "source": "lab_a8\\sources\\mixed\\A.8.9.json",
+            "source_sha256": "1f455df1ac5ce4283e01472fff02344bef0b1fcbd0eb3a0ee999386567745882",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.9",
+            "asset_id": "LAB-CONFIGURATION",
+            "facts": {
+              "baseline_approved": true,
+              "drift_resolved": false
+            }
+          },
+          "owner": "IT Operations",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Configuration; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Partially Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-1f455df1ac5ce4283e01472f"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.11
+        },
+        {
+          "control_id": "A.8.10",
+          "case_id": "A.8.10-mixed",
+          "name": "Information deletion",
+          "criteria_checks": [
+            "deletion_policy_enforced",
+            "deletion_verified"
+          ],
+          "evidence": {
+            "evidence_id": "A8-ffcd6354c86527953c7a760a",
+            "source": "lab_a8\\sources\\mixed\\A.8.10.json",
+            "source_sha256": "ffcd6354c86527953c7a760a40e52209d502877f898f61fa25aeb175085376df",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.10",
+            "asset_id": "LAB-DATA",
+            "facts": {
+              "deletion_policy_enforced": true,
+              "deletion_verified": false
+            }
+          },
+          "owner": "Data owner",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Data; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Partially Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-ffcd6354c86527953c7a760a"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.1
+        },
+        {
+          "control_id": "A.8.12",
+          "case_id": "A.8.12-mixed",
+          "name": "Data leakage prevention",
+          "criteria_checks": [
+            "dlp_enforced",
+            "dlp_test_passed"
+          ],
+          "evidence": {
+            "evidence_id": "A8-29347db4f7fdd066a4d25055",
+            "source": "lab_a8\\sources\\mixed\\A.8.12.json",
+            "source_sha256": "29347db4f7fdd066a4d25055c24f5381bc5f3a1c23c181a562c2bd6bd7073520",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.12",
+            "asset_id": "LAB-DATA",
+            "facts": {
+              "dlp_enforced": true,
+              "dlp_test_passed": false
+            }
+          },
+          "owner": "SOC",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Data; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Partially Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-29347db4f7fdd066a4d25055"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.11
+        },
+        {
+          "control_id": "A.8.13",
+          "case_id": "A.8.13-mixed",
+          "name": "Information backup",
+          "criteria_checks": [
+            "backup_success",
+            "restore_test_passed"
+          ],
+          "evidence": {
+            "evidence_id": "A8-02d636afb058729e3b43d121",
+            "source": "lab_a8\\sources\\mixed\\A.8.13.json",
+            "source_sha256": "02d636afb058729e3b43d121008348c8f742da15d8f45c810f30705770f0e473",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.13",
+            "asset_id": "LAB-BACKUP",
+            "facts": {
+              "backup_success": true,
+              "restore_test_passed": false
+            }
+          },
+          "owner": "IT Operations",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Backup; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Partially Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-02d636afb058729e3b43d121"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.1
+        },
+        {
+          "control_id": "A.8.15",
+          "case_id": "A.8.15-mixed",
+          "name": "Logging",
+          "criteria_checks": [
+            "audit_logs_enabled",
+            "logs_integrity_protected"
+          ],
+          "evidence": {
+            "evidence_id": "A8-f08b21a28ec30c27be9126bf",
+            "source": "lab_a8\\sources\\mixed\\A.8.15.json",
+            "source_sha256": "f08b21a28ec30c27be9126bfe50259d3687ee31eaf68dea89860d6d268de1b3b",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.15",
+            "asset_id": "LAB-LOGGING",
+            "facts": {
+              "audit_logs_enabled": true,
+              "logs_integrity_protected": false
+            }
+          },
+          "owner": "SOC",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Logging; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Partially Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-f08b21a28ec30c27be9126bf"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.1
+        },
+        {
+          "control_id": "A.8.16",
+          "case_id": "A.8.16-mixed",
+          "name": "Monitoring activities",
+          "criteria_checks": [
+            "alerts_enabled",
+            "alert_response_test_passed"
+          ],
+          "evidence": {
+            "evidence_id": "A8-6f4636dede968def7c040d1b",
+            "source": "lab_a8\\sources\\mixed\\A.8.16.json",
+            "source_sha256": "6f4636dede968def7c040d1b73418411bc830f1593a0bc1103317acc56f85354",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.16",
+            "asset_id": "LAB-MONITORING",
+            "facts": {
+              "alerts_enabled": true,
+              "alert_response_test_passed": false
+            }
+          },
+          "owner": "SOC",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Monitoring; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Partially Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-6f4636dede968def7c040d1b"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.1
+        },
+        {
+          "control_id": "A.8.17",
+          "case_id": "A.8.17-mixed",
+          "name": "Clock synchronization",
+          "criteria_checks": [
+            "trusted_time_configured",
+            "clock_offset_within_policy"
+          ],
+          "evidence": {
+            "evidence_id": "A8-f9172e5edb1fa649155a6d56",
+            "source": "lab_a8\\sources\\mixed\\A.8.17.json",
+            "source_sha256": "f9172e5edb1fa649155a6d56430c11bdee6ff26885a8c680c96c1b6ecff01201",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.17",
+            "asset_id": "LAB-TIME",
+            "facts": {
+              "trusted_time_configured": true,
+              "clock_offset_within_policy": false
+            }
+          },
+          "owner": "IT Operations",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Time; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Partially Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-f9172e5edb1fa649155a6d56"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.11
+        },
+        {
+          "control_id": "A.8.19",
+          "case_id": "A.8.19-mixed",
+          "name": "Installation of software on operational systems",
+          "criteria_checks": [
+            "installation_restricted",
+            "installed_software_approved"
+          ],
+          "evidence": {
+            "evidence_id": "A8-c9759d6078785e7ed09f2f25",
+            "source": "lab_a8\\sources\\mixed\\A.8.19.json",
+            "source_sha256": "c9759d6078785e7ed09f2f254a340449103d2ae4e2783fbe767b014dfb294644",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.19",
+            "asset_id": "LAB-SOFTWARE",
+            "facts": {
+              "installation_restricted": true,
+              "installed_software_approved": false
+            }
+          },
+          "owner": "IT Operations",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Software; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Partially Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-c9759d6078785e7ed09f2f25"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.1
+        },
+        {
+          "control_id": "A.8.20",
+          "case_id": "A.8.20-mixed",
+          "name": "Networks security",
+          "criteria_checks": [
+            "firewall_default_deny",
+            "firewall_rules_reviewed"
+          ],
+          "evidence": {
+            "evidence_id": "A8-7dcce73e9f96ed21dc3755d3",
+            "source": "lab_a8\\sources\\mixed\\A.8.20.json",
+            "source_sha256": "7dcce73e9f96ed21dc3755d30d25f735dcda975a8949a70b5e62155600edcc1f",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.20",
+            "asset_id": "LAB-NETWORK",
+            "facts": {
+              "firewall_default_deny": true,
+              "firewall_rules_reviewed": false
+            }
+          },
+          "owner": "Network",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Network; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Partially Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-7dcce73e9f96ed21dc3755d3"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.1
+        },
+        {
+          "control_id": "A.8.22",
+          "case_id": "A.8.22-mixed",
+          "name": "Segregation of networks",
+          "criteria_checks": [
+            "zones_separated",
+            "segmentation_test_passed"
+          ],
+          "evidence": {
+            "evidence_id": "A8-83c3f7561236143e4da531b2",
+            "source": "lab_a8\\sources\\mixed\\A.8.22.json",
+            "source_sha256": "83c3f7561236143e4da531b25c64e780b8188b598b0d1f7113480e8f3a36b4bd",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.22",
+            "asset_id": "LAB-NETWORK",
+            "facts": {
+              "zones_separated": true,
+              "segmentation_test_passed": false
+            }
+          },
+          "owner": "Network",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Network; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Partially Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-83c3f7561236143e4da531b2"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.1
+        },
+        {
+          "control_id": "A.8.24",
+          "case_id": "A.8.24-mixed",
+          "name": "Use of cryptography",
+          "criteria_checks": [
+            "approved_crypto_configured",
+            "key_rotation_current"
+          ],
+          "evidence": {
+            "evidence_id": "A8-d6136fae39a87475b0b306a9",
+            "source": "lab_a8\\sources\\mixed\\A.8.24.json",
+            "source_sha256": "d6136fae39a87475b0b306a9049d5a67215beab53cc5a983a436c57077cddb07",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.24",
+            "asset_id": "LAB-CRYPTO",
+            "facts": {
+              "approved_crypto_configured": true,
+              "key_rotation_current": false
+            }
+          },
+          "owner": "Security",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Crypto; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Partially Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-d6136fae39a87475b0b306a9"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.1
+        },
+        {
+          "control_id": "A.8.32",
+          "case_id": "A.8.32-mixed",
+          "name": "Change management",
+          "criteria_checks": [
+            "change_approved",
+            "rollback_test_recorded"
+          ],
+          "evidence": {
+            "evidence_id": "A8-81a433f083618daee6621f37",
+            "source": "lab_a8\\sources\\mixed\\A.8.32.json",
+            "source_sha256": "81a433f083618daee6621f37fd822436f7d6a4a5dea93318b9eb9b6b20532e2f",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.32",
+            "asset_id": "LAB-CHANGE",
+            "facts": {
+              "change_approved": true,
+              "rollback_test_recorded": false
+            }
+          },
+          "owner": "IT Operations",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Change; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Partially Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-81a433f083618daee6621f37"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.1
+        }
+      ],
+      "sha256": "309bc286d6ef65c754f9f514f7655a2a4a34aa9fb1748cbae8d23080f2c99e6d"
+    },
+    {
+      "profile": "nonconforming",
+      "mode": "rules",
+      "created_at": "2026-11-10T01:56:05.517993+00:00",
+      "is_synthetic": true,
+      "rubric_version": "a8-lab-v1",
+      "catalog_sha256": "dae9f51935be7dbbf950a54bdebbc9b039a44d4d84ba7d937e08b4acaa8b7f48",
+      "model": null,
+      "generation_options": null,
+      "records": [
+        {
+          "control_id": "A.8.1",
+          "case_id": "A.8.1-nonconforming",
+          "name": "User endpoint devices",
+          "criteria_checks": [
+            "edr_active",
+            "disk_encrypted"
+          ],
+          "evidence": {
+            "evidence_id": "A8-5e6433b832af2e500fea3489",
+            "source": "lab_a8\\sources\\nonconforming\\A.8.1.json",
+            "source_sha256": "5e6433b832af2e500fea34894ce8b08c57ed831a020ca64c10d0ffa39e3a586e",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.1",
+            "asset_id": "LAB-ENDPOINT",
+            "facts": {
+              "edr_active": false,
+              "disk_encrypted": false
+            }
+          },
+          "owner": "IT Endpoint",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Endpoint; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Non-Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-5e6433b832af2e500fea3489"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.15
+        },
+        {
+          "control_id": "A.8.2",
+          "case_id": "A.8.2-nonconforming",
+          "name": "Privileged access rights",
+          "criteria_checks": [
+            "privileged_approved",
+            "privileged_review_current"
+          ],
+          "evidence": {
+            "evidence_id": "A8-f8fa396273335eba8dc75e39",
+            "source": "lab_a8\\sources\\nonconforming\\A.8.2.json",
+            "source_sha256": "f8fa396273335eba8dc75e392d3c592166c7ec84eb1ab1384b0957f761725448",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.2",
+            "asset_id": "LAB-IAM",
+            "facts": {
+              "privileged_approved": false,
+              "privileged_review_current": false
+            }
+          },
+          "owner": "IAM",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ IAM; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Non-Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-f8fa396273335eba8dc75e39"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.12
+        },
+        {
+          "control_id": "A.8.3",
+          "case_id": "A.8.3-nonconforming",
+          "name": "Information access restriction",
+          "criteria_checks": [
+            "access_default_deny",
+            "access_review_current"
+          ],
+          "evidence": {
+            "evidence_id": "A8-9ad75d8e89f02c77ec13f358",
+            "source": "lab_a8\\sources\\nonconforming\\A.8.3.json",
+            "source_sha256": "9ad75d8e89f02c77ec13f35841bafa0c503281c3c4ab9eb3f6a382198d2d5cdc",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.3",
+            "asset_id": "LAB-IAM",
+            "facts": {
+              "access_default_deny": false,
+              "access_review_current": false
+            }
+          },
+          "owner": "IAM",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ IAM; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Non-Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-9ad75d8e89f02c77ec13f358"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.11
+        },
+        {
+          "control_id": "A.8.5",
+          "case_id": "A.8.5-nonconforming",
+          "name": "Secure authentication",
+          "criteria_checks": [
+            "mfa_enforced",
+            "legacy_auth_disabled"
+          ],
+          "evidence": {
+            "evidence_id": "A8-e7e762ae454eef62fbad717c",
+            "source": "lab_a8\\sources\\nonconforming\\A.8.5.json",
+            "source_sha256": "e7e762ae454eef62fbad717cfe9bb7c67c773be29d22154c79729198bf5260b5",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.5",
+            "asset_id": "LAB-IAM",
+            "facts": {
+              "mfa_enforced": false,
+              "legacy_auth_disabled": false
+            }
+          },
+          "owner": "IAM",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ IAM; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Non-Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-e7e762ae454eef62fbad717c"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.11
+        },
+        {
+          "control_id": "A.8.7",
+          "case_id": "A.8.7-nonconforming",
+          "name": "Protection against malware",
+          "criteria_checks": [
+            "antimalware_active",
+            "signatures_current"
+          ],
+          "evidence": {
+            "evidence_id": "A8-409899c886420c2edeae2a10",
+            "source": "lab_a8\\sources\\nonconforming\\A.8.7.json",
+            "source_sha256": "409899c886420c2edeae2a1043d79390d9c5fbdb5368ac4380076f61f52e24f6",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.7",
+            "asset_id": "LAB-ENDPOINT",
+            "facts": {
+              "antimalware_active": false,
+              "signatures_current": false
+            }
+          },
+          "owner": "SOC",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Endpoint; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Non-Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-409899c886420c2edeae2a10"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.11
+        },
+        {
+          "control_id": "A.8.8",
+          "case_id": "A.8.8-nonconforming",
+          "name": "Management of technical vulnerabilities",
+          "criteria_checks": [
+            "scan_current",
+            "critical_findings_remediated"
+          ],
+          "evidence": {
+            "evidence_id": "A8-11c814544f3ea5f329a82d8f",
+            "source": "lab_a8\\sources\\nonconforming\\A.8.8.json",
+            "source_sha256": "11c814544f3ea5f329a82d8fe28a6cf55913f95db8d3ab4389c4bf67d04abfef",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.8",
+            "asset_id": "LAB-VULNERABILITY",
+            "facts": {
+              "scan_current": false,
+              "critical_findings_remediated": false
+            }
+          },
+          "owner": "SecOps",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Vulnerability; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Non-Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-11c814544f3ea5f329a82d8f"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.1
+        },
+        {
+          "control_id": "A.8.9",
+          "case_id": "A.8.9-nonconforming",
+          "name": "Configuration management",
+          "criteria_checks": [
+            "baseline_approved",
+            "drift_resolved"
+          ],
+          "evidence": {
+            "evidence_id": "A8-bb2308241a2ee1c1fc481887",
+            "source": "lab_a8\\sources\\nonconforming\\A.8.9.json",
+            "source_sha256": "bb2308241a2ee1c1fc48188772625231be73ff6c4fc97f6cb63b463713615d74",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.9",
+            "asset_id": "LAB-CONFIGURATION",
+            "facts": {
+              "baseline_approved": false,
+              "drift_resolved": false
+            }
+          },
+          "owner": "IT Operations",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Configuration; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Non-Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-bb2308241a2ee1c1fc481887"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.12
+        },
+        {
+          "control_id": "A.8.10",
+          "case_id": "A.8.10-nonconforming",
+          "name": "Information deletion",
+          "criteria_checks": [
+            "deletion_policy_enforced",
+            "deletion_verified"
+          ],
+          "evidence": {
+            "evidence_id": "A8-17c272ebc9801c0efe501cee",
+            "source": "lab_a8\\sources\\nonconforming\\A.8.10.json",
+            "source_sha256": "17c272ebc9801c0efe501ceec7abc8bd8962c96dca9c089940901fa667a8fbe2",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.10",
+            "asset_id": "LAB-DATA",
+            "facts": {
+              "deletion_policy_enforced": false,
+              "deletion_verified": false
+            }
+          },
+          "owner": "Data owner",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Data; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Non-Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-17c272ebc9801c0efe501cee"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.11
+        },
+        {
+          "control_id": "A.8.12",
+          "case_id": "A.8.12-nonconforming",
+          "name": "Data leakage prevention",
+          "criteria_checks": [
+            "dlp_enforced",
+            "dlp_test_passed"
+          ],
+          "evidence": {
+            "evidence_id": "A8-5b40fafd8484b35b7931fdd6",
+            "source": "lab_a8\\sources\\nonconforming\\A.8.12.json",
+            "source_sha256": "5b40fafd8484b35b7931fdd6819404a4521e0b6b300a646dbc3d867fa44d1b64",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.12",
+            "asset_id": "LAB-DATA",
+            "facts": {
+              "dlp_enforced": false,
+              "dlp_test_passed": false
+            }
+          },
+          "owner": "SOC",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Data; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Non-Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-5b40fafd8484b35b7931fdd6"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.1
+        },
+        {
+          "control_id": "A.8.13",
+          "case_id": "A.8.13-nonconforming",
+          "name": "Information backup",
+          "criteria_checks": [
+            "backup_success",
+            "restore_test_passed"
+          ],
+          "evidence": {
+            "evidence_id": "A8-530aa4cd1d3088ae148f2221",
+            "source": "lab_a8\\sources\\nonconforming\\A.8.13.json",
+            "source_sha256": "530aa4cd1d3088ae148f2221d9ed22955baa2e2db6dc1c4009ce601c967f2601",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.13",
+            "asset_id": "LAB-BACKUP",
+            "facts": {
+              "backup_success": false,
+              "restore_test_passed": false
+            }
+          },
+          "owner": "IT Operations",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Backup; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Non-Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-530aa4cd1d3088ae148f2221"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.11
+        },
+        {
+          "control_id": "A.8.15",
+          "case_id": "A.8.15-nonconforming",
+          "name": "Logging",
+          "criteria_checks": [
+            "audit_logs_enabled",
+            "logs_integrity_protected"
+          ],
+          "evidence": {
+            "evidence_id": "A8-68b6882ba3af14cd775b2c69",
+            "source": "lab_a8\\sources\\nonconforming\\A.8.15.json",
+            "source_sha256": "68b6882ba3af14cd775b2c69192a7df67da4f51f279c1ec402bf0b570979b001",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.15",
+            "asset_id": "LAB-LOGGING",
+            "facts": {
+              "audit_logs_enabled": false,
+              "logs_integrity_protected": false
+            }
+          },
+          "owner": "SOC",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Logging; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Non-Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-68b6882ba3af14cd775b2c69"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.11
+        },
+        {
+          "control_id": "A.8.16",
+          "case_id": "A.8.16-nonconforming",
+          "name": "Monitoring activities",
+          "criteria_checks": [
+            "alerts_enabled",
+            "alert_response_test_passed"
+          ],
+          "evidence": {
+            "evidence_id": "A8-76120dc85f6d2d9f9f8afa6f",
+            "source": "lab_a8\\sources\\nonconforming\\A.8.16.json",
+            "source_sha256": "76120dc85f6d2d9f9f8afa6f024f232c65798985ad067620bd0fa17a181de91e",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.16",
+            "asset_id": "LAB-MONITORING",
+            "facts": {
+              "alerts_enabled": false,
+              "alert_response_test_passed": false
+            }
+          },
+          "owner": "SOC",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Monitoring; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Non-Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-76120dc85f6d2d9f9f8afa6f"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.11
+        },
+        {
+          "control_id": "A.8.17",
+          "case_id": "A.8.17-nonconforming",
+          "name": "Clock synchronization",
+          "criteria_checks": [
+            "trusted_time_configured",
+            "clock_offset_within_policy"
+          ],
+          "evidence": {
+            "evidence_id": "A8-1daa8b5649a8caa1f2d68b0a",
+            "source": "lab_a8\\sources\\nonconforming\\A.8.17.json",
+            "source_sha256": "1daa8b5649a8caa1f2d68b0aaa136fd8246a1c8c022abcdffd482cf671aec4b6",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.17",
+            "asset_id": "LAB-TIME",
+            "facts": {
+              "trusted_time_configured": false,
+              "clock_offset_within_policy": false
+            }
+          },
+          "owner": "IT Operations",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Time; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Non-Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-1daa8b5649a8caa1f2d68b0a"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.11
+        },
+        {
+          "control_id": "A.8.19",
+          "case_id": "A.8.19-nonconforming",
+          "name": "Installation of software on operational systems",
+          "criteria_checks": [
+            "installation_restricted",
+            "installed_software_approved"
+          ],
+          "evidence": {
+            "evidence_id": "A8-9fd024b94507dda246604507",
+            "source": "lab_a8\\sources\\nonconforming\\A.8.19.json",
+            "source_sha256": "9fd024b94507dda246604507fb059a161becdcbd29cfba58a2262c995602efb6",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.19",
+            "asset_id": "LAB-SOFTWARE",
+            "facts": {
+              "installation_restricted": false,
+              "installed_software_approved": false
+            }
+          },
+          "owner": "IT Operations",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Software; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Non-Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-9fd024b94507dda246604507"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.11
+        },
+        {
+          "control_id": "A.8.20",
+          "case_id": "A.8.20-nonconforming",
+          "name": "Networks security",
+          "criteria_checks": [
+            "firewall_default_deny",
+            "firewall_rules_reviewed"
+          ],
+          "evidence": {
+            "evidence_id": "A8-293d7a06aca7c507affbb92d",
+            "source": "lab_a8\\sources\\nonconforming\\A.8.20.json",
+            "source_sha256": "293d7a06aca7c507affbb92d951aeaca22d0cf3dd63cd911eb303c1cfa4821c1",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.20",
+            "asset_id": "LAB-NETWORK",
+            "facts": {
+              "firewall_default_deny": false,
+              "firewall_rules_reviewed": false
+            }
+          },
+          "owner": "Network",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Network; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Non-Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-293d7a06aca7c507affbb92d"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.12
+        },
+        {
+          "control_id": "A.8.22",
+          "case_id": "A.8.22-nonconforming",
+          "name": "Segregation of networks",
+          "criteria_checks": [
+            "zones_separated",
+            "segmentation_test_passed"
+          ],
+          "evidence": {
+            "evidence_id": "A8-d64eea11ecde838658a93fd2",
+            "source": "lab_a8\\sources\\nonconforming\\A.8.22.json",
+            "source_sha256": "d64eea11ecde838658a93fd247242623ffa3b4a3c4dafd9a49e95a0e664b4425",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.22",
+            "asset_id": "LAB-NETWORK",
+            "facts": {
+              "zones_separated": false,
+              "segmentation_test_passed": false
+            }
+          },
+          "owner": "Network",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Network; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Non-Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-d64eea11ecde838658a93fd2"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.12
+        },
+        {
+          "control_id": "A.8.24",
+          "case_id": "A.8.24-nonconforming",
+          "name": "Use of cryptography",
+          "criteria_checks": [
+            "approved_crypto_configured",
+            "key_rotation_current"
+          ],
+          "evidence": {
+            "evidence_id": "A8-30a7929f6423e3b2fb310440",
+            "source": "lab_a8\\sources\\nonconforming\\A.8.24.json",
+            "source_sha256": "30a7929f6423e3b2fb310440ef59f8b227ad43254e9cb8f8738b3790d8263d5d",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.24",
+            "asset_id": "LAB-CRYPTO",
+            "facts": {
+              "approved_crypto_configured": false,
+              "key_rotation_current": false
+            }
+          },
+          "owner": "Security",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Crypto; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Non-Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-30a7929f6423e3b2fb310440"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.11
+        },
+        {
+          "control_id": "A.8.32",
+          "case_id": "A.8.32-nonconforming",
+          "name": "Change management",
+          "criteria_checks": [
+            "change_approved",
+            "rollback_test_recorded"
+          ],
+          "evidence": {
+            "evidence_id": "A8-c257d3dfe6f7da804146fe17",
+            "source": "lab_a8\\sources\\nonconforming\\A.8.32.json",
+            "source_sha256": "c257d3dfe6f7da804146fe17875f91065e2b703536abc30680e17a197987639a",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.32",
+            "asset_id": "LAB-CHANGE",
+            "facts": {
+              "change_approved": false,
+              "rollback_test_recorded": false
+            }
+          },
+          "owner": "IT Operations",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Change; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Non-Compliant",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-c257d3dfe6f7da804146fe17"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.11
+        }
+      ],
+      "sha256": "6bae63c76a5c39a2d1fc3e58b01310d6e6e09440b42a1583d42d52f94912f114"
+    },
+    {
+      "profile": "incomplete",
+      "mode": "rules",
+      "created_at": "2026-11-10T01:56:05.517993+00:00",
+      "is_synthetic": true,
+      "rubric_version": "a8-lab-v1",
+      "catalog_sha256": "dae9f51935be7dbbf950a54bdebbc9b039a44d4d84ba7d937e08b4acaa8b7f48",
+      "model": null,
+      "generation_options": null,
+      "records": [
+        {
+          "control_id": "A.8.1",
+          "case_id": "A.8.1-incomplete",
+          "name": "User endpoint devices",
+          "criteria_checks": [
+            "edr_active",
+            "disk_encrypted"
+          ],
+          "evidence": {
+            "evidence_id": "A8-5b310f40db44e21f1863d0cb",
+            "source": "lab_a8\\sources\\incomplete\\A.8.1.json",
+            "source_sha256": "5b310f40db44e21f1863d0cb369b0924a1dfb7460983fd216ad44811ff550443",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.1",
+            "asset_id": "LAB-ENDPOINT",
+            "facts": {
+              "edr_active": true,
+              "disk_encrypted": null
+            }
+          },
+          "owner": "IT Endpoint",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Endpoint; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Insufficient Evidence",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-5b310f40db44e21f1863d0cb"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.15
+        },
+        {
+          "control_id": "A.8.2",
+          "case_id": "A.8.2-incomplete",
+          "name": "Privileged access rights",
+          "criteria_checks": [
+            "privileged_approved",
+            "privileged_review_current"
+          ],
+          "evidence": {
+            "evidence_id": "A8-13613e03f250a07a53457369",
+            "source": "lab_a8\\sources\\incomplete\\A.8.2.json",
+            "source_sha256": "13613e03f250a07a53457369348ca9d62dc12efbd2d8b83f87ff79bf80987013",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.2",
+            "asset_id": "LAB-IAM",
+            "facts": {
+              "privileged_approved": true,
+              "privileged_review_current": null
+            }
+          },
+          "owner": "IAM",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ IAM; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Insufficient Evidence",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-13613e03f250a07a53457369"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.12
+        },
+        {
+          "control_id": "A.8.3",
+          "case_id": "A.8.3-incomplete",
+          "name": "Information access restriction",
+          "criteria_checks": [
+            "access_default_deny",
+            "access_review_current"
+          ],
+          "evidence": {
+            "evidence_id": "A8-f74691df78d01c00587e5674",
+            "source": "lab_a8\\sources\\incomplete\\A.8.3.json",
+            "source_sha256": "f74691df78d01c00587e5674e7b11405b011c2fc58affae1aaaa86ada8473919",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.3",
+            "asset_id": "LAB-IAM",
+            "facts": {
+              "access_default_deny": true,
+              "access_review_current": null
+            }
+          },
+          "owner": "IAM",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ IAM; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Insufficient Evidence",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-f74691df78d01c00587e5674"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.11
+        },
+        {
+          "control_id": "A.8.5",
+          "case_id": "A.8.5-incomplete",
+          "name": "Secure authentication",
+          "criteria_checks": [
+            "mfa_enforced",
+            "legacy_auth_disabled"
+          ],
+          "evidence": {
+            "evidence_id": "A8-c4ba6ce4b545d5cd7ee9cb37",
+            "source": "lab_a8\\sources\\incomplete\\A.8.5.json",
+            "source_sha256": "c4ba6ce4b545d5cd7ee9cb37f1eff6d84a0b7f6fa9aed6cf58cde6d1da6a3871",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.5",
+            "asset_id": "LAB-IAM",
+            "facts": {
+              "mfa_enforced": true,
+              "legacy_auth_disabled": null
+            }
+          },
+          "owner": "IAM",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ IAM; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Insufficient Evidence",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-c4ba6ce4b545d5cd7ee9cb37"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.11
+        },
+        {
+          "control_id": "A.8.7",
+          "case_id": "A.8.7-incomplete",
+          "name": "Protection against malware",
+          "criteria_checks": [
+            "antimalware_active",
+            "signatures_current"
+          ],
+          "evidence": {
+            "evidence_id": "A8-19c7a7ab602d2b322197dc94",
+            "source": "lab_a8\\sources\\incomplete\\A.8.7.json",
+            "source_sha256": "19c7a7ab602d2b322197dc943eeb1e77394f3b3b7e8a5724bb273318b0bd0942",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.7",
+            "asset_id": "LAB-ENDPOINT",
+            "facts": {
+              "antimalware_active": true,
+              "signatures_current": null
+            }
+          },
+          "owner": "SOC",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Endpoint; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Insufficient Evidence",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-19c7a7ab602d2b322197dc94"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.11
+        },
+        {
+          "control_id": "A.8.8",
+          "case_id": "A.8.8-incomplete",
+          "name": "Management of technical vulnerabilities",
+          "criteria_checks": [
+            "scan_current",
+            "critical_findings_remediated"
+          ],
+          "evidence": {
+            "evidence_id": "A8-dcdb63371ff11aad2e8ca183",
+            "source": "lab_a8\\sources\\incomplete\\A.8.8.json",
+            "source_sha256": "dcdb63371ff11aad2e8ca183cc497aff0b845ea3ea545842f31570a59ad6fefc",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.8",
+            "asset_id": "LAB-VULNERABILITY",
+            "facts": {
+              "scan_current": true,
+              "critical_findings_remediated": null
+            }
+          },
+          "owner": "SecOps",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Vulnerability; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Insufficient Evidence",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-dcdb63371ff11aad2e8ca183"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.11
+        },
+        {
+          "control_id": "A.8.9",
+          "case_id": "A.8.9-incomplete",
+          "name": "Configuration management",
+          "criteria_checks": [
+            "baseline_approved",
+            "drift_resolved"
+          ],
+          "evidence": {
+            "evidence_id": "A8-a11d4776c3dd0dda07618c65",
+            "source": "lab_a8\\sources\\incomplete\\A.8.9.json",
+            "source_sha256": "a11d4776c3dd0dda07618c6516e10e1792e94336e50e6273aa271f9dc17c9019",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.9",
+            "asset_id": "LAB-CONFIGURATION",
+            "facts": {
+              "baseline_approved": true,
+              "drift_resolved": null
+            }
+          },
+          "owner": "IT Operations",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Configuration; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Insufficient Evidence",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-a11d4776c3dd0dda07618c65"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.11
+        },
+        {
+          "control_id": "A.8.10",
+          "case_id": "A.8.10-incomplete",
+          "name": "Information deletion",
+          "criteria_checks": [
+            "deletion_policy_enforced",
+            "deletion_verified"
+          ],
+          "evidence": {
+            "evidence_id": "A8-fcabaa2f6594c93b7e577599",
+            "source": "lab_a8\\sources\\incomplete\\A.8.10.json",
+            "source_sha256": "fcabaa2f6594c93b7e5775999a57ca935bf46dbef4a9da70f115366d02938f12",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.10",
+            "asset_id": "LAB-DATA",
+            "facts": {
+              "deletion_policy_enforced": true,
+              "deletion_verified": null
+            }
+          },
+          "owner": "Data owner",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Data; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Insufficient Evidence",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-fcabaa2f6594c93b7e577599"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.1
+        },
+        {
+          "control_id": "A.8.12",
+          "case_id": "A.8.12-incomplete",
+          "name": "Data leakage prevention",
+          "criteria_checks": [
+            "dlp_enforced",
+            "dlp_test_passed"
+          ],
+          "evidence": {
+            "evidence_id": "A8-cc2695c1a33a33badf649c5d",
+            "source": "lab_a8\\sources\\incomplete\\A.8.12.json",
+            "source_sha256": "cc2695c1a33a33badf649c5d6b32088cb2116a1ac50e38cd0aa3c1cde0c1eeb5",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.12",
+            "asset_id": "LAB-DATA",
+            "facts": {
+              "dlp_enforced": true,
+              "dlp_test_passed": null
+            }
+          },
+          "owner": "SOC",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Data; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Insufficient Evidence",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-cc2695c1a33a33badf649c5d"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.1
+        },
+        {
+          "control_id": "A.8.13",
+          "case_id": "A.8.13-incomplete",
+          "name": "Information backup",
+          "criteria_checks": [
+            "backup_success",
+            "restore_test_passed"
+          ],
+          "evidence": {
+            "evidence_id": "A8-72589810733f6e84864e52d3",
+            "source": "lab_a8\\sources\\incomplete\\A.8.13.json",
+            "source_sha256": "72589810733f6e84864e52d3bf3a43100e85fa1ea2c0f1ef51dd5e7c1be617a6",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.13",
+            "asset_id": "LAB-BACKUP",
+            "facts": {
+              "backup_success": true,
+              "restore_test_passed": null
+            }
+          },
+          "owner": "IT Operations",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Backup; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Insufficient Evidence",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-72589810733f6e84864e52d3"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.1
+        },
+        {
+          "control_id": "A.8.15",
+          "case_id": "A.8.15-incomplete",
+          "name": "Logging",
+          "criteria_checks": [
+            "audit_logs_enabled",
+            "logs_integrity_protected"
+          ],
+          "evidence": {
+            "evidence_id": "A8-07ea62ff87e6a0b19b40a06c",
+            "source": "lab_a8\\sources\\incomplete\\A.8.15.json",
+            "source_sha256": "07ea62ff87e6a0b19b40a06c73023e1bfa01c08fae70d0c168e0dea062083afe",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.15",
+            "asset_id": "LAB-LOGGING",
+            "facts": {
+              "audit_logs_enabled": true,
+              "logs_integrity_protected": null
+            }
+          },
+          "owner": "SOC",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Logging; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Insufficient Evidence",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-07ea62ff87e6a0b19b40a06c"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.1
+        },
+        {
+          "control_id": "A.8.16",
+          "case_id": "A.8.16-incomplete",
+          "name": "Monitoring activities",
+          "criteria_checks": [
+            "alerts_enabled",
+            "alert_response_test_passed"
+          ],
+          "evidence": {
+            "evidence_id": "A8-478144c22d176a41e0ba15eb",
+            "source": "lab_a8\\sources\\incomplete\\A.8.16.json",
+            "source_sha256": "478144c22d176a41e0ba15eb0a51f3a2023ab4350297124bad79977ff92d9181",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.16",
+            "asset_id": "LAB-MONITORING",
+            "facts": {
+              "alerts_enabled": true,
+              "alert_response_test_passed": null
+            }
+          },
+          "owner": "SOC",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Monitoring; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Insufficient Evidence",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-478144c22d176a41e0ba15eb"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.1
+        },
+        {
+          "control_id": "A.8.17",
+          "case_id": "A.8.17-incomplete",
+          "name": "Clock synchronization",
+          "criteria_checks": [
+            "trusted_time_configured",
+            "clock_offset_within_policy"
+          ],
+          "evidence": {
+            "evidence_id": "A8-df551325c3cf433c7f769f28",
+            "source": "lab_a8\\sources\\incomplete\\A.8.17.json",
+            "source_sha256": "df551325c3cf433c7f769f28d93ddca022393640c4a503b8a91845d075bca040",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.17",
+            "asset_id": "LAB-TIME",
+            "facts": {
+              "trusted_time_configured": true,
+              "clock_offset_within_policy": null
+            }
+          },
+          "owner": "IT Operations",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Time; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Insufficient Evidence",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-df551325c3cf433c7f769f28"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.11
+        },
+        {
+          "control_id": "A.8.19",
+          "case_id": "A.8.19-incomplete",
+          "name": "Installation of software on operational systems",
+          "criteria_checks": [
+            "installation_restricted",
+            "installed_software_approved"
+          ],
+          "evidence": {
+            "evidence_id": "A8-276a268bbbc706c54114b005",
+            "source": "lab_a8\\sources\\incomplete\\A.8.19.json",
+            "source_sha256": "276a268bbbc706c54114b005ddbea90e842b86d623baced4cb9363cba13bb672",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.19",
+            "asset_id": "LAB-SOFTWARE",
+            "facts": {
+              "installation_restricted": true,
+              "installed_software_approved": null
+            }
+          },
+          "owner": "IT Operations",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Software; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Insufficient Evidence",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-276a268bbbc706c54114b005"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.1
+        },
+        {
+          "control_id": "A.8.20",
+          "case_id": "A.8.20-incomplete",
+          "name": "Networks security",
+          "criteria_checks": [
+            "firewall_default_deny",
+            "firewall_rules_reviewed"
+          ],
+          "evidence": {
+            "evidence_id": "A8-89361afbc849aafc2e156b4a",
+            "source": "lab_a8\\sources\\incomplete\\A.8.20.json",
+            "source_sha256": "89361afbc849aafc2e156b4a74aad09c9bf6c7c0d1fd8d2513d7572bf1a9f403",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.20",
+            "asset_id": "LAB-NETWORK",
+            "facts": {
+              "firewall_default_deny": true,
+              "firewall_rules_reviewed": null
+            }
+          },
+          "owner": "Network",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Network; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Insufficient Evidence",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-89361afbc849aafc2e156b4a"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.1
+        },
+        {
+          "control_id": "A.8.22",
+          "case_id": "A.8.22-incomplete",
+          "name": "Segregation of networks",
+          "criteria_checks": [
+            "zones_separated",
+            "segmentation_test_passed"
+          ],
+          "evidence": {
+            "evidence_id": "A8-2019879a856b44bf6da567c7",
+            "source": "lab_a8\\sources\\incomplete\\A.8.22.json",
+            "source_sha256": "2019879a856b44bf6da567c777ae99a21701d85342fce7b09ab66e955f6c9969",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.22",
+            "asset_id": "LAB-NETWORK",
+            "facts": {
+              "zones_separated": true,
+              "segmentation_test_passed": null
+            }
+          },
+          "owner": "Network",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Network; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Insufficient Evidence",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-2019879a856b44bf6da567c7"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.1
+        },
+        {
+          "control_id": "A.8.24",
+          "case_id": "A.8.24-incomplete",
+          "name": "Use of cryptography",
+          "criteria_checks": [
+            "approved_crypto_configured",
+            "key_rotation_current"
+          ],
+          "evidence": {
+            "evidence_id": "A8-e53efd0fbd2a6579f9b6f21f",
+            "source": "lab_a8\\sources\\incomplete\\A.8.24.json",
+            "source_sha256": "e53efd0fbd2a6579f9b6f21fc414eca02f9d5fae2e5c41f77210d04244dbebee",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.24",
+            "asset_id": "LAB-CRYPTO",
+            "facts": {
+              "approved_crypto_configured": true,
+              "key_rotation_current": null
+            }
+          },
+          "owner": "Security",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Crypto; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Insufficient Evidence",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-e53efd0fbd2a6579f9b6f21f"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.1
+        },
+        {
+          "control_id": "A.8.32",
+          "case_id": "A.8.32-incomplete",
+          "name": "Change management",
+          "criteria_checks": [
+            "change_approved",
+            "rollback_test_recorded"
+          ],
+          "evidence": {
+            "evidence_id": "A8-507ab7a8908c871c1d2b77e3",
+            "source": "lab_a8\\sources\\incomplete\\A.8.32.json",
+            "source_sha256": "507ab7a8908c871c1d2b77e3cb182f52b7723728a55abfc48da42b5dcfe62c6a",
+            "collected_at": "2026-11-10T01:56:05.517993+00:00",
+            "is_synthetic": true,
+            "control_id": "A.8.32",
+            "asset_id": "LAB-CHANGE",
+            "facts": {
+              "change_approved": true,
+              "rollback_test_recorded": null
+            }
+          },
+          "owner": "IT Operations",
+          "applicable": true,
+          "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Change; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+          "applicability_approved": false,
+          "scope_note": "Chỉ kiểm tra hai thuộc tính lab đã nêu; không suy ra đáp ứng toàn bộ nội dung kiểm soát ISO.",
+          "status": "Insufficient Evidence",
+          "rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+          "evidence_ids": [
+            "A8-507ab7a8908c871c1d2b77e3"
+          ],
+          "execution_source": "a8-lab-rules",
+          "error": null,
+          "duration_ms": 0.1
+        }
+      ],
+      "sha256": "e6d30c8ff1724235607862f5d2122ff702e2b52712a706ce75b8967407d331ea"
+    }
+  ],
+  "designer_comparison": {
+    "per_control": [
+      {
+        "control_id": "A.8.1",
+        "total": 4,
+        "rated": 4,
+        "errors": 0,
+        "correct": 4,
+        "accuracy": 1.0,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 1,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 1,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 1,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 1,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.2",
+        "total": 4,
+        "rated": 4,
+        "errors": 0,
+        "correct": 4,
+        "accuracy": 1.0,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 1,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 1,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 1,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 1,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.3",
+        "total": 4,
+        "rated": 4,
+        "errors": 0,
+        "correct": 4,
+        "accuracy": 1.0,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 1,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 1,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 1,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 1,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.5",
+        "total": 4,
+        "rated": 4,
+        "errors": 0,
+        "correct": 4,
+        "accuracy": 1.0,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 1,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 1,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 1,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 1,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.7",
+        "total": 4,
+        "rated": 4,
+        "errors": 0,
+        "correct": 4,
+        "accuracy": 1.0,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 1,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 1,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 1,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 1,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.8",
+        "total": 4,
+        "rated": 4,
+        "errors": 0,
+        "correct": 4,
+        "accuracy": 1.0,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 1,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 1,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 1,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 1,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.9",
+        "total": 4,
+        "rated": 4,
+        "errors": 0,
+        "correct": 4,
+        "accuracy": 1.0,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 1,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 1,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 1,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 1,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.10",
+        "total": 4,
+        "rated": 4,
+        "errors": 0,
+        "correct": 4,
+        "accuracy": 1.0,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 1,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 1,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 1,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 1,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.12",
+        "total": 4,
+        "rated": 4,
+        "errors": 0,
+        "correct": 4,
+        "accuracy": 1.0,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 1,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 1,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 1,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 1,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.13",
+        "total": 4,
+        "rated": 4,
+        "errors": 0,
+        "correct": 4,
+        "accuracy": 1.0,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 1,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 1,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 1,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 1,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.15",
+        "total": 4,
+        "rated": 4,
+        "errors": 0,
+        "correct": 4,
+        "accuracy": 1.0,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 1,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 1,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 1,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 1,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.16",
+        "total": 4,
+        "rated": 4,
+        "errors": 0,
+        "correct": 4,
+        "accuracy": 1.0,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 1,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 1,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 1,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 1,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.17",
+        "total": 4,
+        "rated": 4,
+        "errors": 0,
+        "correct": 4,
+        "accuracy": 1.0,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 1,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 1,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 1,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 1,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.19",
+        "total": 4,
+        "rated": 4,
+        "errors": 0,
+        "correct": 4,
+        "accuracy": 1.0,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 1,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 1,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 1,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 1,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.20",
+        "total": 4,
+        "rated": 4,
+        "errors": 0,
+        "correct": 4,
+        "accuracy": 1.0,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 1,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 1,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 1,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 1,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.22",
+        "total": 4,
+        "rated": 4,
+        "errors": 0,
+        "correct": 4,
+        "accuracy": 1.0,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 1,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 1,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 1,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 1,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.24",
+        "total": 4,
+        "rated": 4,
+        "errors": 0,
+        "correct": 4,
+        "accuracy": 1.0,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 1,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 1,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 1,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 1,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.32",
+        "total": 4,
+        "rated": 4,
+        "errors": 0,
+        "correct": 4,
+        "accuracy": 1.0,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 1,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 1,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 1,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 1,
+            "ERROR": 0
+          }
+        }
+      }
+    ],
+    "cases": [
+      {
+        "control_id": "A.8.1",
+        "case_id": "A.8.1-conforming",
+        "prediction": "Compliant",
+        "expected": "Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.21
+      },
+      {
+        "control_id": "A.8.2",
+        "case_id": "A.8.2-conforming",
+        "prediction": "Compliant",
+        "expected": "Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.15
+      },
+      {
+        "control_id": "A.8.3",
+        "case_id": "A.8.3-conforming",
+        "prediction": "Compliant",
+        "expected": "Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.13
+      },
+      {
+        "control_id": "A.8.5",
+        "case_id": "A.8.5-conforming",
+        "prediction": "Compliant",
+        "expected": "Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.7",
+        "case_id": "A.8.7-conforming",
+        "prediction": "Compliant",
+        "expected": "Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.8",
+        "case_id": "A.8.8-conforming",
+        "prediction": "Compliant",
+        "expected": "Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.9",
+        "case_id": "A.8.9-conforming",
+        "prediction": "Compliant",
+        "expected": "Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.10",
+        "case_id": "A.8.10-conforming",
+        "prediction": "Compliant",
+        "expected": "Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.12",
+        "case_id": "A.8.12-conforming",
+        "prediction": "Compliant",
+        "expected": "Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.13",
+        "case_id": "A.8.13-conforming",
+        "prediction": "Compliant",
+        "expected": "Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.15",
+        "case_id": "A.8.15-conforming",
+        "prediction": "Compliant",
+        "expected": "Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.16",
+        "case_id": "A.8.16-conforming",
+        "prediction": "Compliant",
+        "expected": "Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.17",
+        "case_id": "A.8.17-conforming",
+        "prediction": "Compliant",
+        "expected": "Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.19",
+        "case_id": "A.8.19-conforming",
+        "prediction": "Compliant",
+        "expected": "Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.20",
+        "case_id": "A.8.20-conforming",
+        "prediction": "Compliant",
+        "expected": "Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.22",
+        "case_id": "A.8.22-conforming",
+        "prediction": "Compliant",
+        "expected": "Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.24",
+        "case_id": "A.8.24-conforming",
+        "prediction": "Compliant",
+        "expected": "Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.32",
+        "case_id": "A.8.32-conforming",
+        "prediction": "Compliant",
+        "expected": "Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.1",
+        "case_id": "A.8.1-mixed",
+        "prediction": "Partially Compliant",
+        "expected": "Partially Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.15
+      },
+      {
+        "control_id": "A.8.2",
+        "case_id": "A.8.2-mixed",
+        "prediction": "Partially Compliant",
+        "expected": "Partially Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.12
+      },
+      {
+        "control_id": "A.8.3",
+        "case_id": "A.8.3-mixed",
+        "prediction": "Partially Compliant",
+        "expected": "Partially Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.5",
+        "case_id": "A.8.5-mixed",
+        "prediction": "Partially Compliant",
+        "expected": "Partially Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.7",
+        "case_id": "A.8.7-mixed",
+        "prediction": "Partially Compliant",
+        "expected": "Partially Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.8",
+        "case_id": "A.8.8-mixed",
+        "prediction": "Partially Compliant",
+        "expected": "Partially Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.9",
+        "case_id": "A.8.9-mixed",
+        "prediction": "Partially Compliant",
+        "expected": "Partially Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.10",
+        "case_id": "A.8.10-mixed",
+        "prediction": "Partially Compliant",
+        "expected": "Partially Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.12",
+        "case_id": "A.8.12-mixed",
+        "prediction": "Partially Compliant",
+        "expected": "Partially Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.13",
+        "case_id": "A.8.13-mixed",
+        "prediction": "Partially Compliant",
+        "expected": "Partially Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.15",
+        "case_id": "A.8.15-mixed",
+        "prediction": "Partially Compliant",
+        "expected": "Partially Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.16",
+        "case_id": "A.8.16-mixed",
+        "prediction": "Partially Compliant",
+        "expected": "Partially Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.17",
+        "case_id": "A.8.17-mixed",
+        "prediction": "Partially Compliant",
+        "expected": "Partially Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.19",
+        "case_id": "A.8.19-mixed",
+        "prediction": "Partially Compliant",
+        "expected": "Partially Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.20",
+        "case_id": "A.8.20-mixed",
+        "prediction": "Partially Compliant",
+        "expected": "Partially Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.22",
+        "case_id": "A.8.22-mixed",
+        "prediction": "Partially Compliant",
+        "expected": "Partially Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.24",
+        "case_id": "A.8.24-mixed",
+        "prediction": "Partially Compliant",
+        "expected": "Partially Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.32",
+        "case_id": "A.8.32-mixed",
+        "prediction": "Partially Compliant",
+        "expected": "Partially Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.1",
+        "case_id": "A.8.1-nonconforming",
+        "prediction": "Non-Compliant",
+        "expected": "Non-Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.15
+      },
+      {
+        "control_id": "A.8.2",
+        "case_id": "A.8.2-nonconforming",
+        "prediction": "Non-Compliant",
+        "expected": "Non-Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.12
+      },
+      {
+        "control_id": "A.8.3",
+        "case_id": "A.8.3-nonconforming",
+        "prediction": "Non-Compliant",
+        "expected": "Non-Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.5",
+        "case_id": "A.8.5-nonconforming",
+        "prediction": "Non-Compliant",
+        "expected": "Non-Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.7",
+        "case_id": "A.8.7-nonconforming",
+        "prediction": "Non-Compliant",
+        "expected": "Non-Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.8",
+        "case_id": "A.8.8-nonconforming",
+        "prediction": "Non-Compliant",
+        "expected": "Non-Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.9",
+        "case_id": "A.8.9-nonconforming",
+        "prediction": "Non-Compliant",
+        "expected": "Non-Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.12
+      },
+      {
+        "control_id": "A.8.10",
+        "case_id": "A.8.10-nonconforming",
+        "prediction": "Non-Compliant",
+        "expected": "Non-Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.12",
+        "case_id": "A.8.12-nonconforming",
+        "prediction": "Non-Compliant",
+        "expected": "Non-Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.13",
+        "case_id": "A.8.13-nonconforming",
+        "prediction": "Non-Compliant",
+        "expected": "Non-Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.15",
+        "case_id": "A.8.15-nonconforming",
+        "prediction": "Non-Compliant",
+        "expected": "Non-Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.16",
+        "case_id": "A.8.16-nonconforming",
+        "prediction": "Non-Compliant",
+        "expected": "Non-Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.17",
+        "case_id": "A.8.17-nonconforming",
+        "prediction": "Non-Compliant",
+        "expected": "Non-Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.19",
+        "case_id": "A.8.19-nonconforming",
+        "prediction": "Non-Compliant",
+        "expected": "Non-Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.20",
+        "case_id": "A.8.20-nonconforming",
+        "prediction": "Non-Compliant",
+        "expected": "Non-Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.12
+      },
+      {
+        "control_id": "A.8.22",
+        "case_id": "A.8.22-nonconforming",
+        "prediction": "Non-Compliant",
+        "expected": "Non-Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.12
+      },
+      {
+        "control_id": "A.8.24",
+        "case_id": "A.8.24-nonconforming",
+        "prediction": "Non-Compliant",
+        "expected": "Non-Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.32",
+        "case_id": "A.8.32-nonconforming",
+        "prediction": "Non-Compliant",
+        "expected": "Non-Compliant",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.1",
+        "case_id": "A.8.1-incomplete",
+        "prediction": "Insufficient Evidence",
+        "expected": "Insufficient Evidence",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.15
+      },
+      {
+        "control_id": "A.8.2",
+        "case_id": "A.8.2-incomplete",
+        "prediction": "Insufficient Evidence",
+        "expected": "Insufficient Evidence",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.12
+      },
+      {
+        "control_id": "A.8.3",
+        "case_id": "A.8.3-incomplete",
+        "prediction": "Insufficient Evidence",
+        "expected": "Insufficient Evidence",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.5",
+        "case_id": "A.8.5-incomplete",
+        "prediction": "Insufficient Evidence",
+        "expected": "Insufficient Evidence",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.7",
+        "case_id": "A.8.7-incomplete",
+        "prediction": "Insufficient Evidence",
+        "expected": "Insufficient Evidence",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.8",
+        "case_id": "A.8.8-incomplete",
+        "prediction": "Insufficient Evidence",
+        "expected": "Insufficient Evidence",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.9",
+        "case_id": "A.8.9-incomplete",
+        "prediction": "Insufficient Evidence",
+        "expected": "Insufficient Evidence",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.10",
+        "case_id": "A.8.10-incomplete",
+        "prediction": "Insufficient Evidence",
+        "expected": "Insufficient Evidence",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.12",
+        "case_id": "A.8.12-incomplete",
+        "prediction": "Insufficient Evidence",
+        "expected": "Insufficient Evidence",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.13",
+        "case_id": "A.8.13-incomplete",
+        "prediction": "Insufficient Evidence",
+        "expected": "Insufficient Evidence",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.15",
+        "case_id": "A.8.15-incomplete",
+        "prediction": "Insufficient Evidence",
+        "expected": "Insufficient Evidence",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.16",
+        "case_id": "A.8.16-incomplete",
+        "prediction": "Insufficient Evidence",
+        "expected": "Insufficient Evidence",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.17",
+        "case_id": "A.8.17-incomplete",
+        "prediction": "Insufficient Evidence",
+        "expected": "Insufficient Evidence",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.19",
+        "case_id": "A.8.19-incomplete",
+        "prediction": "Insufficient Evidence",
+        "expected": "Insufficient Evidence",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.20",
+        "case_id": "A.8.20-incomplete",
+        "prediction": "Insufficient Evidence",
+        "expected": "Insufficient Evidence",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.22",
+        "case_id": "A.8.22-incomplete",
+        "prediction": "Insufficient Evidence",
+        "expected": "Insufficient Evidence",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.24",
+        "case_id": "A.8.24-incomplete",
+        "prediction": "Insufficient Evidence",
+        "expected": "Insufficient Evidence",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.32",
+        "case_id": "A.8.32-incomplete",
+        "prediction": "Insufficient Evidence",
+        "expected": "Insufficient Evidence",
+        "label_origin": "designer-authored",
+        "correct": true,
+        "error": null,
+        "duration_ms": 0.1
+      }
+    ],
+    "reference_kind": [
+      "designer-authored"
+    ],
+    "note": "Nhãn designer không phải kết quả người đánh giá độc lập. Lỗi engine tính là không khớp, không loại khỏi mẫu có nhãn."
+  },
+  "human_comparison": {
+    "per_control": [
+      {
+        "control_id": "A.8.1",
+        "total": 4,
+        "rated": 0,
+        "errors": 0,
+        "correct": 0,
+        "accuracy": null,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.2",
+        "total": 4,
+        "rated": 0,
+        "errors": 0,
+        "correct": 0,
+        "accuracy": null,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.3",
+        "total": 4,
+        "rated": 0,
+        "errors": 0,
+        "correct": 0,
+        "accuracy": null,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.5",
+        "total": 4,
+        "rated": 0,
+        "errors": 0,
+        "correct": 0,
+        "accuracy": null,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.7",
+        "total": 4,
+        "rated": 0,
+        "errors": 0,
+        "correct": 0,
+        "accuracy": null,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.8",
+        "total": 4,
+        "rated": 0,
+        "errors": 0,
+        "correct": 0,
+        "accuracy": null,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.9",
+        "total": 4,
+        "rated": 0,
+        "errors": 0,
+        "correct": 0,
+        "accuracy": null,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.10",
+        "total": 4,
+        "rated": 0,
+        "errors": 0,
+        "correct": 0,
+        "accuracy": null,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.12",
+        "total": 4,
+        "rated": 0,
+        "errors": 0,
+        "correct": 0,
+        "accuracy": null,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.13",
+        "total": 4,
+        "rated": 0,
+        "errors": 0,
+        "correct": 0,
+        "accuracy": null,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.15",
+        "total": 4,
+        "rated": 0,
+        "errors": 0,
+        "correct": 0,
+        "accuracy": null,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.16",
+        "total": 4,
+        "rated": 0,
+        "errors": 0,
+        "correct": 0,
+        "accuracy": null,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.17",
+        "total": 4,
+        "rated": 0,
+        "errors": 0,
+        "correct": 0,
+        "accuracy": null,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.19",
+        "total": 4,
+        "rated": 0,
+        "errors": 0,
+        "correct": 0,
+        "accuracy": null,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.20",
+        "total": 4,
+        "rated": 0,
+        "errors": 0,
+        "correct": 0,
+        "accuracy": null,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.22",
+        "total": 4,
+        "rated": 0,
+        "errors": 0,
+        "correct": 0,
+        "accuracy": null,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.24",
+        "total": 4,
+        "rated": 0,
+        "errors": 0,
+        "correct": 0,
+        "accuracy": null,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.32",
+        "total": 4,
+        "rated": 0,
+        "errors": 0,
+        "correct": 0,
+        "accuracy": null,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          }
+        }
+      }
+    ],
+    "cases": [
+      {
+        "control_id": "A.8.1",
+        "case_id": "A.8.1-conforming",
+        "prediction": "Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.21
+      },
+      {
+        "control_id": "A.8.2",
+        "case_id": "A.8.2-conforming",
+        "prediction": "Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.15
+      },
+      {
+        "control_id": "A.8.3",
+        "case_id": "A.8.3-conforming",
+        "prediction": "Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.13
+      },
+      {
+        "control_id": "A.8.5",
+        "case_id": "A.8.5-conforming",
+        "prediction": "Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.7",
+        "case_id": "A.8.7-conforming",
+        "prediction": "Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.8",
+        "case_id": "A.8.8-conforming",
+        "prediction": "Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.9",
+        "case_id": "A.8.9-conforming",
+        "prediction": "Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.10",
+        "case_id": "A.8.10-conforming",
+        "prediction": "Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.12",
+        "case_id": "A.8.12-conforming",
+        "prediction": "Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.13",
+        "case_id": "A.8.13-conforming",
+        "prediction": "Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.15",
+        "case_id": "A.8.15-conforming",
+        "prediction": "Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.16",
+        "case_id": "A.8.16-conforming",
+        "prediction": "Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.17",
+        "case_id": "A.8.17-conforming",
+        "prediction": "Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.19",
+        "case_id": "A.8.19-conforming",
+        "prediction": "Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.20",
+        "case_id": "A.8.20-conforming",
+        "prediction": "Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.22",
+        "case_id": "A.8.22-conforming",
+        "prediction": "Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.24",
+        "case_id": "A.8.24-conforming",
+        "prediction": "Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.32",
+        "case_id": "A.8.32-conforming",
+        "prediction": "Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.1",
+        "case_id": "A.8.1-mixed",
+        "prediction": "Partially Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.15
+      },
+      {
+        "control_id": "A.8.2",
+        "case_id": "A.8.2-mixed",
+        "prediction": "Partially Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.12
+      },
+      {
+        "control_id": "A.8.3",
+        "case_id": "A.8.3-mixed",
+        "prediction": "Partially Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.5",
+        "case_id": "A.8.5-mixed",
+        "prediction": "Partially Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.7",
+        "case_id": "A.8.7-mixed",
+        "prediction": "Partially Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.8",
+        "case_id": "A.8.8-mixed",
+        "prediction": "Partially Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.9",
+        "case_id": "A.8.9-mixed",
+        "prediction": "Partially Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.10",
+        "case_id": "A.8.10-mixed",
+        "prediction": "Partially Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.12",
+        "case_id": "A.8.12-mixed",
+        "prediction": "Partially Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.13",
+        "case_id": "A.8.13-mixed",
+        "prediction": "Partially Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.15",
+        "case_id": "A.8.15-mixed",
+        "prediction": "Partially Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.16",
+        "case_id": "A.8.16-mixed",
+        "prediction": "Partially Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.17",
+        "case_id": "A.8.17-mixed",
+        "prediction": "Partially Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.19",
+        "case_id": "A.8.19-mixed",
+        "prediction": "Partially Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.20",
+        "case_id": "A.8.20-mixed",
+        "prediction": "Partially Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.22",
+        "case_id": "A.8.22-mixed",
+        "prediction": "Partially Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.24",
+        "case_id": "A.8.24-mixed",
+        "prediction": "Partially Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.32",
+        "case_id": "A.8.32-mixed",
+        "prediction": "Partially Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.1",
+        "case_id": "A.8.1-nonconforming",
+        "prediction": "Non-Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.15
+      },
+      {
+        "control_id": "A.8.2",
+        "case_id": "A.8.2-nonconforming",
+        "prediction": "Non-Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.12
+      },
+      {
+        "control_id": "A.8.3",
+        "case_id": "A.8.3-nonconforming",
+        "prediction": "Non-Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.5",
+        "case_id": "A.8.5-nonconforming",
+        "prediction": "Non-Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.7",
+        "case_id": "A.8.7-nonconforming",
+        "prediction": "Non-Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.8",
+        "case_id": "A.8.8-nonconforming",
+        "prediction": "Non-Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.9",
+        "case_id": "A.8.9-nonconforming",
+        "prediction": "Non-Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.12
+      },
+      {
+        "control_id": "A.8.10",
+        "case_id": "A.8.10-nonconforming",
+        "prediction": "Non-Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.12",
+        "case_id": "A.8.12-nonconforming",
+        "prediction": "Non-Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.13",
+        "case_id": "A.8.13-nonconforming",
+        "prediction": "Non-Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.15",
+        "case_id": "A.8.15-nonconforming",
+        "prediction": "Non-Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.16",
+        "case_id": "A.8.16-nonconforming",
+        "prediction": "Non-Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.17",
+        "case_id": "A.8.17-nonconforming",
+        "prediction": "Non-Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.19",
+        "case_id": "A.8.19-nonconforming",
+        "prediction": "Non-Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.20",
+        "case_id": "A.8.20-nonconforming",
+        "prediction": "Non-Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.12
+      },
+      {
+        "control_id": "A.8.22",
+        "case_id": "A.8.22-nonconforming",
+        "prediction": "Non-Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.12
+      },
+      {
+        "control_id": "A.8.24",
+        "case_id": "A.8.24-nonconforming",
+        "prediction": "Non-Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.32",
+        "case_id": "A.8.32-nonconforming",
+        "prediction": "Non-Compliant",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.1",
+        "case_id": "A.8.1-incomplete",
+        "prediction": "Insufficient Evidence",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.15
+      },
+      {
+        "control_id": "A.8.2",
+        "case_id": "A.8.2-incomplete",
+        "prediction": "Insufficient Evidence",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.12
+      },
+      {
+        "control_id": "A.8.3",
+        "case_id": "A.8.3-incomplete",
+        "prediction": "Insufficient Evidence",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.5",
+        "case_id": "A.8.5-incomplete",
+        "prediction": "Insufficient Evidence",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.7",
+        "case_id": "A.8.7-incomplete",
+        "prediction": "Insufficient Evidence",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.8",
+        "case_id": "A.8.8-incomplete",
+        "prediction": "Insufficient Evidence",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.9",
+        "case_id": "A.8.9-incomplete",
+        "prediction": "Insufficient Evidence",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.10",
+        "case_id": "A.8.10-incomplete",
+        "prediction": "Insufficient Evidence",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.12",
+        "case_id": "A.8.12-incomplete",
+        "prediction": "Insufficient Evidence",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.13",
+        "case_id": "A.8.13-incomplete",
+        "prediction": "Insufficient Evidence",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.15",
+        "case_id": "A.8.15-incomplete",
+        "prediction": "Insufficient Evidence",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.16",
+        "case_id": "A.8.16-incomplete",
+        "prediction": "Insufficient Evidence",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.17",
+        "case_id": "A.8.17-incomplete",
+        "prediction": "Insufficient Evidence",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.11
+      },
+      {
+        "control_id": "A.8.19",
+        "case_id": "A.8.19-incomplete",
+        "prediction": "Insufficient Evidence",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.20",
+        "case_id": "A.8.20-incomplete",
+        "prediction": "Insufficient Evidence",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.22",
+        "case_id": "A.8.22-incomplete",
+        "prediction": "Insufficient Evidence",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.24",
+        "case_id": "A.8.24-incomplete",
+        "prediction": "Insufficient Evidence",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.1
+      },
+      {
+        "control_id": "A.8.32",
+        "case_id": "A.8.32-incomplete",
+        "prediction": "Insufficient Evidence",
+        "expected": null,
+        "label_origin": null,
+        "correct": null,
+        "error": null,
+        "duration_ms": 0.1
+      }
+    ],
+    "reference_kind": [],
+    "note": "Nhãn designer không phải kết quả người đánh giá độc lập. Lỗi engine tính là không khớp, không loại khỏi mẫu có nhãn."
+  }
+}

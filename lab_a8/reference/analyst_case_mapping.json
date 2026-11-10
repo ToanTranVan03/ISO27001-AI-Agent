@@ -1,0 +1,434 @@
+[
+  {
+    "opaque_case_id": "CASE-0001",
+    "analyst_case_id": "A.8.1-conforming"
+  },
+  {
+    "opaque_case_id": "CASE-0002",
+    "analyst_case_id": "A.8.1-mixed"
+  },
+  {
+    "opaque_case_id": "CASE-0003",
+    "analyst_case_id": "A.8.1-nonconforming"
+  },
+  {
+    "opaque_case_id": "CASE-0004",
+    "analyst_case_id": "A.8.1-incomplete"
+  },
+  {
+    "opaque_case_id": "CASE-0005",
+    "analyst_case_id": "A.8.2-conforming"
+  },
+  {
+    "opaque_case_id": "CASE-0006",
+    "analyst_case_id": "A.8.2-mixed"
+  },
+  {
+    "opaque_case_id": "CASE-0007",
+    "analyst_case_id": "A.8.2-nonconforming"
+  },
+  {
+    "opaque_case_id": "CASE-0008",
+    "analyst_case_id": "A.8.2-incomplete"
+  },
+  {
+    "opaque_case_id": "CASE-0009",
+    "analyst_case_id": "A.8.3-conforming"
+  },
+  {
+    "opaque_case_id": "CASE-0010",
+    "analyst_case_id": "A.8.3-mixed"
+  },
+  {
+    "opaque_case_id": "CASE-0011",
+    "analyst_case_id": "A.8.3-nonconforming"
+  },
+  {
+    "opaque_case_id": "CASE-0012",
+    "analyst_case_id": "A.8.3-incomplete"
+  },
+  {
+    "opaque_case_id": "CASE-0013",
+    "analyst_case_id": "A.8.5-conforming"
+  },
+  {
+    "opaque_case_id": "CASE-0014",
+    "analyst_case_id": "A.8.5-mixed"
+  },
+  {
+    "opaque_case_id": "CASE-0015",
+    "analyst_case_id": "A.8.5-nonconforming"
+  },
+  {
+    "opaque_case_id": "CASE-0016",
+    "analyst_case_id": "A.8.5-incomplete"
+  },
+  {
+    "opaque_case_id": "CASE-0017",
+    "analyst_case_id": "A.8.7-conforming"
+  },
+  {
+    "opaque_case_id": "CASE-0018",
+    "analyst_case_id": "A.8.7-mixed"
+  },
+  {
+    "opaque_case_id": "CASE-0019",
+    "analyst_case_id": "A.8.7-nonconforming"
+  },
+  {
+    "opaque_case_id": "CASE-0020",
+    "analyst_case_id": "A.8.7-incomplete"
+  },
+  {
+    "opaque_case_id": "CASE-0021",
+    "analyst_case_id": "A.8.8-conforming"
+  },
+  {
+    "opaque_case_id": "CASE-0022",
+    "analyst_case_id": "A.8.8-mixed"
+  },
+  {
+    "opaque_case_id": "CASE-0023",
+    "analyst_case_id": "A.8.8-nonconforming"
+  },
+  {
+    "opaque_case_id": "CASE-0024",
+    "analyst_case_id": "A.8.8-incomplete"
+  },
+  {
+    "opaque_case_id": "CASE-0025",
+    "analyst_case_id": "A.8.9-conforming"
+  },
+  {
+    "opaque_case_id": "CASE-0026",
+    "analyst_case_id": "A.8.9-mixed"
+  },
+  {
+    "opaque_case_id": "CASE-0027",
+    "analyst_case_id": "A.8.9-nonconforming"
+  },
+  {
+    "opaque_case_id": "CASE-0028",
+    "analyst_case_id": "A.8.9-incomplete"
+  },
+  {
+    "opaque_case_id": "CASE-0029",
+    "analyst_case_id": "A.8.10-conforming"
+  },
+  {
+    "opaque_case_id": "CASE-0030",
+    "analyst_case_id": "A.8.10-mixed"
+  },
+  {
+    "opaque_case_id": "CASE-0031",
+    "analyst_case_id": "A.8.10-nonconforming"
+  },
+  {
+    "opaque_case_id": "CASE-0032",
+    "analyst_case_id": "A.8.10-incomplete"
+  },
+  {
+    "opaque_case_id": "CASE-0033",
+    "analyst_case_id": "A.8.12-conforming"
+  },
+  {
+    "opaque_case_id": "CASE-0034",
+    "analyst_case_id": "A.8.12-mixed"
+  },
+  {
+    "opaque_case_id": "CASE-0035",
+    "analyst_case_id": "A.8.12-nonconforming"
+  },
+  {
+    "opaque_case_id": "CASE-0036",
+    "analyst_case_id": "A.8.12-incomplete"
+  },
+  {
+    "opaque_case_id": "CASE-0037",
+    "analyst_case_id": "A.8.13-conforming"
+  },
+  {
+    "opaque_case_id": "CASE-0038",
+    "analyst_case_id": "A.8.13-mixed"
+  },
+  {
+    "opaque_case_id": "CASE-0039",
+    "analyst_case_id": "A.8.13-nonconforming"
+  },
+  {
+    "opaque_case_id": "CASE-0040",
+    "analyst_case_id": "A.8.13-incomplete"
+  },
+  {
+    "opaque_case_id": "CASE-0041",
+    "analyst_case_id": "A.8.15-conforming"
+  },
+  {
+    "opaque_case_id": "CASE-0042",
+    "analyst_case_id": "A.8.15-mixed"
+  },
+  {
+    "opaque_case_id": "CASE-0043",
+    "analyst_case_id": "A.8.15-nonconforming"
+  },
+  {
+    "opaque_case_id": "CASE-0044",
+    "analyst_case_id": "A.8.15-incomplete"
+  },
+  {
+    "opaque_case_id": "CASE-0045",
+    "analyst_case_id": "A.8.16-conforming"
+  },
+  {
+    "opaque_case_id": "CASE-0046",
+    "analyst_case_id": "A.8.16-mixed"
+  },
+  {
+    "opaque_case_id": "CASE-0047",
+    "analyst_case_id": "A.8.16-nonconforming"
+  },
+  {
+    "opaque_case_id": "CASE-0048",
+    "analyst_case_id": "A.8.16-incomplete"
+  },
+  {
+    "opaque_case_id": "CASE-0049",
+    "analyst_case_id": "A.8.17-conforming"
+  },
+  {
+    "opaque_case_id": "CASE-0050",
+    "analyst_case_id": "A.8.17-mixed"
+  },
+  {
+    "opaque_case_id": "CASE-0051",
+    "analyst_case_id": "A.8.17-nonconforming"
+  },
+  {
+    "opaque_case_id": "CASE-0052",
+    "analyst_case_id": "A.8.17-incomplete"
+  },
+  {
+    "opaque_case_id": "CASE-0053",
+    "analyst_case_id": "A.8.19-conforming"
+  },
+  {
+    "opaque_case_id": "CASE-0054",
+    "analyst_case_id": "A.8.19-mixed"
+  },
+  {
+    "opaque_case_id": "CASE-0055",
+    "analyst_case_id": "A.8.19-nonconforming"
+  },
+  {
+    "opaque_case_id": "CASE-0056",
+    "analyst_case_id": "A.8.19-incomplete"
+  },
+  {
+    "opaque_case_id": "CASE-0057",
+    "analyst_case_id": "A.8.20-conforming"
+  },
+  {
+    "opaque_case_id": "CASE-0058",
+    "analyst_case_id": "A.8.20-mixed"
+  },
+  {
+    "opaque_case_id": "CASE-0059",
+    "analyst_case_id": "A.8.20-nonconforming"
+  },
+  {
+    "opaque_case_id": "CASE-0060",
+    "analyst_case_id": "A.8.20-incomplete"
+  },
+  {
+    "opaque_case_id": "CASE-0061",
+    "analyst_case_id": "A.8.22-conforming"
+  },
+  {
+    "opaque_case_id": "CASE-0062",
+    "analyst_case_id": "A.8.22-mixed"
+  },
+  {
+    "opaque_case_id": "CASE-0063",
+    "analyst_case_id": "A.8.22-nonconforming"
+  },
+  {
+    "opaque_case_id": "CASE-0064",
+    "analyst_case_id": "A.8.22-incomplete"
+  },
+  {
+    "opaque_case_id": "CASE-0065",
+    "analyst_case_id": "A.8.24-conforming"
+  },
+  {
+    "opaque_case_id": "CASE-0066",
+    "analyst_case_id": "A.8.24-mixed"
+  },
+  {
+    "opaque_case_id": "CASE-0067",
+    "analyst_case_id": "A.8.24-nonconforming"
+  },
+  {
+    "opaque_case_id": "CASE-0068",
+    "analyst_case_id": "A.8.24-incomplete"
+  },
+  {
+    "opaque_case_id": "CASE-0069",
+    "analyst_case_id": "A.8.32-conforming"
+  },
+  {
+    "opaque_case_id": "CASE-0070",
+    "analyst_case_id": "A.8.32-mixed"
+  },
+  {
+    "opaque_case_id": "CASE-0071",
+    "analyst_case_id": "A.8.32-nonconforming"
+  },
+  {
+    "opaque_case_id": "CASE-0072",
+    "analyst_case_id": "A.8.32-incomplete"
+  },
+  {
+    "opaque_case_id": "CASE-0073",
+    "analyst_case_id": "A.8.1-stale"
+  },
+  {
+    "opaque_case_id": "CASE-0074",
+    "analyst_case_id": "A.8.2-stale"
+  },
+  {
+    "opaque_case_id": "CASE-0075",
+    "analyst_case_id": "A.8.3-stale"
+  },
+  {
+    "opaque_case_id": "CASE-0076",
+    "analyst_case_id": "A.8.5-stale"
+  },
+  {
+    "opaque_case_id": "CASE-0077",
+    "analyst_case_id": "A.8.7-stale"
+  },
+  {
+    "opaque_case_id": "CASE-0078",
+    "analyst_case_id": "A.8.8-stale"
+  },
+  {
+    "opaque_case_id": "CASE-0079",
+    "analyst_case_id": "A.8.9-stale"
+  },
+  {
+    "opaque_case_id": "CASE-0080",
+    "analyst_case_id": "A.8.10-stale"
+  },
+  {
+    "opaque_case_id": "CASE-0081",
+    "analyst_case_id": "A.8.12-stale"
+  },
+  {
+    "opaque_case_id": "CASE-0082",
+    "analyst_case_id": "A.8.13-stale"
+  },
+  {
+    "opaque_case_id": "CASE-0083",
+    "analyst_case_id": "A.8.15-stale"
+  },
+  {
+    "opaque_case_id": "CASE-0084",
+    "analyst_case_id": "A.8.16-stale"
+  },
+  {
+    "opaque_case_id": "CASE-0085",
+    "analyst_case_id": "A.8.17-stale"
+  },
+  {
+    "opaque_case_id": "CASE-0086",
+    "analyst_case_id": "A.8.19-stale"
+  },
+  {
+    "opaque_case_id": "CASE-0087",
+    "analyst_case_id": "A.8.20-stale"
+  },
+  {
+    "opaque_case_id": "CASE-0088",
+    "analyst_case_id": "A.8.22-stale"
+  },
+  {
+    "opaque_case_id": "CASE-0089",
+    "analyst_case_id": "A.8.24-stale"
+  },
+  {
+    "opaque_case_id": "CASE-0090",
+    "analyst_case_id": "A.8.32-stale"
+  },
+  {
+    "opaque_case_id": "CASE-0091",
+    "analyst_case_id": "A.8.1-conflicting"
+  },
+  {
+    "opaque_case_id": "CASE-0092",
+    "analyst_case_id": "A.8.2-conflicting"
+  },
+  {
+    "opaque_case_id": "CASE-0093",
+    "analyst_case_id": "A.8.3-conflicting"
+  },
+  {
+    "opaque_case_id": "CASE-0094",
+    "analyst_case_id": "A.8.5-conflicting"
+  },
+  {
+    "opaque_case_id": "CASE-0095",
+    "analyst_case_id": "A.8.7-conflicting"
+  },
+  {
+    "opaque_case_id": "CASE-0096",
+    "analyst_case_id": "A.8.8-conflicting"
+  },
+  {
+    "opaque_case_id": "CASE-0097",
+    "analyst_case_id": "A.8.9-conflicting"
+  },
+  {
+    "opaque_case_id": "CASE-0098",
+    "analyst_case_id": "A.8.10-conflicting"
+  },
+  {
+    "opaque_case_id": "CASE-0099",
+    "analyst_case_id": "A.8.12-conflicting"
+  },
+  {
+    "opaque_case_id": "CASE-0100",
+    "analyst_case_id": "A.8.13-conflicting"
+  },
+  {
+    "opaque_case_id": "CASE-0101",
+    "analyst_case_id": "A.8.15-conflicting"
+  },
+  {
+    "opaque_case_id": "CASE-0102",
+    "analyst_case_id": "A.8.16-conflicting"
+  },
+  {
+    "opaque_case_id": "CASE-0103",
+    "analyst_case_id": "A.8.17-conflicting"
+  },
+  {
+    "opaque_case_id": "CASE-0104",
+    "analyst_case_id": "A.8.19-conflicting"
+  },
+  {
+    "opaque_case_id": "CASE-0105",
+    "analyst_case_id": "A.8.20-conflicting"
+  },
+  {
+    "opaque_case_id": "CASE-0106",
+    "analyst_case_id": "A.8.22-conflicting"
+  },
+  {
+    "opaque_case_id": "CASE-0107",
+    "analyst_case_id": "A.8.24-conflicting"
+  },
+  {
+    "opaque_case_id": "CASE-0108",
+    "analyst_case_id": "A.8.32-conflicting"
+  }
+]

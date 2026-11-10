@@ -1,0 +1,11 @@
+{
+  "case_id": "A.8.19-nonconforming",
+  "control_id": "A.8.19",
+  "asset_id": "LAB-SOFTWARE",
+  "source_system": "Software",
+  "is_synthetic": true,
+  "observations": {
+    "installation_restricted": false,
+    "installed_software_approved": false
+  }
+}

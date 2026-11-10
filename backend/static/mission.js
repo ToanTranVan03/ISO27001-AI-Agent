@@ -105,7 +105,7 @@ async function runMission() {
     } finally { await reader.cancel().catch(() => {}); }
   } catch (error) {
     $('agent-error').textContent = error.message || 'Không kết nối được máy chủ.'; $('agent-error').hidden = false;
-    $('agent-status').textContent = 'Lần kiểm tra chưa hoàn tất. Có thể chạy lại; nhật ký trên là các bước thực tế đã nhận. Kết quả 3D cũ (nếu có) thuộc lần chạy trước.';
+    $('agent-status').textContent = 'Lần kiểm tra chưa hoàn tất. Có thể chạy lại; nhật ký trên là các bước thực tế đã nhận. Kết quả cũ (nếu có) thuộc lần chạy trước.';
   } finally {
     busy = false;
     for (const id of ['agent-run', 'agent-restore', 'run', 'agent-goal', 'agent-mode']) $(id).disabled = false;

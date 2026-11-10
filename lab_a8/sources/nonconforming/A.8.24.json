@@ -1,0 +1,11 @@
+{
+  "case_id": "A.8.24-nonconforming",
+  "control_id": "A.8.24",
+  "asset_id": "LAB-CRYPTO",
+  "source_system": "Crypto",
+  "is_synthetic": true,
+  "observations": {
+    "approved_crypto_configured": false,
+    "key_rotation_current": false
+  }
+}

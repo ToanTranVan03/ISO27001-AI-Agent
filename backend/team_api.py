@@ -103,7 +103,7 @@ def progress(assessment_id: UUID, user: dict = Depends(require_user)):
                        'waiting_evidence':sum(x['workflow_status']=='WAITING_EVIDENCE' for x in data)}}
 
 
-def execute_agent_job(job_id: str, assessment_id: str, control_id: str) -> None:
+def execute_agent_job(job_id: str, assessment_id: str, control_id: str, evidence_only: bool = False) -> None:
     """Prototype in-process worker. Persistent lock/job survives browser refresh.
 
     API process restart marks interrupted jobs FAILED and unlocks controls.
@@ -117,6 +117,7 @@ def execute_agent_job(job_id: str, assessment_id: str, control_id: str) -> None:
             raise ValueError('Control not found')
         initial = {
             'assessment_id':assessment_id,
+            'source_mode':'user_evidence_only' if evidence_only else 'shared_lab',
             'control_id':control['control_id'],
             'control_name':control['name'],
             'objective':control['objective'],
@@ -142,7 +143,7 @@ def execute_agent_job(job_id: str, assessment_id: str, control_id: str) -> None:
 
 
 @router.post('/assessments/{assessment_id}/controls/{control_id}/run',status_code=202)
-def start_agent(assessment_id: UUID, control_id: str, user: dict = Depends(require_user)):
+def start_agent(assessment_id: UUID, control_id: str, user: dict = Depends(require_user), evidence_only: bool = False):
     require_campaign(assessment_id,user)
     if database.get_control(control_id) is None:
         raise HTTPException(404,detail='Không tìm thấy control.')
@@ -151,7 +152,8 @@ def start_agent(assessment_id: UUID, control_id: str, user: dict = Depends(requi
     except ValueError as exc:
         raise HTTPException(409,detail='Control đang chạy bởi thành viên khác hoặc không tồn tại.') from exc
     try:
-        executor.submit(execute_agent_job,job['job_id'],str(assessment_id),control_id)
+        if evidence_only:executor.submit(execute_agent_job,job['job_id'],str(assessment_id),control_id,True)
+        else:executor.submit(execute_agent_job,job['job_id'],str(assessment_id),control_id)
     except RuntimeError as exc:
         teamwork.finish_job(job['job_id'],None,'Không thể khởi tạo worker.')
         raise HTTPException(503,detail='Worker không khả dụng.') from exc

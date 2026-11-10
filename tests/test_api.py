@@ -85,10 +85,12 @@ class ApiTests(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()['enterprise']['name'], 'HiveFive')
         self.assertEqual(len(response.json()['scenarios']), 6)
-        self.assertIn('HiveFive', self.client.get('/simulation').text)
-        for path in ('/static/app.js', '/static/style.css', '/static/guided.css'):
-            self.assertEqual(self.client.get(path).status_code, 200)
-        self.assertIn('javascript', self.client.get('/static/navigation.mjs').headers['content-type'])
+        page=self.client.get('/simulation',follow_redirects=False)
+        self.assertEqual(page.status_code,307)
+        self.assertEqual(page.headers['location'],'/')
+        for path in ('/static/campus.js','/static/vendor/three.module.min.js'):
+            self.assertEqual(self.client.get(path).status_code,404)
+
 
     def test_all_scenarios_and_invalid_input(self):
         scenarios = self.client.get('/api/simulation').json()['scenarios']

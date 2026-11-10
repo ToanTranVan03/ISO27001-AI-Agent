@@ -1,33 +1,29 @@
-# Frontend doanh nghiệp AI Agent
+# Frontend đánh giá tuân thủ — phạm vi 56 control
 
-Giao diện React/Vite của đồ án đánh giá tuân thủ ISO/IEC 27001: văn phòng 3D, giao nhiệm vụ Agent, danh mục doanh nghiệp và Hồ sơ ISO.
+React/Vite cho phạm vi 56 control con người/phần cứng/phần mềm, quản lý bằng chứng, tiến độ và SoA tổng thể. Nhóm 18 A.8 là luồng raw/thực nghiệm/chấm mù ưu tiên riêng. Văn phòng 3D đã dừng phát triển, không nằm trong luồng điều hướng chính.
 
-## Chạy local
+## Chạy
 
-Làm theo [CHAY_LOCAL.md](../CHAY_LOCAL.md) để chuẩn bị PostgreSQL, backend và Ollama. Từ thư mục `frontend-react`:
+Chuẩn bị PostgreSQL, Ollama và container `iso-a8-lab` theo [CHAY_LOCAL.md](../CHAY_LOCAL.md), rồi từ thư mục này:
 
 ```powershell
-npm install
+npm ci
 npm run dev -- --host 127.0.0.1 --port 5173 --strictPort
 ```
 
-Truy cập http://127.0.0.1:5173. Cấu hình API xem [vite.config.js](vite.config.js) và [src/api.js](src/api.js).
+Giao diện: http://127.0.0.1:5173. Proxy API đến cổng 8000 trong `vite.config.js`.
 
-## Kiểm tra và build
+## Module chính
+
+- `src/App.jsx`: xác thực, điều hướng mặc định Phạm vi 56 control.
+- `src/Scope56.jsx`: bảng đủ 56 control, nộp tài liệu, đánh giá và SoA toàn phạm vi.
+- `src/A8ComplianceStudy.jsx`: chọn nguồn/hồ sơ/engine, theo dõi job, chấm mù, đối chiếu và phê duyệt SoA.
+- `src/api.js`: request và Bearer token.
+- `src/ComplianceDossier.jsx`, `src/CompanyInventory.jsx`: hồ sơ và dữ liệu doanh nghiệp hiện hữu.
 
 ```powershell
 npm run lint
 npm run build
 ```
 
-Bản build nằm trong `dist/`. Không đưa `node_modules/`, `dist/` hoặc thông tin đăng nhập vào Git.
-
-## Thành phần chính
-
-- `src/App.jsx`: đăng nhập và điều hướng.
-- `src/EnterpriseIncident3D.jsx`: tích hợp văn phòng và nhiệm vụ.
-- `src/OfficeInteractive3D.jsx`, `src/office3dEngine.js`: giao diện và cảnh Three.js.
-- `src/AgentOfficeConsole.jsx`, `src/EnterpriseMissionControl.jsx`: giao việc và theo dõi thực thi.
-- `src/CompanyInventory.jsx`, `src/ComplianceDossier.jsx`: dữ liệu doanh nghiệp và hồ sơ đánh giá.
-
-Phạm vi và giới hạn: [README đồ án](../README.md), [văn phòng Agent 3D](../docs/VAN_PHONG_AGENT_3D.md).
+Xem [quy trình nghiệm thu raw v2](../docs/QUY_TRINH_NGHIEM_THU_A8.md). Chưa có người thật đánh giá thì không hiển thị độ đúng human; không tự tạo phê duyệt. Thư mục `dist/`, `node_modules/` và thông tin đăng nhập không đưa vào Git.

@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { Bot, KeyRound, LogIn, ShieldCheck, UserRound } from "lucide-react";
-import SpaceBaseDashboard from "./SpaceBaseDashboard";
 import { ApiError, apiRequest } from "./api";
-import EnterpriseIncident3D from "./EnterpriseIncident3D";
+import A8ComplianceStudy from "./A8ComplianceStudy";
+import Scope56 from "./Scope56";
 import ComplianceDossier from "./ComplianceDossier";
 import CompanyInventory from "./CompanyInventory";
 const SESSION_KEY = "iso_team_token"; // Compatible with existing /workspace session.
@@ -16,7 +16,7 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
-const [view, setView] = useState("incidents");
+const [view, setView] = useState("scope56");
   const clearSession = useCallback(() => {
     sessionStorage.removeItem(SESSION_KEY);
     sessionStorage.removeItem("iso_team_assessment");
@@ -82,7 +82,7 @@ const [view, setView] = useState("incidents");
       setToken(session.access_token);
       setUser(session.user);
       setAssessment(campaigns[0]);
-      setView("incidents");
+      setView("scope56");
     } catch (err) {
       setError(err.message || "Không thể đăng nhập.");
     } finally {
@@ -108,35 +108,21 @@ if (user && assessment && token) {
   return (
     <>
       <div className="fixed left-1/2 top-3 z-[100] flex max-w-[96vw] -translate-x-1/2 gap-2 overflow-x-auto rounded-full border border-white/10 bg-[#172337]/95 p-1 shadow-xl backdrop-blur">
+        <button type="button" onClick={()=>setView("scope56")} className="rounded-full bg-teal-800 px-4 py-2 text-xs font-bold text-white">Phạm vi 56 control</button>
         <button
           type="button"
-          onClick={() => setView("incidents")}
-          className={`rounded-full px-4 py-2 text-xs font-bold ${view === "incidents" ? "bg-emerald-400 text-[#102116]" : "text-slate-200 hover:bg-white/10"}`}
+          onClick={() => setView("a8")}
+          className={`rounded-full px-4 py-2 text-xs font-bold ${view === "a8" ? "bg-emerald-400 text-[#102116]" : "text-slate-200 hover:bg-white/10"}`}
         >
-          Mô phỏng 3D
-        </button>
-        <button
-          type="button"
-          onClick={() => setView("dashboard")}
-          className={`rounded-full px-4 py-2 text-xs font-bold ${view === "dashboard" ? "bg-sky-300 text-[#102116]" : "text-slate-200 hover:bg-white/10"}`}
-        >
-          Dashboard
+          Thực nghiệm 18 A.8
         </button>
         <button type="button" onClick={() => setView("company")} className="rounded-full px-4 py-2 text-xs font-bold text-slate-200 hover:bg-white/10">Doanh nghiệp</button>
         <button type="button" onClick={() => setView("dossier")} className="rounded-full px-4 py-2 text-xs font-bold text-slate-200 hover:bg-white/10">Hồ sơ ISO</button>
         <button type="button" onClick={logout} className="rounded-full px-4 py-2 text-xs font-bold text-slate-200 hover:bg-white/10">Đăng xuất</button>
       </div>
 
-      {view === "company" ? <CompanyInventory assessment={assessment} request={request} onOpenDossier={() => setView("dossier")} /> : view === "dossier" ? <ComplianceDossier assessment={assessment} request={request} onOpenCompany={() => setView("company")} onOpenDashboard={() => setView("dashboard")} /> : view === "incidents" ? (
-        <EnterpriseIncident3D assessment={assessment} request={request} token={token} onOpenDossier={() => setView("dossier")} />
-      ) : (
-        <SpaceBaseDashboard
-          key={assessment.assessment_id}
-          user={user}
-          assessment={assessment}
-          request={request}
-          onLogout={logout}
-        />
+      {view === "scope56" ? <Scope56 assessment={assessment} request={request} onOpenA8={()=>setView("a8")} /> : view === "company" ? <CompanyInventory assessment={assessment} request={request} onOpenDossier={() => setView("dossier")} /> : view === "dossier" ? <ComplianceDossier assessment={assessment} request={request} onOpenCompany={() => setView("company")} /> : (
+        <A8ComplianceStudy assessment={assessment} request={request} />
       )}
     </>
   );
@@ -151,8 +137,8 @@ if (user && assessment && token) {
           <Bot className="h-10 w-10"/>
         </div>
         <div className="mb-7 text-center">
-          <div className="text-[11px] font-bold tracking-[.18em] text-[#FFBD88]">ISO ENTERPRISE LAB · MARS TYCOON</div>
-          <h1 className="mt-2 text-2xl font-black">Đăng nhập căn cứ 3D</h1>
+          <div className="text-[11px] font-bold tracking-[.18em] text-[#FFBD88]">ISO/IEC 27001 · ĐÁNH GIÁ TUÂN THỦ</div>
+          <h1 className="mt-2 text-2xl font-black">Đăng nhập hệ thống đánh giá</h1>
           <p className="mt-2 text-sm text-[#C2CEDA]">Dùng tài khoản Admin hoặc thành viên đã tạo trong hệ thống PostgreSQL.</p>
         </div>
         <form onSubmit={login} className="space-y-4">

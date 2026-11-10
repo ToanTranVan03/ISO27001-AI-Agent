@@ -1,0 +1,311 @@
+{
+  "title": "Dự thảo SoA — phạm vi 18 control A.8",
+  "approval": "DRAFT_NOT_APPROVED",
+  "scope": "Doanh nghiệp lab; chỉ 18 control trong catalog, không phải SoA đầy đủ của ISMS.",
+  "report_sha256": "5edcb6c05473eee8ecd643fc012e36a16bad49e7d4f7439557672f53161c2058",
+  "generated_at": "2026-11-10T03:07:13.185338+00:00",
+  "entries": [
+    {
+      "control_id": "A.8.1",
+      "name": "User endpoint devices",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Endpoint; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "IT Endpoint",
+      "implementation_status": "Evaluation Error",
+      "rationale": "",
+      "evidence_ids": [],
+      "evidence_source": "raw-lab://A.8.1",
+      "evidence_sha256": "72c48997228626e997a47c45a100b08820d124708921afe9396d00181ada8479",
+      "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.2",
+      "name": "Privileged access rights",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ IAM; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "IAM",
+      "implementation_status": "Partially Compliant",
+      "rationale": "Labadmin có mẫu cấp sudo đã phê duyệt, nhưng không có quyết định approved trong tệp access-review.csv. Ngày review trong tệp access-review.csv đã quá 90 ngày, không thỏa mãn điều kiện pass cho check 'privileged_review_current'.",
+      "evidence_ids": [
+        "A8RAW-21197a6f53571023dbdd431a"
+      ],
+      "evidence_source": "raw-lab://A.8.2",
+      "evidence_sha256": "21197a6f53571023dbdd431a5c15ab551d18367bcf00152853cc6be509c4abb1",
+      "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.3",
+      "name": "Information access restriction",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ IAM; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "IAM",
+      "implementation_status": "Evaluation Error",
+      "rationale": "",
+      "evidence_ids": [],
+      "evidence_source": "raw-lab://A.8.3",
+      "evidence_sha256": "1715c7aef85adfd881c6ece4ae7fd4bd40982da063e65e544467ecebcff9c893",
+      "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.5",
+      "name": "Secure authentication",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ IAM; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "IAM",
+      "implementation_status": "Partially Compliant",
+      "rationale": "Lab hệ thống đã thực hiện xác thực hai yếu tố (MFA) nhưng đã không tắt xác thực truyền thống (legacy authentication). Điều này không tuân thủ yêu cầu của kiểm soát A.8.5, vì vậy hệ thống chỉ được đánh giá là Partially Compliant.",
+      "evidence_ids": [
+        "A8RAW-834491c5f5126b35a221162d"
+      ],
+      "evidence_source": "raw-lab://A.8.5",
+      "evidence_sha256": "834491c5f5126b35a221162df75540d853b24191e9900fc3f36e5dd48ac21bd6",
+      "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.7",
+      "name": "Protection against malware",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Endpoint; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "SOC",
+      "implementation_status": "Partially Compliant",
+      "rationale": "Antimalware is active, which is a positive sign. However, the signatures are not current, as the last update was more than 2 days ago. This does not meet the requirement of having signatures updated within 2 days.",
+      "evidence_ids": [
+        "A8RAW-98074694b25b3445cf34c39c"
+      ],
+      "evidence_source": "raw-lab://A.8.7",
+      "evidence_sha256": "98074694b25b3445cf34c39c7a276f60e0fdbbda7b8f92317c5d28156d59f440",
+      "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.8",
+      "name": "Management of technical vulnerabilities",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Vulnerability; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "SecOps",
+      "implementation_status": "Partially Compliant",
+      "rationale": "Hệ thống đã thực hiện quét kỹ thuật hiện tại nhưng vẫn còn tồn tại các finding critical chưa được khắc phục. Theo yêu cầu, quét không được phép vượt quá 7 ngày và tất cả các finding critical phải được khắc phục. Trong bằng chứng, quét gần đây nhất đã được thực hiện vào ngày 2026-11-09, vượt quá 7 ngày. Đồng thời, trong tệp vulnerabilities.csv, vẫn còn tồn tại một finding critical với trạng thái 'open'.",
+      "evidence_ids": [
+        "A8RAW-0aac01f029c716e58d6a93c1"
+      ],
+      "evidence_source": "raw-lab://A.8.8",
+      "evidence_sha256": "0aac01f029c716e58d6a93c12032b1999b11c123c8ba81fe0739a00362fc56b0",
+      "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.9",
+      "name": "Configuration management",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Configuration; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "IT Operations",
+      "implementation_status": "Partially Compliant",
+      "rationale": "Lab A.8.9 về quản lý cấu hình đã được phê duyệt (baseline_approved = true), nhưng có sự thay đổi chưa được giải quyết (drift_resolved = false). Điều này cho thấy mặc dù baseline đã được phê duyệt, nhưng có sự thay đổi cấu hình chưa được xử lý, vi phạm yêu cầu của kiểm soát.",
+      "evidence_ids": [
+        "A8RAW-0604e3e5da8276db61b7714f"
+      ],
+      "evidence_source": "raw-lab://A.8.9",
+      "evidence_sha256": "0604e3e5da8276db61b7714f2faa0fbadb3b56d12a3f0b7c6ec97b881b2b70dc",
+      "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.10",
+      "name": "Information deletion",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Data; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "Data owner",
+      "implementation_status": "Partially Compliant",
+      "rationale": "Dữ liệu đã được thực hiện theo chính sách xóa (deletion_policy_enforced) nhưng không có bằng chứng xác nhận rằng đối tượng đã bị xóa (deletion_verified). Điều này cho thấy chính sách xóa đã được áp dụng nhưng không được kiểm chứng đầy đủ.",
+      "evidence_ids": [
+        "A8RAW-2fa873fde7820f5496bf639c"
+      ],
+      "evidence_source": "raw-lab://A.8.10",
+      "evidence_sha256": "2fa873fde7820f5496bf639c84805fc6a22459cee87805590b15d9b5276411ad",
+      "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.12",
+      "name": "Data leakage prevention",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Data; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "SOC",
+      "implementation_status": "Partially Compliant",
+      "rationale": "DLP mode is correctly enforced with the configuration set to block, but the test did not pass as the PII probe was allowed. This indicates that while the DLP system is enabled, it is not effectively preventing data leakage.",
+      "evidence_ids": [
+        "A8RAW-04e9677ba602da45ca85f897"
+      ],
+      "evidence_source": "raw-lab://A.8.12",
+      "evidence_sha256": "04e9677ba602da45ca85f8975022248629a7a888c83114459bdead77ccf31956",
+      "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.13",
+      "name": "Information backup",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Backup; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "IT Operations",
+      "implementation_status": "Partially Compliant",
+      "rationale": "Dữ liệu sao lưu đã được tạo thành công (backup_success = true), nhưng quá trình khôi phục thử nghiệm không thành công (restore_test_passed = false). Điều này cho thấy hệ thống có thể đã tạo ra một bản sao lưu, nhưng bản sao lưu đó không thể được khôi phục đúng cách.",
+      "evidence_ids": [
+        "A8RAW-871a90d275e32ddaa896e69d"
+      ],
+      "evidence_source": "raw-lab://A.8.13",
+      "evidence_sha256": "871a90d275e32ddaa896e69d19ff09b5903e3bc0777214e3fe91b9af62867460",
+      "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.15",
+      "name": "Logging",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Logging; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "SOC",
+      "implementation_status": "Partially Compliant",
+      "rationale": "Lab-SYSTEM-15 đã bật ghi nhật ký (audit_logs_enabled) nhưng không bảo vệ được sự toàn vẹn của nhật ký (logs_integrity_protected). Điều này cho thấy hệ thống đã ghi nhật ký nhưng chưa có biện pháp bảo vệ toàn vẹn cho nhật ký, vi phạm yêu cầu của kiểm soát A.8.15.",
+      "evidence_ids": [
+        "A8RAW-ee384ed99a3b8f00aa362562"
+      ],
+      "evidence_source": "raw-lab://A.8.15",
+      "evidence_sha256": "ee384ed99a3b8f00aa36256283ca9da3c70ea90924ebca978fe244dddf6a7df8",
+      "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.16",
+      "name": "Monitoring activities",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Monitoring; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "SOC",
+      "implementation_status": "Partially Compliant",
+      "rationale": "Công cụ đã kích hoạt cảnh báo cho số lần đăng nhập thất bại trong khoảng 1-5, nhưng không có bằng chứng cho thấy phản hồi cảnh báo đã thành công. Điều này cho thấy cảnh báo đã được cấu hình đúng nhưng chưa được kiểm tra phản hồi.",
+      "evidence_ids": [
+        "A8RAW-5a8c1070426e5a2c910b114c"
+      ],
+      "evidence_source": "raw-lab://A.8.16",
+      "evidence_sha256": "5a8c1070426e5a2c910b114ccb0feff42203c8405ed5fe0f0c59820d003dd306",
+      "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.17",
+      "name": "Clock synchronization",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Time; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "IT Operations",
+      "implementation_status": "Partially Compliant",
+      "rationale": "Trusted time đã được cấu hình đúng, nhưng độ lệch đồng hồ vượt quá giới hạn chính sách. Theo yêu cầu, trị tuyệt đối của độ lệch đồng hồ không được vượt quá 0,1 giây, nhưng theo bằng chứng, độ lệch đồng hồ là 8.5 giây.",
+      "evidence_ids": [
+        "A8RAW-975bb79e11fd8eccbbfd97e3"
+      ],
+      "evidence_source": "raw-lab://A.8.17",
+      "evidence_sha256": "975bb79e11fd8eccbbfd97e31e79219683dda22c5a80cdf1834f922ba5c24491",
+      "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.19",
+      "name": "Installation of software on operational systems",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Software; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "IT Operations",
+      "implementation_status": "Partially Compliant",
+      "rationale": "Dữ liệu cho thấy việc cài đặt phần mềm trên hệ thống được hạn chế (installation_restricted: true), nhưng phần mềm đã được cài đặt không có sự phê duyệt từ CAB (installed_software_approved: false). Điều này cho thấy hệ thống đã hạn chế quyền cài đặt phần mềm, nhưng không đảm bảo rằng tất cả phần mềm đã được cài đặt đều đã được phê duyệt.",
+      "evidence_ids": [
+        "A8RAW-2bb311cbbdbd4688b11361d6"
+      ],
+      "evidence_source": "raw-lab://A.8.19",
+      "evidence_sha256": "2bb311cbbdbd4688b11361d644260677e997d859b15e188a53c6d6771c1717cf",
+      "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.20",
+      "name": "Networks security",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Network; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "Network",
+      "implementation_status": "Partially Compliant",
+      "rationale": "Lab A.8.20 đã tuân thủ yêu cầu về mặc định chặn (default deny) cho tường lửa, nhưng chưa tuân thủ yêu cầu về việc xem xét các quy tắc tường lửa. Tường lửa mặc định chặn (policy input drop) được xác nhận trong tệp nftables.conf. Tuy nhiên, trong tệp firewall-review.csv, tất cả các quy tắc đều chưa được phê duyệt (pending), không thỏa mãn điều kiện pass cho check 'firewall_rules_reviewed'.",
+      "evidence_ids": [
+        "A8RAW-f556acc649ede40a368477da"
+      ],
+      "evidence_source": "raw-lab://A.8.20",
+      "evidence_sha256": "f556acc649ede40a368477da12779770cafe617e411f4769649aba37fd4ce593",
+      "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.22",
+      "name": "Segregation of networks",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Network; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "Network",
+      "implementation_status": "Partially Compliant",
+      "rationale": "Lab A.8.22 về phân cách mạng đã được thực hiện đúng về mặt cấu trúc mạng, với ít nhất hai subnet không giao nhau. Tuy nhiên, kiểm tra phân cách mạng thông qua thử nghiệm kết nối đã không đạt yêu cầu, vì kết quả thử nghiệm cho thấy kết quả là ALLOW thay vì DENY.",
+      "evidence_ids": [
+        "A8RAW-227c4044461a1d9688c045f5"
+      ],
+      "evidence_source": "raw-lab://A.8.22",
+      "evidence_sha256": "227c4044461a1d9688c045f540cfb3e029a484fa77c9512742cac1141cf5b592",
+      "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.24",
+      "name": "Use of cryptography",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Crypto; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "Security",
+      "implementation_status": "Partially Compliant",
+      "rationale": "Lab đã cấu hình sử dụng chỉ TLSv1.2 và TLSv1.3, đạt yêu cầu. Tuy nhiên, khóa đã được quay vòng từ ngày 2025-01-01, vượt quá 90 ngày, không đạt yêu cầu quay vòng khóa trong 90 ngày.",
+      "evidence_ids": [
+        "A8RAW-2adf5d6acdb0b24f32e2e6b7"
+      ],
+      "evidence_source": "raw-lab://A.8.24",
+      "evidence_sha256": "2adf5d6acdb0b24f32e2e6b711f53fe9df2b773bd292df17a3da747b3ce00893",
+      "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.32",
+      "name": "Change management",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Change; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "IT Operations",
+      "implementation_status": "Partially Compliant",
+      "rationale": "Công việc thay đổi đã được phê duyệt bởi CAB, nhưng việc kiểm tra khôi phục rollback chưa được ghi nhận. Điều này tuân thủ yêu cầu về phê duyệt thay đổi nhưng không đáp ứng yêu cầu về việc ghi nhận kiểm tra khôi phục rollback.",
+      "evidence_ids": [
+        "A8RAW-800b8ab830a5b69d120fb002"
+      ],
+      "evidence_source": "raw-lab://A.8.32",
+      "evidence_sha256": "800b8ab830a5b69d120fb0028204c022ba0a5963921a601db1d4ae084aca7d8a",
+      "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    }
+  ]
+}

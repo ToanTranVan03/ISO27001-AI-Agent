@@ -1,0 +1,11 @@
+{
+  "case_id": "A.8.10-mixed",
+  "control_id": "A.8.10",
+  "asset_id": "LAB-DATA",
+  "source_system": "Data",
+  "is_synthetic": true,
+  "observations": {
+    "deletion_policy_enforced": true,
+    "deletion_verified": false
+  }
+}

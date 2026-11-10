@@ -1,7 +1,7 @@
 import {useRef,useState} from 'react';
 import {Bot,Send,ArrowUpRight,Loader2} from 'lucide-react';
 import {ROLES,STATUS_LABELS,messagesOf,subtasksOf,sourceForRole} from './missionView';
-import {agentSubmission} from './office3dModel';
+import {agentSubmission} from './agentCommand';
 
 export default function AgentOfficeConsole({roleId,base,request,employees,target,onTargetChange,mission,onCreated,onOpenDetails,onBack}) {
   const role=ROLES.find(r=>r.id===roleId)||ROLES[0];

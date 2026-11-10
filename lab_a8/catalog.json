@@ -1,0 +1,614 @@
+[
+  {
+    "control_id": "A.8.1",
+    "name": "User endpoint devices",
+    "source": "Endpoint",
+    "checks": [
+      "edr_active",
+      "disk_encrypted"
+    ],
+    "owner": "IT Endpoint",
+    "applicable": true,
+    "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Endpoint; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+    "applicability_approved": false,
+    "rubric_version": "a8-raw-v2",
+    "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+    "criteria": [
+      {
+        "check": "edr_active",
+        "raw_source": "edr.status",
+        "pass_condition": "Dịch vụ EDR báo active (running)",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "raw configuration/log fixture interpretation"
+      },
+      {
+        "check": "disk_encrypted",
+        "raw_source": "lsblk.json",
+        "pass_condition": "Thiết bị mount / có type crypt",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "raw configuration/log fixture interpretation"
+      }
+    ],
+    "review_status": "PENDING_HUMAN_APPROVAL"
+  },
+  {
+    "control_id": "A.8.2",
+    "name": "Privileged access rights",
+    "source": "IAM",
+    "checks": [
+      "privileged_approved",
+      "privileged_review_current"
+    ],
+    "owner": "IAM",
+    "applicable": true,
+    "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ IAM; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+    "applicability_approved": false,
+    "rubric_version": "a8-raw-v2",
+    "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+    "criteria": [
+      {
+        "check": "privileged_approved",
+        "raw_source": "sudoers",
+        "pass_condition": "Chỉ labadmin có mẫu cấp sudo đã phê duyệt",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "raw configuration/log fixture interpretation"
+      },
+      {
+        "check": "privileged_review_current",
+        "raw_source": "access-review.csv",
+        "pass_condition": "Tất cả quyết định approved, ngày review trong 90 ngày",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "raw configuration/log fixture interpretation"
+      }
+    ],
+    "review_status": "PENDING_HUMAN_APPROVAL"
+  },
+  {
+    "control_id": "A.8.3",
+    "name": "Information access restriction",
+    "source": "IAM",
+    "checks": [
+      "access_default_deny",
+      "access_review_current"
+    ],
+    "owner": "IAM",
+    "applicable": true,
+    "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ IAM; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+    "applicability_approved": false,
+    "rubric_version": "a8-raw-v2",
+    "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+    "criteria": [
+      {
+        "check": "access_default_deny",
+        "raw_source": "acl.csv",
+        "pass_condition": "Không có everyone; quyền trong phạm vi kiểm tra là read",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "raw configuration/log fixture interpretation"
+      },
+      {
+        "check": "access_review_current",
+        "raw_source": "access-review.csv",
+        "pass_condition": "Review approved trong 90 ngày",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "raw configuration/log fixture interpretation"
+      }
+    ],
+    "review_status": "PENDING_HUMAN_APPROVAL"
+  },
+  {
+    "control_id": "A.8.5",
+    "name": "Secure authentication",
+    "source": "IAM",
+    "checks": [
+      "mfa_enforced",
+      "legacy_auth_disabled"
+    ],
+    "owner": "IAM",
+    "applicable": true,
+    "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ IAM; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+    "applicability_approved": false,
+    "rubric_version": "a8-raw-v2",
+    "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+    "criteria": [
+      {
+        "check": "mfa_enforced",
+        "raw_source": "sshd_config",
+        "pass_condition": "SSH yêu cầu publickey cùng keyboard-interactive",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "raw configuration/log fixture interpretation"
+      },
+      {
+        "check": "legacy_auth_disabled",
+        "raw_source": "legacy-auth.conf",
+        "pass_condition": "PasswordAuthentication no",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "raw configuration/log fixture interpretation"
+      }
+    ],
+    "review_status": "PENDING_HUMAN_APPROVAL"
+  },
+  {
+    "control_id": "A.8.7",
+    "name": "Protection against malware",
+    "source": "Endpoint",
+    "checks": [
+      "antimalware_active",
+      "signatures_current"
+    ],
+    "owner": "SOC",
+    "applicable": true,
+    "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Endpoint; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+    "applicability_approved": false,
+    "rubric_version": "a8-raw-v2",
+    "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+    "criteria": [
+      {
+        "check": "antimalware_active",
+        "raw_source": "clamd.status",
+        "pass_condition": "clamd active (running)",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "raw configuration/log fixture interpretation"
+      },
+      {
+        "check": "signatures_current",
+        "raw_source": "freshclam.log",
+        "pass_condition": "Chữ ký cập nhật không quá 2 ngày",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "raw configuration/log fixture interpretation"
+      }
+    ],
+    "review_status": "PENDING_HUMAN_APPROVAL"
+  },
+  {
+    "control_id": "A.8.8",
+    "name": "Management of technical vulnerabilities",
+    "source": "Vulnerability",
+    "checks": [
+      "scan_current",
+      "critical_findings_remediated"
+    ],
+    "owner": "SecOps",
+    "applicable": true,
+    "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Vulnerability; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+    "applicability_approved": false,
+    "rubric_version": "a8-raw-v2",
+    "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+    "criteria": [
+      {
+        "check": "scan_current",
+        "raw_source": "scanner.log",
+        "pass_condition": "Scan không quá 7 ngày",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "raw configuration/log fixture interpretation"
+      },
+      {
+        "check": "critical_findings_remediated",
+        "raw_source": "vulnerabilities.csv",
+        "pass_condition": "Không còn finding critical trạng thái khác fixed",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "raw configuration/log fixture interpretation"
+      }
+    ],
+    "review_status": "PENDING_HUMAN_APPROVAL"
+  },
+  {
+    "control_id": "A.8.9",
+    "name": "Configuration management",
+    "source": "Configuration",
+    "checks": [
+      "baseline_approved",
+      "drift_resolved"
+    ],
+    "owner": "IT Operations",
+    "applicable": true,
+    "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Configuration; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+    "applicability_approved": false,
+    "rubric_version": "a8-raw-v2",
+    "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+    "criteria": [
+      {
+        "check": "baseline_approved",
+        "raw_source": "baseline.conf",
+        "pass_condition": "Baseline có mã CAB phê duyệt",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "raw configuration/log fixture interpretation"
+      },
+      {
+        "check": "drift_resolved",
+        "raw_source": "drift.diff",
+        "pass_condition": "Không có nội dung drift chưa xử lý",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "raw configuration/log fixture interpretation"
+      }
+    ],
+    "review_status": "PENDING_HUMAN_APPROVAL"
+  },
+  {
+    "control_id": "A.8.10",
+    "name": "Information deletion",
+    "source": "Data",
+    "checks": [
+      "deletion_policy_enforced",
+      "deletion_verified"
+    ],
+    "owner": "Data owner",
+    "applicable": true,
+    "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Data; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+    "applicability_approved": false,
+    "rubric_version": "a8-raw-v2",
+    "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+    "criteria": [
+      {
+        "check": "deletion_policy_enforced",
+        "raw_source": "retention.conf",
+        "pass_condition": "Retention trong khoảng 1–30 ngày theo chính sách lab",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "executed-container-file-probe + raw configuration"
+      },
+      {
+        "check": "deletion_verified",
+        "raw_source": "deletion.log",
+        "pass_condition": "Log kiểm chứng đối tượng đã absent",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "executed-container-file-probe + raw configuration"
+      }
+    ],
+    "review_status": "PENDING_HUMAN_APPROVAL"
+  },
+  {
+    "control_id": "A.8.12",
+    "name": "Data leakage prevention",
+    "source": "Data",
+    "checks": [
+      "dlp_enforced",
+      "dlp_test_passed"
+    ],
+    "owner": "SOC",
+    "applicable": true,
+    "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Data; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+    "applicability_approved": false,
+    "rubric_version": "a8-raw-v2",
+    "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+    "criteria": [
+      {
+        "check": "dlp_enforced",
+        "raw_source": "dlp.conf",
+        "pass_condition": "DLP mode block",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "raw configuration/log fixture interpretation"
+      },
+      {
+        "check": "dlp_test_passed",
+        "raw_source": "dlp.log",
+        "pass_condition": "Probe PII bị blocked",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "raw configuration/log fixture interpretation"
+      }
+    ],
+    "review_status": "PENDING_HUMAN_APPROVAL"
+  },
+  {
+    "control_id": "A.8.13",
+    "name": "Information backup",
+    "source": "Backup",
+    "checks": [
+      "backup_success",
+      "restore_test_passed"
+    ],
+    "owner": "IT Operations",
+    "applicable": true,
+    "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Backup; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+    "applicability_approved": false,
+    "rubric_version": "a8-raw-v2",
+    "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+    "criteria": [
+      {
+        "check": "backup_success",
+        "raw_source": "backup.dat + backup.sha256",
+        "pass_condition": "SHA256 backup khớp manifest",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "executed-container-file-probe + raw configuration"
+      },
+      {
+        "check": "restore_test_passed",
+        "raw_source": "backup.dat + restored.dat",
+        "pass_condition": "Nội dung restore khớp backup",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "executed-container-file-probe + raw configuration"
+      }
+    ],
+    "review_status": "PENDING_HUMAN_APPROVAL"
+  },
+  {
+    "control_id": "A.8.15",
+    "name": "Logging",
+    "source": "Logging",
+    "checks": [
+      "audit_logs_enabled",
+      "logs_integrity_protected"
+    ],
+    "owner": "SOC",
+    "applicable": true,
+    "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Logging; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+    "applicability_approved": false,
+    "rubric_version": "a8-raw-v2",
+    "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+    "criteria": [
+      {
+        "check": "audit_logs_enabled",
+        "raw_source": "auditd.conf",
+        "pass_condition": "auditd write_logs yes",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "raw configuration/log fixture interpretation"
+      },
+      {
+        "check": "logs_integrity_protected",
+        "raw_source": "audit.log + audit.sha256",
+        "pass_condition": "SHA256 audit log khớp manifest",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "raw configuration/log fixture interpretation"
+      }
+    ],
+    "review_status": "PENDING_HUMAN_APPROVAL"
+  },
+  {
+    "control_id": "A.8.16",
+    "name": "Monitoring activities",
+    "source": "Monitoring",
+    "checks": [
+      "alerts_enabled",
+      "alert_response_test_passed"
+    ],
+    "owner": "SOC",
+    "applicable": true,
+    "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Monitoring; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+    "applicability_approved": false,
+    "rubric_version": "a8-raw-v2",
+    "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+    "criteria": [
+      {
+        "check": "alerts_enabled",
+        "raw_source": "alerts.conf",
+        "pass_condition": "Ngưỡng cảnh báo failed login trong 1–5",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "raw configuration/log fixture interpretation"
+      },
+      {
+        "check": "alert_response_test_passed",
+        "raw_source": "alert-delivery.log",
+        "pass_condition": "Log có bằng chứng delivery received",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "raw configuration/log fixture interpretation"
+      }
+    ],
+    "review_status": "PENDING_HUMAN_APPROVAL"
+  },
+  {
+    "control_id": "A.8.17",
+    "name": "Clock synchronization",
+    "source": "Time",
+    "checks": [
+      "trusted_time_configured",
+      "clock_offset_within_policy"
+    ],
+    "owner": "IT Operations",
+    "applicable": true,
+    "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Time; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+    "applicability_approved": false,
+    "rubric_version": "a8-raw-v2",
+    "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+    "criteria": [
+      {
+        "check": "trusted_time_configured",
+        "raw_source": "chrony.conf",
+        "pass_condition": "Chrony dùng time.lab.internal trong allowlist",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "raw configuration/log fixture interpretation"
+      },
+      {
+        "check": "clock_offset_within_policy",
+        "raw_source": "tracking.txt",
+        "pass_condition": "Trị tuyệt đối clock offset không quá 0,1 giây",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "raw configuration/log fixture interpretation"
+      }
+    ],
+    "review_status": "PENDING_HUMAN_APPROVAL"
+  },
+  {
+    "control_id": "A.8.19",
+    "name": "Installation of software on operational systems",
+    "source": "Software",
+    "checks": [
+      "installation_restricted",
+      "installed_software_approved"
+    ],
+    "owner": "IT Operations",
+    "applicable": true,
+    "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Software; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+    "applicability_approved": false,
+    "rubric_version": "a8-raw-v2",
+    "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+    "criteria": [
+      {
+        "check": "installation_restricted",
+        "raw_source": "installer-permissions.csv",
+        "pass_condition": "User thường không có quyền cài; inventory phải có user",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "executed-container-file-probe + raw configuration"
+      },
+      {
+        "check": "installed_software_approved",
+        "raw_source": "packages.tsv",
+        "pass_condition": "Mỗi gói có approval CAB",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "executed-container-file-probe + raw configuration"
+      }
+    ],
+    "review_status": "PENDING_HUMAN_APPROVAL"
+  },
+  {
+    "control_id": "A.8.20",
+    "name": "Networks security",
+    "source": "Network",
+    "checks": [
+      "firewall_default_deny",
+      "firewall_rules_reviewed"
+    ],
+    "owner": "Network",
+    "applicable": true,
+    "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Network; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+    "applicability_approved": false,
+    "rubric_version": "a8-raw-v2",
+    "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+    "criteria": [
+      {
+        "check": "firewall_default_deny",
+        "raw_source": "nftables.conf",
+        "pass_condition": "Policy input drop, không có policy accept trong bản lab",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "raw configuration/log fixture interpretation"
+      },
+      {
+        "check": "firewall_rules_reviewed",
+        "raw_source": "firewall-review.csv",
+        "pass_condition": "Các rule có review approved",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "raw configuration/log fixture interpretation"
+      }
+    ],
+    "review_status": "PENDING_HUMAN_APPROVAL"
+  },
+  {
+    "control_id": "A.8.22",
+    "name": "Segregation of networks",
+    "source": "Network",
+    "checks": [
+      "zones_separated",
+      "segmentation_test_passed"
+    ],
+    "owner": "Network",
+    "applicable": true,
+    "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Network; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+    "applicability_approved": false,
+    "rubric_version": "a8-raw-v2",
+    "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+    "criteria": [
+      {
+        "check": "zones_separated",
+        "raw_source": "zones.csv",
+        "pass_condition": "Ít nhất hai subnet và không overlap",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "raw configuration/log fixture interpretation"
+      },
+      {
+        "check": "segmentation_test_passed",
+        "raw_source": "connectivity.log",
+        "pass_condition": "Probe dev → prod:5432 có kết quả DENY",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "raw configuration/log fixture interpretation"
+      }
+    ],
+    "review_status": "PENDING_HUMAN_APPROVAL"
+  },
+  {
+    "control_id": "A.8.24",
+    "name": "Use of cryptography",
+    "source": "Crypto",
+    "checks": [
+      "approved_crypto_configured",
+      "key_rotation_current"
+    ],
+    "owner": "Security",
+    "applicable": true,
+    "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Crypto; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+    "applicability_approved": false,
+    "rubric_version": "a8-raw-v2",
+    "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+    "criteria": [
+      {
+        "check": "approved_crypto_configured",
+        "raw_source": "nginx.conf",
+        "pass_condition": "Chỉ TLSv1.2 và TLSv1.3 trong cấu hình lab",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "raw configuration/log fixture interpretation"
+      },
+      {
+        "check": "key_rotation_current",
+        "raw_source": "key-rotation.csv",
+        "pass_condition": "Rotation khóa trong 90 ngày",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "raw configuration/log fixture interpretation"
+      }
+    ],
+    "review_status": "PENDING_HUMAN_APPROVAL"
+  },
+  {
+    "control_id": "A.8.32",
+    "name": "Change management",
+    "source": "Change",
+    "checks": [
+      "change_approved",
+      "rollback_test_recorded"
+    ],
+    "owner": "IT Operations",
+    "applicable": true,
+    "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Change; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+    "applicability_approved": false,
+    "rubric_version": "a8-raw-v2",
+    "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+    "criteria": [
+      {
+        "check": "change_approved",
+        "raw_source": "changes.csv",
+        "pass_condition": "Các change có mã CAB phê duyệt",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "raw configuration/log fixture interpretation"
+      },
+      {
+        "check": "rollback_test_recorded",
+        "raw_source": "rollback.log",
+        "pass_condition": "Rollback có log restore verified",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "raw configuration/log fixture interpretation"
+      }
+    ],
+    "review_status": "PENDING_HUMAN_APPROVAL"
+  }
+]

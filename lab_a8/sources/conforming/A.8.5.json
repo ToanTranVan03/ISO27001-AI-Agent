@@ -1,0 +1,11 @@
+{
+  "case_id": "A.8.5-conforming",
+  "control_id": "A.8.5",
+  "asset_id": "LAB-IAM",
+  "source_system": "IAM",
+  "is_synthetic": true,
+  "observations": {
+    "mfa_enforced": true,
+    "legacy_auth_disabled": true
+  }
+}

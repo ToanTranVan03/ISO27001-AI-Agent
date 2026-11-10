@@ -1,0 +1,11 @@
+{
+  "case_id": "A.8.1-mixed",
+  "control_id": "A.8.1",
+  "asset_id": "LAB-ENDPOINT",
+  "source_system": "Endpoint",
+  "is_synthetic": true,
+  "observations": {
+    "edr_active": true,
+    "disk_encrypted": false
+  }
+}
