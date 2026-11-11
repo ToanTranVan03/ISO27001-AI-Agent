@@ -2,42 +2,70 @@
 
 **Đề tài:** Xây dựng hệ thống AI Agent đánh giá tuân thủ an toàn thông tin theo tiêu chuẩn ISO/IEC 27001:2022.
 
-## Phạm vi tổng thể và nhóm ưu tiên
+## Phạm vi
 
-**Phạm vi phải triển khai của đồ án là 56 control:** 8 A.6 con người, 14 A.7 phần cứng/vật lý và 34 A.8 phần mềm/kỹ thuật. Góp ý sau báo cáo tuần 4 yêu cầu ưu tiên làm sâu 18 A.8, thu bằng chứng tự động, đo với người đánh giá và sinh SoA; không thu hẹp toàn bộ đề tài xuống 18 control.
+Đồ án quản lý **56 control: 8 A.6 con người, 14 A.7 vật lý/phần cứng và 34 A.8 kỹ thuật/phần mềm**. Nhóm **18 A.8** được ưu tiên thực nghiệm sâu theo góp ý giảng viên, không thay thế 38 control còn lại.
 
-Màn hình mặc định **Phạm vi 56 control** quản lý tiêu chí, bằng chứng, kết luận và SoA đầy đủ phạm vi. **Thực nghiệm 18 A.8** là luồng chuyên sâu riêng. Đã gỡ mã và tài nguyên văn phòng 3D cùng dependency Three.js; tài liệu/ảnh lịch sử vẫn được giữ làm minh chứng phiên bản trước.
+Hiện 27 control có kiểm tra lab đại diện; 29 có connector hồ sơ và quy trình thẩm định nhưng chưa có probe chuyên biệt. Trong nguồn live A.8, mới 5 control có probe; 13 control chưa hỗ trợ trả thiếu bằng chứng. Không coi đã tự động hóa hoặc đáp ứng đủ 56 control.
 
-Xem [ma trận tiến độ đủ 56 control](docs/MA_TRAN_56_CONTROL.md). Hiện 27 control có kiểm tra lab đại diện, 29 có luồng nhận tài liệu/đánh giá nhưng chưa có collector riêng; chưa coi đã tự động hóa hoặc hoàn thành đủ 56.
+## Chức năng hiện hành
 
-## Chức năng
+- Quản lý phạm vi, tiêu chí, nhân viên, tài khoản, thiết bị và hồ sơ theo đợt đánh giá.
+- Thu tài liệu/cấu hình/log, kiểm tra nguồn/hash/phiên bản và chống nhập trùng; chế độ chỉ đánh giá hồ sơ đã thu không dùng preset thay thế.
+- Agent đánh giá bằng chứng qua LangGraph/Ollama; kiểm tra viện dẫn và kết luận, lưu lỗi, không fallback ngầm.
+- Thực nghiệm 18 A.8: 108 ca raw thuộc 6 profile; tách LLM, baseline luật và nguồn nhãn.
+- Thu live A.8.3/.10/.13/.15/.19 từ container cô lập; replay raw v2 là nguồn riêng.
+- Admin điều phối tạo lượt; assessor chấm mù bằng tài khoản khác. Nhãn được khóa và gắn hash; không xuất answer key đầy đủ cho người chấm.
+- Theo dõi công việc dùng chung, thẩm định có danh tính và sinh SoA dự thảo đủ 56 dòng, với bước người phụ trách quyết định tính áp dụng và phê duyệt.
 
-- 18 control: A.8.1, .2, .3, .5, .7, .8, .9, .10, .12, .13, .15, .16, .17, .19, .20, .22, .24, .32.
-- 108 hồ sơ raw chủ đích: đạt, một phần, không đạt, thiếu bằng chứng, hết hạn và mâu thuẫn.
-- Thu cấu hình/log gốc bằng collector parse text/JSON/CSV/TSV, tính checksum, kiểm tra quyền/CIDR/thời gian; hỗ trợ container Docker cô lập và replay file. Phần dịch vụ chưa triển khai vẫn ghi rõ là cấu hình/log mô phỏng, không phải chứng cứ sản xuất.
-- Hai engine tách biệt: Ollama kết luận từ evidence và luật làm baseline; không fallback ngầm.
-- Bảng kết quả/đối chiếu từng control, xuất CSV/JSON. Chưa có nhãn người đánh giá thì hiển thị chưa đo.
-- Người đánh giá khác tài khoản người khởi chạy chấm mù: API ẩn kết luận Agent/đáp án nhóm/profile đến khi nộp đủ 18 control; nhãn đã nộp được khóa và gắn hash.
-- Sinh dự thảo SoA 18 control, xuất JSON/Markdown; có bước người phụ trách duyệt rubric, quyết định tính áp dụng và kế hoạch xử lý trước khi phê duyệt SoA trong phạm vi.
+Văn phòng, bình luận điều khiển nhân vật, mission/SOC demo, giao diện HTML cũ và các khảo sát tổng hợp không còn nằm trong mã hiện hành. Các đường trang cũ chuyển về ứng dụng React; API demo đã gỡ. Lịch sử phát triển còn trong Git và nhật ký tuần.
 
 ## Kiến trúc
 
 ```mermaid
 flowchart LR
-    E[Export doanh nghiệp lab] --> C[Collector allowlist + SHA256]
-    C --> A[Agent Ollama hoặc baseline luật]
-    A --> R[Kết luận và bằng chứng từng control]
-    R --> S[Dự thảo SoA]
-    R --> B[Bảng đối chiếu]
-    D[Đáp án thiết kế - tách khỏi Agent] --> B
-    H[Người đánh giá nhập nhãn] --> B
+    E[Hồ sơ và cấu hình/log lab] --> C[Collector + nguồn + SHA256]
+    C --> A[Agent đánh giá bằng chứng]
+    A --> R[Kết luận + viện dẫn + lỗi]
+    R --> H[Người đánh giá thẩm định]
+    H --> S[SoA dự thảo và phê duyệt]
+    R --> B[Bảng đối chiếu từng control]
+    T[Nhãn thiết kế tách khỏi Agent] --> B
+    U[Nhãn người chấm độc lập] --> B
 ```
 
-Stack: React/Vite, FastAPI/Pydantic, Ollama Qwen2.5:7b; PostgreSQL cho xác thực và đợt đánh giá hiện hữu. Lượt A.8 và nhãn người đánh giá lưu local theo đợt trong `data/a8-study`, chưa chuyển sang PostgreSQL. Chạy một tiến trình Uvicorn cho worker A.8 hiện tại.
+Stack: React/Vite, FastAPI/Pydantic, LangGraph, Ollama Qwen2.5:7b và PostgreSQL. Lượt A.8/settings lưu local trong `data/a8-study`; hiện yêu cầu **một tiến trình Uvicorn**. Chưa có worker/hàng đợi phân tán.
+
+## Cấu trúc thư mục
+
+```text
+AI_Agent_ISO27001/
+├── agent_core/
+│   ├── graph_builder.py       # Đánh giá hồ sơ qua LangGraph
+│   ├── a8_assessment.py       # Kết luận từ bằng chứng, guard và SoA A.8
+│   ├── a8_benchmark.py        # Đo theo control, tách nguồn nhãn/engine
+│   ├── people_assessment.py   # Kiểm tra A.6 đại diện trên hồ sơ lab
+│   └── business_events.py     # Thay đổi hồ sơ nghiệp vụ lab
+├── backend/
+│   ├── main.py               # API chính và giao diện React đã build
+│   ├── team_api.py           # Đăng nhập, bằng chứng, công việc dùng chung
+│   ├── a8_api.py             # Lượt A.8, chấm mù và phê duyệt
+│   ├── scope56.py            # Phạm vi và SoA tổng thể 56 control
+│   └── company_storage.py    # Kho nhân viên/tài khoản/thiết bị độc lập demo
+├── evidence_collectors/      # Parser tài liệu, connector 56, raw/live A.8
+├── frontend-react/src/       # App, Scope56, A8, CompanyInventory, ComplianceDossier
+├── lab_company/              # Seed danh bạ/tài sản lab dùng chung
+├── lab_a8/                   # Rubric, bộ ca raw, script container và nhãn thiết kế
+├── docs/                     # Ma trận, quy trình và bằng chứng thực nghiệm A.8
+├── tests/                    # Kiểm thử chức năng hiện hành
+├── ke_hoach_nhat_ky_tuan/     # Nhật ký tuần 1–5
+├── run_agent_cli.py          # CLI đánh giá A.8 hiện hành
+└── CHAY_LOCAL.md             # Hướng dẫn khởi động local
+```
 
 ## Khởi động
 
-Xem [hướng dẫn local](CHAY_LOCAL.md). Chuẩn bị `.env`, Python dependency, frontend dependency, PostgreSQL và Ollama. Không đưa mật khẩu/token vào Git.
+Chuẩn bị `.env`, dependency Python/frontend, Docker Desktop và Ollama theo [CHAY_LOCAL.md](CHAY_LOCAL.md). Tài khoản khởi tạo lấy từ `INITIAL_ADMIN_*`; không đưa mật khẩu/token vào Git.
 
 ```powershell
 docker compose -f docker-compose.enterprise-lab.yml up -d postgres
@@ -53,74 +81,32 @@ npm ci
 npm run dev -- --host 127.0.0.1 --port 5173 --strictPort
 ```
 
-- Ứng dụng: http://127.0.0.1:5173 — mặc định **Phạm vi 56 control**; chọn **Thực nghiệm 18 A.8** để đo chuyên sâu.
-- API: http://127.0.0.1:8000/docs.
-- Bản React build: http://127.0.0.1:8000, sau `npm run build` trong `frontend-react`.
-- Tài khoản admin lần đầu lấy từ `INITIAL_ADMIN_*` trong `.env`; database đã có người dùng không tự đổi mật khẩu khi sửa các biến này.
+- Ứng dụng phát triển: http://127.0.0.1:5173
+- Bản build phục vụ bởi FastAPI: http://127.0.0.1:8000
+- API: http://127.0.0.1:8000/docs
 
-## Benchmark và kiểm thử
+## Kiểm thử và đo
 
 ```powershell
-.venv\Scripts\python.exe -m agent_core.a8_benchmark --mode rules --output docs/a8-results/baseline-rules.json
-.venv\Scripts\python.exe -m agent_core.a8_benchmark --mode llm --output docs/a8-results/ollama-judgments.json
 .venv\Scripts\python.exe -m pytest tests -q
-cd frontend-react
-npm run build
+node --test tests/*.test.mjs
+npm run build --prefix frontend-react
+npm run lint --prefix frontend-react
+.venv\Scripts\python.exe run_agent_cli.py --help
+.venv\Scripts\python.exe run_agent_cli.py --mode rules --transport files --output work/a8-rules-new.json
 ```
 
-Kết quả baseline đúng không phải độ đúng AI. Kết quả đối chiếu đáp án nhóm không phải khảo sát chuyên gia. Bộ ca có rubric hai kiểm tra đại diện/control, gồm raw log/cấu hình và ca hết hạn/mâu thuẫn; vẫn cần người đánh giá độc lập và tập kiểm định tách biệt trước khi suy rộng chất lượng.
+Xuất lượt mới vào `work/` để không ghi đè số đo đã chốt trong `docs/a8-results/`.
 
-## Cấu trúc phần trọng tâm
+Raw v2 trước đây: LLM khớp **206/216 lượt với đáp án nhóm (95,37%)**, gồm lỗi trong mẫu số; không phải độ đúng so với chuyên gia. Bộ hồi quy v3 là ca đã biết, không thay thế kiểm định độc lập. Live chưa có nhãn độc lập; lỗi suy luận A.8.3 được giữ và guard chặn. Xem [kết quả raw v2](docs/a8-results/KET_QUA_RAW_V2.md) và [hiện trạng nghiệm thu](docs/HOAN_THIEN_THEO_GOP_Y_GIANG_VIEN.md).
 
-```text
-AI_Agent_ISO27001/
-├── lab_a8/
-│   ├── catalog.json                   # 18 control, rubric và tính áp dụng đề xuất
-│   ├── sources/                       # Bộ export v1 (lịch sử) và raw v2
-│   └── reference/designer_labels.json # Đáp án nhóm, không đọc bởi Agent
-├── agent_core/
-│   ├── a8_assessment.py               # Thu evidence, kết luận, sinh SoA
-│   └── a8_benchmark.py                # Đối chiếu và xuất kết quả theo control
-├── backend/a8_api.py                  # Job, phân quyền, review theo đợt
-├── frontend-react/src/
-│   └── A8ComplianceStudy.jsx          # Màn hình đánh giá A.8
-├── tests/test_a8_assessment.py         # Kiểm thử luồng mới
-├── docs/
-│   ├── HUONG_DE_TAI_A8.md             # Phạm vi, thiết kế và phần cần nghiệm thu
-│   └── a8-results/                    # Kết quả đo có nguồn engine rõ ràng
-└── CHAY_LOCAL.md                      # Hướng dẫn máy phát triển
-```
+## Tài liệu sử dụng
 
-## Kết quả v1 ngày 10/11/2026 — chỉ lưu lịch sử
+- [Hướng dẫn thao tác](HUONG_DAN.md).
+- [Ma trận 56 control](docs/MA_TRAN_56_CONTROL.md), [checklist nguồn](docs/CHECKLIST_HO_SO_56.md).
+- [Thu hồ sơ, thẩm định và duyệt SoA 56](docs/THU_HO_SO_VA_THAM_DINH_56.md).
+- [Quy trình thực nghiệm A.8](docs/QUY_TRINH_NGHIEM_THU_A8.md).
+- [Doanh nghiệp dùng chung](docs/DOANH_NGHIEP_DUNG_CHUNG.md).
+- [Dọn mã cũ và phạm vi giữ lại](docs/DON_GON_PROJECT.md).
 
-- 227 test Python và build frontend đạt.
-- Baseline luật: 72/72 ca khớp đáp án nhóm.
-- Ollama Qwen2.5:7b: **70/72 (97,22%)**, hai lỗi thiếu bằng chứng A.8.15 và A.8.32 được giữ nguyên; không fallback.
-- **Chưa có độ đúng so với người đánh giá thực sự.** Bộ ca hiện đơn giản, nhãn thiết kế, một lần lặp; không suy rộng tỷ lệ này sang đánh giá ISO thực tế.
-
-Xem [bảng từng control và kết quả gốc](docs/a8-results/KET_QUA_A8.md), [dự thảo SoA tự sinh](docs/a8-results/SOA_DU_THAO.md) và [ma trận tiêu chí](docs/MA_TRAN_A8.md).
-
-## Phạm vi và giới hạn
-
-Hệ thống hỗ trợ đánh giá trong lab, không chứng nhận ISO. Hai thuộc tính/control là tiêu chí thử nghiệm của nhóm, không phải toàn bộ yêu cầu kiểm soát. SoA tổng thể gồm đủ 56 control, mặc định dự thảo và chưa xác định tính áp dụng; SoA 18 A.8 là báo cáo con. Cần bối cảnh ISMS/đánh giá rủi ro và phê duyệt. Bản raw v2 có giao thức chấm mù trên API/UI; vẫn cần phân công người đánh giá không truy cập đáp án ngoài hệ thống. Chưa có kết quả chuyên gia nếu chưa thu nhãn thật.
-
-Chi tiết: [hướng đề tài A.8, rubric, cách đo và kế hoạch nghiệm thu](docs/HUONG_DE_TAI_A8.md). Tài liệu 3D/benchmark cũ giữ làm lịch sử, không dùng để chứng minh hiệu quả cho phạm vi mới.
-
-## Quy trình hoàn thiện 5 bước — raw v2
-
-Xem [hướng dẫn dựng lab, rubric, collector, chấm mù, đo và phê duyệt SoA](docs/QUY_TRINH_NGHIEM_THU_A8.md). Thao tác chấm/phê duyệt của người thật chưa được thay bằng dữ liệu giả hoặc test tự động.
-
-## Kết quả raw v2 — cấu hình/log gốc và Docker
-
-- 18 control, 108 ca duy nhất, 2 lần lặp = 216 lượt/engine.
-- LLM: **206/216 khớp đáp án nhóm (95,37%)**, gồm 4 lỗi engine và 6 lượt sai phân loại đã tính trong mẫu số; baseline luật 216/216.
-- 235 test Python và build đạt. Chưa có người thật chấm độc lập/phê duyệt rubric và SoA; không đổi số đo nhóm thành độ đúng so với con người.
-- Chấm mù ẩn dự đoán/đáp án/profile và khóa nhãn đã nộp; phê duyệt SoA là thao tác người phụ trách, không tự thực hiện.
-
-Xem [kết quả, giới hạn đo và bảng từng control](docs/a8-results/KET_QUA_RAW_V2.md), [SoA raw v2](docs/a8-results/SOA_RAW_V2.md), [quy trình nghiệm thu 5 bước](docs/QUY_TRINH_NGHIEM_THU_A8.md). Thời gian LLM ghi nhận gồm chờ hàng đợi khi hai tiến trình đo có chồng lấn; không dùng để kết luận tốc độ đơn luồng.
-
-## Hoàn thiện quy trình hồ sơ 56 control
-
-Có connector thu thư mục hồ sơ cho đủ 56 control, checklist nguồn, chế độ Agent chỉ đánh giá tài liệu đã thu, thẩm định có danh tính và phê duyệt SoA toàn phạm vi có kiểm tra phiên bản. Connector tài liệu không được gọi là probe kỹ thuật chuyên biệt cho 29 control còn lại.
-
-Xem [cách chuẩn bị/thu/thẩm định/phê duyệt](docs/THU_HO_SO_VA_THAM_DINH_56.md) và [checklist từng control](docs/CHECKLIST_HO_SO_56.md). Chưa có hồ sơ/người đánh giá thực sự thì vẫn thiếu bằng chứng/chờ phê duyệt; không tạo kết quả người thật để lấp chỗ trống.
+Hệ thống hỗ trợ thử nghiệm trong lab, chưa chứng nhận ISO. Cần hồ sơ phù hợp, người thật xác nhận rubric, chấm độc lập, quyết định tính áp dụng và duyệt SoA. Nguồn nộp/hash không tự chứng minh nội dung được xác thực; hai tiêu chí đại diện không bao phủ toàn bộ một control.

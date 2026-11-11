@@ -6,7 +6,7 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 from psycopg.types.json import Jsonb
 from backend.database import get_connection
-from agent_core.simulation import build_enterprise, CONTROLS
+from agent_core.people_assessment import build_enterprise, CONTROLS
 
 
 def canonical_employee(identifier):
@@ -112,7 +112,7 @@ def project_company(assessment_id, people, accounts, assets, metadata):
         'people': projected_people, 'accounts': projected_accounts, 'devices': devices,
         'assets': assets, 'policy_note': 'Chính sách lab, không phải kết luận chứng nhận ISO.'}
     result['snapshot_hash'] = hashlib.sha256(json.dumps(result, sort_keys=True, ensure_ascii=False, default=str).encode()).hexdigest()
-    from agent_core.live import ACTIONS
+    from agent_core.business_events import ACTIONS
     result['actions'] = [{'id': key, 'name': value} for key, value in ACTIONS.items()]
     return result
 
@@ -147,16 +147,15 @@ def snapshot(assessment_id, cur=None):
 
 
 def change(assessment_id, employee_id, action, cur=None, actor_id=None):
-    from agent_core.live import apply_business_change
+    from agent_core.business_events import apply_business_change
     eid = canonical_employee(employee_id)
     if cur is None:
         with get_connection() as con, con.cursor() as cursor:
             return change(assessment_id, employee_id, action, cursor, actor_id=actor_id)
-    from backend.office_logic import lock_key
-    cur.execute('SELECT pg_try_advisory_xact_lock(hashtextextended(%s,0))', (lock_key(assessment_id,eid),))
+    cur.execute('SELECT pg_try_advisory_xact_lock(hashtextextended(%s,0))', (f"company-person:{assessment_id}:{eid}",))
     if not cur.fetchone()[0]:
-        raise ValueError('SOC đang xử lý nhân viên này. Chờ kết quả trước khi thay đổi hồ sơ.')
-    # Serialize business events and coordinate with the per-employee SOC guard.
+        raise ValueError('Hồ sơ nhân viên đang được cập nhật. Hãy chờ rồi thử lại.')
+    # Serialize business-record changes for each employee.
     cur.execute('SELECT metadata FROM enterprise_company WHERE assessment_id=%s FOR UPDATE', (assessment_id,))
     if not cur.fetchone():
         raise ValueError('Không tìm thấy doanh nghiệp.')
@@ -206,21 +205,3 @@ def change(assessment_id, employee_id, action, cur=None, actor_id=None):
     updated = snapshot(assessment_id,cur)
     return {'changed': True, 'change_id': change_id, 'snapshot_hash': updated['snapshot_hash'],
             'revision': int(updated['snapshot_hash'][:12],16), 'employee_id': eid}
-
-
-def apply_scenario(assessment_id, scenario_id, actor_id=None):
-    from agent_core.simulation import SCENARIOS
-    if scenario_id not in {s['id'] for s in SCENARIOS}:
-        raise ValueError('Không tìm thấy tình huống.')
-    with get_connection() as con, con.cursor() as cur:
-        cur.execute('SELECT metadata FROM enterprise_company WHERE assessment_id=%s FOR UPDATE', (assessment_id,))
-        if not cur.fetchone():
-            raise ValueError('Không tìm thấy doanh nghiệp.')
-        data = snapshot(assessment_id, cur)
-        action = {'new-hire': 'nda_missing', 'training': 'training_missing',
-                  'phishing': 'report_missing', 'offboarding': 'terminate', 'remote': 'remote_unprotected'}.get(scenario_id)
-        if action:
-            people = data['people'][-8:] if scenario_id == 'training' else data['people'][-1:]
-            for person in people:
-                change(assessment_id, person['id'], action, cur, actor_id=actor_id)
-        return snapshot(assessment_id, cur)

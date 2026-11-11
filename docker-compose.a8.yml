@@ -8,6 +8,8 @@ services:
     volumes:
       - ./lab_a8/raw:/fixtures:ro
       - ./lab_a8/runtime.sh:/runtime.sh:ro
+      - ./lab_a8/live_setup.sh:/live_setup.sh:ro
+      - ./lab_a8/live_probe.sh:/live_probe.sh:ro
     command: ["/bin/sh", "/runtime.sh"]
     healthcheck:
       test: ["CMD", "test", "-f", "/lab/ready"]

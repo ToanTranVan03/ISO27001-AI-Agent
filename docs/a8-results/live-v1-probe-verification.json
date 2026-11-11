@@ -1,0 +1,185 @@
+{
+  "created_at": "2026-11-11T05:29:03.519746+00:00",
+  "verification_kind": "engineering-smoke-test-not-independent-human-evaluation",
+  "checks": [
+    {
+      "profile": "conforming",
+      "control_id": "A.8.3",
+      "expected": "Compliant",
+      "actual": "Compliant",
+      "evidence_sha256": "59988bbb9de64972b616a7a6e68bcfb25fb2d6501ac87971200d954f1af04a99",
+      "passed": true
+    },
+    {
+      "profile": "conforming",
+      "control_id": "A.8.10",
+      "expected": "Compliant",
+      "actual": "Compliant",
+      "evidence_sha256": "f393e1ff16601e87fb58785f98dc228a29c11143db5b9c2be8b114115db8d7a1",
+      "passed": true
+    },
+    {
+      "profile": "conforming",
+      "control_id": "A.8.13",
+      "expected": "Compliant",
+      "actual": "Compliant",
+      "evidence_sha256": "28e035a2471b847f8fe1485f87d2e88dfe426e568c76f2c75a729a1b5977e4a5",
+      "passed": true
+    },
+    {
+      "profile": "conforming",
+      "control_id": "A.8.15",
+      "expected": "Compliant",
+      "actual": "Compliant",
+      "evidence_sha256": "9fc6dbf5405056b6a52fe514a5b0b317998f3d47ee720ffaf489c454edab40a1",
+      "passed": true
+    },
+    {
+      "profile": "conforming",
+      "control_id": "A.8.19",
+      "expected": "Compliant",
+      "actual": "Compliant",
+      "evidence_sha256": "1e793c5912405fe18e95698e4d14914703d72e0d547564e11ebb134997d6a9de",
+      "passed": true
+    },
+    {
+      "profile": "mixed",
+      "control_id": "A.8.3",
+      "expected": "Partially Compliant",
+      "actual": "Partially Compliant",
+      "evidence_sha256": "3fac0dc39b79fc30032279aae71bc582761efb29eab34537d4d3a45ea0493ae3",
+      "passed": true
+    },
+    {
+      "profile": "mixed",
+      "control_id": "A.8.10",
+      "expected": "Partially Compliant",
+      "actual": "Partially Compliant",
+      "evidence_sha256": "f269d7e65e2ce21026bfd513d18d4484c88f29727f7c987919b8b34c12a5df0e",
+      "passed": true
+    },
+    {
+      "profile": "mixed",
+      "control_id": "A.8.13",
+      "expected": "Partially Compliant",
+      "actual": "Partially Compliant",
+      "evidence_sha256": "3d8b496db9947a18f9495cde0444a57fb9e817eb0bb62b475308b050fc1d2ec0",
+      "passed": true
+    },
+    {
+      "profile": "mixed",
+      "control_id": "A.8.15",
+      "expected": "Partially Compliant",
+      "actual": "Partially Compliant",
+      "evidence_sha256": "e1c0fc8d397b12324d81dbe6fa3f1908e63804ffccc279f65c8a87220125cc80",
+      "passed": true
+    },
+    {
+      "profile": "mixed",
+      "control_id": "A.8.19",
+      "expected": "Partially Compliant",
+      "actual": "Partially Compliant",
+      "evidence_sha256": "e13a815fa0a72f45b08e2722d7a94bbe19ba329287f7daf704b4bf998243c56b",
+      "passed": true
+    },
+    {
+      "profile": "nonconforming",
+      "control_id": "A.8.3",
+      "expected": "Non-Compliant",
+      "actual": "Non-Compliant",
+      "evidence_sha256": "0cf4fc0bb30fef3c00818504405a0d102cf36038d2237ef82c3b8d0076032d45",
+      "passed": true
+    },
+    {
+      "profile": "nonconforming",
+      "control_id": "A.8.10",
+      "expected": "Non-Compliant",
+      "actual": "Non-Compliant",
+      "evidence_sha256": "9c1dba57eabc4ce7fe5c2f51a32c5c89dd3e8521e656ae1bf9716c0ced1fd9cb",
+      "passed": true
+    },
+    {
+      "profile": "nonconforming",
+      "control_id": "A.8.13",
+      "expected": "Non-Compliant",
+      "actual": "Non-Compliant",
+      "evidence_sha256": "3fda101c8379591cce7993796168f1d38bcb1c3220cec54105c96699fab77187",
+      "passed": true
+    },
+    {
+      "profile": "nonconforming",
+      "control_id": "A.8.15",
+      "expected": "Non-Compliant",
+      "actual": "Non-Compliant",
+      "evidence_sha256": "7905c8e5fdb12e984255baf8cab9234d847c664919c6116c6f5fee2d63d1fb38",
+      "passed": true
+    },
+    {
+      "profile": "nonconforming",
+      "control_id": "A.8.19",
+      "expected": "Non-Compliant",
+      "actual": "Non-Compliant",
+      "evidence_sha256": "a379b9121abcf69790ecbb145b28ae3cb768d63cee66d27a566d75132962feba",
+      "passed": true
+    },
+    {
+      "profile": "incomplete",
+      "control_id": "A.8.3",
+      "expected": "Insufficient Evidence",
+      "actual": "Insufficient Evidence",
+      "evidence_sha256": "5cafc5db68566ff0d8c3c4dc915c0fb7c869a75f001fb26f6ae882ae67c8a1b6",
+      "passed": true
+    },
+    {
+      "profile": "incomplete",
+      "control_id": "A.8.10",
+      "expected": "Insufficient Evidence",
+      "actual": "Insufficient Evidence",
+      "evidence_sha256": "7546cccd1b024e64013a4ba5439b9c35ab2603b38aa4a41ff691a0bbb42dcd1d",
+      "passed": true
+    },
+    {
+      "profile": "incomplete",
+      "control_id": "A.8.13",
+      "expected": "Insufficient Evidence",
+      "actual": "Insufficient Evidence",
+      "evidence_sha256": "b4bbb31c68064e66a712ba8e1b8e0a7d2fb8fa46d96da04018438b2705350f0f",
+      "passed": true
+    },
+    {
+      "profile": "incomplete",
+      "control_id": "A.8.15",
+      "expected": "Insufficient Evidence",
+      "actual": "Insufficient Evidence",
+      "evidence_sha256": "eb36727f1dc31e8380445b2a72c950695a0865fdd067e92b13666be497cad193",
+      "passed": true
+    },
+    {
+      "profile": "incomplete",
+      "control_id": "A.8.19",
+      "expected": "Insufficient Evidence",
+      "actual": "Insufficient Evidence",
+      "evidence_sha256": "c75431aad604f0f50f50f1af103584dad5358615049d4a41ed70337e64b18207",
+      "passed": true
+    }
+  ],
+  "passed": 20,
+  "total": 20,
+  "tamper_test": {
+    "control_id": "A.8.13",
+    "before": {
+      "backup_success": true,
+      "restore_test_passed": true
+    },
+    "changed": {
+      "backup_success": true,
+      "restore_test_passed": false
+    },
+    "after_restoration": {
+      "backup_success": true,
+      "restore_test_passed": true
+    },
+    "different_hash": true
+  },
+  "human_evaluation_completed": false
+}

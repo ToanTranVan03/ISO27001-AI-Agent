@@ -1,3 +1,5 @@
 
 lab_a8/runtime.sh text eol=lf
+lab_a8/live_setup.sh text eol=lf
+lab_a8/live_probe.sh text eol=lf
 lab_a8/raw/** -text whitespace=cr-at-eol

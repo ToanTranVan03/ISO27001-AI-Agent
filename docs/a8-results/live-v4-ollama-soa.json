@@ -1,0 +1,313 @@
+{
+  "title": "Dự thảo SoA — phạm vi 18 control A.8",
+  "approval": "DRAFT_NOT_APPROVED",
+  "scope": "Doanh nghiệp lab; chỉ 18 control trong catalog, không phải SoA đầy đủ của ISMS.",
+  "report_sha256": "f319d3df3d3ff34ea8488e87d66f23a42396b2da13ff18a848fb42467620339e",
+  "generated_at": "2026-11-11T05:34:24.187532+00:00",
+  "entries": [
+    {
+      "control_id": "A.8.1",
+      "name": "User endpoint devices",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Endpoint; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "IT Endpoint",
+      "implementation_status": "Insufficient Evidence",
+      "rationale": "Không thu được nguồn bằng chứng; chưa gọi LLM và không suy đoán kết luận.",
+      "evidence_ids": [
+        "A8LIVE-046103a258898b43178b1e20"
+      ],
+      "evidence_source": "live-container://A.8.1",
+      "evidence_sha256": "046103a258898b43178b1e20f9324bf1228d2d8494d4336decd3fd807cbc21b2",
+      "scope_note": "Chưa có probe live cho control này; phải kết luận thiếu bằng chứng.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.2",
+      "name": "Privileged access rights",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ IAM; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "IAM",
+      "implementation_status": "Insufficient Evidence",
+      "rationale": "Không thu được nguồn bằng chứng; chưa gọi LLM và không suy đoán kết luận.",
+      "evidence_ids": [
+        "A8LIVE-f07f7a8df1e02e05fd4fa708"
+      ],
+      "evidence_source": "live-container://A.8.2",
+      "evidence_sha256": "f07f7a8df1e02e05fd4fa7082eb142301ca71ca66953acdc56dc463957896c31",
+      "scope_note": "Chưa có probe live cho control này; phải kết luận thiếu bằng chứng.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.3",
+      "name": "Information access restriction",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ IAM; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "IAM",
+      "implementation_status": "Evaluation Error",
+      "rationale": "",
+      "evidence_ids": [],
+      "evidence_source": "live-container://A.8.3",
+      "evidence_sha256": "c56cb733689575e5dcadcc2bbc586daecd09ea87e0299cdf9b4c63b311b617ab",
+      "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.5",
+      "name": "Secure authentication",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ IAM; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "IAM",
+      "implementation_status": "Insufficient Evidence",
+      "rationale": "Không thu được nguồn bằng chứng; chưa gọi LLM và không suy đoán kết luận.",
+      "evidence_ids": [
+        "A8LIVE-a23275090524d90124ba83e2"
+      ],
+      "evidence_source": "live-container://A.8.5",
+      "evidence_sha256": "a23275090524d90124ba83e2cf6e6bf61a427db03c473127c9e97f53bad47b53",
+      "scope_note": "Chưa có probe live cho control này; phải kết luận thiếu bằng chứng.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.7",
+      "name": "Protection against malware",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Endpoint; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "SOC",
+      "implementation_status": "Insufficient Evidence",
+      "rationale": "Không thu được nguồn bằng chứng; chưa gọi LLM và không suy đoán kết luận.",
+      "evidence_ids": [
+        "A8LIVE-985f4a75caede4d603569f07"
+      ],
+      "evidence_source": "live-container://A.8.7",
+      "evidence_sha256": "985f4a75caede4d603569f070a925adc891b009d6db523937f7a901a9f1bdfde",
+      "scope_note": "Chưa có probe live cho control này; phải kết luận thiếu bằng chứng.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.8",
+      "name": "Management of technical vulnerabilities",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Vulnerability; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "SecOps",
+      "implementation_status": "Insufficient Evidence",
+      "rationale": "Không thu được nguồn bằng chứng; chưa gọi LLM và không suy đoán kết luận.",
+      "evidence_ids": [
+        "A8LIVE-2afd580574f9b13f28071bb1"
+      ],
+      "evidence_source": "live-container://A.8.8",
+      "evidence_sha256": "2afd580574f9b13f28071bb1819f7b9a5ba3e0b40ec835972d9fc3e1b56eb24d",
+      "scope_note": "Chưa có probe live cho control này; phải kết luận thiếu bằng chứng.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.9",
+      "name": "Configuration management",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Configuration; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "IT Operations",
+      "implementation_status": "Insufficient Evidence",
+      "rationale": "Không thu được nguồn bằng chứng; chưa gọi LLM và không suy đoán kết luận.",
+      "evidence_ids": [
+        "A8LIVE-81165196015b1480507dc171"
+      ],
+      "evidence_source": "live-container://A.8.9",
+      "evidence_sha256": "81165196015b1480507dc1718f1648ad256a656879d27e142fd81024d6d3cf45",
+      "scope_note": "Chưa có probe live cho control này; phải kết luận thiếu bằng chứng.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.10",
+      "name": "Information deletion",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Data; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "Data owner",
+      "implementation_status": "Partially Compliant",
+      "rationale": "Chính sách xóa dữ liệu đã được áp dụng (deletion_policy_enforced=true), nhưng việc xác minh xóa dữ liệu chưa được thực hiện (deletion_verified=false). Do đó, hệ thống chỉ đạt được một phần tiêu chuẩn A.8.10.",
+      "evidence_ids": [
+        "A8LIVE-9d283dab9565ae971638e0c5"
+      ],
+      "evidence_source": "live-container://A.8.10",
+      "evidence_sha256": "9d283dab9565ae971638e0c57791ede3ad88dfbd9100671cce1404362fd78109",
+      "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.12",
+      "name": "Data leakage prevention",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Data; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "SOC",
+      "implementation_status": "Insufficient Evidence",
+      "rationale": "Không thu được nguồn bằng chứng; chưa gọi LLM và không suy đoán kết luận.",
+      "evidence_ids": [
+        "A8LIVE-a536a1f870c47df752b39eaf"
+      ],
+      "evidence_source": "live-container://A.8.12",
+      "evidence_sha256": "a536a1f870c47df752b39eafc60656cac168a9d42d73018e7bf1d708b966418f",
+      "scope_note": "Chưa có probe live cho control này; phải kết luận thiếu bằng chứng.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.13",
+      "name": "Information backup",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Backup; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "IT Operations",
+      "implementation_status": "Partially Compliant",
+      "rationale": "Trong bằng chứng, kiểm tra backup_success đã đạt yêu cầu, nhưng kiểm tra restore_test_passed không đạt. Điều này cho thấy hệ thống có thể đã tạo backup thành công, nhưng quá trình khôi phục không thành công, do đó không đảm bảo tính toàn vẹn của backup.",
+      "evidence_ids": [
+        "A8LIVE-b3d40e35ef0bd10914b38827"
+      ],
+      "evidence_source": "live-container://A.8.13",
+      "evidence_sha256": "b3d40e35ef0bd10914b3882732b41d6d4431a3af95297bfb914e5b46a606cdff",
+      "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.15",
+      "name": "Logging",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Logging; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "SOC",
+      "implementation_status": "Partially Compliant",
+      "rationale": "Ứng dụng lab đã ghi ít nhất một sự kiện (audit_logs_enabled = true), nhưng log chưa được bảo vệ về mặt-integrity (logs_integrity_protected = false). Điều này có thể dẫn đến rủi ro về việc log bị thay đổi mà không được phát hiện.",
+      "evidence_ids": [
+        "A8LIVE-43dc92aa5e4cba168a9036f3"
+      ],
+      "evidence_source": "live-container://A.8.15",
+      "evidence_sha256": "43dc92aa5e4cba168a9036f3d935d398486b93d6fa88d9fea737b371506a8633",
+      "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.16",
+      "name": "Monitoring activities",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Monitoring; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "SOC",
+      "implementation_status": "Insufficient Evidence",
+      "rationale": "Không thu được nguồn bằng chứng; chưa gọi LLM và không suy đoán kết luận.",
+      "evidence_ids": [
+        "A8LIVE-2b2a44cb49414f213c077c46"
+      ],
+      "evidence_source": "live-container://A.8.16",
+      "evidence_sha256": "2b2a44cb49414f213c077c46fb77c767092554c02f7b8ff0fe800b9308cb2ea7",
+      "scope_note": "Chưa có probe live cho control này; phải kết luận thiếu bằng chứng.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.17",
+      "name": "Clock synchronization",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Time; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "IT Operations",
+      "implementation_status": "Insufficient Evidence",
+      "rationale": "Không thu được nguồn bằng chứng; chưa gọi LLM và không suy đoán kết luận.",
+      "evidence_ids": [
+        "A8LIVE-b2424de3c9e5b08f447625f5"
+      ],
+      "evidence_source": "live-container://A.8.17",
+      "evidence_sha256": "b2424de3c9e5b08f447625f5cf7ce0efd867cbead9bbd372d6df997aee816d17",
+      "scope_note": "Chưa có probe live cho control này; phải kết luận thiếu bằng chứng.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.19",
+      "name": "Installation of software on operational systems",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Software; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "IT Operations",
+      "implementation_status": "Partially Compliant",
+      "rationale": "Chứng cứ cho thấy việc cài đặt phần mềm trên hệ thống vận hành được hạn chế (installation_restricted: true), nhưng danh sách phần mềm đã cài đặt không khớp với danh sách phê duyệt (installed_software_approved: false). Điều này cho thấy có sự khác biệt giữa phần mềm đã cài đặt và danh sách phê duyệt, vi phạm yêu cầu quản lý phần mềm.",
+      "evidence_ids": [
+        "A8LIVE-a3d8a433e0dafef887a0166f"
+      ],
+      "evidence_source": "live-container://A.8.19",
+      "evidence_sha256": "a3d8a433e0dafef887a0166f155c872eff36f997964fc64a935bac9c020393da",
+      "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.20",
+      "name": "Networks security",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Network; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "Network",
+      "implementation_status": "Insufficient Evidence",
+      "rationale": "Không thu được nguồn bằng chứng; chưa gọi LLM và không suy đoán kết luận.",
+      "evidence_ids": [
+        "A8LIVE-f4a0b63076ca269128be4657"
+      ],
+      "evidence_source": "live-container://A.8.20",
+      "evidence_sha256": "f4a0b63076ca269128be4657907a7828acb0ed9bd7d90aeccce47f6c0f1c1745",
+      "scope_note": "Chưa có probe live cho control này; phải kết luận thiếu bằng chứng.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.22",
+      "name": "Segregation of networks",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Network; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "Network",
+      "implementation_status": "Insufficient Evidence",
+      "rationale": "Không thu được nguồn bằng chứng; chưa gọi LLM và không suy đoán kết luận.",
+      "evidence_ids": [
+        "A8LIVE-5073e8bf3271fd22e52e6214"
+      ],
+      "evidence_source": "live-container://A.8.22",
+      "evidence_sha256": "5073e8bf3271fd22e52e621484444df0732c683aa058b48cf3e7d83aac1145c4",
+      "scope_note": "Chưa có probe live cho control này; phải kết luận thiếu bằng chứng.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.24",
+      "name": "Use of cryptography",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Crypto; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "Security",
+      "implementation_status": "Insufficient Evidence",
+      "rationale": "Không thu được nguồn bằng chứng; chưa gọi LLM và không suy đoán kết luận.",
+      "evidence_ids": [
+        "A8LIVE-49baa97aad58df7718b3fb67"
+      ],
+      "evidence_source": "live-container://A.8.24",
+      "evidence_sha256": "49baa97aad58df7718b3fb67659c45095c00485199a4b5e27aa95badf622768e",
+      "scope_note": "Chưa có probe live cho control này; phải kết luận thiếu bằng chứng.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.32",
+      "name": "Change management",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Change; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "IT Operations",
+      "implementation_status": "Insufficient Evidence",
+      "rationale": "Không thu được nguồn bằng chứng; chưa gọi LLM và không suy đoán kết luận.",
+      "evidence_ids": [
+        "A8LIVE-6c7c165ec835686e5b84d933"
+      ],
+      "evidence_source": "live-container://A.8.32",
+      "evidence_sha256": "6c7c165ec835686e5b84d933e4718da854f4cfedf4e15612943520530434ff4a",
+      "scope_note": "Chưa có probe live cho control này; phải kết luận thiếu bằng chứng.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    }
+  ]
+}

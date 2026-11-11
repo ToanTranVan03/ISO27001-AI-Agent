@@ -130,7 +130,7 @@ def test_home_page_serves_frontend(monkeypatch):
         response = client.get("/")
 
     assert response.status_code == 200
-    assert "ISO Enterprise Lab" in response.text
+    assert '<div id="root">' in response.text
 
 
 def test_evaluation_uses_database_control_and_persists_result(monkeypatch):
@@ -145,7 +145,8 @@ def test_evaluation_uses_database_control_and_persists_result(monkeypatch):
             "objective": "Published disciplinary process",
         },
     )
-    monkeypatch.setattr(main.database, "save_evaluation", lambda result: saved.update(result))
+    monkeypatch.setattr(main.teamwork, "claim_job", lambda *args: {'job_id':'test-sync-job'})
+    monkeypatch.setattr(main.teamwork, "finish_job", lambda jid,result,*args: saved.update(result or {}))
     monkeypatch.setattr(
         main.agent_graph,
         "invoke",

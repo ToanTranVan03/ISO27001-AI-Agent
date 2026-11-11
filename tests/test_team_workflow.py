@@ -51,7 +51,8 @@ def test_verify_only_traces_real_cited_ids():
     }
     outcome=graph_builder.node_verify(state)
     assert outcome['validated_evidence_ids']==['good-2']
-    assert outcome['compliance_status']=='Partially Compliant'
+    assert outcome['compliance_status']=='Insufficient Evidence'
+    assert outcome['confidence']==0.0
 
 
 def test_claimed_control_endpoint_starts_one_job(monkeypatch):

@@ -33,6 +33,31 @@ def test_reads_actual_text_idempotent_hash_and_version_change(monkeypatch,tmp_pa
     assert packages.inspect(AID,c['control_id'])['items'][0]['evidence_id']!=first['items'][0]['evidence_id']
 
 
+def test_original_bytes_change_even_when_extracted_text_is_identical(monkeypatch,tmp_path):
+    c,folder=source(monkeypatch,tmp_path)
+    first=packages.inspect(AID,c['control_id'])['items'][0]
+    target=folder/'policy.txt'
+    target.write_bytes(b'\xef\xbb\xbf'+target.read_bytes())
+    second=packages.inspect(AID,c['control_id'])['items'][0]
+    assert first['extracted_text']==second['extracted_text']
+    assert first['sha256_hash']!=second['sha256_hash']
+    assert first['evidence_id']!=second['evidence_id']
+
+
+def test_control_directory_cannot_resolve_into_another_campaign(monkeypatch,tmp_path):
+    from pathlib import Path
+    monkeypatch.setattr(packages,'ROOT',tmp_path)
+    cid=packages.controls()[0]['control_id']
+    candidate=tmp_path/AID/cid
+    foreign=tmp_path/'00000000-0000-0000-0000-000000000001'/cid
+    original=Path.resolve
+    # Model a directory junction without requiring Windows link privileges.
+    def resolve(path,*args,**kwargs):
+        return original(foreign,*args,**kwargs) if path==candidate else original(path,*args,**kwargs)
+    monkeypatch.setattr(Path,'resolve',resolve)
+    with pytest.raises(ValueError):packages.directory(AID,cid)
+
+
 @pytest.mark.parametrize('name',['../private.txt','_REQUIRED.md','manifest.json','sub/f.txt'])
 def test_rejects_escape_and_templates_as_evidence(monkeypatch,tmp_path,name):
     c,_=source(monkeypatch,tmp_path,name)

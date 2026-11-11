@@ -42,14 +42,21 @@ def main():
     parser=argparse.ArgumentParser()
     parser.add_argument('--mode',choices=['rules','llm'],default='rules')
     parser.add_argument('--output',required=True)
-    parser.add_argument('--transport',choices=['files','docker'],default='files')
+    parser.add_argument('--transport',choices=['files','docker','live'],default='files')
     parser.add_argument('--repeats',type=int,default=1)
-    parser.add_argument('--profiles',nargs='+',choices=PROFILES,default=list(PROFILES))
+    parser.add_argument('--profiles',nargs='+',choices=PROFILES,default=None)
     args=parser.parse_args()
     from dotenv import load_dotenv
     load_dotenv()
     if not 1<=args.repeats<=10:parser.error('repeats must be 1..10')
-    labels=json.loads((LAB/'reference'/'designer_labels.json').read_text(encoding='utf-8'))
+    if args.transport=='live':
+        from evidence_collectors.a8_live import LIVE_PROFILES
+        args.profiles=args.profiles or list(LIVE_PROFILES)
+        if any(p not in LIVE_PROFILES for p in args.profiles):parser.error('Live does not support stale/conflicting replay profiles')
+        labels=[]  # No replay answer keys for different live probes/rubric.
+    else:
+        args.profiles=args.profiles or list(PROFILES)
+        labels=json.loads((LAB/'reference'/'designer_labels.json').read_text(encoding='utf-8'))
     reports=[]
     output=Path(args.output);output.parent.mkdir(parents=True,exist_ok=True)
     for repeat in range(args.repeats):

@@ -24,7 +24,7 @@ def collect_raw(profile,control,transport='files'):
   try:
    if transport=='files':
     path=(ROOT/profile/cid/name).resolve()
-    if not path.is_relative_to((ROOT/profile/cid).resolve()):raise ValueError('Source escapes lab root')
+    if not path.is_relative_to(ROOT.resolve()/profile/cid):raise ValueError('Source escapes lab control directory')
     raw=path.read_bytes()
    else:
     proc=subprocess.run(['docker','exec','iso-a8-lab','cat',f'/lab/export/{profile}/{cid}/{name}'],capture_output=True,timeout=10)

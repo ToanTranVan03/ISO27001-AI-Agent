@@ -1,0 +1,958 @@
+{
+  "is_synthetic": true,
+  "purpose": "Assessment inventory only; no incident execution or office commands.",
+  "people": [
+    {
+      "employee_id": "EMP-001",
+      "display_name": "Nhân sự mô phỏng 001",
+      "department": "Kiến trúc CNTT",
+      "job_title": "Nhân viên phụ trách",
+      "employment_status": "active",
+      "account_status": "active",
+      "state": {
+        "training_status": "current",
+        "onboarding_status": "complete",
+        "synthetic_profile": true
+      }
+    },
+    {
+      "employee_id": "EMP-003",
+      "display_name": "Nhân sự mô phỏng 003",
+      "department": "Nhân sự",
+      "job_title": "Nhân viên đã nghỉ việc",
+      "employment_status": "terminated",
+      "account_status": "active",
+      "state": {
+        "training_status": "current",
+        "onboarding_status": "complete",
+        "synthetic_profile": true
+      }
+    },
+    {
+      "employee_id": "EMP-006",
+      "display_name": "Nhân sự mô phỏng 006",
+      "department": "Vận hành",
+      "job_title": "Nhân viên vận hành",
+      "employment_status": "active",
+      "account_status": "active",
+      "state": {
+        "training_status": "current",
+        "onboarding_status": "complete",
+        "synthetic_profile": true
+      }
+    },
+    {
+      "employee_id": "EMP-008",
+      "display_name": "Nhân sự mô phỏng 008",
+      "department": "Kế toán",
+      "job_title": "Nhân viên kế toán",
+      "employment_status": "active",
+      "account_status": "active",
+      "state": {
+        "training_status": "not_assigned",
+        "onboarding_status": "complete",
+        "synthetic_profile": true
+      }
+    },
+    {
+      "employee_id": "EMP-011",
+      "display_name": "Nhân sự mô phỏng 011",
+      "department": "Kinh doanh",
+      "job_title": "Nhân viên kinh doanh",
+      "employment_status": "active",
+      "account_status": "active",
+      "state": {
+        "training_status": "current",
+        "onboarding_status": "complete",
+        "synthetic_profile": true
+      }
+    },
+    {
+      "employee_id": "EMP-014",
+      "display_name": "Nhân sự mô phỏng 014",
+      "department": "Nhân sự",
+      "job_title": "Chuyên viên nhân sự",
+      "employment_status": "onboarding",
+      "account_status": "pending",
+      "state": {
+        "training_status": "current",
+        "onboarding_status": "pending",
+        "synthetic_profile": true
+      }
+    },
+    {
+      "employee_id": "EMP-017",
+      "display_name": "Nhân sự mô phỏng 017",
+      "department": "Kinh doanh",
+      "job_title": "Nhân viên kinh doanh",
+      "employment_status": "active",
+      "account_status": "active",
+      "state": {
+        "training_status": "current",
+        "onboarding_status": "complete",
+        "synthetic_profile": true
+      }
+    },
+    {
+      "employee_id": "EMP-019",
+      "display_name": "Nhân sự mô phỏng 019",
+      "department": "Vận hành dữ liệu",
+      "job_title": "Chuyên viên dữ liệu",
+      "employment_status": "active",
+      "account_status": "active",
+      "state": {
+        "training_status": "current",
+        "onboarding_status": "complete",
+        "synthetic_profile": true
+      }
+    },
+    {
+      "employee_id": "EMP-021",
+      "display_name": "Nhân sự mô phỏng 021",
+      "department": "Nhân sự",
+      "job_title": "Nhân viên hợp đồng",
+      "employment_status": "active",
+      "account_status": "active",
+      "state": {
+        "training_status": "current",
+        "onboarding_status": "complete",
+        "synthetic_profile": true
+      }
+    },
+    {
+      "employee_id": "EMP-025",
+      "display_name": "Nhân sự mô phỏng 025",
+      "department": "Hạ tầng CNTT",
+      "job_title": "Kỹ sư hạ tầng CNTT",
+      "employment_status": "active",
+      "account_status": "active",
+      "state": {
+        "training_status": "current",
+        "onboarding_status": "complete",
+        "synthetic_profile": true
+      }
+    },
+    {
+      "employee_id": "EMP-032",
+      "display_name": "Nhân sự mô phỏng 032",
+      "department": "SOC",
+      "job_title": "Điều phối viên SOC",
+      "employment_status": "active",
+      "account_status": "active",
+      "state": {
+        "training_status": "current",
+        "onboarding_status": "complete",
+        "synthetic_profile": true
+      }
+    },
+    {
+      "employee_id": "EMP-038",
+      "display_name": "Nhân sự mô phỏng 038",
+      "department": "Phát triển phần mềm",
+      "job_title": "Kỹ sư phần mềm",
+      "employment_status": "active",
+      "account_status": "active",
+      "state": {
+        "training_status": "current",
+        "onboarding_status": "complete",
+        "synthetic_profile": true
+      }
+    },
+    {
+      "employee_id": "EMP-041",
+      "display_name": "Nhân sự mô phỏng 041",
+      "department": "An ninh cơ sở",
+      "job_title": "Nhân viên an ninh",
+      "employment_status": "active",
+      "account_status": "active",
+      "state": {
+        "training_status": "current",
+        "onboarding_status": "complete",
+        "synthetic_profile": true
+      }
+    },
+    {
+      "employee_id": "EMP-044",
+      "display_name": "Nhân sự mô phỏng 044",
+      "department": "Cơ sở vật chất",
+      "job_title": "Kỹ thuật viên cơ sở",
+      "employment_status": "active",
+      "account_status": "active",
+      "state": {
+        "training_status": "current",
+        "onboarding_status": "complete",
+        "synthetic_profile": true
+      }
+    }
+  ],
+  "assets": [
+    {
+      "asset_id": "EMP-014",
+      "asset_type": "person",
+      "asset_name": "Hồ sơ nhân viên mới NV-014",
+      "department": "Nhân sự",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "EMP-021",
+      "asset_type": "person",
+      "asset_name": "Tài khoản nhân viên hợp đồng NV-021",
+      "department": "Nhân sự",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "EMP-008",
+      "asset_type": "person",
+      "asset_name": "Nhân viên kế toán NV-008",
+      "department": "Kế toán",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "EMP-006",
+      "asset_type": "person",
+      "asset_name": "Nhân viên vận hành NV-006",
+      "department": "Nhân sự",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "EMP-003",
+      "asset_type": "person",
+      "asset_name": "Tài khoản nhân viên NV-003",
+      "department": "Nhân sự",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "EMP-011",
+      "asset_type": "person",
+      "asset_name": "Tài khoản nhân viên kinh doanh NV-011",
+      "department": "Kinh doanh",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "LAP-REMOTE-01",
+      "asset_type": "hardware",
+      "asset_name": "Laptop làm việc từ xa LAP-REMOTE-01",
+      "department": "Kinh doanh",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "SOC-QUEUE-01",
+      "asset_type": "software",
+      "asset_name": "Hàng đợi tiếp nhận sự cố SOC",
+      "department": "SOC",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "FAC-PERIMETER-01",
+      "asset_type": "hardware",
+      "asset_name": "Vành đai phòng máy chủ",
+      "department": "An ninh cơ sở",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "BADGE-GUEST-04",
+      "asset_type": "hardware",
+      "asset_name": "Thẻ khách GUEST-04",
+      "department": "An ninh cơ sở",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "CAB-NET-02",
+      "asset_type": "hardware",
+      "asset_name": "Tủ mạng tầng 2",
+      "department": "Hạ tầng",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "CAM-DC-01",
+      "asset_type": "hardware",
+      "asset_name": "Camera hành lang phòng máy",
+      "department": "An ninh cơ sở",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "SENSOR-ENV-01",
+      "asset_type": "hardware",
+      "asset_name": "Cảm biến môi trường phòng máy",
+      "department": "Cơ sở vật chất",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "BADGE-VENDOR-02",
+      "asset_type": "hardware",
+      "asset_name": "Thẻ nhà thầu VENDOR-02",
+      "department": "An ninh cơ sở",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "WS-RECEPTION-01",
+      "asset_type": "hardware",
+      "asset_name": "Máy trạm quầy tiếp nhận",
+      "department": "Vận hành",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "SRV-EDGE-02",
+      "asset_type": "hardware",
+      "asset_name": "Máy chủ biên SRV-EDGE-02",
+      "department": "Hạ tầng",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "LAP-FIELD-03",
+      "asset_type": "hardware",
+      "asset_name": "Laptop công tác LAP-FIELD-03",
+      "department": "Kinh doanh",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "USB-OPS-07",
+      "asset_type": "hardware",
+      "asset_name": "USB nghiệp vụ USB-OPS-07",
+      "department": "Vận hành",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "UPS-DC-01",
+      "asset_type": "hardware",
+      "asset_name": "Bộ lưu điện UPS-DC-01",
+      "department": "Hạ tầng",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "PATCH-ACC-01",
+      "asset_type": "hardware",
+      "asset_name": "Cáp mạng máy chủ kế toán",
+      "department": "Hạ tầng",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "SW-CORE-01",
+      "asset_type": "hardware",
+      "asset_name": "Switch lõi SW-CORE-01",
+      "department": "Hạ tầng",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "DISK-REUSE-03",
+      "asset_type": "hardware",
+      "asset_name": "Ổ cứng lưu trữ DISK-REUSE-03",
+      "department": "Hạ tầng",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "LAP-FIN-02",
+      "asset_type": "hardware",
+      "asset_name": "Laptop phòng tài chính LAP-FIN-02",
+      "department": "SOC",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "ADM-OPS-01",
+      "asset_type": "software",
+      "asset_name": "Tài khoản quản trị ADM-OPS-01",
+      "department": "Hạ tầng CNTT",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "APP-HR-PORTAL",
+      "asset_type": "software",
+      "asset_name": "Ứng dụng hồ sơ nhân sự",
+      "department": "Nhân sự",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "REPO-ERP-01",
+      "asset_type": "software",
+      "asset_name": "Kho mã nguồn ERP",
+      "department": "Phát triển phần mềm",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "IDP-CORP-01",
+      "asset_type": "software",
+      "asset_name": "Dịch vụ định danh doanh nghiệp",
+      "department": "Hạ tầng CNTT",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "APP-ERP-PROD",
+      "asset_type": "software",
+      "asset_name": "Ứng dụng ERP sản xuất",
+      "department": "Hạ tầng CNTT",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "SRV-TRACK-01",
+      "asset_type": "software",
+      "asset_name": "Máy chủ theo dõi vận đơn",
+      "department": "Hạ tầng CNTT",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "SRV-APP-02",
+      "asset_type": "software",
+      "asset_name": "Máy chủ ứng dụng SRV-APP-02",
+      "department": "Hạ tầng CNTT",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "FILE-EXPORT-09",
+      "asset_type": "software",
+      "asset_name": "Tệp xuất dữ liệu khách hàng",
+      "department": "Vận hành dữ liệu",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "APP-TEST-PORTAL",
+      "asset_type": "software",
+      "asset_name": "Cổng thử nghiệm khách hàng",
+      "department": "Phát triển phần mềm",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "LAP-OPS-05",
+      "asset_type": "hardware",
+      "asset_name": "Laptop vận hành LAP-OPS-05",
+      "department": "SOC",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "BACKUP-ERP-01",
+      "asset_type": "software",
+      "asset_name": "Kho sao lưu ERP",
+      "department": "Hạ tầng CNTT",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "CLUSTER-ERP-01",
+      "asset_type": "software",
+      "asset_name": "Cụm xử lý ERP",
+      "department": "Hạ tầng CNTT",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "LOG-AGENT-SRV-02",
+      "asset_type": "software",
+      "asset_name": "Agent nhật ký máy chủ",
+      "department": "SOC",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "SENSOR-NET-01",
+      "asset_type": "software",
+      "asset_name": "Cảm biến giám sát mạng",
+      "department": "SOC",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "NTP-CORP-01",
+      "asset_type": "software",
+      "asset_name": "Dịch vụ đồng bộ giờ",
+      "department": "Hạ tầng CNTT",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "WS-FIN-02",
+      "asset_type": "hardware",
+      "asset_name": "Máy trạm kế toán WS-FIN-02",
+      "department": "SOC",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "FW-EDGE-01",
+      "asset_type": "hardware",
+      "asset_name": "Tường lửa biên FW-EDGE-01",
+      "department": "Hạ tầng CNTT",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "SVC-MGMT-01",
+      "asset_type": "software",
+      "asset_name": "Dịch vụ quản trị mạng",
+      "department": "Hạ tầng CNTT",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "VLAN-TEST-01",
+      "asset_type": "hardware",
+      "asset_name": "Phân đoạn mạng kiểm thử",
+      "department": "Hạ tầng CNTT",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "WEB-GATEWAY-01",
+      "asset_type": "software",
+      "asset_name": "Gateway lọc web",
+      "department": "SOC",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "KMS-CORP-01",
+      "asset_type": "software",
+      "asset_name": "Dịch vụ quản lý khóa",
+      "department": "Hạ tầng CNTT",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "PIPELINE-ERP-01",
+      "asset_type": "software",
+      "asset_name": "Pipeline phát hành ERP",
+      "department": "Phát triển phần mềm",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "APP-PARTNER-01",
+      "asset_type": "software",
+      "asset_name": "Cổng đối tác doanh nghiệp",
+      "department": "Phát triển phần mềm",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "SVC-ORDER-01",
+      "asset_type": "software",
+      "asset_name": "Dịch vụ xử lý đơn hàng",
+      "department": "Kiến trúc CNTT",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "REPO-ORDER-01",
+      "asset_type": "software",
+      "asset_name": "Kho mã nguồn đơn hàng",
+      "department": "Phát triển phần mềm",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "BUILD-PORTAL-09",
+      "asset_type": "software",
+      "asset_name": "Bản build cổng khách hàng",
+      "department": "QA bảo mật",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "VENDOR-DEV-01",
+      "asset_type": "software",
+      "asset_name": "Tài khoản nhà cung cấp DEV-01",
+      "department": "Phát triển phần mềm",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "ENV-TEST-01",
+      "asset_type": "software",
+      "asset_name": "Môi trường kiểm thử",
+      "department": "Hạ tầng CNTT",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "CHANGE-FW-018",
+      "asset_type": "software",
+      "asset_name": "Yêu cầu thay đổi FW-018",
+      "department": "Hạ tầng CNTT",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "DATASET-QA-04",
+      "asset_type": "software",
+      "asset_name": "Bộ dữ liệu kiểm thử QA-04",
+      "department": "QA dữ liệu",
+      "state": {
+        "operational_status": "normal"
+      }
+    },
+    {
+      "asset_id": "DB-PROD-01",
+      "asset_type": "software",
+      "asset_name": "Cơ sở dữ liệu sản xuất ERP",
+      "department": "Kiểm toán CNTT",
+      "state": {
+        "operational_status": "normal"
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "asset_id": "EMP-014",
+      "employee_id": "EMP-014",
+      "relationship": "affected_employee"
+    },
+    {
+      "asset_id": "EMP-021",
+      "employee_id": "EMP-021",
+      "relationship": "affected_employee"
+    },
+    {
+      "asset_id": "EMP-008",
+      "employee_id": "EMP-008",
+      "relationship": "affected_employee"
+    },
+    {
+      "asset_id": "EMP-006",
+      "employee_id": "EMP-006",
+      "relationship": "affected_employee"
+    },
+    {
+      "asset_id": "EMP-003",
+      "employee_id": "EMP-003",
+      "relationship": "affected_employee"
+    },
+    {
+      "asset_id": "EMP-011",
+      "employee_id": "EMP-011",
+      "relationship": "affected_employee"
+    },
+    {
+      "asset_id": "LAP-REMOTE-01",
+      "employee_id": "EMP-017",
+      "relationship": "affected_employee"
+    },
+    {
+      "asset_id": "SOC-QUEUE-01",
+      "employee_id": "EMP-032",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "FAC-PERIMETER-01",
+      "employee_id": "EMP-041",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "BADGE-GUEST-04",
+      "employee_id": "EMP-041",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "CAB-NET-02",
+      "employee_id": "EMP-025",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "CAM-DC-01",
+      "employee_id": "EMP-041",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "SENSOR-ENV-01",
+      "employee_id": "EMP-044",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "BADGE-VENDOR-02",
+      "employee_id": "EMP-041",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "WS-RECEPTION-01",
+      "employee_id": "EMP-006",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "SRV-EDGE-02",
+      "employee_id": "EMP-025",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "LAP-FIELD-03",
+      "employee_id": "EMP-011",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "USB-OPS-07",
+      "employee_id": "EMP-006",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "UPS-DC-01",
+      "employee_id": "EMP-025",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "PATCH-ACC-01",
+      "employee_id": "EMP-025",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "SW-CORE-01",
+      "employee_id": "EMP-025",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "DISK-REUSE-03",
+      "employee_id": "EMP-025",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "LAP-FIN-02",
+      "employee_id": "EMP-025",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "ADM-OPS-01",
+      "employee_id": "EMP-025",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "APP-HR-PORTAL",
+      "employee_id": "EMP-014",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "REPO-ERP-01",
+      "employee_id": "EMP-038",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "IDP-CORP-01",
+      "employee_id": "EMP-025",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "APP-ERP-PROD",
+      "employee_id": "EMP-025",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "LAP-FIN-02",
+      "employee_id": "EMP-032",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "SRV-TRACK-01",
+      "employee_id": "EMP-025",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "SRV-APP-02",
+      "employee_id": "EMP-025",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "FILE-EXPORT-09",
+      "employee_id": "EMP-019",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "APP-TEST-PORTAL",
+      "employee_id": "EMP-038",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "LAP-OPS-05",
+      "employee_id": "EMP-032",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "BACKUP-ERP-01",
+      "employee_id": "EMP-025",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "CLUSTER-ERP-01",
+      "employee_id": "EMP-025",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "LOG-AGENT-SRV-02",
+      "employee_id": "EMP-032",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "SENSOR-NET-01",
+      "employee_id": "EMP-032",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "NTP-CORP-01",
+      "employee_id": "EMP-025",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "WS-FIN-02",
+      "employee_id": "EMP-032",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "SRV-APP-02",
+      "employee_id": "EMP-025",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "FW-EDGE-01",
+      "employee_id": "EMP-025",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "SVC-MGMT-01",
+      "employee_id": "EMP-025",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "VLAN-TEST-01",
+      "employee_id": "EMP-025",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "WEB-GATEWAY-01",
+      "employee_id": "EMP-032",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "KMS-CORP-01",
+      "employee_id": "EMP-025",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "PIPELINE-ERP-01",
+      "employee_id": "EMP-038",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "APP-PARTNER-01",
+      "employee_id": "EMP-038",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "SVC-ORDER-01",
+      "employee_id": "EMP-001",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "REPO-ORDER-01",
+      "employee_id": "EMP-038",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "BUILD-PORTAL-09",
+      "employee_id": "EMP-001",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "VENDOR-DEV-01",
+      "employee_id": "EMP-038",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "ENV-TEST-01",
+      "employee_id": "EMP-025",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "CHANGE-FW-018",
+      "employee_id": "EMP-025",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "DATASET-QA-04",
+      "employee_id": "EMP-001",
+      "relationship": "responsible_employee"
+    },
+    {
+      "asset_id": "DB-PROD-01",
+      "employee_id": "EMP-001",
+      "relationship": "responsible_employee"
+    }
+  ]
+}

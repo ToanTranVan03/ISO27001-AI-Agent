@@ -24,5 +24,6 @@ for profile in conforming mixed nonconforming incomplete; do
   # A raw audit record of executed container-local probes, distinct from authored fixtures.
   printf 'account=labworker uid=%s install_write=%s backup_sha256=%s\n' "$(id -u labworker)" "$permission" "$(sha256sum "$file" | cut -d ' ' -f 1)" > "$root/runtime-probes.log"
 done
+/bin/sh /live_setup.sh
 printf 'ready\n' > /lab/ready
 exec tail -f /dev/null

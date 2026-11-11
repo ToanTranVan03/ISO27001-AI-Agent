@@ -37,6 +37,24 @@ def build_scope(assessment_id,dossier,studies=None,decisions=None,reviews=None,a
         review=reviews.get(cid)
         row['human_review']=review
         row['human_review_current']=bool(review and review['review_token']==row['review_token'] and row['workflow_status']!='RUNNING')
+        # Actionable progress; development coverage is not evidence of compliance.
+        if row['workflow_status']=='RUNNING':
+            action='Theo dõi Agent đang xử lý'
+        elif decision is None:
+            action='Người phụ trách xác định tính áp dụng và kế hoạch'
+        elif not decision['applicable']:
+            action='Lưu căn cứ loại trừ để người phụ trách duyệt SoA'
+        elif not row['evidence']:
+            action='Thu hồ sơ hoặc bằng chứng cho control'
+        elif row['latest_evaluation_id'] is None:
+            action='Chạy Agent đánh giá nguồn đã thu'
+        elif not row['human_review_current']:
+            action='Người đánh giá thẩm định kết luận và bằng chứng hiện hành'
+        else:
+            action='Rà kế hoạch xử lý và trình duyệt SoA'
+        row['next_action']=action
+        row['evidence_types_present']=sorted({e.get('evidence_type') for e in row['evidence'] if e.get('evidence_type')})
+        row['evidence_types_to_check']=[t for t in row['expected_evidence_types'] if t not in row['evidence_types_present']]
         records.append(row)
     soa=dict(title='SoA dự thảo — toàn bộ phạm vi 56 control của đồ án',approval='DRAFT_NOT_APPROVED',
         scope='8 control A.6, 14 control A.7, 34 control A.8; không đồng nghĩa toàn bộ Annex A/ISMS.',
@@ -63,5 +81,13 @@ def build_scope(assessment_id,dossier,studies=None,decisions=None,reviews=None,a
     result=dict(assessment_id=str(assessment_id),scope_total=len(records),priority_count=len(priority),rubric_sha256=rubric_hash,rubric_approval=rubric_approval,
         pillars=dict(Counter(r['pillar'] for r in records)),support_summary=dict(Counter(r['support_stage'] for r in records)),
         conclusion_summary=dict(Counter(r['conclusion'] for r in records)),controls=records,soa=soa)
+    result['acceptance']=dict(
+        total_controls=len(records),rubric_approved=bool(rubric_approval),
+        applicability_recorded=sum(r['applicability'] is not None for r in records),
+        controls_with_evidence=sum(bool(r['evidence']) for r in records),
+        controls_with_submitted_sources=sum(any(e.get('is_synthetic') is False for e in r['evidence']) for r in records),
+        controls_with_current_human_review=sum(r['human_review_current'] for r in records),
+        soa_approved=soa['approval']=='HUMAN_APPROVED_PROJECT_SCOPE',
+        note='Nguồn nộp không tự đồng nghĩa đã xác thực. Số control có bằng chứng/thẩm định không phải số control đạt ISO.')
     result['sha256']=digest(result)
     return result

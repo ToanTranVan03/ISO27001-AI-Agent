@@ -4,7 +4,7 @@ import json
 from psycopg.types.json import Jsonb
 from backend.database import get_connection
 from backend import company
-from agent_core.simulation import evaluate_enterprise, CONTROLS
+from agent_core.people_assessment import evaluate_enterprise, CONTROLS
 
 PEOPLE_CONTROLS = {c[0] for c in CONTROLS}
 
@@ -14,13 +14,18 @@ def fresh_progress(assessment_id, rows):
     from backend.enterprise_spec import CONTROL_TO_NODE
     data = company.snapshot(assessment_id)
     ids = [r['latest_evaluation_id'] for r in rows if r.get('latest_evaluation_id')]
-    references = {}
+    references = {};document_only=set();new_sources=set()
     if ids:
         with get_connection() as con, con.cursor() as cur:
-            cur.execute('''SELECT ev.evaluation_id,e.extracted_text FROM evaluations ev JOIN evidence e
+            cur.execute('''SELECT ev.evaluation_id,e.extracted_text,ev.audit_trail,
+                EXISTS(SELECT 1 FROM evidence newer WHERE newer.assessment_id=ev.assessment_id
+                    AND newer.control_id=ev.control_id AND newer.created_at>ev.created_at)
+                FROM evaluations ev LEFT JOIN evidence e
                 ON e.assessment_id=ev.assessment_id AND ev.evidence_ids ? e.evidence_id
                 WHERE ev.assessment_id=%s AND ev.evaluation_id=ANY(%s)''', (assessment_id,ids))
-            for eid, text in cur.fetchall():
+            for eid, text, trail, has_new_sources in cur.fetchall():
+                if any('USER_EVIDENCE_ONLY' in str(t) for t in (trail or [])):document_only.add(eid)
+                if has_new_sources:new_sources.add(eid)
                 try:
                     payload = json.loads(text)
                     token = payload.get('snapshot_hash') if isinstance(payload,dict) else None
@@ -31,7 +36,9 @@ def fresh_progress(assessment_id, rows):
     for row in rows:
         used = references.get(row.get('latest_evaluation_id'),[])
         supported = row['control_id'] in PEOPLE_CONTROLS | set(CONTROL_TO_NODE)
-        stale = bool(row.get('latest_evaluation_id') and supported and (not any(used) or any(x and x != data['snapshot_hash'] for x in used)))
+        evaluation_id=row.get('latest_evaluation_id')
+        stale = bool(evaluation_id and (evaluation_id in new_sources or
+            (evaluation_id not in document_only and supported and (not any(used) or any(x and x != data['snapshot_hash'] for x in used)))))
         value = {**row, 'company_snapshot_hash':data['snapshot_hash'],
             'data_freshness':'stale' if stale else ('current' if row.get('latest_evaluation_id') else 'not_evaluated')}
         if stale:

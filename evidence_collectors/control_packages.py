@@ -19,7 +19,8 @@ def directory(assessment_id,control_id):
     aid=str(UUID(str(assessment_id)))
     if control_id not in {c['control_id'] for c in controls()}:raise ValueError('Ngoài phạm vi 56 control.')
     path=ROOT/aid/control_id
-    if not path.resolve().is_relative_to(ROOT.resolve()):raise ValueError('Đường dẫn vượt thư mục bằng chứng.')
+    # A control directory cannot alias another tenant/control through a link.
+    if path.resolve()!=ROOT.resolve()/aid/control_id:raise ValueError('Đường dẫn vượt hoặc liên kết sang thư mục bằng chứng khác.')
     return path
 
 
@@ -74,10 +75,11 @@ def inspect(assessment_id,control_id):
                 'observed_at':observed,'origin':str(source.get('origin','unspecified'))[:200],
                 'note':str(source.get('note',''))[:1000],'content':text,'provenance_verified':False}
             content=json.dumps(payload,ensure_ascii=False,sort_keys=True)
-            identity=f'{assessment_id}:{control_id}:{kind}:{content}'
+            raw_hash=hashlib.sha256(raw).hexdigest()
+            identity=f'{assessment_id}:{control_id}:{kind}:{raw_hash}:{content}'
             items.append({'evidence_id':'PKG-'+hashlib.sha256(identity.encode()).hexdigest()[:32],
                 'evidence_type':kind,'source':f'package://{control_id}/{name}',
-                'extracted_text':content,'sha256_hash':hashlib.sha256(raw).hexdigest(),'observed_at':observed})
+                'extracted_text':content,'sha256_hash':raw_hash,'observed_at':observed})
         except (OSError,KeyError,TypeError,ValueError) as exc:
             findings.append(str(exc)[:200])
     if not data['sources']:findings.append('Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp.')

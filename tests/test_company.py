@@ -3,9 +3,8 @@ import pytest
 from backend.company import canonical_employee, project_company
 from backend.company_evidence import bind_lab
 from backend.enterprise_spec import make_snapshot
-from agent_core.live import apply_business_change
-from agent_core.simulation import evaluate_enterprise
-from backend.office_logic import transition, DEFAULT_STATE
+from agent_core.business_events import apply_business_change
+from agent_core.people_assessment import evaluate_enterprise
 
 
 def fixture():
@@ -72,11 +71,6 @@ def test_lab_counts_come_from_inventory_not_preset_and_evidence_changes_with_sou
     assert bind_lab(base,data,'iam')['evidence_id'] != first['evidence_id']
 
 
-def test_returned_workstation_cannot_be_reopened_by_office_command():
-    with pytest.raises(ValueError):
-        transition('/di-lam',{**DEFAULT_STATE,'returned':True})
-
-
 def test_soc_asset_changes_are_visible_in_account_and_device_projections():
     p,a,d,m = fixture()
     a[0]['state']['asset_id'] = 'IAM-ACCOUNT'
@@ -109,8 +103,7 @@ def test_shared_company_api_requires_authentication():
     from fastapi.testclient import TestClient
     from backend.main import app
     with TestClient(app) as client:
-        for path in ('/api/live','/api/simulation','/api/agent/history',
-                     '/api/assessments/7f7c009b-bdcd-5b33-934e-15251ad2c976/enterprise/company'):
+        for path in ('/api/assessments/7f7c009b-bdcd-5b33-934e-15251ad2c976/enterprise/company',):
             assert client.get(path).status_code == 401
 
 
@@ -138,7 +131,7 @@ def test_dashboard_invalidates_old_company_result_without_erasing_history(monkey
         def execute(self,sql,params):
             assert params[0]=='campaign'
         def fetchall(self):
-            return [(3,json.dumps({'snapshot_hash':'old'}))]
+            return [(3,json.dumps({'snapshot_hash':'old'}),[],False)]
     class Connection:
         def cursor(self):return nullcontext(Cursor())
     @contextmanager

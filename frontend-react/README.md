@@ -1,6 +1,6 @@
 # Frontend đánh giá tuân thủ — phạm vi 56 control
 
-React/Vite cho phạm vi 56 control con người/phần cứng/phần mềm, quản lý bằng chứng, tiến độ và SoA tổng thể. Nhóm 18 A.8 là luồng raw/thực nghiệm/chấm mù ưu tiên riêng. Văn phòng 3D đã dừng phát triển, không nằm trong luồng điều hướng chính.
+React/Vite cho phạm vi 56 control con người/phần cứng/phần mềm, quản lý bằng chứng, tiến độ và SoA tổng thể. Nhóm 18 A.8 là luồng raw/thực nghiệm/chấm mù ưu tiên riêng. Mã văn phòng/bình luận/mission cũ đã được gỡ; thư mục src chỉ giữ các màn hình đánh giá hiện hành.
 
 ## Chạy
 

@@ -20,6 +20,20 @@ def test_experiment_pass_is_not_promoted_to_formal_conclusion():
     assert next(e for e in report['soa']['entries'] if e['control_id']=='A.8.5')['implementation_status']=='Chưa đánh giá'
 
 
+def test_acceptance_counts_do_not_turn_synthetic_sources_into_submitted_evidence():
+    formal={'controls':[dict(control_id='A.8.5',evidence=[
+        dict(evidence_id='lab',sha256_hash='a',is_synthetic=True,evidence_type='lab')]) ]}
+    report=build_scope('a',formal)
+    assert report['acceptance']['controls_with_evidence']==1
+    assert report['acceptance']['controls_with_submitted_sources']==0
+    assert report['acceptance']['controls_with_current_human_review']==0
+    row=next(r for r in report['controls'] if r['control_id']=='A.8.5')
+    assert 'tính áp dụng' in row['next_action']
+    assert row['evidence_types_to_check']
+    formal['controls'][0]['evidence'][0]['is_synthetic']=False
+    assert build_scope('a',formal)['acceptance']['controls_with_submitted_sources']==1
+
+
 def test_exclusion_and_treatment_are_explicit_and_preserve_failed_status():
     formal={'controls':[dict(control_id='A.8.5',conclusion='Non-Compliant',assessment_state='evaluated',evidence=[])]}
     decision={'A.8.5':dict(applicable=False,reason='Explicit scope decision',treatment='Requires supervisor review',recorded_by='admin')}

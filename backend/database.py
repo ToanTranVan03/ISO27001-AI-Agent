@@ -27,7 +27,6 @@ def get_connection() -> Iterator[psycopg.Connection[Any]]:
 
 
 def initialize_database() -> None:
-    from agent_core.enterprise_eval_and_charts import ENTERPRISE_TEST_CASES
 
     with CONTROLS_PATH.open(encoding="utf-8") as controls_file:
         controls = json.load(controls_file)
@@ -94,11 +93,7 @@ def initialize_database() -> None:
                 """
             )
 
-            sample_controls = {
-                case["control_id"]: case for case in ENTERPRISE_TEST_CASES
-            }
             for control in controls:
-                sample = sample_controls.get(control["control_id"], {})
                 cursor.execute(
                     """
                     INSERT INTO controls (
@@ -110,36 +105,15 @@ def initialize_database() -> None:
                     """,
                     (
                         control["control_id"],
-                        sample.get("name", control["name"]),
+                        control["name"],
                         control["group"],
-                        sample.get("objective", control["objective"]),
+                        control["objective"],
                         Jsonb(control["pass_criteria"]),
                         Jsonb(control["expected_evidence_types"]),
                         control["automation_level"],
-                        Jsonb(sample.get("deterministic_rule", {})),
+                        Jsonb({}),
                     ),
                 )
-
-            for case in ENTERPRISE_TEST_CASES:
-                for evidence_item in case["evidences"]:
-                    cursor.execute(
-                        """
-                        INSERT INTO evidence (
-                            evidence_id, control_id, evidence_type, source,
-                            extracted_text, sha256_hash, is_sample
-                        )
-                        VALUES (%s, %s, %s, %s, %s, %s, TRUE)
-                        ON CONFLICT (evidence_id) DO NOTHING
-                        """,
-                        (
-                            evidence_item["evidence_id"],
-                            case["control_id"],
-                            "SAMPLE",
-                            evidence_item["source"],
-                            evidence_item["content"],
-                            "SAMPLE",
-                        ),
-                    )
 
             for control_id, rubric in rubrics.items():
                 cursor.execute(
@@ -251,50 +225,9 @@ def collect_evidence(control_id: str, assessment_id: str | None = None) -> tuple
 
 
 def get_rubric(control_id: str) -> dict[str, Any] | None:
-    with get_connection() as connection:
-        with connection.cursor() as cursor:
-            cursor.execute(
-                "SELECT rubric FROM compliance_rubrics WHERE control_id = %s",
-                (control_id,),
-            )
-            row = cursor.fetchone()
-    return row[0] if row else None
-
-
-def save_evaluation(result: dict[str, Any]) -> None:
-    with get_connection() as connection:
-        with connection.cursor() as cursor:
-            if result.get('assessment_id'):
-                cursor.execute('''SELECT workflow_status FROM control_progress
-                    WHERE assessment_id=%s AND control_id=%s FOR UPDATE''',
-                    (result['assessment_id'],result['control_id']))
-                progress = cursor.fetchone()
-                if not progress or progress[0] == 'RUNNING':
-                    raise EvaluationBusy('Control is running or outside this assessment.')
-            cursor.execute(
-                """
-                INSERT INTO evaluations (
-                    control_id, status, confidence, rationale, evidence_ids, audit_trail, assessment_id, evaluated_by
-                )
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s) RETURNING evaluation_id
-                """,
-                (
-                    result["control_id"],
-                    result["status"],
-                    result["confidence"],
-                    result["rationale"],
-                    Jsonb(result["evidence_ids"]),
-                    Jsonb(result["audit_trail"]),
-                    result.get("assessment_id"), result.get("evaluated_by"),
-                ),
-            )
-            evaluation_id = cursor.fetchone()[0]
-            if result.get('assessment_id'):
-                flow = 'WAITING_EVIDENCE' if result['status']=='Insufficient Evidence' else ('NEEDS_REVIEW' if result['status']=='Not Applicable' else 'COMPLETED')
-                cursor.execute('''UPDATE control_progress SET latest_evaluation_id=%s,compliance_status=%s,
-                    workflow_status=%s,updated_at=NOW(),completed_at=CASE WHEN %s='COMPLETED' THEN NOW() ELSE NULL END
-                    WHERE assessment_id=%s AND control_id=%s''',
-                    (evaluation_id,result['status'],flow,flow,result['assessment_id'],result['control_id']))
+    # Same authoritative version hashed for scope56 approval. The PostgreSQL
+    # seed uses ON CONFLICT DO NOTHING and may retain an older rubric forever.
+    return json.loads(RUBRICS_PATH.read_text(encoding='utf-8')).get(control_id)
 
 
 def save_evidence(
@@ -310,6 +243,12 @@ def save_evidence(
 ) -> None:
     with get_connection() as connection:
         with connection.cursor() as cursor:
+            if assessment_id:
+                cursor.execute('''SELECT workflow_status FROM control_progress
+                    WHERE assessment_id=%s AND control_id=%s FOR UPDATE''',(assessment_id,control_id))
+                progress=cursor.fetchone()
+                if not progress or progress[0]=='RUNNING':
+                    raise EvaluationBusy('Control đang đánh giá hoặc không thuộc đợt; chưa thể thay bằng chứng.')
             cursor.execute(
                 """
                 INSERT INTO evidence (

@@ -5,7 +5,7 @@
 **Thời gian thực hiện đồ án: 12/10/2026–20/12/2026 (10 tuần).**
 Mỗi tuần tính từ **thứ Hai đến Chủ nhật**.
 
-**Tuần hiện tại: Tuần 5.** Cập nhật ngày 10/11/2026.
+**Tuần hiện tại: Tuần 5.** Cập nhật ngày 11/11/2026.
 
 | Tuần | Thời gian (thứ Hai–Chủ nhật) | Nội dung / trạng thái |
 |---|---|---|
@@ -20,12 +20,13 @@ Mỗi tuần tính từ **thứ Hai đến Chủ nhật**.
 - Mỗi tuần có một file `.md`, gồm kế hoạch, nhật ký, kết quả, vướng mắc và việc chuyển tiếp.
 - Đánh dấu `[x]` khi có kết quả và minh chứng; `[ ]` là việc chưa hoàn thành hoặc chưa xác nhận.
 - Nhật ký ghi ngày, các ý chính của công việc đã làm, kết quả và minh chứng cần thiết.
-- Không ghi thao tác commit/push GitHub, chạy/dừng hệ thống hoặc chuyển nhánh.
+- Ghi push trong mục **Đồng bộ GitHub** cuối tuần: thời gian thực tế (UTC+7), người push **Trần Văn Toàn**, nhánh và nội dung chính. Cùng ngày/cùng nhánh gộp một dòng, liệt kê giờ push; không lặp lại chi tiết công việc.
+- Không ghi thao tác chạy/dừng hệ thống hoặc chuyển nhánh.
 - Ghi công việc vào đúng khoảng ngày của tuần; phân biệt ngày thực hiện với ngày tạo minh chứng.
 - Các mục tuần 1–3 được tổng hợp từ tài liệu/mã hiện có, không thay thế nhật ký gốc của nhóm.
 - Phân biệt kết quả mô phỏng, số liệu benchmark lịch sử và kiểm tra thực tế mới chạy.
 
-Tuần 5 đã cập nhật công việc và kết quả đến ngày 10/11/2026; phần chấm và phê duyệt của người thật còn chờ thực hiện.
+Tuần 5 đã cập nhật công việc và kết quả đến ngày 11/11/2026; phần chấm và phê duyệt của người thật còn chờ thực hiện.
 Tuần 6–10 chưa tạo file; khi gần đến tuần tương ứng mới tạo và bổ sung kế hoạch.
 Khi đến tuần tương ứng, cập nhật nội dung và tuần hiện tại trong file này
 và chuyển những việc còn lại đã thống nhất từ tuần trước.

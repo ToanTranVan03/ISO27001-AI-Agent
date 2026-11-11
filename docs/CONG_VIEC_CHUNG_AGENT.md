@@ -7,9 +7,9 @@ Mở **Hồ sơ ISO** trên ứng dụng hiện tại. Bảng công việc hiể
 - **Tiếp tục / xem kết quả chung**: nếu đang chạy, theo dõi job có sẵn; nếu kết quả còn mới, dùng lại. Mục chưa đánh giá, lỗi hoặc dữ liệu đổi sẽ chạy đánh giá.
 - **Chủ động đánh giá lại**: yêu cầu một lượt mới kể cả khi kết quả còn mới; vẫn không vượt khóa job đang chạy.
 - **Agent tiếp tục các việc còn lại**: chọn kiểm soát có collector, ưu tiên kết quả cần tái đánh giá, sau đó mục chưa làm/lỗi theo số kiểm soát. Tối đa 12 mục/lượt; dừng khi lỗi, hết việc hoặc người dùng yêu cầu dừng.
-- Mục chờ bằng chứng/duyệt không tự chạy lặp khi dữ liệu chưa đổi. Xem kết luận, bổ sung hồ sơ và xử lý theo quyền tại Dashboard.
+- Mục chờ bằng chứng/duyệt không tự chạy lặp khi dữ liệu chưa đổi. Xem kết luận, bổ sung hồ sơ và xử lý theo quyền tại Phạm vi 56 control.
 
-Ví dụ: người A kiểm tra A.6.1; người B vào cùng đợt thấy kết quả đó và tiếp tục A.6.2. Nếu nguồn thay đổi, A.6.1 được đánh dấu cần đánh giá lại. Kết quả A.6.1 không thay thế hồ sơ từng nhân viên; nhân vật vào ca không tự được xem là đã thẩm tra tuyển dụng.
+Ví dụ: người A kiểm tra A.6.1; người B vào cùng đợt thấy kết quả đó và tiếp tục A.6.2. Nếu nguồn thay đổi, A.6.1 được đánh dấu cần đánh giá lại. Kết quả A.6.1 không thay thế hồ sơ từng nhân viên; có tài khoản không tự chứng minh đã thẩm tra tuyển dụng.
 
 ## Cơ chế
 

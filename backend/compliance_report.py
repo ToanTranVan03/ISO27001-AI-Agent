@@ -43,7 +43,7 @@ def newer_evidence(evidence, evaluation):
 
 def build_dossier(assessment_id, board, evidence_by_control, history_by_control=None, company_snapshot=None):
     from backend.company_evidence import PEOPLE_CONTROLS
-    from agent_core.simulation import CONTROLS
+    from agent_core.people_assessment import CONTROLS
     criteria = {c[0]: {'required_checks': c[2], 'owner': c[3], 'recommended_action': c[4]} for c in CONTROLS}
     records = []
     for item in board:

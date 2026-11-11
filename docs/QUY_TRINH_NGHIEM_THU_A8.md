@@ -54,8 +54,8 @@ Rubric và gói source được giữ trong từng báo cáo; không dùng nhãn
 ## 5. Đo, báo cáo và SoA
 
 ```powershell
-.venv\Scripts\python.exe -m agent_core.a8_benchmark --mode rules --transport docker --repeats 2 --output docs/a8-results/raw-v2-rules.json
-.venv\Scripts\python.exe -m agent_core.a8_benchmark --mode llm --transport docker --repeats 2 --output docs/a8-results/raw-v2-ollama-full.json
+.venv\Scripts\python.exe -m agent_core.a8_benchmark --mode rules --transport docker --repeats 2 --output work/a8-rules-new.json
+.venv\Scripts\python.exe -m agent_core.a8_benchmark --mode llm --transport docker --repeats 2 --output work/a8-llm-new.json
 ```
 
 CLI hỗ trợ `--profiles` để đo riêng nhóm; lưu số lần lặp, nguồn và engine. Hai lần chạy cùng ca không phải hai ca độc lập: báo cáo số ca duy nhất và số lượt riêng. Kết quả v1 giữ nguyên, không thay bằng v2 hoặc so sánh như cùng điều kiện.

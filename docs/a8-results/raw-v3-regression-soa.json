@@ -1,0 +1,315 @@
+{
+  "title": "Dự thảo SoA — phạm vi 18 control A.8",
+  "approval": "DRAFT_NOT_APPROVED",
+  "scope": "Doanh nghiệp lab; chỉ 18 control trong catalog, không phải SoA đầy đủ của ISMS.",
+  "report_sha256": "38a4e4d6a698f4609c64abfd3c06a8e98a22b5ccf09767adae345f90e6a81a9e",
+  "generated_at": "2026-11-11T05:17:29.921881+00:00",
+  "entries": [
+    {
+      "control_id": "A.8.1",
+      "name": "User endpoint devices",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Endpoint; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "IT Endpoint",
+      "implementation_status": "Insufficient Evidence",
+      "rationale": "Dữ liệu cho check 'disk_encrypted' bị thiếu hoặc không thể đọc được, dẫn đến không đủ bằng chứng để đánh giá. Trong khi đó, check 'edr_active' đã thỏa mãn điều kiện pass, nhưng do thiếu bằng chứng cho 'disk_encrypted', nên không thể kết luận ISMS tuân thủ yêu cầu.",
+      "evidence_ids": [
+        "A8RAW-e22c6cc40d237c9bc50702aa"
+      ],
+      "evidence_source": "raw-lab://A.8.1",
+      "evidence_sha256": "e22c6cc40d237c9bc50702aa7a65d61df5626f31359662077daa7db87d36196c",
+      "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.2",
+      "name": "Privileged access rights",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ IAM; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "IAM",
+      "implementation_status": "Insufficient Evidence",
+      "rationale": "Do thiếu tệp 'access-review.csv', nguồn không đọc được hoặc định dạng không hợp lệ, dẫn đến không thể xác nhận liệu tất cả quyết định đã được phê duyệt và ngày review có trong 90 ngày gần đây hay không. Tuy nhiên, tệp 'sudoers' cho thấy labadmin có quyền sudo đã được phê duyệt.",
+      "evidence_ids": [
+        "A8RAW-233d588d3b6634daeb82ca24"
+      ],
+      "evidence_source": "raw-lab://A.8.2",
+      "evidence_sha256": "233d588d3b6634daeb82ca248f5705ff0461614ede6dffd52349630de958f158",
+      "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.3",
+      "name": "Information access restriction",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ IAM; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "IAM",
+      "implementation_status": "Insufficient Evidence",
+      "rationale": "Bằng chứng cho kiểm tra 'access_review_current' bị thiếu hoặc không thể đọc, dẫn đến trạng thái 'unknown'. Do đó, không đủ bằng chứng để đánh giá trạng thái tuân thủ.",
+      "evidence_ids": [
+        "A8RAW-69cfcef10a8a23735660b933"
+      ],
+      "evidence_source": "raw-lab://A.8.3",
+      "evidence_sha256": "69cfcef10a8a23735660b933a7b41ec1cfb58aeed4123db3ebca9eb4a76f03a3",
+      "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.5",
+      "name": "Secure authentication",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ IAM; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "IAM",
+      "implementation_status": "Insufficient Evidence",
+      "rationale": "Trong bằng chứng, kiểm tra 'legacy_auth_disabled' không có đủ dữ liệu để đánh giá, do tệp 'legacy-auth.conf' bị thiếu, sai định dạng hoặc nguồn không đọc được. Tuy nhiên, kiểm tra 'mfa_enforced' đã được đánh giá là true, cho thấy SSH yêu cầu publickey cùng keyboard-interactive. Tuy nhiên, do thiếu thông tin về 'legacy_auth_disabled', chúng ta không thể đưa ra quyết định đầy đủ.",
+      "evidence_ids": [
+        "A8RAW-a9f5c728263f7dccde3c40be"
+      ],
+      "evidence_source": "raw-lab://A.8.5",
+      "evidence_sha256": "a9f5c728263f7dccde3c40be2999715b4e80f280b7ef2c0911c80c1768b6ffc1",
+      "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.7",
+      "name": "Protection against malware",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Endpoint; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "SOC",
+      "implementation_status": "Insufficient Evidence",
+      "rationale": "Dữ liệu cho check 'signatures_current' bị thiếu hoặc không đọc được, dẫn đến tình trạng unknown. Mặc dù check 'antimalware_active' đạt yêu cầu, nhưng do thiếu thông tin về 'signatures_current', chúng ta không thể đánh giá toàn bộ yêu cầu A.8.7.",
+      "evidence_ids": [
+        "A8RAW-12b93d9fe12188b957698380"
+      ],
+      "evidence_source": "raw-lab://A.8.7",
+      "evidence_sha256": "12b93d9fe12188b9576983809970639727f31ab9ad3b27e53a7cbf9b3d2a17fc",
+      "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.8",
+      "name": "Management of technical vulnerabilities",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Vulnerability; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "SecOps",
+      "implementation_status": "Insufficient Evidence",
+      "rationale": "Dữ liệu cho check 'critical_findings_remediated' bị thiếu, sai định dạng hoặc nguồn không đọc được, dẫn đến không thể xác nhận tình trạng của finding critical. Do đó, không đủ bằng chứng để đánh giá trạng thái tuân thủ.",
+      "evidence_ids": [
+        "A8RAW-6b8d861bfef0189c32246147"
+      ],
+      "evidence_source": "raw-lab://A.8.8",
+      "evidence_sha256": "6b8d861bfef0189c322461471c591488d9a6d7e281f99507de640ce21a633010",
+      "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.9",
+      "name": "Configuration management",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Configuration; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "IT Operations",
+      "implementation_status": "Insufficient Evidence",
+      "rationale": "Dữ liệu cung cấp cho kiểm tra 'drift_resolved' bị thiếu hoặc không đọc được, dẫn đến tình trạng unknown. Do đó, không đủ bằng chứng để xác nhận trạng thái của kiểm tra này. Mặc dù kiểm tra 'baseline_approved' đã đạt yêu cầu, nhưng sự thiếu hụt trong 'drift_resolved' khiến tổng thể không đủ bằng chứng để đánh giá.",
+      "evidence_ids": [
+        "A8RAW-8642ebb9d7b0971708a7b638"
+      ],
+      "evidence_source": "raw-lab://A.8.9",
+      "evidence_sha256": "8642ebb9d7b0971708a7b638fac22f296e9a33de530c8910d96ab5e424ae2743",
+      "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.10",
+      "name": "Information deletion",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Data; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "Data owner",
+      "implementation_status": "Insufficient Evidence",
+      "rationale": "Do thiếu tệp/trường hoặc sai định dạng của tệp deletion.log, dẫn đến không thể xác nhận liệu đối tượng đã bị xóa hay không. Tuy nhiên, chính sách xóa dữ liệu theo retention.conf đã được thực hiện đúng.",
+      "evidence_ids": [
+        "A8RAW-d3c840b24df090764f92bd3a"
+      ],
+      "evidence_source": "raw-lab://A.8.10",
+      "evidence_sha256": "d3c840b24df090764f92bd3a64211e5ec629b653683f8713965336b0a3ea25fe",
+      "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.12",
+      "name": "Data leakage prevention",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Data; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "SOC",
+      "implementation_status": "Insufficient Evidence",
+      "rationale": "Trong bằng chứng, kiểm tra dlp_test_passed không có đủ dữ liệu để đánh giá. Tệp dlp.log bị thiếu hoặc không thể đọc được, dẫn đến tình trạng unknown. Do đó, không có đủ thông tin để xác nhận rằng DLP đã được kiểm tra và thông báo về việc chặn thông tin cá nhân (PII) đã được thực hiện.",
+      "evidence_ids": [
+        "A8RAW-269e3420f5daa189de2b214c"
+      ],
+      "evidence_source": "raw-lab://A.8.12",
+      "evidence_sha256": "269e3420f5daa189de2b214c6280926870ab395cb032c5ab7c0fc9218dcf0a42",
+      "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.13",
+      "name": "Information backup",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Backup; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "IT Operations",
+      "implementation_status": "Insufficient Evidence",
+      "rationale": "Trong bằng chứng, kiểm tra 'restore_test_passed' là null, do thiếu tệp 'restored.dat' hoặc tệp này không thể đọc được. Điều này dẫn đến không đủ bằng chứng để xác nhận rằng việc khôi phục đã thành công, do đó không thể đánh giá trạng thái của kiểm tra này.",
+      "evidence_ids": [
+        "A8RAW-158659420d660bf06eae66a9"
+      ],
+      "evidence_source": "raw-lab://A.8.13",
+      "evidence_sha256": "158659420d660bf06eae66a96db44bb35ba4107149cf70b6f3d3862cd17764ab",
+      "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.15",
+      "name": "Logging",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Logging; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "SOC",
+      "implementation_status": "Insufficient Evidence",
+      "rationale": "Dữ liệu không đủ để xác nhận rằng SHA256 của tệp audit.log khớp với manifest audit.sha256, do tệp audit.sha256 bị thiếu hoặc không đọc được. Điều này dẫn đến trạng thái unknown cho kiểm tra logs_integrity_protected, làm cho bằng chứng không đủ để đánh giá trạng thái Compliant.",
+      "evidence_ids": [
+        "A8RAW-a25b5795bf2952758cacd2d2"
+      ],
+      "evidence_source": "raw-lab://A.8.15",
+      "evidence_sha256": "a25b5795bf2952758cacd2d2c523cf58f58fc973d6ad142e6ce10991dc528b1b",
+      "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.16",
+      "name": "Monitoring activities",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Monitoring; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "SOC",
+      "implementation_status": "Insufficient Evidence",
+      "rationale": "Do tệp alert-delivery.log bị thiếu, không thể xác nhận liệu có bằng chứng delivery received hay không. Điều này dẫn đến tình trạng thiếu dữ liệu cần thiết để đánh giá kiểm tra alert_response_test_passed.",
+      "evidence_ids": [
+        "A8RAW-ceccae1d6a5248201c92697c"
+      ],
+      "evidence_source": "raw-lab://A.8.16",
+      "evidence_sha256": "ceccae1d6a5248201c92697c89b7739344dda3addf808aa923269c4d0a0edf00",
+      "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.17",
+      "name": "Clock synchronization",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Time; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "IT Operations",
+      "implementation_status": "Insufficient Evidence",
+      "rationale": "Trong bằng chứng, check 'trusted_time_configured' đã được cấu hình đúng, nhưng check 'clock_offset_within_policy' không có đủ dữ liệu để đánh giá do tệp 'tracking.txt' bị thiếu hoặc không đọc được. Do đó, không có đủ thông tin để xác nhận liệu clock offset có nằm trong chính sách hay không.",
+      "evidence_ids": [
+        "A8RAW-83cfca8d80f0f67881fed20a"
+      ],
+      "evidence_source": "raw-lab://A.8.17",
+      "evidence_sha256": "83cfca8d80f0f67881fed20a26828e333f6b44efece8d520f260051a8381c70b",
+      "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.19",
+      "name": "Installation of software on operational systems",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Software; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "IT Operations",
+      "implementation_status": "Insufficient Evidence",
+      "rationale": "Dữ liệu về approval CAB cho các gói phần mềm không đủ đầy đủ. Tệp packages.tsv bị thiếu, sai định dạng hoặc không đọc được, dẫn đến tình trạng unknown. Do đó, không thể xác nhận liệu các gói phần mềm đã được phê duyệt bởi CAB hay không.",
+      "evidence_ids": [
+        "A8RAW-af2cb068e2c671696d4ead73"
+      ],
+      "evidence_source": "raw-lab://A.8.19",
+      "evidence_sha256": "af2cb068e2c671696d4ead731803f47bb37cfe1e2b0fbeee4121bb685d6c897e",
+      "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.20",
+      "name": "Networks security",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Network; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "Network",
+      "implementation_status": "Insufficient Evidence",
+      "rationale": "Bằng chứng cho kiểm soát A.8.20 chỉ có đủ cho phần kiểm tra 'firewall_default_deny', nhưng thiếu tệp 'firewall-review.csv' cần thiết cho phần kiểm tra 'firewall_rules_reviewed'. Do đó, không có đủ thông tin để đánh giá toàn bộ kiểm soát.",
+      "evidence_ids": [
+        "A8RAW-a595fb89583616d0653f5da9"
+      ],
+      "evidence_source": "raw-lab://A.8.20",
+      "evidence_sha256": "a595fb89583616d0653f5da9221c6aeabdd391c4039124c11474d1898e7d4d1c",
+      "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.22",
+      "name": "Segregation of networks",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Network; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "Network",
+      "implementation_status": "Insufficient Evidence",
+      "rationale": "Dữ liệu không đủ để xác nhận rằng kiểm tra phân đoạn đã được thực hiện thành công. Tệp zones.csv cho thấy các subnet không giao nhau và không có overlap, nhưng tệp connectivity.log bị thiếu hoặc không thể đọc, dẫn đến không thể xác minh điều kiện pass cho kiểm tra segmentation_test_passed.",
+      "evidence_ids": [
+        "A8RAW-6a368fce8ab1bcc6e03d12a9"
+      ],
+      "evidence_source": "raw-lab://A.8.22",
+      "evidence_sha256": "6a368fce8ab1bcc6e03d12a905cf4be14da1bb3bb91bc205f10060e61497e019",
+      "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.24",
+      "name": "Use of cryptography",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Crypto; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "Security",
+      "implementation_status": "Insufficient Evidence",
+      "rationale": "Do thiếu tệp key-rotation.csv, nguồn không đọc được => unknown, dẫn đến không thể xác nhận điều kiện pass cho check key_rotation_current. Tuy nhiên, approved_crypto_configured đã được cấu hình đúng.",
+      "evidence_ids": [
+        "A8RAW-f6337b065e73be1dd755694d"
+      ],
+      "evidence_source": "raw-lab://A.8.24",
+      "evidence_sha256": "f6337b065e73be1dd755694dbcca40908a1dc6486825a415239741e0bbf399cc",
+      "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    },
+    {
+      "control_id": "A.8.32",
+      "name": "Change management",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Change; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "applicability_approved": false,
+      "owner": "IT Operations",
+      "implementation_status": "Insufficient Evidence",
+      "rationale": "Dữ liệu cho check 'rollback_test_recorded' bị thiếu hoặc không thể đọc được, dẫn đến không đủ bằng chứng để đánh giá. Mặc dù 'change_approved' đã được phê duyệt, nhưng do thiếu thông tin về việc kiểm tra khôi phục rollback, chúng ta không thể xác nhận liệu hệ thống có tuân thủ yêu cầu hay không.",
+      "evidence_ids": [
+        "A8RAW-5fab9ec58e724291b2da7ac6"
+      ],
+      "evidence_source": "raw-lab://A.8.32",
+      "evidence_sha256": "5fab9ec58e724291b2da7ac6e2949abae693ecb61ad9b40c09f06392f1ea70cf",
+      "scope_note": "Kiểm tra đại diện theo tiêu chí lab; không bao phủ toàn bộ yêu cầu của control hoặc chứng nhận ISMS.",
+      "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt."
+    }
+  ]
+}

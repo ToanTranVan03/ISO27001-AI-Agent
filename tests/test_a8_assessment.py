@@ -89,7 +89,7 @@ def api_env(monkeypatch,tmp_path):
     monkeypatch.setattr(a8_api,'STORE',tmp_path)
     monkeypatch.setattr(a8_api,'require_campaign',lambda *_:None)
     monkeypatch.setattr(a8_api.pool,'submit',MagicMock())
-    actor={'user_id':'starter'}
+    actor={'user_id':'starter','role':'admin'}
     app.dependency_overrides[require_user]=lambda:actor
     yield a8_api,actor
     app.dependency_overrides.pop(require_user,None)
@@ -158,6 +158,32 @@ def test_restart_marks_only_running_jobs_failed(api_env):
     api.save(api.folder(aid)/(rid+'.json'),{'state':'running','reviews':[]})
     api.recover_interrupted()
     assert api.read(aid,rid)['state']=='failed'
+
+
+def test_assessor_cannot_create_answer_key_run_or_export_all_labels(api_env):
+    from fastapi.testclient import TestClient
+    from backend.main import app
+    api,actor=api_env
+    aid='7f7c009b-bdcd-5b33-934e-15251ad2c976'
+    base=f'/api/assessments/{aid}/a8'
+    with TestClient(app) as client:
+        created=client.post(base+'/runs',json={'mode':'rules','profile':'mixed'}).json()
+        rid=created['run_id']
+        assert 'designer_reference' not in created
+        assert api.read(aid,rid)['designer_reference']
+        api.worker(aid,rid,'mixed','rules')
+        actor.update(user_id='blind-assessor',role='assessor')
+        assert client.get(base+'/catalog').json()['can_start'] is False
+        assert client.post(base+'/runs',json={'mode':'rules'}).status_code==403
+        hidden=client.get(base+'/runs/'+rid).json()
+        for c in a8.catalog():
+            response=client.post(base+'/runs/'+rid+'/reviews',json={'control_id':c['control_id'],
+                'expected':'Partially Compliant','rationale':'Isolated test label, not a real human rating',
+                'report_sha256':hidden['report_sha256']})
+            assert response.status_code==200
+        visible=client.get(base+'/runs/'+rid).json()
+        assert 'report' in visible and 'designer_reference' not in visible
+        assert all(row['case_id'].endswith('-mixed') for row in visible['designer_comparison']['cases'])
 
 
 def test_run_records_provenance_and_soa_points_to_same_report():

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 export default function ComplianceDossier({ assessment, request, onOpenDashboard, onOpenCompany }) {
   const [report, setReport] = useState(null), [error, setError] = useState(''), [selected, setSelected] = useState('');
   const [job, setJob] = useState(null), [busy, setBusy] = useState(false);
@@ -7,6 +7,16 @@ export default function ComplianceDossier({ assessment, request, onOpenDashboard
   const queue = useRef({active:false, seen:new Set()});
   const [auto, setAuto] = useState(false), [notice,setNotice] = useState('');
   const labels = {not_started:'Chưa kiểm tra',running:'Đang xử lý',stale:'Cần đánh giá lại',failed:'Lỗi lần trước',awaiting_review:'Chờ người duyệt',waiting_evidence:'Chờ bằng chứng',evaluated:'Đã kiểm tra'};
+  const launch=useCallback(async (cid, force=false) => {
+    setBusy(true); setError('');
+    try {
+      const result=await request(`${base}/start`,{method:'POST',body:JSON.stringify({control_id:cid,force})});
+      if(result.control_id) { setSelected(result.control_id); queue.current.seen.add(result.control_id); }
+      if(result.job_id) { setJob(result); setNotice(result.action==='following'?'Đang theo dõi công việc chung đã được khởi chạy.':'Agent đang thực hiện công việc chung.'); }
+      else { setBusy(false); queue.current.active=false; setAuto(false); setNotice(result.action==='reused'?'Dùng kết quả đã lưu; xem kết luận và phần còn thiếu bên dưới.':result.message); }
+      setReport(await request(path));
+    } catch(e) {setError(e.message);setBusy(false);queue.current.active=false;setAuto(false);}
+  },[base,path,request]);
   useEffect(()=>()=>{queue.current.active=false;},[path]);
   useEffect(() => { let active = true; request(path).then(r => { if (active) setReport(r); }).catch(e => { if (active) setError(e.message); }); return () => { active = false; }; }, [path, request]);
   useEffect(() => { if (!job) return; let checking=false; const timer = setInterval(async () => {
@@ -20,19 +30,9 @@ export default function ComplianceDossier({ assessment, request, onOpenDashboard
       }
     }} catch (e) { queue.current.active=false; setAuto(false); setError(e.message); setJob(null); setBusy(false); }
     finally { checking=false; }
-  }, 2500); return () => clearInterval(timer); }, [job, path, request]);
+  }, 2500); return () => clearInterval(timer); }, [job, path, request, launch]);
   useEffect(()=>{let active=true;const timer=setInterval(()=>{request(path).then(r=>{if(active)setReport(r);}).catch(e=>{if(active)setError(e.message);});},5000);return()=>{active=false;clearInterval(timer);};},[path,request]);
   async function refresh() { try { setReport(await request(path)); setError(''); } catch(e) { setError(e.message); } }
-  async function launch(cid, force=false) {
-    setBusy(true); setError('');
-    try {
-      const result=await request(`${base}/start`,{method:'POST',body:JSON.stringify({control_id:cid,force})});
-      if(result.control_id) { setSelected(result.control_id); queue.current.seen.add(result.control_id); }
-      if(result.job_id) { setJob(result); setNotice(result.action==='following'?'Đang theo dõi công việc chung đã được khởi chạy.':'Agent đang thực hiện công việc chung.'); }
-      else { setBusy(false); queue.current.active=false; setAuto(false); setNotice(result.action==='reused'?'Dùng kết quả đã lưu; xem kết luận và phần còn thiếu bên dưới.':result.message); }
-      setReport(await request(path));
-    } catch(e) {setError(e.message);setBusy(false);queue.current.active=false;setAuto(false);}
-  }
   function automate() { queue.current={active:true,seen:new Set()};setAuto(true);launch(null); }
   function stopQueue() {queue.current.active=false;setAuto(false);setNotice('Đã dừng nhận việc tiếp theo; công việc đang chạy vẫn hoàn tất và lưu kết quả.');}
   function download() { const url = URL.createObjectURL(new Blob([JSON.stringify(report,null,2)],{type:'application/json'})); const a=document.createElement('a');a.href=url;a.download=`ho-so-${assessment.assessment_id}.json`;a.click();URL.revokeObjectURL(url); }
