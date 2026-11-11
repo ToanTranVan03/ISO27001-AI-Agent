@@ -190,6 +190,13 @@ def node_verify(state: AgentState):
         state['rationale'] = 'Chưa đủ bằng chứng hợp lệ được viện dẫn để xác nhận kết luận.'
     if unknown:
         state['audit_trail'].append('VERIFY (REJECTED UNKNOWN EVIDENCE IDS)')
+    sources=state['collected_evidences']
+    if (state.get('source_mode')=='user_evidence_only' and sources and
+            all(e.get('source','').startswith('a8-capture://') for e in sources) and state['compliance_status']=='Compliant'):
+        state['compliance_status']='Insufficient Evidence'
+        state['confidence']=0.0
+        state['rationale']='Chỉ có phép thử lab đại diện; chưa đủ nguồn để xác nhận đáp ứng đầy đủ control trong hồ sơ toàn phạm vi.'
+        state['audit_trail'].append('VERIFY REPRESENTATIVE LAB SCOPE; FULL CONTROL NOT ESTABLISHED')
     state['audit_trail'].append('VERIFY')
     return state
 

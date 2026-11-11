@@ -1,6 +1,8 @@
 services:
   a8-lab:
-    image: ubuntu:22.04
+    image: iso-a8-live-lab:v2
+    build:
+      context: ./lab_a8
     container_name: iso-a8-lab
     network_mode: none
     security_opt:
@@ -10,6 +12,7 @@ services:
       - ./lab_a8/runtime.sh:/runtime.sh:ro
       - ./lab_a8/live_setup.sh:/live_setup.sh:ro
       - ./lab_a8/live_probe.sh:/live_probe.sh:ro
+      - ./lab_a8/extended_probe.py:/extended_probe.py:ro
     command: ["/bin/sh", "/runtime.sh"]
     healthcheck:
       test: ["CMD", "test", "-f", "/lab/ready"]

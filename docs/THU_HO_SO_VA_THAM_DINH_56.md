@@ -1,5 +1,13 @@
 # Thu hồ sơ và thẩm định toàn bộ 56 control
 
+> Đã có cầu nối nhập nguồn live A.8 vào hồ sơ 56, giữ nguồn lab và không chuyển kết luận/đáp án. Xem [hướng dẫn và số liệu mới](HOAN_THIEN_HO_SO_56.md), [danh sách công việc](VIEC_CAN_HOAN_THIEN_56.md). Chế độ không dùng preset nhận nguồn capture được nhập tường minh; chỉ có phép thử đại diện không đủ xác nhận đạt toàn control.
+
+## Cập nhật quy trình thẩm định ngày 11/11/2026
+
+Người đánh giá cần điền **từng tiêu chí**: đạt/không đạt/chưa rõ, căn cứ và nguồn viện dẫn. Kết luận tổng phải khớp rubric dự án; có tiêu chí chưa rõ thì giữ thiếu bằng chứng. Không suy ra thiếu hồ sơ là không tuân thủ. Thẩm định tổng hợp cũ giữ trong lịch sử nhưng cần rà lại theo `human-criteria-review-v2` trước khi duyệt SoA. Form khóa vào phiên bản bằng chứng lúc chọn control; dữ liệu đổi phải chọn lại và rà nguồn.
+
+Đây là các tiêu chí đã cấu hình của dự án, chưa chứng minh bao phủ toàn bộ nội dung ISO. Người phụ trách vẫn phải xác nhận rubric, ngưỡng và nguồn. Xem [gói bàn giao và phân công tuần 5](NGHIEM_THU_TUAN_05.md).
+
 ## Phần đã bổ sung
 
 - Connector thư mục bằng chứng dùng cho đủ 56 control, ngoài các probe raw/lab hiện có.

@@ -39,7 +39,14 @@ def read(aid,rid):
 
 def worker(aid,rid,profile,mode,transport="files"):
     try:
-        result=a8.run(profile,mode,transport)
+        from agent_core.a8_protocol import prepare,execute
+        # Persist the sealed evidence and recipe before inference, not after seeing
+        # model output. Run both engines against this same offline pack if needed.
+        doc=read(aid,rid)
+        protocol=prepare(profile,transport,str(doc['created_by']),'Đánh giá đại diện theo rubric đã lưu; không coi là kiểm định độc lập.')
+        with lock:
+            doc=read(aid,rid);doc['protocol']=protocol;save(folder(aid)/(rid+'.json'),doc)
+        result=execute(protocol,mode)['report']
         with lock:
             doc=read(aid,rid);doc.update(state='finished',report=result);save(folder(aid)/(rid+'.json'),doc)
     except Exception as exc:
@@ -66,6 +73,8 @@ class ReviewInput(BaseModel):
     expected: Literal['Compliant','Partially Compliant','Non-Compliant','Insufficient Evidence']
     rationale: str=Field(min_length=10,max_length=2000)
     report_sha256: str=Field(min_length=64,max_length=64)
+    assistance: Literal['unknown','unassisted','ai_assisted','team_discussion']='unknown'
+    prior_exposure: Literal['unknown','no','yes']='unknown'
 
 
 @router.get('/catalog')
@@ -75,9 +84,11 @@ def catalog(assessment_id: UUID,transport: Literal['files','docker','live']='fil
     history=json.loads(path.read_text(encoding='utf-8')) if path.exists() else []
     controls=a8.catalog(transport)
     current=next((r for r in reversed(history) if r['catalog_sha256']==a8.digest(controls)),None)
-    from evidence_collectors.a8_live import LIVE_IDS,LIVE_PROFILES
+    from evidence_collectors.a8_live import LIVE_IDS,LIVE_PROFILES,PASSIVE_IDS,VERSION
+    from evidence_collectors.a8_live_extended import SPECS
     return {'controls':controls,'can_start':user.get('role')=='admin','profiles':LIVE_PROFILES if transport=='live' else a8.PROFILES,
             'live_probe_controls':LIVE_IDS,'transport':transport,
+            'live_rubric_version':VERSION,'live_probe_groups':{'resource_observations':list(PASSIVE_IDS),'active_self_tests':list(SPECS)},
             'source_kind':'live-container-observation' if transport=='live' else 'raw-config-logs-or-isolated-docker',
             'rubric_approval':current,'lab_runtime':runtime_status()}
 
@@ -85,11 +96,12 @@ def catalog(assessment_id: UUID,transport: Literal['files','docker','live']='fil
 @router.get('/runs')
 def runs(assessment_id: UUID,user=Depends(require_user)):
     require_campaign(assessment_id,user)
-    docs=[json.loads(p.read_text(encoding='utf-8')) for p in sorted(folder(assessment_id).glob('*.json'),reverse=True)]
+    docs=sorted((json.loads(p.read_text(encoding='utf-8')) for p in folder(assessment_id).glob('*.json')),
+                key=lambda d:d.get('created_at',''),reverse=True)
     return [dict(run_id=d['run_id'],state=d['state'],created_at=d['created_at'],
                  mode=d['mode'] if str(d['created_by'])==str(user['user_id']) else 'blind',
                  profile=d['profile'] if str(d['created_by'])==str(user['user_id']) else 'Ẩn hồ sơ',
-                 mine=str(d['created_by'])==str(user['user_id'])) for d in docs]
+                 mine=str(d['created_by'])==str(user['user_id']),rubric_version=d.get('report',{}).get('rubric_version')) for d in docs]
 
 
 @router.post('/runs',status_code=202)
@@ -134,23 +146,28 @@ def result(assessment_id: UUID,run_id: UUID,user=Depends(require_user)):
                   evidence={k:v for k,v in r['evidence'].items() if k!='facts'}) for r in report['records']])
 
         labels=doc['designer_reference'] if 'designer_reference' in doc else json.loads((a8.LAB/'reference'/'designer_labels.json').read_text(encoding='utf-8'))
-        # Only most recent review per control by a different actor is scored.
-        latest={r['case_id']:r for r in (doc['reviews'] if owner else mine)}
         doc['designer_comparison']=score([report],labels)
-        doc['human_comparison']=score([report],list(latest.values()))
-        doc['reviewer_comparisons']={str(uid):score([report],[r for r in doc['reviews'] if r.get('reviewer_id')==uid]) for uid in {r.get('reviewer_id') for r in doc['reviews']}}
+        from agent_core.a8_review_analysis import analyze_reviews
+        doc['review_analysis']=analyze_reviews(report,doc['reviews'] if owner else mine,doc['created_by'])
+        analysis=doc['review_analysis']
+        doc['reviewer_comparisons']=analysis['reviewer_comparisons']
+        # A table must not silently merge person B's A.8.1 with person C's
+        # A.8.2. All raters remain separately available in review_analysis.
+        reviewer=next(iter(sorted(analysis['complete_independent_reviewers'])),None)
+        doc['human_reference_reviewer_id']=reviewer
+        doc['human_comparison']=doc['reviewer_comparisons'][reviewer] if reviewer else score([report],[])
         doc['soa']=a8.soa(report)
         records=report['records']
         doc['readiness']=dict(total_controls=len(records),
-            controls_with_observations=sum(bool(r['evidence'].get('artifacts')) for r in records),
+            controls_with_observations=sum(r['evidence'].get('observation_available',bool(r['evidence'].get('artifacts'))) for r in records),
             insufficient_controls=[r['control_id'] for r in records if any(v is None for v in r['evidence']['facts'].values())],
             engine_errors=[dict(control_id=r['control_id'],error=r['error'],diagnostic=r.get('diagnostic')) for r in records if r['error']],
             rubric_conflicts=[dict(control_id=r['control_id'],proposed_status=r['status'],rubric_status=a8.rules(r['evidence'])['status'])
                 for r in records if r['status'] and r['status']!=a8.rules(r['evidence'])['status']],
-            complete_independent_reviewers=sum({r['control_id'] for r in doc['reviews'] if r['reviewer_id']==uid}=={r['control_id'] for r in records}
-                for uid in {r['reviewer_id'] for r in doc['reviews']}),
+            complete_independent_reviewers=len(analysis['complete_independent_reviewers']),
+            complete_submitted_reviewers=len(analysis['complete_reviewers']),
             note='Có bằng chứng hoặc chạy xong không đồng nghĩa đạt kiểm soát. Cần thẩm định và phê duyệt thật.')
-        if doc.get('soa_approval_history'):
+        if doc.get('soa_approval_history') and analysis['complete_independent_reviewers']:
             approval=doc['soa_approval_history'][-1]
             doc['soa']['approval']='HUMAN_APPROVED_LIMITED_SCOPE'
             doc['soa']['human_approval']=approval
@@ -178,11 +195,23 @@ def review(assessment_id: UUID,run_id: UUID,req: ReviewInput,user=Depends(requir
         record=next((r for r in doc['report']['records'] if r['control_id']==req.control_id),None)
         if not record:raise HTTPException(404,'Không thuộc phạm vi lượt này.')
         doc['reviews'].append(dict(case_id=record['case_id'],control_id=req.control_id,expected=req.expected,
-            rationale=req.rationale,reviewer_id=user['user_id'],label_origin='human-submitted-'+REVIEW_PROTOCOL,
+            rationale=req.rationale,reviewer_id=user['user_id'],reviewer_name=user.get('display_name') or user.get('username'),label_origin='human-submitted-'+REVIEW_PROTOCOL,
+            assistance=req.assistance,prior_exposure=req.prior_exposure,provenance_kind='reviewer-self-declaration',
             evidence_sha256=record['evidence']['source_sha256'],report_sha256=doc['report']['sha256'],
             reviewed_at=datetime.now(timezone.utc).isoformat()))
         save(folder(assessment_id)/(str(run_id)+'.json'),doc)
     return {'saved':True}
+
+
+@router.post('/runs/{run_id}/import-sources')
+def import_dossier_sources(assessment_id: UUID,run_id: UUID,user=Depends(require_user)):
+    require_campaign(assessment_id,user)
+    if user.get('role')!='admin':raise HTTPException(403,'Chỉ admin chuyển nguồn lab vào hồ sơ toàn phạm vi.')
+    from backend.a8_evidence_import import import_sources
+    with lock:
+        doc=read(assessment_id,run_id)
+        try:return import_sources(str(assessment_id),str(run_id),doc,user['user_id'])
+        except ValueError as exc:raise HTTPException(409,str(exc)) from exc
 
 
 def recover_interrupted():
@@ -238,9 +267,9 @@ def approve_soa(assessment_id: UUID,run_id: UUID,req: SoAApproval,user=Depends(r
         if doc.get('review_protocol')!=REVIEW_PROTOCOL:raise HTTPException(409,'Lượt cũ chưa dùng giao thức chấm mù mới; cần tạo và chấm lượt mới trước khi duyệt.')
         ids={r['control_id'] for r in doc['report']['records']}
         if {r.control_id for r in req.decisions}!=ids:raise HTTPException(422,'Cần quyết định đủ 18 control, không trùng.')
-        reviewers={r['reviewer_id'] for r in doc['reviews']}
-        if not any({r['control_id'] for r in doc['reviews'] if r['reviewer_id']==uid}==ids for uid in reviewers):
-            raise HTTPException(409,'Cần người đánh giá hoàn tất độc lập đủ 18 control trước khi phê duyệt.')
+        from agent_core.a8_review_analysis import analyze_reviews
+        if not analyze_reviews(doc['report'],doc['reviews'],doc['created_by'])['complete_independent_reviewers']:
+            raise HTTPException(409,'Cần người đánh giá hoàn tất đủ 18 control, khai báo tự chấm và chưa xem đáp án. Nhãn có hỗ trợ/chưa khai báo được giữ riêng, không tính là độc lập.')
         path=folder(assessment_id)/'settings'/'rubric-approvals.json'
         approvals=json.loads(path.read_text(encoding='utf-8')) if path.exists() else []
         if not any(r['catalog_sha256']==doc['report']['catalog_sha256'] for r in approvals):
@@ -278,7 +307,9 @@ def summary(assessment_id: UUID,user=Depends(require_user)):
             eligible=doc['reviews'] if str(doc['created_by'])==str(user['user_id']) else [r for r in doc['reviews'] if str(r['reviewer_id'])==str(user['user_id'])]
             for reviewer in {r['reviewer_id'] for r in eligible}:
                 refs=[r for r in eligible if r['reviewer_id']==reviewer and r.get('report_sha256')==doc['report']['sha256']]
-                human.append(dict(run_id=doc['run_id'],reviewer_id=reviewer,comparison=score([doc['report']],refs)))
+                from agent_core.a8_review_analysis import declared_independent
+                human.append(dict(run_id=doc['run_id'],reviewer_id=reviewer,comparison_kind='all-submitted-including-assisted',
+                    comparison=score([doc['report']],refs),independent_comparison=score([doc['report']],[r for r in refs if declared_independent(r)])))
         result.append(dict(rubric_version=version,catalog_sha256=catalog_hash,mode=mode,transport=transport,
                            assessor_version=assessor_version,
                            implementation_sha256=implementation_hash,

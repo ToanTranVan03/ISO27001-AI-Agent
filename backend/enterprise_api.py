@@ -204,6 +204,14 @@ def collect_packages(assessment_id: UUID,req: CollectPackage,user: dict=Depends(
             'note':'Nguồn do người phụ trách cung cấp; chưa xác thực nội dung chỉ từ việc thu nhận/hash.'}
 
 
+class CriterionReview(BaseModel):
+    model_config=ConfigDict(str_strip_whitespace=True,extra='forbid')
+    criterion_index: int=Field(ge=0)
+    verdict: str=Field(pattern='^(met|not_met|unknown)$')
+    rationale: str=Field(min_length=10,max_length=1500)
+    evidence_ids: list[str]=Field(max_length=100)
+
+
 class ScopeReview(BaseModel):
     model_config=ConfigDict(str_strip_whitespace=True,extra='forbid')
     control_id: str
@@ -211,6 +219,7 @@ class ScopeReview(BaseModel):
     conclusion: str=Field(pattern='^(Compliant|Partially Compliant|Non-Compliant|Insufficient Evidence)$')
     rationale: str=Field(min_length=20,max_length=3000)
     evidence_ids: list[str]=Field(max_length=100)
+    criteria_reviews: list[CriterionReview]=Field(min_length=1,max_length=100)
 
 
 @router.post('/scope56/reviews')
@@ -227,10 +236,13 @@ def scope_review(assessment_id: UUID,req: ScopeReview,user: dict=Depends(require
         available={e['evidence_id'] for e in row['evidence']}
         if not set(req.evidence_ids)<=available:raise HTTPException(422,'Viện dẫn bằng chứng không thuộc control/đợt.')
         if req.conclusion in ('Compliant','Partially Compliant') and not req.evidence_ids:raise HTTPException(422,'Cần viện dẫn bằng chứng để xác nhận kết luận đạt/một phần.')
+        from backend.review_criteria import validate,PROTOCOL
+        try:validate(row['pass_criteria'],[c.model_dump() for c in req.criteria_reviews],req.evidence_ids,req.conclusion)
+        except ValueError as exc:raise HTTPException(422,str(exc)) from exc
         path=a8_api.folder(assessment_id)/'settings'/'scope56-reviews.json'
         history=json.loads(path.read_text(encoding='utf-8')) if path.exists() else []
         record={**req.model_dump(),'reviewed_by':user['user_id'],'reviewed_at':datetime.now(timezone.utc).isoformat(),
-                'protocol':'human-formal-review-not-blinded','machine_conclusion':row['conclusion']}
+                'protocol':PROTOCOL,'machine_conclusion':row['conclusion']}
         history.append(record);a8_api.save(path,history)
     return record
 

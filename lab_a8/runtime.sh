@@ -4,6 +4,7 @@ mkdir -p /lab/export
 cp -R /fixtures/. /lab/export/
 # Only container-local accounts/files are touched. No host paths or published ports.
 id labworker >/dev/null 2>&1 || useradd -m labworker
+id labadmin >/dev/null 2>&1 || useradd -m labadmin
 for profile in conforming mixed nonconforming incomplete; do
   root=/lab/export/$profile
   file="$root/A.8.13/backup.dat"
@@ -25,5 +26,6 @@ for profile in conforming mixed nonconforming incomplete; do
   printf 'account=labworker uid=%s install_write=%s backup_sha256=%s\n' "$(id -u labworker)" "$permission" "$(sha256sum "$file" | cut -d ' ' -f 1)" > "$root/runtime-probes.log"
 done
 /bin/sh /live_setup.sh
+python /extended_probe.py setup
 printf 'ready\n' > /lab/ready
 exec tail -f /dev/null

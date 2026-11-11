@@ -116,7 +116,7 @@ def test_persistent_job_guard_and_separate_human_review(api_env):
         result=client.get(path+'/runs/'+rid).json()
         assert result['state']=='finished'
         assert all(r['accuracy'] is None for r in result['human_comparison']['per_control'])
-        review={'control_id':'A.8.1','expected':'Non-Compliant','rationale':'Independent reviewer disagrees on evidence scope','report_sha256':result['report']['sha256']}
+        review={'control_id':'A.8.1','expected':'Non-Compliant','assistance':'unassisted','prior_exposure':'no','rationale':'Independent reviewer disagrees on evidence scope','report_sha256':result['report']['sha256']}
         assert client.post(path+'/runs/'+rid+'/reviews',json=review).status_code==409
         actor['user_id']='reviewer'
         assert client.post(path+'/runs/'+rid+'/reviews',json=review).status_code==200

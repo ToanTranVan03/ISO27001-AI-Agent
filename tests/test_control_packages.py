@@ -69,7 +69,7 @@ def test_soa_approval_invalidates_when_underlying_snapshot_changes():
     controls=packages.controls()
     decisions={c['control_id']:dict(applicable=True,reason='In project scope',treatment='Maintain controls') for c in controls}
     original=build_scope(AID,{'controls':[],'company_snapshot_hash':'before'},decisions=decisions)
-    reviews={c['control_id']:dict(conclusion='Insufficient Evidence',review_token=c['review_token'],reviewed_by='human') for c in original['controls']}
+    reviews={c['control_id']:dict(conclusion='Insufficient Evidence',review_token=c['review_token'],reviewed_by='human',protocol='human-criteria-review-v2',evidence_ids=[],criteria_reviews=[dict(criterion_index=i,verdict='unknown',rationale='No supporting evidence supplied',evidence_ids=[]) for i,_ in enumerate(c['pass_criteria'])]) for c in original['controls']}
     reviewed=build_scope(AID,{'controls':[],'company_snapshot_hash':'before'},decisions=decisions,reviews=reviews)
     assert not reviewed['soa']['approval_ready']
     rubric_approval={'rubric_sha256':reviewed['rubric_sha256'],'approved_by':'admin'}
@@ -109,7 +109,8 @@ def test_full_scope_review_and_approval_gates(monkeypatch,tmp_path):
     try:
         with TestClient(app) as client:
             review={'control_id':'A.6.1','review_token':report['controls'][0]['review_token'],
-                    'conclusion':'Compliant','rationale':'Reviewer checked the source documentation','evidence_ids':[]}
+                    'conclusion':'Compliant','rationale':'Reviewer checked the source documentation','evidence_ids':[],
+                    'criteria_reviews':[dict(criterion_index=i,verdict='unknown',rationale='No supporting evidence supplied',evidence_ids=[]) for i,_ in enumerate(report['controls'][0]['pass_criteria'])]}
             assert client.post(base+'/reviews',json=review).status_code==422
             review['conclusion']='Insufficient Evidence'
             assert client.post(base+'/reviews',json=review).status_code==200

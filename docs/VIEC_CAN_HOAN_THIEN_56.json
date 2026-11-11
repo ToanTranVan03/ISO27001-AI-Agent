@@ -1,0 +1,1073 @@
+{
+  "tasks": [
+    {
+      "stage": "rubric",
+      "owner_role": "Người phụ trách",
+      "control_id": null,
+      "priority_a8": false,
+      "message": "Rà tiêu chí, ngưỡng và nguồn được chấp nhận; ghi xác nhận rubric đúng phiên bản."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.8.1",
+      "priority_a8": true,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.8.10",
+      "priority_a8": true,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.8.12",
+      "priority_a8": true,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.8.13",
+      "priority_a8": true,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.8.15",
+      "priority_a8": true,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.8.16",
+      "priority_a8": true,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.8.17",
+      "priority_a8": true,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.8.19",
+      "priority_a8": true,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.8.2",
+      "priority_a8": true,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.8.20",
+      "priority_a8": true,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.8.22",
+      "priority_a8": true,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.8.24",
+      "priority_a8": true,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.8.3",
+      "priority_a8": true,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.8.32",
+      "priority_a8": true,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.8.5",
+      "priority_a8": true,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.8.7",
+      "priority_a8": true,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.8.8",
+      "priority_a8": true,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.8.9",
+      "priority_a8": true,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.6.1",
+      "priority_a8": false,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.6.2",
+      "priority_a8": false,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.6.3",
+      "priority_a8": false,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.6.4",
+      "priority_a8": false,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.6.5",
+      "priority_a8": false,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.6.6",
+      "priority_a8": false,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.6.7",
+      "priority_a8": false,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.6.8",
+      "priority_a8": false,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.7.1",
+      "priority_a8": false,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.7.10",
+      "priority_a8": false,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.7.11",
+      "priority_a8": false,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.7.12",
+      "priority_a8": false,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.7.13",
+      "priority_a8": false,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.7.14",
+      "priority_a8": false,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.7.2",
+      "priority_a8": false,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.7.3",
+      "priority_a8": false,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.7.4",
+      "priority_a8": false,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.7.5",
+      "priority_a8": false,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.7.6",
+      "priority_a8": false,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.7.7",
+      "priority_a8": false,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.7.8",
+      "priority_a8": false,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.7.9",
+      "priority_a8": false,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.8.11",
+      "priority_a8": false,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.8.14",
+      "priority_a8": false,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.8.18",
+      "priority_a8": false,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.8.21",
+      "priority_a8": false,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.8.23",
+      "priority_a8": false,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.8.25",
+      "priority_a8": false,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.8.26",
+      "priority_a8": false,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.8.27",
+      "priority_a8": false,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.8.28",
+      "priority_a8": false,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.8.29",
+      "priority_a8": false,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.8.30",
+      "priority_a8": false,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.8.31",
+      "priority_a8": false,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.8.33",
+      "priority_a8": false,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.8.34",
+      "priority_a8": false,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.8.4",
+      "priority_a8": false,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "applicability",
+      "owner_role": "Người phụ trách",
+      "control_id": "A.8.6",
+      "priority_a8": false,
+      "message": "Xác định tính áp dụng và kế hoạch xử lý có căn cứ."
+    },
+    {
+      "stage": "sources",
+      "owner_role": "Chủ sở hữu hồ sơ",
+      "control_id": "A.6.1",
+      "priority_a8": false,
+      "message": "Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định."
+    },
+    {
+      "stage": "sources",
+      "owner_role": "Chủ sở hữu hồ sơ",
+      "control_id": "A.6.3",
+      "priority_a8": false,
+      "message": "Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định."
+    },
+    {
+      "stage": "sources",
+      "owner_role": "Chủ sở hữu hồ sơ",
+      "control_id": "A.6.4",
+      "priority_a8": false,
+      "message": "Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định."
+    },
+    {
+      "stage": "sources",
+      "owner_role": "Chủ sở hữu hồ sơ",
+      "control_id": "A.6.5",
+      "priority_a8": false,
+      "message": "Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định."
+    },
+    {
+      "stage": "sources",
+      "owner_role": "Chủ sở hữu hồ sơ",
+      "control_id": "A.6.6",
+      "priority_a8": false,
+      "message": "Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định."
+    },
+    {
+      "stage": "sources",
+      "owner_role": "Chủ sở hữu hồ sơ",
+      "control_id": "A.6.7",
+      "priority_a8": false,
+      "message": "Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định."
+    },
+    {
+      "stage": "sources",
+      "owner_role": "Chủ sở hữu hồ sơ",
+      "control_id": "A.6.8",
+      "priority_a8": false,
+      "message": "Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định."
+    },
+    {
+      "stage": "sources",
+      "owner_role": "Chủ sở hữu hồ sơ",
+      "control_id": "A.7.1",
+      "priority_a8": false,
+      "message": "Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định."
+    },
+    {
+      "stage": "sources",
+      "owner_role": "Chủ sở hữu hồ sơ",
+      "control_id": "A.7.10",
+      "priority_a8": false,
+      "message": "Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định."
+    },
+    {
+      "stage": "sources",
+      "owner_role": "Chủ sở hữu hồ sơ",
+      "control_id": "A.7.11",
+      "priority_a8": false,
+      "message": "Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định."
+    },
+    {
+      "stage": "sources",
+      "owner_role": "Chủ sở hữu hồ sơ",
+      "control_id": "A.7.12",
+      "priority_a8": false,
+      "message": "Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định."
+    },
+    {
+      "stage": "sources",
+      "owner_role": "Chủ sở hữu hồ sơ",
+      "control_id": "A.7.13",
+      "priority_a8": false,
+      "message": "Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định."
+    },
+    {
+      "stage": "sources",
+      "owner_role": "Chủ sở hữu hồ sơ",
+      "control_id": "A.7.14",
+      "priority_a8": false,
+      "message": "Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định."
+    },
+    {
+      "stage": "sources",
+      "owner_role": "Chủ sở hữu hồ sơ",
+      "control_id": "A.7.2",
+      "priority_a8": false,
+      "message": "Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định."
+    },
+    {
+      "stage": "sources",
+      "owner_role": "Chủ sở hữu hồ sơ",
+      "control_id": "A.7.3",
+      "priority_a8": false,
+      "message": "Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định."
+    },
+    {
+      "stage": "sources",
+      "owner_role": "Chủ sở hữu hồ sơ",
+      "control_id": "A.7.4",
+      "priority_a8": false,
+      "message": "Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định."
+    },
+    {
+      "stage": "sources",
+      "owner_role": "Chủ sở hữu hồ sơ",
+      "control_id": "A.7.5",
+      "priority_a8": false,
+      "message": "Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định."
+    },
+    {
+      "stage": "sources",
+      "owner_role": "Chủ sở hữu hồ sơ",
+      "control_id": "A.7.6",
+      "priority_a8": false,
+      "message": "Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định."
+    },
+    {
+      "stage": "sources",
+      "owner_role": "Chủ sở hữu hồ sơ",
+      "control_id": "A.7.7",
+      "priority_a8": false,
+      "message": "Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định."
+    },
+    {
+      "stage": "sources",
+      "owner_role": "Chủ sở hữu hồ sơ",
+      "control_id": "A.7.8",
+      "priority_a8": false,
+      "message": "Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định."
+    },
+    {
+      "stage": "sources",
+      "owner_role": "Chủ sở hữu hồ sơ",
+      "control_id": "A.7.9",
+      "priority_a8": false,
+      "message": "Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định."
+    },
+    {
+      "stage": "sources",
+      "owner_role": "Chủ sở hữu hồ sơ",
+      "control_id": "A.8.11",
+      "priority_a8": false,
+      "message": "Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định."
+    },
+    {
+      "stage": "sources",
+      "owner_role": "Chủ sở hữu hồ sơ",
+      "control_id": "A.8.14",
+      "priority_a8": false,
+      "message": "Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định."
+    },
+    {
+      "stage": "sources",
+      "owner_role": "Chủ sở hữu hồ sơ",
+      "control_id": "A.8.18",
+      "priority_a8": false,
+      "message": "Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định."
+    },
+    {
+      "stage": "sources",
+      "owner_role": "Chủ sở hữu hồ sơ",
+      "control_id": "A.8.21",
+      "priority_a8": false,
+      "message": "Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định."
+    },
+    {
+      "stage": "sources",
+      "owner_role": "Chủ sở hữu hồ sơ",
+      "control_id": "A.8.23",
+      "priority_a8": false,
+      "message": "Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định."
+    },
+    {
+      "stage": "sources",
+      "owner_role": "Chủ sở hữu hồ sơ",
+      "control_id": "A.8.25",
+      "priority_a8": false,
+      "message": "Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định."
+    },
+    {
+      "stage": "sources",
+      "owner_role": "Chủ sở hữu hồ sơ",
+      "control_id": "A.8.26",
+      "priority_a8": false,
+      "message": "Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định."
+    },
+    {
+      "stage": "sources",
+      "owner_role": "Chủ sở hữu hồ sơ",
+      "control_id": "A.8.27",
+      "priority_a8": false,
+      "message": "Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định."
+    },
+    {
+      "stage": "sources",
+      "owner_role": "Chủ sở hữu hồ sơ",
+      "control_id": "A.8.28",
+      "priority_a8": false,
+      "message": "Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định."
+    },
+    {
+      "stage": "sources",
+      "owner_role": "Chủ sở hữu hồ sơ",
+      "control_id": "A.8.29",
+      "priority_a8": false,
+      "message": "Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định."
+    },
+    {
+      "stage": "sources",
+      "owner_role": "Chủ sở hữu hồ sơ",
+      "control_id": "A.8.30",
+      "priority_a8": false,
+      "message": "Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định."
+    },
+    {
+      "stage": "sources",
+      "owner_role": "Chủ sở hữu hồ sơ",
+      "control_id": "A.8.31",
+      "priority_a8": false,
+      "message": "Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định."
+    },
+    {
+      "stage": "sources",
+      "owner_role": "Chủ sở hữu hồ sơ",
+      "control_id": "A.8.33",
+      "priority_a8": false,
+      "message": "Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định."
+    },
+    {
+      "stage": "sources",
+      "owner_role": "Chủ sở hữu hồ sơ",
+      "control_id": "A.8.34",
+      "priority_a8": false,
+      "message": "Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định."
+    },
+    {
+      "stage": "sources",
+      "owner_role": "Chủ sở hữu hồ sơ",
+      "control_id": "A.8.4",
+      "priority_a8": false,
+      "message": "Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định."
+    },
+    {
+      "stage": "sources",
+      "owner_role": "Chủ sở hữu hồ sơ",
+      "control_id": "A.8.6",
+      "priority_a8": false,
+      "message": "Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.8.1",
+      "priority_a8": true,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.8.10",
+      "priority_a8": true,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.8.12",
+      "priority_a8": true,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.8.13",
+      "priority_a8": true,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.8.15",
+      "priority_a8": true,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.8.16",
+      "priority_a8": true,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.8.17",
+      "priority_a8": true,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.8.19",
+      "priority_a8": true,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.8.2",
+      "priority_a8": true,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.8.20",
+      "priority_a8": true,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.8.22",
+      "priority_a8": true,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.8.24",
+      "priority_a8": true,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.8.3",
+      "priority_a8": true,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.8.32",
+      "priority_a8": true,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.8.5",
+      "priority_a8": true,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.8.7",
+      "priority_a8": true,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.8.8",
+      "priority_a8": true,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.8.9",
+      "priority_a8": true,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.6.1",
+      "priority_a8": false,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.6.2",
+      "priority_a8": false,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.6.3",
+      "priority_a8": false,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.6.4",
+      "priority_a8": false,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.6.5",
+      "priority_a8": false,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.6.6",
+      "priority_a8": false,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.6.7",
+      "priority_a8": false,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.6.8",
+      "priority_a8": false,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.7.1",
+      "priority_a8": false,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.7.10",
+      "priority_a8": false,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.7.11",
+      "priority_a8": false,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.7.12",
+      "priority_a8": false,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.7.13",
+      "priority_a8": false,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.7.14",
+      "priority_a8": false,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.7.2",
+      "priority_a8": false,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.7.3",
+      "priority_a8": false,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.7.4",
+      "priority_a8": false,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.7.5",
+      "priority_a8": false,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.7.6",
+      "priority_a8": false,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.7.7",
+      "priority_a8": false,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.7.8",
+      "priority_a8": false,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.7.9",
+      "priority_a8": false,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.8.11",
+      "priority_a8": false,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.8.14",
+      "priority_a8": false,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.8.18",
+      "priority_a8": false,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.8.21",
+      "priority_a8": false,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.8.23",
+      "priority_a8": false,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.8.25",
+      "priority_a8": false,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.8.26",
+      "priority_a8": false,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.8.27",
+      "priority_a8": false,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.8.28",
+      "priority_a8": false,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.8.29",
+      "priority_a8": false,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.8.30",
+      "priority_a8": false,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.8.31",
+      "priority_a8": false,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.8.33",
+      "priority_a8": false,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.8.34",
+      "priority_a8": false,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.8.4",
+      "priority_a8": false,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "review",
+      "owner_role": "Người đánh giá",
+      "control_id": "A.8.6",
+      "priority_a8": false,
+      "message": "Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn."
+    },
+    {
+      "stage": "approval",
+      "owner_role": "Người phụ trách",
+      "control_id": null,
+      "priority_a8": false,
+      "message": "Hoàn tất các điều kiện quyết định/thẩm định/rubric trước khi trình duyệt SoA."
+    }
+  ],
+  "by_stage": {
+    "rubric": 1,
+    "applicability": 56,
+    "sources": 37,
+    "review": 56,
+    "approval": 1
+  },
+  "scope_total": 56,
+  "soa_approved": false,
+  "rubric_sha256": "dbf106d4cc9cf939e8bd3aba2cc7bf61c605b4c0e0068d6f113a14c942087c9c",
+  "soa_fingerprint": "f95a298fe69d071f2cead92b5347da9095799eb061499ccc87454eb5a6d57b01",
+  "note": "Danh sách việc còn thiếu, không phải tỷ lệ tuân thủ. Có nguồn không đồng nghĩa nguồn đúng. SoA được duyệt không đồng nghĩa mọi control đạt."
+}

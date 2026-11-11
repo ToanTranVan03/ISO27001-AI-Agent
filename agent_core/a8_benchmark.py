@@ -15,7 +15,13 @@ def score(reports, labels):
             rows.append(dict(control_id=r['control_id'],case_id=r['case_id'],prediction=r['status'],
                 expected=reference['expected'] if reference else None,
                 label_origin=reference.get('label_origin') if reference else None,
+                assistance=reference.get('assistance','unknown') if reference else None,
+                prior_exposure=reference.get('prior_exposure','unknown') if reference else None,
                 correct=(r['status']==reference['expected']) if reference else None,
+                first_pass_prediction=r.get('attempts',[{}])[0].get('status') if r.get('attempts') else r['status'],
+                repaired=r.get('repaired',False),attempt_count=len(r.get('attempts',[])),
+                execution_source=r.get('execution_source'),has_observations=r.get('evidence',{}).get('observation_available',bool(r.get('evidence',{}).get('artifacts'))),
+                inference_attempts=len(r.get('attempts',[])) if report.get('mode')=='llm' and r.get('execution_source')!='evidence-availability-check' else 0,
                 error=r['error'],collection_issue_count=len(r.get('evidence',{}).get('collection_errors',[])),duration_ms=r['duration_ms']))
     per=[]
     for cid in dict.fromkeys(r['control_id'] for r in rows):
@@ -33,8 +39,13 @@ def score(reports, labels):
             mean_duration_ms=sum(r['duration_ms'] for r in subset)/len(subset),
             errors=sum(r['error'] is not None for r in subset),collection_issues=sum(r['collection_issue_count'] for r in subset),correct=sum(r['correct'] is True for r in rated),
             accuracy=sum(r['correct'] is True for r in rated)/len(rated) if rated else None,
+            first_pass_accuracy=sum(r['first_pass_prediction']==r['expected'] for r in rated)/len(rated) if rated else None,
+            repaired=sum(r['repaired'] for r in subset),
+            observations=sum(r['has_observations'] for r in subset),inference_attempts=sum(r['inference_attempts'] for r in subset),
+            availability_guard_results=sum(r['execution_source']=='evidence-availability-check' for r in subset),
             confusion={a:{b:sum(r['expected']==a and (r['prediction'] or 'ERROR')==b for r in rated) for b in (*STATUSES,'ERROR')} for a in STATUSES}))
     return dict(per_control=per,cases=rows,reference_kind=sorted({r.get('label_origin','unknown') for r in labels}),
+                unique_cases=len({r['case_id'] for r in rows}),total_observations=len(rows),
                 note='Nhãn designer không phải kết quả người đánh giá độc lập. Lỗi engine tính là không khớp, không loại khỏi mẫu có nhãn.')
 
 

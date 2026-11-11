@@ -1,0 +1,560 @@
+{
+  "kind": "machine-dossier-evaluation-on-imported-live-sources",
+  "is_human_review": false,
+  "note": "Đánh giá rubric hồ sơ toàn phạm vi, không phải nhãn chuyên gia hoặc số đo accuracy.",
+  "summary": {
+    "Insufficient Evidence": 9,
+    "Partially Compliant": 8,
+    "Non-Compliant": 1
+  },
+  "records": [
+    {
+      "control_id": "A.8.1",
+      "job": {
+        "job_id": "ad65d7e7-c6e0-4b01-b4ff-abeebb81c7b4",
+        "assessment_id": "7f7c009b-bdcd-5b33-934e-15251ad2c976",
+        "control_id": "A.8.1",
+        "status": "SUCCEEDED",
+        "error_message": null,
+        "started_at": "2026-11-11T15:02:59.977906+00:00",
+        "finished_at": "2026-11-11T15:03:11.379122+00:00"
+      },
+      "latest_evaluation": {
+        "evaluation_id": 243,
+        "status": "Insufficient Evidence",
+        "confidence": 0.0,
+        "rationale": "Chỉ có phép thử lab đại diện; chưa đủ nguồn để xác nhận đáp ứng đầy đủ control trong hồ sơ toàn phạm vi.",
+        "evidence_ids": [
+          "A8CAP-44cea96f2be9969e90641a54044e872404b508ef"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY REPRESENTATIVE LAB SCOPE; FULL CONTROL NOT ESTABLISHED",
+          "VERIFY",
+          "REPORT"
+        ],
+        "created_at": "2026-11-11T15:03:11.379122+00:00",
+        "performed_by": "admin"
+      }
+    },
+    {
+      "control_id": "A.8.2",
+      "job": {
+        "job_id": "35f12e03-6923-4757-9a30-7b5d159c3b63",
+        "assessment_id": "7f7c009b-bdcd-5b33-934e-15251ad2c976",
+        "control_id": "A.8.2",
+        "status": "SUCCEEDED",
+        "error_message": null,
+        "started_at": "2026-11-11T15:03:12.078608+00:00",
+        "finished_at": "2026-11-11T15:03:18.539986+00:00"
+      },
+      "latest_evaluation": {
+        "evaluation_id": 244,
+        "status": "Insufficient Evidence",
+        "confidence": 0.0,
+        "rationale": "Chỉ có phép thử lab đại diện; chưa đủ nguồn để xác nhận đáp ứng đầy đủ control trong hồ sơ toàn phạm vi.",
+        "evidence_ids": [
+          "A8CAP-2b3187732da6b13fa7852e531273d61c74a5b26a"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY REPRESENTATIVE LAB SCOPE; FULL CONTROL NOT ESTABLISHED",
+          "VERIFY",
+          "REPORT"
+        ],
+        "created_at": "2026-11-11T15:03:18.539986+00:00",
+        "performed_by": "admin"
+      }
+    },
+    {
+      "control_id": "A.8.3",
+      "job": {
+        "job_id": "bd496413-275a-48e2-8223-5579bf43a5ff",
+        "assessment_id": "7f7c009b-bdcd-5b33-934e-15251ad2c976",
+        "control_id": "A.8.3",
+        "status": "SUCCEEDED",
+        "error_message": null,
+        "started_at": "2026-11-11T15:03:18.780644+00:00",
+        "finished_at": "2026-11-11T15:03:25.714027+00:00"
+      },
+      "latest_evaluation": {
+        "evaluation_id": 245,
+        "status": "Insufficient Evidence",
+        "confidence": 0.0,
+        "rationale": "Chỉ có phép thử lab đại diện; chưa đủ nguồn để xác nhận đáp ứng đầy đủ control trong hồ sơ toàn phạm vi.",
+        "evidence_ids": [
+          "A8CAP-f0ff998745f599c53ac48fa7adf0df0a813820ed"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY REPRESENTATIVE LAB SCOPE; FULL CONTROL NOT ESTABLISHED",
+          "VERIFY",
+          "REPORT"
+        ],
+        "created_at": "2026-11-11T15:03:25.714027+00:00",
+        "performed_by": "admin"
+      }
+    },
+    {
+      "control_id": "A.8.5",
+      "job": {
+        "job_id": "0a61205a-90ad-42a4-9433-0afc2efad230",
+        "assessment_id": "7f7c009b-bdcd-5b33-934e-15251ad2c976",
+        "control_id": "A.8.5",
+        "status": "SUCCEEDED",
+        "error_message": null,
+        "started_at": "2026-11-11T15:03:26.579548+00:00",
+        "finished_at": "2026-11-11T15:03:34.060726+00:00"
+      },
+      "latest_evaluation": {
+        "evaluation_id": 246,
+        "status": "Partially Compliant",
+        "confidence": 0.8,
+        "rationale": "Dữ liệu cho thấy xác thực hai yếu tố (MFA) không được áp dụng cho tất cả tài khoản, chỉ có mật khẩu được kiểm tra. MFA không được yêu cầu cho các tài khoản thường và mạng VPN. Ngoài ra, mật khẩu được chấp nhận mà không có yếu tố thứ hai, cho thấy chính sách mật khẩu chưa đủ mạnh.",
+        "evidence_ids": [
+          "A8CAP-db4051d2219b1058e9f8f9a3438ba4552f4ec720"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY",
+          "REPORT"
+        ],
+        "created_at": "2026-11-11T15:03:34.060726+00:00",
+        "performed_by": "admin"
+      }
+    },
+    {
+      "control_id": "A.8.7",
+      "job": {
+        "job_id": "b6e31d80-9f0b-4d08-b05e-ef2a5787fb5a",
+        "assessment_id": "7f7c009b-bdcd-5b33-934e-15251ad2c976",
+        "control_id": "A.8.7",
+        "status": "SUCCEEDED",
+        "error_message": null,
+        "started_at": "2026-11-11T15:03:34.411568+00:00",
+        "finished_at": "2026-11-11T15:03:41.461475+00:00"
+      },
+      "latest_evaluation": {
+        "evaluation_id": 247,
+        "status": "Partially Compliant",
+        "confidence": 0.8,
+        "rationale": "Phần mềm chống mã độc được cài đặt và hoạt động trên máy chủ và máy trạm, nhưng không có thông tin về việc cập nhật mẫu virus tự động trên tất cả máy trạm. Ngoài ra, không có thông tin về việc ngăn chặn người dùng tự ý tắt phần mềm.",
+        "evidence_ids": [
+          "A8CAP-2e434c67aeaa3e181d2871e80d18cfde45ade118"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY",
+          "REPORT"
+        ],
+        "created_at": "2026-11-11T15:03:41.461475+00:00",
+        "performed_by": "admin"
+      }
+    },
+    {
+      "control_id": "A.8.8",
+      "job": {
+        "job_id": "2b61756f-1124-46d3-ba3e-93181cfe722e",
+        "assessment_id": "7f7c009b-bdcd-5b33-934e-15251ad2c976",
+        "control_id": "A.8.8",
+        "status": "SUCCEEDED",
+        "error_message": null,
+        "started_at": "2026-11-11T15:03:42.163103+00:00",
+        "finished_at": "2026-11-11T15:03:50.526933+00:00"
+      },
+      "latest_evaluation": {
+        "evaluation_id": 248,
+        "status": "Partially Compliant",
+        "confidence": 0.8,
+        "rationale": "Hệ thống có quét lỗ hổng định kỳ và bản vá Critical được ghi nhận, nhưng quá trình cập nhật bản vá là thủ công và chậm trễ. Không có thông tin về tự động hóa quy trình quản lý lỗ hổng kỹ thuật.",
+        "evidence_ids": [
+          "A8CAP-a74dfad8d31b03db5d86a30f56561d5c96abc8a8"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY",
+          "REPORT"
+        ],
+        "created_at": "2026-11-11T15:03:50.526933+00:00",
+        "performed_by": "admin"
+      }
+    },
+    {
+      "control_id": "A.8.9",
+      "job": {
+        "job_id": "8c1f346d-8180-4f75-b8ca-17fe9f35ddc2",
+        "assessment_id": "7f7c009b-bdcd-5b33-934e-15251ad2c976",
+        "control_id": "A.8.9",
+        "status": "SUCCEEDED",
+        "error_message": null,
+        "started_at": "2026-11-11T15:03:50.963124+00:00",
+        "finished_at": "2026-11-11T15:03:58.646950+00:00"
+      },
+      "latest_evaluation": {
+        "evaluation_id": 249,
+        "status": "Partially Compliant",
+        "confidence": 0.8,
+        "rationale": "Hệ thống đã có cấu hình tiêu chuẩn (baseline) được xác định, nhưng trạng thái hiện tại không khớp với baseline đã đăng ký. Điều này cho thấy có sự thay đổi cấu hình chưa được phê duyệt. Ngoài ra, việc đánh giá chỉ được thực hiện trong môi trường lab, không phải trong môi trường sản xuất, nên không đủ để kết luận hoàn toàn tuân thủ.",
+        "evidence_ids": [
+          "A8CAP-1f9bbd0a1795fb577c141f4730f6e1c47b3a79a3"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY",
+          "REPORT"
+        ],
+        "created_at": "2026-11-11T15:03:58.646950+00:00",
+        "performed_by": "admin"
+      }
+    },
+    {
+      "control_id": "A.8.10",
+      "job": {
+        "job_id": "2d720d4a-e99a-409e-87dc-f82e81fa0716",
+        "assessment_id": "7f7c009b-bdcd-5b33-934e-15251ad2c976",
+        "control_id": "A.8.10",
+        "status": "SUCCEEDED",
+        "error_message": null,
+        "started_at": "2026-11-11T15:03:59.810329+00:00",
+        "finished_at": "2026-11-11T15:04:06.744376+00:00"
+      },
+      "latest_evaluation": {
+        "evaluation_id": 250,
+        "status": "Insufficient Evidence",
+        "confidence": 0.0,
+        "rationale": "Chỉ có phép thử lab đại diện; chưa đủ nguồn để xác nhận đáp ứng đầy đủ control trong hồ sơ toàn phạm vi.",
+        "evidence_ids": [
+          "A8CAP-f8e9fb75af2fa20dce130f2d7873d5b4973c4654"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY REPRESENTATIVE LAB SCOPE; FULL CONTROL NOT ESTABLISHED",
+          "VERIFY",
+          "REPORT"
+        ],
+        "created_at": "2026-11-11T15:04:06.744376+00:00",
+        "performed_by": "admin"
+      }
+    },
+    {
+      "control_id": "A.8.12",
+      "job": {
+        "job_id": "62c2210c-b504-44d0-bf6e-89afd5177f5a",
+        "assessment_id": "7f7c009b-bdcd-5b33-934e-15251ad2c976",
+        "control_id": "A.8.12",
+        "status": "SUCCEEDED",
+        "error_message": null,
+        "started_at": "2026-11-11T15:04:07.603935+00:00",
+        "finished_at": "2026-11-11T15:04:14.682818+00:00"
+      },
+      "latest_evaluation": {
+        "evaluation_id": 251,
+        "status": "Insufficient Evidence",
+        "confidence": 0.0,
+        "rationale": "Chỉ có phép thử lab đại diện; chưa đủ nguồn để xác nhận đáp ứng đầy đủ control trong hồ sơ toàn phạm vi.",
+        "evidence_ids": [
+          "A8CAP-049a459298395b29c35013f777e0a97db2b898fd"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY REPRESENTATIVE LAB SCOPE; FULL CONTROL NOT ESTABLISHED",
+          "VERIFY",
+          "REPORT"
+        ],
+        "created_at": "2026-11-11T15:04:14.682818+00:00",
+        "performed_by": "admin"
+      }
+    },
+    {
+      "control_id": "A.8.13",
+      "job": {
+        "job_id": "d8634e88-8b5d-4ae4-bb9d-a5da207754d1",
+        "assessment_id": "7f7c009b-bdcd-5b33-934e-15251ad2c976",
+        "control_id": "A.8.13",
+        "status": "SUCCEEDED",
+        "error_message": null,
+        "started_at": "2026-11-11T15:04:15.361306+00:00",
+        "finished_at": "2026-11-11T15:04:22.495728+00:00"
+      },
+      "latest_evaluation": {
+        "evaluation_id": 252,
+        "status": "Partially Compliant",
+        "confidence": 0.8,
+        "rationale": "Dữ liệu đã được sao lưu định kỳ, nhưng không có bằng chứng cho thấy đã diễn tập phục hồi dữ liệu thành công trong năm. Tệp backup.dat và backup.sha256 được kiểm tra, nhưng tệp restored.dat cho thấy quá trình khôi phục không thành công.",
+        "evidence_ids": [
+          "A8CAP-03c0aceb28e763c1a5fc5ffef66afd7a4973d552"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY",
+          "REPORT"
+        ],
+        "created_at": "2026-11-11T15:04:22.495728+00:00",
+        "performed_by": "admin"
+      }
+    },
+    {
+      "control_id": "A.8.15",
+      "job": {
+        "job_id": "7998c81e-0523-42cf-89bc-1a0955d43981",
+        "assessment_id": "7f7c009b-bdcd-5b33-934e-15251ad2c976",
+        "control_id": "A.8.15",
+        "status": "SUCCEEDED",
+        "error_message": null,
+        "started_at": "2026-11-11T15:04:23.153532+00:00",
+        "finished_at": "2026-11-11T15:04:30.821317+00:00"
+      },
+      "latest_evaluation": {
+        "evaluation_id": 253,
+        "status": "Partially Compliant",
+        "confidence": 0.8,
+        "rationale": "Hệ thống đã ghi nhật ký hoạt động của ứng dụng lab-service, nhưng lưu trữ phân tán trên từng máy chủ. Không có thông tin về việc ghi nhật ký vào hệ thống quản lý log tập trung (SIEM/Log Server) hay bảo vệ chống giả mạo. Nhật ký chỉ được lưu trữ trong thời gian ngắn, không đảm bảo 6 tháng theo yêu cầu.",
+        "evidence_ids": [
+          "A8CAP-024cdd973148a2651c48fdfd2ddcc5b4cd78b0e7"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY",
+          "REPORT"
+        ],
+        "created_at": "2026-11-11T15:04:30.821317+00:00",
+        "performed_by": "admin"
+      }
+    },
+    {
+      "control_id": "A.8.16",
+      "job": {
+        "job_id": "aab03096-021b-4069-a922-2dd6633648a2",
+        "assessment_id": "7f7c009b-bdcd-5b33-934e-15251ad2c976",
+        "control_id": "A.8.16",
+        "status": "SUCCEEDED",
+        "error_message": null,
+        "started_at": "2026-11-11T15:04:32.030702+00:00",
+        "finished_at": "2026-11-11T15:04:38.653145+00:00"
+      },
+      "latest_evaluation": {
+        "evaluation_id": 254,
+        "status": "Insufficient Evidence",
+        "confidence": 0.0,
+        "rationale": "Chỉ có phép thử lab đại diện; chưa đủ nguồn để xác nhận đáp ứng đầy đủ control trong hồ sơ toàn phạm vi.",
+        "evidence_ids": [
+          "A8CAP-a713f9fa99c99167cf0cad5cff36d366a593f140"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY REPRESENTATIVE LAB SCOPE; FULL CONTROL NOT ESTABLISHED",
+          "VERIFY",
+          "REPORT"
+        ],
+        "created_at": "2026-11-11T15:04:38.653145+00:00",
+        "performed_by": "admin"
+      }
+    },
+    {
+      "control_id": "A.8.17",
+      "job": {
+        "job_id": "f5f1c303-6f92-46da-aa45-339e0f93afa9",
+        "assessment_id": "7f7c009b-bdcd-5b33-934e-15251ad2c976",
+        "control_id": "A.8.17",
+        "status": "SUCCEEDED",
+        "error_message": null,
+        "started_at": "2026-11-11T15:04:39.775982+00:00",
+        "finished_at": "2026-11-11T15:04:47.320451+00:00"
+      },
+      "latest_evaluation": {
+        "evaluation_id": 255,
+        "status": "Insufficient Evidence",
+        "confidence": 0.7,
+        "rationale": "Bằng chứng chỉ ra rằng thiết bị đã xác minh thời gian ứng dụng trong môi trường lab, nhưng không chứng minh rằng các máy chủ, thiết bị mạng và ứng dụng đã được đồng bộ hóa thời gian từ NTP Server nội bộ hoặc quốc tế. Do đó, không đủ bằng chứng để kết luận về tính tuân thủ của yêu cầu.",
+        "evidence_ids": [
+          "A8CAP-069b8914e7421e30d8ac536d65c699e2c250b586"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY",
+          "REPORT"
+        ],
+        "created_at": "2026-11-11T15:04:47.320451+00:00",
+        "performed_by": "admin"
+      }
+    },
+    {
+      "control_id": "A.8.19",
+      "job": {
+        "job_id": "5a3661e3-4358-4aa8-bd3c-94a5cc3f090d",
+        "assessment_id": "7f7c009b-bdcd-5b33-934e-15251ad2c976",
+        "control_id": "A.8.19",
+        "status": "SUCCEEDED",
+        "error_message": null,
+        "started_at": "2026-11-11T15:04:48.585832+00:00",
+        "finished_at": "2026-11-11T15:04:56.797431+00:00"
+      },
+      "latest_evaluation": {
+        "evaluation_id": 256,
+        "status": "Non-Compliant",
+        "confidence": 0.9,
+        "rationale": "Dữ liệu bằng chứng chỉ ra rằng phần mềm đã được cài đặt nhưng không có thông tin xác nhận rằng chúng đã được phê duyệt. Điều này cho thấy không có kiểm soát chặt chẽ về việc cài đặt phần mềm trên môi trường vận hành.",
+        "evidence_ids": [
+          "A8CAP-bde6e149b94b95bebcb32c85678594a367d92fd5"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY",
+          "REPORT"
+        ],
+        "created_at": "2026-11-11T15:04:56.797431+00:00",
+        "performed_by": "admin"
+      }
+    },
+    {
+      "control_id": "A.8.20",
+      "job": {
+        "job_id": "30548f25-a5a5-4e65-aec8-18460163f5ee",
+        "assessment_id": "7f7c009b-bdcd-5b33-934e-15251ad2c976",
+        "control_id": "A.8.20",
+        "status": "SUCCEEDED",
+        "error_message": null,
+        "started_at": "2026-11-11T15:04:57.379576+00:00",
+        "finished_at": "2026-11-11T15:05:04.818033+00:00"
+      },
+      "latest_evaluation": {
+        "evaluation_id": 257,
+        "status": "Insufficient Evidence",
+        "confidence": 0.0,
+        "rationale": "Chỉ có phép thử lab đại diện; chưa đủ nguồn để xác nhận đáp ứng đầy đủ control trong hồ sơ toàn phạm vi.",
+        "evidence_ids": [
+          "A8CAP-2e2d47afc634522dd0499dd645f27e0e7fbd07eb"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY REPRESENTATIVE LAB SCOPE; FULL CONTROL NOT ESTABLISHED",
+          "VERIFY",
+          "REPORT"
+        ],
+        "created_at": "2026-11-11T15:05:04.818033+00:00",
+        "performed_by": "admin"
+      }
+    },
+    {
+      "control_id": "A.8.22",
+      "job": {
+        "job_id": "f6b38d22-4e69-47f1-96f1-80209e71ced5",
+        "assessment_id": "7f7c009b-bdcd-5b33-934e-15251ad2c976",
+        "control_id": "A.8.22",
+        "status": "SUCCEEDED",
+        "error_message": null,
+        "started_at": "2026-11-11T15:05:05.160570+00:00",
+        "finished_at": "2026-11-11T15:05:12.419393+00:00"
+      },
+      "latest_evaluation": {
+        "evaluation_id": 258,
+        "status": "Partially Compliant",
+        "confidence": 0.8,
+        "rationale": "Mạng được phân chia thành các vùng độc lập, nhưng các rule giao tiếp giữa các VLAN còn lỏng lẻo, cho phép truy cập (Any-Any) không cần thiết. Chỉ có kiểm soát truy cập giữa vùng nhân viên và vùng quản trị, nhưng không chứng minh VLAN/subnet isolation.",
+        "evidence_ids": [
+          "A8CAP-1c954d7fb9e886a8a91be7dfa90ba08046af681f"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY",
+          "REPORT"
+        ],
+        "created_at": "2026-11-11T15:05:12.419393+00:00",
+        "performed_by": "admin"
+      }
+    },
+    {
+      "control_id": "A.8.24",
+      "job": {
+        "job_id": "8bc7bfc9-a12b-4557-8503-da149b15eea5",
+        "assessment_id": "7f7c009b-bdcd-5b33-934e-15251ad2c976",
+        "control_id": "A.8.24",
+        "status": "SUCCEEDED",
+        "error_message": null,
+        "started_at": "2026-11-11T15:05:13.027808+00:00",
+        "finished_at": "2026-11-11T15:05:20.162196+00:00"
+      },
+      "latest_evaluation": {
+        "evaluation_id": 259,
+        "status": "Insufficient Evidence",
+        "confidence": 0.0,
+        "rationale": "Chỉ có phép thử lab đại diện; chưa đủ nguồn để xác nhận đáp ứng đầy đủ control trong hồ sơ toàn phạm vi.",
+        "evidence_ids": [
+          "A8CAP-a4eb2459788429948240fa639f336d3e96768267"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY REPRESENTATIVE LAB SCOPE; FULL CONTROL NOT ESTABLISHED",
+          "VERIFY",
+          "REPORT"
+        ],
+        "created_at": "2026-11-11T15:05:20.162196+00:00",
+        "performed_by": "admin"
+      }
+    },
+    {
+      "control_id": "A.8.32",
+      "job": {
+        "job_id": "f53ba1d7-8dea-4072-aa71-f86ace64f56b",
+        "assessment_id": "7f7c009b-bdcd-5b33-934e-15251ad2c976",
+        "control_id": "A.8.32",
+        "status": "SUCCEEDED",
+        "error_message": null,
+        "started_at": "2026-11-11T15:05:20.839515+00:00",
+        "finished_at": "2026-11-11T15:05:28.335942+00:00"
+      },
+      "latest_evaluation": {
+        "evaluation_id": 260,
+        "status": "Partially Compliant",
+        "confidence": 0.8,
+        "rationale": "Dữ liệu bằng chứng chỉ ra có quy trình quản lý thay đổi, nhưng việc phê duyệt (CAB) và kế hoạch khôi phục (Rollback) được thực hiện trong môi trường lab, không phải trong môi trường production. Điều này cho thấy quy trình không hoàn toàn tuân thủ yêu cầu của tiêu chuẩn.",
+        "evidence_ids": [
+          "A8CAP-ac2281e47cc8dca790c9a7598047b24a91905834"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY",
+          "REPORT"
+        ],
+        "created_at": "2026-11-11T15:05:28.335942+00:00",
+        "performed_by": "admin"
+      }
+    }
+  ]
+}

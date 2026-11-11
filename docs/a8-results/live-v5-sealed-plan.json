@@ -1,0 +1,1188 @@
+{
+  "protocol_version": "sealed-observations-v1",
+  "registered_at": "2026-11-11T13:43:15.443177+00:00",
+  "coordinator": "Tran Van Toan - technical pilot",
+  "objective": "Check bounded repair on live observations; no human validation claim",
+  "recipe": {
+    "model": "qwen2.5:7b",
+    "implementation_sha256": "7ccad743a04c4fc03ba4a56563cd661d7e1eb9ca096345937a902029ef4e4510",
+    "max_model_attempts": 2,
+    "temperature": 0,
+    "num_predict": 400,
+    "num_ctx": 4096
+  },
+  "snapshot": {
+    "profile": "mixed",
+    "transport": "live",
+    "captured_at": "2026-11-11T13:43:14.908318+00:00",
+    "catalog": [
+      {
+        "control_id": "A.8.1",
+        "name": "User endpoint devices",
+        "source": "Endpoint",
+        "checks": [
+          "edr_active",
+          "disk_encrypted"
+        ],
+        "owner": "IT Endpoint",
+        "applicable": true,
+        "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Endpoint; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+        "applicability_approved": false,
+        "rubric_version": "a8-live-v1",
+        "scope_note": "Chưa có probe live cho control này; phải kết luận thiếu bằng chứng.",
+        "criteria": [
+          {
+            "check": "edr_active",
+            "raw_source": "unavailable",
+            "pass_condition": "Chưa triển khai probe live.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "not-implemented"
+          },
+          {
+            "check": "disk_encrypted",
+            "raw_source": "unavailable",
+            "pass_condition": "Chưa triển khai probe live.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "not-implemented"
+          }
+        ],
+        "review_status": "PENDING_HUMAN_APPROVAL"
+      },
+      {
+        "control_id": "A.8.2",
+        "name": "Privileged access rights",
+        "source": "IAM",
+        "checks": [
+          "privileged_approved",
+          "privileged_review_current"
+        ],
+        "owner": "IAM",
+        "applicable": true,
+        "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ IAM; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+        "applicability_approved": false,
+        "rubric_version": "a8-live-v1",
+        "scope_note": "Chưa có probe live cho control này; phải kết luận thiếu bằng chứng.",
+        "criteria": [
+          {
+            "check": "privileged_approved",
+            "raw_source": "unavailable",
+            "pass_condition": "Chưa triển khai probe live.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "not-implemented"
+          },
+          {
+            "check": "privileged_review_current",
+            "raw_source": "unavailable",
+            "pass_condition": "Chưa triển khai probe live.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "not-implemented"
+          }
+        ],
+        "review_status": "PENDING_HUMAN_APPROVAL"
+      },
+      {
+        "control_id": "A.8.3",
+        "name": "Information access restriction",
+        "source": "IAM",
+        "checks": [
+          "access_default_deny",
+          "access_review_current"
+        ],
+        "owner": "IAM",
+        "applicable": true,
+        "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ IAM; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+        "applicability_approved": false,
+        "rubric_version": "a8-live-v1",
+        "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+        "criteria": [
+          {
+            "check": "access_default_deny",
+            "raw_source": "write_access_rc + resource_stat",
+            "pass_condition": "labworker không ghi được tệp nghiệp vụ (test -w trả 1).",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "live-container-observation"
+          },
+          {
+            "check": "access_review_current",
+            "raw_source": "access-review.csv",
+            "pass_condition": "Review cho labworker được approved trong 90 ngày; là hồ sơ lab, chưa phải phê duyệt chuyên gia.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "live-container-observation"
+          }
+        ],
+        "review_status": "PENDING_HUMAN_APPROVAL"
+      },
+      {
+        "control_id": "A.8.5",
+        "name": "Secure authentication",
+        "source": "IAM",
+        "checks": [
+          "mfa_enforced",
+          "legacy_auth_disabled"
+        ],
+        "owner": "IAM",
+        "applicable": true,
+        "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ IAM; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+        "applicability_approved": false,
+        "rubric_version": "a8-live-v1",
+        "scope_note": "Chưa có probe live cho control này; phải kết luận thiếu bằng chứng.",
+        "criteria": [
+          {
+            "check": "mfa_enforced",
+            "raw_source": "unavailable",
+            "pass_condition": "Chưa triển khai probe live.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "not-implemented"
+          },
+          {
+            "check": "legacy_auth_disabled",
+            "raw_source": "unavailable",
+            "pass_condition": "Chưa triển khai probe live.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "not-implemented"
+          }
+        ],
+        "review_status": "PENDING_HUMAN_APPROVAL"
+      },
+      {
+        "control_id": "A.8.7",
+        "name": "Protection against malware",
+        "source": "Endpoint",
+        "checks": [
+          "antimalware_active",
+          "signatures_current"
+        ],
+        "owner": "SOC",
+        "applicable": true,
+        "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Endpoint; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+        "applicability_approved": false,
+        "rubric_version": "a8-live-v1",
+        "scope_note": "Chưa có probe live cho control này; phải kết luận thiếu bằng chứng.",
+        "criteria": [
+          {
+            "check": "antimalware_active",
+            "raw_source": "unavailable",
+            "pass_condition": "Chưa triển khai probe live.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "not-implemented"
+          },
+          {
+            "check": "signatures_current",
+            "raw_source": "unavailable",
+            "pass_condition": "Chưa triển khai probe live.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "not-implemented"
+          }
+        ],
+        "review_status": "PENDING_HUMAN_APPROVAL"
+      },
+      {
+        "control_id": "A.8.8",
+        "name": "Management of technical vulnerabilities",
+        "source": "Vulnerability",
+        "checks": [
+          "scan_current",
+          "critical_findings_remediated"
+        ],
+        "owner": "SecOps",
+        "applicable": true,
+        "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Vulnerability; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+        "applicability_approved": false,
+        "rubric_version": "a8-live-v1",
+        "scope_note": "Chưa có probe live cho control này; phải kết luận thiếu bằng chứng.",
+        "criteria": [
+          {
+            "check": "scan_current",
+            "raw_source": "unavailable",
+            "pass_condition": "Chưa triển khai probe live.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "not-implemented"
+          },
+          {
+            "check": "critical_findings_remediated",
+            "raw_source": "unavailable",
+            "pass_condition": "Chưa triển khai probe live.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "not-implemented"
+          }
+        ],
+        "review_status": "PENDING_HUMAN_APPROVAL"
+      },
+      {
+        "control_id": "A.8.9",
+        "name": "Configuration management",
+        "source": "Configuration",
+        "checks": [
+          "baseline_approved",
+          "drift_resolved"
+        ],
+        "owner": "IT Operations",
+        "applicable": true,
+        "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Configuration; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+        "applicability_approved": false,
+        "rubric_version": "a8-live-v1",
+        "scope_note": "Chưa có probe live cho control này; phải kết luận thiếu bằng chứng.",
+        "criteria": [
+          {
+            "check": "baseline_approved",
+            "raw_source": "unavailable",
+            "pass_condition": "Chưa triển khai probe live.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "not-implemented"
+          },
+          {
+            "check": "drift_resolved",
+            "raw_source": "unavailable",
+            "pass_condition": "Chưa triển khai probe live.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "not-implemented"
+          }
+        ],
+        "review_status": "PENDING_HUMAN_APPROVAL"
+      },
+      {
+        "control_id": "A.8.10",
+        "name": "Information deletion",
+        "source": "Data",
+        "checks": [
+          "deletion_policy_enforced",
+          "deletion_verified"
+        ],
+        "owner": "Data owner",
+        "applicable": true,
+        "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Data; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+        "applicability_approved": false,
+        "rubric_version": "a8-live-v1",
+        "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+        "criteria": [
+          {
+            "check": "deletion_policy_enforced",
+            "raw_source": "retention.conf",
+            "pass_condition": "Cấu hình retention của lab trong 1–30 ngày.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "live-container-observation"
+          },
+          {
+            "check": "deletion_verified",
+            "raw_source": "object_exists_rc + deletion-receipt",
+            "pass_condition": "Có biên nhận phép kiểm tra và đối tượng đã không còn tồn tại.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "live-container-observation"
+          }
+        ],
+        "review_status": "PENDING_HUMAN_APPROVAL"
+      },
+      {
+        "control_id": "A.8.12",
+        "name": "Data leakage prevention",
+        "source": "Data",
+        "checks": [
+          "dlp_enforced",
+          "dlp_test_passed"
+        ],
+        "owner": "SOC",
+        "applicable": true,
+        "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Data; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+        "applicability_approved": false,
+        "rubric_version": "a8-live-v1",
+        "scope_note": "Chưa có probe live cho control này; phải kết luận thiếu bằng chứng.",
+        "criteria": [
+          {
+            "check": "dlp_enforced",
+            "raw_source": "unavailable",
+            "pass_condition": "Chưa triển khai probe live.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "not-implemented"
+          },
+          {
+            "check": "dlp_test_passed",
+            "raw_source": "unavailable",
+            "pass_condition": "Chưa triển khai probe live.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "not-implemented"
+          }
+        ],
+        "review_status": "PENDING_HUMAN_APPROVAL"
+      },
+      {
+        "control_id": "A.8.13",
+        "name": "Information backup",
+        "source": "Backup",
+        "checks": [
+          "backup_success",
+          "restore_test_passed"
+        ],
+        "owner": "IT Operations",
+        "applicable": true,
+        "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Backup; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+        "applicability_approved": false,
+        "rubric_version": "a8-live-v1",
+        "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+        "criteria": [
+          {
+            "check": "backup_success",
+            "raw_source": "backup.dat + backup.sha256",
+            "pass_condition": "Hash nội dung backup khớp seal lúc tạo backup.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "live-container-observation"
+          },
+          {
+            "check": "restore_test_passed",
+            "raw_source": "backup.dat + restored.dat",
+            "pass_condition": "Nội dung đã khôi phục khớp backup.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "live-container-observation"
+          }
+        ],
+        "review_status": "PENDING_HUMAN_APPROVAL"
+      },
+      {
+        "control_id": "A.8.15",
+        "name": "Logging",
+        "source": "Logging",
+        "checks": [
+          "audit_logs_enabled",
+          "logs_integrity_protected"
+        ],
+        "owner": "SOC",
+        "applicable": true,
+        "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Logging; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+        "applicability_approved": false,
+        "rubric_version": "a8-live-v1",
+        "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+        "criteria": [
+          {
+            "check": "audit_logs_enabled",
+            "raw_source": "application.log",
+            "pass_condition": "Ứng dụng lab thực sự ghi ít nhất một sự kiện.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "live-container-observation"
+          },
+          {
+            "check": "logs_integrity_protected",
+            "raw_source": "application.log + application.sha256 + resource_stat",
+            "pass_condition": "Log khớp seal và không cho group/other ghi; chưa kiểm chứng auditd/SIEM.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "live-container-observation"
+          }
+        ],
+        "review_status": "PENDING_HUMAN_APPROVAL"
+      },
+      {
+        "control_id": "A.8.16",
+        "name": "Monitoring activities",
+        "source": "Monitoring",
+        "checks": [
+          "alerts_enabled",
+          "alert_response_test_passed"
+        ],
+        "owner": "SOC",
+        "applicable": true,
+        "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Monitoring; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+        "applicability_approved": false,
+        "rubric_version": "a8-live-v1",
+        "scope_note": "Chưa có probe live cho control này; phải kết luận thiếu bằng chứng.",
+        "criteria": [
+          {
+            "check": "alerts_enabled",
+            "raw_source": "unavailable",
+            "pass_condition": "Chưa triển khai probe live.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "not-implemented"
+          },
+          {
+            "check": "alert_response_test_passed",
+            "raw_source": "unavailable",
+            "pass_condition": "Chưa triển khai probe live.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "not-implemented"
+          }
+        ],
+        "review_status": "PENDING_HUMAN_APPROVAL"
+      },
+      {
+        "control_id": "A.8.17",
+        "name": "Clock synchronization",
+        "source": "Time",
+        "checks": [
+          "trusted_time_configured",
+          "clock_offset_within_policy"
+        ],
+        "owner": "IT Operations",
+        "applicable": true,
+        "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Time; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+        "applicability_approved": false,
+        "rubric_version": "a8-live-v1",
+        "scope_note": "Chưa có probe live cho control này; phải kết luận thiếu bằng chứng.",
+        "criteria": [
+          {
+            "check": "trusted_time_configured",
+            "raw_source": "unavailable",
+            "pass_condition": "Chưa triển khai probe live.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "not-implemented"
+          },
+          {
+            "check": "clock_offset_within_policy",
+            "raw_source": "unavailable",
+            "pass_condition": "Chưa triển khai probe live.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "not-implemented"
+          }
+        ],
+        "review_status": "PENDING_HUMAN_APPROVAL"
+      },
+      {
+        "control_id": "A.8.19",
+        "name": "Installation of software on operational systems",
+        "source": "Software",
+        "checks": [
+          "installation_restricted",
+          "installed_software_approved"
+        ],
+        "owner": "IT Operations",
+        "applicable": true,
+        "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Software; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+        "applicability_approved": false,
+        "rubric_version": "a8-live-v1",
+        "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+        "criteria": [
+          {
+            "check": "installation_restricted",
+            "raw_source": "install_access_rc",
+            "pass_condition": "labworker không có quyền ghi thư mục cài đặt (test -w trả 1).",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "live-container-observation"
+          },
+          {
+            "check": "installed_software_approved",
+            "raw_source": "installed.tsv + approved.tsv",
+            "pass_condition": "Inventory dpkg-query lúc thu khớp danh mục phê duyệt của lab; chưa xác nhận quản trị thay đổi ngoài lab.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "live-container-observation"
+          }
+        ],
+        "review_status": "PENDING_HUMAN_APPROVAL"
+      },
+      {
+        "control_id": "A.8.20",
+        "name": "Networks security",
+        "source": "Network",
+        "checks": [
+          "firewall_default_deny",
+          "firewall_rules_reviewed"
+        ],
+        "owner": "Network",
+        "applicable": true,
+        "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Network; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+        "applicability_approved": false,
+        "rubric_version": "a8-live-v1",
+        "scope_note": "Chưa có probe live cho control này; phải kết luận thiếu bằng chứng.",
+        "criteria": [
+          {
+            "check": "firewall_default_deny",
+            "raw_source": "unavailable",
+            "pass_condition": "Chưa triển khai probe live.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "not-implemented"
+          },
+          {
+            "check": "firewall_rules_reviewed",
+            "raw_source": "unavailable",
+            "pass_condition": "Chưa triển khai probe live.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "not-implemented"
+          }
+        ],
+        "review_status": "PENDING_HUMAN_APPROVAL"
+      },
+      {
+        "control_id": "A.8.22",
+        "name": "Segregation of networks",
+        "source": "Network",
+        "checks": [
+          "zones_separated",
+          "segmentation_test_passed"
+        ],
+        "owner": "Network",
+        "applicable": true,
+        "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Network; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+        "applicability_approved": false,
+        "rubric_version": "a8-live-v1",
+        "scope_note": "Chưa có probe live cho control này; phải kết luận thiếu bằng chứng.",
+        "criteria": [
+          {
+            "check": "zones_separated",
+            "raw_source": "unavailable",
+            "pass_condition": "Chưa triển khai probe live.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "not-implemented"
+          },
+          {
+            "check": "segmentation_test_passed",
+            "raw_source": "unavailable",
+            "pass_condition": "Chưa triển khai probe live.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "not-implemented"
+          }
+        ],
+        "review_status": "PENDING_HUMAN_APPROVAL"
+      },
+      {
+        "control_id": "A.8.24",
+        "name": "Use of cryptography",
+        "source": "Crypto",
+        "checks": [
+          "approved_crypto_configured",
+          "key_rotation_current"
+        ],
+        "owner": "Security",
+        "applicable": true,
+        "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Crypto; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+        "applicability_approved": false,
+        "rubric_version": "a8-live-v1",
+        "scope_note": "Chưa có probe live cho control này; phải kết luận thiếu bằng chứng.",
+        "criteria": [
+          {
+            "check": "approved_crypto_configured",
+            "raw_source": "unavailable",
+            "pass_condition": "Chưa triển khai probe live.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "not-implemented"
+          },
+          {
+            "check": "key_rotation_current",
+            "raw_source": "unavailable",
+            "pass_condition": "Chưa triển khai probe live.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "not-implemented"
+          }
+        ],
+        "review_status": "PENDING_HUMAN_APPROVAL"
+      },
+      {
+        "control_id": "A.8.32",
+        "name": "Change management",
+        "source": "Change",
+        "checks": [
+          "change_approved",
+          "rollback_test_recorded"
+        ],
+        "owner": "IT Operations",
+        "applicable": true,
+        "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Change; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+        "applicability_approved": false,
+        "rubric_version": "a8-live-v1",
+        "scope_note": "Chưa có probe live cho control này; phải kết luận thiếu bằng chứng.",
+        "criteria": [
+          {
+            "check": "change_approved",
+            "raw_source": "unavailable",
+            "pass_condition": "Chưa triển khai probe live.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "not-implemented"
+          },
+          {
+            "check": "rollback_test_recorded",
+            "raw_source": "unavailable",
+            "pass_condition": "Chưa triển khai probe live.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "not-implemented"
+          }
+        ],
+        "review_status": "PENDING_HUMAN_APPROVAL"
+      }
+    ],
+    "evidence": [
+      {
+        "evidence_id": "A8LIVE-046103a258898b43178b1e20",
+        "source": "live-container://A.8.1",
+        "source_sha256": "046103a258898b43178b1e20f9324bf1228d2d8494d4336decd3fd807cbc21b2",
+        "collected_at": "2026-11-11T13:43:14.908318+00:00",
+        "observed_at": null,
+        "asset_id": null,
+        "control_id": "A.8.1",
+        "facts": {
+          "edr_active": null,
+          "disk_encrypted": null
+        },
+        "artifacts": [],
+        "collection_errors": [
+          {
+            "artifact": "live-probe",
+            "error": "live_probe_not_implemented"
+          }
+        ],
+        "is_synthetic": true,
+        "transport": "live",
+        "source_kind": "live-container-observation",
+        "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+      },
+      {
+        "evidence_id": "A8LIVE-f07f7a8df1e02e05fd4fa708",
+        "source": "live-container://A.8.2",
+        "source_sha256": "f07f7a8df1e02e05fd4fa7082eb142301ca71ca66953acdc56dc463957896c31",
+        "collected_at": "2026-11-11T13:43:14.908318+00:00",
+        "observed_at": null,
+        "asset_id": null,
+        "control_id": "A.8.2",
+        "facts": {
+          "privileged_approved": null,
+          "privileged_review_current": null
+        },
+        "artifacts": [],
+        "collection_errors": [
+          {
+            "artifact": "live-probe",
+            "error": "live_probe_not_implemented"
+          }
+        ],
+        "is_synthetic": true,
+        "transport": "live",
+        "source_kind": "live-container-observation",
+        "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+      },
+      {
+        "evidence_id": "A8LIVE-a300260764e9b1c32a3be740",
+        "source": "live-container://A.8.3",
+        "source_sha256": "a300260764e9b1c32a3be740df3a8c2b4cf97603a2f2535edfe2516f36f57cae",
+        "collected_at": "2026-11-11T13:43:15.030198+00:00",
+        "observed_at": "2026-11-11T13:43:14Z",
+        "asset_id": "b81e5c45e5cb",
+        "control_id": "A.8.3",
+        "facts": {
+          "access_default_deny": true,
+          "access_review_current": false
+        },
+        "artifacts": [
+          {
+            "artifact": "observed_at",
+            "content": "2026-11-11T13:43:14Z",
+            "sha256": "647626897b07689bfd1033cdd43766a757f6b0d6ad01de9a145a7d8f3f805c67"
+          },
+          {
+            "artifact": "asset_id",
+            "content": "b81e5c45e5cb",
+            "sha256": "eab6a8f8937f277ae88154d499a47e4d8f81911a8475c64c0af27c76ff3d9aa2"
+          },
+          {
+            "artifact": "write_access_rc",
+            "content": "1",
+            "sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b"
+          },
+          {
+            "artifact": "resource_stat",
+            "content": "644 root root",
+            "sha256": "b9f0b72765fd8a7e8740f30f05af0fa9b4c6ce0bc9b67f5a48360ceceeee59d3"
+          },
+          {
+            "artifact": "access-review.csv",
+            "content": "subject,decision,reviewed_at\nlabworker,rejected,2026-11-11T13:32:53Z\n",
+            "sha256": "271713b4a9a647d11a0fc9738f1f210058ad200dbe2614cdab6487d770d868fd"
+          }
+        ],
+        "collection_errors": [],
+        "is_synthetic": true,
+        "transport": "live",
+        "source_kind": "live-container-observation",
+        "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+      },
+      {
+        "evidence_id": "A8LIVE-a23275090524d90124ba83e2",
+        "source": "live-container://A.8.5",
+        "source_sha256": "a23275090524d90124ba83e2cf6e6bf61a427db03c473127c9e97f53bad47b53",
+        "collected_at": "2026-11-11T13:43:15.030198+00:00",
+        "observed_at": null,
+        "asset_id": null,
+        "control_id": "A.8.5",
+        "facts": {
+          "mfa_enforced": null,
+          "legacy_auth_disabled": null
+        },
+        "artifacts": [],
+        "collection_errors": [
+          {
+            "artifact": "live-probe",
+            "error": "live_probe_not_implemented"
+          }
+        ],
+        "is_synthetic": true,
+        "transport": "live",
+        "source_kind": "live-container-observation",
+        "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+      },
+      {
+        "evidence_id": "A8LIVE-985f4a75caede4d603569f07",
+        "source": "live-container://A.8.7",
+        "source_sha256": "985f4a75caede4d603569f070a925adc891b009d6db523937f7a901a9f1bdfde",
+        "collected_at": "2026-11-11T13:43:15.030198+00:00",
+        "observed_at": null,
+        "asset_id": null,
+        "control_id": "A.8.7",
+        "facts": {
+          "antimalware_active": null,
+          "signatures_current": null
+        },
+        "artifacts": [],
+        "collection_errors": [
+          {
+            "artifact": "live-probe",
+            "error": "live_probe_not_implemented"
+          }
+        ],
+        "is_synthetic": true,
+        "transport": "live",
+        "source_kind": "live-container-observation",
+        "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+      },
+      {
+        "evidence_id": "A8LIVE-2afd580574f9b13f28071bb1",
+        "source": "live-container://A.8.8",
+        "source_sha256": "2afd580574f9b13f28071bb1819f7b9a5ba3e0b40ec835972d9fc3e1b56eb24d",
+        "collected_at": "2026-11-11T13:43:15.030198+00:00",
+        "observed_at": null,
+        "asset_id": null,
+        "control_id": "A.8.8",
+        "facts": {
+          "scan_current": null,
+          "critical_findings_remediated": null
+        },
+        "artifacts": [],
+        "collection_errors": [
+          {
+            "artifact": "live-probe",
+            "error": "live_probe_not_implemented"
+          }
+        ],
+        "is_synthetic": true,
+        "transport": "live",
+        "source_kind": "live-container-observation",
+        "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+      },
+      {
+        "evidence_id": "A8LIVE-81165196015b1480507dc171",
+        "source": "live-container://A.8.9",
+        "source_sha256": "81165196015b1480507dc1718f1648ad256a656879d27e142fd81024d6d3cf45",
+        "collected_at": "2026-11-11T13:43:15.030198+00:00",
+        "observed_at": null,
+        "asset_id": null,
+        "control_id": "A.8.9",
+        "facts": {
+          "baseline_approved": null,
+          "drift_resolved": null
+        },
+        "artifacts": [],
+        "collection_errors": [
+          {
+            "artifact": "live-probe",
+            "error": "live_probe_not_implemented"
+          }
+        ],
+        "is_synthetic": true,
+        "transport": "live",
+        "source_kind": "live-container-observation",
+        "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+      },
+      {
+        "evidence_id": "A8LIVE-06ea855892751fa5a46765a3",
+        "source": "live-container://A.8.10",
+        "source_sha256": "06ea855892751fa5a46765a3a1489ad614a2e525ebaf5411cb4b5abc8b453fe4",
+        "collected_at": "2026-11-11T13:43:15.131381+00:00",
+        "observed_at": "2026-11-11T13:43:15Z",
+        "asset_id": "b81e5c45e5cb",
+        "control_id": "A.8.10",
+        "facts": {
+          "deletion_policy_enforced": true,
+          "deletion_verified": false
+        },
+        "artifacts": [
+          {
+            "artifact": "observed_at",
+            "content": "2026-11-11T13:43:15Z",
+            "sha256": "0884f1c3746fee35b3b369ea137878002a820fa6198c286a1a9a897ab254d55d"
+          },
+          {
+            "artifact": "asset_id",
+            "content": "b81e5c45e5cb",
+            "sha256": "eab6a8f8937f277ae88154d499a47e4d8f81911a8475c64c0af27c76ff3d9aa2"
+          },
+          {
+            "artifact": "retention.conf",
+            "content": "retention_days=30\n",
+            "sha256": "c39297e265909ab8f32772838a6c4ab42b2cdac5268cdeeee49983a2758e12af"
+          },
+          {
+            "artifact": "deletion-receipt",
+            "content": "deletion-check-authorized\n",
+            "sha256": "0c563d9c8bd47030042cb1f0e5e50e287bb726c7af1b401f865417506445f55c"
+          },
+          {
+            "artifact": "object_exists_rc",
+            "content": "0",
+            "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+          }
+        ],
+        "collection_errors": [],
+        "is_synthetic": true,
+        "transport": "live",
+        "source_kind": "live-container-observation",
+        "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+      },
+      {
+        "evidence_id": "A8LIVE-a536a1f870c47df752b39eaf",
+        "source": "live-container://A.8.12",
+        "source_sha256": "a536a1f870c47df752b39eafc60656cac168a9d42d73018e7bf1d708b966418f",
+        "collected_at": "2026-11-11T13:43:15.131381+00:00",
+        "observed_at": null,
+        "asset_id": null,
+        "control_id": "A.8.12",
+        "facts": {
+          "dlp_enforced": null,
+          "dlp_test_passed": null
+        },
+        "artifacts": [],
+        "collection_errors": [
+          {
+            "artifact": "live-probe",
+            "error": "live_probe_not_implemented"
+          }
+        ],
+        "is_synthetic": true,
+        "transport": "live",
+        "source_kind": "live-container-observation",
+        "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+      },
+      {
+        "evidence_id": "A8LIVE-653fe5e1f7640cae4565e02e",
+        "source": "live-container://A.8.13",
+        "source_sha256": "653fe5e1f7640cae4565e02ef790482f1bad55377729a6d93ab8d57b82529f39",
+        "collected_at": "2026-11-11T13:43:15.226254+00:00",
+        "observed_at": "2026-11-11T13:43:15Z",
+        "asset_id": "b81e5c45e5cb",
+        "control_id": "A.8.13",
+        "facts": {
+          "backup_success": true,
+          "restore_test_passed": false
+        },
+        "artifacts": [
+          {
+            "artifact": "observed_at",
+            "content": "2026-11-11T13:43:15Z",
+            "sha256": "0884f1c3746fee35b3b369ea137878002a820fa6198c286a1a9a897ab254d55d"
+          },
+          {
+            "artifact": "asset_id",
+            "content": "b81e5c45e5cb",
+            "sha256": "eab6a8f8937f277ae88154d499a47e4d8f81911a8475c64c0af27c76ff3d9aa2"
+          },
+          {
+            "artifact": "backup.dat",
+            "content": "business-records-backup\n",
+            "sha256": "2a12d75abad6bec7cb1be6b383cf1258d589454918e87024279a25c4405d12de"
+          },
+          {
+            "artifact": "backup.sha256",
+            "content": "2a12d75abad6bec7cb1be6b383cf1258d589454918e87024279a25c4405d12de\n",
+            "sha256": "dc3327d7e8fc3cf125e4e575eeebceb3cd3593a12a227218646f650839a45fd1"
+          },
+          {
+            "artifact": "restored.dat",
+            "content": "restore-does-not-match\n",
+            "sha256": "14548bc699c9ebda80b5b8ab98f44cff011f5b58c86ae5f0d9666d8746940568"
+          }
+        ],
+        "collection_errors": [],
+        "is_synthetic": true,
+        "transport": "live",
+        "source_kind": "live-container-observation",
+        "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+      },
+      {
+        "evidence_id": "A8LIVE-74784bf0c80cbb688d935efa",
+        "source": "live-container://A.8.15",
+        "source_sha256": "74784bf0c80cbb688d935efabc1683544cb894490964c3e4e762cdee6ba1f67b",
+        "collected_at": "2026-11-11T13:43:15.326487+00:00",
+        "observed_at": "2026-11-11T13:43:15Z",
+        "asset_id": "b81e5c45e5cb",
+        "control_id": "A.8.15",
+        "facts": {
+          "audit_logs_enabled": true,
+          "logs_integrity_protected": false
+        },
+        "artifacts": [
+          {
+            "artifact": "observed_at",
+            "content": "2026-11-11T13:43:15Z",
+            "sha256": "0884f1c3746fee35b3b369ea137878002a820fa6198c286a1a9a897ab254d55d"
+          },
+          {
+            "artifact": "asset_id",
+            "content": "b81e5c45e5cb",
+            "sha256": "eab6a8f8937f277ae88154d499a47e4d8f81911a8475c64c0af27c76ff3d9aa2"
+          },
+          {
+            "artifact": "application.log",
+            "content": "event=application_start actor=lab-service\nevent=changed-after-integrity-seal\nevent=application_start actor=lab-service\nevent=changed-after-integrity-seal\n",
+            "sha256": "e4eda1d729d49fbaa4bc8a1d29e954ed33c4f1ac54d9bb650b2a1dc952c5d2dd"
+          },
+          {
+            "artifact": "application.sha256",
+            "content": "7e5afdcf254f39c30d4ef422dae6d43f103ae04c180fa9c9b65e3c2d19dd875a\n",
+            "sha256": "244964dda0dc97f9481e5140ff19efc101182f93cfc40705fe75c5e8758160e3"
+          },
+          {
+            "artifact": "resource_stat",
+            "content": "644 root root",
+            "sha256": "b9f0b72765fd8a7e8740f30f05af0fa9b4c6ce0bc9b67f5a48360ceceeee59d3"
+          }
+        ],
+        "collection_errors": [],
+        "is_synthetic": true,
+        "transport": "live",
+        "source_kind": "live-container-observation",
+        "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+      },
+      {
+        "evidence_id": "A8LIVE-2b2a44cb49414f213c077c46",
+        "source": "live-container://A.8.16",
+        "source_sha256": "2b2a44cb49414f213c077c46fb77c767092554c02f7b8ff0fe800b9308cb2ea7",
+        "collected_at": "2026-11-11T13:43:15.326487+00:00",
+        "observed_at": null,
+        "asset_id": null,
+        "control_id": "A.8.16",
+        "facts": {
+          "alerts_enabled": null,
+          "alert_response_test_passed": null
+        },
+        "artifacts": [],
+        "collection_errors": [
+          {
+            "artifact": "live-probe",
+            "error": "live_probe_not_implemented"
+          }
+        ],
+        "is_synthetic": true,
+        "transport": "live",
+        "source_kind": "live-container-observation",
+        "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+      },
+      {
+        "evidence_id": "A8LIVE-b2424de3c9e5b08f447625f5",
+        "source": "live-container://A.8.17",
+        "source_sha256": "b2424de3c9e5b08f447625f5cf7ce0efd867cbead9bbd372d6df997aee816d17",
+        "collected_at": "2026-11-11T13:43:15.326487+00:00",
+        "observed_at": null,
+        "asset_id": null,
+        "control_id": "A.8.17",
+        "facts": {
+          "trusted_time_configured": null,
+          "clock_offset_within_policy": null
+        },
+        "artifacts": [],
+        "collection_errors": [
+          {
+            "artifact": "live-probe",
+            "error": "live_probe_not_implemented"
+          }
+        ],
+        "is_synthetic": true,
+        "transport": "live",
+        "source_kind": "live-container-observation",
+        "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+      },
+      {
+        "evidence_id": "A8LIVE-5cb79943d6ffb7e423dc8705",
+        "source": "live-container://A.8.19",
+        "source_sha256": "5cb79943d6ffb7e423dc8705adedd3572d4a078eadd044f3b02e1012cfbf6f18",
+        "collected_at": "2026-11-11T13:43:15.442646+00:00",
+        "observed_at": "2026-11-11T13:43:15Z",
+        "asset_id": "b81e5c45e5cb",
+        "control_id": "A.8.19",
+        "facts": {
+          "installation_restricted": true,
+          "installed_software_approved": false
+        },
+        "artifacts": [
+          {
+            "artifact": "observed_at",
+            "content": "2026-11-11T13:43:15Z",
+            "sha256": "0884f1c3746fee35b3b369ea137878002a820fa6198c286a1a9a897ab254d55d"
+          },
+          {
+            "artifact": "asset_id",
+            "content": "b81e5c45e5cb",
+            "sha256": "eab6a8f8937f277ae88154d499a47e4d8f81911a8475c64c0af27c76ff3d9aa2"
+          },
+          {
+            "artifact": "install_access_rc",
+            "content": "1",
+            "sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b"
+          },
+          {
+            "artifact": "install_stat",
+            "content": "755 root root",
+            "sha256": "e1020b4af2ee4d200daaa39d4fb9759b695b3ce568dc313410d924e83ef87ba3"
+          },
+          {
+            "artifact": "installed.tsv",
+            "content": "adduser\t3.118ubuntu5\napt\t2.4.14\nbase-files\t12ubuntu4.7\nbase-passwd\t3.5.52build1\nbash\t5.1-6ubuntu1.1\nbsdutils\t1:2.37.2-4ubuntu3.6\ncoreutils\t8.32-4.1ubuntu1.4\ndash\t0.5.11+git20210903+057cd650a4ed-3build1\ndebconf\t1.5.79ubuntu1\ndebianutils\t5.5-1ubuntu2\ndiffutils\t1:3.8-0ubuntu2.1\ndpkg\t1.21.1ubuntu2.6\ne2fsprogs\t1.46.5-2ubuntu1.2\nfindutils\t4.8.0-1ubuntu3\ngcc-12-base\t12.3.0-1ubuntu1~22.04.3\ngpgv\t2.2.27-3ubuntu2.5\ngrep\t3.7-1build1\ngzip\t1.10-4ubuntu4.2\nhostname\t3.23ubuntu2\ninit-system-helpers\t1.62\nlibacl1\t2.3.1-1\nlibapt-pkg6.0\t2.4.14\nlibattr1\t1:2.5.1-1ubuntu0.1\nlibaudit-common\t1:3.0.7-1ubuntu0.1\nlibaudit1\t1:3.0.7-1ubuntu0.1\nlibblkid1\t2.37.2-4ubuntu3.6\nlibbz2-1.0\t1.0.8-5ubuntu0.1\nlibc-bin\t2.35-0ubuntu3.15\nlibc6\t2.35-0ubuntu3.15\nlibcap-ng0\t0.7.9-2.2build3\nlibcap2\t1:2.44-1ubuntu0.22.04.3\nlibcom-err2\t1.46.5-2ubuntu1.2\nlibcrypt1\t1:4.4.27-1\nlibdb5.3\t5.3.28+dfsg1-0.8ubuntu3\nlibdebconfclient0\t0.261ubuntu1\nlibext2fs2\t1.46.5-2ubuntu1.2\nlibffi8\t3.4.2-4\nlibgcc-s1\t12.3.0-1ubuntu1~22.04.3\nlibgcrypt20\t1.9.4-3ubuntu3.3\nlibgmp10\t2:6.2.1+dfsg-3ubuntu1\nlibgnutls30\t3.7.3-4ubuntu1.9\nlibgpg-error0\t1.43-3\nlibgssapi-krb5-2\t1.19.2-2ubuntu0.10\nlibhogweed6\t3.7.3-1build2\nlibidn2-0\t2.3.2-2build1\nlibk5crypto3\t1.19.2-2ubuntu0.10\nlibkeyutils1\t1.6.1-2ubuntu3\nlibkrb5-3\t1.19.2-2ubuntu0.10\nlibkrb5support0\t1.19.2-2ubuntu0.10\nliblz4-1\t1.9.3-2build2\nliblzma5\t5.2.5-2ubuntu1.1\nlibmount1\t2.37.2-4ubuntu3.6\nlibncurses6\t6.3-2ubuntu0.3\nlibncursesw6\t6.3-2ubuntu0.3\nlibnettle8\t3.7.3-1build2\nlibnsl2\t1.3.0-2build2\nlibp11-kit0\t0.24.0-6ubuntu0.1\nlibpam-modules\t1.4.0-11ubuntu2.8\nlibpam-modules-bin\t1.4.0-11ubuntu2.8\nlibpam-runtime\t1.4.0-11ubuntu2.8\nlibpam0g\t1.4.0-11ubuntu2.8\nlibpcre2-8-0\t10.39-3ubuntu0.1\nlibpcre3\t2:8.39-13ubuntu0.22.04.1\nlibprocps8\t2:3.3.17-6ubuntu2.1\nlibseccomp2\t2.5.3-2ubuntu3~22.04.1\nlibselinux1\t3.3-1build2\nlibsemanage-common\t3.3-1build2\nlibsemanage2\t3.3-1build2\nlibsepol2\t3.3-1build1\nlibsmartcols1\t2.37.2-4ubuntu3.6\nlibss2\t1.46.5-2ubuntu1.2\nlibssl3\t3.0.2-0ubuntu1.30\nlibstdc++6\t12.3.0-1ubuntu1~22.04.3\nlibsystemd0\t249.11-0ubuntu3.22\nlibtasn1-6\t4.18.0-4ubuntu0.2\nlibtinfo6\t6.3-2ubuntu0.3\nlibtirpc-common\t1.3.2-2ubuntu0.1\nlibtirpc3\t1.3.2-2ubuntu0.1\nlibudev1\t249.11-0ubuntu3.22\nlibunistring2\t1.0-1\nlibuuid1\t2.37.2-4ubuntu3.6\nlibxxhash0\t0.8.1-1\nlibzstd1\t1.4.8+dfsg-3build1\nlogin\t1:4.8.1-2ubuntu2.2\nlogsave\t1.46.5-2ubuntu1.2\nlsb-base\t11.1.0ubuntu4\nmawk\t1.3.4.20200120-3\nmount\t2.37.2-4ubuntu3.6\nncurses-base\t6.3-2ubuntu0.3\nncurses-bin\t6.3-2ubuntu0.3\npasswd\t1:4.8.1-2ubuntu2.2\nperl-base\t5.34.0-3ubuntu1.9\nprocps\t2:3.3.17-6ubuntu2.1\nsed\t4.8-1ubuntu2.1\nsensible-utils\t0.0.17\nsysvinit-utils\t3.01-1ubuntu1\ntar\t1.34+dfsg-1ubuntu0.1.22.04.6\nubuntu-keyring\t2021.03.26\nusrmerge\t25ubuntu2\nutil-linux\t2.37.2-4ubuntu3.6\nzlib1g\t1:1.2.11.dfsg-2ubuntu9.2\n",
+            "sha256": "ba0fce1f2305bee35fb14825ae98e138332b7c778d5dc8a4787a9d0ab2c9c5c7"
+          },
+          {
+            "artifact": "approved.tsv",
+            "content": "not-the-installed-inventory\n",
+            "sha256": "8cd94d2e99243dd04cbec1511e6bbdb9e371d428c535de58fac9a652eb770fa1"
+          }
+        ],
+        "collection_errors": [],
+        "is_synthetic": true,
+        "transport": "live",
+        "source_kind": "live-container-observation",
+        "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+      },
+      {
+        "evidence_id": "A8LIVE-f4a0b63076ca269128be4657",
+        "source": "live-container://A.8.20",
+        "source_sha256": "f4a0b63076ca269128be4657907a7828acb0ed9bd7d90aeccce47f6c0f1c1745",
+        "collected_at": "2026-11-11T13:43:15.442646+00:00",
+        "observed_at": null,
+        "asset_id": null,
+        "control_id": "A.8.20",
+        "facts": {
+          "firewall_default_deny": null,
+          "firewall_rules_reviewed": null
+        },
+        "artifacts": [],
+        "collection_errors": [
+          {
+            "artifact": "live-probe",
+            "error": "live_probe_not_implemented"
+          }
+        ],
+        "is_synthetic": true,
+        "transport": "live",
+        "source_kind": "live-container-observation",
+        "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+      },
+      {
+        "evidence_id": "A8LIVE-5073e8bf3271fd22e52e6214",
+        "source": "live-container://A.8.22",
+        "source_sha256": "5073e8bf3271fd22e52e621484444df0732c683aa058b48cf3e7d83aac1145c4",
+        "collected_at": "2026-11-11T13:43:15.442646+00:00",
+        "observed_at": null,
+        "asset_id": null,
+        "control_id": "A.8.22",
+        "facts": {
+          "zones_separated": null,
+          "segmentation_test_passed": null
+        },
+        "artifacts": [],
+        "collection_errors": [
+          {
+            "artifact": "live-probe",
+            "error": "live_probe_not_implemented"
+          }
+        ],
+        "is_synthetic": true,
+        "transport": "live",
+        "source_kind": "live-container-observation",
+        "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+      },
+      {
+        "evidence_id": "A8LIVE-49baa97aad58df7718b3fb67",
+        "source": "live-container://A.8.24",
+        "source_sha256": "49baa97aad58df7718b3fb67659c45095c00485199a4b5e27aa95badf622768e",
+        "collected_at": "2026-11-11T13:43:15.442646+00:00",
+        "observed_at": null,
+        "asset_id": null,
+        "control_id": "A.8.24",
+        "facts": {
+          "approved_crypto_configured": null,
+          "key_rotation_current": null
+        },
+        "artifacts": [],
+        "collection_errors": [
+          {
+            "artifact": "live-probe",
+            "error": "live_probe_not_implemented"
+          }
+        ],
+        "is_synthetic": true,
+        "transport": "live",
+        "source_kind": "live-container-observation",
+        "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+      },
+      {
+        "evidence_id": "A8LIVE-6c7c165ec835686e5b84d933",
+        "source": "live-container://A.8.32",
+        "source_sha256": "6c7c165ec835686e5b84d933e4718da854f4cfedf4e15612943520530434ff4a",
+        "collected_at": "2026-11-11T13:43:15.442646+00:00",
+        "observed_at": null,
+        "asset_id": null,
+        "control_id": "A.8.32",
+        "facts": {
+          "change_approved": null,
+          "rollback_test_recorded": null
+        },
+        "artifacts": [],
+        "collection_errors": [
+          {
+            "artifact": "live-probe",
+            "error": "live_probe_not_implemented"
+          }
+        ],
+        "is_synthetic": true,
+        "transport": "live",
+        "source_kind": "live-container-observation",
+        "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+      }
+    ],
+    "sha256": "84f6f14c11e7f18c431d39f9cea0151fb966e94a875d4f3a7d51b6373950c4fb"
+  },
+  "dataset_usage": "live-pilot-not-independent-validation",
+  "independent_validation": false,
+  "human_approval": "PENDING",
+  "reporting_requirements": [
+    "first-pass and final accuracy separately",
+    "engine errors in denominator",
+    "per-control results",
+    "independent human labels bound to report/evidence hash"
+  ],
+  "sha256": "b5c4c92999723287ec7cf3c77a98d197975398e0f9ac888688acdce3415c34bc"
+}

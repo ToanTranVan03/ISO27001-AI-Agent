@@ -3,6 +3,7 @@ from collections import Counter
 import json
 from pathlib import Path
 from agent_core.a8_assessment import catalog as a8_catalog, digest
+from backend.review_criteria import current as criteria_review_current
 
 CATALOG=Path(__file__).resolve().parents[1]/'docs'/'56_controls_scope.json'
 
@@ -31,12 +32,15 @@ def build_scope(assessment_id,dossier,studies=None,decisions=None,reviews=None,a
             latest_evaluation_id=current.get('latest_evaluation_id'),
             experiment_results=(studies or {}).get(cid,[]),applicability=decision)
         row['evidence_package_supported']=True
+        row['explicit_source_count']=sum(e.get('is_synthetic') is False or e.get('source','').startswith('a8-capture://') for e in row['evidence'])
         row['review_token']=digest({'control_id':cid,'latest_evaluation_id':row['latest_evaluation_id'],
             'assessment_state':row['assessment_state'],'rubric_sha256':rubric_hash,'snapshot':dossier.get('company_snapshot_hash'),
             'evidence':sorted((e['evidence_id'],e['sha256_hash']) for e in row['evidence'])})
         review=reviews.get(cid)
         row['human_review']=review
-        row['human_review_current']=bool(review and review['review_token']==row['review_token'] and row['workflow_status']!='RUNNING')
+        row['human_review_current']=bool(review and review['review_token']==row['review_token'] and row['workflow_status']!='RUNNING'
+                                         and criteria_review_current(review,c['pass_criteria']))
+        row['criteria_review_required']=c['pass_criteria']
         # Actionable progress; development coverage is not evidence of compliance.
         if row['workflow_status']=='RUNNING':
             action='Theo dõi Agent đang xử lý'
@@ -86,8 +90,12 @@ def build_scope(assessment_id,dossier,studies=None,decisions=None,reviews=None,a
         applicability_recorded=sum(r['applicability'] is not None for r in records),
         controls_with_evidence=sum(bool(r['evidence']) for r in records),
         controls_with_submitted_sources=sum(any(e.get('is_synthetic') is False for e in r['evidence']) for r in records),
+        controls_with_captured_lab_sources=sum(any(e.get('source','').startswith('a8-capture://') for e in r['evidence']) for r in records),
+        controls_with_explicit_sources=sum(r['explicit_source_count']>0 for r in records),
         controls_with_current_human_review=sum(r['human_review_current'] for r in records),
         soa_approved=soa['approval']=='HUMAN_APPROVED_PROJECT_SCOPE',
         note='Nguồn nộp không tự đồng nghĩa đã xác thực. Số control có bằng chứng/thẩm định không phải số control đạt ISO.')
+    from backend.acceptance_worklist import build_worklist
+    result['acceptance_worklist']=build_worklist(result)
     result['sha256']=digest(result)
     return result

@@ -1,0 +1,444 @@
+{
+  "review_kind": "assistant-generated-artifact-review",
+  "reviewer": "AI assistant",
+  "is_human_review": false,
+  "eligible_for_independent_human_metrics": false,
+  "blind": false,
+  "run_id": "2370c707-bbb6-4b6c-b2e0-b19ea1a869b7",
+  "report_sha256": "292b66ad3e10b898436a78e312556fb4a586f55102a84e904ce4396e6462a2fc",
+  "created_at": "2026-11-11T14:08:32.741897+00:00",
+  "rows": [
+    {
+      "control_id": "A.8.1",
+      "assistant_status": "Insufficient Evidence",
+      "machine_status": "Insufficient Evidence",
+      "matches": true,
+      "evidence_id": "A8LIVE-046103a258898b43178b1e20",
+      "evidence_sha256": "046103a258898b43178b1e20f9324bf1228d2d8494d4336decd3fd807cbc21b2",
+      "criteria_reviews": [
+        {
+          "check": "edr_active",
+          "verdict": "unknown",
+          "artifacts": [],
+          "rationale": "Chưa có probe live/nguồn quan sát cho tiêu chí trong lượt này."
+        },
+        {
+          "check": "disk_encrypted",
+          "verdict": "unknown",
+          "artifacts": [],
+          "rationale": "Chưa có probe live/nguồn quan sát cho tiêu chí trong lượt này."
+        }
+      ]
+    },
+    {
+      "control_id": "A.8.2",
+      "assistant_status": "Insufficient Evidence",
+      "machine_status": "Insufficient Evidence",
+      "matches": true,
+      "evidence_id": "A8LIVE-f07f7a8df1e02e05fd4fa708",
+      "evidence_sha256": "f07f7a8df1e02e05fd4fa7082eb142301ca71ca66953acdc56dc463957896c31",
+      "criteria_reviews": [
+        {
+          "check": "privileged_approved",
+          "verdict": "unknown",
+          "artifacts": [],
+          "rationale": "Chưa có probe live/nguồn quan sát cho tiêu chí trong lượt này."
+        },
+        {
+          "check": "privileged_review_current",
+          "verdict": "unknown",
+          "artifacts": [],
+          "rationale": "Chưa có probe live/nguồn quan sát cho tiêu chí trong lượt này."
+        }
+      ]
+    },
+    {
+      "control_id": "A.8.3",
+      "assistant_status": "Partially Compliant",
+      "machine_status": "Partially Compliant",
+      "matches": true,
+      "evidence_id": "A8LIVE-092ee209e123dd026648ed7c",
+      "evidence_sha256": "092ee209e123dd026648ed7c57741e9e74f9b6c30b52be3ee3ba09ca27cda5ce",
+      "criteria_reviews": [
+        {
+          "check": "access_default_deny",
+          "verdict": "met",
+          "artifacts": [
+            "write_access_rc",
+            "resource_stat"
+          ],
+          "rationale": "Mã quyền ghi là 1; stat 644 root root. Theo phép thử lab, labworker không ghi được tệp."
+        },
+        {
+          "check": "access_review_current",
+          "verdict": "not_met",
+          "artifacts": [
+            "access-review.csv"
+          ],
+          "rationale": "Bản ghi labworker có decision=rejected, không thỏa điều kiện approved trong rubric."
+        }
+      ]
+    },
+    {
+      "control_id": "A.8.5",
+      "assistant_status": "Insufficient Evidence",
+      "machine_status": "Insufficient Evidence",
+      "matches": true,
+      "evidence_id": "A8LIVE-a23275090524d90124ba83e2",
+      "evidence_sha256": "a23275090524d90124ba83e2cf6e6bf61a427db03c473127c9e97f53bad47b53",
+      "criteria_reviews": [
+        {
+          "check": "mfa_enforced",
+          "verdict": "unknown",
+          "artifacts": [],
+          "rationale": "Chưa có probe live/nguồn quan sát cho tiêu chí trong lượt này."
+        },
+        {
+          "check": "legacy_auth_disabled",
+          "verdict": "unknown",
+          "artifacts": [],
+          "rationale": "Chưa có probe live/nguồn quan sát cho tiêu chí trong lượt này."
+        }
+      ]
+    },
+    {
+      "control_id": "A.8.7",
+      "assistant_status": "Insufficient Evidence",
+      "machine_status": "Insufficient Evidence",
+      "matches": true,
+      "evidence_id": "A8LIVE-985f4a75caede4d603569f07",
+      "evidence_sha256": "985f4a75caede4d603569f070a925adc891b009d6db523937f7a901a9f1bdfde",
+      "criteria_reviews": [
+        {
+          "check": "antimalware_active",
+          "verdict": "unknown",
+          "artifacts": [],
+          "rationale": "Chưa có probe live/nguồn quan sát cho tiêu chí trong lượt này."
+        },
+        {
+          "check": "signatures_current",
+          "verdict": "unknown",
+          "artifacts": [],
+          "rationale": "Chưa có probe live/nguồn quan sát cho tiêu chí trong lượt này."
+        }
+      ]
+    },
+    {
+      "control_id": "A.8.8",
+      "assistant_status": "Insufficient Evidence",
+      "machine_status": "Insufficient Evidence",
+      "matches": true,
+      "evidence_id": "A8LIVE-2afd580574f9b13f28071bb1",
+      "evidence_sha256": "2afd580574f9b13f28071bb1819f7b9a5ba3e0b40ec835972d9fc3e1b56eb24d",
+      "criteria_reviews": [
+        {
+          "check": "scan_current",
+          "verdict": "unknown",
+          "artifacts": [],
+          "rationale": "Chưa có probe live/nguồn quan sát cho tiêu chí trong lượt này."
+        },
+        {
+          "check": "critical_findings_remediated",
+          "verdict": "unknown",
+          "artifacts": [],
+          "rationale": "Chưa có probe live/nguồn quan sát cho tiêu chí trong lượt này."
+        }
+      ]
+    },
+    {
+      "control_id": "A.8.9",
+      "assistant_status": "Insufficient Evidence",
+      "machine_status": "Insufficient Evidence",
+      "matches": true,
+      "evidence_id": "A8LIVE-81165196015b1480507dc171",
+      "evidence_sha256": "81165196015b1480507dc1718f1648ad256a656879d27e142fd81024d6d3cf45",
+      "criteria_reviews": [
+        {
+          "check": "baseline_approved",
+          "verdict": "unknown",
+          "artifacts": [],
+          "rationale": "Chưa có probe live/nguồn quan sát cho tiêu chí trong lượt này."
+        },
+        {
+          "check": "drift_resolved",
+          "verdict": "unknown",
+          "artifacts": [],
+          "rationale": "Chưa có probe live/nguồn quan sát cho tiêu chí trong lượt này."
+        }
+      ]
+    },
+    {
+      "control_id": "A.8.10",
+      "assistant_status": "Partially Compliant",
+      "machine_status": "Partially Compliant",
+      "matches": true,
+      "evidence_id": "A8LIVE-60ecb0631e7b810a666da94b",
+      "evidence_sha256": "60ecb0631e7b810a666da94ba4db675a766519b3dea5d7019ebbf8fcc81f3b99",
+      "criteria_reviews": [
+        {
+          "check": "deletion_policy_enforced",
+          "verdict": "met",
+          "artifacts": [
+            "retention.conf"
+          ],
+          "rationale": "retention_days=30 nằm trong khoảng 1–30 ngày của lab."
+        },
+        {
+          "check": "deletion_verified",
+          "verdict": "not_met",
+          "artifacts": [
+            "object_exists_rc",
+            "deletion-receipt"
+          ],
+          "rationale": "Có biên nhận nhưng object_exists_rc=0: đối tượng vẫn tồn tại, chưa đạt phép kiểm xóa."
+        }
+      ]
+    },
+    {
+      "control_id": "A.8.12",
+      "assistant_status": "Insufficient Evidence",
+      "machine_status": "Insufficient Evidence",
+      "matches": true,
+      "evidence_id": "A8LIVE-a536a1f870c47df752b39eaf",
+      "evidence_sha256": "a536a1f870c47df752b39eafc60656cac168a9d42d73018e7bf1d708b966418f",
+      "criteria_reviews": [
+        {
+          "check": "dlp_enforced",
+          "verdict": "unknown",
+          "artifacts": [],
+          "rationale": "Chưa có probe live/nguồn quan sát cho tiêu chí trong lượt này."
+        },
+        {
+          "check": "dlp_test_passed",
+          "verdict": "unknown",
+          "artifacts": [],
+          "rationale": "Chưa có probe live/nguồn quan sát cho tiêu chí trong lượt này."
+        }
+      ]
+    },
+    {
+      "control_id": "A.8.13",
+      "assistant_status": "Partially Compliant",
+      "machine_status": "Partially Compliant",
+      "matches": true,
+      "evidence_id": "A8LIVE-273e62edcf197b45a32c20f7",
+      "evidence_sha256": "273e62edcf197b45a32c20f76a8aad72898c31a01af1958df73dee3e41ad1154",
+      "criteria_reviews": [
+        {
+          "check": "backup_success",
+          "verdict": "met",
+          "artifacts": [
+            "backup.dat",
+            "backup.sha256"
+          ],
+          "rationale": "SHA256 nội dung backup khớp seal đã lưu."
+        },
+        {
+          "check": "restore_test_passed",
+          "verdict": "not_met",
+          "artifacts": [
+            "backup.dat",
+            "restored.dat"
+          ],
+          "rationale": "Nội dung restored.dat khác backup.dat: chưa phục hồi đúng dữ liệu."
+        }
+      ]
+    },
+    {
+      "control_id": "A.8.15",
+      "assistant_status": "Partially Compliant",
+      "machine_status": "Partially Compliant",
+      "matches": true,
+      "evidence_id": "A8LIVE-7a1053dc2e7404042d6436c1",
+      "evidence_sha256": "7a1053dc2e7404042d6436c12a9a16d757dd1aeb2473d32bfbf6365cb6b97e9a",
+      "criteria_reviews": [
+        {
+          "check": "audit_logs_enabled",
+          "verdict": "met",
+          "artifacts": [
+            "application.log"
+          ],
+          "rationale": "Log có sự kiện application_start do ứng dụng lab ghi."
+        },
+        {
+          "check": "logs_integrity_protected",
+          "verdict": "not_met",
+          "artifacts": [
+            "application.log",
+            "application.sha256",
+            "resource_stat"
+          ],
+          "rationale": "Hash log hiện tại không khớp seal; quyền tệp 644 không khắc phục sai lệch toàn vẹn."
+        }
+      ]
+    },
+    {
+      "control_id": "A.8.16",
+      "assistant_status": "Insufficient Evidence",
+      "machine_status": "Insufficient Evidence",
+      "matches": true,
+      "evidence_id": "A8LIVE-2b2a44cb49414f213c077c46",
+      "evidence_sha256": "2b2a44cb49414f213c077c46fb77c767092554c02f7b8ff0fe800b9308cb2ea7",
+      "criteria_reviews": [
+        {
+          "check": "alerts_enabled",
+          "verdict": "unknown",
+          "artifacts": [],
+          "rationale": "Chưa có probe live/nguồn quan sát cho tiêu chí trong lượt này."
+        },
+        {
+          "check": "alert_response_test_passed",
+          "verdict": "unknown",
+          "artifacts": [],
+          "rationale": "Chưa có probe live/nguồn quan sát cho tiêu chí trong lượt này."
+        }
+      ]
+    },
+    {
+      "control_id": "A.8.17",
+      "assistant_status": "Insufficient Evidence",
+      "machine_status": "Insufficient Evidence",
+      "matches": true,
+      "evidence_id": "A8LIVE-b2424de3c9e5b08f447625f5",
+      "evidence_sha256": "b2424de3c9e5b08f447625f5cf7ce0efd867cbead9bbd372d6df997aee816d17",
+      "criteria_reviews": [
+        {
+          "check": "trusted_time_configured",
+          "verdict": "unknown",
+          "artifacts": [],
+          "rationale": "Chưa có probe live/nguồn quan sát cho tiêu chí trong lượt này."
+        },
+        {
+          "check": "clock_offset_within_policy",
+          "verdict": "unknown",
+          "artifacts": [],
+          "rationale": "Chưa có probe live/nguồn quan sát cho tiêu chí trong lượt này."
+        }
+      ]
+    },
+    {
+      "control_id": "A.8.19",
+      "assistant_status": "Partially Compliant",
+      "machine_status": "Partially Compliant",
+      "matches": true,
+      "evidence_id": "A8LIVE-1a877dc7d4cf2cc396913c5e",
+      "evidence_sha256": "1a877dc7d4cf2cc396913c5eaf3114c9ccdd7dcf346772ed19967ed5d6911f31",
+      "criteria_reviews": [
+        {
+          "check": "installation_restricted",
+          "verdict": "met",
+          "artifacts": [
+            "install_access_rc",
+            "install_stat"
+          ],
+          "rationale": "Mã quyền ghi là 1 và thư mục 755 root root: labworker không có quyền ghi thư mục cài."
+        },
+        {
+          "check": "installed_software_approved",
+          "verdict": "not_met",
+          "artifacts": [
+            "installed.tsv",
+            "approved.tsv"
+          ],
+          "rationale": "Danh mục dpkg thực thu khác danh mục phê duyệt lab; approved.tsv không chứa inventory tương ứng."
+        }
+      ]
+    },
+    {
+      "control_id": "A.8.20",
+      "assistant_status": "Insufficient Evidence",
+      "machine_status": "Insufficient Evidence",
+      "matches": true,
+      "evidence_id": "A8LIVE-f4a0b63076ca269128be4657",
+      "evidence_sha256": "f4a0b63076ca269128be4657907a7828acb0ed9bd7d90aeccce47f6c0f1c1745",
+      "criteria_reviews": [
+        {
+          "check": "firewall_default_deny",
+          "verdict": "unknown",
+          "artifacts": [],
+          "rationale": "Chưa có probe live/nguồn quan sát cho tiêu chí trong lượt này."
+        },
+        {
+          "check": "firewall_rules_reviewed",
+          "verdict": "unknown",
+          "artifacts": [],
+          "rationale": "Chưa có probe live/nguồn quan sát cho tiêu chí trong lượt này."
+        }
+      ]
+    },
+    {
+      "control_id": "A.8.22",
+      "assistant_status": "Insufficient Evidence",
+      "machine_status": "Insufficient Evidence",
+      "matches": true,
+      "evidence_id": "A8LIVE-5073e8bf3271fd22e52e6214",
+      "evidence_sha256": "5073e8bf3271fd22e52e621484444df0732c683aa058b48cf3e7d83aac1145c4",
+      "criteria_reviews": [
+        {
+          "check": "zones_separated",
+          "verdict": "unknown",
+          "artifacts": [],
+          "rationale": "Chưa có probe live/nguồn quan sát cho tiêu chí trong lượt này."
+        },
+        {
+          "check": "segmentation_test_passed",
+          "verdict": "unknown",
+          "artifacts": [],
+          "rationale": "Chưa có probe live/nguồn quan sát cho tiêu chí trong lượt này."
+        }
+      ]
+    },
+    {
+      "control_id": "A.8.24",
+      "assistant_status": "Insufficient Evidence",
+      "machine_status": "Insufficient Evidence",
+      "matches": true,
+      "evidence_id": "A8LIVE-49baa97aad58df7718b3fb67",
+      "evidence_sha256": "49baa97aad58df7718b3fb67659c45095c00485199a4b5e27aa95badf622768e",
+      "criteria_reviews": [
+        {
+          "check": "approved_crypto_configured",
+          "verdict": "unknown",
+          "artifacts": [],
+          "rationale": "Chưa có probe live/nguồn quan sát cho tiêu chí trong lượt này."
+        },
+        {
+          "check": "key_rotation_current",
+          "verdict": "unknown",
+          "artifacts": [],
+          "rationale": "Chưa có probe live/nguồn quan sát cho tiêu chí trong lượt này."
+        }
+      ]
+    },
+    {
+      "control_id": "A.8.32",
+      "assistant_status": "Insufficient Evidence",
+      "machine_status": "Insufficient Evidence",
+      "matches": true,
+      "evidence_id": "A8LIVE-6c7c165ec835686e5b84d933",
+      "evidence_sha256": "6c7c165ec835686e5b84d933e4718da854f4cfedf4e15612943520530434ff4a",
+      "criteria_reviews": [
+        {
+          "check": "change_approved",
+          "verdict": "unknown",
+          "artifacts": [],
+          "rationale": "Chưa có probe live/nguồn quan sát cho tiêu chí trong lượt này."
+        },
+        {
+          "check": "rollback_test_recorded",
+          "verdict": "unknown",
+          "artifacts": [],
+          "rationale": "Chưa có probe live/nguồn quan sát cho tiêu chí trong lượt này."
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "controls": 18,
+    "observed_controls": 5,
+    "insufficient_controls": 13,
+    "matches_project_rubric": 18,
+    "human_accuracy": null,
+    "note": "Khớp rubric lab, không phải accuracy chuyên gia hoặc đánh giá đầy đủ nội dung ISO."
+  }
+}

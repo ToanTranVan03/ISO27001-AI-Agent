@@ -31,9 +31,9 @@ def probe(monkeypatch,fields):
 def test_live_catalog_is_separate_and_does_not_mutate_replay():
     original=a8.catalog()
     current=a8.catalog('live')
-    assert len(current)==18 and live.LIVE_IDS==('A.8.3','A.8.10','A.8.13','A.8.15','A.8.19')
+    assert len(current)==18 and set(live.LIVE_IDS)=={c['control_id'] for c in current}
     assert a8.digest(current)!=a8.digest(original)
-    assert all(c['rubric_version']=='a8-live-v1' for c in current)
+    assert all(c['rubric_version']=='a8-live-v2-active' for c in current)
     assert a8.catalog()==original
 
 
@@ -41,7 +41,7 @@ def test_unsupported_live_control_never_uses_fixture_or_model(monkeypatch):
     mock=MagicMock(side_effect=AssertionError('Must not invoke a command'))
     monkeypatch.setattr(live.subprocess,'run',mock)
     monkeypatch.setattr(a8.ollama,'Client',MagicMock(side_effect=AssertionError('Must not invoke model')))
-    c=control('A.8.1');e=live.collect_live('mixed',c)
+    c=control('A.8.1');c['control_id']='A.8.99';e=live.collect_live('mixed',c)
     assert set(e['facts'].values())=={None}
     assert e['collection_errors'][0]['error']=='live_probe_not_implemented'
     assert a8.assess(c,e,'llm')['execution_source']=='evidence-availability-check'

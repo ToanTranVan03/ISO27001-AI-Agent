@@ -5,6 +5,8 @@ Agent/LangGraph (`agent_core`), PostgreSQL và Ollama.
 
 ## Trọng tâm hiện tại
 
+Live A.8 đã mở rộng sang 18 probe đại diện với rubric `a8-live-v2-active`. Nếu đang dùng image cũ, chạy `docker compose -f docker-compose.a8.yml build` trước `up -d`. Runtime dùng Python/OpenSSL trong container không có mạng ngoài; tiêu chí mới và giới hạn tại [Live A.8 v2](docs/LIVE_A8_V2.md). Các lượt live v1 vẫn là lịch sử riêng, không đổi nhãn đang chấm.
+
 Từ 10/11/2026, giao diện mặc định là **Phạm vi 56 control** (8 A.6, 14 A.7, 34 A.8). Nhóm **Thực nghiệm 18 A.8** ưu tiên đo chuyên sâu; SoA tổng thể đủ 56 dòng, bản A.8 là báo cáo con. Văn phòng 3D/bình luận đã dừng phát triển. Xem [phạm vi và cách kiểm chứng mới](docs/HUONG_DE_TAI_A8.md).
 
 ## Mở ứng dụng

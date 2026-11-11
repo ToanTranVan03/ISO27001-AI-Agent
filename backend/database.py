@@ -271,9 +271,10 @@ def save_evidence(
 
 
 def collect_user_evidence(control_id: str,assessment_id: str):
-    """Only campaign uploads/package documents; synthetic snapshots cannot override them."""
+    """Explicit dossier sources; generated company presets cannot override them."""
     evidence,_=collect_evidence(control_id,assessment_id)
     with get_connection() as con,con.cursor() as cur:
-        cur.execute('SELECT evidence_id FROM evidence WHERE assessment_id=%s AND control_id=%s AND is_synthetic=FALSE AND is_sample=FALSE',(assessment_id,control_id))
+        cur.execute('''SELECT evidence_id FROM evidence WHERE assessment_id=%s AND control_id=%s AND is_sample=FALSE
+            AND (is_synthetic=FALSE OR (evidence_origin='a8-live-capture-v1' AND source LIKE %s))''',(assessment_id,control_id,'a8-capture://%'))
         allowed={r[0] for r in cur.fetchall()}
     return [e for e in evidence if e['evidence_id'] in allowed],{}

@@ -16,6 +16,11 @@
 - [x] Thống nhất quản lý đủ 56 control, connector hồ sơ, thẩm định và SoA tổng thể; không trộn kết quả ca thử vào kết luận chính thức của đợt.
 - [x] Bổ sung 5 probe live đại diện, rà soát lỗi nguồn/viện dẫn/kết luận và sửa quyền chấm mù.
 - [x] Gỡ mã và tài liệu demo không còn phù hợp; tách nghiệp vụ doanh nghiệp dùng chung, cập nhật hướng dẫn và kiểm tra sau dọn.
+- [x] Bổ sung thẩm định từng tiêu chí cho 56 control; chốt nguồn trước suy luận, sửa phản hồi có giới hạn và báo cáo bất đồng từng người chấm.
+- [x] Chuẩn bị CLI nhận bộ nguồn tách riêng và dò trùng ca đã biết; không tự nhận bộ ứng viên là kiểm định độc lập.
+- [x] Mở rộng runtime live từ 5 lên 18 probe đại diện, tách rubric v2; kiểm chứng 72 tình huống và 5 phép đổi/khôi phục nguồn thực.
+- [x] Nối nguồn live với hồ sơ 56, chống nhập trùng; chạy đánh giá riêng, xuất SoA 56 hiện tại và danh sách việc thiếu.
+- [x] Làm rõ tiến độ từng người chấm và khai báo mức hỗ trợ; tách nhãn có AI hỗ trợ/chưa khai báo khỏi đối chiếu độc lập.
 - [ ] Người phụ trách rà soát/phê duyệt rubric và phạm vi thực tế.
 - [ ] Người đánh giá thực sự chấm độc lập; phân tích bất đồng và đo độ đúng so với con người.
 - [ ] Kiểm thử đầy đủ thao tác UI và hoàn thiện hồ sơ nghiệm thu/SoA được người phụ trách phê duyệt.
@@ -24,10 +29,13 @@ Các dấu hoàn thành trên chỉ xác nhận phần triển khai kỹ thuật
 
 ## Hiện trạng đến ngày 11/11/2026
 
-- Đã có luồng quản lý, hồ sơ và SoA cho đủ 56 control; 18 A.8 là nhóm thực nghiệm sâu. Nguồn live mới có 5 probe đại diện, 13 control còn lại trong nhóm 18 chưa có probe live.
-- Sau đợt dọn mã mới nhất: 140 test Python, 5 test JavaScript và build đạt; lint không còn cảnh báo. Các số test/cảnh báo ở những mục trước là mốc kiểm chứng từng phiên bản, không phải các kết quả hiện hành mâu thuẫn nhau.
+- Đã có luồng quản lý, hồ sơ và SoA cho đủ 56 control; 18 A.8 là nhóm thực nghiệm sâu. Runtime live v2 có 18 probe đại diện (5 quan sát tài nguyên, 13 phép thử chủ động ứng dụng lab). Các phép thử chưa bao phủ toàn bộ nội dung ISO; lượt live v1 và nhãn cũ được giữ riêng.
+- Sau hoàn thiện hồ sơ mới nhất: 202 test Python, 5 test JavaScript và build đạt; lint không còn cảnh báo. Các số test/cảnh báo ở những mục trước là mốc kiểm chứng từng phiên bản, không phải các kết quả hiện hành mâu thuẫn nhau.
 - Kho doanh nghiệp được giữ nguyên: 50 nhân viên, 202 tài khoản, 70 thiết bị; hash snapshot trước/sau dọn không đổi.
 - Chưa có hồ sơ đầy đủ cho toàn phạm vi, người đánh giá thật hoàn tất chấm độc lập hoặc phê duyệt chuyên môn. Tuần 5 vẫn đang thực hiện, chưa tổng kết cả tuần.
+- API thực tế hiện có 29/56 control có bằng chứng; 19 có nguồn dùng trong chế độ không lấy preset (18 capture live lab, 1 có hồ sơ nộp). Chưa có quyết định áp dụng/rubric được duyệt/thẩm định hiện hành. Không coi số lượng này là số control đạt.
+- Còn 37 control cần nguồn tương ứng. Đánh giá 18 nguồn nhập theo rubric toàn phạm vi cho kết quả 9 thiếu bằng chứng, 8 một phần, 1 không đạt; khác kết quả ca thử đại diện do phạm vi tiêu chí khác nhau.
+- Khoa đã nộp 2/18 nhãn ở lượt cũ; nhãn giữ nguyên, chưa khai báo mức hỗ trợ và chưa tính là đánh giá độc lập. Chưa có bộ nhãn người đánh giá hoàn tất để công bố accuracy với con người.
 
 ## Nhật ký công việc chính
 
@@ -42,6 +50,9 @@ Các dấu hoàn thành trên chỉ xác nhận phần triển khai kỹ thuật
 | 10/11/2026 | Đo và xuất báo cáo đánh giá | Raw v2 chạy 2 lần trên 108 ca: LLM khớp đáp án nhóm 206/216 (95,37%), baseline 216/216; giữ 4 lỗi engine và 6 lượt sai phân loại; có bảng từng control, precision/recall/F1 và confusion matrix |
 | 10/11/2026 | Hoàn thiện SoA và quy trình nghiệm thu | Xuất JSON/Markdown; tách tính áp dụng khỏi kết luận kiểm tra; phê duyệt cần rubric được duyệt, người chấm đủ 18 control và quyết định/kế hoạch xử lý từng control |
 | 10/11/2026 | Kiểm chứng kỹ thuật và soạn hướng dẫn test | 235 test Python đạt, build thành công; API thật thu đủ 18 control từ Docker; có hướng dẫn chạy baseline, LLM, chấm mù và kiểm tra điều kiện duyệt SoA |
+| 11/11/2026 | Rà mã, dọn demo và củng cố đánh giá | Gỡ mã không còn phù hợp, giữ dữ liệu doanh nghiệp; sửa kiểm tra nguồn/viện dẫn/kiểu dữ liệu, tiến độ người chấm và mức hỗ trợ |
+| 11/11/2026 | Mở rộng live A.8 lên 18 probe đại diện | 72/72 tình huống kỹ thuật; 5 phép đổi/khôi phục nguồn; pilot LLM giữ lỗi lần đầu và lần sửa, không nhận là accuracy chuyên gia |
+| 11/11/2026 | Nối nguồn với hồ sơ toàn phạm vi và xuất bàn giao | Nhập 18 capture, đánh giá lại theo rubric 56; xuất SoA 56 dự thảo và danh sách thiếu; 202 test Python, 5 test JavaScript, lint/build đạt |
 
 ## Bổ sung thống nhất phạm vi ngày 10/11/2026
 
@@ -57,6 +68,9 @@ Các dấu hoàn thành trên chỉ xác nhận phần triển khai kỹ thuật
 - [Quy trình nghiệm thu 5 bước](../docs/QUY_TRINH_NGHIEM_THU_A8.md).
 - [Kết quả raw v2 và phân tích sai khác](../docs/a8-results/KET_QUA_RAW_V2.md), [bảng từng control CSV](../docs/a8-results/raw-v2-combined.csv).
 - [SoA dự thảo](../docs/a8-results/SOA_RAW_V2.md).
+- [Live v2: phạm vi, tiêu chí và giới hạn](../docs/LIVE_A8_V2.md), [pilot LLM từng control](../docs/a8-results/live-v2-ollama-pilot.csv).
+- [Đánh giá nguồn nhập theo rubric toàn phạm vi](../docs/a8-results/dossier-capture-evaluations.json), [SoA 56 hiện tại](../docs/a8-results/SOA_56_HIEN_TAI.md), [SoA 56 JSON](../docs/a8-results/soa56-current-draft.json).
+- [Danh sách việc/hồ sơ còn thiếu](../docs/VIEC_CAN_HOAN_THIEN_56.md), [hướng dẫn nối nguồn và phân loại nhãn](../docs/HOAN_THIEN_HO_SO_56.md).
 - [Collector cấu hình/log gốc](../evidence_collectors/a8_raw.py), [Agent đánh giá](../agent_core/a8_assessment.py), [API chấm mù và phê duyệt](../backend/a8_api.py).
 
 **Phân biệt các mốc:** bản v1 dùng 72 hồ sơ chuẩn hóa, LLM khớp 70/72 (97,22%). Bản raw v2 dùng 108 ca duy nhất, 2 lần lặp thành 216 lượt, khớp 206/216 (95,37%). Đây là hai điều kiện đo khác nhau, không lấy tỷ lệ v1 thay kết quả v2 hoặc kết luận chất lượng tăng/giảm trực tiếp.
@@ -66,17 +80,23 @@ Các tỷ lệ trên đối chiếu **đáp án do nhóm thiết kế**, chưa p
 ## Vướng mắc và giới hạn
 
 - Chưa có người thật xác nhận rubric, chấm độc lập và quyết định tính áp dụng/phê duyệt SoA. Test phần mềm nhập nhãn không được tính là khảo sát hoặc đánh giá chuyên gia.
-- Một số phép thử chạy thực trong container; các dịch vụ còn lại là cấu hình/log mô phỏng, chưa phải tích hợp IAM/EDR hoặc chứng cứ vận hành production. Hai kiểm tra đại diện/control chưa bao phủ toàn bộ nội dung ISO.
-- Bộ raw v2 lưu 4 lỗi engine ở A.8.1/A.8.3 và 6 lượt nhầm thiếu bằng chứng ở A.8.5/A.8.13/A.8.20. Lượt hồi quy sau sửa khớp 36/36 ca đã biết; không thay thế kết quả v2 hoặc kiểm định độc lập. Lỗi suy luận live A.8.3 vẫn tồn tại và được guard chặn, chưa coi model đã suy luận đúng.
-- Chưa xác nhận đầy đủ thao tác bấm UI có đăng nhập; cần kiểm tra thủ công các luồng và trường hợp bị chặn theo checklist.
+- Cần xác nhận với giảng viên người đánh giá được chấp nhận: góp ý yêu cầu đối chiếu với người đánh giá, chưa quy định bắt buộc Khoa/Tú hoặc chuyên gia ngoài nhóm. Phân công nội bộ là bước chuẩn bị; khác tài khoản hoặc tự khai báo chưa chứng minh độc lập/chuyên môn.
+- Thiếu nguồn phù hợp ở 37 control trong chế độ không lấy preset; 19 control có nguồn cũng chưa đồng nghĩa đủ chất lượng hoặc đủ nội dung control. Chưa hoàn tất 56 quyết định áp dụng và 56 thẩm định hiện hành.
+- Runtime live v2 thực hiện phép thử trong container, nhưng scanner, xác thực, monitoring, time reference, DLP và zone gate là thành phần lab. Chưa phải tích hợp IAM/EDR/SIEM, đồng bộ NTP hay VLAN thực; tiêu chí đại diện chưa bao phủ toàn bộ nội dung ISO.
+- Bộ raw v2 lưu 4 lỗi engine ở A.8.1/A.8.3 và 6 lượt nhầm thiếu bằng chứng ở A.8.5/A.8.13/A.8.20. Lượt hồi quy sau sửa khớp 36/36 ca đã biết; không thay thế kết quả v2 hoặc kiểm định độc lập. Pilot live v5 sửa hợp lệ A.8.3 ở lần hai nhưng giữ lỗi lần đầu; chưa coi model hết lỗi hoặc đã có accuracy với người thật.
+- Chưa xác nhận đầy đủ thao tác bấm UI có đăng nhập. Trong phiên kiểm tra, công cụ browser/native không kết nối được; API, build và test đạt không thay thế checklist bấm UI.
 - SoA A.8 là báo cáo con; đã có SoA tổng thể đủ 56 control nhưng vẫn là dự thảo, chưa phải SoA đầy đủ ISMS; cần bối cảnh/rủi ro và phê duyệt người có thẩm quyền.
 
 ## Việc tiếp tục trong tuần 5
 
 - [ ] Người phụ trách rà rubric và xác nhận nguồn bằng chứng được chấp nhận cho từng control.
-- [ ] Phân công người đánh giá chấm mù, không xem đáp án nhóm ngoài hệ thống; thu kết luận và căn cứ thật.
+- [x] Chuẩn bị tài khoản riêng và phân công nội bộ dự kiến cho người chấm; đã có tiến độ và phân loại nguồn hỗ trợ.
+- [ ] Xác nhận người đánh giá/phương pháp với giảng viên; thu kết luận và căn cứ thật, ghi đúng mức hỗ trợ/tiếp xúc đáp án.
+- [ ] Bổ sung nguồn cho 37 control còn thiếu; rà chất lượng/phạm vi nguồn của 19 control đã có, không tạo hồ sơ trống hoặc preset thay bằng chứng.
 - [x] Phân tích bước đầu lỗi engine/thiếu bằng chứng, bổ sung guard và chạy hồi quy trên ca đã biết; giữ nguyên báo cáo lỗi cũ.
-- [ ] Chốt tập kiểm định tách biệt và đo lại sau thay đổi, tiếp tục xử lý lỗi suy luận live A.8.3.
+- [x] Bổ sung sửa phản hồi có giới hạn, giữ lỗi đầu và kiểm tra lại live A.8.3 trên cùng nguồn đã chốt.
+- [x] Chuẩn bị luồng nhận nguồn kiểm định tách riêng, dò trùng nội dung và khóa recipe/snapshot trước chạy.
+- [ ] Nhóm cung cấp và xác nhận tập kiểm định chưa dùng phát triển; thu nhãn thật và đo trên tập đó. Công cụ đã có không đồng nghĩa dữ liệu này đã tồn tại.
 - [ ] Kiểm tra thủ công các luồng UI, xuất báo cáo và các trường hợp bị chặn duyệt.
 - [ ] Hoàn thiện kế hoạch xử lý, quyết định áp dụng và SoA trong phạm vi sau khi đủ điều kiện.
 
@@ -93,7 +113,7 @@ Chưa chốt. Tổng kết cuối tuần 5 rồi xác định công việc chuy�
 - Giữ nguyên kết quả thực nghiệm A.8 95,37%; chưa có kết quả người đánh giá thật và chưa tuyên bố đã khắc phục hết ca sai.
 - Hướng dẫn: [Thu hồ sơ và thẩm định 56](../docs/THU_HO_SO_VA_THAM_DINH_56.md), [checklist hồ sơ từng control](../docs/CHECKLIST_HO_SO_56.md).
 
-## Củng cố bằng chứng và nghiệm thu — 11/11/2026
+## Củng cố bằng chứng và nghiệm thu — 11/11/2026 (mốc live v1)
 
 - Bổ sung nguồn live cho 5 control A.8.3/.10/.13/.15/.19: thu quyền/tồn tại tệp, backup/restore, log ứng dụng và inventory gói tại thời điểm kiểm tra trong container cô lập. 13 control khác chưa có probe live trả thiếu bằng chứng; không dùng bộ replay thay trạng thái live.
 - Tách rubric/version live khỏi raw v2, không lấy đáp án replay chấm kết quả live. Luồng chấm mù và phê duyệt theo hash tiếp tục áp dụng; chưa có nhãn người đánh giá thật hoặc phê duyệt thật.
@@ -122,8 +142,42 @@ Chưa chốt. Tổng kết cuối tuần 5 rồi xác định công việc chuy�
 - Sau dọn: 140 test Python, 5 test JavaScript hiện hành và build đạt; lint không còn cảnh báo. Số test thay đổi do loại các test của chức năng đã xóa, không phải bỏ qua lỗi.
 - Danh sách và minh chứng: [Dọn project](../docs/DON_GON_PROJECT.md).
 
+## Hoàn thiện luồng đánh giá và chuẩn bị chấm — 11/11/2026
+
+- Thẩm định 56 control theo từng tiêu chí/căn cứ/viện dẫn; chặn bỏ sót hoặc kết luận mâu thuẫn. Giữ thẩm định cũ trong lịch sử, yêu cầu rà lại theo giao thức mới; form không tự dùng token nguồn mới khi người chấm đang đọc nguồn cũ.
+- Chốt snapshot và recipe trước suy luận A.8; tối đa một lần yêu cầu model sửa phản hồi không hợp lệ, không thay bằng luật. Báo cáo tách kết quả lần đầu/sau sửa, số lượt/ca và các lỗi.
+- Phân tích từng người chấm, agreement/kappa và bảng bất đồng gắn đúng hash. Không ghép nhãn nhiều người thành một đáp án hoặc tự tạo đồng thuận.
+- Pilot mixed live: 5 probe có nguồn, 13 chưa hỗ trợ giữ thiếu bằng chứng; A.8.3 sai lần đầu và sửa hợp lệ lần hai, 4 probe khác hợp lệ ngay. Lượt này không có lỗi cuối; chưa có nhãn người thật nên không công bố accuracy live. Giữ nguyên số đo lịch sử.
+- Chuẩn bị CLI nhận bộ nguồn mới tách riêng, kiểm tra trùng nội dung với ca đã biết; bộ ứng viên vẫn chờ người xác nhận độc lập. Không tạo bộ held-out giả từ các ca cũ.
+- Theo danh sách thành viên được cung cấp, chuẩn bị phân công: Trần Văn Toàn điều phối/rà rubric; Lê Đăng Khoa và Lê Đoàn Văn Tú chấm riêng. Chưa ghi nhận ai đã thực sự chấm/duyệt; thành viên nhóm không tự được coi là chuyên gia độc lập bên ngoài.
+- Sau bước chuẩn bị đã tạo hai tài khoản assessor riêng, kiểm tra truy cập đúng gói và sửa hiển thị tiến độ đang chấm/chấm đủ. Đây là triển khai luồng cộng tác, không xác nhận hoàn tất đối chiếu người thật.
+- Rà thêm lỗi facts rỗng/sai kiểu có thể bị hiểu là đạt và nhãn thiếu reviewer ID; đã sửa, kiểm tra 157 test ở mốc đó. Bản chấm đối chiếu của trợ lý được lưu riêng, không nộp dưới tên thành viên và không dùng làm nhãn độc lập: [bản chấm AI](../docs/CHAM_DOI_CHIEU_TRO_LY.md).
+- 152 test Python, 5 test JavaScript, lint và build đạt. API thật xác nhận phạm vi/SoA/tiêu chí 56; UI tương tác chưa xác nhận do công cụ trình duyệt không khả dụng. Hồ sơ, chấm và phê duyệt thật còn chờ, không đóng tuần 5 thay người phụ trách.
+- Hướng dẫn và minh chứng: [Bàn giao tuần 5](../docs/NGHIEM_THU_TUAN_05.md), [pilot v5](../docs/a8-results/live-v5-pilot.json), [nguồn đã chốt](../docs/a8-results/live-v5-sealed-plan.json).
+
+## Mở rộng bằng chứng live 18 A.8 — 11/11/2026
+
+- Bổ sung 13 phép thử chủ động cho xác thực, mã hóa tệp, scanner mẫu, inventory/advisory lab, baseline, DLP, monitoring, nguồn thời gian ký, TCP ACL/zone gate, TLS và rollback; giữ 5 probe quan sát hiện có.
+- Dùng image Python/OpenSSL trong container không có mạng ngoài; collector đọc kết quả thao tác và nội dung nguồn, kiểm tra schema/danh tính/thời gian/hash. Thiếu nguồn hoặc công cụ lỗi giữ unknown, không suy đoán đạt.
+- Tách rubric `a8-live-v2-active`, đặt tên tiêu chí theo đúng phép thử; không biến mã hóa tệp thành mã hóa ổ đĩa, loopback gate thành VLAN hoặc nguồn thời gian cùng container thành NTP độc lập.
+- Kiểm chứng 72/72 tình huống lab; 5 phép đổi nguồn thực đều được phát hiện và khôi phục. Đây là kiểm chứng kỹ thuật theo thiết kế nhóm, không phải accuracy chuyên gia.
+- Giao diện hiển thị năng lực probe/rubric hiện tại, danh sách lượt mới nhất trước và mã lượt; lượt Khoa đang chấm giữ snapshot/nhãn cũ. Chưa có phê duyệt hoặc nhãn người thật mới do trợ lý tạo.
+- Agent đã chạy qua API thật trên cả 18 probe mixed: 17 phản hồi hợp lệ lần đầu, A.8.3 sửa hợp lệ lần hai, không lỗi cuối. Lượt pilot không có nhãn người thật nên chưa có accuracy độc lập; đã xuất JSON/CSV và SoA dự thảo. Kiểm tra sau triển khai giữ nguyên report và 2 nhãn của lượt cũ.
+- 190 test Python, 5 test JavaScript, lint và build đạt; chưa thay thế việc kiểm thử toàn bộ UI hoặc thẩm định chuyên môn.
+- Ma trận và giới hạn: [Live A.8 v2](../docs/LIVE_A8_V2.md); minh chứng: [72 tình huống](../docs/a8-results/live-v2-engineering.json), [đổi nguồn và khôi phục](../docs/a8-results/live-v2-mutations.json).
+
+## Nối nguồn với hồ sơ và phân loại nhãn — 11/11/2026
+
+- Thêm nhập nguồn live vào hồ sơ 56: kiểm tra hash, khóa khi Agent chạy, nhập lặp không trùng; chỉ chuyển artifacts/metadata, giữ nhãn lab và không chép kết luận/đáp án.
+- Đã nhập 18 bản thu: số control có bằng chứng tăng 15 → 29; nguồn dùng được trong chế độ không lấy preset là 19, còn 37 cần hồ sơ tương ứng. Danh sách việc thiếu theo vai trò xuất được JSON/Markdown và mở trực tiếp từng control.
+- Chạy đánh giá riêng 18 control trên nguồn đã nhập: 9 thiếu bằng chứng, 8 một phần, 1 không đạt; không có kết luận đạt toàn control. Giữ 18 job lỗi SQL của lần tích hợp đầu, sửa bộ lọc và thêm hồi quy; lượt chạy lại đều thành công, không nhận lỗi SQL là lỗi suy luận LLM.
+- Đã xuất SoA tổng thể hiện tại đủ 56 dòng ở Markdown/JSON; giữ `DRAFT_NOT_APPROVED`, tính áp dụng chưa xác định và các thiếu sót chưa được người phụ trách xác nhận.
+- Thêm khai báo tự chấm/AI hỗ trợ/đã xem đáp án; nhãn hỗ trợ hoặc chưa khai báo được tách khỏi đối chiếu độc lập. Hai nhãn cũ của Khoa giữ nguyên, chưa tự gán là độc lập.
+- Màn hình chấm hiển thị điều kiện và từng artifact, không mặc định chọn đạt. 202 test Python, 5 test JavaScript, lint/build đạt; kiểm thử bấm toàn UI vẫn chưa xác nhận vì công cụ không kết nối.
+- Hướng dẫn: [Hoàn thiện hồ sơ 56](../docs/HOAN_THIEN_HO_SO_56.md), [việc cần làm](../docs/VIEC_CAN_HOAN_THIEN_56.md), [kết quả đánh giá nguồn nhập](../docs/a8-results/dossier-capture-evaluations.json). Không tự hoàn tất nhãn/phê duyệt hoặc tạo hồ sơ thay người phụ trách.
+
 ## Đồng bộ GitHub
 
 | Ngày | Giờ (UTC+7) | Người push | Nhánh | Nội dung chính |
 |---|---|---|---|---|
-| 11/11/2026 | 13:37 | Trần Văn Toàn | `main` | Hoàn thiện đánh giá tuân thủ, bổ sung bằng chứng live và dọn mã demo cũ. |
+| 11/11/2026 | 13:37, 22:27 | Trần Văn Toàn | `main` | Hoàn thiện đánh giá tuân thủ, bằng chứng live và dọn demo; mở rộng 18 probe A.8, nối nguồn với hồ sơ 56 và bổ sung báo cáo. |

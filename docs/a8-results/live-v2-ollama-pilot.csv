@@ -1,0 +1,19 @@
+﻿control_id,status,first_pass_error,attempts,repaired,final_error,observations,evidence_sha256
+A.8.1,Partially Compliant,,1,False,,True,25ddd0716b00c7a12956bb276fc1bd8af1a3dbcd33165c71420650a3e09084ad
+A.8.2,Partially Compliant,,1,False,,True,dadb97df9ade026bce53465be03a81f80253755f29b6f7f6078362894ae05541
+A.8.3,Partially Compliant,RubricConclusionMismatch,2,True,,True,181158a9d5df36c4784e46cd75808b22ae13723dc2e93558f9ca2a90b421f683
+A.8.5,Partially Compliant,,1,False,,True,6726c2ed13950708ee801f3ab6d9281fad7e9b504bea9b1ebe15ee1cf3a004c8
+A.8.7,Partially Compliant,,1,False,,True,e5a8b6cb305f41724cb9c4241629be1e171d3ba50338820bfb64aa6b82f4d4f6
+A.8.8,Partially Compliant,,1,False,,True,7dc5540bb6212e12de8fb27f229339e665f482d051355f0d44bfb7dd55e4e6d7
+A.8.9,Partially Compliant,,1,False,,True,9bdf3af90aa08934e31b4e52fb430fd4fb000749b15efb035acb420d6f58c125
+A.8.10,Partially Compliant,,1,False,,True,50abb179b103b6a5e94b82717d8b3a24bd000d9ef74f6756d37b263991d77d44
+A.8.12,Partially Compliant,,1,False,,True,518e80751e335c98a4a6583da2acf018cc6b173c61766cdea9308381d50da5e7
+A.8.13,Partially Compliant,,1,False,,True,6860e899857edda617cdca7487f24d936643ad549adbdda0871bf6fcd90da113
+A.8.15,Partially Compliant,,1,False,,True,4bede6cc5bf85384339e8da17d670d33686682a1859c282a2aba308fc5205f29
+A.8.16,Partially Compliant,,1,False,,True,e9f41f34dc2dba0f2d73ec82a3eec56fd035444e88a25ecee278649d9ca4932f
+A.8.17,Partially Compliant,,1,False,,True,bdd9c278501b2d3766fc78780c4eb1633868dbc43d28b8c7d2f293b274e60564
+A.8.19,Partially Compliant,,1,False,,True,445dfdc2ba4a3b076c764eadc1011626057bc5890fa5bae0e7227f7fc6cedbb6
+A.8.20,Partially Compliant,,1,False,,True,0c4b38fef237373eb4adec107cac9f65b4b4540c97bbbe826eee24edb08c2b6b
+A.8.22,Partially Compliant,,1,False,,True,dc19fd0127cd1172f57990264a97a926d95b3df61f1504aaf00427049088de82
+A.8.24,Partially Compliant,,1,False,,True,a89ae5ce78e1947907888a1327321480dfea638516343b6b014513d267d8bcf8
+A.8.32,Partially Compliant,,1,False,,True,3e672bd2eb9b2f6ad85cc0638bc2281683d469bc882ed0b6831e7d4eeddc4ea4

@@ -2,6 +2,8 @@
 
 # Đối chiếu góp ý giảng viên và cách nghiệm thu
 
+> **Cập nhật live v2 ngày 11/11/2026:** đã có 18 probe đại diện, gồm 13 phép thử chủ động mới; tiêu chí mới khác live v1 và chỉ bao phủ một phần control. Xem [ma trận live v2 và kiểm chứng](LIVE_A8_V2.md). Các số liệu/giới hạn 5 probe, 13 chưa hỗ trợ dưới đây mô tả các lượt live v1 đã lưu, không phải năng lực runtime mới.
+
 Ngày cập nhật: 11/11/2026. Phạm vi đồ án vẫn là **56 control**; 18 A.8 là nhóm thực nghiệm sâu.
 
 ## Hiện trạng có thể chứng minh

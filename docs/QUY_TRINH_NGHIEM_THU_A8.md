@@ -2,6 +2,10 @@
 
 # Quy trình thực hiện và nghiệm thu A.8 — phiên bản raw v2
 
+> **Runtime live mới:** [Live A.8 v2](LIVE_A8_V2.md) có 18 probe đại diện, dùng image Python/OpenSSL và schema riêng. Phần Ubuntu/raw bên dưới mô tả bộ replay lịch sử, không phải runtime live mới. Không gộp nhãn/kết quả qua các phiên bản rubric.
+
+> Cập nhật v5: lượt mới chốt snapshot trước suy luận, yêu cầu model sửa tối đa một lần với lỗi đầu được giữ. Báo cáo tách lần đầu/sau sửa và từng người chấm; không tự ghép nhãn hoặc tạo đồng thuận. CLI hỗ trợ bộ nguồn tách riêng, nhưng chưa có tập kiểm định/nhãn người thật được xác nhận. Xem [bàn giao tuần 5](NGHIEM_THU_TUAN_05.md). Các mô tả raw v2 dưới đây là quy trình và kết quả lịch sử của nguồn replay.
+
 ## 1. Phạm vi, rubric và phê duyệt
 
 Có 18 control trong `lab_a8/catalog.json`. Mỗi tiêu chí có nguồn cấu hình/log, điều kiện pass, fail, thiếu bằng chứng, loại kiểm chứng và người phụ trách. Ngưỡng là chính sách lab (ví dụ retention 30 ngày, key/access review 90 ngày, clock offset 0,1 giây), không phải yêu cầu bắt buộc được trích từ ISO.

@@ -1,0 +1,582 @@
+{
+  "kind": "active-source-mutation-verification",
+  "is_human_accuracy": false,
+  "results": [
+    {
+      "control_id": "A.8.24",
+      "mutated_source": "private.pem",
+      "before": {
+        "evidence_id": "A8LIVE-7ecde1223a0bda64a5166bb4",
+        "source": "live-container://A.8.24",
+        "source_sha256": "7ecde1223a0bda64a5166bb45e67fec025bed1903d09aeb495bf5c89630363b2",
+        "collected_at": "2026-11-11T14:41:01.920796+00:00",
+        "observed_at": "2026-11-11T14:41:01.903376+00:00",
+        "asset_id": "08b11382ce92",
+        "control_id": "A.8.24",
+        "facts": {
+          "strong_tls_handshake_verified": true,
+          "private_key_access_restricted": true
+        },
+        "artifacts": [
+          {
+            "artifact": "observed_at",
+            "content": "2026-11-11T14:41:01.903376+00:00",
+            "sha256": "97bcbbc6df1819f9951802e285d451452509d1ad89ce5eef2647db3c978cbb8d"
+          },
+          {
+            "artifact": "asset_id",
+            "content": "08b11382ce92",
+            "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+          },
+          {
+            "artifact": "probe.json",
+            "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.24\", \"observed_at\": \"2026-11-11T14:41:01.903376+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"handshake\": {\"response\": \"200 secure lab service\", \"tls_version\": \"TLSv1.3\", \"source_address\": \"127.0.0.1\"}, \"handshake_rc\": 0, \"key_read_rc\": 1, \"key_mode\": \"0o600\", \"certificate_sha256\": \"41d73960d4a58045eace4edb77299b0b1d9b494cf52e633fe83d8b1db9945e8c\"}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+            "sha256": "d687a8c0eea500567bfb5a828e0b30aa4210efad7cf108718962972c8081586f"
+          }
+        ],
+        "collection_errors": [],
+        "is_synthetic": true,
+        "transport": "live",
+        "source_kind": "live-container-observation",
+        "probe_kind": "container-active-self-test",
+        "observation_available": true,
+        "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+      },
+      "after": {
+        "evidence_id": "A8LIVE-be7717e33fb2caccfa9eed31",
+        "source": "live-container://A.8.24",
+        "source_sha256": "be7717e33fb2caccfa9eed31a8b61c2144aeb45d7d311bee9b5cc463d78260d9",
+        "collected_at": "2026-11-11T14:41:02.308911+00:00",
+        "observed_at": "2026-11-11T14:41:02.292396+00:00",
+        "asset_id": "08b11382ce92",
+        "control_id": "A.8.24",
+        "facts": {
+          "strong_tls_handshake_verified": true,
+          "private_key_access_restricted": false
+        },
+        "artifacts": [
+          {
+            "artifact": "observed_at",
+            "content": "2026-11-11T14:41:02.292396+00:00",
+            "sha256": "6ef98f5d29c4fafb464129d29dfa35f794dd66d0f62e33f757d737c293fad90c"
+          },
+          {
+            "artifact": "asset_id",
+            "content": "08b11382ce92",
+            "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+          },
+          {
+            "artifact": "probe.json",
+            "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.24\", \"observed_at\": \"2026-11-11T14:41:02.292396+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"handshake\": {\"response\": \"200 secure lab service\", \"tls_version\": \"TLSv1.3\", \"source_address\": \"127.0.0.1\"}, \"handshake_rc\": 0, \"key_read_rc\": 0, \"key_mode\": \"0o644\", \"certificate_sha256\": \"41d73960d4a58045eace4edb77299b0b1d9b494cf52e633fe83d8b1db9945e8c\"}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+            "sha256": "d97f2e940c2c57385b27e56034cb4afbbd2d6db3dc1452380d6e67828480ff0e"
+          }
+        ],
+        "collection_errors": [],
+        "is_synthetic": true,
+        "transport": "live",
+        "source_kind": "live-container-observation",
+        "probe_kind": "container-active-self-test",
+        "observation_available": true,
+        "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+      },
+      "restored": {
+        "evidence_id": "A8LIVE-bb91aa583b84082e5c3e5f31",
+        "source": "live-container://A.8.24",
+        "source_sha256": "bb91aa583b84082e5c3e5f312b011d7ece3c2347ce196d8cb3add306ae589bcf",
+        "collected_at": "2026-11-11T14:41:02.718385+00:00",
+        "observed_at": "2026-11-11T14:41:02.688840+00:00",
+        "asset_id": "08b11382ce92",
+        "control_id": "A.8.24",
+        "facts": {
+          "strong_tls_handshake_verified": true,
+          "private_key_access_restricted": true
+        },
+        "artifacts": [
+          {
+            "artifact": "observed_at",
+            "content": "2026-11-11T14:41:02.688840+00:00",
+            "sha256": "718bc8f0df5681ff9d0ec9093bec7c1a50828065804ab59bfdbd54e78e160761"
+          },
+          {
+            "artifact": "asset_id",
+            "content": "08b11382ce92",
+            "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+          },
+          {
+            "artifact": "probe.json",
+            "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.24\", \"observed_at\": \"2026-11-11T14:41:02.688840+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"handshake\": {\"response\": \"200 secure lab service\", \"tls_version\": \"TLSv1.3\", \"source_address\": \"127.0.0.1\"}, \"handshake_rc\": 0, \"key_read_rc\": 1, \"key_mode\": \"0o600\", \"certificate_sha256\": \"41d73960d4a58045eace4edb77299b0b1d9b494cf52e633fe83d8b1db9945e8c\"}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+            "sha256": "e76cf90e79367b6e8fab1657267b1c3a09584d72b12f7c9489d8f5dc0632815a"
+          }
+        ],
+        "collection_errors": [],
+        "is_synthetic": true,
+        "transport": "live",
+        "source_kind": "live-container-observation",
+        "probe_kind": "container-active-self-test",
+        "observation_available": true,
+        "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+      }
+    },
+    {
+      "control_id": "A.8.7",
+      "mutated_source": "signatures.txt",
+      "before": {
+        "evidence_id": "A8LIVE-d88e8bf0e5cea147cbd060e1",
+        "source": "live-container://A.8.7",
+        "source_sha256": "d88e8bf0e5cea147cbd060e1072d97176b78fe9a53c8f1f3eac233bb617f8947",
+        "collected_at": "2026-11-11T14:41:03.124064+00:00",
+        "observed_at": "2026-11-11T14:41:03.108977+00:00",
+        "asset_id": "08b11382ce92",
+        "control_id": "A.8.7",
+        "facts": {
+          "test_signature_quarantined": true,
+          "signature_database_fresh": true
+        },
+        "artifacts": [
+          {
+            "artifact": "observed_at",
+            "content": "2026-11-11T14:41:03.108977+00:00",
+            "sha256": "073c7e3cb1831151e91fb700660fdf74e112efe7d0830f0d93f818d858e0fc0d"
+          },
+          {
+            "artifact": "asset_id",
+            "content": "08b11382ce92",
+            "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+          },
+          {
+            "artifact": "probe.json",
+            "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.7\", \"observed_at\": \"2026-11-11T14:41:03.108977+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"scanner_configuration\": {\"enabled\": true}, \"sample_sha256\": \"8dda30955b01bea35f8403e63547dbb63be0376b5a74125464905de592e53f51\", \"scanner_exit_code\": 66, \"quarantine_files\": [\"quarantined.txt\"], \"signature_mtime\": \"2026-11-11T14:36:54.449462+00:00\", \"scanner\": \"Lab signature scanner on harmless custom marker; not EDR/antivirus product\"}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+            "sha256": "d88887a16c8cc5df50592db8e4c2338370aff91e2c4395b217f5a897a19ea3fa"
+          }
+        ],
+        "collection_errors": [],
+        "is_synthetic": true,
+        "transport": "live",
+        "source_kind": "live-container-observation",
+        "probe_kind": "container-active-self-test",
+        "observation_available": true,
+        "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+      },
+      "after": {
+        "evidence_id": "A8LIVE-3fda930440511c9fa6fd27d7",
+        "source": "live-container://A.8.7",
+        "source_sha256": "3fda930440511c9fa6fd27d70e9ef89b32161a3e626d4c88f23d0612ff376c44",
+        "collected_at": "2026-11-11T14:41:03.533643+00:00",
+        "observed_at": "2026-11-11T14:41:03.507937+00:00",
+        "asset_id": "08b11382ce92",
+        "control_id": "A.8.7",
+        "facts": {
+          "test_signature_quarantined": false,
+          "signature_database_fresh": true
+        },
+        "artifacts": [
+          {
+            "artifact": "observed_at",
+            "content": "2026-11-11T14:41:03.507937+00:00",
+            "sha256": "21ae7f5f9f4cd262df3da230dcb48cd26aea6524f1c865d658b3a922fde4887e"
+          },
+          {
+            "artifact": "asset_id",
+            "content": "08b11382ce92",
+            "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+          },
+          {
+            "artifact": "probe.json",
+            "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.7\", \"observed_at\": \"2026-11-11T14:41:03.507937+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"scanner_configuration\": {\"enabled\": true}, \"sample_sha256\": \"8dda30955b01bea35f8403e63547dbb63be0376b5a74125464905de592e53f51\", \"scanner_exit_code\": 0, \"quarantine_files\": [], \"signature_mtime\": \"2026-11-11T14:41:03.254651+00:00\", \"scanner\": \"Lab signature scanner on harmless custom marker; not EDR/antivirus product\"}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+            "sha256": "df126ac1a9a35128fe684d7b847de328a3ad0ff157c1a037c2df455ca59914c0"
+          }
+        ],
+        "collection_errors": [],
+        "is_synthetic": true,
+        "transport": "live",
+        "source_kind": "live-container-observation",
+        "probe_kind": "container-active-self-test",
+        "observation_available": true,
+        "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+      },
+      "restored": {
+        "evidence_id": "A8LIVE-9fd05fec7258719388291d3b",
+        "source": "live-container://A.8.7",
+        "source_sha256": "9fd05fec7258719388291d3be02e0b11355aea63eb7eaa74a4afa53a04e3be1d",
+        "collected_at": "2026-11-11T14:41:04.012249+00:00",
+        "observed_at": "2026-11-11T14:41:03.995458+00:00",
+        "asset_id": "08b11382ce92",
+        "control_id": "A.8.7",
+        "facts": {
+          "test_signature_quarantined": true,
+          "signature_database_fresh": true
+        },
+        "artifacts": [
+          {
+            "artifact": "observed_at",
+            "content": "2026-11-11T14:41:03.995458+00:00",
+            "sha256": "ec2c2dd06ff8a7c25ab86b53b59181cfe1a1bc065beecba4057b26114d4483cc"
+          },
+          {
+            "artifact": "asset_id",
+            "content": "08b11382ce92",
+            "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+          },
+          {
+            "artifact": "probe.json",
+            "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.7\", \"observed_at\": \"2026-11-11T14:41:03.995458+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"scanner_configuration\": {\"enabled\": true}, \"sample_sha256\": \"8dda30955b01bea35f8403e63547dbb63be0376b5a74125464905de592e53f51\", \"scanner_exit_code\": 66, \"quarantine_files\": [\"quarantined.txt\"], \"signature_mtime\": \"2026-11-11T14:41:03.736573+00:00\", \"scanner\": \"Lab signature scanner on harmless custom marker; not EDR/antivirus product\"}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+            "sha256": "09af4b9e2d02c1b5b86ca0e9a93a497437cbe054cd6d5ae897f235b5983546d8"
+          }
+        ],
+        "collection_errors": [],
+        "is_synthetic": true,
+        "transport": "live",
+        "source_kind": "live-container-observation",
+        "probe_kind": "container-active-self-test",
+        "observation_available": true,
+        "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+      }
+    },
+    {
+      "control_id": "A.8.20",
+      "mutated_source": "network.json",
+      "before": {
+        "evidence_id": "A8LIVE-3f2cbc86885ccce8f70f1aaa",
+        "source": "live-container://A.8.20",
+        "source_sha256": "3f2cbc86885ccce8f70f1aaa39711a067e312a96ce8738f87baef41eb6f22e6f",
+        "collected_at": "2026-11-11T14:41:04.450572+00:00",
+        "observed_at": "2026-11-11T14:41:04.432952+00:00",
+        "asset_id": "08b11382ce92",
+        "control_id": "A.8.20",
+        "facts": {
+          "unapproved_source_denied": true,
+          "approved_network_flow_available": true
+        },
+        "artifacts": [
+          {
+            "artifact": "observed_at",
+            "content": "2026-11-11T14:41:04.432952+00:00",
+            "sha256": "5994d68cdcc6829cb9f41e54518223f3fe6650b92a9baa555179664b5cc7810a"
+          },
+          {
+            "artifact": "asset_id",
+            "content": "08b11382ce92",
+            "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+          },
+          {
+            "artifact": "probe.json",
+            "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.20\", \"observed_at\": \"2026-11-11T14:41:04.432952+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"policy\": {\"denied_sources\": [\"127.0.0.2\"], \"approved_flow\": true}, \"unapproved_source\": {\"response\": \"403 source denied\", \"tls_version\": null, \"source_address\": \"127.0.0.2\"}, \"approved_source\": {\"response\": \"200 service reachable\", \"tls_version\": null, \"source_address\": \"127.0.0.1\"}, \"boundary\": \"Application source ACL on actual loopback TCP, not kernel firewall\"}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+            "sha256": "3bebe7c4b29e2786454922aef23fcf483a4c3ec7c6855aff8a28eea47556b41f"
+          }
+        ],
+        "collection_errors": [],
+        "is_synthetic": true,
+        "transport": "live",
+        "source_kind": "live-container-observation",
+        "probe_kind": "container-active-self-test",
+        "observation_available": true,
+        "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+      },
+      "after": {
+        "evidence_id": "A8LIVE-fff8eaae4be30f6b5c6d8d65",
+        "source": "live-container://A.8.20",
+        "source_sha256": "fff8eaae4be30f6b5c6d8d650dc940a392ba956f3c6866cab58b9d2012037b2f",
+        "collected_at": "2026-11-11T14:41:04.883379+00:00",
+        "observed_at": "2026-11-11T14:41:04.864918+00:00",
+        "asset_id": "08b11382ce92",
+        "control_id": "A.8.20",
+        "facts": {
+          "unapproved_source_denied": false,
+          "approved_network_flow_available": true
+        },
+        "artifacts": [
+          {
+            "artifact": "observed_at",
+            "content": "2026-11-11T14:41:04.864918+00:00",
+            "sha256": "90a28331720fff7e8b6366c4093ce0a58d7cd71d064601cf1b9345fa2b0e8880"
+          },
+          {
+            "artifact": "asset_id",
+            "content": "08b11382ce92",
+            "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+          },
+          {
+            "artifact": "probe.json",
+            "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.20\", \"observed_at\": \"2026-11-11T14:41:04.864918+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"policy\": {\"denied_sources\": [], \"approved_flow\": true}, \"unapproved_source\": {\"response\": \"200 service reachable\", \"tls_version\": null, \"source_address\": \"127.0.0.2\"}, \"approved_source\": {\"response\": \"200 service reachable\", \"tls_version\": null, \"source_address\": \"127.0.0.1\"}, \"boundary\": \"Application source ACL on actual loopback TCP, not kernel firewall\"}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+            "sha256": "46c47133b81e40b918b4418b10e5e42cc1dd3ecd9156571021dd9cb974505535"
+          }
+        ],
+        "collection_errors": [],
+        "is_synthetic": true,
+        "transport": "live",
+        "source_kind": "live-container-observation",
+        "probe_kind": "container-active-self-test",
+        "observation_available": true,
+        "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+      },
+      "restored": {
+        "evidence_id": "A8LIVE-8e344883185ccd06e3375a82",
+        "source": "live-container://A.8.20",
+        "source_sha256": "8e344883185ccd06e3375a827640b48f9d4d4bd45a6e71261c28a29b198aa642",
+        "collected_at": "2026-11-11T14:41:05.318694+00:00",
+        "observed_at": "2026-11-11T14:41:05.300810+00:00",
+        "asset_id": "08b11382ce92",
+        "control_id": "A.8.20",
+        "facts": {
+          "unapproved_source_denied": true,
+          "approved_network_flow_available": true
+        },
+        "artifacts": [
+          {
+            "artifact": "observed_at",
+            "content": "2026-11-11T14:41:05.300810+00:00",
+            "sha256": "31cf12570686bcddcfc05f3141d0e7a04b628bf46cdad337ecdc37527423eb80"
+          },
+          {
+            "artifact": "asset_id",
+            "content": "08b11382ce92",
+            "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+          },
+          {
+            "artifact": "probe.json",
+            "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.20\", \"observed_at\": \"2026-11-11T14:41:05.300810+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"policy\": {\"denied_sources\": [\"127.0.0.2\"], \"approved_flow\": true}, \"unapproved_source\": {\"response\": \"403 source denied\", \"tls_version\": null, \"source_address\": \"127.0.0.2\"}, \"approved_source\": {\"response\": \"200 service reachable\", \"tls_version\": null, \"source_address\": \"127.0.0.1\"}, \"boundary\": \"Application source ACL on actual loopback TCP, not kernel firewall\"}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+            "sha256": "4ee399f0126a3cac6a26839f32e9b2bc3a662822a81ea186583f2abb590ac558"
+          }
+        ],
+        "collection_errors": [],
+        "is_synthetic": true,
+        "transport": "live",
+        "source_kind": "live-container-observation",
+        "probe_kind": "container-active-self-test",
+        "observation_available": true,
+        "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+      }
+    },
+    {
+      "control_id": "A.8.32",
+      "mutated_source": "rollback-backup.bin",
+      "before": {
+        "evidence_id": "A8LIVE-8d4264eb9374afb2a8f445dc",
+        "source": "live-container://A.8.32",
+        "source_sha256": "8d4264eb9374afb2a8f445dcc0a0c7374fd1a5fbfc17d9fa7b62a44160ee83c4",
+        "collected_at": "2026-11-11T14:41:05.736759+00:00",
+        "observed_at": "2026-11-11T14:41:05.721333+00:00",
+        "asset_id": "08b11382ce92",
+        "control_id": "A.8.32",
+        "facts": {
+          "change_bound_to_current_release": true,
+          "rollback_restores_release": true
+        },
+        "artifacts": [
+          {
+            "artifact": "observed_at",
+            "content": "2026-11-11T14:41:05.721333+00:00",
+            "sha256": "c5c5dc2f5b8615094044637e86ca664bd5204d3a88bb79b9412cdb9fb997a246"
+          },
+          {
+            "artifact": "asset_id",
+            "content": "08b11382ce92",
+            "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+          },
+          {
+            "artifact": "probe.json",
+            "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.32\", \"observed_at\": \"2026-11-11T14:41:05.721333+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"approval\": {\"ticket\": \"CAB-LAB-032\", \"sha256\": \"2d22208d4ca5d4c8c9ac7ec29c32bc7e48c9fd0eccdd9ef700a5c683b6f6cd82\"}, \"current_release_sha256\": \"2d22208d4ca5d4c8c9ac7ec29c32bc7e48c9fd0eccdd9ef700a5c683b6f6cd82\", \"rollback_rc\": 0, \"restored_sha256\": \"2d22208d4ca5d4c8c9ac7ec29c32bc7e48c9fd0eccdd9ef700a5c683b6f6cd82\", \"expected_release_sha256\": \"2d22208d4ca5d4c8c9ac7ec29c32bc7e48c9fd0eccdd9ef700a5c683b6f6cd82\", \"approval_source\": \"Authored lab change record, not human sign-off\"}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+            "sha256": "bc460cff315f30e0082bdf128113c6a061f524fa276a00bc89fb0ea2be4eddf8"
+          }
+        ],
+        "collection_errors": [],
+        "is_synthetic": true,
+        "transport": "live",
+        "source_kind": "live-container-observation",
+        "probe_kind": "container-active-self-test",
+        "observation_available": true,
+        "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+      },
+      "after": {
+        "evidence_id": "A8LIVE-b8307f73c7e723c79edb42f3",
+        "source": "live-container://A.8.32",
+        "source_sha256": "b8307f73c7e723c79edb42f33ee746c1c48fb98938f03d6dd83fcf9811c2d555",
+        "collected_at": "2026-11-11T14:41:06.100367+00:00",
+        "observed_at": "2026-11-11T14:41:06.085640+00:00",
+        "asset_id": "08b11382ce92",
+        "control_id": "A.8.32",
+        "facts": {
+          "change_bound_to_current_release": true,
+          "rollback_restores_release": false
+        },
+        "artifacts": [
+          {
+            "artifact": "observed_at",
+            "content": "2026-11-11T14:41:06.085640+00:00",
+            "sha256": "0c0c398b8d419ed59b2446339748e53ac7def60cede4e933efba3578f2c706a3"
+          },
+          {
+            "artifact": "asset_id",
+            "content": "08b11382ce92",
+            "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+          },
+          {
+            "artifact": "probe.json",
+            "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.32\", \"observed_at\": \"2026-11-11T14:41:06.085640+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"approval\": {\"ticket\": \"CAB-LAB-032\", \"sha256\": \"2d22208d4ca5d4c8c9ac7ec29c32bc7e48c9fd0eccdd9ef700a5c683b6f6cd82\"}, \"current_release_sha256\": \"2d22208d4ca5d4c8c9ac7ec29c32bc7e48c9fd0eccdd9ef700a5c683b6f6cd82\", \"rollback_rc\": 0, \"restored_sha256\": \"88539f7bbe5392e772138dc94b5250c12f0dc4ed274ea604a9daa89a98895521\", \"expected_release_sha256\": \"2d22208d4ca5d4c8c9ac7ec29c32bc7e48c9fd0eccdd9ef700a5c683b6f6cd82\", \"approval_source\": \"Authored lab change record, not human sign-off\"}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+            "sha256": "84778e4f2a97c262068ed32484e2ed5778d9348da24f05c599f05a8fed06a840"
+          }
+        ],
+        "collection_errors": [],
+        "is_synthetic": true,
+        "transport": "live",
+        "source_kind": "live-container-observation",
+        "probe_kind": "container-active-self-test",
+        "observation_available": true,
+        "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+      },
+      "restored": {
+        "evidence_id": "A8LIVE-933c7dd07fe19dd1bcb193a3",
+        "source": "live-container://A.8.32",
+        "source_sha256": "933c7dd07fe19dd1bcb193a3cfb54c1e0bbe7a72344da8ad9eb1d74353b7ddbe",
+        "collected_at": "2026-11-11T14:41:06.464967+00:00",
+        "observed_at": "2026-11-11T14:41:06.450982+00:00",
+        "asset_id": "08b11382ce92",
+        "control_id": "A.8.32",
+        "facts": {
+          "change_bound_to_current_release": true,
+          "rollback_restores_release": true
+        },
+        "artifacts": [
+          {
+            "artifact": "observed_at",
+            "content": "2026-11-11T14:41:06.450982+00:00",
+            "sha256": "422efbc2eb15afb1bfe4ff68bb9d3b0f93625c146e0c30f83f6e565fab6b2e70"
+          },
+          {
+            "artifact": "asset_id",
+            "content": "08b11382ce92",
+            "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+          },
+          {
+            "artifact": "probe.json",
+            "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.32\", \"observed_at\": \"2026-11-11T14:41:06.450982+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"approval\": {\"ticket\": \"CAB-LAB-032\", \"sha256\": \"2d22208d4ca5d4c8c9ac7ec29c32bc7e48c9fd0eccdd9ef700a5c683b6f6cd82\"}, \"current_release_sha256\": \"2d22208d4ca5d4c8c9ac7ec29c32bc7e48c9fd0eccdd9ef700a5c683b6f6cd82\", \"rollback_rc\": 0, \"restored_sha256\": \"2d22208d4ca5d4c8c9ac7ec29c32bc7e48c9fd0eccdd9ef700a5c683b6f6cd82\", \"expected_release_sha256\": \"2d22208d4ca5d4c8c9ac7ec29c32bc7e48c9fd0eccdd9ef700a5c683b6f6cd82\", \"approval_source\": \"Authored lab change record, not human sign-off\"}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+            "sha256": "3b9caf15614ddb7f4a611c390c78f1d4e2c45d851927349a70d2680187aa11f3"
+          }
+        ],
+        "collection_errors": [],
+        "is_synthetic": true,
+        "transport": "live",
+        "source_kind": "live-container-observation",
+        "probe_kind": "container-active-self-test",
+        "observation_available": true,
+        "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+      }
+    },
+    {
+      "control_id": "A.8.16",
+      "mutated_source": "monitor.json",
+      "before": {
+        "evidence_id": "A8LIVE-8a7b7f70f59840673d7c16e9",
+        "source": "live-container://A.8.16",
+        "source_sha256": "8a7b7f70f59840673d7c16e9590e5c75c2765e2ab6ea6e22ee8986ff6320e448",
+        "collected_at": "2026-11-11T14:41:06.859731+00:00",
+        "observed_at": "2026-11-11T14:41:06.841944+00:00",
+        "asset_id": "08b11382ce92",
+        "control_id": "A.8.16",
+        "facts": {
+          "file_change_detected_within_sla": true,
+          "alert_delivery_receipt_present": true
+        },
+        "artifacts": [
+          {
+            "artifact": "observed_at",
+            "content": "2026-11-11T14:41:06.841944+00:00",
+            "sha256": "7e289217bb0e64a49fb7d53aff3373b615b85d18ae8981a3b11be2a4e995461c"
+          },
+          {
+            "artifact": "asset_id",
+            "content": "08b11382ce92",
+            "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+          },
+          {
+            "artifact": "probe.json",
+            "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.16\", \"observed_at\": \"2026-11-11T14:41:06.841944+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"monitor_configuration\": {\"enabled\": true, \"delivery_enabled\": true}, \"events\": [{\"event\": \"file_changed\", \"latency_ms\": 10.46, \"at\": \"2026-11-11T14:41:06.841698+00:00\"}], \"delivery_receipts\": [{\"receipt_sha256\": \"96bab2aab0b84c23b61a18d542e7a92be42fd592a6de9f8ab7178477572b6cbc\"}]}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+            "sha256": "6aaf10a3f0a8ef647d4081b88f45c2ea8f89d3382a6380cb359378ef7486d1b6"
+          }
+        ],
+        "collection_errors": [],
+        "is_synthetic": true,
+        "transport": "live",
+        "source_kind": "live-container-observation",
+        "probe_kind": "container-active-self-test",
+        "observation_available": true,
+        "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+      },
+      "after": {
+        "evidence_id": "A8LIVE-98d524ec83a1ac0e6340bc6e",
+        "source": "live-container://A.8.16",
+        "source_sha256": "98d524ec83a1ac0e6340bc6eca9a80b62c7fcebc7631fbc1b5fc4106c8ac40c4",
+        "collected_at": "2026-11-11T14:41:07.247324+00:00",
+        "observed_at": "2026-11-11T14:41:07.232450+00:00",
+        "asset_id": "08b11382ce92",
+        "control_id": "A.8.16",
+        "facts": {
+          "file_change_detected_within_sla": true,
+          "alert_delivery_receipt_present": false
+        },
+        "artifacts": [
+          {
+            "artifact": "observed_at",
+            "content": "2026-11-11T14:41:07.232450+00:00",
+            "sha256": "d3923c80998e0f67fb4332ce5032637e57513827a3e2aa06d80c3dd632dac7b3"
+          },
+          {
+            "artifact": "asset_id",
+            "content": "08b11382ce92",
+            "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+          },
+          {
+            "artifact": "probe.json",
+            "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.16\", \"observed_at\": \"2026-11-11T14:41:07.232450+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"monitor_configuration\": {\"enabled\": true, \"delivery_enabled\": false}, \"events\": [{\"event\": \"file_changed\", \"latency_ms\": 10.43, \"at\": \"2026-11-11T14:41:07.232289+00:00\"}], \"delivery_receipts\": []}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+            "sha256": "b357328bfb5f2e933ae128a4ac6bec09e510033a054634167b8379f93817faec"
+          }
+        ],
+        "collection_errors": [],
+        "is_synthetic": true,
+        "transport": "live",
+        "source_kind": "live-container-observation",
+        "probe_kind": "container-active-self-test",
+        "observation_available": true,
+        "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+      },
+      "restored": {
+        "evidence_id": "A8LIVE-57af6eeb62548811769255af",
+        "source": "live-container://A.8.16",
+        "source_sha256": "57af6eeb62548811769255af119bf99dca28f307ca02fba29f6436a9053f3b07",
+        "collected_at": "2026-11-11T14:41:07.651231+00:00",
+        "observed_at": "2026-11-11T14:41:07.635328+00:00",
+        "asset_id": "08b11382ce92",
+        "control_id": "A.8.16",
+        "facts": {
+          "file_change_detected_within_sla": true,
+          "alert_delivery_receipt_present": true
+        },
+        "artifacts": [
+          {
+            "artifact": "observed_at",
+            "content": "2026-11-11T14:41:07.635328+00:00",
+            "sha256": "efdac6300299a3cada8ccef142629eb7fd57819522cc0fc42e4d752febd89e0d"
+          },
+          {
+            "artifact": "asset_id",
+            "content": "08b11382ce92",
+            "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+          },
+          {
+            "artifact": "probe.json",
+            "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.16\", \"observed_at\": \"2026-11-11T14:41:07.635328+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"monitor_configuration\": {\"enabled\": true, \"delivery_enabled\": true}, \"events\": [{\"event\": \"file_changed\", \"latency_ms\": 10.43, \"at\": \"2026-11-11T14:41:07.635047+00:00\"}], \"delivery_receipts\": [{\"receipt_sha256\": \"cf6d62c4c3413c79b30120228dc9460ab32eec604bc8d16ee5958a092acf1a18\"}]}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+            "sha256": "1722cdd25c2ff116077b27f310fdbfd35ec037bd0bb9b19946636a999e50c3cc"
+          }
+        ],
+        "collection_errors": [],
+        "is_synthetic": true,
+        "transport": "live",
+        "source_kind": "live-container-observation",
+        "probe_kind": "container-active-self-test",
+        "observation_available": true,
+        "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+      }
+    }
+  ],
+  "sha256": "b5b2e5a19c1aeec4cc9153d947f6791b1cdd32408e0cb1a6853cdc05f708c117"
+}

@@ -1,7 +1,7 @@
 """Fixed read-only probes of an isolated lab, distinct from historical replay.
 
-Only five representative controls have live probes. Unsupported controls return
-unknown, never receive fixture evidence or a fabricated successful observation.
+Eighteen representative controls have probes. Five observe existing resources;
+thirteen execute bounded active self-tests of container-local applications.
 """
 import base64
 import csv
@@ -11,10 +11,12 @@ import json
 import subprocess
 from copy import deepcopy
 from datetime import datetime, timezone
+from evidence_collectors.a8_live_extended import SPECS,evaluate as evaluate_extended
 
-LIVE_IDS = ('A.8.3', 'A.8.10', 'A.8.13', 'A.8.15', 'A.8.19')
+PASSIVE_IDS = ('A.8.3', 'A.8.10', 'A.8.13', 'A.8.15', 'A.8.19')
+LIVE_IDS = tuple(sorted((*PASSIVE_IDS,*SPECS),key=lambda cid:int(cid.split('.')[-1])))
 LIVE_PROFILES = ('conforming', 'mixed', 'nonconforming', 'incomplete')
-VERSION = 'a8-live-v1'
+VERSION = 'a8-live-v2-active'
 DESCRIPTIONS = {
     'A.8.3': [('write_access_rc + resource_stat', 'labworker không ghi được tệp nghiệp vụ (test -w trả 1).'),
               ('access-review.csv', 'Review cho labworker được approved trong 90 ngày; là hồ sơ lab, chưa phải phê duyệt chuyên gia.')],
@@ -34,9 +36,15 @@ def live_catalog(controls):
     for c in result:
         cid = c['control_id']
         c['rubric_version'] = VERSION
+        if cid in SPECS:
+            c['checks']=[s[0] for s in SPECS[cid]]
+            c['criteria']=[dict(check=check,raw_source='probe.json: '+source,pass_condition=condition,
+                fail_condition='Có quan sát hợp lệ nhưng không thỏa điều kiện lab.',
+                missing_condition='Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.',
+                verification_kind='container-active-self-test') for check,source,condition in SPECS[cid]]
         c['scope_note'] = ('Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.'
                            if cid in LIVE_IDS else 'Chưa có probe live cho control này; phải kết luận thiếu bằng chứng.')
-        for i, criterion in enumerate(c['criteria']):
+        for i, criterion in enumerate(c['criteria'] if cid not in SPECS else []):
             source, condition = DESCRIPTIONS[cid][i] if cid in LIVE_IDS else ('unavailable', 'Chưa triển khai probe live.')
             criterion.update(raw_source=source, pass_condition=condition,
                              verification_kind='live-container-observation' if cid in LIVE_IDS else 'not-implemented')
@@ -52,7 +60,7 @@ def _parse(raw):
         if key in values or key not in {'observed_at', 'asset_id', 'write_access_rc', 'resource_stat',
                 'access-review.csv', 'retention.conf', 'deletion-receipt', 'object_exists_rc',
                 'backup.dat', 'backup.sha256', 'restored.dat', 'application.log', 'application.sha256',
-                'install_access_rc', 'install_stat', 'installed.tsv', 'approved.tsv'}:
+                'install_access_rc', 'install_stat', 'installed.tsv', 'approved.tsv','probe.json'}:
             raise ValueError('Invalid live probe field')
         values[key] = None if encoded == 'MISSING' else base64.b64decode(encoded, validate=True).decode('utf-8')
     return values
@@ -64,6 +72,7 @@ def collect_live(profile, control):
     cid = control['control_id']
     facts = {k: None for k in control['checks']}
     errors, values, artifacts = [], {}, []
+    active_observations=False
     if cid not in LIVE_IDS:
         errors.append({'artifact': 'live-probe', 'error': 'live_probe_not_implemented'})
     else:
@@ -119,7 +128,21 @@ def collect_live(profile, control):
                     raise ValueError('Missing or malformed resource stat')
                 return int(fields[0],8)
 
-            if cid == 'A.8.3':
+            if cid in SPECS:
+                payload=json.loads(text('probe.json'))
+                if not isinstance(payload,dict):raise ValueError('Invalid active observation object')
+                if (payload.get('schema')!='a8-active-observation-v2' or payload.get('control_id')!=cid or
+                        payload.get('observed_at')!=values['observed_at'] or payload.get('asset_id')!=values['asset_id']):
+                    raise ValueError('Active observation identity/schema mismatch')
+                if not isinstance(payload.get('observations'),dict) or not isinstance(payload.get('collection_errors'),list):
+                    raise ValueError('Invalid active observation fields')
+                if payload.get('collection_errors'):
+                    errors.extend(payload['collection_errors']);first=second=None
+                else:
+                    active_observations=bool(payload['observations'])
+                    (first,second),issues=evaluate_extended(cid,payload['observations'],observed)
+                    errors.extend(issues)
+            elif cid == 'A.8.3':
                 first, second = check(lambda: mode('resource_stat')>=0 and denied('write_access_rc')), check(reviewed)
             elif cid == 'A.8.10':
                 first = check(lambda: 1 <= int(text('retention.conf').strip().split('=')[1]) <= 30)
@@ -144,4 +167,6 @@ def collect_live(profile, control):
                 observed_at=values.get('observed_at'), asset_id=values.get('asset_id'),
                 control_id=cid, facts=facts, artifacts=artifacts, collection_errors=errors,
                 is_synthetic=True, transport='live', source_kind='live-container-observation',
+                probe_kind='container-active-self-test' if cid in SPECS else 'read-only-resource-observation',
+                observation_available=active_observations if cid in SPECS else any(a['artifact'] not in ('observed_at','asset_id') for a in artifacts),
                 freshness_note='Observed now in an isolated, intentionally configured lab; not production evidence.')

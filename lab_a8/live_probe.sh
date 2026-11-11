@@ -2,7 +2,12 @@
 # Read-only observations at collection time. Names are fixed, never caller paths.
 set -eu
 case "$1" in conforming|mixed|nonconforming|incomplete) ;; *) exit 64;; esac
-case "$2" in A.8.3|A.8.10|A.8.13|A.8.15|A.8.19) ;; *) exit 64;; esac
+case "$2" in
+  A.8.3|A.8.10|A.8.13|A.8.15|A.8.19) ;;
+  A.8.1|A.8.2|A.8.5|A.8.7|A.8.8|A.8.9|A.8.12|A.8.16|A.8.17|A.8.20|A.8.22|A.8.24|A.8.32)
+    exec python /extended_probe.py probe "$1" "$2" ;;
+  *) exit 64;;
+esac
 root=/lab/live/$1
 emit() {
   printf '%s\t' "$1"
