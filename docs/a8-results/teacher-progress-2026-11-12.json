@@ -1,0 +1,3124 @@
+{
+  "protocol": "teacher-progress-v1",
+  "assessment_id": "7f7c009b-bdcd-5b33-934e-15251ad2c976",
+  "scope_total": 56,
+  "priority_count": 18,
+  "scope_sha256": "8e44c11ec5ab7a8333f46d5df31fc7bdd734de9417b570a87c01bd0580affe48",
+  "rubric_sha256": "dbf106d4cc9cf939e8bd3aba2cc7bf61c605b4c0e0068d6f113a14c942087c9c",
+  "soa_fingerprint": "f95a298fe69d071f2cead92b5347da9095799eb061499ccc87454eb5a6d57b01",
+  "soa_approval": "DRAFT_NOT_APPROVED",
+  "acceptance": {
+    "total_controls": 56,
+    "rubric_approved": false,
+    "applicability_recorded": 0,
+    "controls_with_evidence": 29,
+    "controls_with_submitted_sources": 1,
+    "controls_with_captured_lab_sources": 18,
+    "controls_with_explicit_sources": 19,
+    "controls_with_current_human_review": 0,
+    "soa_approved": false,
+    "note": "Nguồn nộp không tự đồng nghĩa đã xác thực. Số control có bằng chứng/thẩm định không phải số control đạt ISO."
+  },
+  "formal_conclusions": {
+    "Insufficient Evidence": 43,
+    "Cần tái đánh giá": 3,
+    "Chưa đánh giá": 1,
+    "Partially Compliant": 8,
+    "Non-Compliant": 1
+  },
+  "controls": [
+    {
+      "control_id": "A.6.1",
+      "name": "Screening",
+      "priority_a8": false,
+      "explicit_source_count": 0,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.6.2",
+      "name": "Terms and conditions of employment",
+      "priority_a8": false,
+      "explicit_source_count": 1,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.6.3",
+      "name": "Information security awareness, education and training",
+      "priority_a8": false,
+      "explicit_source_count": 0,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.6.4",
+      "name": "Disciplinary process",
+      "priority_a8": false,
+      "explicit_source_count": 0,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.6.5",
+      "name": "Responsibilities after termination or change of employment",
+      "priority_a8": false,
+      "explicit_source_count": 0,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.6.6",
+      "name": "Confidentiality or non-disclosure agreements",
+      "priority_a8": false,
+      "explicit_source_count": 0,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.6.7",
+      "name": "Remote working",
+      "priority_a8": false,
+      "explicit_source_count": 0,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.6.8",
+      "name": "Information security event reporting",
+      "priority_a8": false,
+      "explicit_source_count": 0,
+      "machine_conclusion": "Cần tái đánh giá",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.7.1",
+      "name": "Physical security perimeters",
+      "priority_a8": false,
+      "explicit_source_count": 0,
+      "machine_conclusion": "Chưa đánh giá",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.7.2",
+      "name": "Physical entry",
+      "priority_a8": false,
+      "explicit_source_count": 0,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.7.3",
+      "name": "Securing offices, rooms and facilities",
+      "priority_a8": false,
+      "explicit_source_count": 0,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.7.4",
+      "name": "Physical security monitoring",
+      "priority_a8": false,
+      "explicit_source_count": 0,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.7.5",
+      "name": "Protecting against physical and environmental threats",
+      "priority_a8": false,
+      "explicit_source_count": 0,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.7.6",
+      "name": "Working in secure areas",
+      "priority_a8": false,
+      "explicit_source_count": 0,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.7.7",
+      "name": "Clear desk and clear screen",
+      "priority_a8": false,
+      "explicit_source_count": 0,
+      "machine_conclusion": "Cần tái đánh giá",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.7.8",
+      "name": "Equipment siting and protection",
+      "priority_a8": false,
+      "explicit_source_count": 0,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.7.9",
+      "name": "Security of assets off-premises",
+      "priority_a8": false,
+      "explicit_source_count": 0,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.7.10",
+      "name": "Storage media",
+      "priority_a8": false,
+      "explicit_source_count": 0,
+      "machine_conclusion": "Cần tái đánh giá",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.7.11",
+      "name": "Supporting utilities",
+      "priority_a8": false,
+      "explicit_source_count": 0,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.7.12",
+      "name": "Cabling security",
+      "priority_a8": false,
+      "explicit_source_count": 0,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.7.13",
+      "name": "Equipment maintenance",
+      "priority_a8": false,
+      "explicit_source_count": 0,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.7.14",
+      "name": "Secure disposal or re-use of equipment",
+      "priority_a8": false,
+      "explicit_source_count": 0,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.8.1",
+      "name": "User endpoint devices",
+      "priority_a8": true,
+      "explicit_source_count": 1,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.8.2",
+      "name": "Privileged access rights",
+      "priority_a8": true,
+      "explicit_source_count": 1,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.8.3",
+      "name": "Information access restriction",
+      "priority_a8": true,
+      "explicit_source_count": 1,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.8.4",
+      "name": "Access to source code",
+      "priority_a8": false,
+      "explicit_source_count": 0,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.8.5",
+      "name": "Secure authentication",
+      "priority_a8": true,
+      "explicit_source_count": 1,
+      "machine_conclusion": "Partially Compliant",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.8.6",
+      "name": "Capacity management",
+      "priority_a8": false,
+      "explicit_source_count": 0,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.8.7",
+      "name": "Protection against malware",
+      "priority_a8": true,
+      "explicit_source_count": 1,
+      "machine_conclusion": "Partially Compliant",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.8.8",
+      "name": "Management of technical vulnerabilities",
+      "priority_a8": true,
+      "explicit_source_count": 1,
+      "machine_conclusion": "Partially Compliant",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.8.9",
+      "name": "Configuration management",
+      "priority_a8": true,
+      "explicit_source_count": 1,
+      "machine_conclusion": "Partially Compliant",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.8.10",
+      "name": "Information deletion",
+      "priority_a8": true,
+      "explicit_source_count": 1,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.8.11",
+      "name": "Data masking",
+      "priority_a8": false,
+      "explicit_source_count": 0,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.8.12",
+      "name": "Data leakage prevention",
+      "priority_a8": true,
+      "explicit_source_count": 1,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.8.13",
+      "name": "Information backup",
+      "priority_a8": true,
+      "explicit_source_count": 1,
+      "machine_conclusion": "Partially Compliant",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.8.14",
+      "name": "Redundancy of information processing facilities",
+      "priority_a8": false,
+      "explicit_source_count": 0,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.8.15",
+      "name": "Logging",
+      "priority_a8": true,
+      "explicit_source_count": 1,
+      "machine_conclusion": "Partially Compliant",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.8.16",
+      "name": "Monitoring activities",
+      "priority_a8": true,
+      "explicit_source_count": 1,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.8.17",
+      "name": "Clock synchronization",
+      "priority_a8": true,
+      "explicit_source_count": 1,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.8.18",
+      "name": "Use of privileged utility programs",
+      "priority_a8": false,
+      "explicit_source_count": 0,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.8.19",
+      "name": "Installation of software on operational systems",
+      "priority_a8": true,
+      "explicit_source_count": 1,
+      "machine_conclusion": "Non-Compliant",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.8.20",
+      "name": "Networks security",
+      "priority_a8": true,
+      "explicit_source_count": 1,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.8.21",
+      "name": "Security of network services",
+      "priority_a8": false,
+      "explicit_source_count": 0,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.8.22",
+      "name": "Segregation of networks",
+      "priority_a8": true,
+      "explicit_source_count": 1,
+      "machine_conclusion": "Partially Compliant",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.8.23",
+      "name": "Web filtering",
+      "priority_a8": false,
+      "explicit_source_count": 0,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.8.24",
+      "name": "Use of cryptography",
+      "priority_a8": true,
+      "explicit_source_count": 1,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.8.25",
+      "name": "Secure development life cycle",
+      "priority_a8": false,
+      "explicit_source_count": 0,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.8.26",
+      "name": "Application security requirements",
+      "priority_a8": false,
+      "explicit_source_count": 0,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.8.27",
+      "name": "Secure system architecture and engineering principles",
+      "priority_a8": false,
+      "explicit_source_count": 0,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.8.28",
+      "name": "Secure coding",
+      "priority_a8": false,
+      "explicit_source_count": 0,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.8.29",
+      "name": "Security testing in development and acceptance",
+      "priority_a8": false,
+      "explicit_source_count": 0,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.8.30",
+      "name": "Outsourced development",
+      "priority_a8": false,
+      "explicit_source_count": 0,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.8.31",
+      "name": "Separation of development, test and production environments",
+      "priority_a8": false,
+      "explicit_source_count": 0,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.8.32",
+      "name": "Change management",
+      "priority_a8": true,
+      "explicit_source_count": 1,
+      "machine_conclusion": "Partially Compliant",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.8.33",
+      "name": "Test information",
+      "priority_a8": false,
+      "explicit_source_count": 0,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    },
+    {
+      "control_id": "A.8.34",
+      "name": "Protection of information systems during audit testing",
+      "priority_a8": false,
+      "explicit_source_count": 0,
+      "machine_conclusion": "Insufficient Evidence",
+      "human_review_current": false,
+      "next_action": "Người phụ trách xác định tính áp dụng và kế hoạch"
+    }
+  ],
+  "pending_tasks": {
+    "rubric": 1,
+    "applicability": 56,
+    "sources": 37,
+    "review": 56,
+    "approval": 1
+  },
+  "experiments": [
+    {
+      "run_id": "0b7dc9e9-4d6c-4e0a-9a0f-df3a78feea9e",
+      "created_at": "2026-11-11T15:24:41.500380+00:00",
+      "mode": "llm",
+      "transport": "live",
+      "rubric_version": "a8-live-v2-active",
+      "catalog_sha256": "135424a5cad9a5a55ac88337b7b2efe375c1edd731b5b3f47708098bf062f09f",
+      "report_sha256": "9df9690f8504691f864b1b3117c15ef4523760c150c7af2dd8572e972e1e6925",
+      "metadata_complete": true,
+      "control_count": 18,
+      "capture_count": 18,
+      "source_coverage": 18,
+      "final_errors": 0,
+      "first_errors": 1,
+      "repaired": 1,
+      "human_progress": [],
+      "complete_independently_declared_reviewers": [],
+      "human_comparisons": {},
+      "pending_human_comparison": true,
+      "control_results": [
+        {
+          "control_id": "A.8.1",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "5a856a8a3b37470ee099d47f14bf25779b9ab9d7d59eb8ecf093cf2f92fc6e0d",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.2",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "d009ed14fff346c3924d96c5d41f230411efdc523fcadb89c45dc49e6dd43388",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.3",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "54b37ddbf6f8e22516a95b2c725983373a1f8322566a9e0bc490935bfe02b020",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.5",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "efc2cde43f2b393cd0f7d7879233ed217cdba60f12c34759ec0788315bba32f8",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.7",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "ed50cecb5c1857e9dd8c5fdc80ab13e989c945ef5a0049ec76dbda31c40b1c64",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.8",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "764239c0845b922c5939a2f2816810ac41d3f7ceaf5cbd97e62decac1f06a30c",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.9",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "ca16ad2751a4262d79905e50471923850ddba8a89330c063c51b890cddf2d726",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.10",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "4bf6d73581247f12d2ba12d73d36f626fcff9d35c1e154a143e90ac7fad47cf9",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.12",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "e52a5c3201ee8bf43cbe12540dc4781ec9244d517c06798444f36156f45a9269",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.13",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "f16299c651f3c1349614daf3c205df98f0b824633f4236aebc990fb1829e9b0c",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.15",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "dc2d509982c900129c60f5d4dd1c4b5532dc5ac0946b30e85cc60d480b7ef268",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.16",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "ae4f6fc6e785392629de1b2ca571ac57f1538d5981c0687fcab107e5fdb5e8ce",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.17",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "ba1fe2ff059e99d0481b7da19663b7bae44f1dc9596b8c70c81396ae60d8813d",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.19",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "404e7fd9b358b0f86f489d00348a28d990dcdf6589a62513cb246a8b25aebd9b",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.20",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "eb8f199112918962a7b66e50a2b43402f5466e5ab6d1687aebfe2325dd00b47d",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.22",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "18c16ef9b944480ef407c44a934194f644f5eae3572290b96572d39476448d80",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.24",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "a1202e775acd9b9e38d8ee9dbdce89839677b1708ac85a939d118e340bbc4177",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.32",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "0bd1b3255bd9953d892c3f45442a2a0119a2e9d89db7d1aa02522e2912eacf99",
+          "is_synthetic": true
+        }
+      ]
+    },
+    {
+      "run_id": "67d38694-724e-4cc1-83f8-9df07f5cc3b2",
+      "created_at": "2026-11-11T14:42:30.528268+00:00",
+      "mode": "llm",
+      "transport": "live",
+      "rubric_version": "a8-live-v2-active",
+      "catalog_sha256": "135424a5cad9a5a55ac88337b7b2efe375c1edd731b5b3f47708098bf062f09f",
+      "report_sha256": "c39d7e9bb0f6030089cc414e4a9a1a1f33f4eab8a68d499f481b5dd3370ed540",
+      "metadata_complete": true,
+      "control_count": 18,
+      "capture_count": 18,
+      "source_coverage": 18,
+      "final_errors": 0,
+      "first_errors": 1,
+      "repaired": 1,
+      "human_progress": [],
+      "complete_independently_declared_reviewers": [],
+      "human_comparisons": {},
+      "pending_human_comparison": true,
+      "control_results": [
+        {
+          "control_id": "A.8.1",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "25ddd0716b00c7a12956bb276fc1bd8af1a3dbcd33165c71420650a3e09084ad",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.2",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "dadb97df9ade026bce53465be03a81f80253755f29b6f7f6078362894ae05541",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.3",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "181158a9d5df36c4784e46cd75808b22ae13723dc2e93558f9ca2a90b421f683",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.5",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "6726c2ed13950708ee801f3ab6d9281fad7e9b504bea9b1ebe15ee1cf3a004c8",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.7",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "e5a8b6cb305f41724cb9c4241629be1e171d3ba50338820bfb64aa6b82f4d4f6",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.8",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "7dc5540bb6212e12de8fb27f229339e665f482d051355f0d44bfb7dd55e4e6d7",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.9",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "9bdf3af90aa08934e31b4e52fb430fd4fb000749b15efb035acb420d6f58c125",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.10",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "50abb179b103b6a5e94b82717d8b3a24bd000d9ef74f6756d37b263991d77d44",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.12",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "518e80751e335c98a4a6583da2acf018cc6b173c61766cdea9308381d50da5e7",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.13",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "6860e899857edda617cdca7487f24d936643ad549adbdda0871bf6fcd90da113",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.15",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "4bede6cc5bf85384339e8da17d670d33686682a1859c282a2aba308fc5205f29",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.16",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "e9f41f34dc2dba0f2d73ec82a3eec56fd035444e88a25ecee278649d9ca4932f",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.17",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "bdd9c278501b2d3766fc78780c4eb1633868dbc43d28b8c7d2f293b274e60564",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.19",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "445dfdc2ba4a3b076c764eadc1011626057bc5890fa5bae0e7227f7fc6cedbb6",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.20",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "0c4b38fef237373eb4adec107cac9f65b4b4540c97bbbe826eee24edb08c2b6b",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.22",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "dc19fd0127cd1172f57990264a97a926d95b3df61f1504aaf00427049088de82",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.24",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "a89ae5ce78e1947907888a1327321480dfea638516343b6b014513d267d8bcf8",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.32",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "3e672bd2eb9b2f6ad85cc0638bc2281683d469bc882ed0b6831e7d4eeddc4ea4",
+          "is_synthetic": true
+        }
+      ]
+    },
+    {
+      "run_id": "2370c707-bbb6-4b6c-b2e0-b19ea1a869b7",
+      "created_at": "2026-11-11T13:59:36.521374+00:00",
+      "mode": "llm",
+      "transport": "live",
+      "rubric_version": "a8-live-v1",
+      "catalog_sha256": "0ea331cc629e955afff16902fd96badf0a67cef4d368ccd072d873e334c9d557",
+      "report_sha256": "292b66ad3e10b898436a78e312556fb4a586f55102a84e904ce4396e6462a2fc",
+      "metadata_complete": true,
+      "control_count": 18,
+      "capture_count": 18,
+      "source_coverage": 5,
+      "final_errors": 0,
+      "first_errors": 0,
+      "repaired": 0,
+      "human_progress": [
+        {
+          "reviewer_id": "145f6315-7d77-4ae0-b30b-67deff6637a3",
+          "submitted": 2,
+          "total": 18,
+          "submitted_controls": [
+            "A.8.1",
+            "A.8.2"
+          ],
+          "complete": false,
+          "independently_declared": 0,
+          "assisted": 0,
+          "unclassified": 2,
+          "display_name": "Lê Đăng Khoa"
+        }
+      ],
+      "complete_independently_declared_reviewers": [],
+      "human_comparisons": {},
+      "pending_human_comparison": true,
+      "control_results": [
+        {
+          "control_id": "A.8.1",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "046103a258898b43178b1e20f9324bf1228d2d8494d4336decd3fd807cbc21b2",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.2",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "f07f7a8df1e02e05fd4fa7082eb142301ca71ca66953acdc56dc463957896c31",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.3",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "092ee209e123dd026648ed7c57741e9e74f9b6c30b52be3ee3ba09ca27cda5ce",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.5",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "a23275090524d90124ba83e2cf6e6bf61a427db03c473127c9e97f53bad47b53",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.7",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "985f4a75caede4d603569f070a925adc891b009d6db523937f7a901a9f1bdfde",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.8",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "2afd580574f9b13f28071bb1819f7b9a5ba3e0b40ec835972d9fc3e1b56eb24d",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.9",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "81165196015b1480507dc1718f1648ad256a656879d27e142fd81024d6d3cf45",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.10",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "60ecb0631e7b810a666da94ba4db675a766519b3dea5d7019ebbf8fcc81f3b99",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.12",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "a536a1f870c47df752b39eafc60656cac168a9d42d73018e7bf1d708b966418f",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.13",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "273e62edcf197b45a32c20f76a8aad72898c31a01af1958df73dee3e41ad1154",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.15",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "7a1053dc2e7404042d6436c12a9a16d757dd1aeb2473d32bfbf6365cb6b97e9a",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.16",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "2b2a44cb49414f213c077c46fb77c767092554c02f7b8ff0fe800b9308cb2ea7",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.17",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "b2424de3c9e5b08f447625f5cf7ce0efd867cbead9bbd372d6df997aee816d17",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.19",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "1a877dc7d4cf2cc396913c5eaf3114c9ccdd7dcf346772ed19967ed5d6911f31",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.20",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "f4a0b63076ca269128be4657907a7828acb0ed9bd7d90aeccce47f6c0f1c1745",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.22",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "5073e8bf3271fd22e52e621484444df0732c683aa058b48cf3e7d83aac1145c4",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.24",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "49baa97aad58df7718b3fb67659c45095c00485199a4b5e27aa95badf622768e",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.32",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "6c7c165ec835686e5b84d933e4718da854f4cfedf4e15612943520530434ff4a",
+          "is_synthetic": true
+        }
+      ]
+    },
+    {
+      "run_id": "b9e2f0b7-4cfe-4782-ab4f-6851dee781e5",
+      "created_at": "2026-11-11T06:28:29.661683+00:00",
+      "mode": "llm",
+      "transport": "live",
+      "rubric_version": "a8-live-v1",
+      "catalog_sha256": "0ea331cc629e955afff16902fd96badf0a67cef4d368ccd072d873e334c9d557",
+      "report_sha256": "c6672fb20855cdf0f0b3a27bc8bd86a3b050ba7084709d3ea9a5d3e5dca112ed",
+      "metadata_complete": true,
+      "control_count": 18,
+      "capture_count": 18,
+      "source_coverage": 5,
+      "final_errors": 1,
+      "first_errors": 0,
+      "repaired": 0,
+      "human_progress": [],
+      "complete_independently_declared_reviewers": [],
+      "human_comparisons": {},
+      "pending_human_comparison": true,
+      "control_results": [
+        {
+          "control_id": "A.8.1",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "046103a258898b43178b1e20f9324bf1228d2d8494d4336decd3fd807cbc21b2",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.2",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "f07f7a8df1e02e05fd4fa7082eb142301ca71ca66953acdc56dc463957896c31",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.3",
+          "machine_status": null,
+          "error": "RubricConclusionMismatch",
+          "evidence_sha256": "255c0d2f01089073b8396b5e13260255dd14c57c1be88fd24c50cabe2a0c4790",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.5",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "a23275090524d90124ba83e2cf6e6bf61a427db03c473127c9e97f53bad47b53",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.7",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "985f4a75caede4d603569f070a925adc891b009d6db523937f7a901a9f1bdfde",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.8",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "2afd580574f9b13f28071bb1819f7b9a5ba3e0b40ec835972d9fc3e1b56eb24d",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.9",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "81165196015b1480507dc1718f1648ad256a656879d27e142fd81024d6d3cf45",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.10",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "25cf3cd5324304ebb31a8c1a42a88522896a3c044092b7d0eb6760f8a52b3768",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.12",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "a536a1f870c47df752b39eafc60656cac168a9d42d73018e7bf1d708b966418f",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.13",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "781cea0f77b29d2b6c6b70ba4d641cfb1c1807b016fbc9bc5665cd5e726586f6",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.15",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "1892c7f71469b09b0f64ea3d81bac0585d929567ac5edddc873888c82a5f37bb",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.16",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "2b2a44cb49414f213c077c46fb77c767092554c02f7b8ff0fe800b9308cb2ea7",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.17",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "b2424de3c9e5b08f447625f5cf7ce0efd867cbead9bbd372d6df997aee816d17",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.19",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "3a60db1fb18552b6e21233b5b442e9e5e973e6a8f0eec02d07af06c136f31c9c",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.20",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "f4a0b63076ca269128be4657907a7828acb0ed9bd7d90aeccce47f6c0f1c1745",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.22",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "5073e8bf3271fd22e52e621484444df0732c683aa058b48cf3e7d83aac1145c4",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.24",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "49baa97aad58df7718b3fb67659c45095c00485199a4b5e27aa95badf622768e",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.32",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "6c7c165ec835686e5b84d933e4718da854f4cfedf4e15612943520530434ff4a",
+          "is_synthetic": true
+        }
+      ]
+    },
+    {
+      "run_id": "b5f48550-f8fb-4241-a79c-4b1d25856d46",
+      "created_at": "2026-11-11T05:41:44.738323+00:00",
+      "mode": "llm",
+      "transport": "live",
+      "rubric_version": "a8-live-v1",
+      "catalog_sha256": "0ea331cc629e955afff16902fd96badf0a67cef4d368ccd072d873e334c9d557",
+      "report_sha256": "c3119b8af938a33db96ca7b8170ea5b5356d5bda2b173762f4a9128d2cb4935d",
+      "metadata_complete": true,
+      "control_count": 18,
+      "capture_count": 18,
+      "source_coverage": 5,
+      "final_errors": 1,
+      "first_errors": 0,
+      "repaired": 0,
+      "human_progress": [],
+      "complete_independently_declared_reviewers": [],
+      "human_comparisons": {},
+      "pending_human_comparison": true,
+      "control_results": [
+        {
+          "control_id": "A.8.1",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "046103a258898b43178b1e20f9324bf1228d2d8494d4336decd3fd807cbc21b2",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.2",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "f07f7a8df1e02e05fd4fa7082eb142301ca71ca66953acdc56dc463957896c31",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.3",
+          "machine_status": null,
+          "error": "RubricConclusionMismatch",
+          "evidence_sha256": "97d3e012baf786debf1b2596a428ab7ca3f031f48fd13d10974229c38ca39039",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.5",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "a23275090524d90124ba83e2cf6e6bf61a427db03c473127c9e97f53bad47b53",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.7",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "985f4a75caede4d603569f070a925adc891b009d6db523937f7a901a9f1bdfde",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.8",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "2afd580574f9b13f28071bb1819f7b9a5ba3e0b40ec835972d9fc3e1b56eb24d",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.9",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "81165196015b1480507dc1718f1648ad256a656879d27e142fd81024d6d3cf45",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.10",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "b4c498fb5d4518059b6b53d707614faee1d117b8c1e8b4ed926d08ccfdba1f27",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.12",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "a536a1f870c47df752b39eafc60656cac168a9d42d73018e7bf1d708b966418f",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.13",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "7016d6d551e7e87487a4ef09f0c37ed86d8d31644a25e7e6d22176b4f8d0980a",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.15",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "c48b1bcb146995b166f59a1e3302a13f4d159fe836bdc4d35c932ed274e7f565",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.16",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "2b2a44cb49414f213c077c46fb77c767092554c02f7b8ff0fe800b9308cb2ea7",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.17",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "b2424de3c9e5b08f447625f5cf7ce0efd867cbead9bbd372d6df997aee816d17",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.19",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "9024e37e9b6d6736e8813a5d6880294c9ef898f0a4c813cb943617f69dd7cfe1",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.20",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "f4a0b63076ca269128be4657907a7828acb0ed9bd7d90aeccce47f6c0f1c1745",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.22",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "5073e8bf3271fd22e52e621484444df0732c683aa058b48cf3e7d83aac1145c4",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.24",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "49baa97aad58df7718b3fb67659c45095c00485199a4b5e27aa95badf622768e",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.32",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "6c7c165ec835686e5b84d933e4718da854f4cfedf4e15612943520530434ff4a",
+          "is_synthetic": true
+        }
+      ]
+    },
+    {
+      "run_id": "3af12d1d-0cfc-4ad7-a193-3407e92caf6a",
+      "created_at": "2026-11-11T05:37:04.423976+00:00",
+      "mode": "llm",
+      "transport": "live",
+      "rubric_version": "a8-live-v1",
+      "catalog_sha256": "0ea331cc629e955afff16902fd96badf0a67cef4d368ccd072d873e334c9d557",
+      "report_sha256": "dd017de7f0ef7048ea05c2c950c48ef4fd258a620798ec0f2293f9ccaeb00c00",
+      "metadata_complete": true,
+      "control_count": 18,
+      "capture_count": 18,
+      "source_coverage": 5,
+      "final_errors": 1,
+      "first_errors": 0,
+      "repaired": 0,
+      "human_progress": [],
+      "complete_independently_declared_reviewers": [],
+      "human_comparisons": {},
+      "pending_human_comparison": true,
+      "control_results": [
+        {
+          "control_id": "A.8.1",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "046103a258898b43178b1e20f9324bf1228d2d8494d4336decd3fd807cbc21b2",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.2",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "f07f7a8df1e02e05fd4fa7082eb142301ca71ca66953acdc56dc463957896c31",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.3",
+          "machine_status": null,
+          "error": "RubricConclusionMismatch",
+          "evidence_sha256": "1e40496c7b04b1126bc1923c392bb3dc4da7e546f667b4602d84cce348c7ebab",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.5",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "a23275090524d90124ba83e2cf6e6bf61a427db03c473127c9e97f53bad47b53",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.7",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "985f4a75caede4d603569f070a925adc891b009d6db523937f7a901a9f1bdfde",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.8",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "2afd580574f9b13f28071bb1819f7b9a5ba3e0b40ec835972d9fc3e1b56eb24d",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.9",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "81165196015b1480507dc1718f1648ad256a656879d27e142fd81024d6d3cf45",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.10",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "40f8d71e7d15ba909af7966e5d87b06bd27764fe64e9fd236a9aa9a31a4e7675",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.12",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "a536a1f870c47df752b39eafc60656cac168a9d42d73018e7bf1d708b966418f",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.13",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "b2b55e2e6971fd0f3343e42917f455d02d38f6bd87946fc8fd912c4981a3e630",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.15",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "82b7737690733a060bdd813d9d89e164d4b7524147483d4cecdcf7d49711b24f",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.16",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "2b2a44cb49414f213c077c46fb77c767092554c02f7b8ff0fe800b9308cb2ea7",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.17",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "b2424de3c9e5b08f447625f5cf7ce0efd867cbead9bbd372d6df997aee816d17",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.19",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "07b529b11d57033fa88ccf1c9463e9544fb2b0ee3a1399e0e8316f2f84edcf24",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.20",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "f4a0b63076ca269128be4657907a7828acb0ed9bd7d90aeccce47f6c0f1c1745",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.22",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "5073e8bf3271fd22e52e621484444df0732c683aa058b48cf3e7d83aac1145c4",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.24",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "49baa97aad58df7718b3fb67659c45095c00485199a4b5e27aa95badf622768e",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.32",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "6c7c165ec835686e5b84d933e4718da854f4cfedf4e15612943520530434ff4a",
+          "is_synthetic": true
+        }
+      ]
+    },
+    {
+      "run_id": "6aa10e4a-a0a3-4cdf-9600-9cfa4e8eac58",
+      "created_at": "2026-11-11T05:31:22.228544+00:00",
+      "mode": "llm",
+      "transport": "live",
+      "rubric_version": "a8-live-v1",
+      "catalog_sha256": "0ea331cc629e955afff16902fd96badf0a67cef4d368ccd072d873e334c9d557",
+      "report_sha256": "d85ca640ebf3dbc9238fd504e141e4902386f6f13445e6a45d8082fd1c6c8a50",
+      "metadata_complete": true,
+      "control_count": 18,
+      "capture_count": 18,
+      "source_coverage": 5,
+      "final_errors": 0,
+      "first_errors": 0,
+      "repaired": 0,
+      "human_progress": [],
+      "complete_independently_declared_reviewers": [],
+      "human_comparisons": {},
+      "pending_human_comparison": true,
+      "control_results": [
+        {
+          "control_id": "A.8.1",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "046103a258898b43178b1e20f9324bf1228d2d8494d4336decd3fd807cbc21b2",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.2",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "f07f7a8df1e02e05fd4fa7082eb142301ca71ca66953acdc56dc463957896c31",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.3",
+          "machine_status": "Non-Compliant",
+          "error": null,
+          "evidence_sha256": "88ce9c1c0ef50487378f6a07d6e9e4b9483b4742fb82bb581ade9ad08a25cead",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.5",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "a23275090524d90124ba83e2cf6e6bf61a427db03c473127c9e97f53bad47b53",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.7",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "985f4a75caede4d603569f070a925adc891b009d6db523937f7a901a9f1bdfde",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.8",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "2afd580574f9b13f28071bb1819f7b9a5ba3e0b40ec835972d9fc3e1b56eb24d",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.9",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "81165196015b1480507dc1718f1648ad256a656879d27e142fd81024d6d3cf45",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.10",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "492c9dc95656a0055c9a6be835dbc1695720fa4c69b1623e4730344935c849b0",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.12",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "a536a1f870c47df752b39eafc60656cac168a9d42d73018e7bf1d708b966418f",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.13",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "bdcdf1dadfd3e3b8f6e9fb72eb5bfbb1da45bf3b3cfb139a13d499f2e443e5bb",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.15",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "3a440d1e5bf441fc0f8844e84308f7638a7cc961f242bc6feceb1b7bfa5dbe26",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.16",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "2b2a44cb49414f213c077c46fb77c767092554c02f7b8ff0fe800b9308cb2ea7",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.17",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "b2424de3c9e5b08f447625f5cf7ce0efd867cbead9bbd372d6df997aee816d17",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.19",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "355a95e0b9a56ebd45d4338e0803c45e9cb0c7b35700766237b3771481ca3be7",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.20",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "f4a0b63076ca269128be4657907a7828acb0ed9bd7d90aeccce47f6c0f1c1745",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.22",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "5073e8bf3271fd22e52e621484444df0732c683aa058b48cf3e7d83aac1145c4",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.24",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "49baa97aad58df7718b3fb67659c45095c00485199a4b5e27aa95badf622768e",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.32",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "6c7c165ec835686e5b84d933e4718da854f4cfedf4e15612943520530434ff4a",
+          "is_synthetic": true
+        }
+      ]
+    },
+    {
+      "run_id": "c4fb3bf2-b4d5-4bc2-9cb2-aee241bf10c0",
+      "created_at": "2026-11-11T05:30:43.693325+00:00",
+      "mode": "llm",
+      "transport": "live",
+      "rubric_version": "a8-live-v1",
+      "catalog_sha256": "0ea331cc629e955afff16902fd96badf0a67cef4d368ccd072d873e334c9d557",
+      "report_sha256": "3bf0935abcc2f141e2d0b650ab648566e50dd9b7f0f6a1abffbb91805de45550",
+      "metadata_complete": true,
+      "control_count": 18,
+      "capture_count": 18,
+      "source_coverage": 5,
+      "final_errors": 0,
+      "first_errors": 0,
+      "repaired": 0,
+      "human_progress": [],
+      "complete_independently_declared_reviewers": [],
+      "human_comparisons": {},
+      "pending_human_comparison": true,
+      "control_results": [
+        {
+          "control_id": "A.8.1",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "046103a258898b43178b1e20f9324bf1228d2d8494d4336decd3fd807cbc21b2",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.2",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "f07f7a8df1e02e05fd4fa7082eb142301ca71ca66953acdc56dc463957896c31",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.3",
+          "machine_status": "Non-Compliant",
+          "error": null,
+          "evidence_sha256": "f5d8430a5b0bfffbcdd8d9a178975ad7de4ac7d164b5d7b2fd6fa9275cc1ebc4",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.5",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "a23275090524d90124ba83e2cf6e6bf61a427db03c473127c9e97f53bad47b53",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.7",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "985f4a75caede4d603569f070a925adc891b009d6db523937f7a901a9f1bdfde",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.8",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "2afd580574f9b13f28071bb1819f7b9a5ba3e0b40ec835972d9fc3e1b56eb24d",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.9",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "81165196015b1480507dc1718f1648ad256a656879d27e142fd81024d6d3cf45",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.10",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "630ed79246580f5d6207782900b17bbf364d68d5a0b61289797acdb209b27b28",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.12",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "a536a1f870c47df752b39eafc60656cac168a9d42d73018e7bf1d708b966418f",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.13",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "20fb4b35f397a1796a9863572a9c26f5d37f0c6b7b94eaa2962919a0a40b2af7",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.15",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "4f777a9214115914511e6dd0817165a97022578428bdedb695abe9399f4f81eb",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.16",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "2b2a44cb49414f213c077c46fb77c767092554c02f7b8ff0fe800b9308cb2ea7",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.17",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "b2424de3c9e5b08f447625f5cf7ce0efd867cbead9bbd372d6df997aee816d17",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.19",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "e17af26e7de089a13e953a1beedc87e3bd1009edc3a435aba7aa8fa5ec95c8a0",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.20",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "f4a0b63076ca269128be4657907a7828acb0ed9bd7d90aeccce47f6c0f1c1745",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.22",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "5073e8bf3271fd22e52e621484444df0732c683aa058b48cf3e7d83aac1145c4",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.24",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "49baa97aad58df7718b3fb67659c45095c00485199a4b5e27aa95badf622768e",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.32",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "6c7c165ec835686e5b84d933e4718da854f4cfedf4e15612943520530434ff4a",
+          "is_synthetic": true
+        }
+      ]
+    },
+    {
+      "run_id": "1bb390d3-1c88-4f3e-b79e-ee9d7e608eeb",
+      "created_at": "2026-11-10T03:24:29.164181+00:00",
+      "mode": "llm",
+      "transport": "docker",
+      "rubric_version": "a8-raw-v2",
+      "catalog_sha256": "b7b102b86e746543451b11f87ac52890f678c84b121f899c733cd4dc1657d3a4",
+      "report_sha256": "bc3f448c56053b77e1b6be3a0929d0013682329907821deec63e861c8ab1dae4",
+      "metadata_complete": true,
+      "control_count": 18,
+      "capture_count": 18,
+      "source_coverage": 18,
+      "final_errors": 0,
+      "first_errors": 0,
+      "repaired": 0,
+      "human_progress": [],
+      "complete_independently_declared_reviewers": [],
+      "human_comparisons": {},
+      "pending_human_comparison": true,
+      "control_results": [
+        {
+          "control_id": "A.8.1",
+          "machine_status": "Compliant",
+          "error": null,
+          "evidence_sha256": "b54e594170a12cf2dedf34575f9f18fc6868d4a267be7e66410b028e07722e12",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.2",
+          "machine_status": "Compliant",
+          "error": null,
+          "evidence_sha256": "07aced6bbe15cc45cf823cff5de910e54c229af4f248788c8decb3122eff3eb6",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.3",
+          "machine_status": "Compliant",
+          "error": null,
+          "evidence_sha256": "63c8dcf485f5fcecef5b08349cfd33f0d4f6f67013f7fd3c4af058cf9609365f",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.5",
+          "machine_status": "Compliant",
+          "error": null,
+          "evidence_sha256": "715222811de2718487354873252dbfe468d5f73ade067f6f2656e943881160cf",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.7",
+          "machine_status": "Compliant",
+          "error": null,
+          "evidence_sha256": "e02640d5ffc88689b3958ae6e1a20d8dd230a884719fb87bfa3203261f0f06d0",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.8",
+          "machine_status": "Compliant",
+          "error": null,
+          "evidence_sha256": "79d5a17c435ca5ef9e01e0e223e0f67b7655ed7033a0fd65af0107c46ab05906",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.9",
+          "machine_status": "Compliant",
+          "error": null,
+          "evidence_sha256": "3cce00fb3acfa5783c0145be77bcd68ba90b3edb1ce5d88cf0fc76884bc9f19a",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.10",
+          "machine_status": "Compliant",
+          "error": null,
+          "evidence_sha256": "1fbec2203dbfb536c005fe9831c55ca9ba1389b2f2520cdfd022875a608363e9",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.12",
+          "machine_status": "Compliant",
+          "error": null,
+          "evidence_sha256": "8f06351cd72bd6f5de01d49b69e5fb97286214b5af48404d6ad63fab0f7611ec",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.13",
+          "machine_status": "Compliant",
+          "error": null,
+          "evidence_sha256": "d542d25127e7d187145a12d4575759ce12ac037a028c6ee3b42a5a0f7126b233",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.15",
+          "machine_status": "Compliant",
+          "error": null,
+          "evidence_sha256": "1ce221454b52f4130ce0b5504df95fab5b0bf7725afb24d0ef1202323a86659c",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.16",
+          "machine_status": "Compliant",
+          "error": null,
+          "evidence_sha256": "ecdccaea9e4dd3c8fdbc0184571e8cd462043c64894a2f24272adcb2b4f3cf0b",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.17",
+          "machine_status": "Compliant",
+          "error": null,
+          "evidence_sha256": "3fde32b3dac11ae653880ba325c2cd6fc5e762ae21706025d008e0bcd3c93ec6",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.19",
+          "machine_status": "Compliant",
+          "error": null,
+          "evidence_sha256": "16c8d99a94634fa685458e68d9cb4b2cb6c29302af5e8e09cf896855ba201d53",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.20",
+          "machine_status": "Compliant",
+          "error": null,
+          "evidence_sha256": "4a37b554acd5da8b86dd8f48919888bce5a04b267c543dddfa8636b19a82eba4",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.22",
+          "machine_status": "Compliant",
+          "error": null,
+          "evidence_sha256": "bafe53c0e4530a6eb031832d83fcea6bfccda0a3cce3285998b91bf001760de2",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.24",
+          "machine_status": "Compliant",
+          "error": null,
+          "evidence_sha256": "eb2abadc7c68d80bef9d068c93bc2c96ed6d3707acb2900ada005e69740eb11c",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.32",
+          "machine_status": "Compliant",
+          "error": null,
+          "evidence_sha256": "5d675412f8df24c59daa3dacaac58c4009a1bd0108f863dec191b332cecbac2e",
+          "is_synthetic": true
+        }
+      ]
+    },
+    {
+      "run_id": "eb303e94-c3ed-423d-a01f-cbdecad9f507",
+      "created_at": "2026-11-10T03:15:37.467726+00:00",
+      "mode": "llm",
+      "transport": "docker",
+      "rubric_version": "a8-raw-v2",
+      "catalog_sha256": "b7b102b86e746543451b11f87ac52890f678c84b121f899c733cd4dc1657d3a4",
+      "report_sha256": "96d7f0dc7242e7945d6b327bb3657ede1368f91119ca74f890d54c60915257c6",
+      "metadata_complete": true,
+      "control_count": 18,
+      "capture_count": 18,
+      "source_coverage": 18,
+      "final_errors": 1,
+      "first_errors": 0,
+      "repaired": 0,
+      "human_progress": [],
+      "complete_independently_declared_reviewers": [],
+      "human_comparisons": {},
+      "pending_human_comparison": true,
+      "control_results": [
+        {
+          "control_id": "A.8.1",
+          "machine_status": "Non-Compliant",
+          "error": null,
+          "evidence_sha256": "395b9ff9ed5ff8662680eb264e9532fc66fc27475386fc4200848a54ae364771",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.2",
+          "machine_status": "Insufficient Evidence",
+          "error": null,
+          "evidence_sha256": "f379f9001fd9f75fec52febcd63f48189e282b23c9f600a14a7d29dc8a2ba95d",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.3",
+          "machine_status": "Non-Compliant",
+          "error": null,
+          "evidence_sha256": "60421ea5217227c0ae0cafd26842c4af1248bc6d60022db1c91c00ffb4728f3b",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.5",
+          "machine_status": "Non-Compliant",
+          "error": null,
+          "evidence_sha256": "a9d033d52117a6a14549be4d3588a86f49e34064ab68b82635abc3fef91091fa",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.7",
+          "machine_status": "Non-Compliant",
+          "error": null,
+          "evidence_sha256": "2f1958636c40842c026ecbfec130c2bf0175d44e5af381b666a8ec5002bb4e19",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.8",
+          "machine_status": null,
+          "error": "ValueError",
+          "evidence_sha256": "4d72d35377c371c83e069985710cd807ddd73cd75e17b414aae047841973d219",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.9",
+          "machine_status": "Non-Compliant",
+          "error": null,
+          "evidence_sha256": "eb1276700751604846950ed44c3a6282fcf6b16d7e275447811bddea6a44b4bf",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.10",
+          "machine_status": "Non-Compliant",
+          "error": null,
+          "evidence_sha256": "fdeaad05d2af529b42e80b161ef1328e3149dd3f5fc1dafa9b7ad538da72f75c",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.12",
+          "machine_status": "Non-Compliant",
+          "error": null,
+          "evidence_sha256": "7edace3e7911c7d98eed6eb8d225cd64a63ca7f5928ffddacc28cb8782e2e770",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.13",
+          "machine_status": "Non-Compliant",
+          "error": null,
+          "evidence_sha256": "e366a83be5ed4bb1002b8200de2265865d924355835987d1bd0e6aed7476ab28",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.15",
+          "machine_status": "Non-Compliant",
+          "error": null,
+          "evidence_sha256": "edbfb9e74b96f1a4a68804600c585b9fbcecae6f27559b00aa07be9a8d8ffbcc",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.16",
+          "machine_status": "Non-Compliant",
+          "error": null,
+          "evidence_sha256": "0c112dbbf7156e00e7d64ac99abbda62f21f9d58d26bb60a362e23c6100ae71f",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.17",
+          "machine_status": "Non-Compliant",
+          "error": null,
+          "evidence_sha256": "214d5c13ae313d73a31ff5b3596b301d308132073b52882d6dbe97f408a37a9a",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.19",
+          "machine_status": "Non-Compliant",
+          "error": null,
+          "evidence_sha256": "b663f82b27c43436b3a95db8811e99635ca1c1314bd30fe284bdde8ace2d500b",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.20",
+          "machine_status": "Non-Compliant",
+          "error": null,
+          "evidence_sha256": "5d7907777f6b7d76b521080bda6e7d981e9dcfd82bdba35000f94b366776d2f6",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.22",
+          "machine_status": "Non-Compliant",
+          "error": null,
+          "evidence_sha256": "cd02f728c5bc9770632f2bfb0314a71f12989cb1c4ca34c68920f82145c9c0fe",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.24",
+          "machine_status": "Non-Compliant",
+          "error": null,
+          "evidence_sha256": "d85a40b981504926fd8d5d75e473d98bd36c4b9b3b86816110f286816a3976c5",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.32",
+          "machine_status": "Non-Compliant",
+          "error": null,
+          "evidence_sha256": "4d042035256fa5caaa0adab429886673a508d13379f3679c07da50ff0fd0625b",
+          "is_synthetic": true
+        }
+      ]
+    },
+    {
+      "run_id": "d5aad3dd-4586-48ba-a679-046e65ce2d59",
+      "created_at": "2026-11-10T03:14:59.346100+00:00",
+      "mode": "rules",
+      "transport": "docker",
+      "rubric_version": "a8-raw-v2",
+      "catalog_sha256": "b7b102b86e746543451b11f87ac52890f678c84b121f899c733cd4dc1657d3a4",
+      "report_sha256": "32ab0839ccb5a1ee339157442e9932fc5b8e763043526951b46e468ac3e28350",
+      "metadata_complete": true,
+      "control_count": 18,
+      "capture_count": 18,
+      "source_coverage": 18,
+      "final_errors": 0,
+      "first_errors": 0,
+      "repaired": 0,
+      "human_progress": [],
+      "complete_independently_declared_reviewers": [],
+      "human_comparisons": {},
+      "pending_human_comparison": true,
+      "control_results": [
+        {
+          "control_id": "A.8.1",
+          "machine_status": "Non-Compliant",
+          "error": null,
+          "evidence_sha256": "395b9ff9ed5ff8662680eb264e9532fc66fc27475386fc4200848a54ae364771",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.2",
+          "machine_status": "Non-Compliant",
+          "error": null,
+          "evidence_sha256": "f379f9001fd9f75fec52febcd63f48189e282b23c9f600a14a7d29dc8a2ba95d",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.3",
+          "machine_status": "Non-Compliant",
+          "error": null,
+          "evidence_sha256": "60421ea5217227c0ae0cafd26842c4af1248bc6d60022db1c91c00ffb4728f3b",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.5",
+          "machine_status": "Non-Compliant",
+          "error": null,
+          "evidence_sha256": "a9d033d52117a6a14549be4d3588a86f49e34064ab68b82635abc3fef91091fa",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.7",
+          "machine_status": "Non-Compliant",
+          "error": null,
+          "evidence_sha256": "2f1958636c40842c026ecbfec130c2bf0175d44e5af381b666a8ec5002bb4e19",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.8",
+          "machine_status": "Non-Compliant",
+          "error": null,
+          "evidence_sha256": "4d72d35377c371c83e069985710cd807ddd73cd75e17b414aae047841973d219",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.9",
+          "machine_status": "Non-Compliant",
+          "error": null,
+          "evidence_sha256": "eb1276700751604846950ed44c3a6282fcf6b16d7e275447811bddea6a44b4bf",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.10",
+          "machine_status": "Non-Compliant",
+          "error": null,
+          "evidence_sha256": "fdeaad05d2af529b42e80b161ef1328e3149dd3f5fc1dafa9b7ad538da72f75c",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.12",
+          "machine_status": "Non-Compliant",
+          "error": null,
+          "evidence_sha256": "7edace3e7911c7d98eed6eb8d225cd64a63ca7f5928ffddacc28cb8782e2e770",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.13",
+          "machine_status": "Non-Compliant",
+          "error": null,
+          "evidence_sha256": "e366a83be5ed4bb1002b8200de2265865d924355835987d1bd0e6aed7476ab28",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.15",
+          "machine_status": "Non-Compliant",
+          "error": null,
+          "evidence_sha256": "edbfb9e74b96f1a4a68804600c585b9fbcecae6f27559b00aa07be9a8d8ffbcc",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.16",
+          "machine_status": "Non-Compliant",
+          "error": null,
+          "evidence_sha256": "0c112dbbf7156e00e7d64ac99abbda62f21f9d58d26bb60a362e23c6100ae71f",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.17",
+          "machine_status": "Non-Compliant",
+          "error": null,
+          "evidence_sha256": "214d5c13ae313d73a31ff5b3596b301d308132073b52882d6dbe97f408a37a9a",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.19",
+          "machine_status": "Non-Compliant",
+          "error": null,
+          "evidence_sha256": "b663f82b27c43436b3a95db8811e99635ca1c1314bd30fe284bdde8ace2d500b",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.20",
+          "machine_status": "Non-Compliant",
+          "error": null,
+          "evidence_sha256": "5d7907777f6b7d76b521080bda6e7d981e9dcfd82bdba35000f94b366776d2f6",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.22",
+          "machine_status": "Non-Compliant",
+          "error": null,
+          "evidence_sha256": "cd02f728c5bc9770632f2bfb0314a71f12989cb1c4ca34c68920f82145c9c0fe",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.24",
+          "machine_status": "Non-Compliant",
+          "error": null,
+          "evidence_sha256": "d85a40b981504926fd8d5d75e473d98bd36c4b9b3b86816110f286816a3976c5",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.32",
+          "machine_status": "Non-Compliant",
+          "error": null,
+          "evidence_sha256": "4d042035256fa5caaa0adab429886673a508d13379f3679c07da50ff0fd0625b",
+          "is_synthetic": true
+        }
+      ]
+    },
+    {
+      "run_id": "2422efae-c2da-4ad8-a530-9fca414c3ef4",
+      "created_at": "2026-11-10T03:13:23.718727+00:00",
+      "mode": "rules",
+      "transport": "docker",
+      "rubric_version": "a8-raw-v2",
+      "catalog_sha256": "b7b102b86e746543451b11f87ac52890f678c84b121f899c733cd4dc1657d3a4",
+      "report_sha256": "3150f86486d10d4415c563c4ede15b0270a9599b689d67e1845bfa3f1d70e8d2",
+      "metadata_complete": true,
+      "control_count": 18,
+      "capture_count": 18,
+      "source_coverage": 18,
+      "final_errors": 0,
+      "first_errors": 0,
+      "repaired": 0,
+      "human_progress": [],
+      "complete_independently_declared_reviewers": [],
+      "human_comparisons": {},
+      "pending_human_comparison": true,
+      "control_results": [
+        {
+          "control_id": "A.8.1",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "72c48997228626e997a47c45a100b08820d124708921afe9396d00181ada8479",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.2",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "21197a6f53571023dbdd431a5c15ab551d18367bcf00152853cc6be509c4abb1",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.3",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "1715c7aef85adfd881c6ece4ae7fd4bd40982da063e65e544467ecebcff9c893",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.5",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "834491c5f5126b35a221162df75540d853b24191e9900fc3f36e5dd48ac21bd6",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.7",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "98074694b25b3445cf34c39c7a276f60e0fdbbda7b8f92317c5d28156d59f440",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.8",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "0aac01f029c716e58d6a93c12032b1999b11c123c8ba81fe0739a00362fc56b0",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.9",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "0604e3e5da8276db61b7714f2faa0fbadb3b56d12a3f0b7c6ec97b881b2b70dc",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.10",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "2fa873fde7820f5496bf639c84805fc6a22459cee87805590b15d9b5276411ad",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.12",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "04e9677ba602da45ca85f8975022248629a7a888c83114459bdead77ccf31956",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.13",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "871a90d275e32ddaa896e69d19ff09b5903e3bc0777214e3fe91b9af62867460",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.15",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "ee384ed99a3b8f00aa36256283ca9da3c70ea90924ebca978fe244dddf6a7df8",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.16",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "5a8c1070426e5a2c910b114ccb0feff42203c8405ed5fe0f0c59820d003dd306",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.17",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "975bb79e11fd8eccbbfd97e31e79219683dda22c5a80cdf1834f922ba5c24491",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.19",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "2bb311cbbdbd4688b11361d644260677e997d859b15e188a53c6d6771c1717cf",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.20",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "f556acc649ede40a368477da12779770cafe617e411f4769649aba37fd4ce593",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.22",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "227c4044461a1d9688c045f540cfb3e029a484fa77c9512742cac1141cf5b592",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.24",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "2adf5d6acdb0b24f32e2e6b711f53fe9df2b773bd292df17a3da747b3ce00893",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.32",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "800b8ab830a5b69d120fb0028204c022ba0a5963921a601db1d4ae084aca7d8a",
+          "is_synthetic": true
+        }
+      ]
+    },
+    {
+      "run_id": "2436ddfe-21ca-42d8-b292-db70b6bf4ed9",
+      "created_at": "2026-11-10T03:00:18.549062+00:00",
+      "mode": "llm",
+      "transport": "docker",
+      "rubric_version": "a8-raw-v2",
+      "catalog_sha256": "b7b102b86e746543451b11f87ac52890f678c84b121f899c733cd4dc1657d3a4",
+      "report_sha256": "f181669eabe755b5bc6dd1a3e7fabbb67eef1a7138ebda2821b65850abc4edd0",
+      "metadata_complete": true,
+      "control_count": 18,
+      "capture_count": 18,
+      "source_coverage": 18,
+      "final_errors": 2,
+      "first_errors": 0,
+      "repaired": 0,
+      "human_progress": [],
+      "complete_independently_declared_reviewers": [],
+      "human_comparisons": {},
+      "pending_human_comparison": true,
+      "control_results": [
+        {
+          "control_id": "A.8.1",
+          "machine_status": null,
+          "error": "ValueError",
+          "evidence_sha256": "72c48997228626e997a47c45a100b08820d124708921afe9396d00181ada8479",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.2",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "21197a6f53571023dbdd431a5c15ab551d18367bcf00152853cc6be509c4abb1",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.3",
+          "machine_status": null,
+          "error": "ValueError",
+          "evidence_sha256": "1715c7aef85adfd881c6ece4ae7fd4bd40982da063e65e544467ecebcff9c893",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.5",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "834491c5f5126b35a221162df75540d853b24191e9900fc3f36e5dd48ac21bd6",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.7",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "98074694b25b3445cf34c39c7a276f60e0fdbbda7b8f92317c5d28156d59f440",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.8",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "0aac01f029c716e58d6a93c12032b1999b11c123c8ba81fe0739a00362fc56b0",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.9",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "0604e3e5da8276db61b7714f2faa0fbadb3b56d12a3f0b7c6ec97b881b2b70dc",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.10",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "2fa873fde7820f5496bf639c84805fc6a22459cee87805590b15d9b5276411ad",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.12",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "04e9677ba602da45ca85f8975022248629a7a888c83114459bdead77ccf31956",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.13",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "871a90d275e32ddaa896e69d19ff09b5903e3bc0777214e3fe91b9af62867460",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.15",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "ee384ed99a3b8f00aa36256283ca9da3c70ea90924ebca978fe244dddf6a7df8",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.16",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "5a8c1070426e5a2c910b114ccb0feff42203c8405ed5fe0f0c59820d003dd306",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.17",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "975bb79e11fd8eccbbfd97e31e79219683dda22c5a80cdf1834f922ba5c24491",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.19",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "2bb311cbbdbd4688b11361d644260677e997d859b15e188a53c6d6771c1717cf",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.20",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "f556acc649ede40a368477da12779770cafe617e411f4769649aba37fd4ce593",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.22",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "227c4044461a1d9688c045f540cfb3e029a484fa77c9512742cac1141cf5b592",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.24",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "2adf5d6acdb0b24f32e2e6b711f53fe9df2b773bd292df17a3da747b3ce00893",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.32",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "800b8ab830a5b69d120fb0028204c022ba0a5963921a601db1d4ae084aca7d8a",
+          "is_synthetic": true
+        }
+      ]
+    },
+    {
+      "run_id": "46d9b8ce-5b8f-4761-a417-4336de10c1e2",
+      "created_at": "2026-11-10T02:59:49.113931+00:00",
+      "mode": "rules",
+      "transport": "docker",
+      "rubric_version": "a8-raw-v2",
+      "catalog_sha256": "b7b102b86e746543451b11f87ac52890f678c84b121f899c733cd4dc1657d3a4",
+      "report_sha256": "65cc68ed0597c3ded1b2610e5a476ff789bbab06ff2997c690167666976395e4",
+      "metadata_complete": true,
+      "control_count": 18,
+      "capture_count": 18,
+      "source_coverage": 18,
+      "final_errors": 0,
+      "first_errors": 0,
+      "repaired": 0,
+      "human_progress": [],
+      "complete_independently_declared_reviewers": [],
+      "human_comparisons": {},
+      "pending_human_comparison": true,
+      "control_results": [
+        {
+          "control_id": "A.8.1",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "72c48997228626e997a47c45a100b08820d124708921afe9396d00181ada8479",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.2",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "21197a6f53571023dbdd431a5c15ab551d18367bcf00152853cc6be509c4abb1",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.3",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "1715c7aef85adfd881c6ece4ae7fd4bd40982da063e65e544467ecebcff9c893",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.5",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "834491c5f5126b35a221162df75540d853b24191e9900fc3f36e5dd48ac21bd6",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.7",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "98074694b25b3445cf34c39c7a276f60e0fdbbda7b8f92317c5d28156d59f440",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.8",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "0aac01f029c716e58d6a93c12032b1999b11c123c8ba81fe0739a00362fc56b0",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.9",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "0604e3e5da8276db61b7714f2faa0fbadb3b56d12a3f0b7c6ec97b881b2b70dc",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.10",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "2fa873fde7820f5496bf639c84805fc6a22459cee87805590b15d9b5276411ad",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.12",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "04e9677ba602da45ca85f8975022248629a7a888c83114459bdead77ccf31956",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.13",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "871a90d275e32ddaa896e69d19ff09b5903e3bc0777214e3fe91b9af62867460",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.15",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "ee384ed99a3b8f00aa36256283ca9da3c70ea90924ebca978fe244dddf6a7df8",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.16",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "5a8c1070426e5a2c910b114ccb0feff42203c8405ed5fe0f0c59820d003dd306",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.17",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "975bb79e11fd8eccbbfd97e31e79219683dda22c5a80cdf1834f922ba5c24491",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.19",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "2bb311cbbdbd4688b11361d644260677e997d859b15e188a53c6d6771c1717cf",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.20",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "f556acc649ede40a368477da12779770cafe617e411f4769649aba37fd4ce593",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.22",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "227c4044461a1d9688c045f540cfb3e029a484fa77c9512742cac1141cf5b592",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.24",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "2adf5d6acdb0b24f32e2e6b711f53fe9df2b773bd292df17a3da747b3ce00893",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.32",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "800b8ab830a5b69d120fb0028204c022ba0a5963921a601db1d4ae084aca7d8a",
+          "is_synthetic": true
+        }
+      ]
+    },
+    {
+      "run_id": "7a223fdc-2da9-4bbb-b4dc-4ff88cebca03",
+      "created_at": "2026-11-10T02:43:57.258173+00:00",
+      "mode": "llm",
+      "transport": "UNKNOWN_LEGACY",
+      "rubric_version": "a8-lab-v1",
+      "catalog_sha256": "dae9f51935be7dbbf950a54bdebbc9b039a44d4d84ba7d937e08b4acaa8b7f48",
+      "report_sha256": "a0be300a0be8b76b72b3c1bbecf8716fb6a8cf8eacfac8eb63b1f19106fbf22b",
+      "metadata_complete": false,
+      "control_count": 18,
+      "capture_count": 18,
+      "source_coverage": 0,
+      "final_errors": 0,
+      "first_errors": 0,
+      "repaired": 0,
+      "human_progress": [],
+      "complete_independently_declared_reviewers": [],
+      "human_comparisons": {},
+      "pending_human_comparison": true,
+      "control_results": [
+        {
+          "control_id": "A.8.1",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "09d7eeb89e2e869bfbaf9a7e562d647fe160e52a0c4eede5db9d57c8ae1b2f9e",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.2",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "ef106de989586b79cea0662ac94e3084b03d318b72c94f4943d74b3208541e6e",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.3",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "441723ec4a3359cadee6c08b36a9c7fc638d5f0ad200991dc242c0c63cc6aa13",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.5",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "ea6b40c30a917b6ff72b50dab3aab5bf23c3ee5806743382626af7a5880a7944",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.7",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "aae885af93bc288dea74abf36d64ca501ee8bbb290d5349119a8b017033e3378",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.8",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "2185525f9d15e11a8b0693b1874dfc5277a074ec3634171025c7a2a3e729683d",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.9",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "1f455df1ac5ce4283e01472fff02344bef0b1fcbd0eb3a0ee999386567745882",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.10",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "ffcd6354c86527953c7a760a40e52209d502877f898f61fa25aeb175085376df",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.12",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "29347db4f7fdd066a4d25055c24f5381bc5f3a1c23c181a562c2bd6bd7073520",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.13",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "02d636afb058729e3b43d121008348c8f742da15d8f45c810f30705770f0e473",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.15",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "f08b21a28ec30c27be9126bfe50259d3687ee31eaf68dea89860d6d268de1b3b",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.16",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "6f4636dede968def7c040d1b73418411bc830f1593a0bc1103317acc56f85354",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.17",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "f9172e5edb1fa649155a6d56430c11bdee6ff26885a8c680c96c1b6ecff01201",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.19",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "c9759d6078785e7ed09f2f254a340449103d2ae4e2783fbe767b014dfb294644",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.20",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "7dcce73e9f96ed21dc3755d30d25f735dcda975a8949a70b5e62155600edcc1f",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.22",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "83c3f7561236143e4da531b25c64e780b8188b598b0d1f7113480e8f3a36b4bd",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.24",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "d6136fae39a87475b0b306a9049d5a67215beab53cc5a983a436c57077cddb07",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.32",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "81a433f083618daee6621f37fd822436f7d6a4a5dea93318b9eb9b6b20532e2f",
+          "is_synthetic": true
+        }
+      ]
+    },
+    {
+      "run_id": "6c555323-4e51-432b-88d9-a4dc920f9493",
+      "created_at": "2026-11-10T02:05:58.924323+00:00",
+      "mode": "llm",
+      "transport": "UNKNOWN_LEGACY",
+      "rubric_version": "a8-lab-v1",
+      "catalog_sha256": "dae9f51935be7dbbf950a54bdebbc9b039a44d4d84ba7d937e08b4acaa8b7f48",
+      "report_sha256": "ba9f2fdd05e299020b17640493ffca2c54f19fa75ccbf349ac0735fdd20f9496",
+      "metadata_complete": false,
+      "control_count": 18,
+      "capture_count": 18,
+      "source_coverage": 0,
+      "final_errors": 0,
+      "first_errors": 0,
+      "repaired": 0,
+      "human_progress": [],
+      "complete_independently_declared_reviewers": [],
+      "human_comparisons": {},
+      "pending_human_comparison": true,
+      "control_results": [
+        {
+          "control_id": "A.8.1",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "09d7eeb89e2e869bfbaf9a7e562d647fe160e52a0c4eede5db9d57c8ae1b2f9e",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.2",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "ef106de989586b79cea0662ac94e3084b03d318b72c94f4943d74b3208541e6e",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.3",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "441723ec4a3359cadee6c08b36a9c7fc638d5f0ad200991dc242c0c63cc6aa13",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.5",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "ea6b40c30a917b6ff72b50dab3aab5bf23c3ee5806743382626af7a5880a7944",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.7",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "aae885af93bc288dea74abf36d64ca501ee8bbb290d5349119a8b017033e3378",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.8",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "2185525f9d15e11a8b0693b1874dfc5277a074ec3634171025c7a2a3e729683d",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.9",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "1f455df1ac5ce4283e01472fff02344bef0b1fcbd0eb3a0ee999386567745882",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.10",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "ffcd6354c86527953c7a760a40e52209d502877f898f61fa25aeb175085376df",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.12",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "29347db4f7fdd066a4d25055c24f5381bc5f3a1c23c181a562c2bd6bd7073520",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.13",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "02d636afb058729e3b43d121008348c8f742da15d8f45c810f30705770f0e473",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.15",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "f08b21a28ec30c27be9126bfe50259d3687ee31eaf68dea89860d6d268de1b3b",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.16",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "6f4636dede968def7c040d1b73418411bc830f1593a0bc1103317acc56f85354",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.17",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "f9172e5edb1fa649155a6d56430c11bdee6ff26885a8c680c96c1b6ecff01201",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.19",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "c9759d6078785e7ed09f2f254a340449103d2ae4e2783fbe767b014dfb294644",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.20",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "7dcce73e9f96ed21dc3755d30d25f735dcda975a8949a70b5e62155600edcc1f",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.22",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "83c3f7561236143e4da531b25c64e780b8188b598b0d1f7113480e8f3a36b4bd",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.24",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "d6136fae39a87475b0b306a9049d5a67215beab53cc5a983a436c57077cddb07",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.32",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "81a433f083618daee6621f37fd822436f7d6a4a5dea93318b9eb9b6b20532e2f",
+          "is_synthetic": true
+        }
+      ]
+    },
+    {
+      "run_id": "b39bd3c8-0fd8-45d0-9293-138dbe270b88",
+      "created_at": "2026-11-10T02:03:30.326035+00:00",
+      "mode": "llm",
+      "transport": "UNKNOWN_LEGACY",
+      "rubric_version": "a8-lab-v1",
+      "catalog_sha256": "dae9f51935be7dbbf950a54bdebbc9b039a44d4d84ba7d937e08b4acaa8b7f48",
+      "report_sha256": "5107804a3dd461b964700d1e040d2add022b204d29abc63aebfe12ba80a36a77",
+      "metadata_complete": false,
+      "control_count": 18,
+      "capture_count": 18,
+      "source_coverage": 0,
+      "final_errors": 0,
+      "first_errors": 0,
+      "repaired": 0,
+      "human_progress": [],
+      "complete_independently_declared_reviewers": [],
+      "human_comparisons": {},
+      "pending_human_comparison": true,
+      "control_results": [
+        {
+          "control_id": "A.8.1",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "09d7eeb89e2e869bfbaf9a7e562d647fe160e52a0c4eede5db9d57c8ae1b2f9e",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.2",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "ef106de989586b79cea0662ac94e3084b03d318b72c94f4943d74b3208541e6e",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.3",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "441723ec4a3359cadee6c08b36a9c7fc638d5f0ad200991dc242c0c63cc6aa13",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.5",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "ea6b40c30a917b6ff72b50dab3aab5bf23c3ee5806743382626af7a5880a7944",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.7",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "aae885af93bc288dea74abf36d64ca501ee8bbb290d5349119a8b017033e3378",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.8",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "2185525f9d15e11a8b0693b1874dfc5277a074ec3634171025c7a2a3e729683d",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.9",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "1f455df1ac5ce4283e01472fff02344bef0b1fcbd0eb3a0ee999386567745882",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.10",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "ffcd6354c86527953c7a760a40e52209d502877f898f61fa25aeb175085376df",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.12",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "29347db4f7fdd066a4d25055c24f5381bc5f3a1c23c181a562c2bd6bd7073520",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.13",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "02d636afb058729e3b43d121008348c8f742da15d8f45c810f30705770f0e473",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.15",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "f08b21a28ec30c27be9126bfe50259d3687ee31eaf68dea89860d6d268de1b3b",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.16",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "6f4636dede968def7c040d1b73418411bc830f1593a0bc1103317acc56f85354",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.17",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "f9172e5edb1fa649155a6d56430c11bdee6ff26885a8c680c96c1b6ecff01201",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.19",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "c9759d6078785e7ed09f2f254a340449103d2ae4e2783fbe767b014dfb294644",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.20",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "7dcce73e9f96ed21dc3755d30d25f735dcda975a8949a70b5e62155600edcc1f",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.22",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "83c3f7561236143e4da531b25c64e780b8188b598b0d1f7113480e8f3a36b4bd",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.24",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "d6136fae39a87475b0b306a9049d5a67215beab53cc5a983a436c57077cddb07",
+          "is_synthetic": true
+        },
+        {
+          "control_id": "A.8.32",
+          "machine_status": "Partially Compliant",
+          "error": null,
+          "evidence_sha256": "81a433f083618daee6621f37fd822436f7d6a4a5dea93318b9eb9b6b20532e2f",
+          "is_synthetic": true
+        }
+      ]
+    }
+  ],
+  "rejected_runs": [],
+  "practice_summary": {
+    "accounts": [
+      {
+        "account_id": "145f6315-7d77-4ae0-b30b-67deff6637a3",
+        "account_name": "Lê Đăng Khoa",
+        "saved_at": "2026-11-12T03:03:26.618393+00:00",
+        "submitted": 18,
+        "total": 18,
+        "practice_dataset": "built-in-raw-mixed-development",
+        "performed_by": "SIMULATED_RUBRIC_ENGINE_NOT_ACCOUNT_HOLDER",
+        "source_report_sha256": "b3413318e0db75f00db91f6312765b4e5d50e4ee8f05331daec41cd9e7c3cd8f"
+      },
+      {
+        "account_id": "a1ee908b-5907-420c-897a-0938a25b6c6b",
+        "account_name": "admin",
+        "saved_at": "2026-11-12T03:03:26.553014+00:00",
+        "submitted": 18,
+        "total": 18,
+        "practice_dataset": "built-in-raw-mixed-development",
+        "performed_by": "SIMULATED_RUBRIC_ENGINE_NOT_ACCOUNT_HOLDER",
+        "source_report_sha256": "f02e57771b815ec93ef21bbd2dfca9a5fd27c27c27e6a346a4062860ddbd7785"
+      },
+      {
+        "account_id": "c9ccb219-e097-49e7-b746-0ad63a8c0e36",
+        "account_name": "Lê Đoàn Văn Tú",
+        "saved_at": "2026-11-12T03:03:26.678229+00:00",
+        "submitted": 18,
+        "total": 18,
+        "practice_dataset": "built-in-raw-mixed-development",
+        "performed_by": "SIMULATED_RUBRIC_ENGINE_NOT_ACCOUNT_HOLDER",
+        "source_report_sha256": "8ae776f1b355b5fdbfe5989b2a0eda8cb9ca0d6ed8e346bb4eb46437a1541274"
+      }
+    ],
+    "simulated_label_count": 54,
+    "human_label_count": 0,
+    "note": "Kết quả luyện tập theo tài khoản trên gói mẫu riêng, không thuộc lượt đang chọn. Không cộng vào tiến độ chấm thật hoặc điều kiện duyệt SoA."
+  },
+  "professional_acceptance": "NOT_ASSERTED",
+  "methodological_limits": [
+    "56 control là phạm vi đồ án, không phải toàn bộ Annex A/ISMS.",
+    "18 probe A.8 là tiêu chí đại diện; có nguồn chưa chứng minh đủ nội dung control.",
+    "Mỗi lượt có bảng riêng theo phiên bản rubric/nguồn/engine; không cộng tỷ lệ khác điều kiện.",
+    "capture_count chỉ là số cặp control/hash trong một lượt, không chứng minh mẫu độc lập.",
+    "Số tài khoản hoặc 54 nhãn giả lập không phải 54 ca kiểm định hay nhãn người thật.",
+    "Nhãn đủ và tự khai báo độc lập chưa chứng minh trình độ chuyên gia hoặc độc lập bên ngoài.",
+    "Chưa xác nhận tập kiểm định mới và nghiệm thu chuyên môn bằng báo cáo tự sinh."
+  ],
+  "sha256": "3975e8934950f6e0710169a6fd537105e67ee3d8009d496015d2071715870a03"
+}

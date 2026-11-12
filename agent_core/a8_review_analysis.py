@@ -5,7 +5,7 @@ from agent_core.a8_assessment import STATUSES
 
 
 def declared_independent(review):
-    return review.get('assistance')=='unassisted' and review.get('prior_exposure')=='no'
+    return not review.get('is_simulated') and not str(review.get('label_origin','')).startswith('simulated-') and review.get('assistance')=='unassisted' and review.get('prior_exposure')=='no'
 
 
 def review_category(review):
@@ -21,7 +21,8 @@ def analyze_reviews(report, reviews, creator_id):
     for review in reviews:
         record=records.get(review.get('control_id'))
         uid=str(review['reviewer_id']) if review.get('reviewer_id') is not None else ''
-        if (not uid or uid==str(creator_id) or not record or
+        if (review.get('is_simulated') or str(review.get('label_origin','')).startswith('simulated-') or
+                not uid or uid==str(creator_id) or not record or
                 review.get('report_sha256')!=report['sha256'] or
                 review.get('evidence_sha256')!=record['evidence']['source_sha256'] or
                 review.get('expected') not in STATUSES or review.get('case_id')!=record['case_id']):

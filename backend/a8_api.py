@@ -182,6 +182,61 @@ def result(assessment_id: UUID,run_id: UUID,user=Depends(require_user)):
     return {k:v for k,v in doc.items() if k!='designer_reference'}
 
 
+@router.get('/practice/summary')
+def practice_summary(assessment_id: UUID,user=Depends(require_user)):
+    require_campaign(assessment_id,user)
+    if user.get('role')!='admin':raise HTTPException(403,'Chỉ admin xem tổng hợp tài khoản luyện tập.')
+    rows=[]
+    for path in sorted((folder(assessment_id)/'practice').glob('*.json')):
+        doc=json.loads(path.read_text(encoding='utf-8'))
+        if not doc.get('practice_only') or not doc.get('is_simulated'):continue
+        if a8.digest({k:v for k,v in doc.items() if k!='sha256'})!=doc.get('sha256'):continue
+        rows.append(dict(account_id=doc['practice_account_id'],account_name=doc['practice_account_name'],
+            saved_at=doc['saved_at'],submitted=len(doc['labels']),total=18,
+            practice_dataset=doc['practice_dataset'],performed_by=doc['performed_by'],
+            source_report_sha256=doc['source_report_sha256']))
+    return dict(accounts=rows,simulated_label_count=sum(r['submitted'] for r in rows),human_label_count=0,
+                note='Kết quả luyện tập theo tài khoản trên gói mẫu riêng, không thuộc lượt đang chọn. Không cộng vào tiến độ chấm thật hoặc điều kiện duyệt SoA.')
+
+
+@router.get('/practice/simulated-review')
+def practice_simulated_review(assessment_id: UUID,user=Depends(require_user)):
+    require_campaign(assessment_id,user)
+    path=folder(assessment_id)/'practice'/(str(UUID(str(user['user_id'])))+'.json') if user.get('user_id') else None
+    if path and path.exists():return json.loads(path.read_text(encoding='utf-8'))
+    from agent_core.a8_simulated_review import simulate
+    # Public development fixture only; never read a selected blind run or labels.
+    result=simulate(a8.run('mixed','rules','files'))
+    result.update(practice_only=True,practice_dataset='built-in-raw-mixed-development',
+                  exposure_note='Đã xem ví dụ bộ phát triển raw mixed. Không coi bộ đã xem là kiểm định mù độc lập; khai đúng mức tiếp xúc khi chấm thật.')
+    result['sha256']=a8.digest({k:v for k,v in result.items() if k!='sha256'})
+    return result
+
+
+@router.post('/practice/simulated-review')
+def save_practice_simulated_review(assessment_id: UUID,user=Depends(require_user)):
+    require_campaign(assessment_id,user)
+    with lock:
+        result=practice_simulated_review(assessment_id,user)
+        result.update(practice_account_id=str(user['user_id']),practice_account_name=user.get('display_name') or user.get('username'),
+                      performed_by='SIMULATED_RUBRIC_ENGINE_NOT_ACCOUNT_HOLDER',
+                      saved_at=result.get('saved_at') or datetime.now(timezone.utc).isoformat())
+        result['sha256']=a8.digest({k:v for k,v in result.items() if k!='sha256'})
+        save(folder(assessment_id)/'practice'/(str(UUID(str(user['user_id'])))+'.json'),result)
+    return result
+
+
+@router.get('/runs/{run_id}/simulated-review')
+def simulated_review(assessment_id: UUID,run_id: UUID,user=Depends(require_user)):
+    require_campaign(assessment_id,user)
+    if user.get('role')!='admin':raise HTTPException(403,'Chỉ admin xem chấm giả lập; không mở đáp án cho người chấm mù.')
+    doc=read(assessment_id,run_id)
+    if doc.get('state')!='finished' or not doc.get('report'):raise HTTPException(409,'Lượt chưa hoàn tất.')
+    from agent_core.a8_simulated_review import simulate
+    try:return simulate(doc['report'])
+    except (ValueError,KeyError,TypeError) as exc:raise HTTPException(409,'Không thể chấm giả lập: nguồn hoặc cấu trúc không hợp lệ.') from exc
+
+
 @router.post('/runs/{run_id}/reviews')
 def review(assessment_id: UUID,run_id: UUID,req: ReviewInput,user=Depends(require_user)):
     require_campaign(assessment_id,user)

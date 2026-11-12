@@ -5,7 +5,8 @@ export default function A8RunValidation({doc,download,canImport,onImport}) {
  const initialErrors=records.filter(r=>r.attempts?.[0]?.error);
  const analysis=doc.review_analysis;
  return <section className="space-y-3 rounded border border-teal-700 p-4">
-  <h2 className="text-xl">Kiểm chứng kết quả và bất đồng</h2>
+  <h2 className="text-xl">Kiểm chứng kết quả và bất đồng · Chấm thật của lượt đang chọn</h2>
+  <p>Không bao gồm kết quả chấm giả định trong khu luyện tập. Admin xem kết quả giả định của Khoa/Tú ở bảng tổng hợp riêng phía trên.</p>
   {canImport&&<div className="rounded border border-slate-600 p-3"><p>Chuyển bản thu cố định vào hồ sơ 56 control để đánh giá/thẩm định riêng. Giữ nhãn nguồn lab, không chuyển kết luận hoặc đáp án và không tự xác nhận đạt control.</p><button className="rounded bg-teal-800 p-2" onClick={onImport}>Nhập nguồn live vào hồ sơ 56 (admin)</button></div>}
   <p>Lượt này: {attempted.length} control qua engine · {initialErrors.length} lỗi phản hồi lần đầu · {repaired.length} được model sửa hợp lệ · {records.filter(r=>r.error).length} lỗi cuối cùng. Tối đa hai lần gọi; không thay phản hồi bằng đáp án luật.</p>
   <p>Nguồn đối chiếu người đánh giá trong bảng: {doc.human_reference_reviewer_id||'Chưa có bộ 18/18 được khai báo tự chấm và chưa xem đáp án; xem tiến độ/phân loại bên dưới'}. Không ghép nhãn nhiều người thành một đáp án.</p>

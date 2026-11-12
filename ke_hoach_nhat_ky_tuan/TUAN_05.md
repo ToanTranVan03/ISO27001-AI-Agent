@@ -2,7 +2,7 @@
 
 - Thời gian: **09/11/2026–15/11/2026 (thứ Hai–Chủ nhật).**
 - Trạng thái: **Đang thực hiện.**
-- Cập nhật: **11/11/2026**.
+- Cập nhật: **12/11/2026**.
 
 ## Mục tiêu và kế hoạch
 
@@ -21,21 +21,27 @@
 - [x] Mở rộng runtime live từ 5 lên 18 probe đại diện, tách rubric v2; kiểm chứng 72 tình huống và 5 phép đổi/khôi phục nguồn thực.
 - [x] Nối nguồn live với hồ sơ 56, chống nhập trùng; chạy đánh giá riêng, xuất SoA 56 hiện tại và danh sách việc thiếu.
 - [x] Làm rõ tiến độ từng người chấm và khai báo mức hỗ trợ; tách nhãn có AI hỗ trợ/chưa khai báo khỏi đối chiếu độc lập.
+- [x] Bổ sung gói bàn giao 56 control / 113 tiêu chí, yêu cầu nguồn và dự thảo việc xử lý; xuất JSON/Markdown.
+- [x] Bổ sung chấm giả định và lưu riêng theo tài khoản; admin theo dõi tổng hợp, không tính vào chấm thật hoặc điều kiện duyệt SoA.
+- [x] Bổ sung người phụ trách, hạn xử lý và cách kiểm tra lại vào hồ sơ/SoA; nhắc kế hoạch còn thiếu thông tin.
+- [x] Bổ sung báo cáo điều phối theo yêu cầu giảng viên, tách kết quả từng lượt/nguồn/rubric/engine và metadata lịch sử chưa đầy đủ.
 - [ ] Người phụ trách rà soát/phê duyệt rubric và phạm vi thực tế.
 - [ ] Người đánh giá thực sự chấm độc lập; phân tích bất đồng và đo độ đúng so với con người.
 - [ ] Kiểm thử đầy đủ thao tác UI và hoàn thiện hồ sơ nghiệm thu/SoA được người phụ trách phê duyệt.
 
 Các dấu hoàn thành trên chỉ xác nhận phần triển khai kỹ thuật, không thay thế việc con người thẩm định/phê duyệt.
 
-## Hiện trạng đến ngày 11/11/2026
+## Hiện trạng đến ngày 12/11/2026
 
 - Đã có luồng quản lý, hồ sơ và SoA cho đủ 56 control; 18 A.8 là nhóm thực nghiệm sâu. Runtime live v2 có 18 probe đại diện (5 quan sát tài nguyên, 13 phép thử chủ động ứng dụng lab). Các phép thử chưa bao phủ toàn bộ nội dung ISO; lượt live v1 và nhãn cũ được giữ riêng.
-- Sau hoàn thiện hồ sơ mới nhất: 202 test Python, 5 test JavaScript và build đạt; lint không còn cảnh báo. Các số test/cảnh báo ở những mục trước là mốc kiểm chứng từng phiên bản, không phải các kết quả hiện hành mâu thuẫn nhau.
+- Kiểm chứng mới nhất: **220 test Python, 5 test JavaScript, lint/build đạt**; còn 3 cảnh báo deprecation thư viện. Các số test ở mục lịch sử là mốc từng phiên bản, không phải kết quả hiện hành.
 - Kho doanh nghiệp được giữ nguyên: 50 nhân viên, 202 tài khoản, 70 thiết bị; hash snapshot trước/sau dọn không đổi.
 - Chưa có hồ sơ đầy đủ cho toàn phạm vi, người đánh giá thật hoàn tất chấm độc lập hoặc phê duyệt chuyên môn. Tuần 5 vẫn đang thực hiện, chưa tổng kết cả tuần.
 - API thực tế hiện có 29/56 control có bằng chứng; 19 có nguồn dùng trong chế độ không lấy preset (18 capture live lab, 1 có hồ sơ nộp). Chưa có quyết định áp dụng/rubric được duyệt/thẩm định hiện hành. Không coi số lượng này là số control đạt.
 - Còn 37 control cần nguồn tương ứng. Đánh giá 18 nguồn nhập theo rubric toàn phạm vi cho kết quả 9 thiếu bằng chứng, 8 một phần, 1 không đạt; khác kết quả ca thử đại diện do phạm vi tiêu chí khác nhau.
 - Khoa đã nộp 2/18 nhãn ở lượt cũ; nhãn giữ nguyên, chưa khai báo mức hỗ trợ và chưa tính là đánh giá độc lập. Chưa có bộ nhãn người đánh giá hoàn tất để công bố accuracy với con người.
+- Đã lưu 18 kết quả giả lập cho mỗi tài khoản admin/Khoa/Tú (54 nhãn luyện tập), tách khỏi nhãn nghiên cứu và phê duyệt; số này không phải 54 ca kiểm định.
+- Báo cáo điều phối tổng hợp 56 control và 17 lượt thực nghiệm có report hợp lệ; 3 lượt lịch sử thiếu metadata được đánh dấu riêng. Đã có gói bàn giao 113 tiêu chí và theo dõi kế hoạch xử lý; các phần triển khai này chưa thay thế thẩm định/nghiệm thu thật.
 
 ## Nhật ký công việc chính
 
@@ -53,6 +59,9 @@ Các dấu hoàn thành trên chỉ xác nhận phần triển khai kỹ thuật
 | 11/11/2026 | Rà mã, dọn demo và củng cố đánh giá | Gỡ mã không còn phù hợp, giữ dữ liệu doanh nghiệp; sửa kiểm tra nguồn/viện dẫn/kiểu dữ liệu, tiến độ người chấm và mức hỗ trợ |
 | 11/11/2026 | Mở rộng live A.8 lên 18 probe đại diện | 72/72 tình huống kỹ thuật; 5 phép đổi/khôi phục nguồn; pilot LLM giữ lỗi lần đầu và lần sửa, không nhận là accuracy chuyên gia |
 | 11/11/2026 | Nối nguồn với hồ sơ toàn phạm vi và xuất bàn giao | Nhập 18 capture, đánh giá lại theo rubric 56; xuất SoA 56 dự thảo và danh sách thiếu; 202 test Python, 5 test JavaScript, lint/build đạt |
+| 12/11/2026 | Hoàn thiện gói bàn giao và yêu cầu hồ sơ | Đủ 56 control / 113 tiêu chí; chỉ ra nguồn, vai trò và vướng mắc; xuất JSON/Markdown, sửa chỉ dẫn khi control chỉ có preset |
+| 12/11/2026 | Bổ sung chấm giả định và tổng hợp admin | Lưu riêng 18 kết quả mẫu/tài khoản, admin thấy 54 nhãn luyện tập; không sửa nhãn thật hoặc dùng giả lập làm accuracy độc lập |
+| 12/11/2026 | Hoàn thiện theo dõi xử lý và báo cáo điều phối | Nối người phụ trách/hạn/cách kiểm tra lại vào SoA; báo cáo 56 control và A.8 từng lượt, đánh dấu lịch sử thiếu metadata; 220 test Python, 5 test JavaScript, lint/build đạt |
 
 ## Bổ sung thống nhất phạm vi ngày 10/11/2026
 
@@ -72,6 +81,8 @@ Các dấu hoàn thành trên chỉ xác nhận phần triển khai kỹ thuật
 - [Đánh giá nguồn nhập theo rubric toàn phạm vi](../docs/a8-results/dossier-capture-evaluations.json), [SoA 56 hiện tại](../docs/a8-results/SOA_56_HIEN_TAI.md), [SoA 56 JSON](../docs/a8-results/soa56-current-draft.json).
 - [Danh sách việc/hồ sơ còn thiếu](../docs/VIEC_CAN_HOAN_THIEN_56.md), [hướng dẫn nối nguồn và phân loại nhãn](../docs/HOAN_THIEN_HO_SO_56.md).
 - [Collector cấu hình/log gốc](../evidence_collectors/a8_raw.py), [Agent đánh giá](../agent_core/a8_assessment.py), [API chấm mù và phê duyệt](../backend/a8_api.py).
+- [Gói bàn giao 113 tiêu chí](../docs/BAN_GIAO_TUAN_05_2026_11_12.md), [chấm giả lập tách riêng](../docs/CHAM_GIA_LAP_2026_11_12.md).
+- [Theo dõi kế hoạch xử lý](../docs/KE_HOACH_XU_LY_VA_KIEM_TRA_LAI.md), [báo cáo điều phối và snapshot](../docs/BAO_CAO_DIEU_PHOI_GIANG_VIEN.md).
 
 **Phân biệt các mốc:** bản v1 dùng 72 hồ sơ chuẩn hóa, LLM khớp 70/72 (97,22%). Bản raw v2 dùng 108 ca duy nhất, 2 lần lặp thành 216 lượt, khớp 206/216 (95,37%). Đây là hai điều kiện đo khác nhau, không lấy tỷ lệ v1 thay kết quả v2 hoặc kết luận chất lượng tăng/giảm trực tiếp.
 
@@ -96,6 +107,8 @@ Các tỷ lệ trên đối chiếu **đáp án do nhóm thiết kế**, chưa p
 - [x] Phân tích bước đầu lỗi engine/thiếu bằng chứng, bổ sung guard và chạy hồi quy trên ca đã biết; giữ nguyên báo cáo lỗi cũ.
 - [x] Bổ sung sửa phản hồi có giới hạn, giữ lỗi đầu và kiểm tra lại live A.8.3 trên cùng nguồn đã chốt.
 - [x] Chuẩn bị luồng nhận nguồn kiểm định tách riêng, dò trùng nội dung và khóa recipe/snapshot trước chạy.
+- [x] Chuẩn bị gói bàn giao, khu chấm giả định và báo cáo admin; giữ tách biệt với kết quả nghiên cứu và phê duyệt thật.
+- [x] Hoàn thiện công cụ ghi người phụ trách/hạn/cách kiểm tra lại và xuất cùng SoA; chưa tự điền các quyết định thực tế.
 - [ ] Nhóm cung cấp và xác nhận tập kiểm định chưa dùng phát triển; thu nhãn thật và đo trên tập đó. Công cụ đã có không đồng nghĩa dữ liệu này đã tồn tại.
 - [ ] Kiểm tra thủ công các luồng UI, xuất báo cáo và các trường hợp bị chặn duyệt.
 - [ ] Hoàn thiện kế hoạch xử lý, quyết định áp dụng và SoA trong phạm vi sau khi đủ điều kiện.
@@ -176,8 +189,42 @@ Chưa chốt. Tổng kết cuối tuần 5 rồi xác định công việc chuy�
 - Màn hình chấm hiển thị điều kiện và từng artifact, không mặc định chọn đạt. 202 test Python, 5 test JavaScript, lint/build đạt; kiểm thử bấm toàn UI vẫn chưa xác nhận vì công cụ không kết nối.
 - Hướng dẫn: [Hoàn thiện hồ sơ 56](../docs/HOAN_THIEN_HO_SO_56.md), [việc cần làm](../docs/VIEC_CAN_HOAN_THIEN_56.md), [kết quả đánh giá nguồn nhập](../docs/a8-results/dossier-capture-evaluations.json). Không tự hoàn tất nhãn/phê duyệt hoặc tạo hồ sơ thay người phụ trách.
 
+## Hoàn thiện bàn giao theo tiêu chí — 12/11/2026
+
+- Bổ sung gói bàn giao động đủ 56 control / 113 tiêu chí: yêu cầu nguồn, vai trò đề nghị, ID/hash bằng chứng, vướng mắc và dự thảo xử lý; xuất JSON/Markdown ngay trên giao diện.
+- Chỉ lấy thẩm định hiện hành làm kết quả tiêu chí; không tự gán người nhận, hạn xử lý, nhãn hoặc phê duyệt. Sửa chỉ dẫn thu nguồn khi control chỉ có preset.
+- Kiểm tra API thật giữ nguyên trạng thái: 19 control có nguồn ngoài preset, 37 thiếu nguồn; chưa có quyết định áp dụng/rubric/thẩm định/SoA được duyệt. Không đóng các mục cần người thật hoặc nguồn mới.
+- 207 test Python, 5 test JavaScript, lint/build đạt. Computer Use vẫn lỗi kết nối native pipe; kiểm thử bấm toàn UI chưa hoàn tất.
+- Minh chứng và thao tác tiếp: [Bàn giao 12/11](../docs/BAN_GIAO_TUAN_05_2026_11_12.md).
+
+## Chấm giả lập tách riêng — 12/11/2026
+
+- Theo yêu cầu đẩy tiến độ kỹ thuật, bổ sung chấm giả lập theo facts/rubric lab trên cùng snapshot; admin xem bảng và xuất JSON riêng. Không tạo nhãn dưới tài khoản thành viên hoặc mở đáp án cho người chấm mù.
+- Đã chạy 18 control của lượt live v2: 18 kết luận một phần, khớp kết luận cuối Agent 18/18. Đây là đối chiếu cùng rubric/guard, không phải accuracy người thật; giữ lỗi lần đầu A.8.3 và trạng thái thiếu nguồn toàn phạm vi.
+- Chặn nhãn có dấu giả lập khỏi phân tích người chấm ngay cả khi khai sai mức hỗ trợ. Nhãn thật, SoA và các phê duyệt giữ nguyên; chấm thật thực hiện sau.
+- 211 test Python, 5 test JavaScript, lint/build đạt. [Bảng chấm giả lập](../docs/CHAM_GIA_LAP_2026_11_12.md).
+
+- Bổ sung ngày 12/11: tài khoản người chấm có nút chấm nhanh 18 control mẫu trong khu luyện tập riêng; không mở lượt chấm mù, không nộp nhãn thật. Ví dụ dùng bộ phát triển raw mixed, yêu cầu khai đúng mức tiếp xúc khi chấm thật. 212 test Python, lint/build đạt.
+- Đã lưu gói giả lập riêng 18/18 cho từng tài khoản admin/Khoa/Tú; ghi người thực hiện là bộ máy giả lập, không phải chủ tài khoản. Kiểm tra hash xác nhận nhãn thật/quyết định/phê duyệt không đổi; 6 test mô phỏng đạt, lint/build đạt. Gói nằm ngoài kho nhãn nghiên cứu và tự hiện lại ở khu luyện tập khi đăng nhập đúng tài khoản.
+- Bổ sung bảng admin tổng hợp chấm giả định các tài khoản, tự cập nhật 4 giây; hiển thị rõ 54 nhãn giả lập của 3 tài khoản, tách khỏi tiến độ chấm thật theo lượt. Sửa tiêu đề/thông báo để tránh nhầm giả định đã lưu với nhãn thật chưa nộp; API và 6 test mô phỏng, lint/build đạt.
+
+## Theo dõi kế hoạch xử lý và kiểm tra lại — 12/11/2026
+
+- Bổ sung người chịu trách nhiệm, hạn xử lý và cách kiểm tra lại cho quyết định từng control; API kiểm tra đầu vào, giữ lịch sử, đổi kế hoạch làm fingerprint/phê duyệt SoA cũ không còn hiện hành.
+- Nối các thông tin vào SoA và gói bàn giao; danh sách việc nhắc kế hoạch áp dụng còn thiếu chi tiết. Không tự phân công, đặt hạn hay ghi công việc đã xong.
+- 215 test Python, 5 test JavaScript, lint/build đạt; API thật xác nhận đủ 56 dòng và không sửa nhãn/quyết định/phê duyệt. Các mục cần nguồn, người thật, tập kiểm định và kiểm thử UI vẫn mở.
+- Hướng dẫn: [Kế hoạch xử lý và kiểm tra lại](../docs/KE_HOACH_XU_LY_VA_KIEM_TRA_LAI.md).
+
+## Báo cáo điều phối theo góp ý giảng viên — 12/11/2026
+
+- Bổ sung báo cáo admin tổng hợp 56 control, kết quả A.8 theo từng lượt/nguồn/rubric/engine, lỗi đầu/cuối, đối chiếu từng người và việc còn thiếu; xuất JSON/Markdown.
+- Tách 54 nhãn luyện tập khỏi chấm thật/mẫu kiểm định; không cộng kết quả khác điều kiện thành một accuracy. Nêu lượt bị loại do dữ liệu/hash và đánh dấu metadata lịch sử còn thiếu.
+- API thật xác nhận 56 control, 17 lượt report hợp lệ, 3 lượt thiếu metadata; chưa có lượt hoàn tất nhãn khai báo độc lập. Tệp nhãn/quyết định/phê duyệt giữ nguyên.
+- 220 test Python, 5 test JavaScript, lint/build đạt. [Hướng dẫn và snapshot báo cáo](../docs/BAO_CAO_DIEU_PHOI_GIANG_VIEN.md). Các mục cần nguồn, người thật và kiểm thử UI chưa đóng.
+
 ## Đồng bộ GitHub
 
 | Ngày | Giờ (UTC+7) | Người push | Nhánh | Nội dung chính |
 |---|---|---|---|---|
 | 11/11/2026 | 13:37, 22:27 | Trần Văn Toàn | `main` | Hoàn thiện đánh giá tuân thủ, bằng chứng live và dọn demo; mở rộng 18 probe A.8, nối nguồn với hồ sơ 56 và bổ sung báo cáo. |
+| 12/11/2026 | 10:21 | Trần Văn Toàn | `main` | Bổ sung gói bàn giao 56 control, chấm giả định tách riêng, kế hoạch xử lý và báo cáo điều phối theo góp ý giảng viên. |

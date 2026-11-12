@@ -1,5 +1,6 @@
 """Authorized lab APIs, separate from the existing assessment/workflow API."""
 from uuid import UUID
+from datetime import date
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, ConfigDict, Field
 from backend.team_api import require_user, require_campaign
@@ -124,6 +125,18 @@ def shared_work_start(assessment_id: UUID, req: SharedWorkInput, user: dict = De
     return result
 
 
+@router.get('/scope56/teacher-report')
+def teacher_report(assessment_id: UUID,user: dict=Depends(require_user)):
+    require_campaign(assessment_id,user)
+    if user.get('role')!='admin':raise HTTPException(403,'Chỉ admin xuất báo cáo điều phối; người chấm dùng gói mù.')
+    import json
+    from backend import a8_api
+    from backend.teacher_report import build_report
+    with a8_api.lock:
+        runs=[json.loads(p.read_text(encoding='utf-8')) for p in a8_api.folder(assessment_id).glob('*.json')]
+        return build_report(scope56(assessment_id,user),runs,a8_api.practice_summary(assessment_id,user))
+
+
 @router.get('/scope56')
 def scope56(assessment_id: UUID,user: dict=Depends(require_user)):
     from backend.shared_work import dossier
@@ -159,6 +172,9 @@ class ScopeDecision(BaseModel):
     applicable: bool
     reason: str=Field(min_length=10,max_length=2000)
     treatment: str=Field(min_length=10,max_length=2000)
+    treatment_owner: str | None=Field(default=None,min_length=2,max_length=200)
+    treatment_due: date | None=None
+    verification_plan: str | None=Field(default=None,min_length=10,max_length=2000)
 
 
 @router.post('/scope56/decisions')
@@ -173,7 +189,7 @@ def scope_decision(assessment_id: UUID,req: ScopeDecision,user: dict=Depends(req
     with a8_api.lock:
         path=a8_api.folder(assessment_id)/'settings'/'scope56-decisions.json'
         history=json.loads(path.read_text(encoding='utf-8')) if path.exists() else []
-        record={**req.model_dump(),'recorded_by':user['user_id'],'recorded_at':datetime.now(timezone.utc).isoformat()}
+        record={**req.model_dump(mode='json'),'recorded_by':user['user_id'],'recorded_at':datetime.now(timezone.utc).isoformat()}
         history.append(record);a8_api.save(path,history)
     return record
 

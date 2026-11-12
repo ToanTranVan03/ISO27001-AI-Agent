@@ -1,0 +1,2166 @@
+{
+  "protocol": "simulated-review-v1",
+  "is_simulated": true,
+  "source_report_sha256": "c39d7e9bb0f6030089cc414e4a9a1a1f33f4eab8a68d499f481b5dd3370ed540",
+  "reviewer_kind": "deterministic-rubric-simulator",
+  "labels": [
+    {
+      "control_id": "A.8.1",
+      "case_id": "A.8.1-mixed",
+      "expected": "Partially Compliant",
+      "reviewer_id": "SIMULATED-RUBRIC-REVIEWER",
+      "reviewer_name": "Bộ chấm giả lập theo rubric lab",
+      "label_origin": "simulated-rubric-v1",
+      "assistance": "ai_assisted",
+      "prior_exposure": "yes",
+      "is_simulated": true,
+      "eligible_for_human_comparison": false,
+      "report_sha256": "c39d7e9bb0f6030089cc414e4a9a1a1f33f4eab8a68d499f481b5dd3370ed540",
+      "evidence_sha256": "25ddd0716b00c7a12956bb276fc1bd8af1a3dbcd33165c71420650a3e09084ad",
+      "criteria": [
+        {
+          "check": "endpoint_record_private",
+          "value": true,
+          "verdict": "met",
+          "evidence_id": "A8LIVE-25ddd0716b00c7a12956bb27"
+        },
+        {
+          "check": "endpoint_file_encryption_verified",
+          "value": false,
+          "verdict": "not_met",
+          "evidence_id": "A8LIVE-25ddd0716b00c7a12956bb27"
+        }
+      ],
+      "rationale": "endpoint_record_private=True (met); endpoint_file_encryption_verified=False (not_met)"
+    },
+    {
+      "control_id": "A.8.2",
+      "case_id": "A.8.2-mixed",
+      "expected": "Partially Compliant",
+      "reviewer_id": "SIMULATED-RUBRIC-REVIEWER",
+      "reviewer_name": "Bộ chấm giả lập theo rubric lab",
+      "label_origin": "simulated-rubric-v1",
+      "assistance": "ai_assisted",
+      "prior_exposure": "yes",
+      "is_simulated": true,
+      "eligible_for_human_comparison": false,
+      "report_sha256": "c39d7e9bb0f6030089cc414e4a9a1a1f33f4eab8a68d499f481b5dd3370ed540",
+      "evidence_sha256": "dadb97df9ade026bce53465be03a81f80253755f29b6f7f6078362894ae05541",
+      "criteria": [
+        {
+          "check": "privileged_operation_restricted",
+          "value": true,
+          "verdict": "met",
+          "evidence_id": "A8LIVE-dadb97df9ade026bce53465b"
+        },
+        {
+          "check": "privileged_review_current",
+          "value": false,
+          "verdict": "not_met",
+          "evidence_id": "A8LIVE-dadb97df9ade026bce53465b"
+        }
+      ],
+      "rationale": "privileged_operation_restricted=True (met); privileged_review_current=False (not_met)"
+    },
+    {
+      "control_id": "A.8.3",
+      "case_id": "A.8.3-mixed",
+      "expected": "Partially Compliant",
+      "reviewer_id": "SIMULATED-RUBRIC-REVIEWER",
+      "reviewer_name": "Bộ chấm giả lập theo rubric lab",
+      "label_origin": "simulated-rubric-v1",
+      "assistance": "ai_assisted",
+      "prior_exposure": "yes",
+      "is_simulated": true,
+      "eligible_for_human_comparison": false,
+      "report_sha256": "c39d7e9bb0f6030089cc414e4a9a1a1f33f4eab8a68d499f481b5dd3370ed540",
+      "evidence_sha256": "181158a9d5df36c4784e46cd75808b22ae13723dc2e93558f9ca2a90b421f683",
+      "criteria": [
+        {
+          "check": "access_default_deny",
+          "value": true,
+          "verdict": "met",
+          "evidence_id": "A8LIVE-181158a9d5df36c4784e46cd"
+        },
+        {
+          "check": "access_review_current",
+          "value": false,
+          "verdict": "not_met",
+          "evidence_id": "A8LIVE-181158a9d5df36c4784e46cd"
+        }
+      ],
+      "rationale": "access_default_deny=True (met); access_review_current=False (not_met)"
+    },
+    {
+      "control_id": "A.8.5",
+      "case_id": "A.8.5-mixed",
+      "expected": "Partially Compliant",
+      "reviewer_id": "SIMULATED-RUBRIC-REVIEWER",
+      "reviewer_name": "Bộ chấm giả lập theo rubric lab",
+      "label_origin": "simulated-rubric-v1",
+      "assistance": "ai_assisted",
+      "prior_exposure": "yes",
+      "is_simulated": true,
+      "eligible_for_human_comparison": false,
+      "report_sha256": "c39d7e9bb0f6030089cc414e4a9a1a1f33f4eab8a68d499f481b5dd3370ed540",
+      "evidence_sha256": "6726c2ed13950708ee801f3ab6d9281fad7e9b504bea9b1ebe15ee1cf3a004c8",
+      "criteria": [
+        {
+          "check": "password_rejection_verified",
+          "value": true,
+          "verdict": "met",
+          "evidence_id": "A8LIVE-6726c2ed13950708ee801f3a"
+        },
+        {
+          "check": "second_factor_enforced",
+          "value": false,
+          "verdict": "not_met",
+          "evidence_id": "A8LIVE-6726c2ed13950708ee801f3a"
+        }
+      ],
+      "rationale": "password_rejection_verified=True (met); second_factor_enforced=False (not_met)"
+    },
+    {
+      "control_id": "A.8.7",
+      "case_id": "A.8.7-mixed",
+      "expected": "Partially Compliant",
+      "reviewer_id": "SIMULATED-RUBRIC-REVIEWER",
+      "reviewer_name": "Bộ chấm giả lập theo rubric lab",
+      "label_origin": "simulated-rubric-v1",
+      "assistance": "ai_assisted",
+      "prior_exposure": "yes",
+      "is_simulated": true,
+      "eligible_for_human_comparison": false,
+      "report_sha256": "c39d7e9bb0f6030089cc414e4a9a1a1f33f4eab8a68d499f481b5dd3370ed540",
+      "evidence_sha256": "e5a8b6cb305f41724cb9c4241629be1e171d3ba50338820bfb64aa6b82f4d4f6",
+      "criteria": [
+        {
+          "check": "test_signature_quarantined",
+          "value": true,
+          "verdict": "met",
+          "evidence_id": "A8LIVE-e5a8b6cb305f41724cb9c424"
+        },
+        {
+          "check": "signature_database_fresh",
+          "value": false,
+          "verdict": "not_met",
+          "evidence_id": "A8LIVE-e5a8b6cb305f41724cb9c424"
+        }
+      ],
+      "rationale": "test_signature_quarantined=True (met); signature_database_fresh=False (not_met)"
+    },
+    {
+      "control_id": "A.8.8",
+      "case_id": "A.8.8-mixed",
+      "expected": "Partially Compliant",
+      "reviewer_id": "SIMULATED-RUBRIC-REVIEWER",
+      "reviewer_name": "Bộ chấm giả lập theo rubric lab",
+      "label_origin": "simulated-rubric-v1",
+      "assistance": "ai_assisted",
+      "prior_exposure": "yes",
+      "is_simulated": true,
+      "eligible_for_human_comparison": false,
+      "report_sha256": "c39d7e9bb0f6030089cc414e4a9a1a1f33f4eab8a68d499f481b5dd3370ed540",
+      "evidence_sha256": "7dc5540bb6212e12de8fb27f229339e665f482d051355f0d44bfb7dd55e4e6d7",
+      "criteria": [
+        {
+          "check": "inventory_scan_enabled",
+          "value": true,
+          "verdict": "met",
+          "evidence_id": "A8LIVE-7dc5540bb6212e12de8fb27f"
+        },
+        {
+          "check": "no_critical_lab_advisory_match",
+          "value": false,
+          "verdict": "not_met",
+          "evidence_id": "A8LIVE-7dc5540bb6212e12de8fb27f"
+        }
+      ],
+      "rationale": "inventory_scan_enabled=True (met); no_critical_lab_advisory_match=False (not_met)"
+    },
+    {
+      "control_id": "A.8.9",
+      "case_id": "A.8.9-mixed",
+      "expected": "Partially Compliant",
+      "reviewer_id": "SIMULATED-RUBRIC-REVIEWER",
+      "reviewer_name": "Bộ chấm giả lập theo rubric lab",
+      "label_origin": "simulated-rubric-v1",
+      "assistance": "ai_assisted",
+      "prior_exposure": "yes",
+      "is_simulated": true,
+      "eligible_for_human_comparison": false,
+      "report_sha256": "c39d7e9bb0f6030089cc414e4a9a1a1f33f4eab8a68d499f481b5dd3370ed540",
+      "evidence_sha256": "9bdf3af90aa08934e31b4e52fb430fd4fb000749b15efb035acb420d6f58c125",
+      "criteria": [
+        {
+          "check": "baseline_authorization_present",
+          "value": true,
+          "verdict": "met",
+          "evidence_id": "A8LIVE-9bdf3af90aa08934e31b4e52"
+        },
+        {
+          "check": "configuration_matches_baseline",
+          "value": false,
+          "verdict": "not_met",
+          "evidence_id": "A8LIVE-9bdf3af90aa08934e31b4e52"
+        }
+      ],
+      "rationale": "baseline_authorization_present=True (met); configuration_matches_baseline=False (not_met)"
+    },
+    {
+      "control_id": "A.8.10",
+      "case_id": "A.8.10-mixed",
+      "expected": "Partially Compliant",
+      "reviewer_id": "SIMULATED-RUBRIC-REVIEWER",
+      "reviewer_name": "Bộ chấm giả lập theo rubric lab",
+      "label_origin": "simulated-rubric-v1",
+      "assistance": "ai_assisted",
+      "prior_exposure": "yes",
+      "is_simulated": true,
+      "eligible_for_human_comparison": false,
+      "report_sha256": "c39d7e9bb0f6030089cc414e4a9a1a1f33f4eab8a68d499f481b5dd3370ed540",
+      "evidence_sha256": "50abb179b103b6a5e94b82717d8b3a24bd000d9ef74f6756d37b263991d77d44",
+      "criteria": [
+        {
+          "check": "deletion_policy_enforced",
+          "value": true,
+          "verdict": "met",
+          "evidence_id": "A8LIVE-50abb179b103b6a5e94b8271"
+        },
+        {
+          "check": "deletion_verified",
+          "value": false,
+          "verdict": "not_met",
+          "evidence_id": "A8LIVE-50abb179b103b6a5e94b8271"
+        }
+      ],
+      "rationale": "deletion_policy_enforced=True (met); deletion_verified=False (not_met)"
+    },
+    {
+      "control_id": "A.8.12",
+      "case_id": "A.8.12-mixed",
+      "expected": "Partially Compliant",
+      "reviewer_id": "SIMULATED-RUBRIC-REVIEWER",
+      "reviewer_name": "Bộ chấm giả lập theo rubric lab",
+      "label_origin": "simulated-rubric-v1",
+      "assistance": "ai_assisted",
+      "prior_exposure": "yes",
+      "is_simulated": true,
+      "eligible_for_human_comparison": false,
+      "report_sha256": "c39d7e9bb0f6030089cc414e4a9a1a1f33f4eab8a68d499f481b5dd3370ed540",
+      "evidence_sha256": "518e80751e335c98a4a6583da2acf018cc6b173c61766cdea9308381d50da5e7",
+      "criteria": [
+        {
+          "check": "sensitive_transfer_blocked",
+          "value": true,
+          "verdict": "met",
+          "evidence_id": "A8LIVE-518e80751e335c98a4a6583d"
+        },
+        {
+          "check": "blocked_transfer_audited",
+          "value": false,
+          "verdict": "not_met",
+          "evidence_id": "A8LIVE-518e80751e335c98a4a6583d"
+        }
+      ],
+      "rationale": "sensitive_transfer_blocked=True (met); blocked_transfer_audited=False (not_met)"
+    },
+    {
+      "control_id": "A.8.13",
+      "case_id": "A.8.13-mixed",
+      "expected": "Partially Compliant",
+      "reviewer_id": "SIMULATED-RUBRIC-REVIEWER",
+      "reviewer_name": "Bộ chấm giả lập theo rubric lab",
+      "label_origin": "simulated-rubric-v1",
+      "assistance": "ai_assisted",
+      "prior_exposure": "yes",
+      "is_simulated": true,
+      "eligible_for_human_comparison": false,
+      "report_sha256": "c39d7e9bb0f6030089cc414e4a9a1a1f33f4eab8a68d499f481b5dd3370ed540",
+      "evidence_sha256": "6860e899857edda617cdca7487f24d936643ad549adbdda0871bf6fcd90da113",
+      "criteria": [
+        {
+          "check": "backup_success",
+          "value": true,
+          "verdict": "met",
+          "evidence_id": "A8LIVE-6860e899857edda617cdca74"
+        },
+        {
+          "check": "restore_test_passed",
+          "value": false,
+          "verdict": "not_met",
+          "evidence_id": "A8LIVE-6860e899857edda617cdca74"
+        }
+      ],
+      "rationale": "backup_success=True (met); restore_test_passed=False (not_met)"
+    },
+    {
+      "control_id": "A.8.15",
+      "case_id": "A.8.15-mixed",
+      "expected": "Partially Compliant",
+      "reviewer_id": "SIMULATED-RUBRIC-REVIEWER",
+      "reviewer_name": "Bộ chấm giả lập theo rubric lab",
+      "label_origin": "simulated-rubric-v1",
+      "assistance": "ai_assisted",
+      "prior_exposure": "yes",
+      "is_simulated": true,
+      "eligible_for_human_comparison": false,
+      "report_sha256": "c39d7e9bb0f6030089cc414e4a9a1a1f33f4eab8a68d499f481b5dd3370ed540",
+      "evidence_sha256": "4bede6cc5bf85384339e8da17d670d33686682a1859c282a2aba308fc5205f29",
+      "criteria": [
+        {
+          "check": "audit_logs_enabled",
+          "value": true,
+          "verdict": "met",
+          "evidence_id": "A8LIVE-4bede6cc5bf85384339e8da1"
+        },
+        {
+          "check": "logs_integrity_protected",
+          "value": false,
+          "verdict": "not_met",
+          "evidence_id": "A8LIVE-4bede6cc5bf85384339e8da1"
+        }
+      ],
+      "rationale": "audit_logs_enabled=True (met); logs_integrity_protected=False (not_met)"
+    },
+    {
+      "control_id": "A.8.16",
+      "case_id": "A.8.16-mixed",
+      "expected": "Partially Compliant",
+      "reviewer_id": "SIMULATED-RUBRIC-REVIEWER",
+      "reviewer_name": "Bộ chấm giả lập theo rubric lab",
+      "label_origin": "simulated-rubric-v1",
+      "assistance": "ai_assisted",
+      "prior_exposure": "yes",
+      "is_simulated": true,
+      "eligible_for_human_comparison": false,
+      "report_sha256": "c39d7e9bb0f6030089cc414e4a9a1a1f33f4eab8a68d499f481b5dd3370ed540",
+      "evidence_sha256": "e9f41f34dc2dba0f2d73ec82a3eec56fd035444e88a25ecee278649d9ca4932f",
+      "criteria": [
+        {
+          "check": "file_change_detected_within_sla",
+          "value": true,
+          "verdict": "met",
+          "evidence_id": "A8LIVE-e9f41f34dc2dba0f2d73ec82"
+        },
+        {
+          "check": "alert_delivery_receipt_present",
+          "value": false,
+          "verdict": "not_met",
+          "evidence_id": "A8LIVE-e9f41f34dc2dba0f2d73ec82"
+        }
+      ],
+      "rationale": "file_change_detected_within_sla=True (met); alert_delivery_receipt_present=False (not_met)"
+    },
+    {
+      "control_id": "A.8.17",
+      "case_id": "A.8.17-mixed",
+      "expected": "Partially Compliant",
+      "reviewer_id": "SIMULATED-RUBRIC-REVIEWER",
+      "reviewer_name": "Bộ chấm giả lập theo rubric lab",
+      "label_origin": "simulated-rubric-v1",
+      "assistance": "ai_assisted",
+      "prior_exposure": "yes",
+      "is_simulated": true,
+      "eligible_for_human_comparison": false,
+      "report_sha256": "c39d7e9bb0f6030089cc414e4a9a1a1f33f4eab8a68d499f481b5dd3370ed540",
+      "evidence_sha256": "bdd9c278501b2d3766fc78780c4eb1633868dbc43d28b8c7d2f293b274e60564",
+      "criteria": [
+        {
+          "check": "time_reference_signature_valid",
+          "value": true,
+          "verdict": "met",
+          "evidence_id": "A8LIVE-bdd9c278501b2d3766fc7878"
+        },
+        {
+          "check": "application_time_offset_within_policy",
+          "value": false,
+          "verdict": "not_met",
+          "evidence_id": "A8LIVE-bdd9c278501b2d3766fc7878"
+        }
+      ],
+      "rationale": "time_reference_signature_valid=True (met); application_time_offset_within_policy=False (not_met)"
+    },
+    {
+      "control_id": "A.8.19",
+      "case_id": "A.8.19-mixed",
+      "expected": "Partially Compliant",
+      "reviewer_id": "SIMULATED-RUBRIC-REVIEWER",
+      "reviewer_name": "Bộ chấm giả lập theo rubric lab",
+      "label_origin": "simulated-rubric-v1",
+      "assistance": "ai_assisted",
+      "prior_exposure": "yes",
+      "is_simulated": true,
+      "eligible_for_human_comparison": false,
+      "report_sha256": "c39d7e9bb0f6030089cc414e4a9a1a1f33f4eab8a68d499f481b5dd3370ed540",
+      "evidence_sha256": "445dfdc2ba4a3b076c764eadc1011626057bc5890fa5bae0e7227f7fc6cedbb6",
+      "criteria": [
+        {
+          "check": "installation_restricted",
+          "value": true,
+          "verdict": "met",
+          "evidence_id": "A8LIVE-445dfdc2ba4a3b076c764ead"
+        },
+        {
+          "check": "installed_software_approved",
+          "value": false,
+          "verdict": "not_met",
+          "evidence_id": "A8LIVE-445dfdc2ba4a3b076c764ead"
+        }
+      ],
+      "rationale": "installation_restricted=True (met); installed_software_approved=False (not_met)"
+    },
+    {
+      "control_id": "A.8.20",
+      "case_id": "A.8.20-mixed",
+      "expected": "Partially Compliant",
+      "reviewer_id": "SIMULATED-RUBRIC-REVIEWER",
+      "reviewer_name": "Bộ chấm giả lập theo rubric lab",
+      "label_origin": "simulated-rubric-v1",
+      "assistance": "ai_assisted",
+      "prior_exposure": "yes",
+      "is_simulated": true,
+      "eligible_for_human_comparison": false,
+      "report_sha256": "c39d7e9bb0f6030089cc414e4a9a1a1f33f4eab8a68d499f481b5dd3370ed540",
+      "evidence_sha256": "0c4b38fef237373eb4adec107cac9f65b4b4540c97bbbe826eee24edb08c2b6b",
+      "criteria": [
+        {
+          "check": "unapproved_source_denied",
+          "value": true,
+          "verdict": "met",
+          "evidence_id": "A8LIVE-0c4b38fef237373eb4adec10"
+        },
+        {
+          "check": "approved_network_flow_available",
+          "value": false,
+          "verdict": "not_met",
+          "evidence_id": "A8LIVE-0c4b38fef237373eb4adec10"
+        }
+      ],
+      "rationale": "unapproved_source_denied=True (met); approved_network_flow_available=False (not_met)"
+    },
+    {
+      "control_id": "A.8.22",
+      "case_id": "A.8.22-mixed",
+      "expected": "Partially Compliant",
+      "reviewer_id": "SIMULATED-RUBRIC-REVIEWER",
+      "reviewer_name": "Bộ chấm giả lập theo rubric lab",
+      "label_origin": "simulated-rubric-v1",
+      "assistance": "ai_assisted",
+      "prior_exposure": "yes",
+      "is_simulated": true,
+      "eligible_for_human_comparison": false,
+      "report_sha256": "c39d7e9bb0f6030089cc414e4a9a1a1f33f4eab8a68d499f481b5dd3370ed540",
+      "evidence_sha256": "dc19fd0127cd1172f57990264a97a926d95b3df61f1504aaf00427049088de82",
+      "criteria": [
+        {
+          "check": "cross_zone_service_denied",
+          "value": true,
+          "verdict": "met",
+          "evidence_id": "A8LIVE-dc19fd0127cd1172f5799026"
+        },
+        {
+          "check": "business_zone_service_available",
+          "value": false,
+          "verdict": "not_met",
+          "evidence_id": "A8LIVE-dc19fd0127cd1172f5799026"
+        }
+      ],
+      "rationale": "cross_zone_service_denied=True (met); business_zone_service_available=False (not_met)"
+    },
+    {
+      "control_id": "A.8.24",
+      "case_id": "A.8.24-mixed",
+      "expected": "Partially Compliant",
+      "reviewer_id": "SIMULATED-RUBRIC-REVIEWER",
+      "reviewer_name": "Bộ chấm giả lập theo rubric lab",
+      "label_origin": "simulated-rubric-v1",
+      "assistance": "ai_assisted",
+      "prior_exposure": "yes",
+      "is_simulated": true,
+      "eligible_for_human_comparison": false,
+      "report_sha256": "c39d7e9bb0f6030089cc414e4a9a1a1f33f4eab8a68d499f481b5dd3370ed540",
+      "evidence_sha256": "a89ae5ce78e1947907888a1327321480dfea638516343b6b014513d267d8bcf8",
+      "criteria": [
+        {
+          "check": "strong_tls_handshake_verified",
+          "value": true,
+          "verdict": "met",
+          "evidence_id": "A8LIVE-a89ae5ce78e1947907888a13"
+        },
+        {
+          "check": "private_key_access_restricted",
+          "value": false,
+          "verdict": "not_met",
+          "evidence_id": "A8LIVE-a89ae5ce78e1947907888a13"
+        }
+      ],
+      "rationale": "strong_tls_handshake_verified=True (met); private_key_access_restricted=False (not_met)"
+    },
+    {
+      "control_id": "A.8.32",
+      "case_id": "A.8.32-mixed",
+      "expected": "Partially Compliant",
+      "reviewer_id": "SIMULATED-RUBRIC-REVIEWER",
+      "reviewer_name": "Bộ chấm giả lập theo rubric lab",
+      "label_origin": "simulated-rubric-v1",
+      "assistance": "ai_assisted",
+      "prior_exposure": "yes",
+      "is_simulated": true,
+      "eligible_for_human_comparison": false,
+      "report_sha256": "c39d7e9bb0f6030089cc414e4a9a1a1f33f4eab8a68d499f481b5dd3370ed540",
+      "evidence_sha256": "3e672bd2eb9b2f6ad85cc0638bc2281683d469bc882ed0b6831e7d4eeddc4ea4",
+      "criteria": [
+        {
+          "check": "change_bound_to_current_release",
+          "value": true,
+          "verdict": "met",
+          "evidence_id": "A8LIVE-3e672bd2eb9b2f6ad85cc063"
+        },
+        {
+          "check": "rollback_restores_release",
+          "value": false,
+          "verdict": "not_met",
+          "evidence_id": "A8LIVE-3e672bd2eb9b2f6ad85cc063"
+        }
+      ],
+      "rationale": "change_bound_to_current_release=True (met); rollback_restores_release=False (not_met)"
+    }
+  ],
+  "simulated_comparison": {
+    "per_control": [
+      {
+        "control_id": "A.8.1",
+        "total": 1,
+        "rated": 1,
+        "class_metrics": {
+          "Compliant": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          },
+          "Partially Compliant": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 1
+          },
+          "Non-Compliant": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          },
+          "Insufficient Evidence": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          }
+        },
+        "mean_duration_ms": 11356.18,
+        "errors": 0,
+        "collection_issues": 0,
+        "correct": 1,
+        "accuracy": 1.0,
+        "first_pass_accuracy": 1.0,
+        "repaired": 0,
+        "observations": 1,
+        "inference_attempts": 1,
+        "availability_guard_results": 0,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 1,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.2",
+        "total": 1,
+        "rated": 1,
+        "class_metrics": {
+          "Compliant": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          },
+          "Partially Compliant": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 1
+          },
+          "Non-Compliant": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          },
+          "Insufficient Evidence": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          }
+        },
+        "mean_duration_ms": 6585.77,
+        "errors": 0,
+        "collection_issues": 0,
+        "correct": 1,
+        "accuracy": 1.0,
+        "first_pass_accuracy": 1.0,
+        "repaired": 0,
+        "observations": 1,
+        "inference_attempts": 1,
+        "availability_guard_results": 0,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 1,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.3",
+        "total": 1,
+        "rated": 1,
+        "class_metrics": {
+          "Compliant": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          },
+          "Partially Compliant": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 1
+          },
+          "Non-Compliant": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          },
+          "Insufficient Evidence": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          }
+        },
+        "mean_duration_ms": 12896.36,
+        "errors": 0,
+        "collection_issues": 0,
+        "correct": 1,
+        "accuracy": 1.0,
+        "first_pass_accuracy": 0.0,
+        "repaired": 1,
+        "observations": 1,
+        "inference_attempts": 2,
+        "availability_guard_results": 0,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 1,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.5",
+        "total": 1,
+        "rated": 1,
+        "class_metrics": {
+          "Compliant": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          },
+          "Partially Compliant": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 1
+          },
+          "Non-Compliant": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          },
+          "Insufficient Evidence": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          }
+        },
+        "mean_duration_ms": 5628.9,
+        "errors": 0,
+        "collection_issues": 0,
+        "correct": 1,
+        "accuracy": 1.0,
+        "first_pass_accuracy": 1.0,
+        "repaired": 0,
+        "observations": 1,
+        "inference_attempts": 1,
+        "availability_guard_results": 0,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 1,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.7",
+        "total": 1,
+        "rated": 1,
+        "class_metrics": {
+          "Compliant": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          },
+          "Partially Compliant": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 1
+          },
+          "Non-Compliant": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          },
+          "Insufficient Evidence": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          }
+        },
+        "mean_duration_ms": 6641.22,
+        "errors": 0,
+        "collection_issues": 0,
+        "correct": 1,
+        "accuracy": 1.0,
+        "first_pass_accuracy": 1.0,
+        "repaired": 0,
+        "observations": 1,
+        "inference_attempts": 1,
+        "availability_guard_results": 0,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 1,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.8",
+        "total": 1,
+        "rated": 1,
+        "class_metrics": {
+          "Compliant": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          },
+          "Partially Compliant": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 1
+          },
+          "Non-Compliant": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          },
+          "Insufficient Evidence": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          }
+        },
+        "mean_duration_ms": 8091.48,
+        "errors": 0,
+        "collection_issues": 0,
+        "correct": 1,
+        "accuracy": 1.0,
+        "first_pass_accuracy": 1.0,
+        "repaired": 0,
+        "observations": 1,
+        "inference_attempts": 1,
+        "availability_guard_results": 0,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 1,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.9",
+        "total": 1,
+        "rated": 1,
+        "class_metrics": {
+          "Compliant": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          },
+          "Partially Compliant": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 1
+          },
+          "Non-Compliant": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          },
+          "Insufficient Evidence": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          }
+        },
+        "mean_duration_ms": 6467.01,
+        "errors": 0,
+        "collection_issues": 0,
+        "correct": 1,
+        "accuracy": 1.0,
+        "first_pass_accuracy": 1.0,
+        "repaired": 0,
+        "observations": 1,
+        "inference_attempts": 1,
+        "availability_guard_results": 0,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 1,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.10",
+        "total": 1,
+        "rated": 1,
+        "class_metrics": {
+          "Compliant": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          },
+          "Partially Compliant": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 1
+          },
+          "Non-Compliant": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          },
+          "Insufficient Evidence": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          }
+        },
+        "mean_duration_ms": 6070.13,
+        "errors": 0,
+        "collection_issues": 0,
+        "correct": 1,
+        "accuracy": 1.0,
+        "first_pass_accuracy": 1.0,
+        "repaired": 0,
+        "observations": 1,
+        "inference_attempts": 1,
+        "availability_guard_results": 0,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 1,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.12",
+        "total": 1,
+        "rated": 1,
+        "class_metrics": {
+          "Compliant": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          },
+          "Partially Compliant": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 1
+          },
+          "Non-Compliant": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          },
+          "Insufficient Evidence": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          }
+        },
+        "mean_duration_ms": 6460.93,
+        "errors": 0,
+        "collection_issues": 0,
+        "correct": 1,
+        "accuracy": 1.0,
+        "first_pass_accuracy": 1.0,
+        "repaired": 0,
+        "observations": 1,
+        "inference_attempts": 1,
+        "availability_guard_results": 0,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 1,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.13",
+        "total": 1,
+        "rated": 1,
+        "class_metrics": {
+          "Compliant": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          },
+          "Partially Compliant": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 1
+          },
+          "Non-Compliant": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          },
+          "Insufficient Evidence": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          }
+        },
+        "mean_duration_ms": 5601.88,
+        "errors": 0,
+        "collection_issues": 0,
+        "correct": 1,
+        "accuracy": 1.0,
+        "first_pass_accuracy": 1.0,
+        "repaired": 0,
+        "observations": 1,
+        "inference_attempts": 1,
+        "availability_guard_results": 0,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 1,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.15",
+        "total": 1,
+        "rated": 1,
+        "class_metrics": {
+          "Compliant": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          },
+          "Partially Compliant": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 1
+          },
+          "Non-Compliant": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          },
+          "Insufficient Evidence": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          }
+        },
+        "mean_duration_ms": 6156.89,
+        "errors": 0,
+        "collection_issues": 0,
+        "correct": 1,
+        "accuracy": 1.0,
+        "first_pass_accuracy": 1.0,
+        "repaired": 0,
+        "observations": 1,
+        "inference_attempts": 1,
+        "availability_guard_results": 0,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 1,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.16",
+        "total": 1,
+        "rated": 1,
+        "class_metrics": {
+          "Compliant": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          },
+          "Partially Compliant": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 1
+          },
+          "Non-Compliant": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          },
+          "Insufficient Evidence": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          }
+        },
+        "mean_duration_ms": 6092.19,
+        "errors": 0,
+        "collection_issues": 0,
+        "correct": 1,
+        "accuracy": 1.0,
+        "first_pass_accuracy": 1.0,
+        "repaired": 0,
+        "observations": 1,
+        "inference_attempts": 1,
+        "availability_guard_results": 0,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 1,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.17",
+        "total": 1,
+        "rated": 1,
+        "class_metrics": {
+          "Compliant": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          },
+          "Partially Compliant": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 1
+          },
+          "Non-Compliant": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          },
+          "Insufficient Evidence": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          }
+        },
+        "mean_duration_ms": 7111.11,
+        "errors": 0,
+        "collection_issues": 0,
+        "correct": 1,
+        "accuracy": 1.0,
+        "first_pass_accuracy": 1.0,
+        "repaired": 0,
+        "observations": 1,
+        "inference_attempts": 1,
+        "availability_guard_results": 0,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 1,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.19",
+        "total": 1,
+        "rated": 1,
+        "class_metrics": {
+          "Compliant": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          },
+          "Partially Compliant": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 1
+          },
+          "Non-Compliant": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          },
+          "Insufficient Evidence": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          }
+        },
+        "mean_duration_ms": 6960.06,
+        "errors": 0,
+        "collection_issues": 0,
+        "correct": 1,
+        "accuracy": 1.0,
+        "first_pass_accuracy": 1.0,
+        "repaired": 0,
+        "observations": 1,
+        "inference_attempts": 1,
+        "availability_guard_results": 0,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 1,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.20",
+        "total": 1,
+        "rated": 1,
+        "class_metrics": {
+          "Compliant": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          },
+          "Partially Compliant": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 1
+          },
+          "Non-Compliant": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          },
+          "Insufficient Evidence": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          }
+        },
+        "mean_duration_ms": 6403.87,
+        "errors": 0,
+        "collection_issues": 0,
+        "correct": 1,
+        "accuracy": 1.0,
+        "first_pass_accuracy": 1.0,
+        "repaired": 0,
+        "observations": 1,
+        "inference_attempts": 1,
+        "availability_guard_results": 0,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 1,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.22",
+        "total": 1,
+        "rated": 1,
+        "class_metrics": {
+          "Compliant": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          },
+          "Partially Compliant": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 1
+          },
+          "Non-Compliant": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          },
+          "Insufficient Evidence": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          }
+        },
+        "mean_duration_ms": 6716.13,
+        "errors": 0,
+        "collection_issues": 0,
+        "correct": 1,
+        "accuracy": 1.0,
+        "first_pass_accuracy": 1.0,
+        "repaired": 0,
+        "observations": 1,
+        "inference_attempts": 1,
+        "availability_guard_results": 0,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 1,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.24",
+        "total": 1,
+        "rated": 1,
+        "class_metrics": {
+          "Compliant": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          },
+          "Partially Compliant": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 1
+          },
+          "Non-Compliant": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          },
+          "Insufficient Evidence": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          }
+        },
+        "mean_duration_ms": 5291.08,
+        "errors": 0,
+        "collection_issues": 0,
+        "correct": 1,
+        "accuracy": 1.0,
+        "first_pass_accuracy": 1.0,
+        "repaired": 0,
+        "observations": 1,
+        "inference_attempts": 1,
+        "availability_guard_results": 0,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 1,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          }
+        }
+      },
+      {
+        "control_id": "A.8.32",
+        "total": 1,
+        "rated": 1,
+        "class_metrics": {
+          "Compliant": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          },
+          "Partially Compliant": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 1
+          },
+          "Non-Compliant": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          },
+          "Insufficient Evidence": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "support": 0
+          }
+        },
+        "mean_duration_ms": 6194.28,
+        "errors": 0,
+        "collection_issues": 0,
+        "correct": 1,
+        "accuracy": 1.0,
+        "first_pass_accuracy": 1.0,
+        "repaired": 0,
+        "observations": 1,
+        "inference_attempts": 1,
+        "availability_guard_results": 0,
+        "confusion": {
+          "Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Partially Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 1,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Non-Compliant": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          },
+          "Insufficient Evidence": {
+            "Compliant": 0,
+            "Partially Compliant": 0,
+            "Non-Compliant": 0,
+            "Insufficient Evidence": 0,
+            "ERROR": 0
+          }
+        }
+      }
+    ],
+    "cases": [
+      {
+        "control_id": "A.8.1",
+        "case_id": "A.8.1-mixed",
+        "prediction": "Partially Compliant",
+        "expected": "Partially Compliant",
+        "label_origin": "simulated-rubric-v1",
+        "assistance": "ai_assisted",
+        "prior_exposure": "yes",
+        "correct": true,
+        "first_pass_prediction": "Partially Compliant",
+        "repaired": false,
+        "attempt_count": 1,
+        "execution_source": "ollama-a8-evidence-judgment",
+        "has_observations": true,
+        "inference_attempts": 1,
+        "error": null,
+        "collection_issue_count": 0,
+        "duration_ms": 11356.18
+      },
+      {
+        "control_id": "A.8.2",
+        "case_id": "A.8.2-mixed",
+        "prediction": "Partially Compliant",
+        "expected": "Partially Compliant",
+        "label_origin": "simulated-rubric-v1",
+        "assistance": "ai_assisted",
+        "prior_exposure": "yes",
+        "correct": true,
+        "first_pass_prediction": "Partially Compliant",
+        "repaired": false,
+        "attempt_count": 1,
+        "execution_source": "ollama-a8-evidence-judgment",
+        "has_observations": true,
+        "inference_attempts": 1,
+        "error": null,
+        "collection_issue_count": 0,
+        "duration_ms": 6585.77
+      },
+      {
+        "control_id": "A.8.3",
+        "case_id": "A.8.3-mixed",
+        "prediction": "Partially Compliant",
+        "expected": "Partially Compliant",
+        "label_origin": "simulated-rubric-v1",
+        "assistance": "ai_assisted",
+        "prior_exposure": "yes",
+        "correct": true,
+        "first_pass_prediction": null,
+        "repaired": true,
+        "attempt_count": 2,
+        "execution_source": "ollama-a8-evidence-judgment",
+        "has_observations": true,
+        "inference_attempts": 2,
+        "error": null,
+        "collection_issue_count": 0,
+        "duration_ms": 12896.36
+      },
+      {
+        "control_id": "A.8.5",
+        "case_id": "A.8.5-mixed",
+        "prediction": "Partially Compliant",
+        "expected": "Partially Compliant",
+        "label_origin": "simulated-rubric-v1",
+        "assistance": "ai_assisted",
+        "prior_exposure": "yes",
+        "correct": true,
+        "first_pass_prediction": "Partially Compliant",
+        "repaired": false,
+        "attempt_count": 1,
+        "execution_source": "ollama-a8-evidence-judgment",
+        "has_observations": true,
+        "inference_attempts": 1,
+        "error": null,
+        "collection_issue_count": 0,
+        "duration_ms": 5628.9
+      },
+      {
+        "control_id": "A.8.7",
+        "case_id": "A.8.7-mixed",
+        "prediction": "Partially Compliant",
+        "expected": "Partially Compliant",
+        "label_origin": "simulated-rubric-v1",
+        "assistance": "ai_assisted",
+        "prior_exposure": "yes",
+        "correct": true,
+        "first_pass_prediction": "Partially Compliant",
+        "repaired": false,
+        "attempt_count": 1,
+        "execution_source": "ollama-a8-evidence-judgment",
+        "has_observations": true,
+        "inference_attempts": 1,
+        "error": null,
+        "collection_issue_count": 0,
+        "duration_ms": 6641.22
+      },
+      {
+        "control_id": "A.8.8",
+        "case_id": "A.8.8-mixed",
+        "prediction": "Partially Compliant",
+        "expected": "Partially Compliant",
+        "label_origin": "simulated-rubric-v1",
+        "assistance": "ai_assisted",
+        "prior_exposure": "yes",
+        "correct": true,
+        "first_pass_prediction": "Partially Compliant",
+        "repaired": false,
+        "attempt_count": 1,
+        "execution_source": "ollama-a8-evidence-judgment",
+        "has_observations": true,
+        "inference_attempts": 1,
+        "error": null,
+        "collection_issue_count": 0,
+        "duration_ms": 8091.48
+      },
+      {
+        "control_id": "A.8.9",
+        "case_id": "A.8.9-mixed",
+        "prediction": "Partially Compliant",
+        "expected": "Partially Compliant",
+        "label_origin": "simulated-rubric-v1",
+        "assistance": "ai_assisted",
+        "prior_exposure": "yes",
+        "correct": true,
+        "first_pass_prediction": "Partially Compliant",
+        "repaired": false,
+        "attempt_count": 1,
+        "execution_source": "ollama-a8-evidence-judgment",
+        "has_observations": true,
+        "inference_attempts": 1,
+        "error": null,
+        "collection_issue_count": 0,
+        "duration_ms": 6467.01
+      },
+      {
+        "control_id": "A.8.10",
+        "case_id": "A.8.10-mixed",
+        "prediction": "Partially Compliant",
+        "expected": "Partially Compliant",
+        "label_origin": "simulated-rubric-v1",
+        "assistance": "ai_assisted",
+        "prior_exposure": "yes",
+        "correct": true,
+        "first_pass_prediction": "Partially Compliant",
+        "repaired": false,
+        "attempt_count": 1,
+        "execution_source": "ollama-a8-evidence-judgment",
+        "has_observations": true,
+        "inference_attempts": 1,
+        "error": null,
+        "collection_issue_count": 0,
+        "duration_ms": 6070.13
+      },
+      {
+        "control_id": "A.8.12",
+        "case_id": "A.8.12-mixed",
+        "prediction": "Partially Compliant",
+        "expected": "Partially Compliant",
+        "label_origin": "simulated-rubric-v1",
+        "assistance": "ai_assisted",
+        "prior_exposure": "yes",
+        "correct": true,
+        "first_pass_prediction": "Partially Compliant",
+        "repaired": false,
+        "attempt_count": 1,
+        "execution_source": "ollama-a8-evidence-judgment",
+        "has_observations": true,
+        "inference_attempts": 1,
+        "error": null,
+        "collection_issue_count": 0,
+        "duration_ms": 6460.93
+      },
+      {
+        "control_id": "A.8.13",
+        "case_id": "A.8.13-mixed",
+        "prediction": "Partially Compliant",
+        "expected": "Partially Compliant",
+        "label_origin": "simulated-rubric-v1",
+        "assistance": "ai_assisted",
+        "prior_exposure": "yes",
+        "correct": true,
+        "first_pass_prediction": "Partially Compliant",
+        "repaired": false,
+        "attempt_count": 1,
+        "execution_source": "ollama-a8-evidence-judgment",
+        "has_observations": true,
+        "inference_attempts": 1,
+        "error": null,
+        "collection_issue_count": 0,
+        "duration_ms": 5601.88
+      },
+      {
+        "control_id": "A.8.15",
+        "case_id": "A.8.15-mixed",
+        "prediction": "Partially Compliant",
+        "expected": "Partially Compliant",
+        "label_origin": "simulated-rubric-v1",
+        "assistance": "ai_assisted",
+        "prior_exposure": "yes",
+        "correct": true,
+        "first_pass_prediction": "Partially Compliant",
+        "repaired": false,
+        "attempt_count": 1,
+        "execution_source": "ollama-a8-evidence-judgment",
+        "has_observations": true,
+        "inference_attempts": 1,
+        "error": null,
+        "collection_issue_count": 0,
+        "duration_ms": 6156.89
+      },
+      {
+        "control_id": "A.8.16",
+        "case_id": "A.8.16-mixed",
+        "prediction": "Partially Compliant",
+        "expected": "Partially Compliant",
+        "label_origin": "simulated-rubric-v1",
+        "assistance": "ai_assisted",
+        "prior_exposure": "yes",
+        "correct": true,
+        "first_pass_prediction": "Partially Compliant",
+        "repaired": false,
+        "attempt_count": 1,
+        "execution_source": "ollama-a8-evidence-judgment",
+        "has_observations": true,
+        "inference_attempts": 1,
+        "error": null,
+        "collection_issue_count": 0,
+        "duration_ms": 6092.19
+      },
+      {
+        "control_id": "A.8.17",
+        "case_id": "A.8.17-mixed",
+        "prediction": "Partially Compliant",
+        "expected": "Partially Compliant",
+        "label_origin": "simulated-rubric-v1",
+        "assistance": "ai_assisted",
+        "prior_exposure": "yes",
+        "correct": true,
+        "first_pass_prediction": "Partially Compliant",
+        "repaired": false,
+        "attempt_count": 1,
+        "execution_source": "ollama-a8-evidence-judgment",
+        "has_observations": true,
+        "inference_attempts": 1,
+        "error": null,
+        "collection_issue_count": 0,
+        "duration_ms": 7111.11
+      },
+      {
+        "control_id": "A.8.19",
+        "case_id": "A.8.19-mixed",
+        "prediction": "Partially Compliant",
+        "expected": "Partially Compliant",
+        "label_origin": "simulated-rubric-v1",
+        "assistance": "ai_assisted",
+        "prior_exposure": "yes",
+        "correct": true,
+        "first_pass_prediction": "Partially Compliant",
+        "repaired": false,
+        "attempt_count": 1,
+        "execution_source": "ollama-a8-evidence-judgment",
+        "has_observations": true,
+        "inference_attempts": 1,
+        "error": null,
+        "collection_issue_count": 0,
+        "duration_ms": 6960.06
+      },
+      {
+        "control_id": "A.8.20",
+        "case_id": "A.8.20-mixed",
+        "prediction": "Partially Compliant",
+        "expected": "Partially Compliant",
+        "label_origin": "simulated-rubric-v1",
+        "assistance": "ai_assisted",
+        "prior_exposure": "yes",
+        "correct": true,
+        "first_pass_prediction": "Partially Compliant",
+        "repaired": false,
+        "attempt_count": 1,
+        "execution_source": "ollama-a8-evidence-judgment",
+        "has_observations": true,
+        "inference_attempts": 1,
+        "error": null,
+        "collection_issue_count": 0,
+        "duration_ms": 6403.87
+      },
+      {
+        "control_id": "A.8.22",
+        "case_id": "A.8.22-mixed",
+        "prediction": "Partially Compliant",
+        "expected": "Partially Compliant",
+        "label_origin": "simulated-rubric-v1",
+        "assistance": "ai_assisted",
+        "prior_exposure": "yes",
+        "correct": true,
+        "first_pass_prediction": "Partially Compliant",
+        "repaired": false,
+        "attempt_count": 1,
+        "execution_source": "ollama-a8-evidence-judgment",
+        "has_observations": true,
+        "inference_attempts": 1,
+        "error": null,
+        "collection_issue_count": 0,
+        "duration_ms": 6716.13
+      },
+      {
+        "control_id": "A.8.24",
+        "case_id": "A.8.24-mixed",
+        "prediction": "Partially Compliant",
+        "expected": "Partially Compliant",
+        "label_origin": "simulated-rubric-v1",
+        "assistance": "ai_assisted",
+        "prior_exposure": "yes",
+        "correct": true,
+        "first_pass_prediction": "Partially Compliant",
+        "repaired": false,
+        "attempt_count": 1,
+        "execution_source": "ollama-a8-evidence-judgment",
+        "has_observations": true,
+        "inference_attempts": 1,
+        "error": null,
+        "collection_issue_count": 0,
+        "duration_ms": 5291.08
+      },
+      {
+        "control_id": "A.8.32",
+        "case_id": "A.8.32-mixed",
+        "prediction": "Partially Compliant",
+        "expected": "Partially Compliant",
+        "label_origin": "simulated-rubric-v1",
+        "assistance": "ai_assisted",
+        "prior_exposure": "yes",
+        "correct": true,
+        "first_pass_prediction": "Partially Compliant",
+        "repaired": false,
+        "attempt_count": 1,
+        "execution_source": "ollama-a8-evidence-judgment",
+        "has_observations": true,
+        "inference_attempts": 1,
+        "error": null,
+        "collection_issue_count": 0,
+        "duration_ms": 6194.28
+      }
+    ],
+    "reference_kind": [
+      "simulated-rubric-v1"
+    ],
+    "unique_cases": 18,
+    "total_observations": 18,
+    "note": "Nhãn designer không phải kết quả người đánh giá độc lập. Lỗi engine tính là không khớp, không loại khỏi mẫu có nhãn."
+  },
+  "human_label_count": 0,
+  "eligible_for_soa_approval": false,
+  "note": "Chấm giả lập từ facts đã parse và rubric lab dùng chung với guard. Không phải người thật, chấm mù, đọc nguồn độc lập hay accuracy chuyên gia. Không ghi vào nhãn người chấm hoặc phê duyệt SoA.",
+  "sha256": "fb3e7c40af54184237f0dce23f16109cd6d0c88b49f92c2fa8d7f6a8ff7873a2"
+}

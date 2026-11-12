@@ -48,7 +48,7 @@ def build_scope(assessment_id,dossier,studies=None,decisions=None,reviews=None,a
             action='Người phụ trách xác định tính áp dụng và kế hoạch'
         elif not decision['applicable']:
             action='Lưu căn cứ loại trừ để người phụ trách duyệt SoA'
-        elif not row['evidence']:
+        elif not row['explicit_source_count']:
             action='Thu hồ sơ hoặc bằng chứng cho control'
         elif row['latest_evaluation_id'] is None:
             action='Chạy Agent đánh giá nguồn đã thu'
@@ -71,6 +71,9 @@ def build_scope(assessment_id,dossier,studies=None,decisions=None,reviews=None,a
             human_review=r['human_review'],evidence_ids=[e['evidence_id'] for e in r['evidence']],
             evidence_hashes=[e['sha256_hash'] for e in r['evidence']],assessment_state=r['assessment_state'],
             treatment=r['applicability']['treatment'] if r['applicability'] else 'Chờ xác định kế hoạch xử lý/thu thập bằng chứng.',
+            treatment_owner=r['applicability'].get('treatment_owner') if r['applicability'] else None,
+            treatment_due=r['applicability'].get('treatment_due') if r['applicability'] else None,
+            verification_plan=r['applicability'].get('verification_plan') if r['applicability'] else None,
             priority_experiment=r['priority_a8'],experiment_is_formal_conclusion=False,
             note='Kết quả ca thử A.8 không tự thay thế đánh giá toàn đợt; chưa tự phê duyệt.') for r in records])
     fingerprint=digest([{'control_id':r['control_id'],'review_token':r['review_token'],
@@ -97,5 +100,7 @@ def build_scope(assessment_id,dossier,studies=None,decisions=None,reviews=None,a
         note='Nguồn nộp không tự đồng nghĩa đã xác thực. Số control có bằng chứng/thẩm định không phải số control đạt ISO.')
     from backend.acceptance_worklist import build_worklist
     result['acceptance_worklist']=build_worklist(result)
+    from backend.acceptance_packet import build_packet
+    result['handoff_packet']=build_packet(result)
     result['sha256']=digest(result)
     return result
