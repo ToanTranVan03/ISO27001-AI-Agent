@@ -1,91 +1,69 @@
-# Hướng dẫn chấm thật (Human Blind Review) 18 Control A.8
+# Chấm thật 18 control A.8 — tài khoản Văn Tú
 
-Tài liệu hướng dẫn dành cho **Trần Văn Toàn**, **Lê Đăng Khoa** và **Lê Đoàn Văn Tú** để thực hiện đánh giá độc lập con người (chấm thật) theo yêu cầu giảng viên và tiêu chuẩn ISO/IEC 27001:2022.
+Nhánh bàn giao: `Tu/Tuan5`. Người chấm: **Lê Đoàn Văn Tú**, username **`vantu`**, role **`assessor`**.
 
----
+Người chấm tự đọc bằng chứng gốc và rubric, tự đưa ra kết luận và lý do trước khi xem kết quả Agent, đáp án thiết kế hoặc nhãn của Khoa. Chỉ hướng dẫn thao tác không tạo ra nhãn con người; nhãn có AI hỗ trợ phải khai `ai_assisted`. Tiến độ giả lập/luyện tập được lưu riêng.
 
-## 1. Phân biệt "Chấm giả định" và "Chấm thật"
+## 1. Chuẩn bị trên máy Windows
 
-- **Chấm giả định (Simulated Review):** Được bổ sung ngày 12/11/2026 nhằm kiểm thử kỹ thuật và giao diện. Nhãn giả định được máy tự sinh theo quy tắc, bị gắn cờ `is_simulated = True` và **không được tính vào tiến độ nghiệm thu chính thức** hay phê duyệt SoA.
-- **Chấm thật (Human Blind Review):** Người đánh giá (Khoa và Tú) sử dụng tài khoản assessor riêng, đọc bằng chứng gốc (cấu hình, log, kết quả probe) trong trạng thái **chấm mù** (chưa biết kết luận của AI Agent hay đáp án nhóm), sau đó đưa ra kết luận và căn cứ đánh giá độc lập.
+Tại thư mục dự án (máy hiện tại: `D:\ISO27001-AI-Agent`):
 
----
+```powershell
+py -3.11 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt pytest
+npm.cmd ci --prefix frontend-react
+npm.cmd run build --prefix frontend-react
+```
 
-## 2. Danh sách tài khoản đã khởi tạo
+Tạo `.env` từ `.env.example` nếu chưa có. Đặt mật khẩu riêng cho PostgreSQL và admin, bảo đảm `DATABASE_URL` khớp mật khẩu/cổng PostgreSQL. Giữ `.env` ở máy local; không commit mật khẩu. Nếu cổng 5432 đã dùng, đặt `POSTGRES_PORT=5433` và sửa cổng trong `DATABASE_URL`.
 
-Các tài khoản đã được nạp sẵn vào CSDL PostgreSQL với đúng UUID chuẩn của dự án:
+Mở Docker Desktop, chờ Engine hoạt động rồi chạy:
 
-| Vai trò | Họ tên | Username | Mật khẩu mặc định | Role | Ghi chú |
-|---|---|---|---|---|---|
-| **Điều phối viên** | Trần Văn Toàn | `admin` | `Admin@12345678` | `admin` | Tạo lượt chạy A.8, rà soát rubric, phê duyệt SoA |
-| **Người chấm B** | Lê Đăng Khoa | `ledangkhoa` | `Khoa@12345678` | `assessor` | Đánh giá độc lập 18 control A.8 |
-| **Người chấm C** | Lê Đoàn Văn Tú | `vantu` | `VanTu@12345678` | `assessor` | Đánh giá độc lập 18 control A.8 |
+```powershell
+docker compose -f docker-compose.enterprise-lab.yml up -d postgres
+docker compose -f docker-compose.a8.yml up -d --build
+.\.venv\Scripts\python.exe -m uvicorn backend.main:app --host 127.0.0.1 --port 8000
+```
 
-> **Khởi tạo/đồng bộ tài khoản:** Chạy lệnh:
-> ```powershell
-> python scripts/seed_team_accounts.py
-> ```
+Để đánh giá bằng LLM, chạy Ollama với model khớp `OLLAMA_MODEL` trong `.env` (mặc định `qwen2.5:7b`). Lab Docker phục vụ nguồn live; replay file dùng nguồn lịch sử trong repository và không xác nhận hiện trạng hệ thống.
 
----
+## 2. Chuẩn bị tài khoản Văn Tú
 
-## 3. Quy trình thực hiện Chấm thật
+Sau khi backend khởi động và tạo schema, mở terminal khác:
 
-### Cách 1: Sử dụng công cụ tự động CLI (`scripts/run_human_review.py`)
+```powershell
+.\.venv\Scripts\python.exe scripts/seed_team_accounts.py --user tu
+```
 
-Công cụ được xây dựng để hỗ trợ Khoa và Tú hoàn thành lượt chấm nhanh chóng và chính xác:
+Nếu `vantu` đã tồn tại, script giữ nguyên mật khẩu và gắn tài khoản vào đợt đánh giá. Nếu chưa có, script hỏi mật khẩu mới ít nhất 12 ký tự và yêu cầu nhập lại. Script không reset admin/Khoa, không xóa phiên đăng nhập và không tạo nhãn chấm. Tài khoản trong database máy khác không tự có sau khi clone GitHub.
 
-1. **Xem danh sách các lượt đánh giá hiện có:**
-   ```powershell
-   python scripts/run_human_review.py --action status
-   ```
+## 3. Người điều phối tạo lượt; Văn Tú chấm trên web
 
-2. **Admin tạo một lượt đánh giá A.8 mới:**
-   ```powershell
-   python scripts/run_human_review.py --action start --transport files --profile mixed --mode rules
-   ```
-   *(Hoặc `--transport live` nếu muốn chạy trực tiếp trên Docker container `iso-a8-lab`)*
+1. Người điều phối đăng nhập admin tại `http://127.0.0.1:8000`, chọn đợt đánh giá → **Thực nghiệm 18 A.8**. Tạo lượt bằng nguồn/engine đã thống nhất và chờ hoàn tất. Muốn đối chiếu với Agent LLM thì chọn engine LLM; baseline luật là một kết quả riêng.
+2. Người điều phối cung cấp **run-id**. Văn Tú và Khoa chấm cùng lượt để dùng cùng snapshot/rubric. Người chấm không dùng tài khoản admin để xem trước kết quả.
+3. Văn Tú đăng nhập `vantu`, mở đúng lượt. Kiểm tra thông báo **Gói đánh giá mù**. Lượt cũ không hỗ trợ giao thức hiện hành cần người điều phối tạo lại.
+4. Với từng control, đọc rubric, các artifact cấu hình/log/probe, nguồn và thời điểm. Tự chọn kết luận và nhập lý do viện dẫn quan sát cụ thể. Không mở kho đáp án hoặc nhờ AI chọn kết luận nếu muốn đối chiếu tự chấm.
+5. Khai trung thực mức hỗ trợ và mức đã tiếp xúc đáp án. Nhãn AI hỗ trợ/đã xem trước vẫn được lưu nhưng không tính thành nhãn tự khai độc lập.
+6. Bấm **Nộp và khóa kết luận**. Nhãn đã nộp không sửa; có thể quay lại tiếp tục các control chưa nộp. Sau đủ 18/18, ứng dụng mở bảng đối chiếu cho tài khoản đó.
 
-3. **Lê Đăng Khoa thực hiện chấm mù 18 control:**
-   - Chấm tương tác từng control (đọc bằng chứng và nhập kết luận):
-     ```powershell
-     python scripts/run_human_review.py --action review --user khoa
-     ```
-   - Hoặc nộp căn cứ chuyên môn chuẩn 18 control:
-     ```powershell
-     python scripts/run_human_review.py --action review --user khoa --auto
-     ```
+## 4. Lựa chọn chấm tương tác qua CLI
 
-4. **Lê Đoàn Văn Tú thực hiện chấm mù 18 control:**
-   ```powershell
-   python scripts/run_human_review.py --action review --user tu --auto
-   ```
+CLI mặc định tài khoản Văn Tú, hỏi mật khẩu bằng nhập ẩn, chỉ đọc/nộp qua API bằng chính tài khoản assessor. CLI không đăng nhập admin, không tự tạo lượt, không có đáp án gợi ý hoặc lựa chọn mặc định cho kết luận, không hỗ trợ `--auto`/`review-all`.
 
-5. **Chấm cả hai người và xuất ma trận đối chiếu người - máy:**
-   ```powershell
-   python scripts/run_human_review.py --action review-all
-   ```
+```powershell
+# Xem danh sách lượt bằng quyền của Văn Tú; thông tin được API làm mù.
+.\.venv\Scripts\python.exe scripts/run_human_review.py --action status --user tu
 
----
+# Thay UUID bên dưới bằng run-id do người điều phối cung cấp.
+.\.venv\Scripts\python.exe scripts/run_human_review.py --user tu --run-id <UUID>
+```
 
-### Cách 2: Chấm trên giao diện Web React
+CLI hiển thị rubric và bằng chứng gốc trước khi yêu cầu kết luận/lý do. Người chấm phải khai mức hỗ trợ/tiếp xúc cho từng control, xem lại nội dung rồi gõ `NOP` để nộp. Gõ `q` để dừng; chạy lại cùng run-id để tiếp tục. Đáp án không được tự điền nếu nhập trống hoặc căn cứ quá ngắn. Nếu dùng API máy khác, thêm `--url http://<dia-chi>:8000`.
 
-1. Khởi động backend và frontend:
-   ```powershell
-   python -m uvicorn backend.main:app --host 127.0.0.1 --port 8000
-   ```
-2. Mở trình duyệt tại `http://127.0.0.1:8000`.
-3. Đăng nhập bằng tài khoản `ledangkhoa` hoặc `vantu`.
-4. Vào mục **Thực nghiệm 18 A.8** -> Chọn lượt đánh giá do admin tạo.
-5. Giao diện hiển thị **"Gói đánh giá mù · chưa hiển thị Agent hoặc đáp án nhóm"**.
-6. Chọn từng control, xem bằng chứng, chọn kết luận, nhập căn cứ (tối thiểu 10 ký tự), chọn hình thức khai báo `Tự chấm (unassisted)` và bấm **"Nộp và khóa kết luận"**.
-7. Sau khi nộp đủ 18/18 control, kết quả đối chiếu giữa người chấm và Agent sẽ tự động mở khóa.
+## 5. Báo cáo và giới hạn nghiệm thu
 
----
+Sau khi nộp, admin xem tiến độ từng người, bảng đối chiếu từng control và bất đồng người–máy/người–người; xuất JSON/CSV và SoA dự thảo trong ứng dụng. Các nhãn phải khớp report/evidence hash. Tài khoản riêng hoặc tự khai độc lập chưa tự chứng minh trình độ chuyên gia hay độc lập ngoài nhóm.
 
-## 4. Kiểm tra báo cáo Giảng viên (Teacher Report)
+Đủ nhãn là một điều kiện của duyệt SoA A.8; còn cần rubric đúng hash được duyệt, quyết định tính áp dụng và kế hoạch từng control, cùng người phụ trách thực sự phê duyệt. SoA là phạm vi lab giới hạn, không phải chứng nhận ISO hay tự phát sinh thẩm quyền pháp lý.
 
-Khi cả 2 người chấm đã nộp đủ 18/18 control độc lập:
-- Endpoint: `GET /api/assessments/{assessment_id}/enterprise/scope56/teacher-report`
-- Trường `complete_independently_declared_reviewers` sẽ ghi nhận đủ cả Khoa và Tú.
-- Báo cáo đối chiếu độ đồng thuận (Inter-rater Agreement) và Cohen's Kappa được tính toán tự động.
-- Admin có đủ điều kiện pháp lý để ký duyệt SoA.
+Không dùng nhãn tự sinh hoặc bài test phần mềm để đóng tiến độ chấm thật trong nhật ký tuần 5. Nếu đã dùng công cụ `--auto` ở phiên bản cũ, giữ lịch sử và loại nhãn đó khỏi kết quả đối chiếu người tự chấm; người điều phối chuẩn bị lượt/bộ nguồn phù hợp để chấm lại, không sửa nhãn khóa thành nhãn người thật.
