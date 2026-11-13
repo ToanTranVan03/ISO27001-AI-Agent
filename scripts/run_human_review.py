@@ -2,6 +2,7 @@
 import argparse
 from getpass import getpass
 import json
+import sys
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 from uuid import UUID
@@ -124,4 +125,6 @@ def main():
 
 
 if __name__ == "__main__":
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
     raise SystemExit(main())
