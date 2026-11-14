@@ -1,0 +1,19 @@
+﻿control_id,control_name,checks,rules_cases,rules_correct,rules_accuracy_pct,llm_cases,llm_correct,llm_accuracy_pct,llm_macro_precision_pct,llm_macro_recall_pct,llm_macro_f1_pct,llm_mean_duration_ms
+A.8.1,User endpoint devices,edr_active; disk_encrypted,6,6,100.0,12,10,83.33,100.0,75.0,75.0,8389.6
+A.8.2,Privileged access rights,privileged_approved; privileged_review_current,6,6,100.0,12,12,100.0,100.0,100.0,100.0,7142.39
+A.8.3,Information access restriction,access_default_deny; access_review_current,6,6,100.0,12,10,83.33,100.0,75.0,75.0,9023.35
+A.8.5,Secure authentication,mfa_enforced; legacy_auth_disabled,6,6,100.0,12,10,83.33,87.5,91.67,86.67,7958.55
+A.8.7,Protection against malware,antimalware_active; signatures_current,6,6,100.0,12,12,100.0,100.0,100.0,100.0,8032.25
+A.8.8,Management of technical vulnerabilities,scan_current; critical_findings_remediated,6,6,100.0,12,12,100.0,100.0,100.0,100.0,7899.22
+A.8.9,Configuration management,baseline_approved; drift_resolved,6,6,100.0,12,12,100.0,100.0,100.0,100.0,7495.36
+A.8.10,Information deletion,deletion_policy_enforced; deletion_verified,6,6,100.0,12,12,100.0,100.0,100.0,100.0,7659.91
+A.8.12,Data leakage prevention,dlp_enforced; dlp_test_passed,6,6,100.0,12,12,100.0,100.0,100.0,100.0,7649.72
+A.8.13,Information backup,backup_success; restore_test_passed,6,6,100.0,12,10,83.33,87.5,91.67,86.67,7883.06
+A.8.15,Logging,audit_logs_enabled; logs_integrity_protected,6,6,100.0,12,12,100.0,100.0,100.0,100.0,7970.33
+A.8.16,Monitoring activities,alerts_enabled; alert_response_test_passed,6,6,100.0,12,12,100.0,100.0,100.0,100.0,7551.61
+A.8.17,Clock synchronization,trusted_time_configured; clock_offset_within_policy,6,6,100.0,12,12,100.0,100.0,100.0,100.0,7778.27
+A.8.19,Installation of software on operational systems,installation_restricted; installed_software_approved,6,6,100.0,12,12,100.0,100.0,100.0,100.0,7993.63
+A.8.20,Networks security,firewall_default_deny; firewall_rules_reviewed,6,6,100.0,12,10,83.33,87.5,91.67,86.67,7849.13
+A.8.22,Segregation of networks,zones_separated; segmentation_test_passed,6,6,100.0,12,12,100.0,100.0,100.0,100.0,7521.01
+A.8.24,Use of cryptography,approved_crypto_configured; key_rotation_current,6,6,100.0,12,12,100.0,100.0,100.0,100.0,7777.28
+A.8.32,Change management,change_approved; rollback_test_recorded,6,6,100.0,12,12,100.0,100.0,100.0,100.0,7244.87

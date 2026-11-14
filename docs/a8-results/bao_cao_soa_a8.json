@@ -1,0 +1,477 @@
+{
+  "title": "BÁO CÁO TUYÊN BỐ ÁP DỤNG (STATEMENT OF APPLICABILITY - SoA) TỰ ĐỘNG — 18 CONTROL A.8",
+  "standard": "ISO/IEC 27001:2022 Annex A.8 (Technological Controls)",
+  "profile_evaluated": "mixed",
+  "profile_description": "Hồ sơ Đạt một phần (Đạt tiêu chí 1 nhưng vi phạm tiêu chí 2 có chủ đích)",
+  "engine_mode": "rules",
+  "approval_status": "APPROVED_BY_ASSESSOR_COMPARISON",
+  "generated_at": "2026-11-14T08:44:12.065749+00:00",
+  "report_sha256": "17ed2d4a95844ed27b74005b1eeacba256816cf87f70523100d13cf8d5137b3a",
+  "summary": {
+    "total_controls": 18,
+    "applicable_controls": 18,
+    "status_breakdown": {
+      "Compliant": 0,
+      "Partially Compliant": 18,
+      "Non-Compliant": 0,
+      "Insufficient Evidence": 0
+    },
+    "matched_with_human_assessor": 18,
+    "human_agreement_pct": 100.0
+  },
+  "entries": [
+    {
+      "control_id": "A.8.1",
+      "control_name": "User endpoint devices",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Endpoint; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "owner": "IT Endpoint",
+      "agent_conclusion": "Partially Compliant",
+      "human_assessor_conclusion": "Partially Compliant",
+      "human_assessor_name": "Lê Đoàn Văn Tú",
+      "matches_assessor": true,
+      "extracted_facts": {
+        "edr_active": true,
+        "disk_encrypted": false
+      },
+      "facts_summary": "edr_active=True, disk_encrypted=False",
+      "evidence_id": "A8RAW-b80a43cdf8bf034833522208",
+      "evidence_artifacts": [
+        "capture.json",
+        "edr.status",
+        "lsblk.json"
+      ],
+      "evidence_sha256": "b80a43cdf8bf03483352220860999e569a85070199e386b2f35a851f59253abf",
+      "agent_rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+      "remediation_plan": "Bật đầy đủ tác nhân EDR và kích hoạt mã hóa toàn bộ ổ đĩa (BitLocker/LUKS) trên toàn bộ thiết bị đầu cuối người dùng."
+    },
+    {
+      "control_id": "A.8.2",
+      "control_name": "Privileged access rights",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ IAM; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "owner": "IAM",
+      "agent_conclusion": "Partially Compliant",
+      "human_assessor_conclusion": "Partially Compliant",
+      "human_assessor_name": "Lê Đoàn Văn Tú",
+      "matches_assessor": true,
+      "extracted_facts": {
+        "privileged_approved": true,
+        "privileged_review_current": false
+      },
+      "facts_summary": "privileged_approved=True, privileged_review_current=False",
+      "evidence_id": "A8RAW-07c98b2db46359551f2d199c",
+      "evidence_artifacts": [
+        "capture.json",
+        "sudoers",
+        "access-review.csv"
+      ],
+      "evidence_sha256": "07c98b2db46359551f2d199c97f84bfade89cd8570c934b9e04403ba3024ad95",
+      "agent_rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+      "remediation_plan": "Thu hồi các quyền sudo/admin vượt mức trên hệ thống và thực hiện rà soát định kỳ danh sách tài khoản đặc quyền."
+    },
+    {
+      "control_id": "A.8.3",
+      "control_name": "Information access restriction",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ IAM; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "owner": "IAM",
+      "agent_conclusion": "Partially Compliant",
+      "human_assessor_conclusion": "Partially Compliant",
+      "human_assessor_name": "Lê Đoàn Văn Tú",
+      "matches_assessor": true,
+      "extracted_facts": {
+        "access_default_deny": true,
+        "access_review_current": false
+      },
+      "facts_summary": "access_default_deny=True, access_review_current=False",
+      "evidence_id": "A8RAW-593491dcd63a5359f9f838c7",
+      "evidence_artifacts": [
+        "capture.json",
+        "acl.csv",
+        "access-review.csv"
+      ],
+      "evidence_sha256": "593491dcd63a5359f9f838c715e935bada2d33e8f58ae775f54ec683ea96ae19",
+      "agent_rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+      "remediation_plan": "Áp dụng chính sách mặc định từ chối (default-deny) trên ACL và cập nhật biên bản rà soát quyền truy cập tài nguyên nhạy cảm."
+    },
+    {
+      "control_id": "A.8.5",
+      "control_name": "Secure authentication",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ IAM; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "owner": "IAM",
+      "agent_conclusion": "Partially Compliant",
+      "human_assessor_conclusion": "Partially Compliant",
+      "human_assessor_name": "Lê Đoàn Văn Tú",
+      "matches_assessor": true,
+      "extracted_facts": {
+        "mfa_enforced": true,
+        "legacy_auth_disabled": false
+      },
+      "facts_summary": "mfa_enforced=True, legacy_auth_disabled=False",
+      "evidence_id": "A8RAW-9ea62e1732e1824df81e407e",
+      "evidence_artifacts": [
+        "capture.json",
+        "sshd_config",
+        "legacy-auth.conf"
+      ],
+      "evidence_sha256": "9ea62e1732e1824df81e407e326f40d281bfce55b1efd80ea35eba28cde7a584",
+      "agent_rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+      "remediation_plan": "Bắt buộc xác thực đa yếu tố (MFA/2FA) cho mọi tài khoản truy cập hệ thống và khóa đăng nhập mật khẩu yếu."
+    },
+    {
+      "control_id": "A.8.7",
+      "control_name": "Protection against malware",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Endpoint; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "owner": "SOC",
+      "agent_conclusion": "Partially Compliant",
+      "human_assessor_conclusion": "Partially Compliant",
+      "human_assessor_name": "Lê Đoàn Văn Tú",
+      "matches_assessor": true,
+      "extracted_facts": {
+        "antimalware_active": true,
+        "signatures_current": false
+      },
+      "facts_summary": "antimalware_active=True, signatures_current=False",
+      "evidence_id": "A8RAW-accd44630f91f10e01dfcbe6",
+      "evidence_artifacts": [
+        "capture.json",
+        "clamd.status",
+        "freshclam.log"
+      ],
+      "evidence_sha256": "accd44630f91f10e01dfcbe60ab1e9f8638fdd1c299d217471b2f7c72714f053",
+      "agent_rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+      "remediation_plan": "Bật cơ chế tự động cách ly mã độc theo thời gian thực và cập nhật cơ sở dữ liệu chữ ký nhận diện mới nhất."
+    },
+    {
+      "control_id": "A.8.8",
+      "control_name": "Management of technical vulnerabilities",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Vulnerability; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "owner": "SecOps",
+      "agent_conclusion": "Partially Compliant",
+      "human_assessor_conclusion": "Partially Compliant",
+      "human_assessor_name": "Lê Đoàn Văn Tú",
+      "matches_assessor": true,
+      "extracted_facts": {
+        "scan_current": true,
+        "critical_findings_remediated": false
+      },
+      "facts_summary": "scan_current=True, critical_findings_remediated=False",
+      "evidence_id": "A8RAW-8deada1f18bae6342b05bf5c",
+      "evidence_artifacts": [
+        "capture.json",
+        "scanner.log",
+        "vulnerabilities.csv"
+      ],
+      "evidence_sha256": "8deada1f18bae6342b05bf5c1632b2de17195a3327da38a8ff5af5af5c664ab8",
+      "agent_rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+      "remediation_plan": "Thực hiện quét lỗ hổng kỹ thuật định kỳ và cài đặt bản vá khẩn cấp cho các gói phần mềm có CVE mức Critical/High."
+    },
+    {
+      "control_id": "A.8.9",
+      "control_name": "Configuration management",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Configuration; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "owner": "IT Operations",
+      "agent_conclusion": "Partially Compliant",
+      "human_assessor_conclusion": "Partially Compliant",
+      "human_assessor_name": "Lê Đoàn Văn Tú",
+      "matches_assessor": true,
+      "extracted_facts": {
+        "baseline_approved": true,
+        "drift_resolved": false
+      },
+      "facts_summary": "baseline_approved=True, drift_resolved=False",
+      "evidence_id": "A8RAW-c7b7cc2b93450c4802e09c7b",
+      "evidence_artifacts": [
+        "capture.json",
+        "baseline.conf",
+        "drift.diff"
+      ],
+      "evidence_sha256": "c7b7cc2b93450c4802e09c7bef695785e2850bc893ba152ef2d7da00b5e734a4",
+      "agent_rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+      "remediation_plan": "Đồng bộ hóa cấu hình thực tế của máy chủ theo đúng hồ sơ cấu hình chuẩn (Hardening Baseline) đã phê duyệt."
+    },
+    {
+      "control_id": "A.8.10",
+      "control_name": "Information deletion",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Data; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "owner": "Data owner",
+      "agent_conclusion": "Partially Compliant",
+      "human_assessor_conclusion": "Partially Compliant",
+      "human_assessor_name": "Lê Đoàn Văn Tú",
+      "matches_assessor": true,
+      "extracted_facts": {
+        "deletion_policy_enforced": true,
+        "deletion_verified": false
+      },
+      "facts_summary": "deletion_policy_enforced=True, deletion_verified=False",
+      "evidence_id": "A8RAW-067a03196262365d5596d6b2",
+      "evidence_artifacts": [
+        "capture.json",
+        "retention.conf",
+        "deletion.log"
+      ],
+      "evidence_sha256": "067a03196262365d5596d6b2782e14c3b807b512ad34f05346fa211cba06aff4",
+      "agent_rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+      "remediation_plan": "Thực thi quy trình xóa an toàn dữ liệu hết hạn lưu trữ và lập biên bản xác minh kết quả hủy dữ liệu."
+    },
+    {
+      "control_id": "A.8.12",
+      "control_name": "Data leakage prevention",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Data; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "owner": "SOC",
+      "agent_conclusion": "Partially Compliant",
+      "human_assessor_conclusion": "Partially Compliant",
+      "human_assessor_name": "Lê Đoàn Văn Tú",
+      "matches_assessor": true,
+      "extracted_facts": {
+        "dlp_enforced": true,
+        "dlp_test_passed": false
+      },
+      "facts_summary": "dlp_enforced=True, dlp_test_passed=False",
+      "evidence_id": "A8RAW-663d173daa901745b13fb9ed",
+      "evidence_artifacts": [
+        "capture.json",
+        "dlp.conf",
+        "dlp.log"
+      ],
+      "evidence_sha256": "663d173daa901745b13fb9edcc3259e8d54205c63deca7321c28bfef5c2a2d25",
+      "agent_rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+      "remediation_plan": "Kích hoạt chính sách chặn rò rỉ dữ liệu (DLP) trên kênh truyền và bật ghi nhật ký kiểm toán đầy đủ các sự kiện vi phạm."
+    },
+    {
+      "control_id": "A.8.13",
+      "control_name": "Information backup",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Backup; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "owner": "IT Operations",
+      "agent_conclusion": "Partially Compliant",
+      "human_assessor_conclusion": "Partially Compliant",
+      "human_assessor_name": "Lê Đoàn Văn Tú",
+      "matches_assessor": true,
+      "extracted_facts": {
+        "backup_success": true,
+        "restore_test_passed": false
+      },
+      "facts_summary": "backup_success=True, restore_test_passed=False",
+      "evidence_id": "A8RAW-9f76a89dd417dfe7868a976f",
+      "evidence_artifacts": [
+        "capture.json",
+        "backup.dat",
+        "backup.sha256",
+        "restored.dat"
+      ],
+      "evidence_sha256": "9f76a89dd417dfe7868a976fe3d0fedd7aba49738cd632271fbcbcffe3ece966",
+      "agent_rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+      "remediation_plan": "Duy trì lịch sao lưu tự động hằng ngày và thực hiện diễn tập khôi phục dữ liệu (Restore Test) định kỳ."
+    },
+    {
+      "control_id": "A.8.15",
+      "control_name": "Logging",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Logging; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "owner": "SOC",
+      "agent_conclusion": "Partially Compliant",
+      "human_assessor_conclusion": "Partially Compliant",
+      "human_assessor_name": "Lê Đoàn Văn Tú",
+      "matches_assessor": true,
+      "extracted_facts": {
+        "audit_logs_enabled": true,
+        "logs_integrity_protected": false
+      },
+      "facts_summary": "audit_logs_enabled=True, logs_integrity_protected=False",
+      "evidence_id": "A8RAW-6b0d6a3200095f1dcfcf2ba0",
+      "evidence_artifacts": [
+        "capture.json",
+        "auditd.conf",
+        "audit.log",
+        "audit.sha256"
+      ],
+      "evidence_sha256": "6b0d6a3200095f1dcfcf2ba0ed763b9be3d0657206313c59870fc3d5a0a0e1f5",
+      "agent_rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+      "remediation_plan": "Kích hoạt ghi nhật ký kiểm toán tập trung và bảo vệ tính toàn vẹn của tệp log bằng chữ ký số hoặc lưu trữ bất biến (WORM)."
+    },
+    {
+      "control_id": "A.8.16",
+      "control_name": "Monitoring activities",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Monitoring; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "owner": "SOC",
+      "agent_conclusion": "Partially Compliant",
+      "human_assessor_conclusion": "Partially Compliant",
+      "human_assessor_name": "Lê Đoàn Văn Tú",
+      "matches_assessor": true,
+      "extracted_facts": {
+        "alerts_enabled": true,
+        "alert_response_test_passed": false
+      },
+      "facts_summary": "alerts_enabled=True, alert_response_test_passed=False",
+      "evidence_id": "A8RAW-4593cbc067daa06efb66a235",
+      "evidence_artifacts": [
+        "capture.json",
+        "alerts.conf",
+        "alert-delivery.log"
+      ],
+      "evidence_sha256": "4593cbc067daa06efb66a2352e9323c7c69af126c46bfd056fa231329c5111b5",
+      "agent_rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+      "remediation_plan": "Cấu hình giám sát tính toàn vẹn tệp (FIM) phát hiện bất thường trong SLA và đảm bảo cảnh báo được gửi tới trực ban SOC."
+    },
+    {
+      "control_id": "A.8.17",
+      "control_name": "Clock synchronization",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Time; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "owner": "IT Operations",
+      "agent_conclusion": "Partially Compliant",
+      "human_assessor_conclusion": "Partially Compliant",
+      "human_assessor_name": "Lê Đoàn Văn Tú",
+      "matches_assessor": true,
+      "extracted_facts": {
+        "trusted_time_configured": true,
+        "clock_offset_within_policy": false
+      },
+      "facts_summary": "trusted_time_configured=True, clock_offset_within_policy=False",
+      "evidence_id": "A8RAW-fc14e07c1b6c1a55810011b1",
+      "evidence_artifacts": [
+        "capture.json",
+        "chrony.conf",
+        "tracking.txt"
+      ],
+      "evidence_sha256": "fc14e07c1b6c1a55810011b1a8061974595f5338066ad44544db93f96e67f325",
+      "agent_rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+      "remediation_plan": "Đồng bộ thời gian tất cả máy chủ với máy chủ NTP chuẩn có xác thực chữ ký và kiểm soát độ lệch dưới ngưỡng cho phép."
+    },
+    {
+      "control_id": "A.8.19",
+      "control_name": "Installation of software on operational systems",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Software; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "owner": "IT Operations",
+      "agent_conclusion": "Partially Compliant",
+      "human_assessor_conclusion": "Partially Compliant",
+      "human_assessor_name": "Lê Đoàn Văn Tú",
+      "matches_assessor": true,
+      "extracted_facts": {
+        "installation_restricted": true,
+        "installed_software_approved": false
+      },
+      "facts_summary": "installation_restricted=True, installed_software_approved=False",
+      "evidence_id": "A8RAW-ca1252d3a928eb6934d6605a",
+      "evidence_artifacts": [
+        "capture.json",
+        "installer-permissions.csv",
+        "packages.tsv"
+      ],
+      "evidence_sha256": "ca1252d3a928eb6934d6605a5d3499e146d8ecd4fb4e3d94fea4b1e7e4cae41c",
+      "agent_rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+      "remediation_plan": "Chặn quyền cài đặt phần mềm trái phép của người dùng thường và gỡ bỏ các gói không nằm trong danh mục phê duyệt (Allowlist)."
+    },
+    {
+      "control_id": "A.8.20",
+      "control_name": "Networks security",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Network; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "owner": "Network",
+      "agent_conclusion": "Partially Compliant",
+      "human_assessor_conclusion": "Partially Compliant",
+      "human_assessor_name": "Lê Đoàn Văn Tú",
+      "matches_assessor": true,
+      "extracted_facts": {
+        "firewall_default_deny": true,
+        "firewall_rules_reviewed": false
+      },
+      "facts_summary": "firewall_default_deny=True, firewall_rules_reviewed=False",
+      "evidence_id": "A8RAW-0a15215730f92751345911c3",
+      "evidence_artifacts": [
+        "capture.json",
+        "nftables.conf",
+        "firewall-review.csv"
+      ],
+      "evidence_sha256": "0a15215730f92751345911c30ddf1b36aff252d3b7e69d257de884a33339f646",
+      "agent_rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+      "remediation_plan": "Rà soát quy tắc tường lửa chặn mọi kết nối từ mạng không tin cậy và duy trì luồng lưu lượng nghiệp vụ được phê duyệt."
+    },
+    {
+      "control_id": "A.8.22",
+      "control_name": "Segregation of networks",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Network; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "owner": "Network",
+      "agent_conclusion": "Partially Compliant",
+      "human_assessor_conclusion": "Partially Compliant",
+      "human_assessor_name": "Lê Đoàn Văn Tú",
+      "matches_assessor": true,
+      "extracted_facts": {
+        "zones_separated": true,
+        "segmentation_test_passed": false
+      },
+      "facts_summary": "zones_separated=True, segmentation_test_passed=False",
+      "evidence_id": "A8RAW-dde3cf7607c3dc006946aa91",
+      "evidence_artifacts": [
+        "capture.json",
+        "zones.csv",
+        "connectivity.log"
+      ],
+      "evidence_sha256": "dde3cf7607c3dc006946aa918666259f7b4853be5388f4c26b8891fd31622854",
+      "agent_rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+      "remediation_plan": "Phân tách vùng mạng (Network Segmentation) giữa vùng người dùng, vùng máy chủ nghiệp vụ và vùng quản trị."
+    },
+    {
+      "control_id": "A.8.24",
+      "control_name": "Use of cryptography",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Crypto; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "owner": "Security",
+      "agent_conclusion": "Partially Compliant",
+      "human_assessor_conclusion": "Partially Compliant",
+      "human_assessor_name": "Lê Đoàn Văn Tú",
+      "matches_assessor": true,
+      "extracted_facts": {
+        "approved_crypto_configured": true,
+        "key_rotation_current": false
+      },
+      "facts_summary": "approved_crypto_configured=True, key_rotation_current=False",
+      "evidence_id": "A8RAW-75d503bfc48a16919540ecd9",
+      "evidence_artifacts": [
+        "capture.json",
+        "nginx.conf",
+        "key-rotation.csv"
+      ],
+      "evidence_sha256": "75d503bfc48a16919540ecd96765af592ece4d177c266d92354bd24a8eb064f9",
+      "agent_rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+      "remediation_plan": "Bắt buộc giao thức TLS 1.2/1.3 với bộ mã mạnh và giới hạn quyền truy cập tệp khóa riêng (chmod 600)."
+    },
+    {
+      "control_id": "A.8.32",
+      "control_name": "Change management",
+      "applicable": true,
+      "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Change; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+      "owner": "IT Operations",
+      "agent_conclusion": "Partially Compliant",
+      "human_assessor_conclusion": "Partially Compliant",
+      "human_assessor_name": "Lê Đoàn Văn Tú",
+      "matches_assessor": true,
+      "extracted_facts": {
+        "change_approved": true,
+        "rollback_test_recorded": false
+      },
+      "facts_summary": "change_approved=True, rollback_test_recorded=False",
+      "evidence_id": "A8RAW-0b22489164b34024d61b0d78",
+      "evidence_artifacts": [
+        "capture.json",
+        "changes.csv",
+        "rollback.log"
+      ],
+      "evidence_sha256": "0b22489164b34024d61b0d78af7b597e59270d4504c6d2756dc6412683332199",
+      "agent_rationale": "Kết luận theo rubric lab và các facts được thu thập; không phải đánh giá toàn bộ ISMS.",
+      "remediation_plan": "Đảm bảo mọi thay đổi trên môi trường vận hành đều gắn với phiếu duyệt Change Ticket và kiểm thử thành công kịch bản Rollback."
+    }
+  ],
+  "soa_sha256": "add21ca645196d52886a6eed57a36b24c6dff343ff8bd434ebbd7ba4b9cf4baa"
+}
