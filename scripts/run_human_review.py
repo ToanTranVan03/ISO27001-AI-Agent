@@ -4,11 +4,13 @@ real blind assessment (Chấm thật) on 18 ISO 27001 A.8 controls.
 import argparse
 import json
 import os
+import subprocess
 import sys
 import time
 from pathlib import Path
 from typing import Literal
 from dotenv import load_dotenv
+from psycopg import OperationalError
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT_DIR))
@@ -17,6 +19,24 @@ load_dotenv(ROOT_DIR / ".env")
 from backend import database, teamwork
 from backend.teamwork import DEMO_ASSESSMENT_ID
 import backend.a8_api as a8_api
+
+def ensure_postgres_running():
+    """Tự động kiểm tra và bật container PostgreSQL + Lab A.8 nếu bị tắt sau khi khởi động lại máy."""
+    try:
+        with database.get_connection() as _:
+            return
+    except OperationalError:
+        print("[Hệ thống] Phát hiện container PostgreSQL đang tắt. Đang tự động khởi động Docker container...")
+        subprocess.run(["docker", "start", "iso27001-postgres", "iso-a8-lab"], capture_output=True, text=True)
+        for _ in range(15):
+            time.sleep(1)
+            try:
+                with database.get_connection() as _:
+                    print("[Hệ thống] Đã kết nối PostgreSQL thành công!")
+                    return
+            except OperationalError:
+                pass
+        raise RuntimeError("Không thể kết nối PostgreSQL ở cổng 5432. Hãy mở Docker Desktop và chạy: docker start iso27001-postgres")
 
 ASSESSORS = {
     "khoa": {
@@ -112,6 +132,7 @@ HUMAN_ASSESSMENTS_MIXED = {
 }
 
 def get_auth_token(user_key: str) -> dict:
+    ensure_postgres_running()
     acc = ASSESSORS[user_key]
     res = teamwork.login(acc["username"], acc["password"])
     if not res:
@@ -148,7 +169,20 @@ def submit_human_evaluations(user_key: str, run_id: str, auto: bool = False):
 
     doc = a8_api.result(DEMO_ASSESSMENT_ID, run_id, user=user)
     if not doc.get("blind"):
-        print(f"[LƯU Ý] Tài khoản này là người tạo lượt hoặc không ở chế độ chấm mù.")
+        mine = [r for r in doc.get("reviews", []) if str(r.get("reviewer_id")) == str(user["user_id"])]
+        if len(mine) >= 18:
+            print(f"[HOÀN TẤT] Tài khoản {user['display_name']} ĐÃ NỘP ĐỦ 18/18 control cho lượt {run_id}!")
+            for r in sorted(mine, key=lambda x: x["control_id"]):
+                print(f"   ✓ [{r['control_id']}]: {r['expected']} — {r['rationale'][:70]}...")
+            if not auto:
+                ans = input("\nBạn có muốn Admin tạo một lượt đánh giá mới tinh để bạn tự tay chấm lại từ đầu không? (y/N): ").strip().lower()
+                if ans == "y":
+                    new_doc = start_new_run_as_admin()
+                    return submit_human_evaluations(user_key, new_doc["run_id"], auto=False)
+            return doc
+        else:
+            print(f"[LƯU Ý] Tài khoản này là người tạo lượt nên không ở chế độ chấm mù.")
+            return doc
     
     submitted = set(doc.get("submitted_controls", []))
     print(f"Tiến độ hiện tại: Đã nộp {len(submitted)}/18 control.")
@@ -248,13 +282,17 @@ def main():
         print("\n>>> KIỂM TRA ĐỐI CHIẾU NGƯỜI - MÁY & ĐỒNG THUẬN KHOA vs TÚ:")
         doc = a8_api.result(DEMO_ASSESSMENT_ID, run_id, user=admin_sess["user"])
         analysis = doc.get("review_analysis", {})
-        print(f" - Số người chấm độc lập hoàn tất: {len(analysis.get('complete_independent_reviewers', []))}")
-        print(f" - Người chấm: {list(analysis.get('reviewer_comparisons', {}).keys())}")
-        for r_id, comp in analysis.get("reviewer_comparisons", {}).items():
-            print(f"   * Reviewer {r_id}: Accuracy đối chiếu={comp.get('accuracy')}, Total={comp.get('total')}")
-        pairs = analysis.get("inter_rater_comparisons", [])
-        for p in pairs:
-            print(f"   * Cặp đối chiếu {p.get('reviewer_a')} vs {p.get('reviewer_b')}: Agreement={p.get('agreement_rate')}, Cohen Kappa={p.get('cohen_kappa')}")
+        print(f" - Số người chấm độc lập hoàn tất: {len(analysis.get('complete_independent_reviewers', []))}/2")
+        for prog in analysis.get("reviewer_progress", []):
+            r_id = prog.get("reviewer_id")
+            comp = analysis.get("reviewer_comparisons", {}).get(r_id, {})
+            cases = comp.get("cases", [])
+            correct = sum(1 for c in cases if c.get("correct"))
+            total = len(cases)
+            acc_pct = f"{(100 * correct / total):.1f}%" if total else "N/A"
+            print(f"   * {prog.get('display_name')}: Đã nộp {prog.get('submitted')}/{prog.get('total')} (Độc lập: {prog.get('independently_declared')}) | Khớp Agent: {correct}/{total} ({acc_pct})")
+        for p in analysis.get("pairwise_agreement", []):
+            print(f"   * Đồng thuận cặp (Khoa vs Tú): {p.get('paired_controls')}/18 control | Tỷ lệ đồng thuận: {100 * (p.get('agreement') or 0):.1f}% | Cohen's Kappa: {p.get('cohens_kappa')}")
 
 if __name__ == "__main__":
     main()

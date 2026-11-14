@@ -2,9 +2,12 @@
 Ensures admin, Khoa, and Tú can all log in with matching UUIDs.
 """
 import os
+import subprocess
 import sys
+import time
 from pathlib import Path
 from dotenv import load_dotenv
+from psycopg import OperationalError
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT_DIR))
@@ -12,6 +15,22 @@ load_dotenv(ROOT_DIR / ".env")
 
 from backend.database import get_connection
 from backend.teamwork import hash_password, DEMO_ASSESSMENT_ID
+
+def ensure_postgres_running():
+    try:
+        with get_connection() as _:
+            return
+    except OperationalError:
+        print("[Hệ thống] Phát hiện container PostgreSQL đang tắt. Đang tự động khởi động...")
+        subprocess.run(["docker", "start", "iso27001-postgres", "iso-a8-lab"], capture_output=True, text=True)
+        for _ in range(15):
+            time.sleep(1)
+            try:
+                with get_connection() as _:
+                    return
+            except OperationalError:
+                pass
+        raise RuntimeError("Không thể kết nối PostgreSQL ở cổng 5432. Hãy mở Docker Desktop và chạy: docker start iso27001-postgres")
 
 ACCOUNTS = [
     {
@@ -38,6 +57,7 @@ ACCOUNTS = [
 ]
 
 def seed():
+    ensure_postgres_running()
     with get_connection() as con:
         with con.cursor() as cur:
             cur.execute("DELETE FROM team_sessions")
