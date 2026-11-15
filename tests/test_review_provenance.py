@@ -48,7 +48,7 @@ def test_api_stores_provenance_and_blocks_assisted_approval(api_env):
         doc=api.read(aid,rid);actor.update(user_id='reviewer',role='assessor')
         for c in a8.catalog():
             response=client.post(base+'/runs/'+rid+'/reviews',json=dict(control_id=c['control_id'],expected='Partially Compliant',
-                rationale='Software test only, not actual independent human labels',report_sha256=doc['report']['sha256'],assistance='ai_assisted',prior_exposure='no'))
+                rationale='Software test only, not actual independent human labels for '+c['control_id'],report_sha256=doc['report']['sha256'],assistance='ai_assisted',prior_exposure='no'))
             assert response.status_code==200
         result=client.get(base+'/runs/'+rid).json()
         assert result['readiness']['complete_submitted_reviewers']==1

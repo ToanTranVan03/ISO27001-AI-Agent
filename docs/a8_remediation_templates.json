@@ -1,0 +1,20 @@
+{
+  "A.8.1": "Bật đầy đủ tác nhân EDR và kích hoạt mã hóa toàn bộ ổ đĩa (BitLocker/LUKS) trên toàn bộ thiết bị đầu cuối người dùng.",
+  "A.8.2": "Thu hồi các quyền sudo/admin vượt mức trên hệ thống và thực hiện rà soát định kỳ danh sách tài khoản đặc quyền.",
+  "A.8.3": "Áp dụng chính sách mặc định từ chối (default-deny) trên ACL và cập nhật biên bản rà soát quyền truy cập tài nguyên nhạy cảm.",
+  "A.8.5": "Bắt buộc xác thực đa yếu tố (MFA/2FA) cho mọi tài khoản truy cập hệ thống và khóa đăng nhập mật khẩu yếu.",
+  "A.8.7": "Bật cơ chế tự động cách ly mã độc theo thời gian thực và cập nhật cơ sở dữ liệu chữ ký nhận diện mới nhất.",
+  "A.8.8": "Thực hiện quét lỗ hổng kỹ thuật định kỳ và cài đặt bản vá khẩn cấp cho các gói phần mềm có CVE mức Critical/High.",
+  "A.8.9": "Đồng bộ hóa cấu hình thực tế của máy chủ theo đúng hồ sơ cấu hình chuẩn (Hardening Baseline) đã phê duyệt.",
+  "A.8.10": "Thực thi quy trình xóa an toàn dữ liệu hết hạn lưu trữ và lập biên bản xác minh kết quả hủy dữ liệu.",
+  "A.8.12": "Kích hoạt chính sách chặn rò rỉ dữ liệu (DLP) trên kênh truyền và bật ghi nhật ký kiểm toán đầy đủ các sự kiện vi phạm.",
+  "A.8.13": "Duy trì lịch sao lưu tự động hằng ngày và thực hiện diễn tập khôi phục dữ liệu (Restore Test) định kỳ.",
+  "A.8.15": "Kích hoạt ghi nhật ký kiểm toán tập trung và bảo vệ tính toàn vẹn của tệp log bằng chữ ký số hoặc lưu trữ bất biến (WORM).",
+  "A.8.16": "Cấu hình giám sát tính toàn vẹn tệp (FIM) phát hiện bất thường trong SLA và đảm bảo cảnh báo được gửi tới trực ban SOC.",
+  "A.8.17": "Đồng bộ thời gian tất cả máy chủ với máy chủ NTP chuẩn có xác thực chữ ký và kiểm soát độ lệch dưới ngưỡng cho phép.",
+  "A.8.19": "Chặn quyền cài đặt phần mềm trái phép của người dùng thường và gỡ bỏ các gói không nằm trong danh mục phê duyệt (Allowlist).",
+  "A.8.20": "Rà soát quy tắc tường lửa chặn mọi kết nối từ mạng không tin cậy và duy trì luồng lưu lượng nghiệp vụ được phê duyệt.",
+  "A.8.22": "Phân tách vùng mạng (Network Segmentation) giữa vùng người dùng, vùng máy chủ nghiệp vụ và vùng quản trị.",
+  "A.8.24": "Bắt buộc giao thức TLS 1.2/1.3 với bộ mã mạnh và giới hạn quyền truy cập tệp khóa riêng (chmod 600).",
+  "A.8.32": "Đảm bảo mọi thay đổi trên môi trường vận hành đều gắn với phiếu duyệt Change Ticket và kiểm thử thành công kịch bản Rollback."
+}

@@ -74,7 +74,7 @@ def test_external_candidate_does_not_become_heldout_by_copying_capture_dates(tmp
 def label(report,index,uid,status):
     r=report['records'][index]
     return dict(case_id=r['case_id'],control_id=r['control_id'],reviewer_id=uid,expected=status,assistance='unassisted',prior_exposure='no',
-                rationale='Test only, not an independent expert judgment',report_sha256=report['sha256'],
+                rationale='Test only, not an independent expert judgment for '+r['control_id'],report_sha256=report['sha256'],
                 evidence_sha256=r['evidence']['source_sha256'])
 
 

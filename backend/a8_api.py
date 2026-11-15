@@ -75,6 +75,7 @@ class ReviewInput(BaseModel):
     report_sha256: str=Field(min_length=64,max_length=64)
     assistance: Literal['unknown','unassisted','ai_assisted','team_discussion']='unknown'
     prior_exposure: Literal['unknown','no','yes']='unknown'
+    quality_warning_acknowledged: bool=False
 
 
 @router.get('/catalog')
@@ -101,6 +102,8 @@ def runs(assessment_id: UUID,user=Depends(require_user)):
     return [dict(run_id=d['run_id'],state=d['state'],created_at=d['created_at'],
                  mode=d['mode'] if str(d['created_by'])==str(user['user_id']) else 'blind',
                  profile=d['profile'] if str(d['created_by'])==str(user['user_id']) else 'Ẩn hồ sơ',
+                 can_review=d.get('review_protocol')==REVIEW_PROTOCOL and d['state']=='finished' and str(d['created_by'])!=str(user['user_id']),
+                 has_artifacts=bool(d.get('report',{}).get('records')) and all(r['evidence'].get('artifacts') for r in d.get('report',{}).get('records',[])),
                  mine=str(d['created_by'])==str(user['user_id']),rubric_version=d.get('report',{}).get('rubric_version')) for d in docs]
 
 
@@ -128,6 +131,46 @@ def start(assessment_id: UUID,req: RunInput,user=Depends(require_user)):
     return {k:v for k,v in doc.items() if k!='designer_reference'}
 
 
+class CandidateRunInput(BaseModel):
+    model_config=ConfigDict(extra='forbid')
+    plan: dict
+    mode: Literal['rules','llm']='llm'
+
+
+def candidate_worker(aid,rid,plan,mode):
+    try:
+        from agent_core.a8_protocol import execute
+        report=execute(plan,mode)['report']
+        with lock:
+            doc=read(aid,rid);doc.update(state='finished',report=report);save(folder(aid)/(rid+'.json'),doc)
+    except Exception as exc:
+        with lock:
+            doc=read(aid,rid);doc.update(state='failed',error=type(exc).__name__);save(folder(aid)/(rid+'.json'),doc)
+
+
+@router.post('/candidate-runs',status_code=202)
+def candidate_run(assessment_id: UUID,req: CandidateRunInput,user=Depends(require_user)):
+    require_campaign(assessment_id,user)
+    if user.get('role')!='admin':raise HTTPException(403,'Chỉ admin nhập gói kiểm định ứng viên.')
+    from backend.validation_plan import validate_candidate
+    try:plan=validate_candidate(req.plan)
+    except (ValueError,KeyError,TypeError,OSError) as exc:raise HTTPException(422,'Gói ứng viên không hợp lệ: '+str(exc)) from exc
+    with lock:
+        if any(json.loads(p.read_text(encoding='utf-8')).get('state')=='running' for p in folder(assessment_id).glob('*.json')):
+            raise HTTPException(409,'Đợt này đang có lượt chạy.')
+        rid=str(uuid4());aid=str(assessment_id)
+        doc=dict(run_id=rid,assessment_id=aid,profile=plan['snapshot']['profile'],mode=req.mode,state='running',
+            created_at=datetime.now(timezone.utc).isoformat(),created_by=user['user_id'],reviews=[],transport='files',
+            review_protocol=REVIEW_PROTOCOL,designer_reference=[],reference_sha256=a8.digest([]),protocol=plan,
+            candidate_source=True,independent_validation=False,provenance_status='PENDING_HUMAN_VERIFICATION')
+        save(folder(aid)/(rid+'.json'),doc)
+        try:pool.submit(candidate_worker,aid,rid,plan,req.mode)
+        except RuntimeError:
+            doc.update(state='failed',error='Worker unavailable');save(folder(aid)/(rid+'.json'),doc)
+            raise HTTPException(503,'Không khởi động được worker.')
+    return {k:v for k,v in doc.items() if k!='designer_reference'}
+
+
 @router.get('/runs/{run_id}')
 def result(assessment_id: UUID,run_id: UUID,user=Depends(require_user)):
     require_campaign(assessment_id,user)
@@ -149,11 +192,17 @@ def result(assessment_id: UUID,run_id: UUID,user=Depends(require_user)):
         doc['designer_comparison']=score([report],labels)
         from agent_core.a8_review_analysis import analyze_reviews
         doc['review_analysis']=analyze_reviews(report,doc['reviews'] if owner else mine,doc['created_by'])
+        from agent_core.review_quality import audit_reviews
+        doc['review_quality_audit']=audit_reviews(report,doc['reviews'] if owner else mine)
+        from agent_core.review_quality import pending_quality_reviews
+        pending_quality=pending_quality_reviews(report,doc['reviews'] if owner else mine)
+        doc['review_quality_pending_count']=len(pending_quality)
         analysis=doc['review_analysis']
         doc['reviewer_comparisons']=analysis['reviewer_comparisons']
         # A table must not silently merge person B's A.8.1 with person C's
         # A.8.2. All raters remain separately available in review_analysis.
-        reviewer=next(iter(sorted(analysis['complete_independent_reviewers'])),None)
+        pending_reviewers={str(r['reviewer_id']) for r in pending_quality}
+        reviewer=next(iter(sorted(uid for uid in analysis['complete_independent_reviewers'] if str(uid) not in pending_reviewers)),None)
         doc['human_reference_reviewer_id']=reviewer
         doc['human_comparison']=doc['reviewer_comparisons'][reviewer] if reviewer else score([report],[])
         doc['soa']=a8.soa(report)
@@ -167,7 +216,7 @@ def result(assessment_id: UUID,run_id: UUID,user=Depends(require_user)):
             complete_independent_reviewers=len(analysis['complete_independent_reviewers']),
             complete_submitted_reviewers=len(analysis['complete_reviewers']),
             note='Có bằng chứng hoặc chạy xong không đồng nghĩa đạt kiểm soát. Cần thẩm định và phê duyệt thật.')
-        if doc.get('soa_approval_history') and analysis['complete_independent_reviewers']:
+        if doc.get('soa_approval_history') and analysis['complete_independent_reviewers'] and not pending_quality:
             approval=doc['soa_approval_history'][-1]
             doc['soa']['approval']='HUMAN_APPROVED_LIMITED_SCOPE'
             doc['soa']['human_approval']=approval
@@ -237,6 +286,24 @@ def simulated_review(assessment_id: UUID,run_id: UUID,user=Depends(require_user)
     except (ValueError,KeyError,TypeError) as exc:raise HTTPException(409,'Không thể chấm giả lập: nguồn hoặc cấu trúc không hợp lệ.') from exc
 
 
+class ReviewCheckInput(BaseModel):
+    model_config=ConfigDict(str_strip_whitespace=True,extra='forbid')
+    control_id: str
+    rationale: str=Field(max_length=2000)
+
+
+@router.post('/runs/{run_id}/review-check')
+def review_check(assessment_id: UUID,run_id: UUID,req: ReviewCheckInput,user=Depends(require_user)):
+    require_campaign(assessment_id,user)
+    doc=read(assessment_id,run_id)
+    if doc.get('state')!='finished' or doc.get('review_protocol')!=REVIEW_PROTOCOL:
+        raise HTTPException(409,'Lượt chưa sẵn sàng hoặc là lịch sử chỉ đọc.')
+    if not any(r['control_id']==req.control_id for r in doc['report']['records']):raise HTTPException(404,'Không thuộc lượt.')
+    from agent_core.review_quality import inspect_rationale
+    own=[r for r in doc['reviews'] if str(r['reviewer_id'])==str(user['user_id'])]
+    return inspect_rationale(doc['report'],req.control_id,req.rationale,own)
+
+
 @router.post('/runs/{run_id}/reviews')
 def review(assessment_id: UUID,run_id: UUID,req: ReviewInput,user=Depends(require_user)):
     require_campaign(assessment_id,user)
@@ -249,9 +316,16 @@ def review(assessment_id: UUID,run_id: UUID,req: ReviewInput,user=Depends(requir
         if any(r['control_id']==req.control_id and str(r['reviewer_id'])==str(user['user_id']) for r in doc['reviews']):raise HTTPException(409,'Nhãn đã nộp được khóa để bảo đảm đánh giá mù.')
         record=next((r for r in doc['report']['records'] if r['control_id']==req.control_id),None)
         if not record:raise HTTPException(404,'Không thuộc phạm vi lượt này.')
+        from agent_core.review_quality import inspect_rationale
+        own=[r for r in doc['reviews'] if str(r['reviewer_id'])==str(user['user_id'])]
+        quality=inspect_rationale(doc['report'],req.control_id,req.rationale,own)
+        if quality['blocked']:raise HTTPException(422,'Căn cứ chủ yếu là ký tự lặp hoặc quá ngắn; hãy mô tả nguồn thực tế.')
+        if quality['issues'] and not req.quality_warning_acknowledged:
+            raise HTTPException(409,'Căn cứ có dấu hiệu trùng hoặc viện dẫn control khác. Kiểm tra căn cứ và xác nhận cảnh báo trước khi nộp.')
         doc['reviews'].append(dict(case_id=record['case_id'],control_id=req.control_id,expected=req.expected,
             rationale=req.rationale,reviewer_id=user['user_id'],reviewer_name=user.get('display_name') or user.get('username'),label_origin='human-submitted-'+REVIEW_PROTOCOL,
             assistance=req.assistance,prior_exposure=req.prior_exposure,provenance_kind='reviewer-self-declaration',
+            quality_check=quality,quality_warning_acknowledged=req.quality_warning_acknowledged,
             evidence_sha256=record['evidence']['source_sha256'],report_sha256=doc['report']['sha256'],
             reviewed_at=datetime.now(timezone.utc).isoformat()))
         save(folder(assessment_id)/(str(run_id)+'.json'),doc)
@@ -325,6 +399,9 @@ def approve_soa(assessment_id: UUID,run_id: UUID,req: SoAApproval,user=Depends(r
         from agent_core.a8_review_analysis import analyze_reviews
         if not analyze_reviews(doc['report'],doc['reviews'],doc['created_by'])['complete_independent_reviewers']:
             raise HTTPException(409,'Cần người đánh giá hoàn tất đủ 18 control, khai báo tự chấm và chưa xem đáp án. Nhãn có hỗ trợ/chưa khai báo được giữ riêng, không tính là độc lập.')
+        from agent_core.review_quality import pending_quality_reviews
+        if pending_quality_reviews(doc['report'],doc['reviews']):
+            raise HTTPException(409,'Căn cứ còn dấu hiệu chất lượng chưa được xác nhận; không dùng lượt này để phê duyệt. Giữ nhãn khóa và tổ chức phiên rà/chấm phù hợp.')
         path=folder(assessment_id)/'settings'/'rubric-approvals.json'
         approvals=json.loads(path.read_text(encoding='utf-8')) if path.exists() else []
         if not any(r['catalog_sha256']==doc['report']['catalog_sha256'] for r in approvals):
@@ -363,8 +440,10 @@ def summary(assessment_id: UUID,user=Depends(require_user)):
             for reviewer in {r['reviewer_id'] for r in eligible}:
                 refs=[r for r in eligible if r['reviewer_id']==reviewer and r.get('report_sha256')==doc['report']['sha256']]
                 from agent_core.a8_review_analysis import declared_independent
+                from agent_core.review_quality import pending_quality_reviews
+                quality_pending={r['case_id'] for r in pending_quality_reviews(doc['report'],refs)}
                 human.append(dict(run_id=doc['run_id'],reviewer_id=reviewer,comparison_kind='all-submitted-including-assisted',
-                    comparison=score([doc['report']],refs),independent_comparison=score([doc['report']],[r for r in refs if declared_independent(r)])))
+                    comparison=score([doc['report']],refs),independent_comparison=score([doc['report']],[r for r in refs if declared_independent(r) and r['case_id'] not in quality_pending])))
         result.append(dict(rubric_version=version,catalog_sha256=catalog_hash,mode=mode,transport=transport,
                            assessor_version=assessor_version,
                            implementation_sha256=implementation_hash,

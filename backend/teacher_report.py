@@ -2,6 +2,7 @@
 from collections import Counter
 from agent_core.a8_assessment import digest
 from agent_core.a8_review_analysis import analyze_reviews
+from agent_core.review_quality import audit_reviews,pending_quality_reviews
 
 
 def build_report(scope,runs,practice):
@@ -16,6 +17,8 @@ def build_report(scope,runs,practice):
             rejected.append(dict(run_id=doc['run_id'],reason='empty_or_duplicate_controls'));continue
         analysis=analyze_reviews(report,doc.get('reviews',[]),doc['created_by'])
         independent=analysis['complete_independent_reviewers']
+        pending={str(r['reviewer_id']) for r in pending_quality_reviews(report,doc.get('reviews',[]))}
+        eligible=[uid for uid in independent if str(uid) not in pending]
         experiments.append(dict(run_id=doc['run_id'],created_at=doc['created_at'],
             mode=report.get('mode','UNKNOWN_LEGACY'),transport=report.get('transport','UNKNOWN_LEGACY'),rubric_version=report.get('rubric_version'),
             catalog_sha256=report.get('catalog_sha256'),report_sha256=report['sha256'],
@@ -26,9 +29,11 @@ def build_report(scope,runs,practice):
             first_errors=sum(bool(r.get('attempts') and r['attempts'][0].get('error')) for r in records),
             repaired=sum(bool(r.get('repaired')) for r in records),
             human_progress=analysis['reviewer_progress'],
+            rationale_quality_issues=audit_reviews(report,doc.get('reviews',[])),
             complete_independently_declared_reviewers=independent,
-            human_comparisons={uid:analysis['independent_reviewer_comparisons'][uid]['per_control'] for uid in independent},
-            pending_human_comparison=not bool(independent),
+            quality_eligible_independently_declared_reviewers=eligible,
+            human_comparisons={uid:analysis['independent_reviewer_comparisons'][uid]['per_control'] for uid in eligible},
+            pending_human_comparison=not bool(eligible),
             control_results=[dict(control_id=r['control_id'],machine_status=r['status'],error=r.get('error'),
                 evidence_sha256=r['evidence']['source_sha256'],is_synthetic=r['evidence'].get('is_synthetic')) for r in records]))
     payload=dict(protocol='teacher-progress-v1',assessment_id=scope['assessment_id'],

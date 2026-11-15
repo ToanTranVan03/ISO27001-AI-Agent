@@ -1,0 +1,451 @@
+{
+  "protocol": "assistant-quality-audit-v1",
+  "created_at": "2026-11-15T03:11:09.120299+00:00",
+  "run_id": "0b7dc9e9-4d6c-4e0a-9a0f-df3a78feea9e",
+  "report_sha256": "9df9690f8504691f864b1b3117c15ef4523760c150c7af2dd8572e972e1e6925",
+  "run_file_sha256": "ad31cc21d303b2383d59898b58f9d2d15f9846f9026eff75622d51fa63ba293c",
+  "review_count": 36,
+  "manual_findings": [
+    {
+      "reviewer_id": "c9ccb219-e097-49e7-b746-0ad63a8c0e36",
+      "reviewer_name": "Lê Đoàn Văn Tú",
+      "control_id": "A.8.2",
+      "reviewed_at": "2026-11-15T02:15:58.379358+00:00",
+      "rationale_sha256": "065821062b758a7791563e3fcc1c16f9fdf552f0363d91fe5a8ab1e6cde96d1b",
+      "finding": "Nội dung thử, chưa có căn cứ quan sát.",
+      "resolution": "PENDING_REVIEW_NOT_LABEL_REWRITE"
+    },
+    {
+      "reviewer_id": "c9ccb219-e097-49e7-b746-0ad63a8c0e36",
+      "reviewer_name": "Lê Đoàn Văn Tú",
+      "control_id": "A.8.5",
+      "reviewed_at": "2026-11-15T02:43:50.958416+00:00",
+      "rationale_sha256": "369be360d6031431309d52312038c4f9571db71ad29491b30aeb212e3fa8acd4",
+      "finding": "Dán mô tả A.8.3 về quyền ghi thay vì xác thực.",
+      "resolution": "PENDING_REVIEW_NOT_LABEL_REWRITE"
+    },
+    {
+      "reviewer_id": "c9ccb219-e097-49e7-b746-0ad63a8c0e36",
+      "reviewer_name": "Lê Đoàn Văn Tú",
+      "control_id": "A.8.15",
+      "reviewed_at": "2026-11-15T02:46:30.564944+00:00",
+      "rationale_sha256": "9b7e5923e8d1779da3abb31aee356a3d3930160959c3db55a6b6291e0f929865",
+      "finding": "Dán mô tả A.8.13 về backup thay vì log.",
+      "resolution": "PENDING_REVIEW_NOT_LABEL_REWRITE"
+    },
+    {
+      "reviewer_id": "c9ccb219-e097-49e7-b746-0ad63a8c0e36",
+      "reviewer_name": "Lê Đoàn Văn Tú",
+      "control_id": "A.8.17",
+      "reviewed_at": "2026-11-15T02:46:53.451354+00:00",
+      "rationale_sha256": "5c4cca539bbeff10245358d4eefac10396eb8b04af3dc2f24b31c3c7b783d577",
+      "finding": "Dán mô tả A.8.16 về watcher thay vì thời gian.",
+      "resolution": "PENDING_REVIEW_NOT_LABEL_REWRITE"
+    },
+    {
+      "reviewer_id": "145f6315-7d77-4ae0-b30b-67deff6637a3",
+      "reviewer_name": "Lê Đăng Khoa",
+      "control_id": "A.8.2",
+      "reviewed_at": "2026-11-15T02:49:55.069494+00:00",
+      "rationale_sha256": "d9df62bfbb20baf6c78a954eb45dc4b23c799c2b5b23398a06ec8faf869431e6",
+      "finding": "Dán mô tả A.8.1 về endpoint/mã hóa thay vì đặc quyền.",
+      "resolution": "PENDING_REVIEW_NOT_LABEL_REWRITE"
+    },
+    {
+      "reviewer_id": "145f6315-7d77-4ae0-b30b-67deff6637a3",
+      "reviewer_name": "Lê Đăng Khoa",
+      "control_id": "A.8.10",
+      "reviewed_at": "2026-11-15T02:51:12.885352+00:00",
+      "rationale_sha256": "9dbc3d83fe943262039ee459c4a2020839870c0eefd7315e67cbcc7049fdee77",
+      "finding": "Dán mô tả A.8.9 về baseline thay vì xóa dữ liệu.",
+      "resolution": "PENDING_REVIEW_NOT_LABEL_REWRITE"
+    },
+    {
+      "reviewer_id": "145f6315-7d77-4ae0-b30b-67deff6637a3",
+      "reviewer_name": "Lê Đăng Khoa",
+      "control_id": "A.8.17",
+      "reviewed_at": "2026-11-15T02:52:10.372552+00:00",
+      "rationale_sha256": "5c4cca539bbeff10245358d4eefac10396eb8b04af3dc2f24b31c3c7b783d577",
+      "finding": "Dán mô tả A.8.16 về watcher thay vì thời gian.",
+      "resolution": "PENDING_REVIEW_NOT_LABEL_REWRITE"
+    },
+    {
+      "reviewer_id": "145f6315-7d77-4ae0-b30b-67deff6637a3",
+      "reviewer_name": "Lê Đăng Khoa",
+      "control_id": "A.8.22",
+      "reviewed_at": "2026-11-15T02:52:44.407763+00:00",
+      "rationale_sha256": "6d1cab53370474c6b0d024aded81e0d547b1bc7c2e839ddbe8dc3eec553ff67f",
+      "finding": "Dán mô tả A.8.20 về source ACL thay vì zone gate.",
+      "resolution": "PENDING_REVIEW_NOT_LABEL_REWRITE"
+    },
+    {
+      "reviewer_id": "145f6315-7d77-4ae0-b30b-67deff6637a3",
+      "reviewer_name": "Lê Đăng Khoa",
+      "control_id": "A.8.32",
+      "reviewed_at": "2026-11-15T02:53:08.154364+00:00",
+      "rationale_sha256": "ffe658ab05731bf26938db77e24d17ecf51c40ee60e827fd7b237c900ae95970",
+      "finding": "Dán mô tả A.8.24 về TLS/khóa thay vì rollback.",
+      "resolution": "PENDING_REVIEW_NOT_LABEL_REWRITE"
+    }
+  ],
+  "automated_suspicions": [
+    {
+      "reviewer_id": "c9ccb219-e097-49e7-b746-0ad63a8c0e36",
+      "reviewer_name": "Lê Đoàn Văn Tú",
+      "control_id": "A.8.2",
+      "issues": [
+        {
+          "code": "filler_or_too_short",
+          "severity": "error",
+          "message": "Căn cứ quá ngắn hoặc chủ yếu là ký tự lặp; hãy mô tả quan sát từ nguồn."
+        }
+      ],
+      "blocked": true,
+      "note": "Kiểm tra hình thức và dấu hiệu dán nhầm, không xác nhận căn cứ đúng hoặc nhãn độc lập."
+    },
+    {
+      "reviewer_id": "c9ccb219-e097-49e7-b746-0ad63a8c0e36",
+      "reviewer_name": "Lê Đoàn Văn Tú",
+      "control_id": "A.8.3",
+      "issues": [
+        {
+          "code": "duplicate_other_control",
+          "severity": "warning",
+          "related_controls": [
+            "A.8.5"
+          ],
+          "message": "Căn cứ trùng nguyên văn control khác của bạn: A.8.5. Hãy kiểm tra dán nhầm."
+        }
+      ],
+      "blocked": false,
+      "note": "Kiểm tra hình thức và dấu hiệu dán nhầm, không xác nhận căn cứ đúng hoặc nhãn độc lập."
+    },
+    {
+      "reviewer_id": "c9ccb219-e097-49e7-b746-0ad63a8c0e36",
+      "reviewer_name": "Lê Đoàn Văn Tú",
+      "control_id": "A.8.5",
+      "issues": [
+        {
+          "code": "duplicate_other_control",
+          "severity": "warning",
+          "related_controls": [
+            "A.8.3"
+          ],
+          "message": "Căn cứ trùng nguyên văn control khác của bạn: A.8.3. Hãy kiểm tra dán nhầm."
+        },
+        {
+          "code": "references_other_control_sources",
+          "severity": "warning",
+          "references": {
+            "A.8.3": [
+              "resource_stat",
+              "review.csv",
+              "write_access_rc"
+            ],
+            "A.8.15": [
+              "resource_stat"
+            ]
+          },
+          "message": "Có tên tệp/trường thuộc tiêu chí control khác; kiểm tra viện dẫn và phạm vi trước khi nộp."
+        }
+      ],
+      "blocked": false,
+      "note": "Kiểm tra hình thức và dấu hiệu dán nhầm, không xác nhận căn cứ đúng hoặc nhãn độc lập."
+    },
+    {
+      "reviewer_id": "c9ccb219-e097-49e7-b746-0ad63a8c0e36",
+      "reviewer_name": "Lê Đoàn Văn Tú",
+      "control_id": "A.8.13",
+      "issues": [
+        {
+          "code": "duplicate_other_control",
+          "severity": "warning",
+          "related_controls": [
+            "A.8.15"
+          ],
+          "message": "Căn cứ trùng nguyên văn control khác của bạn: A.8.15. Hãy kiểm tra dán nhầm."
+        }
+      ],
+      "blocked": false,
+      "note": "Kiểm tra hình thức và dấu hiệu dán nhầm, không xác nhận căn cứ đúng hoặc nhãn độc lập."
+    },
+    {
+      "reviewer_id": "c9ccb219-e097-49e7-b746-0ad63a8c0e36",
+      "reviewer_name": "Lê Đoàn Văn Tú",
+      "control_id": "A.8.15",
+      "issues": [
+        {
+          "code": "duplicate_other_control",
+          "severity": "warning",
+          "related_controls": [
+            "A.8.13"
+          ],
+          "message": "Căn cứ trùng nguyên văn control khác của bạn: A.8.13. Hãy kiểm tra dán nhầm."
+        },
+        {
+          "code": "references_other_control_sources",
+          "severity": "warning",
+          "references": {
+            "A.8.13": [
+              "backup.dat",
+              "backup.sha256",
+              "restored.dat"
+            ]
+          },
+          "message": "Có tên tệp/trường thuộc tiêu chí control khác; kiểm tra viện dẫn và phạm vi trước khi nộp."
+        }
+      ],
+      "blocked": false,
+      "note": "Kiểm tra hình thức và dấu hiệu dán nhầm, không xác nhận căn cứ đúng hoặc nhãn độc lập."
+    },
+    {
+      "reviewer_id": "c9ccb219-e097-49e7-b746-0ad63a8c0e36",
+      "reviewer_name": "Lê Đoàn Văn Tú",
+      "control_id": "A.8.16",
+      "issues": [
+        {
+          "code": "duplicate_other_control",
+          "severity": "warning",
+          "related_controls": [
+            "A.8.17"
+          ],
+          "message": "Căn cứ trùng nguyên văn control khác của bạn: A.8.17. Hãy kiểm tra dán nhầm."
+        }
+      ],
+      "blocked": false,
+      "note": "Kiểm tra hình thức và dấu hiệu dán nhầm, không xác nhận căn cứ đúng hoặc nhãn độc lập."
+    },
+    {
+      "reviewer_id": "c9ccb219-e097-49e7-b746-0ad63a8c0e36",
+      "reviewer_name": "Lê Đoàn Văn Tú",
+      "control_id": "A.8.17",
+      "issues": [
+        {
+          "code": "duplicate_other_control",
+          "severity": "warning",
+          "related_controls": [
+            "A.8.16"
+          ],
+          "message": "Căn cứ trùng nguyên văn control khác của bạn: A.8.16. Hãy kiểm tra dán nhầm."
+        },
+        {
+          "code": "references_other_control_sources",
+          "severity": "warning",
+          "references": {
+            "A.8.16": [
+              "delivery_receipts"
+            ]
+          },
+          "message": "Có tên tệp/trường thuộc tiêu chí control khác; kiểm tra viện dẫn và phạm vi trước khi nộp."
+        }
+      ],
+      "blocked": false,
+      "note": "Kiểm tra hình thức và dấu hiệu dán nhầm, không xác nhận căn cứ đúng hoặc nhãn độc lập."
+    },
+    {
+      "reviewer_id": "145f6315-7d77-4ae0-b30b-67deff6637a3",
+      "reviewer_name": "Lê Đăng Khoa",
+      "control_id": "A.8.1",
+      "issues": [
+        {
+          "code": "duplicate_other_control",
+          "severity": "warning",
+          "related_controls": [
+            "A.8.2"
+          ],
+          "message": "Căn cứ trùng nguyên văn control khác của bạn: A.8.2. Hãy kiểm tra dán nhầm."
+        }
+      ],
+      "blocked": false,
+      "note": "Kiểm tra hình thức và dấu hiệu dán nhầm, không xác nhận căn cứ đúng hoặc nhãn độc lập."
+    },
+    {
+      "reviewer_id": "145f6315-7d77-4ae0-b30b-67deff6637a3",
+      "reviewer_name": "Lê Đăng Khoa",
+      "control_id": "A.8.2",
+      "issues": [
+        {
+          "code": "duplicate_other_control",
+          "severity": "warning",
+          "related_controls": [
+            "A.8.1"
+          ],
+          "message": "Căn cứ trùng nguyên văn control khác của bạn: A.8.1. Hãy kiểm tra dán nhầm."
+        },
+        {
+          "code": "references_other_control_sources",
+          "severity": "warning",
+          "references": {
+            "A.8.1": [
+              "plaintext_copy_exists",
+              "read_rc"
+            ]
+          },
+          "message": "Có tên tệp/trường thuộc tiêu chí control khác; kiểm tra viện dẫn và phạm vi trước khi nộp."
+        }
+      ],
+      "blocked": false,
+      "note": "Kiểm tra hình thức và dấu hiệu dán nhầm, không xác nhận căn cứ đúng hoặc nhãn độc lập."
+    },
+    {
+      "reviewer_id": "145f6315-7d77-4ae0-b30b-67deff6637a3",
+      "reviewer_name": "Lê Đăng Khoa",
+      "control_id": "A.8.9",
+      "issues": [
+        {
+          "code": "duplicate_other_control",
+          "severity": "warning",
+          "related_controls": [
+            "A.8.10"
+          ],
+          "message": "Căn cứ trùng nguyên văn control khác của bạn: A.8.10. Hãy kiểm tra dán nhầm."
+        }
+      ],
+      "blocked": false,
+      "note": "Kiểm tra hình thức và dấu hiệu dán nhầm, không xác nhận căn cứ đúng hoặc nhãn độc lập."
+    },
+    {
+      "reviewer_id": "145f6315-7d77-4ae0-b30b-67deff6637a3",
+      "reviewer_name": "Lê Đăng Khoa",
+      "control_id": "A.8.10",
+      "issues": [
+        {
+          "code": "duplicate_other_control",
+          "severity": "warning",
+          "related_controls": [
+            "A.8.9"
+          ],
+          "message": "Căn cứ trùng nguyên văn control khác của bạn: A.8.9. Hãy kiểm tra dán nhầm."
+        }
+      ],
+      "blocked": false,
+      "note": "Kiểm tra hình thức và dấu hiệu dán nhầm, không xác nhận căn cứ đúng hoặc nhãn độc lập."
+    },
+    {
+      "reviewer_id": "145f6315-7d77-4ae0-b30b-67deff6637a3",
+      "reviewer_name": "Lê Đăng Khoa",
+      "control_id": "A.8.16",
+      "issues": [
+        {
+          "code": "duplicate_other_control",
+          "severity": "warning",
+          "related_controls": [
+            "A.8.17"
+          ],
+          "message": "Căn cứ trùng nguyên văn control khác của bạn: A.8.17. Hãy kiểm tra dán nhầm."
+        }
+      ],
+      "blocked": false,
+      "note": "Kiểm tra hình thức và dấu hiệu dán nhầm, không xác nhận căn cứ đúng hoặc nhãn độc lập."
+    },
+    {
+      "reviewer_id": "145f6315-7d77-4ae0-b30b-67deff6637a3",
+      "reviewer_name": "Lê Đăng Khoa",
+      "control_id": "A.8.17",
+      "issues": [
+        {
+          "code": "duplicate_other_control",
+          "severity": "warning",
+          "related_controls": [
+            "A.8.16"
+          ],
+          "message": "Căn cứ trùng nguyên văn control khác của bạn: A.8.16. Hãy kiểm tra dán nhầm."
+        },
+        {
+          "code": "references_other_control_sources",
+          "severity": "warning",
+          "references": {
+            "A.8.16": [
+              "delivery_receipts"
+            ]
+          },
+          "message": "Có tên tệp/trường thuộc tiêu chí control khác; kiểm tra viện dẫn và phạm vi trước khi nộp."
+        }
+      ],
+      "blocked": false,
+      "note": "Kiểm tra hình thức và dấu hiệu dán nhầm, không xác nhận căn cứ đúng hoặc nhãn độc lập."
+    },
+    {
+      "reviewer_id": "145f6315-7d77-4ae0-b30b-67deff6637a3",
+      "reviewer_name": "Lê Đăng Khoa",
+      "control_id": "A.8.20",
+      "issues": [
+        {
+          "code": "duplicate_other_control",
+          "severity": "warning",
+          "related_controls": [
+            "A.8.22"
+          ],
+          "message": "Căn cứ trùng nguyên văn control khác của bạn: A.8.22. Hãy kiểm tra dán nhầm."
+        }
+      ],
+      "blocked": false,
+      "note": "Kiểm tra hình thức và dấu hiệu dán nhầm, không xác nhận căn cứ đúng hoặc nhãn độc lập."
+    },
+    {
+      "reviewer_id": "145f6315-7d77-4ae0-b30b-67deff6637a3",
+      "reviewer_name": "Lê Đăng Khoa",
+      "control_id": "A.8.22",
+      "issues": [
+        {
+          "code": "duplicate_other_control",
+          "severity": "warning",
+          "related_controls": [
+            "A.8.20"
+          ],
+          "message": "Căn cứ trùng nguyên văn control khác của bạn: A.8.20. Hãy kiểm tra dán nhầm."
+        }
+      ],
+      "blocked": false,
+      "note": "Kiểm tra hình thức và dấu hiệu dán nhầm, không xác nhận căn cứ đúng hoặc nhãn độc lập."
+    },
+    {
+      "reviewer_id": "145f6315-7d77-4ae0-b30b-67deff6637a3",
+      "reviewer_name": "Lê Đăng Khoa",
+      "control_id": "A.8.24",
+      "issues": [
+        {
+          "code": "duplicate_other_control",
+          "severity": "warning",
+          "related_controls": [
+            "A.8.32"
+          ],
+          "message": "Căn cứ trùng nguyên văn control khác của bạn: A.8.32. Hãy kiểm tra dán nhầm."
+        }
+      ],
+      "blocked": false,
+      "note": "Kiểm tra hình thức và dấu hiệu dán nhầm, không xác nhận căn cứ đúng hoặc nhãn độc lập."
+    },
+    {
+      "reviewer_id": "145f6315-7d77-4ae0-b30b-67deff6637a3",
+      "reviewer_name": "Lê Đăng Khoa",
+      "control_id": "A.8.32",
+      "issues": [
+        {
+          "code": "duplicate_other_control",
+          "severity": "warning",
+          "related_controls": [
+            "A.8.24"
+          ],
+          "message": "Căn cứ trùng nguyên văn control khác của bạn: A.8.24. Hãy kiểm tra dán nhầm."
+        },
+        {
+          "code": "references_other_control_sources",
+          "severity": "warning",
+          "references": {
+            "A.8.24": [
+              "key_read_rc"
+            ]
+          },
+          "message": "Có tên tệp/trường thuộc tiêu chí control khác; kiểm tra viện dẫn và phạm vi trước khi nộp."
+        }
+      ],
+      "blocked": false,
+      "note": "Kiểm tra hình thức và dấu hiệu dán nhầm, không xác nhận căn cứ đúng hoặc nhãn độc lập."
+    }
+  ],
+  "author": "AI assistant, not independent human assessor",
+  "original_labels_modified": false,
+  "note": "9 lỗi nội dung được trợ lý đối chiếu. Danh sách tự động là tập nghi vấn lớn hơn, gồm cả bản gốc bị trùng; không coi tất cả là sai. Giữ lịch sử và tạo phiên rà/chấm phù hợp, không sửa nhãn khóa hoặc nâng thành độc lập.",
+  "sha256": "52d397259351f3d60293ff026cbaefbf7c110016470464f7f23ccb6c7a6430b1"
+}

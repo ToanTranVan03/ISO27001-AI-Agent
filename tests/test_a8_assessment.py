@@ -127,6 +127,7 @@ def test_persistent_job_guard_and_separate_human_review(api_env):
         assert client.post(path+'/runs/'+rid+'/reviews',json=review).status_code==409
         for c in a8.catalog()[1:]:
             review['control_id']=c['control_id']
+            review['rationale']='Independent test rationale for '+c['control_id']
             assert client.post(path+'/runs/'+rid+'/reviews',json=review).status_code==200
         result=client.get(path+'/runs/'+rid).json()
         row=result['human_comparison']['per_control'][0]
@@ -178,7 +179,7 @@ def test_assessor_cannot_create_answer_key_run_or_export_all_labels(api_env):
         hidden=client.get(base+'/runs/'+rid).json()
         for c in a8.catalog():
             response=client.post(base+'/runs/'+rid+'/reviews',json={'control_id':c['control_id'],
-                'expected':'Partially Compliant','rationale':'Isolated test label, not a real human rating',
+                'expected':'Partially Compliant','rationale':'Isolated test label, not a real human rating for '+c['control_id'],
                 'report_sha256':hidden['report_sha256']})
             assert response.status_code==200
         visible=client.get(base+'/runs/'+rid).json()
