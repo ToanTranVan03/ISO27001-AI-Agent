@@ -104,7 +104,7 @@ Tài liệu minh chứng chính:
 |---|---|---|---|---|
 | 11/11/2026 | 13:37, 22:27 | Trần Văn Toàn | `main` | Hoàn thiện đánh giá tuân thủ, bằng chứng live và dọn demo; mở rộng 18 probe A.8, nối nguồn với hồ sơ 56 và bổ sung báo cáo |
 | 12/11/2026 | 10:22 | Trần Văn Toàn | `main` | Gói bàn giao 56 control, chấm giả định tách riêng, kế hoạch xử lý và báo cáo điều phối |
-| 15/11/2026 | 11:37 | Trần Văn Toàn | `main` | Tích hợp hai nhánh, hoàn thiện chấm A.8, kiểm tra nguồn và cập nhật nhật ký tuần 5–6 |
+| 15/11/2026 | 11:39 (xác nhận đồng bộ) | Trần Văn Toàn | `main` | Tích hợp hai nhánh, hoàn thiện chấm A.8, kiểm tra nguồn và cập nhật nhật ký tuần 5–6 |
 
 ### Hai nhánh thành viên đã có trên GitHub
 
