@@ -116,7 +116,7 @@ if (user && assessment && token) {
         <AccountProfile user={user} assessment={assessment} request={request} onSaved={setUser}/><button type="button" onClick={logout} aria-label="Đăng xuất" title="Đăng xuất" className="rounded-xl p-3 text-slate-400 hover:bg-slate-800 hover:text-white"><LogOut size={18}/></button></div>
       </header>
 
-      {view === "scope56" ? <Scope56 assessment={assessment} request={request} onOpenA8={()=>setView("a8")} /> : view === "company" ? <CompanyInventory assessment={assessment} request={request} onOpenDossier={() => setView("dossier")} /> : view === "dossier" ? <ComplianceDossier assessment={assessment} request={request} onOpenDashboard={()=>{setView("scope56");window.scrollTo({top:0,behavior:"instant"});}} onOpenCompany={() => setView("company")} /> : (
+      {view === "scope56" ? <Scope56 assessment={assessment} request={request} onOpenA8={()=>setView("a8")} /> : view === "company" ? <CompanyInventory assessment={assessment} request={request} onOpenDossier={() => setView("dossier")} /> : view === "dossier" ? <ComplianceDossier user={user} assessment={assessment} request={request} onOpenDashboard={()=>{setView("scope56");window.scrollTo({top:0,behavior:"instant"});}} onOpenCompany={() => setView("company")} /> : (
         <A8ComplianceStudy assessment={assessment} request={request} />
       )}
     </>

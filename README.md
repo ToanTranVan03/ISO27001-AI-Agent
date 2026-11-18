@@ -18,6 +18,7 @@ Hiện 27 control có kiểm tra lab đại diện; 29 có connector hồ sơ v�
 - Thu 18 probe live từ container cô lập, có phép thử TCP/TLS, xác thực, crypto, scanner mẫu và rollback; replay raw v2 là nguồn riêng. Rubric mới không thay kết quả/nhãn của các lượt cũ.
 - Admin điều phối tạo lượt; assessor chấm mù bằng tài khoản khác. Nhãn được khóa và gắn hash; không xuất answer key đầy đủ cho người chấm.
 - Theo dõi công việc dùng chung, thẩm định có danh tính và sinh SoA dự thảo đủ 56 dòng, với bước người phụ trách quyết định tính áp dụng và phê duyệt.
+- [Đánh giá nguồn theo lô trên server](docs/DANH_GIA_THEO_LO_TREN_SERVER.md): tiếp tục khi đóng trang, lưu tiến độ PostgreSQL, chặn lô trùng và ghi lý do lỗi/bỏ qua; restart API đánh dấu gián đoạn, không tự chạy lại.
 - Thẩm định từng tiêu chí cho 56 control; chốt nguồn trước chạy A.8, sửa phản hồi tối đa một lần và giữ lỗi đầu; tách độ đúng lần đầu/sau sửa và bất đồng từng người chấm.
 - Nhập nguồn live vào hồ sơ 56 mà không sao chép kết luận; giữ nguồn lab riêng. Có danh sách thiếu hồ sơ theo vai trò và khai báo hỗ trợ khi chấm để tách nhãn có AI hỗ trợ khỏi đối chiếu độc lập.
 

@@ -1,43 +1,29 @@
+import SourceBatchPanel from './SourceBatchPanel';
 import {conclusionLabels} from './assessmentLabels';
 import {PageHeader,WorkflowGuide,StatusBadge} from './AssessmentUI';
-import {Search,RefreshCw,Download,Play,ArrowUpRight,Bot} from 'lucide-react';
+import {Search,RefreshCw,Download} from 'lucide-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
-export default function ComplianceDossier({ assessment, request, onOpenDashboard, onOpenCompany }) {
+export default function ComplianceDossier({ assessment, request, onOpenDashboard, onOpenCompany, user }) {
   const [report, setReport] = useState(null), [error, setError] = useState(''), [selected, setSelected] = useState('');
   const [job, setJob] = useState(null), [busy, setBusy] = useState(false);
   const base = `/api/assessments/${assessment.assessment_id}/enterprise/shared-work`;
   const path = base;
-  const queue = useRef({active:false, seen:new Set()});
-  const [auto, setAuto] = useState(false), [notice,setNotice] = useState('');
+  const [notice,setNotice] = useState('');
   const labels = {not_started:'Chưa kiểm tra',running:'Đang xử lý',stale:'Cần đánh giá lại',failed:'Lỗi lần trước',awaiting_review:'Chờ người duyệt',waiting_evidence:'Chờ bằng chứng',evaluated:'Đã kiểm tra'};
   const launch=useCallback(async (cid, force=false) => {
     setBusy(true); setError('');
     try {
       const result=await request(`${base}/start`,{method:'POST',body:JSON.stringify({control_id:cid,force})});
-      if(result.control_id) { setSelected(result.control_id); queue.current.seen.add(result.control_id); }
+      if(result.control_id) { setSelected(result.control_id); }
       if(result.job_id) { setJob(result); setNotice(result.action==='following'?'Đang theo dõi công việc chung đã được khởi chạy.':'Agent đang thực hiện công việc chung.'); }
-      else { setBusy(false); queue.current.active=false; setAuto(false); setNotice(result.action==='reused'?'Dùng kết quả đã lưu; xem kết luận và phần còn thiếu bên dưới.':result.message); }
+      else { setBusy(false); setNotice(result.action==='reused'?'Dùng kết quả đã lưu; xem kết luận và phần còn thiếu bên dưới.':result.message); }
       setReport(await request(path));
-    } catch(e) {setError(e.message);setBusy(false);queue.current.active=false;setAuto(false);}
+    } catch(e) {setError(e.message);setBusy(false);}
   },[base,path,request]);
-  useEffect(()=>()=>{queue.current.active=false;},[path]);
   useEffect(() => { let active = true; request(path).then(r => { if (active) setReport(r); }).catch(e => { if (active) setError(e.message); }); return () => { active = false; }; }, [path, request]);
-  useEffect(() => { if (!job) return; let checking=false; const timer = setInterval(async () => {
-    if(checking)return;checking=true;
-    try { const state = await request(`/api/jobs/${job.job_id}`); if (state.status !== 'RUNNING') {
-      setJob(null); setBusy(false); const latest=await request(path); setReport(latest);
-      if (state.status !== 'SUCCEEDED') { queue.current.active=false; setAuto(false); setError(state.error_message || 'Đánh giá không hoàn tất'); }
-      else if(queue.current.active) {
-        if(latest.next_control_id && !queue.current.seen.has(latest.next_control_id) && queue.current.seen.size<12) { await launch(latest.next_control_id); }
-        else { queue.current.active=false; setAuto(false); setNotice('Đã kết thúc lượt tự động. Các mục chờ bằng chứng/duyệt cần người phụ trách tiếp tục.'); }
-      }
-    }} catch (e) { queue.current.active=false; setAuto(false); setError(e.message); setJob(null); setBusy(false); }
-    finally { checking=false; }
-  }, 2500); return () => clearInterval(timer); }, [job, path, request, launch]);
+  useEffect(() => { if (!job) return; let checking=false,active=true; const timer=setInterval(async()=>{if(checking)return;checking=true;try{const state=await request(`/api/jobs/${job.job_id}`);if(active&&state.status!=='RUNNING'){setJob(null);setBusy(false);setReport(await request(path));if(state.status!=='SUCCEEDED')setError(state.error_message||'Đánh giá chưa hoàn tất');}}catch(e){if(active){setError(e.message);setJob(null);setBusy(false);}}finally{checking=false;}},2500);return()=>{active=false;clearInterval(timer);};},[job,path,request]);
   useEffect(()=>{let active=true;const timer=setInterval(()=>{request(path).then(r=>{if(active)setReport(r);}).catch(e=>{if(active)setError(e.message);});},5000);return()=>{active=false;clearInterval(timer);};},[path,request]);
   async function refresh() { try { setReport(await request(path)); setError(''); } catch(e) { setError(e.message); } }
-  function automate() { queue.current={active:true,seen:new Set()};setAuto(true);launch(null); }
-  function stopQueue() {queue.current.active=false;setAuto(false);setNotice('Đã dừng nhận việc tiếp theo; công việc đang chạy vẫn hoàn tất và lưu kết quả.');}
   function download() { const url = URL.createObjectURL(new Blob([JSON.stringify(report,null,2)],{type:'application/json'})); const a=document.createElement('a');a.href=url;a.download=`ho-so-${assessment.assessment_id}.json`;a.click();URL.revokeObjectURL(url); }
   const [query,setQuery]=useState(''),[filter,setFilter]=useState('all'),[visible,setVisible]=useState(12);
   const detailRef=useRef(null);
@@ -47,7 +33,7 @@ export default function ComplianceDossier({ assessment, request, onOpenDashboard
   return <main className="app-page min-h-screen text-slate-100"><section className="space-y-6">
     <PageHeader step="Theo dõi công việc" title="Hồ sơ & công việc chung" description="Theo dõi kết quả đã lưu, tiếp tục công việc còn thiếu và đọc căn cứ đánh giá. Mọi tài khoản trong đợt cùng nhìn vào hồ sơ này."><button onClick={refresh} className="flex items-center gap-2 rounded-xl border border-slate-600 px-4 py-3 text-xs"><RefreshCw size={15}/>Làm mới</button><button disabled={!report} onClick={download} className="flex items-center gap-2 rounded-xl bg-teal-700 px-4 py-3 text-xs"><Download size={15}/>Xuất hồ sơ</button></PageHeader>
     <WorkflowGuide current={2}/>
-    <section className="grid gap-5 rounded-3xl border border-teal-800 bg-gradient-to-br from-teal-950/60 to-slate-900 p-6 lg:grid-cols-[1fr_auto]"><div><h2 className="flex items-center gap-2 text-lg font-semibold"><Bot size={22} className="text-teal-300"/>Tiếp tục đánh giá từ kết quả đã lưu</h2><p className="mt-3 text-sm text-slate-300">Việc tiếp theo: <strong className="text-teal-200">{report?.next_control_id||'Không có mục tự động đang chờ'}</strong></p><p className="mt-2 max-w-2xl text-xs text-slate-400">Chạy tối đa 12 mục khi trang đang mở. Có nguồn đã nộp thì đánh giá chính nguồn đó; control thiếu nguồn không được tự thay bằng preset. Agent không tự duyệt hoặc sửa hồ sơ nhân viên.</p>{notice&&<p role="status" className="mt-3 text-sm text-teal-200">{notice}</p>}</div><div className="flex flex-col justify-center gap-3"><button disabled={busy||auto||!report?.next_control_id} onClick={automate} className="flex items-center justify-center gap-2 rounded-xl bg-teal-500 px-5 py-3 text-sm font-semibold text-slate-950"><Play size={16}/>{busy?'Agent đang xử lý…':'Tiếp tục công việc'}</button>{auto&&<button onClick={stopQueue} className="rounded-xl border border-amber-700 px-4 py-2 text-xs text-amber-200">Dừng sau việc hiện tại</button>}{onOpenCompany&&<button onClick={onOpenCompany} className="flex items-center justify-center gap-2 text-xs text-slate-300">Xem doanh nghiệp <ArrowUpRight size={14}/></button>}</div></section>
+    <SourceBatchPanel base={base} request={request} canManage={user?.role==='admin'} onOpenCompany={onOpenCompany} onUpdate={refresh}/>{notice&&<p role="status" className="text-sm text-teal-200">{notice}</p>}
     {error&&<p role="alert">{error}</p>}{!report&&!error&&<p role="status" className="text-sm text-slate-400">Đang đọc hồ sơ…</p>}
     {report&&<><div className="grid grid-cols-2 gap-3 lg:grid-cols-4">{Object.entries(report.summary).map(([k,v])=><div key={k} className="rounded-2xl border border-slate-700 bg-slate-900 p-5"><p className="text-xs text-slate-400">{conclusionLabels[k]||k}</p><strong className="mt-3 block text-3xl">{v}</strong><p className="mt-1 text-[10px] text-slate-500">control trong hồ sơ chung</p></div>)}</div>
     <section className="rounded-2xl border border-slate-700 bg-slate-900 p-5"><div className="flex flex-wrap items-center justify-between gap-4"><div><h2 className="font-semibold">Danh sách công việc</h2><p className="mt-1 text-xs text-slate-400">Chọn control để xem căn cứ và lịch sử.</p></div><div className="flex flex-wrap gap-3"><label className="flex items-center gap-2 rounded-xl bg-slate-950 px-3"><Search size={15} className="text-slate-500"/><input aria-label="Tìm trong hồ sơ" value={query} onChange={e=>{setQuery(e.target.value);setVisible(12);}} placeholder="Tìm mã hoặc tên…" className="bg-transparent p-2"/></label><select aria-label="Lọc trạng thái công việc" value={filter} onChange={e=>{setFilter(e.target.value);setVisible(12);}} className="bg-slate-800 p-2"><option value="all">Tất cả công việc</option>{Object.entries(labels).map(([value,label])=><option key={value} value={value}>{label}</option>)}</select></div></div><div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-3">{filtered.slice(0,visible).map(c=><button key={c.control_id} disabled={busy} onClick={()=>openDetail(c.control_id)} aria-pressed={selected===c.control_id} className="work-card"><div className="flex items-center justify-between gap-2"><strong className="text-xs text-teal-300">{c.control_id}</strong><StatusBadge status={c.shared_state} label={labels[c.shared_state]||c.workflow_status}/></div><h3 className="mt-3 min-h-10 text-sm font-semibold leading-5">{c.name}</h3><div className="mt-4"><StatusBadge status={c.conclusion}/></div><div className="mt-4 flex justify-between border-t border-slate-700 pt-3 text-[10px] text-slate-400"><span>{c.evidence.length} bằng chứng · {c.execution_mode==='user_evidence_only'?'Hồ sơ đã thu':c.execution_mode==='shared_lab'?'Collector lab':'Cần nguồn'}</span><span>{c.assigned_to||'Chưa phân công'}</span></div></button>)}</div>{filtered.length===0&&<p className="py-8 text-center text-sm text-slate-400">Không có công việc khớp bộ lọc.</p>}<div className="mt-5 flex items-center justify-between text-xs text-slate-400"><span>Hiển thị {Math.min(visible,filtered.length)} / {filtered.length} công việc</span>{visible<filtered.length&&<button onClick={()=>setVisible(n=>n+12)} className="rounded-xl border border-slate-600 px-4 py-2">Xem thêm 12 mục</button>}</div></section>
