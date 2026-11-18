@@ -20,3 +20,7 @@ node_modules/
 dist/
 *.pyc
 /work/
+
+# Local backend process output
+/backend-enterprise.stdout.log
+/backend-enterprise.stderr.log
