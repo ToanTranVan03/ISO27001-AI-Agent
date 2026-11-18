@@ -308,8 +308,10 @@ def scope_review(assessment_id: UUID,req: ScopeReview,user: dict=Depends(require
         available={e['evidence_id'] for e in row['evidence']}
         if not set(req.evidence_ids)<=available:raise HTTPException(422,'Viện dẫn bằng chứng không thuộc control/đợt.')
         if req.conclusion in ('Compliant','Partially Compliant') and not req.evidence_ids:raise HTTPException(422,'Cần viện dẫn bằng chứng để xác nhận kết luận đạt/một phần.')
-        from backend.review_criteria import validate,PROTOCOL
-        try:validate(row['pass_criteria'],[c.model_dump() for c in req.criteria_reviews],req.evidence_ids,req.conclusion)
+        from backend.review_criteria import validate,validate_sources,PROTOCOL
+        try:
+            validate(row['pass_criteria'],[c.model_dump() for c in req.criteria_reviews],req.evidence_ids,req.conclusion)
+            validate_sources([c.model_dump() for c in req.criteria_reviews],row['evidence'])
         except ValueError as exc:raise HTTPException(422,str(exc)) from exc
         path=a8_api.folder(assessment_id)/'settings'/'scope56-reviews.json'
         history=json.loads(path.read_text(encoding='utf-8')) if path.exists() else []
@@ -334,11 +336,11 @@ def approve_scope56(assessment_id: UUID,req: ScopeApproval,user: dict=Depends(re
     if user.get('role')!='admin':raise HTTPException(403,'Chỉ người phụ trách admin phê duyệt SoA.')
     with a8_api.lock:
         report=scope56(assessment_id,user);soa=report['soa']
-        if req.fingerprint!=soa['fingerprint'] or not soa['approval_ready']:raise HTTPException(409,detail={'message':'Chưa đủ quyết định/thẩm định hiện hành hoặc nguồn đã đổi.','pending_controls':soa['pending_controls']})
+        if req.fingerprint!=soa['fingerprint'] or not soa['approval_ready']:raise HTTPException(409,detail={'message':'Chưa đủ quyết định, thẩm định hoặc kế hoạch xử lý hiện hành; hoặc nguồn đã đổi.','pending_controls':soa['pending_controls'],'readiness':soa.get('readiness')})
         path=a8_api.folder(assessment_id)/'settings'/'scope56-approvals.json'
         history=json.loads(path.read_text(encoding='utf-8')) if path.exists() else []
         record={**req.model_dump(),'approved_by':user['user_id'],'approved_at':datetime.now(timezone.utc).isoformat(),
-                'scope_total':56,'meaning':'Chấp thuận SoA trong phạm vi đồ án, không phải chứng nhận ISO.'}
+                'scope_total':56,'approval_protocol':soa.get('approval_protocol'),'meaning':'Chấp thuận SoA trong phạm vi đồ án, không phải chứng nhận ISO.'}
         history.append(record);a8_api.save(path,history)
     return record
 

@@ -4,6 +4,8 @@ import json
 from pathlib import Path
 from agent_core.a8_assessment import catalog as a8_catalog, digest
 from backend.review_criteria import current as criteria_review_current
+from backend.review_criteria import validate_sources
+from backend.soa_readiness import build_readiness,PROTOCOL as APPROVAL_PROTOCOL
 
 CATALOG=Path(__file__).resolve().parents[1]/'docs'/'56_controls_scope.json'
 
@@ -43,6 +45,9 @@ def build_scope(assessment_id,dossier,studies=None,decisions=None,reviews=None,a
         row['human_review']=review
         row['human_review_current']=bool(review and review['review_token']==row['review_token'] and row['workflow_status']!='RUNNING'
                                          and criteria_review_current(review,c['pass_criteria']))
+        if row['human_review_current']:
+            try:validate_sources(review['criteria_reviews'],row['evidence'])
+            except ValueError:row['human_review_current']=False
         row['criteria_review_required']=c['pass_criteria']
         # Actionable progress; development coverage is not evidence of compliance.
         if row['workflow_status']=='RUNNING':
@@ -79,14 +84,15 @@ def build_scope(assessment_id,dossier,studies=None,decisions=None,reviews=None,a
             verification_plan=r['applicability'].get('verification_plan') if r['applicability'] else None,
             priority_experiment=r['priority_a8'],experiment_is_formal_conclusion=False,
             note='Kết quả ca thử A.8 không tự thay thế đánh giá toàn đợt; chưa tự phê duyệt.') for r in records])
-    fingerprint=digest([{'control_id':r['control_id'],'review_token':r['review_token'],
-       'applicability':r['applicability'],'human_review':r['human_review']} for r in records])
+    readiness=build_readiness(records,bool(rubric_approval))
+    fingerprint=digest({'protocol':APPROVAL_PROTOCOL,'controls':[{'control_id':r['control_id'],'review_token':r['review_token'],
+       'applicability':r['applicability'],'human_review':r['human_review']} for r in records]})
     approved=next((a for a in reversed(approvals or []) if a['fingerprint']==fingerprint),None)
-    pending=[r['control_id'] for r in records if r['applicability'] is None or
-             (r['applicability']['applicable'] and not r['human_review_current']) or r['workflow_status']=='RUNNING']
+    pending=readiness['pending_controls']
     soa.update(fingerprint=fingerprint,approval='HUMAN_APPROVED_PROJECT_SCOPE' if approved and rubric_approval and not pending else 'DRAFT_NOT_APPROVED',
                human_approval=approved if rubric_approval and not pending else None,pending_controls=pending,approval_ready=not pending and bool(rubric_approval),
                pending_rubric_approval=not bool(rubric_approval),
+               readiness=readiness,approval_protocol=APPROVAL_PROTOCOL,
                approval_note='Chỉ phê duyệt phạm vi 56 control của đồ án; không chứng nhận toàn ISMS.')
     result=dict(assessment_id=str(assessment_id),scope_total=len(records),priority_count=len(priority),rubric_sha256=rubric_hash,rubric_approval=rubric_approval,
         pillars=dict(Counter(r['pillar'] for r in records)),support_summary=dict(Counter(r['support_stage'] for r in records)),

@@ -30,3 +30,12 @@ def current(review,criteria):
     try:validate(criteria,review.get('criteria_reviews',[]),review.get('evidence_ids',[]),review['conclusion'])
     except (ValueError,KeyError,TypeError):return False
     return True
+
+
+def validate_sources(checks,evidence):
+    available={e['evidence_id']:e for e in evidence}
+    for item in checks:
+        for identifier in item.get('evidence_ids',[]):
+            if identifier not in available:raise ValueError('Nguồn của tiêu chí không còn thuộc hồ sơ hiện hành.')
+            if item['verdict']!='unknown' and available[identifier].get('source_quality',{}).get('usable') is False:
+                raise ValueError('Nguồn trích xuất không dùng được: bổ sung nguồn hoặc ghi tiêu chí chưa rõ; không xác nhận đạt/không đạt từ nguồn này.')

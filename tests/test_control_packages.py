@@ -67,7 +67,8 @@ def test_rejects_escape_and_templates_as_evidence(monkeypatch,tmp_path,name):
 
 def test_soa_approval_invalidates_when_underlying_snapshot_changes():
     controls=packages.controls()
-    decisions={c['control_id']:dict(applicable=True,reason='In project scope',treatment='Maintain controls') for c in controls}
+    decisions={c['control_id']:dict(applicable=True,reason='In project scope',treatment='Maintain controls',
+        treatment_owner='Test owner',treatment_due='2026-12-20',verification_plan='Recollect sources and review every criterion') for c in controls}
     original=build_scope(AID,{'controls':[],'company_snapshot_hash':'before'},decisions=decisions)
     reviews={c['control_id']:dict(conclusion='Insufficient Evidence',review_token=c['review_token'],reviewed_by='human',protocol='human-criteria-review-v2',evidence_ids=[],criteria_reviews=[dict(criterion_index=i,verdict='unknown',rationale='No supporting evidence supplied',evidence_ids=[]) for i,_ in enumerate(c['pass_criteria'])]) for c in original['controls']}
     reviewed=build_scope(AID,{'controls':[],'company_snapshot_hash':'before'},decisions=decisions,reviews=reviews)

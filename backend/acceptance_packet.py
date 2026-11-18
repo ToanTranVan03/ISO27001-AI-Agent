@@ -4,6 +4,7 @@ from agent_core.a8_assessment import digest
 
 def build_packet(scope):
     rows = []
+    readiness={r['control_id']:r for r in scope['soa'].get('readiness',{}).get('controls',[])}
     for control in scope['controls']:
         decision = control['applicability']
         excluded = decision is not None and decision['applicable'] is False
@@ -39,6 +40,7 @@ def build_packet(scope):
             machine_conclusion=control['conclusion'],
             current_human_conclusion=review['conclusion'] if review else None,
             review_token=control['review_token'],gaps=gaps,
+            approval_blockers=readiness.get(control['control_id'],{}).get('blockers',[]),
             treatment_proposal=dict(status='DRAFT_REQUIRES_OWNER',
                 action='Giữ căn cứ loại trừ để người phụ trách rà SoA.' if excluded else
                     'Thu nguồn cho các yêu cầu tiêu chí; xử lý điểm không đạt, đánh giá lại và thẩm định trên snapshot mới.' if gaps else
@@ -48,6 +50,7 @@ def build_packet(scope):
             recorded_follow_up=dict(owner=decision.get('treatment_owner') if decision else None,
                 due_date=decision.get('treatment_due') if decision else None,
                 verification_plan=decision.get('verification_plan') if decision else None)))
+        rows[-1]['recorded_follow_up']['due_state']=readiness.get(control['control_id'],{}).get('due_state','not_recorded')
     packet = dict(protocol='week5-handoff-v1',assessment_id=scope['assessment_id'],
         rubric_sha256=scope['rubric_sha256'],soa_fingerprint=scope['soa']['fingerprint'],
         formal_soa_approval=scope['soa']['approval'],controls=rows,
