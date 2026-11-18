@@ -154,10 +154,12 @@ def execute_agent_job(job_id: str, assessment_id: str, control_id: str, evidence
             'audit_trail':result_state['audit_trail'],
         }
         teamwork.finish_job(job_id,result)
-    except Exception:
+    except Exception as exc:
         logger.exception('Agent job %s failed',job_id)
         try:
-            teamwork.finish_job(job_id,None,'Không thể chạy Agent. Kiểm tra Ollama hoặc log API.')
+            from pydantic import ValidationError
+            message='Phản hồi model không đúng JSON/schema; chưa lưu kết luận. Xem log API.' if isinstance(exc,ValidationError) else 'Không thể chạy Agent. Kiểm tra Ollama hoặc log API.'
+            teamwork.finish_job(job_id,None,message)
         except Exception:
             logger.exception('Could not persist failed job %s',job_id)
 
