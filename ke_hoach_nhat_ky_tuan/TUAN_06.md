@@ -66,4 +66,4 @@ Ghi gọn theo ngày/nhánh; người push: Trần Văn Toàn. Không ghi thao t
 
 | Ngày | Giờ (UTC+7) | Người push | Nhánh | Nội dung chính |
 |---|---|---|---|---|
-| 18/11/2026 | 10:32 | Trần Văn Toàn | `Tuan6` | Kiểm tra chất lượng nguồn bằng chứng, trực quan hóa đánh giá tuân thủ và cập nhật tài liệu tuần 6 |
+| 18/11/2026 | 10:32, 12:18 | Trần Văn Toàn | `Tuan6` | Kiểm tra chất lượng nguồn; thống nhất giao diện; xem trước/lịch sử doanh nghiệp; nộp, tải bản gốc và nối nguồn với hàng đợi đánh giá 56 control |
