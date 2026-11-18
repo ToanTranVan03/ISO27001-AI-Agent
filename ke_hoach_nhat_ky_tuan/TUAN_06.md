@@ -61,8 +61,11 @@ Các thông tin trên là **trạng thái bàn giao từ tuần 5**, không ph�
 | 18/11/2026 | Tự động hóa lượt đánh giá nguồn trên server | Không phụ thuộc giữ trang mở; lô hữu hạn, mỗi control tối đa một lần; giữ tiến độ/lỗi/bỏ qua, kiểm tra token nguồn/rubric và khóa job; kiểm chứng PostgreSQL bằng rollback |
 | 18/11/2026 | Chạy thực tế và xử lý lỗi Agent | Lô 18 control đầu có 16 job lưu kết quả, 2 lỗi; tăng giới hạn phản hồi chưa đủ, sau sửa đóng gói/context hai lượt kiểm tra lại lưu được kết quả. Giữ mọi job cũ, không sửa thành thành công |
 | 18/11/2026 | Xuất kết quả và kiểm chứng sau sửa | Kết quả máy mới nhất của 18 control: 3 không tuân thủ, 6 một phần, 9 thiếu bằng chứng; không phải độ đúng so với người chấm. 308 test Python, 7 test JavaScript, lint/build/render đạt; nguồn/rubric giữa các lần kiểm tra lại không đổi |
+| 18/11/2026 | Tách yêu cầu bổ sung nguồn theo nhóm phụ trách | Xuất phiếu theo Nhân sự/Hành chính/IT, nêu tiêu chí, loại nguồn, checklist và chỗ ghi người nhận/hạn; phân biệt thiếu nguồn với nguồn lỗi. 310 test Python, lint/build đạt; không tự tạo bằng chứng hoặc xác nhận giao việc |
 
 ## Kết quả và minh chứng
+
+- [Phiếu yêu cầu nguồn theo nhóm](../docs/source-requests/README.md): dự thảo giao nhóm bổ sung hồ sơ.
 
 - [Kiểm tra nội dung nguồn trước đánh giá](../docs/KIEM_TRA_NOI_DUNG_NGUON.md): chính sách kỹ thuật, hành vi và giới hạn.
 - [Theo dõi thay đổi doanh nghiệp](../docs/LICH_SU_DOANH_NGHIEP.md): xem trước, kiểm tra snapshot và lịch sử.

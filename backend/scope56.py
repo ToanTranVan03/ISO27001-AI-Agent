@@ -113,5 +113,7 @@ def build_scope(assessment_id,dossier,studies=None,decisions=None,reviews=None,a
     result['acceptance_worklist']=build_worklist(result)
     from backend.acceptance_packet import build_packet
     result['handoff_packet']=build_packet(result)
+    from backend.source_requests import build_requests
+    result['source_requests']=build_requests(result['handoff_packet'])
     result['sha256']=digest(result)
     return result
