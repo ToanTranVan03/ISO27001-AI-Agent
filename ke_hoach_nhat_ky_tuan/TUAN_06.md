@@ -49,8 +49,6 @@ Các thông tin trên là **trạng thái bàn giao từ tuần 5**, không ph�
 | 18/11/2026 | Bổ sung tiếp nhận nguồn và bản gốc trên web | Hỗ trợ tài liệu/log/cấu hình/JSON/CSV cho 56 control; khai xuất xứ, thời điểm và giới hạn mẫu; kiểm tra đầu vào, chống nạp lại cùng nguồn, lưu/tải bản gốc theo quyền và SHA256 |
 | 18/11/2026 | Nối hồ sơ đã nộp với công việc chung | Control chưa có collector riêng được đánh giá từ nguồn đã thu; nguồn không dùng được không thay bằng preset; bổ sung cảnh báo chất lượng nguồn trong hồ sơ bàn giao |
 | 18/11/2026 | Kiểm chứng tổng hợp sau triển khai | 282 test Python, 7 test JavaScript, lint/build và render đạt; PostgreSQL thật kiểm tra lưu/nạp lại/tải bản gốc/đầu vào Agent bằng giao dịch rollback, không để lại dữ liệu thử; API đang chạy kiểm tra từ chối nguồn lỗi và giữ hồ sơ nguyên trạng |
-
-
 | 18/11/2026 | Bổ sung hồ sơ tài khoản và vai trò người dùng | Hiển thị quản trị viên/người đánh giá, phân biệt tài khoản hệ thống với nhân viên giả lập; sửa họ tên, email, đơn vị và chức danh của chính mình; không cho tự đổi tên đăng nhập/quyền |
 | 18/11/2026 | Kiểm chứng chức năng tài khoản | Mốc mới: 289 test Python, lint/build đạt; API hồ sơ hoạt động, từ chối tự đổi quyền và kiểm tra đúng tài khoản đăng nhập; chưa thay kiểm thử toàn bộ trình duyệt |
 
