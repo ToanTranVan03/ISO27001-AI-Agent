@@ -2,7 +2,7 @@
 @import "tailwindcss";
 
 :root {
-  font-family: ui-rounded, "Trebuchet MS", Inter, system-ui, sans-serif;
+  font-family: "Segoe UI", Inter, system-ui, Arial, sans-serif;
   color-scheme: dark;
 }
 
@@ -33,4 +33,55 @@ main { animation: reveal-page .25s ease-out; }
 @keyframes reveal-page { from { opacity: .5; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+
+/* Shared assessment workspace */
+.app-page { background: radial-gradient(ellipse at 80% 0%, #11334455, transparent 45%), #080f1d; padding: 112px 28px 64px; }
+.app-page > section { max-width: 1280px; margin-inline: auto; }
+.page-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; padding: 8px 0 12px; }
+.page-eyebrow { display: flex; align-items: center; gap: 7px; color: #5eead4; font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.page-heading h1 { font-size: clamp(24px, 3vw, 34px); font-weight: 750; line-height: 1.25; letter-spacing: -.025em; margin-top: 12px; }
+.page-description { color: #94a3b8; font-size: 13px; line-height: 1.8; max-width: 740px; margin-top: 12px; }
+.page-heading-actions { display: flex; flex-wrap: wrap; gap: 8px; flex-shrink: 0; }
+.workflow-guide { display: flex; flex-wrap: wrap; gap: 18px; padding: 14px 18px; border: 1px solid #263446; border-radius: 14px; background: #0f1a2a; }
+.workflow-guide > span { display: flex; align-items: center; gap: 10px; color: #7f91a8; font-size: 11px; }
+.workflow-guide b { font-size: 10px; color: #64748b; }
+.workflow-guide .workflow-current, .workflow-current b { color: #5eead4; }
+.status-badge { display: inline-flex; align-items: center; gap: 6px; border: 1px solid; border-radius: 999px; padding: 5px 9px; font-size: 10px; line-height: 1.4; white-space: nowrap; }
+.status-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+.status-success { color: #6ee7b7; background: #10b98112; border-color: #10b98145; }
+.status-warning { color: #fcd34d; background: #f59e0b12; border-color: #f59e0b45; }
+.status-danger { color: #fda4af; background: #f43f5e12; border-color: #f43f5e45; }
+.status-info { color: #7dd3fc; background: #0ea5e912; border-color: #0ea5e945; }
+.status-active { color: #5eead4; background: #14b8a612; border-color: #14b8a645; }
+.status-neutral { color: #cbd5e1; background: #64748b12; border-color: #64748b45; }
+.app-page p { line-height: 1.75; }
+.app-page button { transition: background .15s, border-color .15s, transform .15s; }
+.app-page button:disabled { opacity: .4; }
+.app-page :is(select,textarea,input:not([type=checkbox]):not([type=radio])) { border: 1px solid #334155; border-radius: 9px; max-width: 100%; font-size: 12px; }
+.app-page textarea { min-height: 88px; margin-block: 10px; }
+.app-page input[type=file] { padding: 10px; color: #94a3b8; }
+.app-page input[type=file]::file-selector-button { border: 0; border-radius: 6px; padding: 5px 10px; margin-right: 12px; color: #99f6e4; background: #134e4a; cursor: pointer; }
+.app-page table th { font-size: 11px; color: #94a3b8; text-transform: none; background: #142033; font-weight: 600; }
+.app-page table td { padding: 14px 12px; vertical-align: top; line-height: 1.65; }
+.app-page table tbody tr:hover { background: #1e293b55; }
+.app-page pre { background: #060d19; border: 1px solid #263446; padding: 14px; border-radius: 10px; color: #a6b8cc; }
+.app-page summary { font-size: 12px; font-weight: 600; color: #cbd5e1; }
+.app-page details[open] > summary { color: #5eead4; }
+.app-page [role=alert] { border-radius: 12px; background: #88133722; color: #fecdd3; padding: 12px 16px; font-size: 12px; }
+.app-page [role=status]:empty { display: none; }
+.panel-toolbar { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 14px; padding: 20px; border: 1px solid #334155; border-radius: 18px; background: #101c2d; }
+.panel-toolbar label { flex: 1; min-width: 160px; color: #94a3b8; font-size: 11px; }
+.panel-toolbar label select { display: block; width: 100%; margin-top: 8px; padding: 10px; color: #e2e8f0; }
+.work-card { border: 1px solid #29384c; background: #101b2c; border-radius: 16px; padding: 18px; text-align: left; width: 100%; }
+.work-card:hover { background: #14283a; border-color: #2a8e89; }
+.work-card[aria-pressed=true] { border-color: #5eead4; background: #11312f; }
+@media (max-width: 640px) {
+ .app-page { padding: 100px 14px 40px; }
+ .page-heading { flex-direction: column; gap: 12px; }
+ .page-heading-actions { width: 100%; }
+ .workflow-guide { gap: 10px 14px; padding: 12px; }
+ .workflow-guide > span { font-size: 10px; gap: 5px; }
+ .panel-toolbar { padding: 14px; }
+ .app-page table { min-width: 600px; }
 }

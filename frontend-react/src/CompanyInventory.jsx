@@ -1,3 +1,4 @@
+import {PageHeader,WorkflowGuide} from './AssessmentUI';
 import CompanyChanges, {ChangeList} from './CompanyChanges';
 import { useEffect, useState } from 'react';
 
@@ -11,13 +12,14 @@ export default function CompanyInventory({assessment,request,onOpenDossier}) {
   const stale=currentPreview&&currentPreview.snapshot_hash!==data?.snapshot_hash;
   async function previewChange(){setBusy(true);setError('');setNotice('');setPreview(null);try{setPreview(await request(path+'/events/preview',{method:'POST',body:JSON.stringify({employee_id:selected,action})}));}catch(e){setError(e.message);}finally{setBusy(false);}}
   async function record(){if(!currentPreview||stale)return;setBusy(true);setError('');try{const result=await request(path+'/events',{method:'POST',body:JSON.stringify({employee_id:selected,action,expected_snapshot_hash:currentPreview.snapshot_hash})});setData(await request(path));setPreview(null);setNotice(result.changed?`Đã lưu thay đổi #${result.change_id}. Cần đánh giá lại hồ sơ liên quan để có kết luận mới.`:'Dữ liệu đã giống yêu cầu; không tạo bản ghi thay đổi trùng.');}catch(e){setError(e.message);setPreview(null);}finally{setBusy(false);}}
-  return <main className="min-h-screen bg-[#101d2b] px-5 pb-12 pt-24 text-slate-100"><section className="mx-auto max-w-6xl space-y-5">
-    <header className="rounded-3xl border border-teal-800 bg-gradient-to-br from-teal-950 to-slate-900 p-7"><p className="text-xs font-semibold uppercase tracking-widest text-teal-300">Mô hình dùng để thử nghiệm</p><h1 className="mt-3 text-3xl font-bold">Doanh nghiệp dùng chung</h1><p className="mt-3 max-w-3xl text-sm leading-6 text-slate-300">Nhân viên → tài khoản → thiết bị → bằng chứng đánh giá. Dữ liệu giả lập giúp kiểm tra các tình huống đúng, sai và thiếu hồ sơ có chủ đích.</p></header>
-    <div className="grid gap-3 md:grid-cols-3">{[
+  return <main className="app-page min-h-screen text-slate-100"><section className="mx-auto max-w-6xl space-y-5">
+    <PageHeader step="Dữ liệu đầu vào" title="Doanh nghiệp dùng chung" description="Nhân viên, tài khoản và thiết bị liên kết trong cùng đợt đánh giá. Theo dõi dữ liệu giả lập và các thay đổi trước khi thu bằng chứng."/><WorkflowGuide current={0}/>
+    <details className="rounded-2xl border border-slate-700 bg-slate-900 p-5"><summary>Dữ liệu doanh nghiệp đến từ đâu?</summary>    <div className="grid gap-3 md:grid-cols-3">{[
       ['01 · Danh mục doanh nghiệp','Nhân viên, tài khoản và tài sản được tạo từ bộ dữ liệu giả lập, lưu dùng chung theo đợt đánh giá. Đây là bối cảnh nghiệp vụ, không tự chứng minh tuân thủ.'],
       ['02 · Bằng chứng kỹ thuật','Probe thu cấu hình, trạng thái hoặc kết quả thử trong lab cô lập. Kết quả chỉ có giá trị trong phạm vi tiêu chí và tài nguyên đã quan sát.'],
       ['03 · Hồ sơ bổ sung','Người dùng cung cấp tài liệu, log hoặc gói hồ sơ cho control tương ứng. Cần kiểm tra nội dung, nguồn và thời điểm trước khi thẩm định.']
     ].map(([title,text])=><article key={title} className="rounded-2xl border border-slate-700 bg-slate-900 p-5"><h2 className="font-semibold text-teal-200">{title}</h2><p className="mt-3 text-sm leading-6 text-slate-300">{text}</p></article>)}</div>
+</details>
     {error&&<p role="alert" className="rounded-xl border border-rose-800 bg-rose-950/30 p-4 text-sm text-rose-200">{error}</p>}{notice&&<p role="status" className="rounded-xl border border-teal-800 bg-teal-950/30 p-4 text-sm text-teal-200">{notice}</p>}{!data&&!error&&<p>Đang đọc doanh nghiệp...</p>}
     {data&&<><div className="flex flex-wrap gap-4">{[['Nhân viên',data.people.length],['Tài khoản',data.accounts.length],['Thiết bị',data.devices.length]].map(([label,n])=><div key={label} className="rounded-xl bg-slate-800 p-5">{label}: <strong>{n}</strong></div>)}<button onClick={onOpenDossier} className="rounded-xl bg-teal-700 p-4">Mở hồ sơ ISO</button></div>
     <p className="break-all text-xs text-slate-400">Ngày đánh giá: {data.assessment_date} · Snapshot: {data.snapshot_hash}</p>

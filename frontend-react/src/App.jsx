@@ -98,7 +98,7 @@ const [view, setView] = useState("scope56");
   }
 
   if (loading) return (
-    <div className="flex min-h-screen items-center justify-center bg-[#172337] text-[#FFE4C7]">
+    <div className="flex min-h-screen items-center justify-center bg-[#080f1d] text-[#99f6e4]">
       <Bot className="mr-3 animate-pulse"/> Đang kiểm tra phiên đăng nhập...
     </div>
   );
@@ -115,7 +115,7 @@ if (user && assessment && token) {
         <div className="hidden text-right text-xs sm:block"><p className="font-semibold">{user.display_name||user.username}</p><p className="mt-1 text-[10px] text-slate-400">Đợt {assessment.assessment_id.slice(0,8)}</p></div><button type="button" onClick={logout} aria-label="Đăng xuất" title="Đăng xuất" className="rounded-xl p-3 text-slate-400 hover:bg-slate-800 hover:text-white"><LogOut size={18}/></button></div>
       </header>
 
-      {view === "scope56" ? <Scope56 assessment={assessment} request={request} onOpenA8={()=>setView("a8")} /> : view === "company" ? <CompanyInventory assessment={assessment} request={request} onOpenDossier={() => setView("dossier")} /> : view === "dossier" ? <ComplianceDossier assessment={assessment} request={request} onOpenCompany={() => setView("company")} /> : (
+      {view === "scope56" ? <Scope56 assessment={assessment} request={request} onOpenA8={()=>setView("a8")} /> : view === "company" ? <CompanyInventory assessment={assessment} request={request} onOpenDossier={() => setView("dossier")} /> : view === "dossier" ? <ComplianceDossier assessment={assessment} request={request} onOpenDashboard={()=>{setView("scope56");window.scrollTo({top:0,behavior:"instant"});}} onOpenCompany={() => setView("company")} /> : (
         <A8ComplianceStudy assessment={assessment} request={request} />
       )}
     </>
@@ -124,36 +124,36 @@ if (user && assessment && token) {
 
 
   return (
-    <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#172337] px-4 py-12 text-white">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_100%,#c17c53_0%,#35465a_45%,#172337_83%)] opacity-70"/>
-      <section className="relative w-full max-w-[440px] rounded-[32px] border border-white/15 bg-[#223449]/95 p-7 shadow-2xl sm:p-9">
-        <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-[22px] bg-[#FF914D] text-white">
+    <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#080f1d] px-4 py-12 text-white">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_100%,#0f766e_0%,#152b3c_45%,#080f1d_83%)] opacity-70"/>
+      <section className="relative w-full max-w-[440px] rounded-[32px] border border-white/15 bg-[#111e30]/95 p-7 shadow-2xl sm:p-9">
+        <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-[22px] bg-[#14b8a6] text-white">
           <Bot className="h-10 w-10"/>
         </div>
         <div className="mb-7 text-center">
-          <div className="text-[11px] font-bold tracking-[.18em] text-[#FFBD88]">ISO/IEC 27001 · ĐÁNH GIÁ TUÂN THỦ</div>
+          <div className="text-[11px] font-bold tracking-[.18em] text-[#5eead4]">ISO/IEC 27001 · ĐÁNH GIÁ TUÂN THỦ</div>
           <h1 className="mt-2 text-2xl font-black">Đăng nhập hệ thống đánh giá</h1>
           <p className="mt-2 text-sm text-[#C2CEDA]">Theo dõi bằng chứng, kết luận của Agent và hồ sơ đánh giá trong cùng một hệ thống.</p>
         </div>
         <form onSubmit={login} className="space-y-4">
           <label className="block text-sm font-bold">Tên đăng nhập
-            <div className="mt-2 flex items-center rounded-2xl border border-white/15 bg-[#142335] px-4 focus-within:border-[#FF914D]">
-              <UserRound className="h-4 w-4 text-[#FFBC91]"/>
+            <div className="mt-2 flex items-center rounded-2xl border border-white/15 bg-[#142335] px-4 focus-within:border-[#14b8a6]">
+              <UserRound className="h-4 w-4 text-[#5eead4]"/>
               <input required autoComplete="username" value={username} onChange={e => setUsername(e.target.value)} className="w-full bg-transparent p-3.5 outline-none" placeholder="admin"/>
             </div>
           </label>
           <label className="block text-sm font-bold">Mật khẩu
-            <div className="mt-2 flex items-center rounded-2xl border border-white/15 bg-[#142335] px-4 focus-within:border-[#FF914D]">
-              <KeyRound className="h-4 w-4 text-[#FFBC91]"/>
+            <div className="mt-2 flex items-center rounded-2xl border border-white/15 bg-[#142335] px-4 focus-within:border-[#14b8a6]">
+              <KeyRound className="h-4 w-4 text-[#5eead4]"/>
               <input required type="password" autoComplete="current-password" value={password} onChange={e => setPassword(e.target.value)} className="w-full bg-transparent p-3.5 outline-none" placeholder="Nhập mật khẩu"/>
             </div>
           </label>
           {error && <p role="alert" className="rounded-xl bg-red-500/15 p-3 text-sm text-red-200">{error}</p>}
-          <button disabled={busy} type="submit" className="flex w-full items-center justify-center gap-2 rounded-full bg-[#FF842F] px-5 py-4 font-black text-white shadow-[0_4px_0_#D66222] hover:bg-[#FA913E] disabled:opacity-60">
+          <button disabled={busy} type="submit" className="flex w-full items-center justify-center gap-2 rounded-full bg-[#0f766e] px-5 py-4 font-black text-white shadow-[0_4px_0_#115e59] hover:bg-[#0d9488] disabled:opacity-60">
             {busy ? "Đang đăng nhập..." : <><LogIn className="h-5 w-5"/> ĐĂNG NHẬP HỆ THỐNG</>}
           </button>
         </form>
-        <p className="mt-6 flex items-center justify-center gap-2 text-xs text-[#B9C6D2]"><ShieldCheck className="h-4 w-4"/> Xác thực qua FastAPI · Tiến độ chia sẻ qua PostgreSQL</p>
+        <p className="mt-6 flex items-center justify-center gap-2 text-xs text-[#B9C6D2]"><ShieldCheck className="h-4 w-4"/> Tài khoản riêng · Hồ sơ và tiến độ dùng chung</p>
       </section>
     </main>
   );
