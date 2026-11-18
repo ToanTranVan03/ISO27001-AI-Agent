@@ -15,5 +15,22 @@ body,
 }
 
 body {
-  background: #172337;
+  background: #020617;
+}
+
+button, summary, select { cursor: pointer; }
+button:disabled { cursor: not-allowed; }
+button:focus-visible, summary:focus-visible, select:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 2px solid #5eead4;
+  outline-offset: 3px;
+}
+details > summary { line-height: 1.6; }
+details[open] > summary { margin-bottom: 1rem; }
+main { animation: reveal-page .25s ease-out; }
+.control-tile { transition: transform .15s ease, box-shadow .15s ease; }
+.control-tile:hover { transform: translateY(-3px); box-shadow: 0 5px 16px #0005; }
+* { scrollbar-width: thin; scrollbar-color: #475569 #0f172a; }
+@keyframes reveal-page { from { opacity: .5; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }

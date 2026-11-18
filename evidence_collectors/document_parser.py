@@ -102,6 +102,9 @@ def extract_document_text(filename: str, content: bytes) -> str:
 
     if not text:
         raise ValueError("Tài liệu không chứa văn bản trích xuất được.")
+    from evidence_collectors.source_quality import text_quality
+    if not text_quality(text)['usable']:
+        raise ValueError('Nội dung trích xuất quá ít hoặc chủ yếu là ký tự lặp. Kiểm tra tài liệu gốc/OCR và nộp nguồn có nội dung; chưa lưu làm bằng chứng đánh giá.')
 
     if len(text) > MAX_DOCUMENT_CHARS:
         raise ValueError(

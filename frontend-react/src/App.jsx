@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { Bot, KeyRound, LogIn, ShieldCheck, UserRound } from "lucide-react";
+import { Bot, KeyRound, LogIn, ShieldCheck, UserRound, LayoutDashboard, FlaskConical, Building2, FolderCheck, LogOut } from "lucide-react";
 import { ApiError, apiRequest } from "./api";
 import A8ComplianceStudy from "./A8ComplianceStudy";
 import Scope56 from "./Scope56";
@@ -107,19 +107,13 @@ const [view, setView] = useState("scope56");
 if (user && assessment && token) {
   return (
     <>
-      <div className="fixed left-1/2 top-3 z-[100] flex max-w-[96vw] -translate-x-1/2 gap-2 overflow-x-auto rounded-full border border-white/10 bg-[#172337]/95 p-1 shadow-xl backdrop-blur">
-        <button type="button" onClick={()=>setView("scope56")} className="rounded-full bg-teal-800 px-4 py-2 text-xs font-bold text-white">Phạm vi 56 control</button>
-        <button
-          type="button"
-          onClick={() => setView("a8")}
-          className={`rounded-full px-4 py-2 text-xs font-bold ${view === "a8" ? "bg-emerald-400 text-[#102116]" : "text-slate-200 hover:bg-white/10"}`}
-        >
-          Thực nghiệm 18 A.8
-        </button>
-        <button type="button" onClick={() => setView("company")} className="rounded-full px-4 py-2 text-xs font-bold text-slate-200 hover:bg-white/10">Doanh nghiệp</button>
-        <button type="button" onClick={() => setView("dossier")} className="rounded-full px-4 py-2 text-xs font-bold text-slate-200 hover:bg-white/10">Hồ sơ ISO</button>
-        <button type="button" onClick={logout} className="rounded-full px-4 py-2 text-xs font-bold text-slate-200 hover:bg-white/10">Đăng xuất</button>
-      </div>
+      <header className="fixed inset-x-0 top-0 z-[100] border-b border-slate-700/70 bg-slate-950/95 text-white shadow-lg backdrop-blur-xl">
+        <div className="mx-auto flex max-w-7xl items-center gap-3 px-4 py-3"><div className="hidden shrink-0 items-center gap-3 lg:flex"><span className="rounded-xl bg-teal-400/10 p-2 text-teal-300"><ShieldCheck size={24}/></span><span className="text-sm font-bold">HIVEFIVE<span className="block text-[10px] font-normal tracking-wider text-slate-400">COMPLIANCE AGENT</span></span></div>
+        <nav aria-label="Điều hướng chính" className="flex min-w-0 flex-1 gap-1 overflow-x-auto">{[
+          ['scope56','Tổng quan 56 control',LayoutDashboard],['a8','Thực nghiệm A.8',FlaskConical],['company','Doanh nghiệp',Building2],['dossier','Hồ sơ ISO',FolderCheck]
+        ].map(([id,label,Icon])=><button key={id} type="button" onClick={()=>{setView(id);window.scrollTo({top:0,behavior:'instant'});}} aria-current={view===id?'page':undefined} className={`flex shrink-0 items-center gap-2 whitespace-nowrap rounded-xl px-3 py-3 text-xs font-semibold transition ${view===id?'bg-teal-400/15 text-teal-200 ring-1 ring-teal-400/30':'text-slate-400 hover:bg-slate-800 hover:text-white'}`}><Icon size={16}/>{label}</button>)}</nav>
+        <div className="hidden text-right text-xs sm:block"><p className="font-semibold">{user.display_name||user.username}</p><p className="mt-1 text-[10px] text-slate-400">Đợt {assessment.assessment_id.slice(0,8)}</p></div><button type="button" onClick={logout} aria-label="Đăng xuất" title="Đăng xuất" className="rounded-xl p-3 text-slate-400 hover:bg-slate-800 hover:text-white"><LogOut size={18}/></button></div>
+      </header>
 
       {view === "scope56" ? <Scope56 assessment={assessment} request={request} onOpenA8={()=>setView("a8")} /> : view === "company" ? <CompanyInventory assessment={assessment} request={request} onOpenDossier={() => setView("dossier")} /> : view === "dossier" ? <ComplianceDossier assessment={assessment} request={request} onOpenCompany={() => setView("company")} /> : (
         <A8ComplianceStudy assessment={assessment} request={request} />
@@ -139,7 +133,7 @@ if (user && assessment && token) {
         <div className="mb-7 text-center">
           <div className="text-[11px] font-bold tracking-[.18em] text-[#FFBD88]">ISO/IEC 27001 · ĐÁNH GIÁ TUÂN THỦ</div>
           <h1 className="mt-2 text-2xl font-black">Đăng nhập hệ thống đánh giá</h1>
-          <p className="mt-2 text-sm text-[#C2CEDA]">Dùng tài khoản Admin hoặc thành viên đã tạo trong hệ thống PostgreSQL.</p>
+          <p className="mt-2 text-sm text-[#C2CEDA]">Theo dõi bằng chứng, kết luận của Agent và hồ sơ đánh giá trong cùng một hệ thống.</p>
         </div>
         <form onSubmit={login} className="space-y-4">
           <label className="block text-sm font-bold">Tên đăng nhập
@@ -156,7 +150,7 @@ if (user && assessment && token) {
           </label>
           {error && <p role="alert" className="rounded-xl bg-red-500/15 p-3 text-sm text-red-200">{error}</p>}
           <button disabled={busy} type="submit" className="flex w-full items-center justify-center gap-2 rounded-full bg-[#FF842F] px-5 py-4 font-black text-white shadow-[0_4px_0_#D66222] hover:bg-[#FA913E] disabled:opacity-60">
-            {busy ? "Đang đăng nhập..." : <><LogIn className="h-5 w-5"/> ĐĂNG NHẬP VÀO CĂN CỨ</>}
+            {busy ? "Đang đăng nhập..." : <><LogIn className="h-5 w-5"/> ĐĂNG NHẬP HỆ THỐNG</>}
           </button>
         </form>
         <p className="mt-6 flex items-center justify-center gap-2 text-xs text-[#B9C6D2]"><ShieldCheck className="h-4 w-4"/> Xác thực qua FastAPI · Tiến độ chia sẻ qua PostgreSQL</p>

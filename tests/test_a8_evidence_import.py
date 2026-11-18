@@ -82,8 +82,8 @@ def test_explicit_lab_source_filter_binds_like_pattern_as_parameter(monkeypatch)
     class Connection:
         def cursor(self):return nullcontext(Cursor())
     monkeypatch.setattr(database,'get_connection',lambda:nullcontext(Connection()))
-    monkeypatch.setattr(database,'collect_evidence',lambda *_:([dict(evidence_id='captured'),dict(evidence_id='preset')],{}))
+    monkeypatch.setattr(database,'collect_evidence',lambda *_:([dict(evidence_id='captured',content='Captured artifact content for software test'),dict(evidence_id='preset')],{}))
     sources,_=database.collect_user_evidence('A.8.1',AID)
-    assert sources==[dict(evidence_id='captured')]
+    assert sources==[dict(evidence_id='captured',content='Captured artifact content for software test')]
     sql,params=calls[0]
     assert 'source LIKE %s' in sql and params==(AID,'A.8.1','a8-capture://%')

@@ -33,6 +33,9 @@ def build_scope(assessment_id,dossier,studies=None,decisions=None,reviews=None,a
             experiment_results=(studies or {}).get(cid,[]),applicability=decision)
         row['evidence_package_supported']=True
         row['explicit_source_count']=sum(e.get('is_synthetic') is False or e.get('source','').startswith('a8-capture://') for e in row['evidence'])
+        explicit=[e for e in row['evidence'] if e.get('is_synthetic') is False or e.get('source','').startswith('a8-capture://')]
+        row['source_quality_issues']=[dict(evidence_id=e['evidence_id'],**e['source_quality']) for e in explicit if e.get('source_quality',{}).get('usable') is False]
+        row['usable_source_count']=sum(e.get('source_quality',{}).get('usable') is not False for e in explicit)
         row['review_token']=digest({'control_id':cid,'latest_evaluation_id':row['latest_evaluation_id'],
             'assessment_state':row['assessment_state'],'rubric_sha256':rubric_hash,'snapshot':dossier.get('company_snapshot_hash'),
             'evidence':sorted((e['evidence_id'],e['sha256_hash']) for e in row['evidence'])})
@@ -48,7 +51,7 @@ def build_scope(assessment_id,dossier,studies=None,decisions=None,reviews=None,a
             action='Người phụ trách xác định tính áp dụng và kế hoạch'
         elif not decision['applicable']:
             action='Lưu căn cứ loại trừ để người phụ trách duyệt SoA'
-        elif not row['explicit_source_count']:
+        elif not row['usable_source_count']:
             action='Thu hồ sơ hoặc bằng chứng cho control'
         elif row['latest_evaluation_id'] is None:
             action='Chạy Agent đánh giá nguồn đã thu'
@@ -95,6 +98,8 @@ def build_scope(assessment_id,dossier,studies=None,decisions=None,reviews=None,a
         controls_with_submitted_sources=sum(any(e.get('is_synthetic') is False for e in r['evidence']) for r in records),
         controls_with_captured_lab_sources=sum(any(e.get('source','').startswith('a8-capture://') for e in r['evidence']) for r in records),
         controls_with_explicit_sources=sum(r['explicit_source_count']>0 for r in records),
+        controls_with_usable_text_sources=sum(r['usable_source_count']>0 for r in records),
+        controls_with_source_quality_issues=sum(bool(r['source_quality_issues']) for r in records),
         controls_with_current_human_review=sum(r['human_review_current'] for r in records),
         soa_approved=soa['approval']=='HUMAN_APPROVED_PROJECT_SCOPE',
         note='Nguồn nộp không tự đồng nghĩa đã xác thực. Số control có bằng chứng/thẩm định không phải số control đạt ISO.')

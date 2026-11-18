@@ -76,6 +76,8 @@ def node_collect(state: AgentState):
         from backend.database import collect_user_evidence
         state["collected_evidences"],state["deterministic_rule"]=collect_user_evidence(state["control_id"],state["assessment_id"])
         state["audit_trail"].append("COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS")
+        rejected=state['deterministic_rule'].get('source_quality_rejected',[])
+        if rejected:state['audit_trail'].append('SOURCE_QUALITY_REJECTED: '+', '.join(rejected))
         return state
     shared = None
     if state.get('assessment_id'):

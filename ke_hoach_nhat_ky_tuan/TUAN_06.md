@@ -1,8 +1,9 @@
 # Tuần 6 — Hoàn thiện bằng chứng, kiểm định và hồ sơ đánh giá tuân thủ
 
 - Thời gian: **16/11/2026–22/11/2026 (thứ Hai–Chủ nhật).**
-- Trạng thái: **Chuẩn bị — chưa bắt đầu tuần.**
+- Trạng thái: **Đang thực hiện.**
 - Lập kế hoạch: **15/11/2026**.
+- Cập nhật: **18/11/2026**.
 
 ## Mục tiêu và kế hoạch
 
@@ -31,14 +32,16 @@ Các thông tin trên là **trạng thái bàn giao từ tuần 5**, không ph�
 
 ## Nhật ký công việc chính
 
-Chưa có công việc thực hiện trong khoảng 16/11–22/11/2026. Bổ sung ngắn gọn theo ngày khi có kết quả.
-
 | Ngày | Công việc | Kết quả / minh chứng |
 |---|---|---|
+| 18/11/2026 | Củng cố kiểm tra nội dung nguồn và đầu vào Agent | Chặn tài liệu quá ít/ký tự lặp khi nạp mới, lọc nguồn cũ trước suy luận, giữ lịch sử; thêm cảnh báo và việc yêu cầu nộp lại trên Phạm vi 56 |
+| 18/11/2026 | Kiểm chứng và rà nguồn A.6.2 | Nguồn 1 ký tự không đưa vào model; 253 test Python, 5 test JavaScript, lint/build đạt. Không coi ngưỡng văn bản là đủ bằng chứng tuân thủ |
 
 ## Kết quả và minh chứng
 
-Chưa có kết quả mới của tuần 6. Tài liệu dùng để tiếp tục công việc:
+- [Kiểm tra nội dung nguồn trước đánh giá](../docs/KIEM_TRA_NOI_DUNG_NGUON.md): chính sách kỹ thuật, hành vi và giới hạn.
+
+Tài liệu bàn giao từ tuần trước:
 
 - [Nhật ký tuần 5](TUAN_05.md).
 - [Bàn giao nghiệm thu, phiếu xác nhận và checklist UI](../docs/HOAN_THIEN_NGHIEM_THU_2026_11_15.md).
@@ -59,7 +62,8 @@ Chưa xác định. Rà kết quả cuối tuần 6 rồi chốt; chưa tạo fi
 
 ## Đồng bộ GitHub
 
-Chưa có lần push được ghi nhận cho tuần 6. Khi push, ghi thời gian thực tế (UTC+7), người push, nhánh và nội dung ngắn gọn; gộp cùng ngày/cùng nhánh. Không ghi thao tác chạy/dừng hoặc chuyển nhánh.
+Ghi gọn theo ngày/nhánh; người push: Trần Văn Toàn. Không ghi thao tác chạy/dừng hoặc chuyển nhánh.
 
 | Ngày | Giờ (UTC+7) | Người push | Nhánh | Nội dung chính |
 |---|---|---|---|---|
+| 18/11/2026 | 10:32 | Trần Văn Toàn | `Tuan6` | Kiểm tra chất lượng nguồn bằng chứng, trực quan hóa đánh giá tuân thủ và cập nhật tài liệu tuần 6 |
