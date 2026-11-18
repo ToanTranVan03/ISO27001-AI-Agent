@@ -14,7 +14,8 @@ Giữ phạm vi 56 control (8 A.6, 14 A.7, 34 A.8), ưu tiên kiểm định sâ
 - [ ] Chuẩn bị bộ nguồn kiểm định mới, xác nhận lịch sử tiếp xúc và chốt snapshot trước khi chạy/chấm; không dùng lại fixture đã biết rồi gọi là tập độc lập.
 - [ ] Tổ chức người đánh giá đọc và chấm trên cùng mã lượt/bằng chứng; khai đúng mức hỗ trợ, giữ riêng kết quả có AI hỗ trợ và nhãn luyện tập.
 - [ ] Phân tích bất đồng và chất lượng căn cứ; lưu xử lý riêng, không sửa nhãn khóa hoặc thay đổi báo cáo cũ để tăng điểm.
-- [ ] Chạy Agent trên hồ sơ hiện hành; báo cáo từng control, lỗi lần đầu/sau sửa và độ đúng so với bộ nhãn đủ điều kiện.
+- [x] Chạy Agent trên 18 nguồn A.8 lab hiện hành, xuất kết quả từng control và giữ riêng các lần lỗi/kiểm tra lại.
+- [ ] Mở rộng đánh giá trên nguồn còn thiếu trong phạm vi 56; đo độ đúng bằng bộ kiểm định và nhãn người đánh giá đủ điều kiện.
 - [ ] Kiểm thử đầy đủ giao diện bằng các tài khoản: đọc/thu nguồn, chấm, khóa nhãn, cập nhật tiến độ, xuất báo cáo và các trường hợp bị chặn.
 - [ ] Người phụ trách ghi 56 quyết định tính áp dụng, lý do và kế hoạch xử lý/duy trì; bổ sung người nhận, hạn và cách kiểm tra lại.
 - [ ] Thẩm định từng tiêu chí trên nguồn hiện hành, hoàn thiện và trình người có trách nhiệm phê duyệt SoA khi đủ điều kiện.
@@ -27,6 +28,8 @@ Phần triển khai kỹ thuật đã hoàn thành trong tuần:
 - [x] Nộp nguồn gốc trên web cho 56 control, lưu/tải bản gốc có hash và nối nguồn với hàng đợi đánh giá.
 - [x] Kiểm chứng mã/API và giao dịch PostgreSQL rollback; chưa thay cho kiểm thử đầy đủ UI hoặc nghiệm thu chuyên môn.
 - [x] Bổ sung bảng điều kiện trình duyệt SoA theo từng control, cảnh báo hạn và chặn thiếu thông tin kế hoạch/nguồn thẩm định không dùng được.
+- [x] Chuyển chạy lô nguồn sang server, lưu tiến độ PostgreSQL, chặn lô trùng, dừng có kiểm soát và ghi gián đoạn khi API khởi động lại.
+- [x] Kiểm soát kích thước đầu vào/context model, giữ nguồn không cắt âm thầm; không hiển thị kết luận cũ như hiện hành khi job mới lỗi.
 
 Chỉ đánh dấu hoàn thành khi có kết quả và minh chứng. Hoàn thành phần mềm, có nguồn hoặc chạy xong không đồng nghĩa control tuân thủ hay đã nghiệm thu chuyên môn.
 
@@ -55,6 +58,9 @@ Các thông tin trên là **trạng thái bàn giao từ tuần 5**, không ph�
 | 18/11/2026 | Hoàn thiện kiểm tra hồ sơ trước trình duyệt SoA | Control áp dụng cần thẩm định hiện hành, kế hoạch, người nhận, hạn/kỳ rà và cách kiểm tra lại; bổ sung giao thức/fingerprint mới, giữ lịch sử duyệt cũ |
 | 18/11/2026 | Theo dõi việc cần bổ sung và hạn kế hoạch | Bảng 56 control có lý do bị chặn, lọc/tìm, mở đúng hồ sơ và xuất JSON/Markdown; nhắc rà hạn đã qua nhưng không tự gia hạn hoặc kết luận công việc đã/chưa hoàn tất |
 | 18/11/2026 | Củng cố thẩm định và kiểm chứng SoA | Chặn kết luận đạt/không đạt từ nguồn không dùng được; 295 test Python, 7 test JavaScript, lint/build/render đạt; API thật chặn duyệt thiếu điều kiện và thẩm định nguồn lỗi, không lưu dữ liệu thử; kiểm thử toàn UI vẫn còn chờ |
+| 18/11/2026 | Tự động hóa lượt đánh giá nguồn trên server | Không phụ thuộc giữ trang mở; lô hữu hạn, mỗi control tối đa một lần; giữ tiến độ/lỗi/bỏ qua, kiểm tra token nguồn/rubric và khóa job; kiểm chứng PostgreSQL bằng rollback |
+| 18/11/2026 | Chạy thực tế và xử lý lỗi Agent | Lô 18 control đầu có 16 job lưu kết quả, 2 lỗi; tăng giới hạn phản hồi chưa đủ, sau sửa đóng gói/context hai lượt kiểm tra lại lưu được kết quả. Giữ mọi job cũ, không sửa thành thành công |
+| 18/11/2026 | Xuất kết quả và kiểm chứng sau sửa | Kết quả máy mới nhất của 18 control: 3 không tuân thủ, 6 một phần, 9 thiếu bằng chứng; không phải độ đúng so với người chấm. 308 test Python, 7 test JavaScript, lint/build/render đạt; nguồn/rubric giữa các lần kiểm tra lại không đổi |
 
 ## Kết quả và minh chứng
 
@@ -62,6 +68,8 @@ Các thông tin trên là **trạng thái bàn giao từ tuần 5**, không ph�
 - [Theo dõi thay đổi doanh nghiệp](../docs/LICH_SU_DOANH_NGHIEP.md): xem trước, kiểm tra snapshot và lịch sử.
 - [Thu nguồn gốc trên web cho 56 control](../docs/THU_NGUON_WEB_56.md): cách nộp nguồn, tải bản gốc và tiếp tục đánh giá.
 - [Điều kiện hồ sơ và trình duyệt SoA](../docs/DIEU_KIEN_DUYET_SOA_56.md): phần còn thiếu, hạn kế hoạch, thẩm định và chính sách duyệt mới.
+- [Đánh giá theo lô trên server](../docs/DANH_GIA_THEO_LO_TREN_SERVER.md): vận hành, khóa, dừng và giới hạn.
+- [Kết quả đánh giá lại 18 nguồn A.8](../docs/KET_QUA_DANH_GIA_NGUON_18_2026_11_18.md): bảng kết quả và dữ liệu job/evaluation/audit trail, giữ các lần lỗi. Chỉ đo thực thi, chưa phải benchmark độc lập.
 - Trạng thái kiểm tra ngày 18/11: 19/56 control có nguồn ngoài preset, 18 qua kiểm tra nội dung tối thiểu; 37 còn thiếu nguồn và A.6.2 cần thay nguồn. Chưa có thẩm định hiện hành/quyết định tính áp dụng; rubric và SoA chưa được phê duyệt.
 
 Tài liệu bàn giao từ tuần trước:

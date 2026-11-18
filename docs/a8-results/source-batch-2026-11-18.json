@@ -1,0 +1,918 @@
+{
+  "captured_at": "2026-11-18T19:47:12.262262+07:00",
+  "batch_id": "37dd8327-e54f-44ee-b8dd-aa017f99b4f0",
+  "assessment_id": "7f7c009b-bdcd-5b33-934e-15251ad2c976",
+  "source": "Existing intentionally configured lab captures; not a new independent validation corpus",
+  "meaning": "Execution reliability only; no human accuracy computed",
+  "human_accuracy": null,
+  "initial_config": {
+    "context": 4096,
+    "response_tokens": 250
+  },
+  "response_recheck_config": {
+    "context": 4096,
+    "response_tokens": 512
+  },
+  "final_recheck_config": {
+    "context": 16384,
+    "response_tokens": 512,
+    "max_prompt_utf8_bytes": 14336,
+    "lossless_capture_packing": true
+  },
+  "initial_counts": {
+    "SUCCEEDED": 16,
+    "FAILED": 2
+  },
+  "final_execution_counts": {
+    "SUCCEEDED": 18
+  },
+  "final_machine_conclusions": {
+    "Non-Compliant": 3,
+    "Insufficient Evidence": 9,
+    "Partially Compliant": 6
+  },
+  "controls": [
+    {
+      "control_id": "A.8.2",
+      "source_token": "726a073481fed3f6c6ba3d763e9bc7bb3fdcadfa72508aedec0458747fb98f2d",
+      "initial": {
+        "job_id": "c7857c16-e2ff-40e5-b646-4456004f4290",
+        "status": "SUCCEEDED",
+        "error": null,
+        "started_at": "2026-11-18T12:33:16.758154+00:00",
+        "finished_at": "2026-11-18T12:33:30.791651+00:00",
+        "evaluation_id": 262,
+        "machine_conclusion": "Non-Compliant",
+        "evidence_ids": [
+          "A8CAP-2b3187732da6b13fa7852e531273d61c74a5b26a",
+          "A8CAP-841bd9158844e7b074dc95ac2b3954ecbe813d13"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY",
+          "REPORT"
+        ]
+      },
+      "response_budget_recheck": null,
+      "context_recheck": null,
+      "latest_execution": {
+        "job_id": "c7857c16-e2ff-40e5-b646-4456004f4290",
+        "status": "SUCCEEDED",
+        "error": null,
+        "started_at": "2026-11-18T12:33:16.758154+00:00",
+        "finished_at": "2026-11-18T12:33:30.791651+00:00",
+        "evaluation_id": 262,
+        "machine_conclusion": "Non-Compliant",
+        "evidence_ids": [
+          "A8CAP-2b3187732da6b13fa7852e531273d61c74a5b26a",
+          "A8CAP-841bd9158844e7b074dc95ac2b3954ecbe813d13"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY",
+          "REPORT"
+        ]
+      }
+    },
+    {
+      "control_id": "A.8.3",
+      "source_token": "6940a563aa4a3f26bf18da3a2feac04bfd348441a6bd5535a221803f08ad9f90",
+      "initial": {
+        "job_id": "0d393193-0d31-414a-9dd0-4d34b82db190",
+        "status": "SUCCEEDED",
+        "error": null,
+        "started_at": "2026-11-18T12:33:32.500189+00:00",
+        "finished_at": "2026-11-18T12:33:42.858995+00:00",
+        "evaluation_id": 263,
+        "machine_conclusion": "Insufficient Evidence",
+        "evidence_ids": [
+          "A8CAP-f0ff998745f599c53ac48fa7adf0df0a813820ed",
+          "A8CAP-2041a7d32385d61e383457e991a20df6b26d6fba"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY REPRESENTATIVE LAB SCOPE; FULL CONTROL NOT ESTABLISHED",
+          "VERIFY",
+          "REPORT"
+        ]
+      },
+      "response_budget_recheck": null,
+      "context_recheck": null,
+      "latest_execution": {
+        "job_id": "0d393193-0d31-414a-9dd0-4d34b82db190",
+        "status": "SUCCEEDED",
+        "error": null,
+        "started_at": "2026-11-18T12:33:32.500189+00:00",
+        "finished_at": "2026-11-18T12:33:42.858995+00:00",
+        "evaluation_id": 263,
+        "machine_conclusion": "Insufficient Evidence",
+        "evidence_ids": [
+          "A8CAP-f0ff998745f599c53ac48fa7adf0df0a813820ed",
+          "A8CAP-2041a7d32385d61e383457e991a20df6b26d6fba"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY REPRESENTATIVE LAB SCOPE; FULL CONTROL NOT ESTABLISHED",
+          "VERIFY",
+          "REPORT"
+        ]
+      }
+    },
+    {
+      "control_id": "A.8.5",
+      "source_token": "dcb3d4219e0e7779018b225dee0c3ba81110297febed73914089817e726c4261",
+      "initial": {
+        "job_id": "75704339-061e-4889-8565-04b6062ce814",
+        "status": "SUCCEEDED",
+        "error": null,
+        "started_at": "2026-11-18T12:33:44.505132+00:00",
+        "finished_at": "2026-11-18T12:33:56.032584+00:00",
+        "evaluation_id": 264,
+        "machine_conclusion": "Insufficient Evidence",
+        "evidence_ids": [
+          "A8CAP-db4051d2219b1058e9f8f9a3438ba4552f4ec720",
+          "A8CAP-2e8c77befeef95e5e265d44c319916f0e11815c5"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY",
+          "REPORT"
+        ]
+      },
+      "response_budget_recheck": null,
+      "context_recheck": null,
+      "latest_execution": {
+        "job_id": "75704339-061e-4889-8565-04b6062ce814",
+        "status": "SUCCEEDED",
+        "error": null,
+        "started_at": "2026-11-18T12:33:44.505132+00:00",
+        "finished_at": "2026-11-18T12:33:56.032584+00:00",
+        "evaluation_id": 264,
+        "machine_conclusion": "Insufficient Evidence",
+        "evidence_ids": [
+          "A8CAP-db4051d2219b1058e9f8f9a3438ba4552f4ec720",
+          "A8CAP-2e8c77befeef95e5e265d44c319916f0e11815c5"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY",
+          "REPORT"
+        ]
+      }
+    },
+    {
+      "control_id": "A.8.7",
+      "source_token": "f722dcdaf105f539f7592267f508242b212df5388ccabec2d582be38c1d84aa1",
+      "initial": {
+        "job_id": "d662545c-310f-4a29-9ede-ab36958088ca",
+        "status": "SUCCEEDED",
+        "error": null,
+        "started_at": "2026-11-18T12:33:57.732728+00:00",
+        "finished_at": "2026-11-18T12:34:09.017372+00:00",
+        "evaluation_id": 265,
+        "machine_conclusion": "Partially Compliant",
+        "evidence_ids": [
+          "A8CAP-2e434c67aeaa3e181d2871e80d18cfde45ade118",
+          "A8CAP-04f9a3878cd79ee4236df80b5be93960b851ab41"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY",
+          "REPORT"
+        ]
+      },
+      "response_budget_recheck": null,
+      "context_recheck": null,
+      "latest_execution": {
+        "job_id": "d662545c-310f-4a29-9ede-ab36958088ca",
+        "status": "SUCCEEDED",
+        "error": null,
+        "started_at": "2026-11-18T12:33:57.732728+00:00",
+        "finished_at": "2026-11-18T12:34:09.017372+00:00",
+        "evaluation_id": 265,
+        "machine_conclusion": "Partially Compliant",
+        "evidence_ids": [
+          "A8CAP-2e434c67aeaa3e181d2871e80d18cfde45ade118",
+          "A8CAP-04f9a3878cd79ee4236df80b5be93960b851ab41"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY",
+          "REPORT"
+        ]
+      }
+    },
+    {
+      "control_id": "A.8.8",
+      "source_token": "eef57b9cc6dd06927b87b867407f8b981fb632054bbfb6a08b6281af00b8f8d7",
+      "initial": {
+        "job_id": "8494750c-bfaa-4668-a607-f1afdaf1bd27",
+        "status": "FAILED",
+        "error": "Không thể chạy Agent. Kiểm tra Ollama hoặc log API.",
+        "started_at": "2026-11-18T12:34:10.508318+00:00",
+        "finished_at": "2026-11-18T12:34:22.532996+00:00",
+        "evaluation_id": null,
+        "machine_conclusion": null,
+        "evidence_ids": [],
+        "audit_trail": []
+      },
+      "response_budget_recheck": {
+        "job_id": "c2299f44-36e0-48cb-94a1-0f9955aea14a",
+        "status": "FAILED",
+        "error": "Phản hồi model không đúng JSON/schema; chưa lưu kết luận. Xem log API.",
+        "started_at": "2026-11-18T12:38:15.063173+00:00",
+        "finished_at": "2026-11-18T12:38:31.165462+00:00",
+        "evaluation_id": null,
+        "machine_conclusion": null,
+        "evidence_ids": [],
+        "audit_trail": []
+      },
+      "context_recheck": {
+        "job_id": "cddbfe26-6b53-4462-b8b6-16805aa483e5",
+        "status": "SUCCEEDED",
+        "error": null,
+        "started_at": "2026-11-18T12:46:10.730371+00:00",
+        "finished_at": "2026-11-18T12:46:36.094416+00:00",
+        "evaluation_id": 279,
+        "machine_conclusion": "Partially Compliant",
+        "evidence_ids": [
+          "A8CAP-a74dfad8d31b03db5d86a30f56561d5c96abc8a8",
+          "A8CAP-99fb6baf65624d3a0a5b61b2ee5b8c078bc1ad8a"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "MODEL_INPUT_BYTES 13772; CONTEXT 16384; NO SILENT TRUNCATION",
+          "EVALUATE",
+          "VERIFY",
+          "REPORT"
+        ]
+      },
+      "latest_execution": {
+        "job_id": "cddbfe26-6b53-4462-b8b6-16805aa483e5",
+        "status": "SUCCEEDED",
+        "error": null,
+        "started_at": "2026-11-18T12:46:10.730371+00:00",
+        "finished_at": "2026-11-18T12:46:36.094416+00:00",
+        "evaluation_id": 279,
+        "machine_conclusion": "Partially Compliant",
+        "evidence_ids": [
+          "A8CAP-a74dfad8d31b03db5d86a30f56561d5c96abc8a8",
+          "A8CAP-99fb6baf65624d3a0a5b61b2ee5b8c078bc1ad8a"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "MODEL_INPUT_BYTES 13772; CONTEXT 16384; NO SILENT TRUNCATION",
+          "EVALUATE",
+          "VERIFY",
+          "REPORT"
+        ]
+      }
+    },
+    {
+      "control_id": "A.8.9",
+      "source_token": "5d22d737f8044774dc87ab56a7551575bddeac14f2a139e65de08829d6cefedc",
+      "initial": {
+        "job_id": "0e889ccb-967a-40fd-8fcb-4785d101720c",
+        "status": "SUCCEEDED",
+        "error": null,
+        "started_at": "2026-11-18T12:34:24.080374+00:00",
+        "finished_at": "2026-11-18T12:34:35.658120+00:00",
+        "evaluation_id": 266,
+        "machine_conclusion": "Partially Compliant",
+        "evidence_ids": [
+          "A8CAP-1f9bbd0a1795fb577c141f4730f6e1c47b3a79a3",
+          "A8CAP-749fb7a15ba6509171d475672ad8ca620b4e1dca"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY",
+          "REPORT"
+        ]
+      },
+      "response_budget_recheck": null,
+      "context_recheck": null,
+      "latest_execution": {
+        "job_id": "0e889ccb-967a-40fd-8fcb-4785d101720c",
+        "status": "SUCCEEDED",
+        "error": null,
+        "started_at": "2026-11-18T12:34:24.080374+00:00",
+        "finished_at": "2026-11-18T12:34:35.658120+00:00",
+        "evaluation_id": 266,
+        "machine_conclusion": "Partially Compliant",
+        "evidence_ids": [
+          "A8CAP-1f9bbd0a1795fb577c141f4730f6e1c47b3a79a3",
+          "A8CAP-749fb7a15ba6509171d475672ad8ca620b4e1dca"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY",
+          "REPORT"
+        ]
+      }
+    },
+    {
+      "control_id": "A.8.10",
+      "source_token": "255aa8b3589ed37b7b83eb58a6905e1c9e91f563659dd1295d0a972f6387b61f",
+      "initial": {
+        "job_id": "259e9879-9aa7-433f-ba87-369ebe5484f0",
+        "status": "SUCCEEDED",
+        "error": null,
+        "started_at": "2026-11-18T12:34:37.491804+00:00",
+        "finished_at": "2026-11-18T12:34:47.634299+00:00",
+        "evaluation_id": 267,
+        "machine_conclusion": "Insufficient Evidence",
+        "evidence_ids": [
+          "A8CAP-f8e9fb75af2fa20dce130f2d7873d5b4973c4654",
+          "A8CAP-f0a7fd8324e644643d6092a335076e99c2dfdfd4"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY REPRESENTATIVE LAB SCOPE; FULL CONTROL NOT ESTABLISHED",
+          "VERIFY",
+          "REPORT"
+        ]
+      },
+      "response_budget_recheck": null,
+      "context_recheck": null,
+      "latest_execution": {
+        "job_id": "259e9879-9aa7-433f-ba87-369ebe5484f0",
+        "status": "SUCCEEDED",
+        "error": null,
+        "started_at": "2026-11-18T12:34:37.491804+00:00",
+        "finished_at": "2026-11-18T12:34:47.634299+00:00",
+        "evaluation_id": 267,
+        "machine_conclusion": "Insufficient Evidence",
+        "evidence_ids": [
+          "A8CAP-f8e9fb75af2fa20dce130f2d7873d5b4973c4654",
+          "A8CAP-f0a7fd8324e644643d6092a335076e99c2dfdfd4"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY REPRESENTATIVE LAB SCOPE; FULL CONTROL NOT ESTABLISHED",
+          "VERIFY",
+          "REPORT"
+        ]
+      }
+    },
+    {
+      "control_id": "A.8.12",
+      "source_token": "b9cd76323074e338ddfdc103400c01cbb303dd87bae83d2c607de154cd0a8fcc",
+      "initial": {
+        "job_id": "9aa2d088-b4c1-45c2-9733-bf597893f976",
+        "status": "SUCCEEDED",
+        "error": null,
+        "started_at": "2026-11-18T12:34:49.459601+00:00",
+        "finished_at": "2026-11-18T12:35:00.466270+00:00",
+        "evaluation_id": 268,
+        "machine_conclusion": "Insufficient Evidence",
+        "evidence_ids": [
+          "A8CAP-049a459298395b29c35013f777e0a97db2b898fd",
+          "A8CAP-55a18974d78c34bf1c0d0a9157d56882c9717aff"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY REPRESENTATIVE LAB SCOPE; FULL CONTROL NOT ESTABLISHED",
+          "VERIFY",
+          "REPORT"
+        ]
+      },
+      "response_budget_recheck": null,
+      "context_recheck": null,
+      "latest_execution": {
+        "job_id": "9aa2d088-b4c1-45c2-9733-bf597893f976",
+        "status": "SUCCEEDED",
+        "error": null,
+        "started_at": "2026-11-18T12:34:49.459601+00:00",
+        "finished_at": "2026-11-18T12:35:00.466270+00:00",
+        "evaluation_id": 268,
+        "machine_conclusion": "Insufficient Evidence",
+        "evidence_ids": [
+          "A8CAP-049a459298395b29c35013f777e0a97db2b898fd",
+          "A8CAP-55a18974d78c34bf1c0d0a9157d56882c9717aff"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY REPRESENTATIVE LAB SCOPE; FULL CONTROL NOT ESTABLISHED",
+          "VERIFY",
+          "REPORT"
+        ]
+      }
+    },
+    {
+      "control_id": "A.8.13",
+      "source_token": "5475649c296f220c9018d56a88bab218f3f75cd8e1a3827e4ba5621ec0cbb15a",
+      "initial": {
+        "job_id": "7a43322e-db5d-439a-91d1-3b49822fa873",
+        "status": "SUCCEEDED",
+        "error": null,
+        "started_at": "2026-11-18T12:35:02.181597+00:00",
+        "finished_at": "2026-11-18T12:35:12.741490+00:00",
+        "evaluation_id": 269,
+        "machine_conclusion": "Partially Compliant",
+        "evidence_ids": [
+          "A8CAP-03c0aceb28e763c1a5fc5ffef66afd7a4973d552",
+          "A8CAP-9a4313b18c29c30afff20516ea49e166ac261b02"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY",
+          "REPORT"
+        ]
+      },
+      "response_budget_recheck": null,
+      "context_recheck": null,
+      "latest_execution": {
+        "job_id": "7a43322e-db5d-439a-91d1-3b49822fa873",
+        "status": "SUCCEEDED",
+        "error": null,
+        "started_at": "2026-11-18T12:35:02.181597+00:00",
+        "finished_at": "2026-11-18T12:35:12.741490+00:00",
+        "evaluation_id": 269,
+        "machine_conclusion": "Partially Compliant",
+        "evidence_ids": [
+          "A8CAP-03c0aceb28e763c1a5fc5ffef66afd7a4973d552",
+          "A8CAP-9a4313b18c29c30afff20516ea49e166ac261b02"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY",
+          "REPORT"
+        ]
+      }
+    },
+    {
+      "control_id": "A.8.15",
+      "source_token": "2119092b63be7af311acfbcd6fb676c75b00030bb26b676d913486e7568c0a95",
+      "initial": {
+        "job_id": "343e6064-528d-42de-bb36-fe5e864edad9",
+        "status": "SUCCEEDED",
+        "error": null,
+        "started_at": "2026-11-18T12:35:14.592111+00:00",
+        "finished_at": "2026-11-18T12:35:25.630238+00:00",
+        "evaluation_id": 270,
+        "machine_conclusion": "Partially Compliant",
+        "evidence_ids": [
+          "A8CAP-024cdd973148a2651c48fdfd2ddcc5b4cd78b0e7",
+          "A8CAP-701453fb7db7c91765e65ffd12ebcc2096e95970"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY",
+          "REPORT"
+        ]
+      },
+      "response_budget_recheck": null,
+      "context_recheck": null,
+      "latest_execution": {
+        "job_id": "343e6064-528d-42de-bb36-fe5e864edad9",
+        "status": "SUCCEEDED",
+        "error": null,
+        "started_at": "2026-11-18T12:35:14.592111+00:00",
+        "finished_at": "2026-11-18T12:35:25.630238+00:00",
+        "evaluation_id": 270,
+        "machine_conclusion": "Partially Compliant",
+        "evidence_ids": [
+          "A8CAP-024cdd973148a2651c48fdfd2ddcc5b4cd78b0e7",
+          "A8CAP-701453fb7db7c91765e65ffd12ebcc2096e95970"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY",
+          "REPORT"
+        ]
+      }
+    },
+    {
+      "control_id": "A.8.16",
+      "source_token": "eb5d4b0bfdac0e3ada9f48e283e77bbf1341fc8828093b68dcbe5a8b6c41017a",
+      "initial": {
+        "job_id": "23af57e8-d37a-4246-92bf-c9e8c5fc6e58",
+        "status": "SUCCEEDED",
+        "error": null,
+        "started_at": "2026-11-18T12:35:27.065820+00:00",
+        "finished_at": "2026-11-18T12:35:37.408351+00:00",
+        "evaluation_id": 271,
+        "machine_conclusion": "Insufficient Evidence",
+        "evidence_ids": [
+          "A8CAP-a713f9fa99c99167cf0cad5cff36d366a593f140",
+          "A8CAP-65b60c56df0ace08ceb5c4bc56335fd7a8baa77f"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY REPRESENTATIVE LAB SCOPE; FULL CONTROL NOT ESTABLISHED",
+          "VERIFY",
+          "REPORT"
+        ]
+      },
+      "response_budget_recheck": null,
+      "context_recheck": null,
+      "latest_execution": {
+        "job_id": "23af57e8-d37a-4246-92bf-c9e8c5fc6e58",
+        "status": "SUCCEEDED",
+        "error": null,
+        "started_at": "2026-11-18T12:35:27.065820+00:00",
+        "finished_at": "2026-11-18T12:35:37.408351+00:00",
+        "evaluation_id": 271,
+        "machine_conclusion": "Insufficient Evidence",
+        "evidence_ids": [
+          "A8CAP-a713f9fa99c99167cf0cad5cff36d366a593f140",
+          "A8CAP-65b60c56df0ace08ceb5c4bc56335fd7a8baa77f"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY REPRESENTATIVE LAB SCOPE; FULL CONTROL NOT ESTABLISHED",
+          "VERIFY",
+          "REPORT"
+        ]
+      }
+    },
+    {
+      "control_id": "A.8.17",
+      "source_token": "975bee7d07682796ed1acea3afb4102bb5f2e0ab0514b4fe05ea8a38e52f469f",
+      "initial": {
+        "job_id": "2afa8ede-a615-4967-a22b-14ba7da24a66",
+        "status": "SUCCEEDED",
+        "error": null,
+        "started_at": "2026-11-18T12:35:38.983184+00:00",
+        "finished_at": "2026-11-18T12:35:50.224589+00:00",
+        "evaluation_id": 272,
+        "machine_conclusion": "Non-Compliant",
+        "evidence_ids": [
+          "A8CAP-069b8914e7421e30d8ac536d65c699e2c250b586",
+          "A8CAP-6e36a3ee80086cdcf1d21ae8cc86a228f9bbefee"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY",
+          "REPORT"
+        ]
+      },
+      "response_budget_recheck": null,
+      "context_recheck": null,
+      "latest_execution": {
+        "job_id": "2afa8ede-a615-4967-a22b-14ba7da24a66",
+        "status": "SUCCEEDED",
+        "error": null,
+        "started_at": "2026-11-18T12:35:38.983184+00:00",
+        "finished_at": "2026-11-18T12:35:50.224589+00:00",
+        "evaluation_id": 272,
+        "machine_conclusion": "Non-Compliant",
+        "evidence_ids": [
+          "A8CAP-069b8914e7421e30d8ac536d65c699e2c250b586",
+          "A8CAP-6e36a3ee80086cdcf1d21ae8cc86a228f9bbefee"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY",
+          "REPORT"
+        ]
+      }
+    },
+    {
+      "control_id": "A.8.19",
+      "source_token": "7ffefed76c8096424a5b9454e10a532c6c3ce57226b86ea8fbf6b8f78d51474e",
+      "initial": {
+        "job_id": "f26a6ff3-900c-42a7-a76d-b2ae85fa82a0",
+        "status": "FAILED",
+        "error": "Không thể chạy Agent. Kiểm tra Ollama hoặc log API.",
+        "started_at": "2026-11-18T12:35:51.791320+00:00",
+        "finished_at": "2026-11-18T12:36:01.457755+00:00",
+        "evaluation_id": null,
+        "machine_conclusion": null,
+        "evidence_ids": [],
+        "audit_trail": []
+      },
+      "response_budget_recheck": {
+        "job_id": "6112b8a9-5f34-478b-b1d2-c2abc1707566",
+        "status": "FAILED",
+        "error": "Phản hồi model không đúng JSON/schema; chưa lưu kết luận. Xem log API.",
+        "started_at": "2026-11-18T12:38:15.160062+00:00",
+        "finished_at": "2026-11-18T12:38:35.506279+00:00",
+        "evaluation_id": null,
+        "machine_conclusion": null,
+        "evidence_ids": [],
+        "audit_trail": []
+      },
+      "context_recheck": {
+        "job_id": "b5fe0056-9ff2-49bb-972a-ae2542167abf",
+        "status": "SUCCEEDED",
+        "error": null,
+        "started_at": "2026-11-18T12:46:10.805682+00:00",
+        "finished_at": "2026-11-18T12:46:26.462166+00:00",
+        "evaluation_id": 278,
+        "machine_conclusion": "Non-Compliant",
+        "evidence_ids": [
+          "A8CAP-bde6e149b94b95bebcb32c85678594a367d92fd5",
+          "A8CAP-9ac27c01b67702d4b6675d84beca5bd6353430eb"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "MODEL_INPUT_BYTES 12899; CONTEXT 16384; NO SILENT TRUNCATION",
+          "EVALUATE",
+          "VERIFY",
+          "REPORT"
+        ]
+      },
+      "latest_execution": {
+        "job_id": "b5fe0056-9ff2-49bb-972a-ae2542167abf",
+        "status": "SUCCEEDED",
+        "error": null,
+        "started_at": "2026-11-18T12:46:10.805682+00:00",
+        "finished_at": "2026-11-18T12:46:26.462166+00:00",
+        "evaluation_id": 278,
+        "machine_conclusion": "Non-Compliant",
+        "evidence_ids": [
+          "A8CAP-bde6e149b94b95bebcb32c85678594a367d92fd5",
+          "A8CAP-9ac27c01b67702d4b6675d84beca5bd6353430eb"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "MODEL_INPUT_BYTES 12899; CONTEXT 16384; NO SILENT TRUNCATION",
+          "EVALUATE",
+          "VERIFY",
+          "REPORT"
+        ]
+      }
+    },
+    {
+      "control_id": "A.8.20",
+      "source_token": "d8d5eb7cab52c1ae4d4596cc65c847ff26409cfe00200f7d886ad59fc9f27162",
+      "initial": {
+        "job_id": "fdfa39ee-5e94-411b-ae54-ae778a37309d",
+        "status": "SUCCEEDED",
+        "error": null,
+        "started_at": "2026-11-18T12:36:02.941269+00:00",
+        "finished_at": "2026-11-18T12:36:13.845042+00:00",
+        "evaluation_id": 273,
+        "machine_conclusion": "Insufficient Evidence",
+        "evidence_ids": [
+          "A8CAP-2e2d47afc634522dd0499dd645f27e0e7fbd07eb",
+          "A8CAP-e61dc2bd4b269303a14ea59d3ecfd11432c400a4"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY",
+          "REPORT"
+        ]
+      },
+      "response_budget_recheck": null,
+      "context_recheck": null,
+      "latest_execution": {
+        "job_id": "fdfa39ee-5e94-411b-ae54-ae778a37309d",
+        "status": "SUCCEEDED",
+        "error": null,
+        "started_at": "2026-11-18T12:36:02.941269+00:00",
+        "finished_at": "2026-11-18T12:36:13.845042+00:00",
+        "evaluation_id": 273,
+        "machine_conclusion": "Insufficient Evidence",
+        "evidence_ids": [
+          "A8CAP-2e2d47afc634522dd0499dd645f27e0e7fbd07eb",
+          "A8CAP-e61dc2bd4b269303a14ea59d3ecfd11432c400a4"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY",
+          "REPORT"
+        ]
+      }
+    },
+    {
+      "control_id": "A.8.22",
+      "source_token": "6701593f7d330479b01f58b13a1bdd7106e82b236cf3a2d88672fc70765cc950",
+      "initial": {
+        "job_id": "44c55a40-9f12-4e36-b9b9-31a945f8639f",
+        "status": "SUCCEEDED",
+        "error": null,
+        "started_at": "2026-11-18T12:36:15.287556+00:00",
+        "finished_at": "2026-11-18T12:36:25.886758+00:00",
+        "evaluation_id": 274,
+        "machine_conclusion": "Insufficient Evidence",
+        "evidence_ids": [
+          "A8CAP-1c954d7fb9e886a8a91be7dfa90ba08046af681f",
+          "A8CAP-ee4807616708ec078304f5aa0d2242ba77aa17bd"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY",
+          "REPORT"
+        ]
+      },
+      "response_budget_recheck": null,
+      "context_recheck": null,
+      "latest_execution": {
+        "job_id": "44c55a40-9f12-4e36-b9b9-31a945f8639f",
+        "status": "SUCCEEDED",
+        "error": null,
+        "started_at": "2026-11-18T12:36:15.287556+00:00",
+        "finished_at": "2026-11-18T12:36:25.886758+00:00",
+        "evaluation_id": 274,
+        "machine_conclusion": "Insufficient Evidence",
+        "evidence_ids": [
+          "A8CAP-1c954d7fb9e886a8a91be7dfa90ba08046af681f",
+          "A8CAP-ee4807616708ec078304f5aa0d2242ba77aa17bd"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY",
+          "REPORT"
+        ]
+      }
+    },
+    {
+      "control_id": "A.8.24",
+      "source_token": "e7bc3ada78f8958fdcb7a01fdf34faecee594fadbe08be19b9d777e5d1c22f61",
+      "initial": {
+        "job_id": "84d4e55e-b84f-4b2a-9e3a-95f72fc69de9",
+        "status": "SUCCEEDED",
+        "error": null,
+        "started_at": "2026-11-18T12:36:27.407505+00:00",
+        "finished_at": "2026-11-18T12:36:38.233423+00:00",
+        "evaluation_id": 275,
+        "machine_conclusion": "Insufficient Evidence",
+        "evidence_ids": [
+          "A8CAP-a4eb2459788429948240fa639f336d3e96768267",
+          "A8CAP-6e343a39369861d17647936a4e1c6f7619f4d2f4"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY REPRESENTATIVE LAB SCOPE; FULL CONTROL NOT ESTABLISHED",
+          "VERIFY",
+          "REPORT"
+        ]
+      },
+      "response_budget_recheck": null,
+      "context_recheck": null,
+      "latest_execution": {
+        "job_id": "84d4e55e-b84f-4b2a-9e3a-95f72fc69de9",
+        "status": "SUCCEEDED",
+        "error": null,
+        "started_at": "2026-11-18T12:36:27.407505+00:00",
+        "finished_at": "2026-11-18T12:36:38.233423+00:00",
+        "evaluation_id": 275,
+        "machine_conclusion": "Insufficient Evidence",
+        "evidence_ids": [
+          "A8CAP-a4eb2459788429948240fa639f336d3e96768267",
+          "A8CAP-6e343a39369861d17647936a4e1c6f7619f4d2f4"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY REPRESENTATIVE LAB SCOPE; FULL CONTROL NOT ESTABLISHED",
+          "VERIFY",
+          "REPORT"
+        ]
+      }
+    },
+    {
+      "control_id": "A.8.32",
+      "source_token": "070e455767533e570876221f7c5d66b78793551ac081a2578765bc5c02a64bb1",
+      "initial": {
+        "job_id": "574a43f2-b279-410e-ac1a-602a04d708ad",
+        "status": "SUCCEEDED",
+        "error": null,
+        "started_at": "2026-11-18T12:36:39.721624+00:00",
+        "finished_at": "2026-11-18T12:36:51.572174+00:00",
+        "evaluation_id": 276,
+        "machine_conclusion": "Partially Compliant",
+        "evidence_ids": [
+          "A8CAP-ac2281e47cc8dca790c9a7598047b24a91905834",
+          "A8CAP-e77afe7b1185150d33117bd590a0137807eae268"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY",
+          "REPORT"
+        ]
+      },
+      "response_budget_recheck": null,
+      "context_recheck": null,
+      "latest_execution": {
+        "job_id": "574a43f2-b279-410e-ac1a-602a04d708ad",
+        "status": "SUCCEEDED",
+        "error": null,
+        "started_at": "2026-11-18T12:36:39.721624+00:00",
+        "finished_at": "2026-11-18T12:36:51.572174+00:00",
+        "evaluation_id": 276,
+        "machine_conclusion": "Partially Compliant",
+        "evidence_ids": [
+          "A8CAP-ac2281e47cc8dca790c9a7598047b24a91905834",
+          "A8CAP-e77afe7b1185150d33117bd590a0137807eae268"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY",
+          "REPORT"
+        ]
+      }
+    },
+    {
+      "control_id": "A.8.1",
+      "source_token": "dbb5628139793256defdbe8bd54093e463d1752bb5cb833cc8a0ed5f690f1a87",
+      "initial": {
+        "job_id": "542531e5-6ee5-415b-9030-82e5ba652e23",
+        "status": "SUCCEEDED",
+        "error": null,
+        "started_at": "2026-11-18T12:36:53.149994+00:00",
+        "finished_at": "2026-11-18T12:37:04.007018+00:00",
+        "evaluation_id": 277,
+        "machine_conclusion": "Insufficient Evidence",
+        "evidence_ids": [
+          "A8CAP-44cea96f2be9969e90641a54044e872404b508ef",
+          "A8CAP-2dde3a7734659b8355fcf059e50a766dc6eea35c"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY",
+          "REPORT"
+        ]
+      },
+      "response_budget_recheck": null,
+      "context_recheck": null,
+      "latest_execution": {
+        "job_id": "542531e5-6ee5-415b-9030-82e5ba652e23",
+        "status": "SUCCEEDED",
+        "error": null,
+        "started_at": "2026-11-18T12:36:53.149994+00:00",
+        "finished_at": "2026-11-18T12:37:04.007018+00:00",
+        "evaluation_id": 277,
+        "machine_conclusion": "Insufficient Evidence",
+        "evidence_ids": [
+          "A8CAP-44cea96f2be9969e90641a54044e872404b508ef",
+          "A8CAP-2dde3a7734659b8355fcf059e50a766dc6eea35c"
+        ],
+        "audit_trail": [
+          "PLAN USER_EVIDENCE_ONLY",
+          "COLLECT USER_EVIDENCE_ONLY; NO SYNTHETIC SNAPSHOTS",
+          "EVALUATE",
+          "VERIFY",
+          "REPORT"
+        ]
+      }
+    }
+  ]
+}

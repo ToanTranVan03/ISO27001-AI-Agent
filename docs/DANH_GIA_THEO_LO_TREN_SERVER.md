@@ -24,3 +24,11 @@ Lô chỉ nhận control có nguồn ngoài preset qua kiểm tra nội dung t�
 302 test Python, 7 test JavaScript và lint/build đạt ở mốc triển khai. Kiểm tra PostgreSQL thật bằng giao dịch rollback xác nhận tạo lô, theo dõi yêu cầu trùng, ghi nhận dừng và khóa worker; không để lại dữ liệu thử. Các test kiểm tra nguồn đổi trước/sau claim, lỗi model/worker, không retry vô hạn và quyền theo đợt.
 
 Lượt đánh giá thực tế trên nguồn lab hiện hành được ghi riêng với kết quả thực thi; không dùng để thay bộ kiểm định mới, nhãn người thật hoặc độ đúng so với người đánh giá độc lập.
+
+## Kiểm soát đầu vào model sau lượt thực tế
+
+Nhánh hồ sơ dùng Qwen2.5:7b được cấu hình context 16384 và phản hồi tối đa 512 token. Đầu vào được kiểm tra tổng byte UTF-8 trước khi gọi model (tối đa 14336 byte cho prompt); quá giới hạn thì báo lỗi rõ ràng và yêu cầu chia nguồn, không cắt bỏ nội dung âm thầm.
+
+Các bản capture chỉ khác thông tin nhập nhưng giống toàn bộ nội dung quan sát có thể được đóng gói chung, giữ mọi evidence ID và provenance. Khác thời điểm quan sát, tài sản, artifact hoặc phạm vi thì không gộp. Bản gốc trong database không đổi. Đây là giảm lặp đầu vào, không sinh dữ kiện hay tóm tắt thay nội dung gốc.
+
+Nếu lần đánh giá mới nhất lỗi, giao diện ghi lỗi và chỉ giữ kết luận cũ trong lịch sử, không tô xanh kết luận cũ thành kết quả hiện hành. Bản sửa qua 308 test Python; kiểm tra lại model thật và các lần lỗi được báo riêng để không trộn thành số liệu độ đúng.
