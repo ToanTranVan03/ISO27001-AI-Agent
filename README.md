@@ -12,6 +12,7 @@ Hiện 27 control có kiểm tra lab đại diện; 29 có connector hồ sơ v�
 
 - Quản lý phạm vi, tiêu chí, nhân viên, tài khoản, thiết bị và hồ sơ theo đợt đánh giá.
 - Thu tài liệu/cấu hình/log, kiểm tra nguồn/hash/phiên bản và chống nhập trùng; chế độ chỉ đánh giá hồ sơ đã thu không dùng preset thay thế.
+- Tải nguồn cho 56 control ngay trên web, khai xuất xứ/thời điểm, lưu và tải lại bản gốc có kiểm tra hash; hàng đợi tiếp tục đánh giá nguồn đã nộp cho control chưa có collector riêng. Xem [hướng dẫn thu nguồn web](docs/THU_NGUON_WEB_56.md).
 - Agent đánh giá bằng chứng qua LangGraph/Ollama; kiểm tra viện dẫn và kết luận, lưu lỗi, không fallback ngầm.
 - Thực nghiệm 18 A.8: 108 ca raw thuộc 6 profile; tách LLM, baseline luật và nguồn nhãn.
 - Thu 18 probe live từ container cô lập, có phép thử TCP/TLS, xác thực, crypto, scanner mẫu và rollback; replay raw v2 là nguồn riêng. Rubric mới không thay kết quả/nhãn của các lượt cũ.

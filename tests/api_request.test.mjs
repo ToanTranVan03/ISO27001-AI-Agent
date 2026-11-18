@@ -36,3 +36,19 @@ test('network failures are distinguishable from server rejection',async t=>{
   t.mock.method(globalThis,'fetch',async()=>{throw new TypeError('offline');});
   await assert.rejects(apiRequest('/private'),e=>e instanceof ApiError&&e.status===0);
 });
+
+test('original artifact downloads keep authentication and raw bytes',async t=>{
+  const bytes=new Uint8Array([0,1,200,255]);
+  t.mock.method(globalThis,'fetch',async(_path,options)=>{
+    assert.equal(options.headers.get('Authorization'),'Bearer token');
+    assert.equal('responseType' in options,false);
+    return new Response(bytes,{status:200});
+  });
+  const blob=await apiRequest('/original','token',{responseType:'blob'});
+  assert.deepEqual(new Uint8Array(await blob.arrayBuffer()),bytes);
+});
+
+test('download errors remain structured API errors instead of downloadable files',async t=>{
+  t.mock.method(globalThis,'fetch',async()=>new Response(JSON.stringify({detail:'Not authorized'}),{status:403}));
+  await assert.rejects(apiRequest('/original','token',{responseType:'blob'}),e=>e instanceof ApiError&&e.status===403&&e.message==='Not authorized');
+});

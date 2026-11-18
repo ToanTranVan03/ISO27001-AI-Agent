@@ -7,6 +7,7 @@ export class ApiError extends Error {
 }
 
 export async function apiRequest(path, token = "", options = {}) {
+  const {responseType,...fetchOptions}=options;
   const headers = new Headers(options.headers || {});
   if (token) headers.set("Authorization", `Bearer ${token}`);
   if (options.body && !(options.body instanceof FormData) && !headers.has("Content-Type")) {
@@ -14,10 +15,11 @@ export async function apiRequest(path, token = "", options = {}) {
   }
   let response;
   try {
-    response = await fetch(path, { ...options, headers });
+    response = await fetch(path, { ...fetchOptions, headers });
   } catch {
     throw new ApiError("Không kết nối được FastAPI. Hãy khởi động server cổng 8000.", 0);
   }
+  if (response.ok && responseType === 'blob') return response.blob();
   const data = await response.json().catch(() => ({}));
   if (!response.ok) {
     throw new ApiError(typeof data.detail === "string" ? data.detail : `Lỗi HTTP ${response.status}`, response.status);
