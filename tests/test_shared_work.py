@@ -55,6 +55,30 @@ def test_stale_result_runs_again_and_preserves_target(monkeypatch,claim_env):
     claim_env.assert_called_once_with('assessment','A.6.1','Bob')
 
 
+def test_supplied_sources_enable_document_controls_and_never_fall_back_to_presets(monkeypatch,claim_env):
+    c=control('A.7.2',flow='NOT_STARTED',status='not_evaluated',supported=False)
+    c['evidence']=[dict(is_synthetic=False,source='upload-source://A.7.2/policy.txt',source_quality={'usable':True})]
+    monkeypatch.setattr(shared_work,'dossier',lambda _: {'controls':[c]})
+    board=shared_work.board('assessment')
+    assert board['next_control_id']=='A.7.2'
+    monkeypatch.setattr(shared_work,'board',lambda _:board)
+    result=shared_work.start('assessment','Bob')
+    assert result['evidence_only'] is True
+    c['collector_supported']=True
+    c['evidence'][0]['source_quality']['usable']=False
+    assert shared_work.execution_mode(c) is None
+    c['shared_state']='stale'
+    with pytest.raises(ValueError,match='nguồn dùng được'):
+        shared_work.start('assessment','Bob','A.7.2')
+
+
+def test_runtime_capture_is_explicit_source_even_when_marked_synthetic():
+    c=control();c['evidence']=[dict(is_synthetic=True,source='a8-capture://run/A.8.1')]
+    assert shared_work.execution_mode(c)=='user_evidence_only'
+    c['evidence']=[dict(is_synthetic=True,source='lab://company/A.6.1')]
+    assert shared_work.execution_mode(c)=='shared_lab'
+
+
 def test_legacy_claim_race_follows_winner(monkeypatch,claim_env):
     c=control(status='not_evaluated',flow='NOT_STARTED');c['shared_state']='not_started'
     monkeypatch.setattr(shared_work,'board',lambda _: {'controls':[c],'next_control_id':'A.6.1'})

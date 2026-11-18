@@ -30,16 +30,26 @@ def state(control):
     return 'evaluated'
 
 
+def execution_mode(control):
+    explicit=[e for e in control.get('evidence',[]) if e.get('is_synthetic') is False
+              or e.get('source','').startswith('a8-capture://')]
+    if explicit:
+        # A broken supplied source must not silently become a preset evaluation.
+        return 'user_evidence_only' if any(e.get('source_quality',{}).get('usable') is not False for e in explicit) else None
+    return 'shared_lab' if control.get('collector_supported') else None
+
+
 def board(assessment_id):
     report = dossier(assessment_id)
     for c in report['controls']:
         c['shared_state'] = state(c)
-    candidates = [c for c in report['controls'] if c['collector_supported'] and
+        c['execution_mode'] = execution_mode(c)
+    candidates = [c for c in report['controls'] if c['execution_mode'] and
                   c['shared_state'] in ('not_started', 'stale', 'failed')]
     candidates.sort(key=lambda c: (0 if c['shared_state'] == 'stale' else 1,
                                    tuple(int(x) for x in c['control_id'].split('.')[1:])))
     report['next_control_id'] = candidates[0]['control_id'] if candidates else None
-    report['automation_policy'] = 'Ưu tiên kết quả cũ cần đánh giá lại, sau đó kiểm soát chưa chạy/lỗi. Không tự duyệt; chờ bổ sung bằng chứng không tự chạy lặp.'
+    report['automation_policy'] = 'Ưu tiên kết quả cũ cần đánh giá lại, sau đó kiểm soát chưa chạy/lỗi. Có nguồn ngoài preset thì chỉ đánh giá nguồn đã thu; nguồn không dùng được không thay bằng preset. Không tự duyệt; chờ bằng chứng không tự chạy lặp.'
     report.pop('sha256', None)
     report['sha256'] = hashlib.sha256(json.dumps(report, sort_keys=True, ensure_ascii=False, default=str).encode()).hexdigest()
     return report
@@ -56,10 +66,13 @@ def start(assessment_id, user_id, control_id=None, force=False):
             if cid is None:
                 return {'action': 'nothing_pending', 'message': 'Không có kiểm soát tự động cần chạy. Xem hồ sơ chờ bằng chứng/duyệt.'}
             c = next((c for c in report['controls'] if c['control_id'] == cid), None)
-            if not c or not c['collector_supported']:
-                raise ValueError('Kiểm soát chưa có collector tự động.')
+            mode=execution_mode(c) if c else None
+            if not c:
+                raise ValueError('Control không thuộc đợt đánh giá.')
             if c['shared_state'] == 'running':
                 return {'action': 'following', 'control_id': cid, 'job_id': c['active_job_id'], 'assigned_to': c['assigned_to']}
+            if mode is None:
+                raise ValueError('Chưa có nguồn dùng được hoặc collector. Bổ sung/kiểm tra nguồn trước khi đánh giá.')
             if not force and c['shared_state'] in ('evaluated', 'awaiting_review', 'waiting_evidence'):
                 return {'action': 'reused', 'control_id': cid, 'evaluation_id': c['latest_evaluation_id'], 'conclusion': c['conclusion']}
             try:
@@ -69,4 +82,4 @@ def start(assessment_id, user_id, control_id=None, force=False):
                 if current.get('active_job_id'):
                     return {'action': 'following', 'control_id': cid, 'job_id': current['active_job_id'], 'assigned_to': current.get('assigned_to')}
                 raise
-            return {**job, 'control_id': cid, 'action': 'started'}
+            return {**job, 'control_id': cid, 'action': 'started','evidence_only':mode=='user_evidence_only'}

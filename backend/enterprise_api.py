@@ -144,7 +144,10 @@ def shared_work_start(assessment_id: UUID, req: SharedWorkInput, user: dict = De
         raise HTTPException(409, detail=str(exc)) from exc
     if result['action'] == 'started':
         try:
-            executor.submit(execute_agent_job, result['job_id'], str(assessment_id), result['control_id'])
+            if result.get('evidence_only'):
+                executor.submit(execute_agent_job, result['job_id'], str(assessment_id), result['control_id'],True)
+            else:
+                executor.submit(execute_agent_job, result['job_id'], str(assessment_id), result['control_id'])
         except RuntimeError as exc:
             teamwork.finish_job(result['job_id'], None, 'Không thể khởi tạo worker.')
             raise HTTPException(503, detail='Worker không khả dụng.') from exc
