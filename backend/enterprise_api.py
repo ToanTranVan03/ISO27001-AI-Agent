@@ -166,6 +166,44 @@ def teacher_report(assessment_id: UUID,user: dict=Depends(require_user)):
         return build_report(scope56(assessment_id,user),runs,a8_api.practice_summary(assessment_id,user))
 
 
+class SourceBatchInput(BaseModel):
+    model_config=ConfigDict(extra='forbid')
+    limit: int=Field(default=12,ge=1,le=56)
+    force: bool=False
+
+
+@router.get('/shared-work/batches')
+def source_batches(assessment_id: UUID,user: dict=Depends(require_user)):
+    from backend import batch_work
+    require_campaign(assessment_id,user)
+    return {'items':batch_work.recent(str(assessment_id))}
+
+
+@router.post('/shared-work/batches',status_code=202)
+def start_source_batch(assessment_id: UUID,req: SourceBatchInput,user: dict=Depends(require_user)):
+    from backend import batch_work
+    from backend.team_api import executor,execute_agent_job
+    require_campaign(assessment_id,user)
+    if user.get('role')!='admin':raise HTTPException(403,'Chỉ admin điều phối lượt đánh giá nhiều control.')
+    try:result=batch_work.create(str(assessment_id),user['user_id'],req.limit,req.force)
+    except ValueError as exc:raise HTTPException(409,str(exc)) from exc
+    if result['action']=='started':
+        try:executor.submit(batch_work.process,str(assessment_id),result['batch_id'],execute_agent_job)
+        except RuntimeError as exc:
+            batch_work.persist(str(assessment_id),result['batch_id'],[],'FAILED','Không khởi tạo được worker.')
+            raise HTTPException(503,'Worker không sẵn sàng.') from exc
+    return result
+
+
+@router.post('/shared-work/batches/{batch_id}/stop')
+def stop_source_batch(assessment_id: UUID,batch_id: UUID,user: dict=Depends(require_user)):
+    from backend import batch_work
+    require_campaign(assessment_id,user)
+    if user.get('role')!='admin':raise HTTPException(403,'Chỉ admin dừng lượt đánh giá nhiều control.')
+    try:return batch_work.stop(str(assessment_id),str(batch_id),user['user_id'])
+    except ValueError as exc:raise HTTPException(404,str(exc)) from exc
+
+
 @router.get('/scope56')
 def scope56(assessment_id: UUID,user: dict=Depends(require_user)):
     from backend.shared_work import dossier

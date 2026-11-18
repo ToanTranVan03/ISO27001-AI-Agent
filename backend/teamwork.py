@@ -122,6 +122,8 @@ def init_teamwork() -> None:
             # Interrupted thread-based jobs must never leave controls locked after API restart.
             cur.execute("UPDATE agent_jobs SET status='INTERRUPTED', finished_at=NOW(), error_message='API restarted during evaluation' WHERE status='RUNNING'")
             cur.execute("UPDATE control_progress SET workflow_status='FAILED', active_job_id=NULL, updated_at=NOW() WHERE workflow_status='RUNNING'")
+            from backend.batch_work import init_schema as init_batch_schema
+            init_batch_schema(cur)
             # Default team is shared intentionally in this single-enterprise MVP.
             cur.execute('''INSERT INTO assessment_members (assessment_id, user_id)
                            SELECT %s, user_id FROM team_users ON CONFLICT DO NOTHING''',
