@@ -26,6 +26,7 @@ Phần triển khai kỹ thuật đã hoàn thành trong tuần:
 - [x] Bổ sung xem trước thay đổi doanh nghiệp, kiểm tra snapshot và lịch sử người cập nhật/giá trị trước–sau.
 - [x] Nộp nguồn gốc trên web cho 56 control, lưu/tải bản gốc có hash và nối nguồn với hàng đợi đánh giá.
 - [x] Kiểm chứng mã/API và giao dịch PostgreSQL rollback; chưa thay cho kiểm thử đầy đủ UI hoặc nghiệm thu chuyên môn.
+- [x] Bổ sung bảng điều kiện trình duyệt SoA theo từng control, cảnh báo hạn và chặn thiếu thông tin kế hoạch/nguồn thẩm định không dùng được.
 
 Chỉ đánh dấu hoàn thành khi có kết quả và minh chứng. Hoàn thành phần mềm, có nguồn hoặc chạy xong không đồng nghĩa control tuân thủ hay đã nghiệm thu chuyên môn.
 
@@ -51,12 +52,16 @@ Các thông tin trên là **trạng thái bàn giao từ tuần 5**, không ph�
 | 18/11/2026 | Kiểm chứng tổng hợp sau triển khai | 282 test Python, 7 test JavaScript, lint/build và render đạt; PostgreSQL thật kiểm tra lưu/nạp lại/tải bản gốc/đầu vào Agent bằng giao dịch rollback, không để lại dữ liệu thử; API đang chạy kiểm tra từ chối nguồn lỗi và giữ hồ sơ nguyên trạng |
 | 18/11/2026 | Bổ sung hồ sơ tài khoản và vai trò người dùng | Hiển thị quản trị viên/người đánh giá, phân biệt tài khoản hệ thống với nhân viên giả lập; sửa họ tên, email, đơn vị và chức danh của chính mình; không cho tự đổi tên đăng nhập/quyền |
 | 18/11/2026 | Kiểm chứng chức năng tài khoản | Mốc mới: 289 test Python, lint/build đạt; API hồ sơ hoạt động, từ chối tự đổi quyền và kiểm tra đúng tài khoản đăng nhập; chưa thay kiểm thử toàn bộ trình duyệt |
+| 18/11/2026 | Hoàn thiện kiểm tra hồ sơ trước trình duyệt SoA | Control áp dụng cần thẩm định hiện hành, kế hoạch, người nhận, hạn/kỳ rà và cách kiểm tra lại; bổ sung giao thức/fingerprint mới, giữ lịch sử duyệt cũ |
+| 18/11/2026 | Theo dõi việc cần bổ sung và hạn kế hoạch | Bảng 56 control có lý do bị chặn, lọc/tìm, mở đúng hồ sơ và xuất JSON/Markdown; nhắc rà hạn đã qua nhưng không tự gia hạn hoặc kết luận công việc đã/chưa hoàn tất |
+| 18/11/2026 | Củng cố thẩm định và kiểm chứng SoA | Chặn kết luận đạt/không đạt từ nguồn không dùng được; 295 test Python, 7 test JavaScript, lint/build/render đạt; API thật chặn duyệt thiếu điều kiện và thẩm định nguồn lỗi, không lưu dữ liệu thử; kiểm thử toàn UI vẫn còn chờ |
 
 ## Kết quả và minh chứng
 
 - [Kiểm tra nội dung nguồn trước đánh giá](../docs/KIEM_TRA_NOI_DUNG_NGUON.md): chính sách kỹ thuật, hành vi và giới hạn.
 - [Theo dõi thay đổi doanh nghiệp](../docs/LICH_SU_DOANH_NGHIEP.md): xem trước, kiểm tra snapshot và lịch sử.
 - [Thu nguồn gốc trên web cho 56 control](../docs/THU_NGUON_WEB_56.md): cách nộp nguồn, tải bản gốc và tiếp tục đánh giá.
+- [Điều kiện hồ sơ và trình duyệt SoA](../docs/DIEU_KIEN_DUYET_SOA_56.md): phần còn thiếu, hạn kế hoạch, thẩm định và chính sách duyệt mới.
 - Trạng thái kiểm tra ngày 18/11: 19/56 control có nguồn ngoài preset, 18 qua kiểm tra nội dung tối thiểu; 37 còn thiếu nguồn và A.6.2 cần thay nguồn. Chưa có thẩm định hiện hành/quyết định tính áp dụng; rubric và SoA chưa được phê duyệt.
 
 Tài liệu bàn giao từ tuần trước:
