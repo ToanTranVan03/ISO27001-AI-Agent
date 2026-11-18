@@ -43,7 +43,7 @@ def build_scope(assessment_id,dossier,studies=None,decisions=None,reviews=None,a
             'evidence':sorted((e['evidence_id'],e['sha256_hash']) for e in row['evidence'])})
         review=reviews.get(cid)
         row['human_review']=review
-        row['human_review_current']=bool(review and review['review_token']==row['review_token'] and row['workflow_status']!='RUNNING'
+        row['human_review_current']=bool(review and review['review_token']==row['review_token'] and row['workflow_status'] not in ('RUNNING','FAILED')
                                          and criteria_review_current(review,c['pass_criteria']))
         if row['human_review_current']:
             try:validate_sources(review['criteria_reviews'],row['evidence'])
@@ -58,7 +58,7 @@ def build_scope(assessment_id,dossier,studies=None,decisions=None,reviews=None,a
             action='Lưu căn cứ loại trừ để người phụ trách duyệt SoA'
         elif not row['usable_source_count']:
             action='Thu hồ sơ hoặc bằng chứng cho control'
-        elif row['latest_evaluation_id'] is None:
+        elif row['latest_evaluation_id'] is None or row['assessment_state'] in ('failed','stale','not_evaluated'):
             action='Chạy Agent đánh giá nguồn đã thu'
         elif not row['human_review_current']:
             action='Người đánh giá thẩm định kết luận và bằng chứng hiện hành'

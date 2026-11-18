@@ -33,6 +33,16 @@ def test_freshness_uses_real_time_not_timezone_string_order():
     assert newer_evidence({'created_at': None}, {'created_at': '2026-11-06T04:00:00+00:00'})
 
 
+def test_latest_failed_job_never_displays_an_old_green_conclusion_as_current():
+    item={**row(evaluation=3),'workflow_status':'FAILED'}
+    history={'A.6.1':[dict(evaluation_id=3,status='Compliant',created_at='2026-11-06T04:00:00+00:00')]}
+    result=build_dossier('a',[item],{},history)['controls'][0]
+    assert result['assessment_state']=='failed'
+    assert result['conclusion']=='Lỗi đánh giá gần nhất'
+    assert result['historical_conclusion']=='Compliant'
+    assert result['evaluation_history']==history['A.6.1']
+
+
 def test_dossier_route_rejects_other_campaign_before_reading(monkeypatch):
     from fastapi import HTTPException
     from fastapi.testclient import TestClient

@@ -57,6 +57,7 @@ def build_dossier(assessment_id, board, evidence_by_control, history_by_control=
         stale = bool(latest and any(newer_evidence(e, latest) for e in evidence_by_control.get(cid, [])))
         used = [e for e in evidence_by_control.get(cid, []) if latest and e.get('evidence_id') in latest.get('evidence_ids', [])]
         document_only=bool(latest and any('USER_EVIDENCE_ONLY' in str(t) for t in latest.get('audit_trail',[])))
+        failed=item.get('workflow_status')=='FAILED'
         if evaluated and not document_only and company_snapshot and (cid in PEOPLE_CONTROLS | set(CONTROL_TO_NODE) or any(e.get('snapshot_hash') for e in used)):
             stale = stale or not any(e.get('snapshot_hash') for e in used) or any(e.get('snapshot_hash') and e['snapshot_hash'] != company_snapshot['snapshot_hash'] for e in used)
         records.append({**item, 'collector_supported': bool(node) or cid in PEOPLE_CONTROLS,
@@ -65,8 +66,8 @@ def build_dossier(assessment_id, board, evidence_by_control, history_by_control=
             'evidence': evidence_by_control.get(cid, []),
             'evaluation_history': (history_by_control or {}).get(cid, []),
             'historical_conclusion': item.get('compliance_status') if evaluated else None,
-            'conclusion': 'Cần tái đánh giá' if stale else (item.get('compliance_status') if evaluated else 'Chưa đánh giá'),
-            'assessment_state': 'stale' if stale else ('evaluated' if evaluated else 'not_evaluated')})
+            'conclusion': 'Lỗi đánh giá gần nhất' if failed else 'Cần tái đánh giá' if stale else (item.get('compliance_status') if evaluated else 'Chưa đánh giá'),
+            'assessment_state': 'failed' if failed else 'stale' if stale else ('evaluated' if evaluated else 'not_evaluated')})
     payload = {'assessment_id': str(assessment_id), 'is_synthetic': True,
         'generated_at': datetime.now(timezone.utc).isoformat(),
         'supported_collectors': sorted(set(CONTROL_TO_NODE) | PEOPLE_CONTROLS), 'controls': records,

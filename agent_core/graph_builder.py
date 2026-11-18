@@ -153,8 +153,14 @@ Chỉ xuất đúng bốn khóa: status, confidence, rationale, evidence_ids.
 Không sao chép gói bằng chứng, metadata hoặc danh sách tiêu chí vào phản hồi.
 Dựa vào tiêu chí trên và bằng chứng, hãy xuất ra JSON đánh giá."""
     
+    from agent_core.model_input import pack_evidence,validate_budget
     user_prompt = f"""Control: {state['control_id']} - {state['control_name']}
-Bằng chứng: {json.dumps(safe_evidences, ensure_ascii=False)}"""
+Bằng chứng: {json.dumps(pack_evidence(safe_evidences), ensure_ascii=False, separators=(',',':'))}"""
+    messages=[
+        {"role":"system","content":sys_prompt+"\nJSON schema: "+json.dumps(ControlEvaluationOutput.model_json_schema())},
+        {"role":"user","content":user_prompt}]
+    input_size=validate_budget(messages)
+    state['audit_trail'].append(f'MODEL_INPUT_BYTES {input_size}; CONTEXT 16384; NO SILENT TRUNCATION')
 
     # Gọi mô hình Ollama (Phần này giữ nguyên như cũ)
     ollama_client = ollama.Client(
@@ -162,14 +168,11 @@ Bằng chứng: {json.dumps(safe_evidences, ensure_ascii=False)}"""
     )
     resp = ollama_client.chat(
         model=os.getenv("OLLAMA_MODEL", "qwen2.5:7b"),
-        messages=[
-            {"role": "system", "content": sys_prompt + "\nJSON schema: " + json.dumps(ControlEvaluationOutput.model_json_schema())},
-            {"role": "user", "content": user_prompt}
-        ],
+        messages=messages,
         # ollama==0.4.0 accepts JSON mode but not a schema dict. Keep strict
         # Pydantic validation below; invalid model output still fails visibly.
         format="json",
-        options={"temperature": 0.0, "num_predict": 512, "num_ctx": 4096}
+        options={"temperature": 0.0, "num_predict": 512, "num_ctx": 16384}
     )
     
     parsed = ControlEvaluationOutput.model_validate_json(resp["message"]["content"])
