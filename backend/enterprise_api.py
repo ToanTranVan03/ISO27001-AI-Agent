@@ -1,7 +1,7 @@
 """Authorized lab APIs, separate from the existing assessment/workflow API."""
 from uuid import UUID
 from datetime import date
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from pydantic import BaseModel, ConfigDict, Field
 from backend.team_api import require_user, require_campaign
 from backend import enterprise_lab, teamwork
@@ -17,6 +17,7 @@ class ScenarioInput(BaseModel):
 class CompanyEvent(BaseModel):
     employee_id: str = Field(pattern=r'^(EMP|HF)-\d{3}$')
     action: str = Field(min_length=1, max_length=80)
+    expected_snapshot_hash: str | None = Field(default=None, pattern=r'^[0-9a-f]{64}$')
 
 
 @router.get('/company')
@@ -33,9 +34,33 @@ def company_event(assessment_id: UUID, req: CompanyEvent, user: dict = Depends(r
     if req.action == 'retention_approve' and user['role'] != 'admin':
         raise HTTPException(403,detail='Chỉ admin ghi nhận phê duyệt ngoại lệ.')
     try:
-        return change(str(assessment_id), req.employee_id, req.action, actor_id=user['user_id'])
+        return change(str(assessment_id), req.employee_id, req.action, actor_id=user['user_id'],
+                      expected_snapshot_hash=req.expected_snapshot_hash)
     except ValueError as exc:
         raise HTTPException(409, detail=str(exc)) from exc
+
+
+@router.post('/company/events/preview')
+def company_event_preview(assessment_id: UUID, req: CompanyEvent, user: dict = Depends(require_user)):
+    from backend.company import preview
+    require_campaign(assessment_id, user)
+    if req.action == 'retention_approve' and user['role'] != 'admin':
+        raise HTTPException(403, detail='Chỉ admin ghi nhận phê duyệt ngoại lệ.')
+    try:
+        return preview(str(assessment_id), req.employee_id, req.action)
+    except ValueError as exc:
+        raise HTTPException(409, detail=str(exc)) from exc
+
+
+@router.get('/company/history')
+def company_history(assessment_id: UUID, employee_id: str | None = None,
+                    limit: int = Query(default=30, ge=1, le=100), user: dict = Depends(require_user)):
+    from backend.company import history
+    require_campaign(assessment_id, user)
+    try:
+        return {'items':history(str(assessment_id), employee_id, limit)}
+    except ValueError as exc:
+        raise HTTPException(422, detail=str(exc)) from exc
 
 
 @router.get('/overview')

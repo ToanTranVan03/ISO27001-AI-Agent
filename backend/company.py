@@ -146,12 +146,59 @@ def snapshot(assessment_id, cur=None):
     return project_company(assessment_id, people, accounts, assets, metadata)
 
 
-def change(assessment_id, employee_id, action, cur=None, actor_id=None):
+def describe_changes(before, after):
+    """Compare only recorded fields; absent, null and false remain distinct."""
+    changes = []
+    def compare(kind, identifier, left, right):
+        for field in sorted(set(left) | set(right)):
+            if (field in left) != (field in right) or left.get(field) != right.get(field):
+                changes.append(dict(entity=kind, entity_id=identifier, field=field,
+                    before=left.get(field), after=right.get(field),
+                    before_present=field in left, after_present=field in right))
+    compare('person', after['person']['id'], before['person'], after['person'])
+    for kind in ('accounts', 'devices'):
+        old = {r['id']: r for r in before.get(kind, [])}
+        new = {r['id']: r for r in after.get(kind, [])}
+        for identifier in sorted(set(old) | set(new)):
+            compare(kind, identifier, old.get(identifier, {}), new.get(identifier, {}))
+    compare('company', 'assessment', {'assessment_date':before.get('assessment_date')},
+            {'assessment_date':after.get('assessment_date')})
+    return changes
+
+
+def preview(assessment_id, employee_id, action):
+    from agent_core.business_events import apply_business_change
+    data = snapshot(assessment_id)
+    candidate = copy.deepcopy(data)
+    before, after = apply_business_change(candidate, canonical_employee(employee_id), action)
+    return dict(snapshot_hash=data['snapshot_hash'], changes=describe_changes(before, after),
+                employee_id=canonical_employee(employee_id), action=action,
+                note='Thay đổi hồ sơ giả lập; không tự thu bằng chứng hoặc kết luận tuân thủ.')
+
+
+def history(assessment_id, employee_id=None, limit=30):
+    if not 1 <= limit <= 100:
+        raise ValueError('Số bản ghi phải từ 1 đến 100.')
+    employee_id = canonical_employee(employee_id) if employee_id else None
+    with get_connection() as con, con.cursor() as cur:
+        cur.execute('''SELECT c.change_id,c.employee_id,c.action,c.before_state,c.after_state,
+            c.created_at,u.username,u.display_name FROM enterprise_company_changes c
+            LEFT JOIN team_users u ON u.user_id=c.submitted_by
+            WHERE c.assessment_id=%s AND (%s::text IS NULL OR c.employee_id=%s)
+            ORDER BY c.created_at DESC,c.change_id DESC LIMIT %s''',
+            (assessment_id, employee_id, employee_id, limit))
+        return [dict(change_id=r[0],employee_id=r[1],action=r[2],
+            changes=describe_changes(r[3],r[4]),created_at=r[5].isoformat(),
+            username=r[6],display_name=r[7]) for r in cur.fetchall()]
+
+
+def change(assessment_id, employee_id, action, cur=None, actor_id=None, expected_snapshot_hash=None):
     from agent_core.business_events import apply_business_change
     eid = canonical_employee(employee_id)
     if cur is None:
         with get_connection() as con, con.cursor() as cursor:
-            return change(assessment_id, employee_id, action, cursor, actor_id=actor_id)
+            return change(assessment_id, employee_id, action, cursor, actor_id=actor_id,
+                          expected_snapshot_hash=expected_snapshot_hash)
     cur.execute('SELECT pg_try_advisory_xact_lock(hashtextextended(%s,0))', (f"company-person:{assessment_id}:{eid}",))
     if not cur.fetchone()[0]:
         raise ValueError('Hồ sơ nhân viên đang được cập nhật. Hãy chờ rồi thử lại.')
@@ -168,6 +215,8 @@ def change(assessment_id, employee_id, action, cur=None, actor_id=None):
         ORDER BY asset_id FOR UPDATE''', (assessment_id,assessment_id,eid))
     cur.fetchall()
     data = snapshot(assessment_id, cur)
+    if expected_snapshot_hash is not None and data['snapshot_hash'] != expected_snapshot_hash:
+        raise ValueError('Dữ liệu doanh nghiệp đã thay đổi. Hãy xem trước lại trước khi lưu.')
     before, after = apply_business_change(data, eid, action)
     if before == after:
         return {'changed': False, 'snapshot_hash': data['snapshot_hash'], 'revision': int(data['snapshot_hash'][:12],16)}
