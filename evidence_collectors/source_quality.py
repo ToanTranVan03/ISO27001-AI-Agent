@@ -1,5 +1,16 @@
 """Minimal text usability, not truth, authenticity or ISO compliance."""
 from collections import Counter
+import json
+
+
+def evidence_quality(text):
+    """Judge supplied content, never allow the provenance wrapper to pad a stub."""
+    try:
+        payload=json.loads(text)
+        if isinstance(payload,dict) and payload.get('source_kind') in {'USER_PROVIDED_PACKAGE','USER_PROVIDED_WEB_SOURCE'}:
+            text=payload.get('content','')
+    except (ValueError,TypeError):pass
+    return text_quality(text if isinstance(text,str) else '')
 
 
 def text_quality(text):

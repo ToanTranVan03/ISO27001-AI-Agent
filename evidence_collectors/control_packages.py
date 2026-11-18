@@ -87,9 +87,13 @@ def inspect(assessment_id,control_id):
 
 
 def collect(assessment_id,control_id,user_id):
+    return store(assessment_id,control_id,user_id,inspect(assessment_id,control_id))
+
+
+def store(assessment_id,control_id,user_id,packet):
+    """Store validated items under the same upload/evaluation transaction lock."""
     from backend.database import get_connection
     from backend.teamwork import log_event
-    packet=inspect(assessment_id,control_id)
     inserted=[];reused=[]
     with get_connection() as con,con.cursor() as cur:
         cur.execute('SELECT workflow_status FROM control_progress WHERE assessment_id=%s AND control_id=%s FOR UPDATE',(assessment_id,control_id))

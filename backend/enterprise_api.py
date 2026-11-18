@@ -1,7 +1,8 @@
 """Authorized lab APIs, separate from the existing assessment/workflow API."""
 from uuid import UUID
 from datetime import date
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Query, UploadFile, File, Form
+from fastapi.responses import FileResponse
 from pydantic import BaseModel, ConfigDict, Field
 from backend.team_api import require_user, require_campaign
 from backend import enterprise_lab, teamwork
@@ -230,6 +231,33 @@ def prepare_packages(assessment_id: UUID,user: dict=Depends(require_user)):
 
 class CollectPackage(BaseModel):
     control_id: str | None = None
+
+
+@router.post('/scope56/controls/{control_id}/sources/upload',status_code=201)
+async def upload_control_source(assessment_id: UUID,control_id: str,
+        evidence_type: str=Form(...),origin: str=Form(...),observed_at: str | None=Form(None),
+        note: str=Form(''),file: UploadFile=File(...),user: dict=Depends(require_user)):
+    from evidence_collectors import source_intake,control_packages
+    require_campaign(assessment_id,user)
+    raw=await file.read(control_packages.MAX_BYTES+1)
+    if len(raw)>control_packages.MAX_BYTES:raise HTTPException(413,'Tệp quá 15MB.')
+    try:
+        item=source_intake.prepare(str(assessment_id),control_id,file.filename,raw,evidence_type,origin,observed_at,note)
+        source_intake.preserve(str(assessment_id),raw)
+        result=control_packages.store(str(assessment_id),control_id,user['user_id'],{'items':[item],'issues':[]})
+    except (ValueError,UnicodeError) as exc:raise HTTPException(422,str(exc)) from exc
+    except OSError as exc:raise HTTPException(503,'Không lưu được bản gốc. Chưa xác nhận thu nhận nguồn.') from exc
+    return {**result,'evidence_id':item['evidence_id'],'original_sha256':item['sha256_hash'],
+            'provenance_verified':False,'original_preserved':True}
+
+
+@router.get('/scope56/controls/{control_id}/sources/{evidence_id}/original')
+def download_control_source(assessment_id: UUID,control_id: str,evidence_id: str,user: dict=Depends(require_user)):
+    from evidence_collectors.source_intake import retrieve
+    require_campaign(assessment_id,user)
+    try:path,name=retrieve(str(assessment_id),control_id,evidence_id)
+    except (ValueError,OSError) as exc:raise HTTPException(404,'Không có bản gốc hợp lệ trong phạm vi truy cập.') from exc
+    return FileResponse(path,filename=name,media_type='application/octet-stream',headers={'X-Content-Type-Options':'nosniff'})
 
 
 @router.post('/scope56/packages/collect')

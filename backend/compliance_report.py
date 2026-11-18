@@ -5,7 +5,7 @@ import hashlib
 import json
 from backend.enterprise_spec import NODE_SPECS, CONTROL_TO_NODE
 from backend.database import get_connection
-from evidence_collectors.source_quality import text_quality
+from evidence_collectors.source_quality import evidence_quality
 
 
 def campaign_evidence(assessment_id):
@@ -31,7 +31,7 @@ def campaign_evidence(assessment_id):
             'is_synthetic': synthetic, 'revision': payload.get('revision'),
             'facts': payload.get('facts', {}), 'entity_refs': payload.get('entity_refs', {}),
             'snapshot_hash': payload.get('snapshot_hash'), 'origin': 'lab' if synthetic else 'uploaded_or_imported',
-            'source_quality': text_quality(text)})
+            'source_quality': evidence_quality(text)})
     return grouped
 
 

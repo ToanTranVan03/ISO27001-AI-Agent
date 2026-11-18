@@ -277,7 +277,7 @@ def collect_user_evidence(control_id: str,assessment_id: str):
         cur.execute('''SELECT evidence_id FROM evidence WHERE assessment_id=%s AND control_id=%s AND is_sample=FALSE
             AND (is_synthetic=FALSE OR (evidence_origin='a8-live-capture-v1' AND source LIKE %s))''',(assessment_id,control_id,'a8-capture://%'))
         allowed={r[0] for r in cur.fetchall()}
-    from evidence_collectors.source_quality import text_quality
+    from evidence_collectors.source_quality import evidence_quality
     candidates=[e for e in evidence if e['evidence_id'] in allowed]
-    rejected=[e['evidence_id'] for e in candidates if not text_quality(e.get('content',''))['usable']]
+    rejected=[e['evidence_id'] for e in candidates if not evidence_quality(e.get('content',''))['usable']]
     return [e for e in candidates if e['evidence_id'] not in rejected],{'source_quality_rejected':rejected}

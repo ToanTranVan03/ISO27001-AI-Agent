@@ -21,6 +21,7 @@ def build_packet(scope):
         if decision is None: gaps.append('applicability_not_decided')
         if not excluded:
             if not control['explicit_source_count']: gaps.append('explicit_sources_missing')
+            elif not control.get('usable_source_count',control['explicit_source_count']): gaps.append('source_content_unusable')
             if control['assessment_state'] != 'evaluated': gaps.append('evaluation_not_current')
             if not review: gaps.append('human_criteria_review_not_current')
             if any(c['verified_verdict'] == 'unknown' for c in checks): gaps.append('criteria_unknown')
