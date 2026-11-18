@@ -51,6 +51,7 @@ def init_teamwork() -> None:
                     role TEXT NOT NULL CHECK (role IN ('admin', 'assessor')),
                     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
                 )''')
+            cur.execute("ALTER TABLE team_users ADD COLUMN IF NOT EXISTS profile JSONB NOT NULL DEFAULT '{}'::jsonb")
             cur.execute('''
                 CREATE TABLE IF NOT EXISTS team_sessions (
                     token_hash TEXT PRIMARY KEY,
@@ -194,6 +195,28 @@ def store_campaign_evidence(assessment_id: str, control_id: str, user_id: str,
             if row[0]=='RUNNING':raise ValueError('Control đang đánh giá, không thể thêm bằng chứng lúc này.')
             cur.execute('INSERT INTO evidence(evidence_id,control_id,evidence_type,source,extracted_text,sha256_hash,assessment_id,uploaded_by) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(evidence_id,control_id,evidence_type,source,extracted_text,sha256_hash,assessment_id,user_id))
             log_event(cur,assessment_id,control_id,user_id,'EVIDENCE_UPLOADED',{'evidence_id':evidence_id})
+
+def account_profile(user_id):
+    with get_connection() as con,con.cursor() as cur:
+        cur.execute('SELECT user_id,username,display_name,role,profile FROM team_users WHERE user_id=%s',(user_id,))
+        row=cur.fetchone()
+    if not row:raise ValueError('Không tìm thấy tài khoản.')
+    profile=row[4] or {}
+    return dict(user_id=str(row[0]),username=row[1],display_name=row[2],role=row[3],
+        email=profile.get('email',''),organization=profile.get('organization',''),position=profile.get('position',''))
+
+
+def update_account_profile(user_id,display_name,email='',organization='',position=''):
+    display_name=display_name.strip();email=email.strip();organization=organization.strip();position=position.strip()
+    if not 1<=len(display_name)<=100 or any(ord(c)<32 for c in display_name):raise ValueError('Tên hiển thị phải từ 1–100 ký tự, không chứa ký tự điều khiển.')
+    if len(email)>254 or email and not re.fullmatch(r'[^\s@]+@[^\s@]+\.[^\s@]+',email):raise ValueError('Email không hợp lệ.')
+    if len(organization)>150 or len(position)>150:raise ValueError('Đơn vị/chức danh tối đa 150 ký tự.')
+    with get_connection() as con,con.cursor() as cur:
+        cur.execute('UPDATE team_users SET display_name=%s,profile=%s WHERE user_id=%s RETURNING user_id',
+            (display_name,Jsonb(dict(email=email,organization=organization,position=position)),user_id))
+        if not cur.fetchone():raise ValueError('Không tìm thấy tài khoản.')
+    return account_profile(user_id)
+
 
 def get_user_from_token(token: str) -> dict | None:
     if not token or len(token) > 200:

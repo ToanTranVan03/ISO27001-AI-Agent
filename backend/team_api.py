@@ -6,7 +6,7 @@ from pathlib import Path
 from uuid import UUID, uuid4
 
 from fastapi import APIRouter, Depends, File, Form, Header, HTTPException, UploadFile
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 from psycopg import IntegrityError
 
 from backend import database, teamwork
@@ -65,6 +65,26 @@ def login(req: LoginRequest):
 @router.get('/auth/me')
 def me(user: dict = Depends(require_user)):
     return user
+
+
+class AccountProfileInput(BaseModel):
+    model_config=ConfigDict(extra='forbid',str_strip_whitespace=True)
+    display_name: str=Field(min_length=1,max_length=100)
+    email: str=Field(default='',max_length=254)
+    organization: str=Field(default='',max_length=150)
+    position: str=Field(default='',max_length=150)
+
+
+@router.get('/auth/profile')
+def account_profile(user: dict=Depends(require_user)):
+    try:return teamwork.account_profile(user['user_id'])
+    except ValueError as exc:raise HTTPException(404,str(exc)) from exc
+
+
+@router.put('/auth/profile')
+def update_profile(req: AccountProfileInput,user: dict=Depends(require_user)):
+    try:return teamwork.update_account_profile(user['user_id'],**req.model_dump())
+    except ValueError as exc:raise HTTPException(422,str(exc)) from exc
 
 
 @router.post('/auth/logout')

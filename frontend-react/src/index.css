@@ -85,3 +85,5 @@ main { animation: reveal-page .25s ease-out; }
  .panel-toolbar { padding: 14px; }
  .app-page table { min-width: 600px; }
 }
+
+.account-dialog::backdrop { background: #020617bb; backdrop-filter: blur(5px); }

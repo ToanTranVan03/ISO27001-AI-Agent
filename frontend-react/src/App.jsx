@@ -1,3 +1,4 @@
+import AccountProfile from './AccountProfile';
 import { useCallback, useEffect, useState } from "react";
 import { Bot, KeyRound, LogIn, ShieldCheck, UserRound, LayoutDashboard, FlaskConical, Building2, FolderCheck, LogOut } from "lucide-react";
 import { ApiError, apiRequest } from "./api";
@@ -112,7 +113,7 @@ if (user && assessment && token) {
         <nav aria-label="Điều hướng chính" className="flex min-w-0 flex-1 gap-1 overflow-x-auto">{[
           ['scope56','Tổng quan 56 control',LayoutDashboard],['a8','Thực nghiệm A.8',FlaskConical],['company','Doanh nghiệp',Building2],['dossier','Hồ sơ ISO',FolderCheck]
         ].map(([id,label,Icon])=><button key={id} type="button" onClick={()=>{setView(id);window.scrollTo({top:0,behavior:'instant'});}} aria-current={view===id?'page':undefined} className={`flex shrink-0 items-center gap-2 whitespace-nowrap rounded-xl px-3 py-3 text-xs font-semibold transition ${view===id?'bg-teal-400/15 text-teal-200 ring-1 ring-teal-400/30':'text-slate-400 hover:bg-slate-800 hover:text-white'}`}><Icon size={16}/>{label}</button>)}</nav>
-        <div className="hidden text-right text-xs sm:block"><p className="font-semibold">{user.display_name||user.username}</p><p className="mt-1 text-[10px] text-slate-400">Đợt {assessment.assessment_id.slice(0,8)}</p></div><button type="button" onClick={logout} aria-label="Đăng xuất" title="Đăng xuất" className="rounded-xl p-3 text-slate-400 hover:bg-slate-800 hover:text-white"><LogOut size={18}/></button></div>
+        <AccountProfile user={user} assessment={assessment} request={request} onSaved={setUser}/><button type="button" onClick={logout} aria-label="Đăng xuất" title="Đăng xuất" className="rounded-xl p-3 text-slate-400 hover:bg-slate-800 hover:text-white"><LogOut size={18}/></button></div>
       </header>
 
       {view === "scope56" ? <Scope56 assessment={assessment} request={request} onOpenA8={()=>setView("a8")} /> : view === "company" ? <CompanyInventory assessment={assessment} request={request} onOpenDossier={() => setView("dossier")} /> : view === "dossier" ? <ComplianceDossier assessment={assessment} request={request} onOpenDashboard={()=>{setView("scope56");window.scrollTo({top:0,behavior:"instant"});}} onOpenCompany={() => setView("company")} /> : (
