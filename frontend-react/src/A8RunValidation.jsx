@@ -1,4 +1,5 @@
-export default function A8RunValidation({doc,download,canImport,onImport}) {
+import ReviewFollowups from './ReviewFollowups';
+export default function A8RunValidation({doc,download,canImport,onImport,canManageFollowups,onSaveFollowup}) {
  const records=doc.report.records;
  const attempted=records.filter(r=>r.attempts?.length&&r.execution_source!=='evidence-availability-check');
  const repaired=records.filter(r=>r.repaired);
@@ -6,6 +7,7 @@ export default function A8RunValidation({doc,download,canImport,onImport}) {
  const analysis=doc.review_analysis;
  return <section className="space-y-3 rounded border border-teal-700 p-4">
   <h2 className="text-xl">Kiểm chứng kết quả và bất đồng · Chấm thật của lượt đang chọn</h2>
+  <ReviewFollowups key={doc.run_id} doc={doc} download={download} canManage={canManageFollowups} onSave={onSaveFollowup}/>
   <p>Không bao gồm kết quả chấm giả định trong khu luyện tập. Admin xem kết quả giả định của Khoa/Tú ở bảng tổng hợp riêng phía trên.</p>
   {doc.review_quality_audit?.length>0&&<details className="rounded border border-amber-500 p-3"><summary>{doc.review_quality_audit.length} căn cứ có dấu hiệu cần rà lại — không sửa nhãn gốc</summary><p>Đây là gợi ý kiểm tra chất lượng, chưa phải phán quyết nội dung. Giữ nhãn đã khóa và ghi nhận xử lý riêng.</p><ul>{doc.review_quality_audit.map(r=><li key={`${r.reviewer_id}-${r.control_id}`} className="py-2">{r.reviewer_name||r.reviewer_id} · {r.control_id}: {r.issues.map(i=>i.message).join(' ')}</li>)}</ul></details>}
   {canImport&&<div className="rounded border border-slate-600 p-3"><p>Chuyển bản thu cố định vào hồ sơ 56 control để đánh giá/thẩm định riêng. Giữ nhãn nguồn lab, không chuyển kết luận hoặc đáp án và không tự xác nhận đạt control.</p><button className="rounded bg-teal-800 p-2" onClick={onImport}>Nhập nguồn live vào hồ sơ 56 (admin)</button></div>}
