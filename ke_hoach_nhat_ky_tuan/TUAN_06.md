@@ -26,6 +26,7 @@ Phần triển khai kỹ thuật đã hoàn thành trong tuần:
 - [x] Trực quan hóa và thống nhất bốn màn hình; phân biệt kết quả, tiến độ, bằng chứng và thẩm định.
 - [x] Bổ sung xem trước thay đổi doanh nghiệp, kiểm tra snapshot và lịch sử người cập nhật/giá trị trước–sau.
 - [x] Nộp nguồn gốc trên web cho 56 control, lưu/tải bản gốc có hash và nối nguồn với hàng đợi đánh giá.
+- [x] Kiểm tra lặp API bằng ba tài khoản và lưu báo cáo 39 bước ngày 20/11; chưa thay kiểm thử toàn UI.
 - [x] Kiểm chứng mã/API và giao dịch PostgreSQL rollback; chưa thay cho kiểm thử đầy đủ UI hoặc nghiệm thu chuyên môn.
 - [x] Bổ sung bảng điều kiện trình duyệt SoA theo từng control, cảnh báo hạn và chặn thiếu thông tin kế hoạch/nguồn thẩm định không dùng được.
 - [x] Chuyển chạy lô nguồn sang server, lưu tiến độ PostgreSQL, chặn lô trùng, dừng có kiểm soát và ghi gián đoạn khi API khởi động lại.
@@ -63,8 +64,11 @@ Các thông tin trên là **trạng thái bàn giao từ tuần 5**, không ph�
 | 18/11/2026 | Xuất kết quả và kiểm chứng sau sửa | Kết quả máy mới nhất của 18 control: 3 không tuân thủ, 6 một phần, 9 thiếu bằng chứng; không phải độ đúng so với người chấm. 308 test Python, 7 test JavaScript, lint/build/render đạt; nguồn/rubric giữa các lần kiểm tra lại không đổi |
 | 18/11/2026 | Tách yêu cầu bổ sung nguồn theo nhóm phụ trách | Xuất 38 phiếu: Nhân sự 8, Hành chính/vật lý 14, IT/ATTT 16; có tiêu chí, loại nguồn, checklist và chỗ ghi người nhận/hạn; phân biệt thiếu nguồn với nguồn lỗi. 310 test Python, lint/build đạt; không tự tạo bằng chứng hoặc xác nhận giao việc |
 | 20/11/2026 | Tách kiểm tra gói kiểm định trước khi chạy | Admin kiểm tra nguồn/hash/rubric/facts và phần chưa rõ trước khi xác nhận chạy; preflight không gọi model, không tạo lượt hoặc lưu nhãn. 310 test hồi quy trước bổ sung và test mới về phân quyền/không tạo tác dụng phụ đạt; lint/build đạt. Chưa có bộ kiểm định mới được xác nhận |
+| 20/11/2026 | Tự động kiểm tra nghiệm thu API ba tài khoản | Bổ sung CLI chạy lặp, không ghi mật khẩu/token; 39/39 bước API thật bằng admin/Khoa/Tú đạt, gồm đọc bốn khu vực và chặn quyền sai/khác đợt. Không tạo model/nhãn/phê duyệt. 314 test Python đạt; kiểm thử toàn UI vẫn chờ kết nối trình duyệt |
 
 ## Kết quả và minh chứng
+
+- [Nghiệm thu API ba tài khoản ngày 20/11](../docs/a8-results/api-acceptance-2026-11-20.json): 39 bước đạt, chưa kiểm thử toàn GUI.
 
 - [Phiếu yêu cầu nguồn theo nhóm](../docs/source-requests/README.md): dự thảo giao nhóm bổ sung hồ sơ.
 

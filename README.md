@@ -116,3 +116,13 @@ Raw v2 trước đây: LLM khớp **206/216 lượt với đáp án nhóm (95,37
 - [Dọn mã cũ và phạm vi giữ lại](docs/DON_GON_PROJECT.md).
 
 Hệ thống hỗ trợ thử nghiệm trong lab, chưa chứng nhận ISO. Cần hồ sơ phù hợp, người thật xác nhận rubric, chấm độc lập, quyết định tính áp dụng và duyệt SoA. Nguồn nộp/hash không tự chứng minh nội dung được xác thực; hai tiêu chí đại diện không bao phủ toàn bộ một control.
+
+### Kiểm tra nghiệm thu API bằng ba tài khoản
+
+`run_acceptance_checks.py` kiểm tra đăng nhập, đọc các khu vực và quyền bị chặn; không tạo lượt model, nộp nhãn hay phê duyệt. Admin lấy từ `.env`; cung cấp mật khẩu thành viên qua biến môi trường `ACCEPTANCE_KHOA_PASSWORD` và `ACCEPTANCE_TU_PASSWORD`, không ghi vào Git. Thiếu tài khoản hoặc một bước lỗi thì báo cáo không đạt. Không ghi đè báo cáo cũ.
+
+```powershell
+.venv\Scripts\python.exe run_acceptance_checks.py --output work/api-acceptance-new.json
+```
+
+Báo cáo là kiểm tra API, không thay nghiệm thu toàn giao diện hoặc đánh giá chuyên môn. Mốc 20/11/2026: [39 bước API bằng ba tài khoản](docs/a8-results/api-acceptance-2026-11-20.json) đạt; `gui_tested=false`.
