@@ -29,7 +29,18 @@ test('expired sessions expose 401 for the app to clear authentication',async t=>
 
 test('structured validation failures remain API errors',async t=>{
   t.mock.method(globalThis,'fetch',async()=>new Response(JSON.stringify({detail:[{msg:'Invalid input'}]}),{status:422}));
-  await assert.rejects(apiRequest('/validate'),e=>e instanceof ApiError&&e.status===422);
+  await assert.rejects(apiRequest('/validate'),e=>e instanceof ApiError&&e.status===422&&e.message==='Invalid input');
+});
+
+test('approval blockers preserve readable reasons and structured details',async t=>{
+  const detail={message:'Chưa đủ hồ sơ',pending_controls:['A.6.2'],readiness:{ready:false}};
+  t.mock.method(globalThis,'fetch',async()=>new Response(JSON.stringify({detail}),{status:409}));
+  await assert.rejects(apiRequest('/approval'),e=>e.status===409&&e.message.includes('A.6.2')&&e.detail.readiness.ready===false);
+});
+
+test('validation errors name fields without echoing submitted secrets',async t=>{
+  t.mock.method(globalThis,'fetch',async()=>new Response(JSON.stringify({detail:[{loc:['body','note'],msg:'Too short',input:'private-value'}]}),{status:422}));
+  await assert.rejects(apiRequest('/validate'),e=>e.message==='note: Too short'&&!e.message.includes('private-value'));
 });
 
 test('network failures are distinguishable from server rejection',async t=>{

@@ -1,9 +1,23 @@
 /** Centralized request helper; backend requires Bearer tokens on private APIs. */
 export class ApiError extends Error {
-  constructor(message, status) {
+  constructor(message, status, detail = null) {
     super(message);
     this.status = status;
+    this.detail = detail;
   }
+}
+
+function errorMessage(detail, status) {
+  if (typeof detail === 'string') return detail;
+  if (Array.isArray(detail)) return detail.map(item => {
+    const field = Array.isArray(item?.loc) ? item.loc.filter(x => x !== 'body').join('.') : '';
+    return typeof item?.msg === 'string' ? `${field ? field + ': ' : ''}${item.msg}` : '';
+  }).filter(Boolean).join('; ') || `Lỗi HTTP ${status}`;
+  if (detail && typeof detail.message === 'string') {
+    const pending = Array.isArray(detail.pending_controls) ? detail.pending_controls.filter(x => typeof x === 'string') : [];
+    return detail.message + (pending.length ? ` Control cần bổ sung: ${pending.join(', ')}.` : '');
+  }
+  return `Lỗi HTTP ${status}`;
 }
 
 export async function apiRequest(path, token = "", options = {}) {
@@ -22,7 +36,7 @@ export async function apiRequest(path, token = "", options = {}) {
   if (response.ok && responseType === 'blob') return response.blob();
   const data = await response.json().catch(() => ({}));
   if (!response.ok) {
-    throw new ApiError(typeof data.detail === "string" ? data.detail : `Lỗi HTTP ${response.status}`, response.status);
+    throw new ApiError(errorMessage(data.detail, response.status), response.status, data.detail);
   }
   return data;
 }
