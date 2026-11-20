@@ -34,3 +34,21 @@ def test_load_checks_hash_and_duplicate_inputs(tmp_path):
     with pytest.raises(ValueError,match='Duplicate'):load_reports([p,p])
     r['records'][0]['status']='Compliant';p.write_text(json.dumps(r),encoding='utf-8')
     with pytest.raises(ValueError,match='hash'):load_reports([p])
+
+
+def test_export_excludes_pending_quality_without_changing_locked_labels():
+    r=report()
+    labels=[dict(reviewer_id='assessor',control_id=x['control_id'],case_id=x['case_id'],
+        report_sha256=r['sha256'],evidence_sha256=x['evidence']['source_sha256'],
+        expected=x['status'] or 'Insufficient Evidence',rationale='Recorded observation reviewed against the criterion.',
+        assistance='unassisted',prior_exposure='no',
+        quality_check=dict(blocked=False,issues=[])) for x in r['records']]
+    before=copy.deepcopy(labels)
+    clean=evaluate_accuracy_against_assessors([r],labels)[0]
+    assert clean['quality_eligible_independently_declared_reviewers']==['assessor']
+    labels[0]['quality_check']=dict(blocked=True,issues=[dict(code='filler',severity='error')])
+    bad=copy.deepcopy(labels)
+    result=evaluate_accuracy_against_assessors([r],labels)[0]
+    assert result['analysis']['complete_reviewers']==['assessor']
+    assert result['pending_human_comparison'] and not result['human_comparisons']
+    assert labels==bad and before[0]['quality_check']['blocked'] is False

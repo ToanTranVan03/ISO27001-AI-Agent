@@ -5,6 +5,7 @@ from pathlib import Path
 from agent_core.a8_assessment import ROOT, LAB, digest, soa
 from agent_core.a8_benchmark import score
 from agent_core.a8_review_analysis import analyze_reviews
+from agent_core.review_quality import audit_reviews, pending_quality_reviews
 
 
 def load_reports(paths):
@@ -42,7 +43,13 @@ def evaluate_accuracy_against_assessors(reports,labels):
         bound=[l for l in labels if l['report_sha256']==report['sha256']]
         analysis=analyze_reviews(report,bound,'EXPORT_COORDINATOR_NOT_A_REVIEWER')
         if analysis['rejected_labels']:raise ValueError('Review case/evidence binding invalid')
+        pending={str(r['reviewer_id']) for r in pending_quality_reviews(report,bound)}
+        eligible=[uid for uid in analysis['complete_independent_reviewers'] if str(uid) not in pending]
         results.append(dict(report_sha256=report['sha256'],analysis=analysis,
+            rationale_quality_issues=audit_reviews(report,bound),
+            quality_eligible_independently_declared_reviewers=eligible,
+            human_comparisons={uid:analysis['independent_reviewer_comparisons'][uid]['per_control'] for uid in eligible},
+            pending_human_comparison=not bool(eligible),
             note='Each reviewer remains separate. Declaration is not proof of expertise or external independence.'))
     return results
 
