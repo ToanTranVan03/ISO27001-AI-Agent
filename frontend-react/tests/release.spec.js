@@ -59,6 +59,28 @@ for(const [username,key] of [['admin','INITIAL_ADMIN_PASSWORD'],['ledangkhoa','A
   if(username!=='admin')await expect(page.getByRole('button',{name:'Bắt đầu lượt',exact:true})).toHaveCount(0);
   await page.getByRole('button',{name:'Thực nghiệm A.8',exact:true}).click();
   await expect(page.getByRole('heading',{name:'Đánh giá chuyên sâu A.8',exact:true})).toBeVisible();
+  if(username==='admin'){
+   const token=await page.evaluate(()=>sessionStorage.getItem('iso_team_token'));
+   const aid=await page.evaluate(()=>sessionStorage.getItem('iso_team_assessment'));
+   const runs=await (await page.request.get(`/api/assessments/${aid}/a8/runs`,{headers:{Authorization:`Bearer ${token}`}})).json();
+   const run=runs.find(r=>r.mine&&r.state==='finished');
+   expect(run,'A finished coordinator-owned run is needed for read-only UI testing').toBeTruthy();
+   await page.getByLabel('Mở lượt đánh giá đã lưu').selectOption(run.run_id);
+   await expect(page.getByRole('heading',{name:'Sổ xử lý bất đồng & căn cứ cần rà'})).toBeVisible();
+   // Mock this write only: verify the form without adding test notes to real history.
+   let submitted;
+   await page.route(`**/runs/${run.run_id}/review-followups`,async route=>{
+    submitted=route.request().postDataJSON();
+    await route.fulfill({status:201,contentType:'application/json',body:JSON.stringify({meaning:'UI_MOCK_ONLY'})});
+   });
+   await page.getByLabel('Control cần xử lý bất đồng').selectOption({index:1});
+   await page.getByLabel('Nội dung đối soát bất đồng').fill('UI mock only: test a coordination note without writing any real review history.');
+   await page.getByRole('button',{name:'Lưu biên bản xử lý riêng'}).click();
+   await expect(page.getByText('Đã lưu biên bản riêng; nhãn khóa, số liệu đối chiếu và phê duyệt không thay đổi.',{exact:true})).toBeVisible();
+   expect(submitted.report_sha256).toMatch(/^[a-f0-9]{64}$/);
+   expect(submitted.state).toBe('needs_new_review');
+   expect(submitted).not.toHaveProperty('expected');
+  }
   expect(failures).toEqual([]);
   await page.getByRole('button',{name:'Đăng xuất',exact:true}).click();
   await expect(page.getByRole('heading',{name:'Đăng nhập hệ thống đánh giá'})).toBeVisible();

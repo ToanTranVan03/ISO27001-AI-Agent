@@ -72,6 +72,8 @@ Các thông tin trên là **trạng thái bàn giao từ tuần 5**, không ph�
 
 ### Bổ sung ngày 20/11 — rà soát trước bàn giao
 
+- Bổ sung [sổ xử lý bất đồng A.8](../docs/SO_XU_LY_BAT_DONG_A8.md): admin ghi biên bản riêng theo control/hash nguồn, lưu lịch sử người/thời điểm và xuất cùng báo cáo; không sửa nhãn khóa, độ đúng hoặc phê duyệt. Gói chấm mù không lộ biên bản trước khi hoàn tất. 319 test Python và 3 kịch bản Edge đạt; thao tác lưu form mới dùng POST giả lập trên trình duyệt, API lưu kiểm tra bằng thư mục test tạm. Chưa thay biên bản thảo luận thật.
+
 - Đồng nhất điều kiện đối chiếu người chấm giữa CLI và web; giữ nguyên nhãn khóa, tách người còn căn cứ lỗi/cảnh báo chưa xác nhận khỏi bảng đủ điều kiện.
 - Hiển thị chi tiết lỗi 409/422; đồng bộ tài liệu và form kế hoạch với chính sách duyệt SoA hiện hành, không nhầm lưu nháp là phê duyệt.
 - Cập nhật snapshot việc cần làm: 38 yêu cầu nguồn (37 thiếu, A.6.2 cần thay) và 18 yêu cầu rà mức bao phủ tách riêng; chưa tự giao người/hạn hoặc tạo hồ sơ.
