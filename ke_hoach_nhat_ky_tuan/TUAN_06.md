@@ -31,6 +31,8 @@ Phần triển khai kỹ thuật đã hoàn thành trong tuần:
 - [x] Bổ sung bảng điều kiện trình duyệt SoA theo từng control, cảnh báo hạn và chặn thiếu thông tin kế hoạch/nguồn thẩm định không dùng được.
 - [x] Chuyển chạy lô nguồn sang server, lưu tiến độ PostgreSQL, chặn lô trùng, dừng có kiểm soát và ghi gián đoạn khi API khởi động lại.
 - [x] Kiểm soát kích thước đầu vào/context model, giữ nguồn không cắt âm thầm; không hiển thị kết luận cũ như hiện hành khi job mới lỗi.
+- [x] Đồng nhất bộ lọc chất lượng căn cứ của báo cáo CLI/web; hiển thị lỗi API có cấu trúc và phân biệt kế hoạch nháp với điều kiện trình duyệt.
+- [x] Tách phiếu nguồn thiếu/không dùng được với rà mức bao phủ; kiểm thử Edge ba tài khoản cho điều hướng, xuất SoA và từ chối tệp lỗi. Chưa thay kiểm thử toàn bộ thao tác nộp/chấm/duyệt.
 
 Chỉ đánh dấu hoàn thành khi có kết quả và minh chứng. Hoàn thành phần mềm, có nguồn hoặc chạy xong không đồng nghĩa control tuân thủ hay đã nghiệm thu chuyên môn.
 
@@ -68,6 +70,14 @@ Các thông tin trên là **trạng thái bàn giao từ tuần 5**, không ph�
 
 ## Kết quả và minh chứng
 
+### Bổ sung ngày 20/11 — rà soát trước bàn giao
+
+- Đồng nhất điều kiện đối chiếu người chấm giữa CLI và web; giữ nguyên nhãn khóa, tách người còn căn cứ lỗi/cảnh báo chưa xác nhận khỏi bảng đủ điều kiện.
+- Hiển thị chi tiết lỗi 409/422; đồng bộ tài liệu và form kế hoạch với chính sách duyệt SoA hiện hành, không nhầm lưu nháp là phê duyệt.
+- Cập nhật snapshot việc cần làm: 38 yêu cầu nguồn (37 thiếu, A.6.2 cần thay) và 18 yêu cầu rà mức bao phủ tách riêng; chưa tự giao người/hạn hoặc tạo hồ sơ.
+- Kiểm chứng: **316 test Python, 9 test JavaScript, lint/build và 3 kịch bản Edge admin/Khoa/Tú đạt**. Đã kiểm tra đăng nhập/đăng xuất, bốn màn hình, xuất SoA 56 dòng, nút duyệt bị khóa, người chấm không có nút chạy lô; admin nộp tệp một ký tự bị từ chối 422 và form nhắc kế hoạch thiếu. Không nộp nhãn/quyết định/phê duyệt hoặc chạy model.
+- [Biên bản và cách chạy lại](../docs/KIEM_THU_RELEASE_2026_11_20.md); [phiếu nguồn hiện hành](../docs/YEU_CAU_NGUON_56_HIEN_HANH.md). Chưa xác nhận toàn bộ luồng UI nộp nguồn hợp lệ, nộp/khóa nhãn, đổi snapshot và duyệt thành công; các mục cần con người/nguồn thật vẫn chưa tích xong.
+
 - [Nghiệm thu API ba tài khoản ngày 20/11](../docs/a8-results/api-acceptance-2026-11-20.json): 39 bước đạt, chưa kiểm thử toàn GUI.
 
 - [Phiếu yêu cầu nguồn theo nhóm](../docs/source-requests/README.md): dự thảo giao nhóm bổ sung hồ sơ.
@@ -91,7 +101,7 @@ Tài liệu bàn giao từ tuần trước:
 
 - Thiếu nguồn và xác nhận chuyên môn thực tế; công cụ không thể tự tạo phê duyệt hoặc nhãn độc lập thay con người.
 - Probe lab chỉ kiểm tra tiêu chí đại diện, chưa chứng minh đầy đủ nội dung từng control hoặc toàn bộ ISMS.
-- Ngày 18/11 công cụ điều khiển trình duyệt vẫn chưa kết nối; đã kiểm tra mã/API/render nhưng chưa xác nhận toàn bộ thao tác UI. Cần kiểm thử thủ công có ghi kết quả.
+- Ngày 20/11 Computer Use/native pipe vẫn chưa kết nối; đã dùng Playwright chạy Edge thực tế với ba tài khoản cho tập kịch bản đọc/xuất và từ chối tệp lỗi. Chưa bao phủ toàn bộ thao tác nộp/chấm/duyệt; cần tiếp tục trên đợt thử riêng và ghi kết quả, không coi ba kịch bản là kiểm thử toàn UI.
 
 Cập nhật thêm khi phát sinh, kèm hướng xử lý và phần còn chờ.
 

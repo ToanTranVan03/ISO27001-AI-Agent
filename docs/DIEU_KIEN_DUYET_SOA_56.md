@@ -25,6 +25,8 @@ Sau khi rà rubric và đủ hồ sơ hiện hành, người phụ trách mới 
 
 ## Kiểm chứng ngày 18/11/2026
 
+Mốc dưới đây là lịch sử. Cập nhật 20/11: đã đồng bộ tài liệu kế hoạch và thông báo trên form; 316 test Python, 9 test JavaScript, lint/build và 3 kịch bản Edge ba tài khoản đạt. Phạm vi UI và phần chưa kiểm tra ghi trong [biên bản release](KIEM_THU_RELEASE_2026_11_20.md); không xác nhận toàn bộ thao tác hoặc nghiệm thu chuyên môn.
+
 295 test Python, 7 test JavaScript, lint/build và render thành công. API đang chạy trả HTTP 409 khi cố duyệt hồ sơ còn thiếu, HTTP 422 khi kết luận đạt từ nguồn A.6.2 không dùng được; đã xác nhận không phát sinh thẩm định/phê duyệt thử. Chưa kiểm thử toàn bộ thao tác trình duyệt do công cụ chưa kết nối.
 
 Hồ sơ thực tế vẫn còn thiếu: rubric chưa xác nhận; 56 quyết định tính áp dụng và thẩm định hiện hành chưa hoàn tất; 37 control thiếu nguồn ngoài preset, A.6.2 cần thay nguồn. Nguồn kiểm định mới và nhãn người đánh giá đủ điều kiện phải do nhóm cung cấp/xác nhận; không tích hoàn tất bằng kết quả giả định.
