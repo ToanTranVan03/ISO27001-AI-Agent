@@ -114,5 +114,5 @@ Ghi gọn theo ngày/nhánh; người push: Trần Văn Toàn. Không ghi thao t
 
 | Ngày | Giờ (UTC+7) | Người push | Nhánh | Nội dung chính |
 |---|---|---|---|---|
-| 20/11/2026 | 12:29 | Trần Văn Toàn | `main` | Gộp tiến độ từ Tuan6: kiểm tra gói nguồn, nghiệm thu API/Edge ba tài khoản, đồng nhất báo cáo và điều kiện SoA, phiếu nguồn/mức bao phủ, sổ xử lý bất đồng và nhật ký tuần 6 |
+| 20/11/2026 | 12:29 (`main`), 12:36 (cả hai nhánh) | Trần Văn Toàn | `main`, `Tuan6` | Đồng bộ tiến độ tuần 6: kiểm tra gói nguồn, nghiệm thu API/Edge ba tài khoản, đồng nhất báo cáo và điều kiện SoA, phiếu nguồn/mức bao phủ, sổ xử lý bất đồng và nhật ký |
 | 18/11/2026 | 10:32, 12:18, 12:44, 20:03 | Trần Văn Toàn | `Tuan6` | Kiểm tra chất lượng nguồn; thống nhất giao diện; xem trước/lịch sử doanh nghiệp; nộp, tải bản gốc và nối nguồn với hàng đợi đánh giá 56 control; hồ sơ tài khoản/vai trò; điều kiện duyệt SoA; lô server và báo cáo 18 control; sửa đầu vào model; 38 phiếu yêu cầu nguồn theo nhóm |
