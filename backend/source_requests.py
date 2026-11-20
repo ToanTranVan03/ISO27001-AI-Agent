@@ -1,10 +1,17 @@
 """Read-only source acquisition requests; never evidence or owner decisions."""
 def build_requests(packet):
-    requests=[]
+    requests=[];coverage=[]
     for row in packet['controls']:
         if row['excluded_by_recorded_decision']:continue
         reason='replace_unusable_source' if 'source_content_unusable' in row['gaps'] else 'supply_missing_source' if 'explicit_sources_missing' in row['gaps'] else None
-        if not reason:continue
+        if not reason:
+            if 'human_criteria_review_not_current' in row['gaps'] or 'criteria_unknown' in row['gaps']:
+                coverage.append(dict(control_id=row['control_id'],owner_role=row['owner_role'],
+                    reason='verify_source_coverage',status='DRAFT_NOT_ASSIGNED',assignee=None,due_date=None,
+                    existing_evidence_ids=[s['evidence_id'] for s in row['sources']],
+                    criteria=[c['criterion'] for c in row['criteria']],
+                    note='Nguồn qua kiểm tra nội dung tối thiểu chưa chứng minh đủ tiêu chí; cần người phụ trách rà phạm vi và viện dẫn.'))
+            continue
         requests.append(dict(control_id=row['control_id'],name=row['name'],owner_role=row['owner_role'],reason=reason,
             expected_evidence_types=row['expected_evidence_types'],
             criteria=[c['criterion'] for c in row['criteria']],
@@ -14,8 +21,9 @@ def build_requests(packet):
                 'Ghi nguồn cung cấp, đối tượng, kỳ quan sát và giới hạn mẫu.',
                 'Giữ cấu hình/log/hồ sơ đúng hoặc sai như thực tế; không sửa để tạo kết luận đạt.',
                 'Nộp đúng control và loại nguồn; sau tiếp nhận phải đánh giá và thẩm định lại.']))
-    return dict(protocol='source-requests-v1',assessment_id=packet['assessment_id'],
+    return dict(protocol='source-requests-v2',assessment_id=packet['assessment_id'],
         based_on_packet_sha256=packet['sha256'],requests=requests,
+        coverage_reviews=coverage,
         by_role={role:sum(r['owner_role']==role for r in requests) for role in sorted({r['owner_role'] for r in requests})},
         note='Phiếu yêu cầu dự thảo từ hồ sơ hiện hành; không phải bằng chứng, giao việc đã xác nhận hoặc phê duyệt.')
 
@@ -32,4 +40,12 @@ def markdown(report,role=None):
             'Loại nguồn được hỗ trợ: '+', '.join(r['expected_evidence_types']),'',
             'Nội dung cần chứng minh hoặc bác bỏ:',*['- '+c for c in r['criteria']],'',
             'Checklist bàn giao:',*['- [ ] '+c for c in r['submission_checklist']]]
+    coverage=[r for r in report.get('coverage_reviews',[]) if role is None or r['owner_role']==role]
+    if coverage:
+        lines+=['','## Rà mức bao phủ nguồn đã có','',
+            'Không cộng vào số control thiếu nguồn; không tự xác nhận đủ nội dung hoặc đạt control.']
+        for row in coverage:
+            lines+=['', '### '+row['control_id'],row['note'],
+                'Nguồn hiện có: '+', '.join(row['existing_evidence_ids']),
+                *['- [ ] '+c for c in row['criteria']]]
     return '\n'.join(lines)+'\n'
