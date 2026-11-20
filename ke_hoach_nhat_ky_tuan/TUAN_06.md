@@ -33,6 +33,7 @@ Phần triển khai kỹ thuật đã hoàn thành trong tuần:
 - [x] Kiểm soát kích thước đầu vào/context model, giữ nguồn không cắt âm thầm; không hiển thị kết luận cũ như hiện hành khi job mới lỗi.
 - [x] Đồng nhất bộ lọc chất lượng căn cứ của báo cáo CLI/web; hiển thị lỗi API có cấu trúc và phân biệt kế hoạch nháp với điều kiện trình duyệt.
 - [x] Tách phiếu nguồn thiếu/không dùng được với rà mức bao phủ; kiểm thử Edge ba tài khoản cho điều hướng, xuất SoA và từ chối tệp lỗi. Chưa thay kiểm thử toàn bộ thao tác nộp/chấm/duyệt.
+- [x] Bổ sung sổ xử lý bất đồng theo lượt/control/hash, lưu người ghi và thời điểm; xuất riêng và cùng báo cáo điều phối, không sửa nhãn khóa hoặc số liệu đối chiếu.
 
 Chỉ đánh dấu hoàn thành khi có kết quả và minh chứng. Hoàn thành phần mềm, có nguồn hoặc chạy xong không đồng nghĩa control tuân thủ hay đã nghiệm thu chuyên môn.
 
@@ -66,31 +67,28 @@ Các thông tin trên là **trạng thái bàn giao từ tuần 5**, không ph�
 | 18/11/2026 | Xuất kết quả và kiểm chứng sau sửa | Kết quả máy mới nhất của 18 control: 3 không tuân thủ, 6 một phần, 9 thiếu bằng chứng; không phải độ đúng so với người chấm. 308 test Python, 7 test JavaScript, lint/build/render đạt; nguồn/rubric giữa các lần kiểm tra lại không đổi |
 | 18/11/2026 | Tách yêu cầu bổ sung nguồn theo nhóm phụ trách | Xuất 38 phiếu: Nhân sự 8, Hành chính/vật lý 14, IT/ATTT 16; có tiêu chí, loại nguồn, checklist và chỗ ghi người nhận/hạn; phân biệt thiếu nguồn với nguồn lỗi. 310 test Python, lint/build đạt; không tự tạo bằng chứng hoặc xác nhận giao việc |
 | 20/11/2026 | Tách kiểm tra gói kiểm định trước khi chạy | Admin kiểm tra nguồn/hash/rubric/facts và phần chưa rõ trước khi xác nhận chạy; preflight không gọi model, không tạo lượt hoặc lưu nhãn. 310 test hồi quy trước bổ sung và test mới về phân quyền/không tạo tác dụng phụ đạt; lint/build đạt. Chưa có bộ kiểm định mới được xác nhận |
-| 20/11/2026 | Tự động kiểm tra nghiệm thu API ba tài khoản | Bổ sung CLI chạy lặp, không ghi mật khẩu/token; 39/39 bước API thật bằng admin/Khoa/Tú đạt, gồm đọc bốn khu vực và chặn quyền sai/khác đợt. Không tạo model/nhãn/phê duyệt. 314 test Python đạt; kiểm thử toàn UI vẫn chờ kết nối trình duyệt |
+| 20/11/2026 | Tự động kiểm tra nghiệm thu API ba tài khoản | CLI chạy lặp; 39/39 bước API thật bằng admin/Khoa/Tú đạt, gồm đọc bốn khu vực và chặn quyền sai/khác đợt. Không ghi mật khẩu/token, tạo lượt model, nhãn hoặc phê duyệt; mốc 314 test Python trước khi bổ sung kiểm thử Edge |
+| 20/11/2026 | Đồng nhất báo cáo và điều kiện trình duyệt | Báo cáo CLI/web lọc căn cứ chưa đủ điều kiện; giao diện hiện lý do lỗi 409/422, tài liệu và form phân biệt lưu kế hoạch nháp với đủ điều kiện duyệt SoA |
+| 20/11/2026 | Cập nhật yêu cầu nguồn và mức bao phủ | 38 yêu cầu cung cấp/thay nguồn (37 thiếu, A.6.2 cần thay), tách 18 yêu cầu rà mức bao phủ; xuất theo nhóm, cập nhật danh sách công việc từ API; không tự gán người/hạn |
+| 20/11/2026 | Kiểm thử giao diện bằng Edge | Ba kịch bản admin/Khoa/Tú đạt: đăng nhập/đăng xuất, bốn màn hình, xuất SoA 56 dòng, chặn duyệt thiếu điều kiện, ẩn nút chạy lô với người chấm; admin nộp tệp một ký tự bị từ chối 422, form nhắc kế hoạch thiếu |
+| 20/11/2026 | Bổ sung sổ xử lý bất đồng và căn cứ cần rà | Biên bản riêng gắn control/hash nguồn, người ghi/thời điểm; lịch sử chỉ bổ sung, xuất JSON/Markdown cùng báo cáo; kiểm tra quyền, hash, schema và không lộ sổ trong gói mù; không sửa nhãn, độ đúng hoặc phê duyệt |
+| 20/11/2026 | Kiểm chứng bản mới nhất | 319 test Python, 9 test JavaScript, lint/build và 3 kịch bản Edge đạt. API lưu sổ kiểm tra bằng dữ liệu test tạm; form lưu dùng POST giả lập trên Edge, không ghi biên bản thử vào lượt thật |
 
 ## Kết quả và minh chứng
 
-### Bổ sung ngày 20/11 — rà soát trước bàn giao
+Mốc kiểm chứng mới nhất ngày 20/11: **319 test Python, 9 test JavaScript, lint/build và 3 kịch bản Edge đạt**. Các số test thấp hơn trong bảng công việc là mốc lịch sử, không phải lỗi mất test. Kết quả kỹ thuật không thay bằng chứng tuân thủ hoặc xác nhận chuyên môn.
 
-- Bổ sung [sổ xử lý bất đồng A.8](../docs/SO_XU_LY_BAT_DONG_A8.md): admin ghi biên bản riêng theo control/hash nguồn, lưu lịch sử người/thời điểm và xuất cùng báo cáo; không sửa nhãn khóa, độ đúng hoặc phê duyệt. Gói chấm mù không lộ biên bản trước khi hoàn tất. 319 test Python và 3 kịch bản Edge đạt; thao tác lưu form mới dùng POST giả lập trên trình duyệt, API lưu kiểm tra bằng thư mục test tạm. Chưa thay biên bản thảo luận thật.
-
-- Đồng nhất điều kiện đối chiếu người chấm giữa CLI và web; giữ nguyên nhãn khóa, tách người còn căn cứ lỗi/cảnh báo chưa xác nhận khỏi bảng đủ điều kiện.
-- Hiển thị chi tiết lỗi 409/422; đồng bộ tài liệu và form kế hoạch với chính sách duyệt SoA hiện hành, không nhầm lưu nháp là phê duyệt.
-- Cập nhật snapshot việc cần làm: 38 yêu cầu nguồn (37 thiếu, A.6.2 cần thay) và 18 yêu cầu rà mức bao phủ tách riêng; chưa tự giao người/hạn hoặc tạo hồ sơ.
-- Kiểm chứng: **316 test Python, 9 test JavaScript, lint/build và 3 kịch bản Edge admin/Khoa/Tú đạt**. Đã kiểm tra đăng nhập/đăng xuất, bốn màn hình, xuất SoA 56 dòng, nút duyệt bị khóa, người chấm không có nút chạy lô; admin nộp tệp một ký tự bị từ chối 422 và form nhắc kế hoạch thiếu. Không nộp nhãn/quyết định/phê duyệt hoặc chạy model.
-- [Biên bản và cách chạy lại](../docs/KIEM_THU_RELEASE_2026_11_20.md); [phiếu nguồn hiện hành](../docs/YEU_CAU_NGUON_56_HIEN_HANH.md). Chưa xác nhận toàn bộ luồng UI nộp nguồn hợp lệ, nộp/khóa nhãn, đổi snapshot và duyệt thành công; các mục cần con người/nguồn thật vẫn chưa tích xong.
-
-- [Nghiệm thu API ba tài khoản ngày 20/11](../docs/a8-results/api-acceptance-2026-11-20.json): 39 bước đạt, chưa kiểm thử toàn GUI.
-
-- [Phiếu yêu cầu nguồn theo nhóm](../docs/source-requests/README.md): dự thảo giao nhóm bổ sung hồ sơ.
-
+- [Sổ xử lý bất đồng A.8](../docs/SO_XU_LY_BAT_DONG_A8.md): cách ghi biên bản riêng, xuất báo cáo và giới hạn kiểm thử lưu.
+- [Biên bản kiểm thử Edge và cách chạy lại](../docs/KIEM_THU_RELEASE_2026_11_20.md): phạm vi đọc/xuất, từ chối tệp lỗi; mốc 316 test trước khi thêm sổ xử lý.
+- [Nghiệm thu API ba tài khoản](../docs/a8-results/api-acceptance-2026-11-20.json): 39/39 bước, không thay kiểm thử toàn giao diện.
+- [Phiếu nguồn hiện hành](../docs/YEU_CAU_NGUON_56_HIEN_HANH.md) và [việc cần hoàn thiện](../docs/VIEC_CAN_HOAN_THIEN_56.md): snapshot từ API ngày 20/11; bản xuất không tự cập nhật.
 - [Kiểm tra nội dung nguồn trước đánh giá](../docs/KIEM_TRA_NOI_DUNG_NGUON.md): chính sách kỹ thuật, hành vi và giới hạn.
 - [Theo dõi thay đổi doanh nghiệp](../docs/LICH_SU_DOANH_NGHIEP.md): xem trước, kiểm tra snapshot và lịch sử.
 - [Thu nguồn gốc trên web cho 56 control](../docs/THU_NGUON_WEB_56.md): cách nộp nguồn, tải bản gốc và tiếp tục đánh giá.
 - [Điều kiện hồ sơ và trình duyệt SoA](../docs/DIEU_KIEN_DUYET_SOA_56.md): phần còn thiếu, hạn kế hoạch, thẩm định và chính sách duyệt mới.
 - [Đánh giá theo lô trên server](../docs/DANH_GIA_THEO_LO_TREN_SERVER.md): vận hành, khóa, dừng và giới hạn.
 - [Kết quả đánh giá lại 18 nguồn A.8](../docs/KET_QUA_DANH_GIA_NGUON_18_2026_11_18.md): bảng kết quả và dữ liệu job/evaluation/audit trail, giữ các lần lỗi. Chỉ đo thực thi, chưa phải benchmark độc lập.
-- Trạng thái kiểm tra ngày 18/11: 19/56 control có nguồn ngoài preset, 18 qua kiểm tra nội dung tối thiểu; 37 còn thiếu nguồn và A.6.2 cần thay nguồn. Chưa có thẩm định hiện hành/quyết định tính áp dụng; rubric và SoA chưa được phê duyệt.
+- Trạng thái nguồn kiểm tra lại ngày 20/11: 19/56 control có nguồn ngoài preset, 18 qua kiểm tra nội dung tối thiểu; 37 còn thiếu nguồn và A.6.2 cần thay nguồn. Chưa có thẩm định hiện hành/quyết định tính áp dụng; rubric và SoA chưa được phê duyệt.
 
 Tài liệu bàn giao từ tuần trước:
 
@@ -103,9 +101,8 @@ Tài liệu bàn giao từ tuần trước:
 
 - Thiếu nguồn và xác nhận chuyên môn thực tế; công cụ không thể tự tạo phê duyệt hoặc nhãn độc lập thay con người.
 - Probe lab chỉ kiểm tra tiêu chí đại diện, chưa chứng minh đầy đủ nội dung từng control hoặc toàn bộ ISMS.
+- Sổ xử lý đã có công cụ nhưng chưa có biên bản đối soát chuyên môn thật; ghi chú không tự giải quyết căn cứ sai hoặc biến nhãn có hỗ trợ thành độc lập.
 - Ngày 20/11 Computer Use/native pipe vẫn chưa kết nối; đã dùng Playwright chạy Edge thực tế với ba tài khoản cho tập kịch bản đọc/xuất và từ chối tệp lỗi. Chưa bao phủ toàn bộ thao tác nộp/chấm/duyệt; cần tiếp tục trên đợt thử riêng và ghi kết quả, không coi ba kịch bản là kiểm thử toàn UI.
-
-Cập nhật thêm khi phát sinh, kèm hướng xử lý và phần còn chờ.
 
 ## Việc chuyển tiếp sang tuần 7
 
