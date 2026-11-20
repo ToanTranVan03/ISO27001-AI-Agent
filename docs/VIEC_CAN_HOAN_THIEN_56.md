@@ -1,6 +1,9 @@
 # Việc cần hoàn thiện — 56 control
 
-Danh sách việc còn thiếu, không phải tỷ lệ tuân thủ. Có nguồn không đồng nghĩa nguồn đúng. SoA được duyệt không đồng nghĩa mọi control đạt.
+Snapshot đọc từ API ngày 2026-11-20T12:05:35.250342+07:00. Không phải tỷ lệ tuân thủ hoặc xác nhận chuyên môn.
+
+Rubric: dbf106d4cc9cf939e8bd3aba2cc7bf61c605b4c0e0068d6f113a14c942087c9c
+SoA: 48562434651f6d5b22e2f8965fde2210a580ed4a74eafa01c00af30237a6aea2
 
 | Control | Bước | Phụ trách | Việc cần làm |
 |---|---|---|---|
@@ -62,6 +65,7 @@ Danh sách việc còn thiếu, không phải tỷ lệ tuân thủ. Có nguồn
 | A.8.4 | applicability | Người phụ trách | Xác định tính áp dụng và kế hoạch xử lý có căn cứ. |
 | A.8.6 | applicability | Người phụ trách | Xác định tính áp dụng và kế hoạch xử lý có căn cứ. |
 | A.6.1 | sources | Chủ sở hữu hồ sơ | Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định. |
+| A.6.2 | source_quality | Chủ sở hữu hồ sơ | Nguồn trích xuất quá ít hoặc ký tự lặp; kiểm tra tệp gốc/OCR và nộp nguồn phù hợp trước khi đánh giá. |
 | A.6.3 | sources | Chủ sở hữu hồ sơ | Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định. |
 | A.6.4 | sources | Chủ sở hữu hồ sơ | Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định. |
 | A.6.5 | sources | Chủ sở hữu hồ sơ | Thu nguồn gốc/hồ sơ hoặc nhập bản capture live; preset tự sinh và mẫu trống chưa thay thế nguồn để thẩm định. |
@@ -155,3 +159,5 @@ Danh sách việc còn thiếu, không phải tỷ lệ tuân thủ. Có nguồn
 | A.8.4 | review | Người đánh giá | Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn. |
 | A.8.6 | review | Người đánh giá | Thẩm định từng tiêu chí, căn cứ và viện dẫn; giữ chưa rõ khi thiếu nguồn. |
 | Toàn phạm vi | approval | Người phụ trách | Hoàn tất các điều kiện quyết định/thẩm định/rubric trước khi trình duyệt SoA. |
+
+Nguồn: [Phiếu yêu cầu nguồn hiện hành](YEU_CAU_NGUON_56_HIEN_HANH.md). Có nguồn không đồng nghĩa đủ mức bao phủ; vẫn cần thẩm định.
