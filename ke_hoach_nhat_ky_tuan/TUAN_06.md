@@ -3,7 +3,7 @@
 - Thời gian: **16/11/2026–22/11/2026 (thứ Hai–Chủ nhật).**
 - Trạng thái: **Đang thực hiện.**
 - Lập kế hoạch: **15/11/2026**.
-- Cập nhật: **18/11/2026**.
+- Cập nhật: **20/11/2026**.
 
 ## Mục tiêu và kế hoạch
 
@@ -62,6 +62,7 @@ Các thông tin trên là **trạng thái bàn giao từ tuần 5**, không ph�
 | 18/11/2026 | Chạy thực tế và xử lý lỗi Agent | Lô 18 control đầu có 16 job lưu kết quả, 2 lỗi; tăng giới hạn phản hồi chưa đủ, sau sửa đóng gói/context hai lượt kiểm tra lại lưu được kết quả. Giữ mọi job cũ, không sửa thành thành công |
 | 18/11/2026 | Xuất kết quả và kiểm chứng sau sửa | Kết quả máy mới nhất của 18 control: 3 không tuân thủ, 6 một phần, 9 thiếu bằng chứng; không phải độ đúng so với người chấm. 308 test Python, 7 test JavaScript, lint/build/render đạt; nguồn/rubric giữa các lần kiểm tra lại không đổi |
 | 18/11/2026 | Tách yêu cầu bổ sung nguồn theo nhóm phụ trách | Xuất 38 phiếu: Nhân sự 8, Hành chính/vật lý 14, IT/ATTT 16; có tiêu chí, loại nguồn, checklist và chỗ ghi người nhận/hạn; phân biệt thiếu nguồn với nguồn lỗi. 310 test Python, lint/build đạt; không tự tạo bằng chứng hoặc xác nhận giao việc |
+| 20/11/2026 | Tách kiểm tra gói kiểm định trước khi chạy | Admin kiểm tra nguồn/hash/rubric/facts và phần chưa rõ trước khi xác nhận chạy; preflight không gọi model, không tạo lượt hoặc lưu nhãn. 310 test hồi quy trước bổ sung và test mới về phân quyền/không tạo tác dụng phụ đạt; lint/build đạt. Chưa có bộ kiểm định mới được xác nhận |
 
 ## Kết quả và minh chứng
 

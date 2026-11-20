@@ -171,6 +171,20 @@ def candidate_run(assessment_id: UUID,req: CandidateRunInput,user=Depends(requir
     return {k:v for k,v in doc.items() if k!='designer_reference'}
 
 
+@router.post('/candidate-runs/validate')
+def candidate_preflight(assessment_id: UUID,req: CandidateRunInput,user=Depends(require_user)):
+    require_campaign(assessment_id,user)
+    if user.get('role')!='admin':raise HTTPException(403,'Chỉ admin kiểm tra gói kiểm định ứng viên.')
+    from backend.validation_plan import validate_candidate
+    try:plan=validate_candidate(req.plan)
+    except (ValueError,KeyError,TypeError,OSError) as exc:raise HTTPException(422,'Gói ứng viên không hợp lệ: '+str(exc)) from exc
+    return dict(valid=True,plan_sha256=plan['sha256'],independent_validation=False,
+        model_called=False,run_created=False,
+        controls=[dict(control_id=e['control_id'],artifact_count=len(e['artifacts']),
+            unknown_checks=[key for key,value in e['facts'].items() if value is None]) for e in plan['snapshot']['evidence']],
+        note='Hash, cấu trúc, rubric và nguồn đã qua kiểm tra kỹ thuật. Không xác nhận độc lập, chuyên môn hoặc kết luận tuân thủ.')
+
+
 @router.get('/runs/{run_id}')
 def result(assessment_id: UUID,run_id: UUID,user=Depends(require_user)):
     require_campaign(assessment_id,user)
