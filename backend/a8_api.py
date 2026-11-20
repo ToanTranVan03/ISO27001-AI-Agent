@@ -346,6 +346,36 @@ def review(assessment_id: UUID,run_id: UUID,req: ReviewInput,user=Depends(requir
     return {'saved':True}
 
 
+class ReviewFollowupInput(BaseModel):
+    model_config=ConfigDict(str_strip_whitespace=True,extra='forbid')
+    control_id: str
+    report_sha256: str=Field(min_length=64,max_length=64)
+    state: Literal['needs_evidence','needs_new_review','discussion_recorded']
+    note: str=Field(min_length=30,max_length=3000)
+
+
+@router.post('/runs/{run_id}/review-followups',status_code=201)
+def review_followup(assessment_id: UUID,run_id: UUID,req: ReviewFollowupInput,user=Depends(require_user)):
+    require_campaign(assessment_id,user)
+    if user.get('role')!='admin':raise HTTPException(403,'Chỉ admin điều phối ghi biên bản xử lý; không chấm thay người đánh giá.')
+    with lock:
+        doc=read(assessment_id,run_id)
+        report=doc.get('report')
+        if doc.get('state')!='finished' or not report:raise HTTPException(409,'Lượt chưa có báo cáo hoàn tất.')
+        if req.report_sha256!=report['sha256']:raise HTTPException(409,'Báo cáo đã đổi; đọc lại đúng snapshot.')
+        if a8.digest({k:v for k,v in report.items() if k!='sha256'})!=report['sha256']:
+            raise HTTPException(409,'Hash báo cáo không hợp lệ; không ghi biên bản trên dữ liệu sai.')
+        record=next((r for r in report['records'] if r['control_id']==req.control_id),None)
+        if not record:raise HTTPException(422,'Control không thuộc báo cáo này.')
+        item=dict(**req.model_dump(),followup_id=str(uuid4()),
+            evidence_sha256=record['evidence']['source_sha256'],recorded_by=user['user_id'],
+            recorded_at=datetime.now(timezone.utc).isoformat(),
+            meaning='COORDINATOR_NOTE_NOT_A_LABEL_OR_APPROVAL')
+        doc.setdefault('review_followups',[]).append(item)
+        save(folder(assessment_id)/(str(run_id)+'.json'),doc)
+    return item
+
+
 @router.post('/runs/{run_id}/import-sources')
 def import_dossier_sources(assessment_id: UUID,run_id: UUID,user=Depends(require_user)):
     require_campaign(assessment_id,user)
