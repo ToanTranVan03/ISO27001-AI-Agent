@@ -1,6 +1,6 @@
 # Theo dõi xử lý và kiểm tra lại — tuần 5
 
-Cập nhật 12/11/2026. Đây là chức năng theo dõi hồ sơ; không tự tuyên bố hoàn tất đánh giá tuân thủ.
+Cập nhật chính sách 20/11/2026; chức năng ban đầu triển khai 12/11/2026. Đây là chức năng theo dõi hồ sơ; không tự tuyên bố hoàn tất đánh giá tuân thủ.
 
 ## Chức năng vừa hoàn thiện
 
@@ -13,7 +13,7 @@ Trong **Phạm vi 56 → chọn control → Tính áp dụng và kế hoạch x�
 
 API kiểm tra định dạng ngày, độ dài thông tin và quyền admin trước khi ghi. Thông tin theo cùng lịch sử quyết định hiện có; thay đổi bất kỳ phần nào của quyết định làm fingerprint SoA thay đổi. Không tự gán thành viên, hạn hoặc đánh dấu công việc hoàn thành.
 
-Kế hoạch đã ghi được đưa vào SoA JSON/Markdown và gói bàn giao. Kế hoạch cũ thiếu người nhận/hạn/cách kiểm tra lại được nhắc trong danh sách việc cần làm nếu control áp dụng. Đây là nhắc hoàn thiện kế hoạch; chưa đặt thêm điều kiện phê duyệt bắt buộc cho các trường tùy chọn này. Không tự suy ra người nhận đã đồng ý hoặc đã thực hiện.
+Kế hoạch đã ghi được đưa vào SoA JSON/Markdown và gói bàn giao. API cho phép lưu nháp thiếu người nhận/hạn/cách kiểm tra lại, nhưng **control áp dụng chưa đủ điều kiện trình duyệt SoA nếu thiếu các trường này**. Chính sách `scope56-approval-v2-followup` thay thế mô tả ngày 12/11 coi các trường chỉ là tùy chọn khi duyệt. Xem [điều kiện duyệt SoA](DIEU_KIEN_DUYET_SOA_56.md). Không tự suy ra người nhận đã đồng ý hoặc đã thực hiện. Control loại trừ cần căn cứ; không tạo kế hoạch/hạn giả. Hạn đã qua là cảnh báo, không tự đổi kết luận.
 
 ## Cách dùng để đẩy tiến độ
 
