@@ -15,7 +15,9 @@ export default function TeacherReport({request,url,exportFile}) {
    `Quan sát: ${r.source_coverage}/${r.control_count}; lỗi đầu/cuối: ${r.first_errors}/${r.final_errors}; sửa hợp lệ: ${r.repaired}.`,
    `Người nộp đủ và tự khai báo độc lập: ${r.complete_independently_declared_reviewers.length}. ${r.pending_human_comparison?'Chưa có bảng độ đúng so với người chấm đủ.':'Xem bảng từng người trong JSON; tư cách chuyên môn cần xác nhận.'}`, '',
    '| Control | Kết quả máy | Lỗi | Hash bằng chứng |','|---|---|---|---|',
-   ...r.control_results.map(c=>`| ${c.control_id} | ${safe(c.machine_status)} | ${c.error||''} | ${c.evidence_sha256} |`)]),
+   ...r.control_results.map(c=>`| ${c.control_id} | ${safe(c.machine_status)} | ${c.error||''} | ${c.evidence_sha256} |`),
+   '', 'Biên bản điều phối (không sửa nhãn/độ đúng/phê duyệt):',
+   ...(r.review_followups||[]).map(f=>`- ${safe(f.control_id)} · ${safe(f.state)} · ${safe(f.recorded_by)} · ${safe(f.recorded_at)}: ${safe(f.note)} · hash nguồn ${safe(f.evidence_sha256)}`)]),
   '', '## Luyện tập giả lập','', `${data.practice_summary.simulated_label_count} nhãn giả lập, không cộng vào mẫu kiểm định hoặc nhãn người thật.`,
   '', '## Việc còn thiếu','',...Object.entries(data.pending_tasks).map(([stage,count])=>`- ${stage}: ${count}`)].join('\n');}
  return <section className="space-y-3 rounded border border-teal-700 p-4"><h2 className="text-xl">Báo cáo điều phối theo yêu cầu giảng viên (admin)</h2>

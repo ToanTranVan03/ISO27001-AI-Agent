@@ -30,6 +30,8 @@ def build_report(scope,runs,practice):
             repaired=sum(bool(r.get('repaired')) for r in records),
             human_progress=analysis['reviewer_progress'],
             rationale_quality_issues=audit_reviews(report,doc.get('reviews',[])),
+            review_followups=doc.get('review_followups',[]),
+            followup_note='Coordinator history only; never changes locked labels, eligibility or accuracy.',
             complete_independently_declared_reviewers=independent,
             quality_eligible_independently_declared_reviewers=eligible,
             human_comparisons={uid:analysis['independent_reviewer_comparisons'][uid]['per_control'] for uid in eligible},

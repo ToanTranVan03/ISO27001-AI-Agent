@@ -45,3 +45,12 @@ def test_old_reports_with_missing_metadata_remain_explicit_legacy_history():
     item=result['experiments'][0]
     assert item['transport']=='UNKNOWN_LEGACY' and item['catalog_sha256'] is None
     assert item['metadata_complete'] is False
+
+
+def test_coordination_notes_are_exported_without_creating_human_metrics():
+    run=sample();run['review_followups']=[dict(state='discussion_recorded',note='Test coordination history only')]
+    result=build_report(build_scope('a',{'controls':[]}),[run],{})
+    item=result['experiments'][0]
+    assert item['review_followups']==run['review_followups']
+    assert item['pending_human_comparison'] and not item['human_comparisons']
+    assert not item['quality_eligible_independently_declared_reviewers']
