@@ -3,7 +3,7 @@ from uuid import UUID
 from datetime import date
 from fastapi import APIRouter, Depends, HTTPException, Query, UploadFile, File, Form
 from fastapi.responses import FileResponse
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from backend.team_api import require_user, require_campaign
 from backend import enterprise_lab, teamwork
 from backend.enterprise_spec import CONTROL_TO_NODE, PRESETS
@@ -242,6 +242,58 @@ class ScopeDecision(BaseModel):
     treatment_owner: str | None=Field(default=None,min_length=2,max_length=200)
     treatment_due: date | None=None
     verification_plan: str | None=Field(default=None,min_length=10,max_length=2000)
+
+
+class BatchScopeDecision(ScopeDecision):
+    applicable: StrictBool
+
+
+class DecisionBatchInput(BaseModel):
+    model_config=ConfigDict(extra='forbid',str_strip_whitespace=True)
+    assessment_id: UUID
+    expected_fingerprint: str=Field(pattern=r'^[a-f0-9]{64}$')
+    decisions: list[BatchScopeDecision]=Field(min_length=1,max_length=56)
+    note: str=Field(min_length=20,max_length=2000)
+
+
+def decision_batch_preview(assessment_id,req,user):
+    from backend.decision_batch import preview
+    require_campaign(assessment_id,user)
+    if user.get('role')!='admin':raise HTTPException(403,'Chỉ người phụ trách admin nhập quyết định.')
+    if str(assessment_id)!=str(req.assessment_id):raise HTTPException(409,'Gói thuộc đợt khác; không nhập quyết định.')
+    scope=scope56(assessment_id,user)
+    if scope['soa']['fingerprint']!=req.expected_fingerprint:raise HTTPException(409,'Hồ sơ đã đổi; xuất lại mẫu và xem trước trên phiên bản mới.')
+    try:result=preview(scope,[d.model_dump(mode='json') for d in req.decisions])
+    except ValueError as exc:raise HTTPException(422,str(exc)) from exc
+    return {**result,'assessment_id':str(assessment_id),'based_on_fingerprint':req.expected_fingerprint,'note_by_owner':req.note}
+
+
+@router.post('/scope56/decisions/batch/validate')
+def validate_decision_batch(assessment_id: UUID,req: DecisionBatchInput,user=Depends(require_user)):
+    from backend import a8_api
+    with a8_api.lock:return decision_batch_preview(assessment_id,req,user)
+
+
+@router.post('/scope56/decisions/batch')
+def import_decision_batch(assessment_id: UUID,req: DecisionBatchInput,user=Depends(require_user)):
+    import json
+    from datetime import datetime,timezone
+    from uuid import uuid4
+    from backend import a8_api
+    with a8_api.lock:
+        result=decision_batch_preview(assessment_id,req,user)
+        changed=[c['after'] for c in result['changes'] if c['action']!='unchanged']
+        batch_id=str(uuid4()) if changed else None
+        if changed:
+            path=a8_api.folder(assessment_id)/'settings'/'scope56-decisions.json'
+            history=json.loads(path.read_text(encoding='utf-8')) if path.exists() else []
+            now=datetime.now(timezone.utc).isoformat()
+            history.extend({**d,'recorded_by':user['user_id'],'recorded_at':now,
+                'import_batch_id':batch_id,'import_note':req.note,'based_on_fingerprint':req.expected_fingerprint} for d in changed)
+            try:a8_api.save(path,history)
+            except OSError as exc:raise HTTPException(503,'Chưa lưu được gói quyết định; tải lại để kiểm tra trước khi thử lại.') from exc
+    return dict(applied=len(changed),import_batch_id=batch_id,assessment_id=str(assessment_id),
+        note='Đã lưu quyết định/kế hoạch của người phụ trách. Chưa thẩm định hoặc phê duyệt SoA; đọc lại các điều kiện còn thiếu.')
 
 
 @router.post('/scope56/decisions')

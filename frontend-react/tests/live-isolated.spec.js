@@ -27,9 +27,22 @@ test('real isolated writes: source, review, SoA lifecycle and two synthetic rate
  for(const name of ['release_rater1','release_rater2'])await request('POST','/api/team/users',{
   username:name,display_name:`SYNTHETIC TEST ONLY ${name}`,password:process.env.ISO_ASSESSOR_PASSWORD});
  // Deliberately artificial test-only scope to exercise an approval transition.
- for(const c of initial.controls.filter(c=>c.control_id!=='A.6.1'))await request('POST',path+'/decisions',{
-  control_id:c.control_id,applicable:false,reason:'Synthetic integration test exclusion; never a real scope decision.',
-  treatment:'Synthetic test fixture only; no operational remediation asserted.'});
+ const decisionPack={assessment_id:aid,expected_fingerprint:initial.soa.fingerprint,
+  decisions:initial.controls.filter(c=>c.control_id!=='A.6.1').map(c=>({
+   control_id:c.control_id,applicable:false,reason:'Synthetic integration test exclusion; never a real scope decision.',
+   treatment:'Synthetic test fixture only; no operational remediation asserted.'}))};
+ await page.getByText('Quản lý nguồn, tiêu chí và hồ sơ bàn giao',{exact:true}).click();
+ await page.getByText('Nhập tính áp dụng & kế hoạch theo lô · người phụ trách',{exact:true}).click();
+ await page.getByLabel('Gói quyết định và kế hoạch JSON').setInputFiles({name:'synthetic-decisions.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(decisionPack))});
+ await page.getByLabel('Căn cứ nhập gói quyết định').fill('SYNTHETIC integration test only, not actual applicability decisions.');
+ await page.getByRole('button',{name:'Xem trước gói quyết định, chưa lưu',exact:true}).click();
+ await expect(page.getByRole('region',{name:'Xem trước quyết định theo lô'})).toContainText('55 quyết định sẽ thay đổi');
+ expect((await request('GET',path)).acceptance.applicability_recorded).toBe(0);
+ await page.getByRole('button',{name:'Lưu 55 quyết định/kế hoạch đã xem trước',exact:true}).click();
+ await expect(page.getByRole('status').filter({hasText:'Đã lưu 55 quyết định/kế hoạch.'})).toBeVisible();
+ expect((await request('GET',path)).acceptance.applicability_recorded).toBe(55);
+ const staleBatch=await page.request.post(path+'/decisions/batch',{headers:{Authorization:`Bearer ${adminToken}`},data:{...decisionPack,note:'Synthetic old fingerprint must be rejected'}});
+ expect(staleBatch.status()).toBe(409);
  await request('POST',path+'/rubric/approval',{rubric_sha256:initial.rubric_sha256,note:'SYNTHETIC integration test acknowledgment only, not a professional approval.'});
  await page.getByRole('button',{name:'Doanh nghiệp',exact:true}).click();await page.getByRole('button',{name:'Tổng quan 56 control',exact:true}).click();
  const open=async()=>page.getByRole('row').filter({has:page.getByText('A.6.1',{exact:true})}).getByRole('button',{name:'Bổ sung',exact:true}).click();
