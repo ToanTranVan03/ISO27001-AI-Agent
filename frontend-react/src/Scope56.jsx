@@ -18,7 +18,7 @@ export default function Scope56({assessment,request,onOpenA8,onOpenDossier,onOpe
  const [treatmentOwner,setTreatmentOwner]=useState(''),[treatmentDue,setTreatmentDue]=useState(''),[verificationPlan,setVerificationPlan]=useState('');
  const [criteriaReviews,setCriteriaReviews]=useState([]),[reviewToken,setReviewToken]=useState('');
  const [packet,setPacket]=useState(null),[sources,setSources]=useState(null),[reviewStatus,setReviewStatus]=useState('Insufficient Evidence'),[reviewNote,setReviewNote]=useState(''),[approvalNote,setApprovalNote]=useState(''),[rubricNote,setRubricNote]=useState('');
- const [data,setData]=useState(null),[selected,setSelected]=useState(''),[filter,setFilter]=useState('all'),[error,setError]=useState(''),[busy,setBusy]=useState(false),[applicable,setApplicable]=useState(''),[reason,setReason]=useState(''),[treatment,setTreatment]=useState(''),[notice,setNotice]=useState('');
+ const [data,setData]=useState(null),[selected,setSelected]=useState(controlId),[filter,setFilter]=useState('all'),[error,setError]=useState(''),[busy,setBusy]=useState(false),[applicable,setApplicable]=useState(''),[reason,setReason]=useState(''),[treatment,setTreatment]=useState(''),[notice,setNotice]=useState('');
  const load=useCallback(async()=>{try{setData(await request(path));}catch(e){setError(e.message);}},[path,request]);
  useEffect(()=>{let active=true;async function update(){try{const r=await request(path);if(active)setData(r);}catch(e){if(active)setError(e.message);}}update();const timer=setInterval(update,6000);return()=>{active=false;clearInterval(timer);};},[path,request]);
  const detail=data?.controls.find(c=>c.control_id===selected);

@@ -28,7 +28,9 @@ test('employee, dossier, control and source-run context survive navigation, relo
   await page.getByRole('button',{name:`Tổng quan · ${control.control_id}`,exact:true}).click();
   await expect(page.getByRole('heading',{name:`${control.control_id} · ${control.name}`,exact:true})).toBeVisible();
   expect(new URLSearchParams(new URL(page.url()).hash.slice(1)).get('employee')).toBe('EMP-001');
+  expect(new URLSearchParams(new URL(page.url()).hash.slice(1)).get('control')).toBe(control.control_id);
   await page.reload();
+  expect(new URLSearchParams(new URL(page.url()).hash.slice(1)).get('control')).toBe(control.control_id);
   await expect(page.getByRole('heading',{name:`${control.control_id} · ${control.name}`,exact:true})).toBeVisible();
   await page.getByRole('button',{name:`Doanh nghiệp · EMP-001`,exact:true}).click();
   await expect(page.getByRole('heading',{name:/^EMP-001 ·/})).toBeVisible();

@@ -22,8 +22,24 @@ def recipe():
 def payload_fingerprint(evidence):
     # A new capture date or asset label does not make a known fixture held-out.
     return a8.digest({'control_id':evidence['control_id'],'sources':sorted(
-        (a['artifact'],a['sha256']) for a in evidence['artifacts']
+        (a['artifact'],canonical_artifact_digest(a)) for a in evidence['artifacts']
         if a['artifact'] not in ('capture.json','secondary-capture.sha256'))})
+
+
+def canonical_artifact_digest(artifact):
+    """Spot cosmetic copies, without changing the bytes sealed as evidence.
+
+    Preserve data payloads/checksums exactly. For structured JSON compare values;
+    for config/status/log/inventory text ignore line-ending/trailing-space edits.
+    This is duplicate detection only, never proof of independent provenance.
+    """
+    name=artifact['artifact'];content=artifact['content']
+    if name.endswith('.json'):
+        try:return a8.digest({'json':json.loads(content)})
+        except (ValueError,TypeError):pass
+    if name.endswith(('.conf','.log','.status','.csv','.tsv','.txt','.diff')) or name=='sudoers':
+        content='\n'.join(line.rstrip(' \t') for line in content.splitlines()).strip('\n')
+    return hashlib.sha256(content.encode()).hexdigest()
 
 
 def external_capture(profile,root):
@@ -62,6 +78,7 @@ def prepare(profile,transport,coordinator,objective,raw_root=None):
                                       'per-control results','independent human labels bound to report/evidence hash'])
     if raw_root:
         plan.update(dataset_usage='external-candidate-pending-independent-review',
+                    overlap_scan='cosmetic-text-v2',
                     known_fixture_overlap_controls=overlaps,
                     independence_note='Overlap scan is not proof of independence. A person must confirm source, exposure and split before any held-out claim.')
     plan['sha256']=a8.digest(plan)
