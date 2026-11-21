@@ -1,0 +1,81 @@
+{
+  "protocol": "isolated-real-write-acceptance-v1",
+  "checked_at": "2026-11-21T20:04:36.904428+07:00",
+  "database": "iso_acceptance_0b9ed5f475d1",
+  "test_data_only": true,
+  "human_assessment": false,
+  "professional_approval": false,
+  "api_mocked": false,
+  "passed": true,
+  "database_dropped": true,
+  "main_table_counts_unchanged": true,
+  "extended_orchestration": {
+    "batch_engine": "real-configured-Ollama",
+    "candidate_engine": "rules",
+    "candidate_data": "modified-known-fixture-transport-regression-not-independent"
+  },
+  "browser_exit_code": 0,
+  "orchestration_receipt": {
+    "test_data_only": true,
+    "human_assessment": false,
+    "independent_validation": false,
+    "stopped_batch": {
+      "batch_id": "1b5aa9fa-d675-489c-b0dd-8bd653382155",
+      "status": "STOPPED",
+      "planned": 2,
+      "results": [
+        {
+          "error": null,
+          "job_id": "88bf4fed-a014-4b7b-b20a-cf60eac77352",
+          "status": "SUCCEEDED",
+          "control_id": "A.6.1",
+          "started_at": "2026-11-21T13:04:57.061919+00:00",
+          "finished_at": "2026-11-21T13:05:05.060327+00:00",
+          "source_token": "5c05f49552fb2a9ddc3287775e4db8d0e57361d6df7878e5f5934ac5c84e315e"
+        }
+      ]
+    },
+    "completed_batch": {
+      "batch_id": "b5caa85b-a5f2-4ac0-a0c9-ba2253d4a669",
+      "status": "COMPLETED",
+      "planned": 1,
+      "results": [
+        {
+          "error": null,
+          "job_id": "f499ee49-166b-48ec-a5a2-07d6e1611066",
+          "status": "SUCCEEDED",
+          "control_id": "A.6.2",
+          "started_at": "2026-11-21T13:05:06.211077+00:00",
+          "finished_at": "2026-11-21T13:05:11.370816+00:00",
+          "source_token": "5895061bb894a79009180919feceb8222a0d445b17c95f2de807f782017d7106"
+        }
+      ]
+    },
+    "candidate": {
+      "run_id": "46663c53-f9c5-4ac3-beec-4aab61e45b60",
+      "engine": "rules",
+      "state": "finished",
+      "records": 18,
+      "capture_sha256": "3ee3a64b434ea1a279e46dfb801120bd60967ddc9eb02f1bb356cbfa2cd6ddf7",
+      "plan_sha256": "cbf4a174665488223b4d782767fe072fb94c5a62cc9e65cf970b18c0217467af"
+    },
+    "synthetic_raters": [
+      {
+        "username": "release_rater1",
+        "report_sha256": "b87d0ab028096d1c393c7be6723c4ccd19e3ede285f844cfa94f0b736f177abf",
+        "submitted": 0
+      },
+      {
+        "username": "release_rater2",
+        "report_sha256": "b87d0ab028096d1c393c7be6723c4ccd19e3ede285f844cfa94f0b736f177abf",
+        "submitted": 0
+      }
+    ]
+  },
+  "synthetic_database_counts": {
+    "evidence": 4,
+    "evaluations": 2,
+    "team_users": 3
+  },
+  "note": "Synthetic integration test only. Real requests on a disposable database; no member grades, source validation or professional SoA approval."
+}

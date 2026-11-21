@@ -44,6 +44,7 @@ Phần triển khai kỹ thuật đã hoàn thành trong tuần:
 - [x] Siết kiểm tra gói ứng viên: dò bản sao chỉ đổi định dạng JSON/xuống dòng cấu hình, kiểm tra kiểu snapshot/facts/artifact và trả 422 thay lỗi server. Giữ byte/hash gốc; không coi dò trùng là xác minh độc lập.
 - [x] Bổ sung phiếu kiểm tra gói có hash/số artifact/tiêu chí chưa rõ và xuất JSON; yêu cầu kiểm tra lại khi đổi engine. Kiểm thử Edge chạy/dừng lô, giữ tiến độ sau tải lại, xuất lượt và chặn gói lỗi/lượt trùng bằng API mô phỏng.
 - [x] Xuất lại snapshot bàn giao, 38 yêu cầu cung cấp/thay nguồn và 18 yêu cầu rà mức bao phủ theo API ngày 21/11; tách ba nhóm nguồn và hướng dẫn thao tác cho các việc cần nhóm xác nhận.
+- [x] Kiểm thử ghi thật luồng lô/dừng/chạy tiếp bằng Ollama trên database riêng; nhập gói ứng viên qua worker luật, hai tài khoản thử đọc cùng gói mù. Sửa lưu JSON nguyên tử khi Windows tạm giữ tệp; giữ báo cáo lỗi và bản ghi cũ khi hết lượt thử.
 
 Chỉ đánh dấu hoàn thành khi có kết quả và minh chứng. Hoàn thành phần mềm, có nguồn hoặc chạy xong không đồng nghĩa control tuân thủ hay đã nghiệm thu chuyên môn.
 
@@ -92,6 +93,7 @@ Các thông tin trên là **trạng thái bàn giao từ tuần 5**, không ph�
 | 21/11/2026 | Hoàn thiện liên kết và khôi phục mục đang xem | Nhân viên → hồ sơ → control → lượt A.8; tải lại/Back giữ ngữ cảnh. Khởi tạo lựa chọn control từ đường dẫn ngay khi tải; giữ kiểm tra quyền và chấm mù |
 | 21/11/2026 | Siết gói kiểm định và mở rộng kiểm thử tuần 6 | Dò bản sao chỉ đổi định dạng, chặn snapshot/facts/artifact sai kiểu; phiếu kiểm tra và xuất JSON; kiểm thử UI lô/dừng/gói bằng phản hồi mô phỏng. 339 test Python, 14 test JavaScript, 8 kịch bản Edge và lint/build đạt; API thật từ chối gói sao chép và snapshot lỗi bằng 422, không tạo lượt hoặc đổi fingerprint SoA |
 | 21/11/2026 | Rà tồn đọng và chuẩn bị bàn giao nguồn | API xác nhận 37 control thiếu nguồn, A.6.2 cần thay; xuất lại 38 phiếu theo ba nhóm và 18 phiếu rà mức bao phủ. 56 quyết định áp dụng, thẩm định hiện hành, rubric và SoA vẫn chờ người phụ trách; không ghi nhận đã thực hiện thay nhóm |
+| 21/11/2026 | Kiểm thử điều phối ghi thật và sửa lỗi lưu Windows | Lô hai control dùng Ollama thật: dừng sau A.6.1, lượt mới chỉ chạy A.6.2; cả hai job thành công. Gói ứng viên luật đủ 18 bản ghi, hai tài khoản thử cùng hash/gói mù. Lần đầu lỗi thay tệp quyết định được giữ; sửa tệp tạm riêng và thử lại có giới hạn, lần sau hai kịch bản ghi thật đạt. 345 test Python, 14 test JavaScript và lint/build đạt; database thử đã dọn, fingerprint/trạng thái nghiệm thu chính không đổi |
 
 ## Kết quả và minh chứng
 
@@ -100,7 +102,7 @@ Các thông tin trên là **trạng thái bàn giao từ tuần 5**, không ph�
 - **Liên kết giao diện bổ sung:** đã kiểm chứng điều hướng nhân viên → hồ sơ → control → lượt A.8 và quay lại; 14 test JavaScript, 6 kịch bản Edge và lint/build đạt. POST nhập nguồn trong kịch bản điều hướng được mô phỏng; fingerprint SoA và trạng thái nghiệm thu đợt chính không đổi. Không tự chạy Agent hoặc duyệt khi chuyển màn hình.
 - **Kiểm tra ghi sau nối điều hướng:** một kịch bản PostgreSQL/backend/Edge cô lập đạt, gồm nguồn/thẩm định/kế hoạch/SoA và hai tài khoản thử. Hai lần lỗi thư mục kết quả được giữ lại; đã tách thư mục Playwright từng lượt và 5 test bảo vệ database đạt. Database thử được dọn, ba bảng chính không đổi; không tạo phê duyệt hay nhãn người thật.
 
-- **Kiểm chứng phần mềm mới nhất:** 339 test Python, 14 test JavaScript, 8 kịch bản Edge và lint/build đạt; có thêm một kịch bản tích hợp ghi thật trên PostgreSQL/backend/Edge cô lập ở đợt trước. Kiểm thử UI bổ sung lô/gói dùng POST mô phỏng; API thật kiểm tra từ chối gói lỗi và giữ nguyên danh sách lượt/fingerprint SoA. Các mốc thấp hơn trong bảng là lịch sử, không cộng dồn số test.
+- **Kiểm chứng phần mềm mới nhất:** 345 test Python, 14 test JavaScript và lint/build đạt; 8 kịch bản Edge thường đã đạt ở đợt trước. Bộ tích hợp mở rộng có hai kịch bản PostgreSQL/backend/Edge ghi thật đạt, gồm lô dùng Ollama và gói ứng viên dùng luật; giữ riêng lần lỗi, không gộp thành độ đúng của Agent. Database thử đã dọn; API chính xác nhận fingerprint SoA và trạng thái nghiệm thu không đổi so với snapshot bàn giao. Các mốc trong bảng là lịch sử, không cộng dồn số test.
 - **18 nguồn A.8 hiện hành:** đã lưu kết quả thực thi; kết luận máy mới nhất gồm 3 không tuân thủ, 6 một phần, 9 thiếu bằng chứng. Không phải độ đúng so với người chấm.
 - **38 hồ sơ phát triển:** chạy đủ, giữ phản hồi gốc và 3 lần thử lại lỗi; khớp khóa thiết kế 23/38 sau thử lại. Có 15 control lệch kết luận tổng, 18 control lệch tiêu chí và tổng 19 tiêu chí khác khóa. Đây là bộ do trợ lý tạo, chưa được xác nhận chuyên môn hoặc tính độc lập.
 - **Đợt đánh giá chính:** 19/56 control có nguồn ngoài preset, 18 qua ngưỡng nội dung; 37 còn thiếu nguồn được chấp nhận và A.6.2 cần thay nguồn. Chưa có quyết định áp dụng/thẩm định hiện hành; rubric và SoA chưa được phê duyệt. Hồ sơ mô phỏng mới không tự thay đổi trạng thái này.
@@ -108,6 +110,7 @@ Các thông tin trên là **trạng thái bàn giao từ tuần 5**, không ph�
 
 ### Tài liệu đối chiếu
 
+- [Kiểm thử điều phối ghi thật](../docs/KIEM_THU_DIEU_PHOI_GHI_THAT.md): lô/dừng/chạy tiếp, gói ứng viên, hai tài khoản thử và sửa lỗi lưu JSON Windows; [báo cáo đạt](../docs/a8-results/isolated-orchestration-2026-11-21-retry.json) giữ riêng với [lần đầu lỗi](../docs/a8-results/isolated-orchestration-2026-11-21.json).
 - [Chốt việc theo snapshot 21/11](../docs/CHOT_VIEC_TUAN_06_2026_11_21.md): trạng thái API, ba nhóm phiếu nguồn, các bước và đầu vào nhóm cần thực hiện; [8 kịch bản Edge](../docs/a8-results/week6-ui-2026-11-21.json), [kiểm tra API gói lỗi](../docs/a8-results/week6-preflight-api-2026-11-21.json).
 - [Liên kết bốn màn hình](../docs/LIEN_KET_DIEU_HUONG_HE_THONG.md): cách đi theo control/nhân viên/lượt nguồn, khôi phục đường dẫn và giới hạn kiểm chứng.
 - [Kết quả 18 nguồn A.8](../docs/KET_QUA_DANH_GIA_NGUON_18_2026_11_18.md): job, lỗi và kết quả từng control.
@@ -129,7 +132,7 @@ Tài liệu bàn giao tuần trước: [Nhật ký tuần 5](TUAN_05.md), [phi�
 - Probe lab chỉ kiểm tra tiêu chí đại diện, chưa chứng minh đầy đủ nội dung từng control hoặc toàn bộ ISMS.
 - Sổ xử lý đã có công cụ nhưng chưa có biên bản đối soát chuyên môn thật; ghi chú không tự giải quyết căn cứ sai hoặc biến nhãn có hỗ trợ thành độc lập.
 - Bộ 38 hồ sơ do trợ lý tạo là dữ liệu phát triển, chưa có người xác nhận phạm vi/chất lượng khóa thiết kế; 15 ca Agent lệch khóa vẫn cần rà cả tiêu chí, dữ liệu và kết luận. Không dùng bộ này để tuyên bố kiểm định độc lập hoặc tự đóng 37 control thiếu nguồn chính thức.
-- Đã có kiểm thử Edge ghi thật trên đợt riêng cho nguồn/thẩm định/SoA và hai tài khoản thử; UI lô/dừng và gói ứng viên đã có kịch bản với phản hồi API mô phỏng, chưa phải E2E worker/Ollama ghi thật cho các luồng đó. Chưa bao phủ mọi lỗi đồng thời, mất mạng hoặc mọi loại gói; chưa tích hoàn tất kiểm thử toàn UI. Chấm thật, xác nhận rubric và duyệt doanh nghiệp vẫn cần đúng người thực hiện.
+- Đã có kiểm thử Edge ghi thật trên đợt riêng cho nguồn/thẩm định/SoA, lô/dừng/chạy tiếp với Ollama và gói ứng viên qua worker luật; hai tài khoản thử đọc cùng gói mù. Chưa chạy engine LLM cho cả gói ứng viên mới, chưa bao phủ mọi lỗi đồng thời, mất mạng, khởi động lại worker hoặc mọi loại gói; chưa tích hoàn tất kiểm thử toàn UI. Tập dùng kiểm thử đường truyền là fixture đã sửa, không phải bộ kiểm định độc lập. Chấm thật, xác nhận rubric và duyệt doanh nghiệp vẫn cần đúng người thực hiện.
 - Quét trùng mới nhận biết thêm bản sao chỉ thay định dạng, không chứng minh nguồn mới độc lập. Gói ứng viên chuẩn bị theo cơ chế cũ cần đóng gói lại với `cosmetic-text-v2`; lịch sử đã lưu không sửa. Bộ kiểm định mới và lịch sử sử dụng vẫn cần nhóm cung cấp/xác nhận.
 
 ## Việc chuyển tiếp sang tuần 7
