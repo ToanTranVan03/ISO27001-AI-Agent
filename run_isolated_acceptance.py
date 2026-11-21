@@ -26,6 +26,27 @@ def validate_database(name,source):
         raise ValueError('Only a newly generated disposable acceptance database is allowed')
 
 
+def prepare_regression_candidate(directory):
+    """Artificial content variants for transport tests; never held-out data."""
+    import shutil
+    from agent_core import a8_assessment as a8
+    from agent_core.a8_protocol import prepare
+    root=directory/'candidate-regression-sources'
+    shutil.copytree(a8.LAB/'raw/mixed',root/'mixed')
+    for path in (root/'mixed').glob('*/*'):
+        if not path.is_file() or path.name=='capture.json':continue
+        if path.suffix=='.json':
+            value=json.loads(path.read_text(encoding='utf-8'))
+            if isinstance(value,dict):value['synthetic_test_record']='NOT INDEPENDENT DATA'
+            path.write_text(json.dumps(value),encoding='utf-8')
+        else:path.write_bytes(path.read_bytes()+b'\nSYNTHETIC TRANSPORT TEST ONLY: NOT INDEPENDENT DATA\n')
+    plan=prepare('mixed','files','Synthetic integration test',
+        'Modified known development fixture for API/worker transport only; never independent validation',raw_root=root)
+    target=directory/'candidate-regression-plan.json'
+    target.write_text(json.dumps(plan,ensure_ascii=False),encoding='utf-8')
+    return target
+
+
 def serve():
     options=conninfo_to_dict(os.environ['DATABASE_URL'])
     validate_database(options['dbname'],os.environ['ISO_SOURCE_DBNAME'])
@@ -47,6 +68,7 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--execute',action='store_true',help='Create, test and drop only a disposable database')
     parser.add_argument('--output',required=True)
+    parser.add_argument('--extended',action='store_true',help='Also exercise real Ollama batch and candidate worker on disposable data')
     args=parser.parse_args()
     if not args.execute:parser.error('--execute is required')
     output=Path(args.output)
@@ -65,6 +87,11 @@ def main():
     report=dict(protocol='isolated-real-write-acceptance-v1',checked_at=datetime.now(ZoneInfo('Asia/Bangkok')).isoformat(),
         database=name,test_data_only=True,human_assessment=False,professional_approval=False,
         api_mocked=False,passed=False,database_dropped=False,main_table_counts_unchanged=False)
+    if args.extended:
+        env['ISO_ISOLATED_CANDIDATE_PATH']=str(prepare_regression_candidate(directory))
+        env['ISO_ISOLATED_ORCHESTRATION_RECEIPT']=str(directory/'orchestration-receipt.json')
+        report['extended_orchestration']=dict(batch_engine='real-configured-Ollama',candidate_engine='rules',
+            candidate_data='modified-known-fixture-transport-regression-not-independent')
     child=None;created=False
     def counts(connection):
         with connection.cursor() as cur:
@@ -88,11 +115,14 @@ def main():
                     time.sleep(.5)
                 else:raise RuntimeError('Isolated backend startup timed out')
                 runner=ROOT/'frontend-react/node_modules/@playwright/test/cli.js'
-                result=subprocess.run(['node',str(runner),'test','tests/live-isolated.spec.js','--workers=1','--reporter=list','--output',str(directory/'browser-results')],
-                    cwd=ROOT/'frontend-react',env=env,capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=240)
+                specs=['tests/live-isolated.spec.js']+(['tests/live-orchestration.spec.js'] if args.extended else [])
+                result=subprocess.run(['node',str(runner),'test',*specs,'--workers=1','--reporter=list','--output',str(directory/'browser-results')],
+                    cwd=ROOT/'frontend-react',env=env,capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=420 if args.extended else 240)
                 (directory/'browser.log').write_text(result.stdout+'\n'+result.stderr,encoding='utf-8')
                 report['browser_exit_code']=result.returncode
                 report['passed']=result.returncode==0
+                if args.extended and (directory/'orchestration-receipt.json').is_file():
+                    report['orchestration_receipt']=json.loads((directory/'orchestration-receipt.json').read_text(encoding='utf-8'))
                 with psycopg.connect(env['DATABASE_URL']) as con:report['synthetic_database_counts']=counts(con)
         except Exception as exc:
             report['error']=type(exc).__name__+': '+str(exc)

@@ -2,6 +2,8 @@
 import json
 import threading
 import subprocess
+import time
+import logging
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 from pathlib import Path
@@ -26,9 +28,22 @@ def folder(aid):
 
 def save(path,payload):
     path.parent.mkdir(parents=True,exist_ok=True)
-    temporary=path.with_suffix('.tmp')
-    temporary.write_text(json.dumps(payload,ensure_ascii=False,indent=2),encoding='utf-8')
-    temporary.replace(path)
+    # Unique, same-directory file keeps the replacement atomic and prevents
+    # writers from sharing one .tmp name. Windows readers/scanners can briefly
+    # hold the destination open: retry only those sharing/access errors, bounded.
+    temporary=path.with_name(f'.{path.name}.{uuid4().hex}.tmp')
+    try:
+        temporary.write_text(json.dumps(payload,ensure_ascii=False,indent=2),encoding='utf-8')
+        for attempt in range(5):
+            try:
+                temporary.replace(path)
+                break
+            except PermissionError as exc:
+                if getattr(exc,'winerror',None) not in (5,32,33) or attempt==4:raise
+                time.sleep(.01*2**attempt)
+    finally:
+        try:temporary.unlink(missing_ok=True)
+        except OSError:logging.getLogger(__name__).warning('Could not remove an atomic-write temporary file')
 
 
 def read(aid,rid):
