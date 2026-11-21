@@ -8,7 +8,7 @@ import threading
 from uuid import UUID,uuid4
 from fastapi import APIRouter,Depends,HTTPException
 from backend.team_api import require_user,require_campaign
-from agent_core.development_lab import build_bundle,evaluate,compare_designer
+from agent_core.development_lab import build_bundle,evaluate,compare_designer,designer_reference,reference_hash
 
 router=APIRouter(prefix='/api/assessments/{assessment_id}/enterprise/development-lab',tags=['Development scenarios'])
 STORE=Path(__file__).resolve().parents[1]/'work/development-lab'
@@ -31,7 +31,7 @@ def worker(path,doc,bundle):
             with lock:
                 doc['results'].append(result);doc['updated_at']=datetime.now(timezone.utc).isoformat();save(path,doc)
         with lock:
-            doc['designer_comparison']=compare_designer(doc['results']);doc['state']='COMPLETED';save(path,doc)
+            doc['designer_comparison']=compare_designer(doc['results'],doc.get('designer_reference_snapshot'));doc['state']='COMPLETED';save(path,doc)
     except Exception as exc:
         with lock:doc.update(state='FAILED',error=str(exc)[:500]);save(path,doc)
     finally:
@@ -51,6 +51,19 @@ def get_lab(assessment_id:UUID,user=Depends(require_user)):
     return dict(bundle=bundle,runs=reports,can_start=user.get('role')=='admin')
 
 
+@router.get('/runs/{run_id}/analysis')
+def analyze_lab(assessment_id:UUID,run_id:UUID,user=Depends(require_user)):
+    require_campaign(assessment_id,user)
+    from agent_core.development_lab_audit import audit
+    with lock:
+        path=directory(assessment_id)/(str(run_id)+'.json')
+        if not path.exists():raise HTTPException(404,'Không tìm thấy lượt lab trong đợt.')
+        report=json.loads(path.read_text(encoding='utf-8'))
+        if report['state']!='COMPLETED':raise HTTPException(409,'Chờ lượt lab hoàn tất trước khi phân tích.')
+        try:return audit(report)
+        except ValueError as exc:raise HTTPException(409,str(exc)) from exc
+
+
 @router.post('/runs',status_code=202)
 def start_lab(assessment_id:UUID,user=Depends(require_user)):
     require_campaign(assessment_id,user)
@@ -62,6 +75,8 @@ def start_lab(assessment_id:UUID,user=Depends(require_user)):
         doc=dict(run_id=rid,assessment_id=aid,created_at=datetime.now(timezone.utc).isoformat(),
             state='RUNNING',model=os.getenv('OLLAMA_MODEL','qwen2.5:7b'),bundle_sha256=bundle['sha256'],
             is_synthetic=True,independent_validation=False,professional_approval=False,results=[],total=len(bundle['cases']))
+        reference=designer_reference()
+        doc.update(designer_reference_snapshot=reference,designer_reference_sha256=reference_hash(reference))
         save(path,doc);active[aid]=rid
         try:pool.submit(worker,path,doc,bundle)
         except RuntimeError:
