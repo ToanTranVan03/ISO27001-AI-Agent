@@ -37,6 +37,7 @@ Phần triển khai kỹ thuật đã hoàn thành trong tuần:
 - [x] Bổ sung bảng hướng dẫn hoàn tất theo hồ sơ hiện hành: vai trò, bước làm, điều kiện kiểm tra, mở đúng control và xuất checklist. Chuẩn bị hướng dẫn cụ thể cho nhóm về nguồn, bộ kiểm định, chấm, thẩm định và SoA.
 - [x] Mở rộng kiểm thử Edge cho nộp nguồn hợp lệ/tải bản gốc, chặn token thẩm định cũ, thẩm định tiêu chí/lưu kế hoạch nháp và nộp/khóa nhãn mù sau tải lại bằng phản hồi API mô phỏng; tách kết quả mô phỏng khỏi kiểm thử ghi thật và nghiệm thu chuyên môn.
 - [x] Bổ sung kiểm thử tích hợp ghi thật trên PostgreSQL/backend/Edge cô lập: nguồn, thẩm định, kế hoạch, chu kỳ duyệt/hết hiệu lực SoA và hai tài khoản thử chấm 36 nhãn có hỗ trợ. Dữ liệu tổng hợp, không nhập vào đợt chính; giữ lần lỗi và dọn database thử.
+- [x] Chuẩn bị 38 hồ sơ mô phỏng phát triển bổ sung cho nhóm ngoài 18 A.8, tách khóa thiết kế khỏi đầu vào Agent; thêm khu lab riêng trong Doanh nghiệp, chạy Qwen2.5:7b và giữ phản hồi/lỗi/thử lại. Không cộng nguồn hoặc nhãn mô phỏng vào nghiệm thu đợt chính.
 
 Chỉ đánh dấu hoàn thành khi có kết quả và minh chứng. Hoàn thành phần mềm, có nguồn hoặc chạy xong không đồng nghĩa control tuân thủ hay đã nghiệm thu chuyên môn.
 
@@ -81,6 +82,11 @@ Các thông tin trên là **trạng thái bàn giao từ tuần 5**, không ph�
 
 ### Bổ sung ngày 21/11 — phân việc còn chờ và mở rộng kiểm thử
 
+- Bổ sung 38 tình huống hồ sơ có nội dung cụ thể: 8 A.6, 14 A.7 và 16 A.8 ngoài nhóm thực nghiệm 18; có hợp đồng/đào tạo, nhật ký vật lý, cấu hình và tài liệu kỹ thuật. Nguồn do trợ lý tạo, đánh dấu phát triển đã biết, không phải nguồn độc lập hoặc xác nhận của thành viên.
+- Agent Qwen2.5:7b chạy 38/38 ca: 3 lỗi cấu trúc đầu được giữ lại; thử đúng một lần bằng JSON Schema cho 3 ca lỗi, còn 0 lỗi cấu trúc cuối. Khớp khóa thiết kế lần đầu 22/38, sau thử lại 23/38 (60,53%); 15 ca lệch giữ nguyên để rà, không coi đây là accuracy so với người đánh giá.
+- [Kết quả và snapshot nguồn 38 hồ sơ](../docs/KET_QUA_LAB_HO_SO_38_2026_11_21.md). Xem trên **Doanh nghiệp → Lab hồ sơ bổ sung · 38 control**; admin chạy lượt mới, các tài khoản đọc/xuất được gói không có đáp án. Kết quả lưu riêng, không sửa hồ sơ/nhãn/SoA đợt chính.
+- Kiểm chứng mới nhất: **331 test Python, 5 kịch bản Edge và lint/build đạt**; Edge kiểm tra đọc/xuất nguồn lab, nhãn mô phỏng và quyền chạy. Đợt chính kiểm tra lại vẫn 19 control có nguồn ngoài preset, 18 qua ngưỡng nội dung, A.6.2 cần thay; chưa có quyết định áp dụng/thẩm định hiện hành/rubric hoặc SoA được duyệt.
+
 - Triển khai [runner kiểm thử ghi thật cô lập](../docs/KIEM_THU_GHI_THAT_CO_LAP.md): database và kho tệp riêng, tài khoản thử tổng hợp, không giả danh thành viên. Lần 3 đạt sau khi sửa hai lỗi kịch bản (token đăng xuất và chờ snapshot); giữ báo cáo hai lần lỗi. Kiểm tra chặn nguồn/thẩm định cũ, phê duyệt SoA thử và hết hiệu lực khi nguồn đổi, 36 nhãn thử có hỗ trợ/tách đối chiếu độc lập. Dọn database thử, số dòng ba bảng chính trước/sau không đổi. Mốc mới: **324 test Python đạt**, không tạo accuracy hoặc phê duyệt chuyên môn mới cho đề tài.
 
 - Hoàn thiện **Cần làm gì để hoàn tất?** trong Tổng quan 56: bảy bước theo dữ liệu hiện tại, phân biệt thiếu nguồn/nguồn lỗi, đánh giá, thẩm định, quyết định và duyệt; phần kiểm định/người chấm cần xác nhận hồ sơ riêng, không tự suy ra độc lập. Checklist xuất ra chỉ là hướng dẫn, không phải bằng chứng/phê duyệt.
@@ -88,7 +94,7 @@ Các thông tin trên là **trạng thái bàn giao từ tuần 5**, không ph�
 - Kiểm chứng phần mới: **11 test JavaScript, 5 kịch bản Edge, lint/build đạt**. Ba kịch bản đọc/xuất bằng tài khoản thật; hai kịch bản ghi nguồn/thẩm định/quyết định và nộp/khóa nhãn dùng API mô phỏng trên trình duyệt. Kiểm tra không làm thay đổi hồ sơ đợt thật. Không chạy lại bộ Python vì không sửa backend; mốc gần nhất vẫn 319 test đạt.
 - Chưa đóng các mục cần con người: xác nhận rubric/phương pháp, bổ sung nguồn, tập kiểm định mới, tự chấm phù hợp, xử lý bất đồng thật, 56 quyết định/thẩm định và phê duyệt SoA. Đã bổ sung một kịch bản UI ghi thật trên đợt riêng; mục kiểm thử đầy đủ toàn giao diện vẫn mở vì chưa bao phủ mọi chức năng/tình huống.
 
-Mốc mới nhất ngày 21/11: **324 test Python đạt**; frontend đã đạt **11 test JavaScript, 5 kịch bản Edge và lint/build**, bổ sung một kịch bản tích hợp Edge ghi thật trên database thử. Phân biệt kiểm thử dữ liệu tổng hợp với nhãn và hồ sơ chuyên môn. Các số test thấp hơn là mốc lịch sử, không phải lỗi mất test.
+Mốc mới nhất ngày 21/11: **331 test Python đạt**; frontend đã đạt **11 test JavaScript, 5 kịch bản Edge và lint/build**, cùng một kịch bản tích hợp Edge ghi thật trên database thử. Đã chạy LLM thật trên 38 ca hồ sơ phát triển, giữ cả lỗi/ca lệch. Phân biệt kiểm thử dữ liệu tổng hợp với nhãn và hồ sơ chuyên môn; các số test thấp hơn là mốc lịch sử.
 
 - [Sổ xử lý bất đồng A.8](../docs/SO_XU_LY_BAT_DONG_A8.md): cách ghi biên bản riêng, xuất báo cáo và giới hạn kiểm thử lưu.
 - [Biên bản kiểm thử Edge và cách chạy lại](../docs/KIEM_THU_RELEASE_2026_11_20.md): phạm vi đọc/xuất, từ chối tệp lỗi; mốc 316 test trước khi thêm sổ xử lý.
@@ -114,6 +120,7 @@ Tài liệu bàn giao từ tuần trước:
 - Thiếu nguồn và xác nhận chuyên môn thực tế; công cụ không thể tự tạo phê duyệt hoặc nhãn độc lập thay con người.
 - Probe lab chỉ kiểm tra tiêu chí đại diện, chưa chứng minh đầy đủ nội dung từng control hoặc toàn bộ ISMS.
 - Sổ xử lý đã có công cụ nhưng chưa có biên bản đối soát chuyên môn thật; ghi chú không tự giải quyết căn cứ sai hoặc biến nhãn có hỗ trợ thành độc lập.
+- Bộ 38 hồ sơ do trợ lý tạo là dữ liệu phát triển, chưa có người xác nhận phạm vi/chất lượng khóa thiết kế; 15 ca Agent lệch khóa vẫn cần rà cả tiêu chí, dữ liệu và kết luận. Không dùng bộ này để tuyên bố kiểm định độc lập hoặc tự đóng 37 control thiếu nguồn chính thức.
 - Đã có kiểm thử Edge ghi thật trên đợt riêng cho các bước nguồn/thẩm định/SoA và hai tài khoản chấm thử; chưa đồng nghĩa toàn bộ chức năng UI đã nghiệm thu. Chưa bao phủ hết lô server/dừng, mọi trường hợp gói ứng viên và lỗi đồng thời trên trình duyệt. Phần chấm thật, xác nhận rubric và duyệt doanh nghiệp vẫn cần đúng người thực hiện.
 
 ## Việc chuyển tiếp sang tuần 7
