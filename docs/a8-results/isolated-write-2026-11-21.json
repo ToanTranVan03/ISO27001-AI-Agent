@@ -1,0 +1,19 @@
+{
+  "protocol": "isolated-real-write-acceptance-v1",
+  "checked_at": "2026-11-21T10:12:13.194660+07:00",
+  "database": "iso_acceptance_23a85a2c8f55",
+  "test_data_only": true,
+  "human_assessment": false,
+  "professional_approval": false,
+  "api_mocked": false,
+  "passed": false,
+  "database_dropped": true,
+  "main_database_unchanged": true,
+  "browser_exit_code": 1,
+  "synthetic_database_counts": {
+    "evidence": 2,
+    "evaluations": 0,
+    "team_users": 3
+  },
+  "note": "Synthetic integration test only. Real requests on a disposable database; no member grades, source validation or professional SoA approval."
+}
