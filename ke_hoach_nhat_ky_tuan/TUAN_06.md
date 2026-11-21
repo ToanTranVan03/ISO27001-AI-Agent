@@ -3,7 +3,7 @@
 - Thời gian: **16/11/2026–22/11/2026 (thứ Hai–Chủ nhật).**
 - Trạng thái: **Đang thực hiện.**
 - Lập kế hoạch: **15/11/2026**.
-- Cập nhật: **20/11/2026**.
+- Cập nhật: **21/11/2026**.
 
 ## Mục tiêu và kế hoạch
 
@@ -34,6 +34,8 @@ Phần triển khai kỹ thuật đã hoàn thành trong tuần:
 - [x] Đồng nhất bộ lọc chất lượng căn cứ của báo cáo CLI/web; hiển thị lỗi API có cấu trúc và phân biệt kế hoạch nháp với điều kiện trình duyệt.
 - [x] Tách phiếu nguồn thiếu/không dùng được với rà mức bao phủ; kiểm thử Edge ba tài khoản cho điều hướng, xuất SoA và từ chối tệp lỗi. Chưa thay kiểm thử toàn bộ thao tác nộp/chấm/duyệt.
 - [x] Bổ sung sổ xử lý bất đồng theo lượt/control/hash, lưu người ghi và thời điểm; xuất riêng và cùng báo cáo điều phối, không sửa nhãn khóa hoặc số liệu đối chiếu.
+- [x] Bổ sung bảng hướng dẫn hoàn tất theo hồ sơ hiện hành: vai trò, bước làm, điều kiện kiểm tra, mở đúng control và xuất checklist. Chuẩn bị hướng dẫn cụ thể cho nhóm về nguồn, bộ kiểm định, chấm, thẩm định và SoA.
+- [x] Mở rộng kiểm thử Edge cho nộp nguồn hợp lệ/tải bản gốc, chặn token thẩm định cũ, thẩm định tiêu chí/lưu kế hoạch nháp và nộp/khóa nhãn mù sau tải lại bằng phản hồi API mô phỏng; kiểm tra đợt thật không bị thay đổi. Chưa thay kiểm thử tích hợp ghi thật hoặc nghiệm thu chuyên môn.
 
 Chỉ đánh dấu hoàn thành khi có kết quả và minh chứng. Hoàn thành phần mềm, có nguồn hoặc chạy xong không đồng nghĩa control tuân thủ hay đã nghiệm thu chuyên môn.
 
@@ -76,7 +78,14 @@ Các thông tin trên là **trạng thái bàn giao từ tuần 5**, không ph�
 
 ## Kết quả và minh chứng
 
-Mốc kiểm chứng mới nhất ngày 20/11: **319 test Python, 9 test JavaScript, lint/build và 3 kịch bản Edge đạt**. Các số test thấp hơn trong bảng công việc là mốc lịch sử, không phải lỗi mất test. Kết quả kỹ thuật không thay bằng chứng tuân thủ hoặc xác nhận chuyên môn.
+### Bổ sung ngày 21/11 — phân việc còn chờ và mở rộng kiểm thử
+
+- Hoàn thiện **Cần làm gì để hoàn tất?** trong Tổng quan 56: bảy bước theo dữ liệu hiện tại, phân biệt thiếu nguồn/nguồn lỗi, đánh giá, thẩm định, quyết định và duyệt; phần kiểm định/người chấm cần xác nhận hồ sơ riêng, không tự suy ra độc lập. Checklist xuất ra chỉ là hướng dẫn, không phải bằng chứng/phê duyệt.
+- [Hướng dẫn nhóm chốt việc tuần 6](../docs/HUONG_DAN_CHOT_VIEC_TUAN_06.md): từng bước và sản phẩm cần Toàn/Khoa/Tú cung cấp; phân công là đề xuất, cần nhóm thống nhất. Nguồn có thể từ doanh nghiệp lab, không yêu cầu production; cần artifact/hồ sơ có nội dung và đúng phạm vi đã thống nhất.
+- Kiểm chứng phần mới: **11 test JavaScript, 5 kịch bản Edge, lint/build đạt**. Ba kịch bản đọc/xuất bằng tài khoản thật; hai kịch bản ghi nguồn/thẩm định/quyết định và nộp/khóa nhãn dùng API mô phỏng trên trình duyệt. Kiểm tra không làm thay đổi hồ sơ đợt thật. Không chạy lại bộ Python vì không sửa backend; mốc gần nhất vẫn 319 test đạt.
+- Chưa đóng các mục cần con người: xác nhận rubric/phương pháp, bổ sung nguồn, tập kiểm định mới, tự chấm phù hợp, xử lý bất đồng thật, 56 quyết định/thẩm định và phê duyệt SoA. Kiểm thử UI ghi thật xuyên suốt trên đợt riêng vẫn cần bổ sung; không tích xong chỉ từ phản hồi mô phỏng.
+
+Mốc backend ngày 20/11: **319 test Python đạt**. Ngày 21/11, phần frontend bổ sung đạt **11 test JavaScript, 5 kịch bản Edge và lint/build** với phạm vi thật/mô phỏng nêu trên. Các số test thấp hơn trong bảng công việc là mốc lịch sử, không phải lỗi mất test. Kết quả kỹ thuật không thay bằng chứng tuân thủ hoặc xác nhận chuyên môn.
 
 - [Sổ xử lý bất đồng A.8](../docs/SO_XU_LY_BAT_DONG_A8.md): cách ghi biên bản riêng, xuất báo cáo và giới hạn kiểm thử lưu.
 - [Biên bản kiểm thử Edge và cách chạy lại](../docs/KIEM_THU_RELEASE_2026_11_20.md): phạm vi đọc/xuất, từ chối tệp lỗi; mốc 316 test trước khi thêm sổ xử lý.
@@ -102,7 +111,7 @@ Tài liệu bàn giao từ tuần trước:
 - Thiếu nguồn và xác nhận chuyên môn thực tế; công cụ không thể tự tạo phê duyệt hoặc nhãn độc lập thay con người.
 - Probe lab chỉ kiểm tra tiêu chí đại diện, chưa chứng minh đầy đủ nội dung từng control hoặc toàn bộ ISMS.
 - Sổ xử lý đã có công cụ nhưng chưa có biên bản đối soát chuyên môn thật; ghi chú không tự giải quyết căn cứ sai hoặc biến nhãn có hỗ trợ thành độc lập.
-- Ngày 20/11 Computer Use/native pipe vẫn chưa kết nối; đã dùng Playwright chạy Edge thực tế với ba tài khoản cho tập kịch bản đọc/xuất và từ chối tệp lỗi. Chưa bao phủ toàn bộ thao tác nộp/chấm/duyệt; cần tiếp tục trên đợt thử riêng và ghi kết quả, không coi ba kịch bản là kiểm thử toàn UI.
+- Đã dùng Playwright chạy Edge thực tế: ngày 21/11 có 5 kịch bản gồm đọc/xuất ba tài khoản và các thao tác ghi dùng API mô phỏng. Chưa bao phủ ghi thật xuyên suốt, phép duyệt thành công và thay đổi snapshot trên đợt thử riêng; cần tiếp tục ghi kết quả, không coi số kịch bản là nghiệm thu toàn UI. Lỗi Computer Use ngày 20/11 không còn là blocker cho phần kiểm thử trình duyệt tự động đã thực hiện.
 
 ## Việc chuyển tiếp sang tuần 7
 
