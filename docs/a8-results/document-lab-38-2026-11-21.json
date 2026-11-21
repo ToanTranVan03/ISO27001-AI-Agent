@@ -1,0 +1,3371 @@
+{
+  "run_id": "044f6f1b-7406-4204-8edd-b2ef01d1af1e",
+  "assessment_id": "7f7c009b-bdcd-5b33-934e-15251ad2c976",
+  "created_at": "2026-11-21T03:26:02.242266+00:00",
+  "state": "COMPLETED",
+  "model": "qwen2.5:7b",
+  "bundle_sha256": "9a4277bc02ab2df4552f871ec8c621445126f69dc820c9575456c865fed8d588",
+  "is_synthetic": true,
+  "independent_validation": false,
+  "professional_approval": false,
+  "results": [
+    {
+      "control_id": "A.6.1",
+      "model": "qwen2.5:7b",
+      "status": "Partially Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The artifact contains a record of a background check that was completed on 2026-09-28, indicating the existence of a background check record.\",\"source_files\":[\"screening.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"There is no confirmation from the HR department as the 'confirmed_by' field is null and the state is 'draft' in the HR confirmation record.\",\"source_files\":[\"screening.json\"]}]}",
+      "source_hashes": {
+        "screening.json": "76fc96ae2258c6bc6a83011236d1b0764da2a4cc3c76519babac67799056ecc4"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The artifact contains a record of a background check that was completed on 2026-09-28, indicating the existence of a background check record.",
+          "source_files": [
+            "screening.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "not_met",
+          "rationale": "There is no confirmation from the HR department as the 'confirmed_by' field is null and the state is 'draft' in the HR confirmation record.",
+          "source_files": [
+            "screening.json"
+          ]
+        }
+      ],
+      "duration_ms": 8016
+    },
+    {
+      "control_id": "A.6.2",
+      "model": "qwen2.5:7b",
+      "status": "Partially Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The contract includes a security clause regarding the protection of confidential data, reporting incidents, returning assets, and retaining confidentiality after termination.\",\"source_files\":[\"contract.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The employee has not yet signed the contract as indicated by the null value in the 'signed_on' field for the employee party.\",\"source_files\":[\"contract.json\"]}]}",
+      "source_hashes": {
+        "contract.json": "86a8679e8c1b3739a2882ccb77936907cc74cde9d2b4718996f7c8eefb573eb9"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The contract includes a security clause regarding the protection of confidential data, reporting incidents, returning assets, and retaining confidentiality after termination.",
+          "source_files": [
+            "contract.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "not_met",
+          "rationale": "The employee has not yet signed the contract as indicated by the null value in the 'signed_on' field for the employee party.",
+          "source_files": [
+            "contract.json"
+          ]
+        }
+      ],
+      "duration_ms": 3078
+    },
+    {
+      "control_id": "A.6.3",
+      "model": "qwen2.5:7b",
+      "status": "Partially Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"All employees have completed the course as the number of completed employees (48) equals the required number (50) minus the pending employees (2).\",\"source_files\":[\"lms_export.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"There is no evidence of a test being conducted as the records do not include any information about a test or assessment results.\",\"source_files\":[\"lms_export.json\"]}] }",
+      "source_hashes": {
+        "lms_export.json": "f70013b57a59185769d06bad02d9b63dbc39e3b9fe66c46676c6fb1e3e01577b"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "All employees have completed the course as the number of completed employees (48) equals the required number (50) minus the pending employees (2).",
+          "source_files": [
+            "lms_export.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "not_met",
+          "rationale": "There is no evidence of a test being conducted as the records do not include any information about a test or assessment results.",
+          "source_files": [
+            "lms_export.json"
+          ]
+        }
+      ],
+      "duration_ms": 3328
+    },
+    {
+      "control_id": "A.6.4",
+      "model": "qwen2.5:7b",
+      "status": "Insufficient Evidence",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The artifact 'discipline_policy.json' shows that a discipline policy document (LAB-HR-DISCIPLINE-1) has been published and is in effect on 2026-10-01.\",\"source_files\":[\"discipline_policy.json\"]},{\"criterion_index\":1,\"verdict\":\"unknown\",\"rationale\":\"While the policy document has been published, there is no explicit record of it being distributed to all employees.\",\"source_files\":[\"discipline_policy.json\"]}]}",
+      "source_hashes": {
+        "discipline_policy.json": "0de370c95839ce63e05fb96e2f7df2002506644be35a5175fde05b041fe1ae38"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The artifact 'discipline_policy.json' shows that a discipline policy document (LAB-HR-DISCIPLINE-1) has been published and is in effect on 2026-10-01.",
+          "source_files": [
+            "discipline_policy.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "unknown",
+          "rationale": "While the policy document has been published, there is no explicit record of it being distributed to all employees.",
+          "source_files": [
+            "discipline_policy.json"
+          ]
+        }
+      ],
+      "duration_ms": 3640
+    },
+    {
+      "control_id": "A.6.5",
+      "model": "qwen2.5:7b",
+      "status": "Insufficient Evidence",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"not_met\",\"rationale\":\"The 'access_revocation_export' is not_collected due to IAM audit export not being supplied.\",\"source_files\":[\"offboarding.json\"]},{\"criterion_index\":1,\"verdict\":\"unknown\",\"rationale\":\"The 'access_revocation_export' is not_collected, making the 'Biên bản xác nhận cắt quyền truy cập hệ thống' status unknown.\",\"source_files\":[\"offboarding.json\"]}]}",
+      "source_hashes": {
+        "offboarding.json": "1de7dfe37fc6382f20b444a7c1875a92cc807ee06b1588c451e1b259a81bc07a"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "not_met",
+          "rationale": "The 'access_revocation_export' is not_collected due to IAM audit export not being supplied.",
+          "source_files": [
+            "offboarding.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "unknown",
+          "rationale": "The 'access_revocation_export' is not_collected, making the 'Biên bản xác nhận cắt quyền truy cập hệ thống' status unknown.",
+          "source_files": [
+            "offboarding.json"
+          ]
+        }
+      ],
+      "duration_ms": 2891
+    },
+    {
+      "control_id": "A.6.6",
+      "model": "qwen2.5:7b",
+      "status": "Insufficient Evidence",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The records show that both EMP-001 and LAB-VENDOR-01 have signed NDAs, with EMP-001's NDA expiring on 2025-12-31 and LAB-VENDOR-01's NDA also expiring on 2025-12-31.\",\"source_files\":[\"nda_register.json\"]},{\"criterion_index\":1,\"verdict\":\"unknown\",\"rationale\":\"The records do not provide information on the current validity of the NDAs beyond their expiration dates. There is no explicit mention of whether the NDAs are still effective after their expiration dates.\",\"source_files\":[\"nda_register.json\"]}] }",
+      "source_hashes": {
+        "nda_register.json": "5a68f08680e07c831366f4854f77e6e98d1ec32745437d1d98ae58398848b6eb"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The records show that both EMP-001 and LAB-VENDOR-01 have signed NDAs, with EMP-001's NDA expiring on 2025-12-31 and LAB-VENDOR-01's NDA also expiring on 2025-12-31.",
+          "source_files": [
+            "nda_register.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "unknown",
+          "rationale": "The records do not provide information on the current validity of the NDAs beyond their expiration dates. There is no explicit mention of whether the NDAs are still effective after their expiration dates.",
+          "source_files": [
+            "nda_register.json"
+          ]
+        }
+      ],
+      "duration_ms": 4375
+    },
+    {
+      "control_id": "A.6.7",
+      "model": "qwen2.5:7b",
+      "status": "Non-Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"not_met\",\"rationale\":\"The policy is in draft state and not published, indicating no official remote work policy.\",\"source_files\":[\"remote_configuration.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The endpoint uses plain HTTP for remote transport and has antivirus disabled, indicating lack of security measures.\",\"source_files\":[\"remote_configuration.json\"]}]}",
+      "source_hashes": {
+        "remote_configuration.json": "0fa0a02f2f0ce6b827ebbfab31529a56ea1b8b68abea491611e16903a7e1efbf"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "not_met",
+          "rationale": "The policy is in draft state and not published, indicating no official remote work policy.",
+          "source_files": [
+            "remote_configuration.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "not_met",
+          "rationale": "The endpoint uses plain HTTP for remote transport and has antivirus disabled, indicating lack of security measures.",
+          "source_files": [
+            "remote_configuration.json"
+          ]
+        }
+      ],
+      "duration_ms": 2469
+    },
+    {
+      "control_id": "A.6.8",
+      "model": "qwen2.5:7b",
+      "status": "Insufficient Evidence",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The artifact contains a reporting form URL, indicating a channel for incident reporting.\",\"source_files\":[\"incident_channel.json\"]},{\"criterion_index\":1,\"verdict\":\"unknown\",\"rationale\":\"While the artifact includes an event register, there is no explicit mention of an ATT&CK (Advanced Threat Detection and Knowledge) log, only a generic event register.\",\"source_files\":[\"incident_channel.json\"]}] }",
+      "source_hashes": {
+        "incident_channel.json": "fc565ddd2ea365fb4ed3a555f6a7792e4db52f0ad112a16342fd454563b0d669"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The artifact contains a reporting form URL, indicating a channel for incident reporting.",
+          "source_files": [
+            "incident_channel.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "unknown",
+          "rationale": "While the artifact includes an event register, there is no explicit mention of an ATT&CK (Advanced Threat Detection and Knowledge) log, only a generic event register.",
+          "source_files": [
+            "incident_channel.json"
+          ]
+        }
+      ],
+      "duration_ms": 2781
+    },
+    {
+      "control_id": "A.7.1",
+      "model": "qwen2.5:7b",
+      "status": "Partially Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The 'zones' record explicitly states that the 'server-room' is marked as 'restricted', indicating a physical security perimeter.\",\"source_files\":[\"perimeter_inspection.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The 'lock_test' for 'LAB-D1' in the 'doors' record is 'failed', indicating that the physical security check did not meet the required standard.\",\"source_files\":[\"perimeter_inspection.json\"]}] }",
+      "source_hashes": {
+        "perimeter_inspection.json": "ee148307130171c0f669add914b040da9e5fb0b19eefbbccaf878cce05b2f100"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The 'zones' record explicitly states that the 'server-room' is marked as 'restricted', indicating a physical security perimeter.",
+          "source_files": [
+            "perimeter_inspection.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "not_met",
+          "rationale": "The 'lock_test' for 'LAB-D1' in the 'doors' record is 'failed', indicating that the physical security check did not meet the required standard.",
+          "source_files": [
+            "perimeter_inspection.json"
+          ]
+        }
+      ],
+      "duration_ms": 3188
+    },
+    {
+      "control_id": "A.7.2",
+      "model": "qwen2.5:7b",
+      "status": "Partially Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The badge log contains records of card swipes and biometric access, including 'EMP-001' and 'EMP-002' entering the server room.\",\"source_files\":[\"badge_log.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The log does not explicitly show that only authorized personnel are allowed entry, as 'EMP-002' entered without an escort or additional authorization.\",\"source_files\":[\"badge_log.json\"]}]}",
+      "source_hashes": {
+        "badge_log.json": "25051f3a60251e175c798c57393f0af30a8a87714445b2f2c5b5e22bbd7b081c"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The badge log contains records of card swipes and biometric access, including 'EMP-001' and 'EMP-002' entering the server room.",
+          "source_files": [
+            "badge_log.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "not_met",
+          "rationale": "The log does not explicitly show that only authorized personnel are allowed entry, as 'EMP-002' entered without an escort or additional authorization.",
+          "source_files": [
+            "badge_log.json"
+          ]
+        }
+      ],
+      "duration_ms": 3203
+    },
+    {
+      "control_id": "A.7.3",
+      "model": "qwen2.5:7b",
+      "status": "Insufficient Evidence",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The inspection record shows no obstruction at the emergency exit, indicating compliance with safety checks.\",\"source_files\":[\"office_inspection.json\"]},{\"criterion_index\":1,\"verdict\":\"unknown\",\"rationale\":\"The artifact does not provide information on the key custodian's actions after 18:00 to confirm if the doors were locked as per the policy.\",\"source_files\":[\"office_inspection.json\"]}]}",
+      "source_hashes": {
+        "office_inspection.json": "46f2e585238406ad36f5def4d45274b762c08743d8480507cf595cc0dbfb2959"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The inspection record shows no obstruction at the emergency exit, indicating compliance with safety checks.",
+          "source_files": [
+            "office_inspection.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "unknown",
+          "rationale": "The artifact does not provide information on the key custodian's actions after 18:00 to confirm if the doors were locked as per the policy.",
+          "source_files": [
+            "office_inspection.json"
+          ]
+        }
+      ],
+      "duration_ms": 3047
+    },
+    {
+      "control_id": "A.7.4",
+      "model": "qwen2.5:7b",
+      "status": "Insufficient Evidence",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The system is recording as of 2026-11-21T08:59:50+07:00, indicating it is operational.\",\"source_files\":[\"cctv_status.json\"]},{\"criterion_index\":1,\"verdict\":\"unknown\",\"rationale\":\"The artifact does not provide information on the actual time period the video recordings are stored, only the policy and retention period.\",\"source_files\":[\"cctv_status.json\"]}]}",
+      "source_hashes": {
+        "cctv_status.json": "3060ba80ac718139a23155922f79ea29a1b123249e0c95f41e7acd04ab992158"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The system is recording as of 2026-11-21T08:59:50+07:00, indicating it is operational.",
+          "source_files": [
+            "cctv_status.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "unknown",
+          "rationale": "The artifact does not provide information on the actual time period the video recordings are stored, only the policy and retention period.",
+          "source_files": [
+            "cctv_status.json"
+          ]
+        }
+      ],
+      "duration_ms": 3421
+    },
+    {
+      "control_id": "A.7.5",
+      "model": "qwen2.5:7b",
+      "status": "Partially Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"not_met\",\"rationale\":\"The 'Biên bản nghiệm thu/bảo trì PCCC' is not collected according to the records.\",\"source_files\":[\"environmental_records.json\"]},{\"criterion_index\":1,\"verdict\":\"met\",\"rationale\":\"The temperature and humidity sensor 'LAB-TEMP-01' is reported as 'responding' and measures a temperature of 23.4°C and humidity of 46% at the observed time.\",\"source_files\":[\"environmental_records.json\"]}]}",
+      "source_hashes": {
+        "environmental_records.json": "153ae079b8327d3959726a90057d311c629ccb41976344ec8079b389beca15fa"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "not_met",
+          "rationale": "The 'Biên bản nghiệm thu/bảo trì PCCC' is not collected according to the records.",
+          "source_files": [
+            "environmental_records.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "met",
+          "rationale": "The temperature and humidity sensor 'LAB-TEMP-01' is reported as 'responding' and measures a temperature of 23.4°C and humidity of 46% at the observed time.",
+          "source_files": [
+            "environmental_records.json"
+          ]
+        }
+      ],
+      "duration_ms": 3344
+    },
+    {
+      "control_id": "A.7.6",
+      "model": "qwen2.5:7b",
+      "status": "Partially Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The records show that visits to secure areas are being monitored, as evidenced by the visitor register entry for LAB-VISITOR-1.\",\"source_files\":[\"visitor_register.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The records do not contain any explicit prohibition against photography or any other form of media capture in secure areas.\",\"source_files\":[\"visitor_register.json\"]}]}",
+      "source_hashes": {
+        "visitor_register.json": "0c8b8bec430def792b8febca32e53071028417288df4154d9b57eb14d23c4238"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The records show that visits to secure areas are being monitored, as evidenced by the visitor register entry for LAB-VISITOR-1.",
+          "source_files": [
+            "visitor_register.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "not_met",
+          "rationale": "The records do not contain any explicit prohibition against photography or any other form of media capture in secure areas.",
+          "source_files": [
+            "visitor_register.json"
+          ]
+        }
+      ],
+      "duration_ms": 2906
+    },
+    {
+      "control_id": "A.7.7",
+      "model": "qwen2.5:7b",
+      "status": "Non-Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"not_met\",\"rationale\":\"Unsecured papers observed on LAB-DESK-01 during inspection.\",\"source_files\":[\"desk_endpoint_audit.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"Screen lock idle seconds is 0, indicating the screen is not configured to lock automatically.\",\"source_files\":[\"desk_endpoint_audit.json\"]}] }",
+      "source_hashes": {
+        "desk_endpoint_audit.json": "48ccf3a8e814176552b028ac4f80f8696800200ab0adbbb8e695dbcfd2b7fd6f"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "not_met",
+          "rationale": "Unsecured papers observed on LAB-DESK-01 during inspection.",
+          "source_files": [
+            "desk_endpoint_audit.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "not_met",
+          "rationale": "Screen lock idle seconds is 0, indicating the screen is not configured to lock automatically.",
+          "source_files": [
+            "desk_endpoint_audit.json"
+          ]
+        }
+      ],
+      "duration_ms": 2641
+    },
+    {
+      "control_id": "A.7.8",
+      "model": "qwen2.5:7b",
+      "status": "Partially Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The asset record specifies the physical location of the critical equipment.\",\"source_files\":[\"rack_inventory.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The rack check indicates that the door lock for rack-01 is missing, which does not meet the requirement for locked cabinets.\",\"source_files\":[\"rack_inventory.json\"]}]}",
+      "source_hashes": {
+        "rack_inventory.json": "36d98981fe445a296bcb115fce78fa58f8b1f56578743358bd00955057c8e619"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The asset record specifies the physical location of the critical equipment.",
+          "source_files": [
+            "rack_inventory.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "not_met",
+          "rationale": "The rack check indicates that the door lock for rack-01 is missing, which does not meet the requirement for locked cabinets.",
+          "source_files": [
+            "rack_inventory.json"
+          ]
+        }
+      ],
+      "duration_ms": 2531
+    },
+    {
+      "control_id": "A.7.9",
+      "model": "qwen2.5:7b",
+      "status": "Partially Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The handover record is present.\",\"source_files\":[\"offsite_assets.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The disk encryption status is not collected.\",\"source_files\":[\"offsite_assets.json\"]}]}",
+      "source_hashes": {
+        "offsite_assets.json": "8d2acefb8139254d961d5590061c3356c4ec27f6094f211bd713e3e441267dbb"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The handover record is present.",
+          "source_files": [
+            "offsite_assets.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "not_met",
+          "rationale": "The disk encryption status is not collected.",
+          "source_files": [
+            "offsite_assets.json"
+          ]
+        }
+      ],
+      "duration_ms": 2156
+    },
+    {
+      "control_id": "A.7.10",
+      "model": "qwen2.5:7b",
+      "status": "Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The records show that the inventory includes a USB device with a capacity of 32GB and a custodian, indicating that the storage media is documented.\",\"source_files\":[\"removable_media.json\"]},{\"criterion_index\":1,\"verdict\":\"met\",\"rationale\":\"The policy states that the default is 'deny' and specifies the exception process, logging, and state, indicating that a policy for controlling USB usage is in place.\",\"source_files\":[\"removable_media.json\"]}]}",
+      "source_hashes": {
+        "removable_media.json": "ee1670358f7c64fd74d234e33957a243c2644b881e363bd0b3a8c4f5cd49e0fd"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The records show that the inventory includes a USB device with a capacity of 32GB and a custodian, indicating that the storage media is documented.",
+          "source_files": [
+            "removable_media.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "met",
+          "rationale": "The policy states that the default is 'deny' and specifies the exception process, logging, and state, indicating that a policy for controlling USB usage is in place.",
+          "source_files": [
+            "removable_media.json"
+          ]
+        }
+      ],
+      "duration_ms": 3281
+    },
+    {
+      "control_id": "A.7.11",
+      "model": "qwen2.5:7b",
+      "status": null,
+      "error": "ValueError: Missing criterion verdicts",
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"not_met\",\"rationale\":\"The criterion requires 'Nhật ký bảo trì UPS, máy phát điện', but 'ups_generator_records' is marked as 'not_collected'.\",\"source_files\":[\"utility_maintenance.json\"]}]}",
+      "source_hashes": {
+        "utility_maintenance.json": "bd06a1d8d4f45e73b7b6d419ce8c8b1444f8116e7fcebae6c5ea6ec1f5c1c820"
+      },
+      "duration_ms": 1704
+    },
+    {
+      "control_id": "A.7.12",
+      "model": "qwen2.5:7b",
+      "status": null,
+      "error": "ValueError: Missing criterion verdicts",
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"not_met\",\"rationale\":\"The inspection found that the conduit was missing, leaving the cable exposed on the floor. This does not meet the criterion of cabling being protected in conduits.\",\"source_files\":[\"cable_inspection.json\"]}]}",
+      "source_hashes": {
+        "cable_inspection.json": "00e04aa94dfb321393a3dd1dcd7ba2b86d3f440edc30bc0eb7e3a142b7e5d24b"
+      },
+      "duration_ms": 2031
+    },
+    {
+      "control_id": "A.7.13",
+      "model": "qwen2.5:7b",
+      "status": "Insufficient Evidence",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The artifact contains a maintenance contract for LAB-SRV-01 with a schedule interval of 90 days, indicating that there is a contract/literal 'Có hợp đồng/lịch bảo trì' in place.\",\"source_files\":[\"maintenance_register.json\"]},{\"criterion_index\":1,\"verdict\":\"unknown\",\"rationale\":\"The artifact does not contain any explicit 'Biên bản bảo trì thiết bị lưu hệ thống' (maintenance log) entries, only a register of completed and scheduled maintenance.\",\"source_files\":[\"maintenance_register.json\"]}] }",
+      "source_hashes": {
+        "maintenance_register.json": "5dbbb461fbee963c6ccd6515cd3793ccdcc2affa9813186d3deb336fe0c3c94b"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The artifact contains a maintenance contract for LAB-SRV-01 with a schedule interval of 90 days, indicating that there is a contract/literal 'Có hợp đồng/lịch bảo trì' in place.",
+          "source_files": [
+            "maintenance_register.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "unknown",
+          "rationale": "The artifact does not contain any explicit 'Biên bản bảo trì thiết bị lưu hệ thống' (maintenance log) entries, only a register of completed and scheduled maintenance.",
+          "source_files": [
+            "maintenance_register.json"
+          ]
+        }
+      ],
+      "duration_ms": 3656
+    },
+    {
+      "control_id": "A.7.14",
+      "model": "qwen2.5:7b",
+      "status": "Partially Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The record shows that LAB-DISK-01 was wiped and the verification was successful.\",\"source_files\":[\"disposal_register.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"There is no destruction certificate provided for LAB-DISK-02, and it is located in an unlocked store, which does not meet the criterion for physical destruction of failed disks.\",\"source_files\":[\"disposal_register.json\"]}]}",
+      "source_hashes": {
+        "disposal_register.json": "0d33cb26283bf185233585b786aea09023f0983ab6976383baa18527d120f5f0"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The record shows that LAB-DISK-01 was wiped and the verification was successful.",
+          "source_files": [
+            "disposal_register.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "not_met",
+          "rationale": "There is no destruction certificate provided for LAB-DISK-02, and it is located in an unlocked store, which does not meet the criterion for physical destruction of failed disks.",
+          "source_files": [
+            "disposal_register.json"
+          ]
+        }
+      ],
+      "duration_ms": 3078
+    },
+    {
+      "control_id": "A.8.4",
+      "model": "qwen2.5:7b",
+      "status": "Non-Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"not_met\",\"rationale\":\"allow_force_push is set to true, which does not meet the requirement for branch protection.\",\"source_files\":[\"repository_settings.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The roles are not clearly defined as read/write. LAB-AUDIT is listed as read, but there is no explicit write role defined for any member.\",\"source_files\":[\"repository_settings.json\"]}] }",
+      "source_hashes": {
+        "repository_settings.json": "72acfc35d75426a2e0a12c418bb5bfd7ad31cfb19bd6fcd93402f57086e4e12d"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "not_met",
+          "rationale": "allow_force_push is set to true, which does not meet the requirement for branch protection.",
+          "source_files": [
+            "repository_settings.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "not_met",
+          "rationale": "The roles are not clearly defined as read/write. LAB-AUDIT is listed as read, but there is no explicit write role defined for any member.",
+          "source_files": [
+            "repository_settings.json"
+          ]
+        }
+      ],
+      "duration_ms": 2922
+    },
+    {
+      "control_id": "A.8.6",
+      "model": "qwen2.5:7b",
+      "status": "Partially Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The artifact contains metrics for CPU, RAM, and Disk usage, indicating that the system is monitoring these resources.\",\"source_files\":[\"capacity_export.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The artifact does not contain any alert rules, which means that there are no configured warning thresholds in place.\",\"source_files\":[\"capacity_export.json\"]}]}",
+      "source_hashes": {
+        "capacity_export.json": "ec2fa324f973e643b90ff1ec82da0a3a4b332da5b838753380f1a1851199c3b9"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The artifact contains metrics for CPU, RAM, and Disk usage, indicating that the system is monitoring these resources.",
+          "source_files": [
+            "capacity_export.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "not_met",
+          "rationale": "The artifact does not contain any alert rules, which means that there are no configured warning thresholds in place.",
+          "source_files": [
+            "capacity_export.json"
+          ]
+        }
+      ],
+      "duration_ms": 2734
+    },
+    {
+      "control_id": "A.8.11",
+      "model": "qwen2.5:7b",
+      "status": "Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The policy in the artifact specifies that the email and national_id columns are masked in the test environment, which meets the criterion.\",\"source_files\":[\"masking_export.json\"]},{ \"criterion_index\":1,\"verdict\":\"met\",\"rationale\":\"The sample data shows that the email and national_id fields are masked, indicating that sensitive data is hidden in the non-Production environment as required.\",\"source_files\":[\"masking_export.json\"]}] }",
+      "source_hashes": {
+        "masking_export.json": "4fbbb76efeacd25c5128381d510278592199222adf99b8ba498780d7d7eb94de"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The policy in the artifact specifies that the email and national_id columns are masked in the test environment, which meets the criterion.",
+          "source_files": [
+            "masking_export.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "met",
+          "rationale": "The sample data shows that the email and national_id fields are masked, indicating that sensitive data is hidden in the non-Production environment as required.",
+          "source_files": [
+            "masking_export.json"
+          ]
+        }
+      ],
+      "duration_ms": 3172
+    },
+    {
+      "control_id": "A.8.14",
+      "model": "qwen2.5:7b",
+      "status": null,
+      "error": "ValueError: Missing criterion verdicts",
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The HA configuration is explicitly stated in the artifact, indicating the presence of a load balancer with backends.\",\"source_files\":[\"ha_configuration.json\"]}]}",
+      "source_hashes": {
+        "ha_configuration.json": "13f617a9061f8460a722f83520a32f37e79bd31ebe2cc1bc9a020b137c35376d"
+      },
+      "duration_ms": 1469
+    },
+    {
+      "control_id": "A.8.18",
+      "model": "qwen2.5:7b",
+      "status": "Insufficient Evidence",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"not_met\",\"rationale\":\"The scenario does not show any SUID/SGID files with restricted execution groups other than 'all users'.\",\"source_files\":[\"utility_permissions.json\"]},{\"criterion_index\":1,\"verdict\":\"unknown\",\"rationale\":\"The scenario does not provide a list of authorized utility programs or any review tickets related to the authorization process.\",\"source_files\":[\"utility_permissions.json\"]}]}",
+      "source_hashes": {
+        "utility_permissions.json": "c433bf231c3ca49b7231f378b555d0f79daa1f6ab7815e8c75dfe5c0c2956554"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "not_met",
+          "rationale": "The scenario does not show any SUID/SGID files with restricted execution groups other than 'all users'.",
+          "source_files": [
+            "utility_permissions.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "unknown",
+          "rationale": "The scenario does not provide a list of authorized utility programs or any review tickets related to the authorization process.",
+          "source_files": [
+            "utility_permissions.json"
+          ]
+        }
+      ],
+      "duration_ms": 2672
+    },
+    {
+      "control_id": "A.8.21",
+      "model": "qwen2.5:7b",
+      "status": "Partially Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"not_met\",\"rationale\":\"The criterion states that there should be a security SLA with the network service provider, but the artifact does not provide this information.\",\"source_files\":[\"network_service_records.json\"]},{ \"criterion_index\":1,\"verdict\":\"met\",\"rationale\":\"The artifact includes configurations for DNS and VPN, which meet the requirement for configuring security services.\",\"source_files\":[\"network_service_records.json\"]}]}",
+      "source_hashes": {
+        "network_service_records.json": "b73156e9f6d6a255b4c833f7dfe6f3746719d954e5aa6c22e858fbff2a1e8f34"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "not_met",
+          "rationale": "The criterion states that there should be a security SLA with the network service provider, but the artifact does not provide this information.",
+          "source_files": [
+            "network_service_records.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "met",
+          "rationale": "The artifact includes configurations for DNS and VPN, which meet the requirement for configuring security services.",
+          "source_files": [
+            "network_service_records.json"
+          ]
+        }
+      ],
+      "duration_ms": 2765
+    },
+    {
+      "control_id": "A.8.23",
+      "model": "qwen2.5:7b",
+      "status": "Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"Proxy mode is explicitly configured and rule order includes deny-blocklist.\",\"source_files\":[\"web_filter_config.json\"]},{\"criterion_index\":1,\"verdict\":\"met\",\"rationale\":\"Blocklist contains entries for malware.example.invalid and phishing.example.invalid.\",\"source_files\":[\"web_filter_config.json\"]}]}",
+      "source_hashes": {
+        "web_filter_config.json": "70c218383d9ca65af86beb10090f610787a2c5607f176afea745c4cd94aed799"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "Proxy mode is explicitly configured and rule order includes deny-blocklist.",
+          "source_files": [
+            "web_filter_config.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "met",
+          "rationale": "Blocklist contains entries for malware.example.invalid and phishing.example.invalid.",
+          "source_files": [
+            "web_filter_config.json"
+          ]
+        }
+      ],
+      "duration_ms": 2250
+    },
+    {
+      "control_id": "A.8.25",
+      "model": "qwen2.5:7b",
+      "status": "Partially Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The artifact contains a documented SDLC process with defined stages.\",\"source_files\":[\"development_workflow.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The CI/CD pipeline does not include any security scan jobs.\",\"source_files\":[\"development_workflow.json\"]}]}",
+      "source_hashes": {
+        "development_workflow.json": "a272b08fd2ff85ef9c180de64680e98c0034f97697ca0c940572624d4a5ef463"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The artifact contains a documented SDLC process with defined stages.",
+          "source_files": [
+            "development_workflow.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "not_met",
+          "rationale": "The CI/CD pipeline does not include any security scan jobs.",
+          "source_files": [
+            "development_workflow.json"
+          ]
+        }
+      ],
+      "duration_ms": 2172
+    },
+    {
+      "control_id": "A.8.26",
+      "model": "qwen2.5:7b",
+      "status": "Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The artifact contains a detailed software security requirement document (SEC-01 and SEC-02) as per the specified format.\",\"source_files\":[\"application_requirements.json\"]}] }",
+      "source_hashes": {
+        "application_requirements.json": "7cb15ca4955c3f212e4071e1f7b3441e05d2815e671de9e9f5eb9695a982272f"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The artifact contains a detailed software security requirement document (SEC-01 and SEC-02) as per the specified format.",
+          "source_files": [
+            "application_requirements.json"
+          ]
+        }
+      ],
+      "duration_ms": 1610
+    },
+    {
+      "control_id": "A.8.27",
+      "model": "qwen2.5:7b",
+      "status": "Insufficient Evidence",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The design document 'LAB-ARCH-01' is present in the records.\",\"source_files\":[\"architecture_and_deployment.json\"]},{\"criterion_index\":1,\"verdict\":\"unknown\",\"rationale\":\"The availability of the deployment export is not collected, as stated in the records.\",\"source_files\":[\"architecture_and_deployment.json\"]}]}",
+      "source_hashes": {
+        "architecture_and_deployment.json": "a6afc2bb305369dbb9d2c559b48742928a147862da4db91d84f35e40965ce6cd"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The design document 'LAB-ARCH-01' is present in the records.",
+          "source_files": [
+            "architecture_and_deployment.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "unknown",
+          "rationale": "The availability of the deployment export is not collected, as stated in the records.",
+          "source_files": [
+            "architecture_and_deployment.json"
+          ]
+        }
+      ],
+      "duration_ms": 2484
+    },
+    {
+      "control_id": "A.8.28",
+      "model": "qwen2.5:7b",
+      "status": "Partially Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The secure coding guidelines are documented in the 'LAB-CODING-01' document, which includes rules such as parameterized SQL, validate input, and no hardcoded secrets.\",\"source_files\":[\"coding_and_sast.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The SAST report contains critical findings, specifically an open SQL injection vulnerability in 'lab/example.py' at line 42, indicating the presence of a serious coding issue.\",\"source_files\":[\"coding_and_sast.json\"]}]}",
+      "source_hashes": {
+        "coding_and_sast.json": "57c7354caef2142317827599b5edfdc73c296b8fa8e0a14e305dba6898d3ff66"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The secure coding guidelines are documented in the 'LAB-CODING-01' document, which includes rules such as parameterized SQL, validate input, and no hardcoded secrets.",
+          "source_files": [
+            "coding_and_sast.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "not_met",
+          "rationale": "The SAST report contains critical findings, specifically an open SQL injection vulnerability in 'lab/example.py' at line 42, indicating the presence of a serious coding issue.",
+          "source_files": [
+            "coding_and_sast.json"
+          ]
+        }
+      ],
+      "duration_ms": 3500
+    },
+    {
+      "control_id": "A.8.29",
+      "model": "qwen2.5:7b",
+      "status": "Partially Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The artifact contains a DAST report (LAB-DAST-01) with findings, meeting the criterion.\",\"source_files\":[\"acceptance_testing.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The security acceptance record does not show approval by any party, only that it is pending.\",\"source_files\":[\"acceptance_testing.json\"]}]}",
+      "source_hashes": {
+        "acceptance_testing.json": "8f7413fa4296e454439fb75f4b99e50a4ff6da7e4ddd959498bbc22ed9a6b027"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The artifact contains a DAST report (LAB-DAST-01) with findings, meeting the criterion.",
+          "source_files": [
+            "acceptance_testing.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "not_met",
+          "rationale": "The security acceptance record does not show approval by any party, only that it is pending.",
+          "source_files": [
+            "acceptance_testing.json"
+          ]
+        }
+      ],
+      "duration_ms": 2594
+    },
+    {
+      "control_id": "A.8.30",
+      "model": "qwen2.5:7b",
+      "status": "Insufficient Evidence",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The contract includes clauses on confidentiality, secure coding, vulnerability remediation, and right to review source.\",\"source_files\":[\"supplier_delivery.json\"]},{\"criterion_index\":1,\"verdict\":\"unknown\",\"rationale\":\"There is no explicit mention of a source code review log or record in the provided artifact.\",\"source_files\":[\"supplier_delivery.json\"]}]}",
+      "source_hashes": {
+        "supplier_delivery.json": "45657133fffda32ecba90da2f0d86c21cbe201aebd70e9b676b7a25676daa0c5"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The contract includes clauses on confidentiality, secure coding, vulnerability remediation, and right to review source.",
+          "source_files": [
+            "supplier_delivery.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "unknown",
+          "rationale": "There is no explicit mention of a source code review log or record in the provided artifact.",
+          "source_files": [
+            "supplier_delivery.json"
+          ]
+        }
+      ],
+      "duration_ms": 2531
+    },
+    {
+      "control_id": "A.8.31",
+      "model": "qwen2.5:7b",
+      "status": "Partially Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The environment networks are clearly defined with separate subnets for development and production.\",\"source_files\":[\"environment_access.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The development account (LAB-DEV-1) is allowed to perform a SELECT operation on the production database (LAB-PROD-DB), which violates the criterion of separation between development and production environments.\",\"source_files\":[\"environment_access.json\"]}]}",
+      "source_hashes": {
+        "environment_access.json": "b92fe8f867bb7618004b18e3a3dc84668a80ddfdca1635e2afc9b387dfb7d742"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The environment networks are clearly defined with separate subnets for development and production.",
+          "source_files": [
+            "environment_access.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "not_met",
+          "rationale": "The development account (LAB-DEV-1) is allowed to perform a SELECT operation on the production database (LAB-PROD-DB), which violates the criterion of separation between development and production environments.",
+          "source_files": [
+            "environment_access.json"
+          ]
+        }
+      ],
+      "duration_ms": 3016
+    },
+    {
+      "control_id": "A.8.33",
+      "model": "qwen2.5:7b",
+      "status": "Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The dataset is generated by 'LAB-FAKER-SEED-2026' and does not use a production export, indicating it is anonymized.\",\"source_files\":[\"test_dataset_provenance.json\"]},{\"criterion_index\":1,\"verdict\":\"met\",\"rationale\":\"The 'is_synthetic' field is set to true, confirming the data is synthetic.\",\"source_files\":[\"test_dataset_provenance.json\"]}]}",
+      "source_hashes": {
+        "test_dataset_provenance.json": "34743483c47ccbf805a5e873b16b9de45cf978d551c63488a1531c3901281d64"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The dataset is generated by 'LAB-FAKER-SEED-2026' and does not use a production export, indicating it is anonymized.",
+          "source_files": [
+            "test_dataset_provenance.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "met",
+          "rationale": "The 'is_synthetic' field is set to true, confirming the data is synthetic.",
+          "source_files": [
+            "test_dataset_provenance.json"
+          ]
+        }
+      ],
+      "duration_ms": 2984
+    },
+    {
+      "control_id": "A.8.34",
+      "model": "qwen2.5:7b",
+      "status": "Partially Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The audit account 'LAB-AUDIT' has been granted 'SELECT' privileges, which are read-only.\",\"source_files\":[\"audit_access_plan.json\"]},{ \"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The scan plan has an approval state of 'pending' and no approval by a specific individual is recorded.\",\"source_files\":[\"audit_access_plan.json\"]}] }",
+      "source_hashes": {
+        "audit_access_plan.json": "f9469df91e0cc7ebd9a201a64dad7126dbceadd6674ea48154276b4016dab464"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The audit account 'LAB-AUDIT' has been granted 'SELECT' privileges, which are read-only.",
+          "source_files": [
+            "audit_access_plan.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "not_met",
+          "rationale": "The scan plan has an approval state of 'pending' and no approval by a specific individual is recorded.",
+          "source_files": [
+            "audit_access_plan.json"
+          ]
+        }
+      ],
+      "duration_ms": 2750
+    }
+  ],
+  "total": 38,
+  "updated_at": "2026-11-21T03:27:54.688832+00:00",
+  "designer_comparison": {
+    "source": "ASSISTANT_AUTHORED_DESIGNER_KEY_NOT_HUMAN_REVIEW",
+    "total": 38,
+    "correct": 22,
+    "per_control": [
+      {
+        "control_id": "A.6.1",
+        "expected": "Partially Compliant",
+        "actual": "Partially Compliant",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.6.2",
+        "expected": "Partially Compliant",
+        "actual": "Partially Compliant",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.6.3",
+        "expected": "Partially Compliant",
+        "actual": "Partially Compliant",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.6.4",
+        "expected": "Compliant",
+        "actual": "Insufficient Evidence",
+        "correct": false,
+        "error": null
+      },
+      {
+        "control_id": "A.6.5",
+        "expected": "Insufficient Evidence",
+        "actual": "Insufficient Evidence",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.6.6",
+        "expected": "Partially Compliant",
+        "actual": "Insufficient Evidence",
+        "correct": false,
+        "error": null
+      },
+      {
+        "control_id": "A.6.7",
+        "expected": "Non-Compliant",
+        "actual": "Non-Compliant",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.6.8",
+        "expected": "Compliant",
+        "actual": "Insufficient Evidence",
+        "correct": false,
+        "error": null
+      },
+      {
+        "control_id": "A.7.1",
+        "expected": "Partially Compliant",
+        "actual": "Partially Compliant",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.7.2",
+        "expected": "Partially Compliant",
+        "actual": "Partially Compliant",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.7.3",
+        "expected": "Compliant",
+        "actual": "Insufficient Evidence",
+        "correct": false,
+        "error": null
+      },
+      {
+        "control_id": "A.7.4",
+        "expected": "Partially Compliant",
+        "actual": "Insufficient Evidence",
+        "correct": false,
+        "error": null
+      },
+      {
+        "control_id": "A.7.5",
+        "expected": "Insufficient Evidence",
+        "actual": "Partially Compliant",
+        "correct": false,
+        "error": null
+      },
+      {
+        "control_id": "A.7.6",
+        "expected": "Compliant",
+        "actual": "Partially Compliant",
+        "correct": false,
+        "error": null
+      },
+      {
+        "control_id": "A.7.7",
+        "expected": "Non-Compliant",
+        "actual": "Non-Compliant",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.7.8",
+        "expected": "Partially Compliant",
+        "actual": "Partially Compliant",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.7.9",
+        "expected": "Insufficient Evidence",
+        "actual": "Partially Compliant",
+        "correct": false,
+        "error": null
+      },
+      {
+        "control_id": "A.7.10",
+        "expected": "Compliant",
+        "actual": "Compliant",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.7.11",
+        "expected": "Insufficient Evidence",
+        "actual": null,
+        "correct": false,
+        "error": "ValueError: Missing criterion verdicts"
+      },
+      {
+        "control_id": "A.7.12",
+        "expected": "Partially Compliant",
+        "actual": null,
+        "correct": false,
+        "error": "ValueError: Missing criterion verdicts"
+      },
+      {
+        "control_id": "A.7.13",
+        "expected": "Compliant",
+        "actual": "Insufficient Evidence",
+        "correct": false,
+        "error": null
+      },
+      {
+        "control_id": "A.7.14",
+        "expected": "Partially Compliant",
+        "actual": "Partially Compliant",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.8.4",
+        "expected": "Partially Compliant",
+        "actual": "Non-Compliant",
+        "correct": false,
+        "error": null
+      },
+      {
+        "control_id": "A.8.6",
+        "expected": "Partially Compliant",
+        "actual": "Partially Compliant",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.8.11",
+        "expected": "Compliant",
+        "actual": "Compliant",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.8.14",
+        "expected": "Insufficient Evidence",
+        "actual": null,
+        "correct": false,
+        "error": "ValueError: Missing criterion verdicts"
+      },
+      {
+        "control_id": "A.8.18",
+        "expected": "Non-Compliant",
+        "actual": "Insufficient Evidence",
+        "correct": false,
+        "error": null
+      },
+      {
+        "control_id": "A.8.21",
+        "expected": "Insufficient Evidence",
+        "actual": "Partially Compliant",
+        "correct": false,
+        "error": null
+      },
+      {
+        "control_id": "A.8.23",
+        "expected": "Compliant",
+        "actual": "Compliant",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.8.25",
+        "expected": "Partially Compliant",
+        "actual": "Partially Compliant",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.8.26",
+        "expected": "Compliant",
+        "actual": "Compliant",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.8.27",
+        "expected": "Insufficient Evidence",
+        "actual": "Insufficient Evidence",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.8.28",
+        "expected": "Partially Compliant",
+        "actual": "Partially Compliant",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.8.29",
+        "expected": "Partially Compliant",
+        "actual": "Partially Compliant",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.8.30",
+        "expected": "Compliant",
+        "actual": "Insufficient Evidence",
+        "correct": false,
+        "error": null
+      },
+      {
+        "control_id": "A.8.31",
+        "expected": "Partially Compliant",
+        "actual": "Partially Compliant",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.8.33",
+        "expected": "Compliant",
+        "actual": "Compliant",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.8.34",
+        "expected": "Partially Compliant",
+        "actual": "Partially Compliant",
+        "correct": true,
+        "error": null
+      }
+    ],
+    "note": "Khớp đáp án của bộ phát triển đã biết; không phải độ đúng với người đánh giá độc lập."
+  },
+  "repair_protocol": "schema-constrained-json-v1",
+  "repair_at": "2026-11-21T03:29:09.617049+00:00",
+  "repair_attempts": [
+    {
+      "control_id": "A.7.11",
+      "model": "qwen2.5:7b",
+      "status": "Insufficient Evidence",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"not_met\",\"rationale\":\"The criterion requires 'Nhật ký bảo trì UPS, máy phát điện', but the artifact records show 'availability': 'not_collected' for 'ups_generator_records'.\",\"source_files\":[\"utility_maintenance.json\"]},{\"criterion_index\":1,\"verdict\":\"unknown\",\"rationale\":\"The criterion requires 'Biên bản kiểm tra hệ thống làm mát', but the artifact records show 'availability': 'not_collected' for 'cooling_inspections'.\",\"source_files\":[\"utility_maintenance.json\"]}] }",
+      "source_hashes": {
+        "utility_maintenance.json": "bd06a1d8d4f45e73b7b6d419ce8c8b1444f8116e7fcebae6c5ea6ec1f5c1c820"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "not_met",
+          "rationale": "The criterion requires 'Nhật ký bảo trì UPS, máy phát điện', but the artifact records show 'availability': 'not_collected' for 'ups_generator_records'.",
+          "source_files": [
+            "utility_maintenance.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "unknown",
+          "rationale": "The criterion requires 'Biên bản kiểm tra hệ thống làm mát', but the artifact records show 'availability': 'not_collected' for 'cooling_inspections'.",
+          "source_files": [
+            "utility_maintenance.json"
+          ]
+        }
+      ],
+      "duration_ms": 3468
+    },
+    {
+      "control_id": "A.7.12",
+      "model": "qwen2.5:7b",
+      "status": "Insufficient Evidence",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"not_met\",\"rationale\":\"The inspection found that the cable was exposed on the floor, which does not meet the criterion of being run in conduit or tubing.\",\"source_files\":[\"cable_inspection.json\"]},{\"criterion_index\":1,\"verdict\":\"unknown\",\"rationale\":\"The artifact does not contain a physical inspection report, only a synthetic inspection record.\",\"source_files\":[\"cable_inspection.json\"]}]}",
+      "source_hashes": {
+        "cable_inspection.json": "00e04aa94dfb321393a3dd1dcd7ba2b86d3f440edc30bc0eb7e3a142b7e5d24b"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "not_met",
+          "rationale": "The inspection found that the cable was exposed on the floor, which does not meet the criterion of being run in conduit or tubing.",
+          "source_files": [
+            "cable_inspection.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "unknown",
+          "rationale": "The artifact does not contain a physical inspection report, only a synthetic inspection record.",
+          "source_files": [
+            "cable_inspection.json"
+          ]
+        }
+      ],
+      "duration_ms": 2594
+    },
+    {
+      "control_id": "A.8.14",
+      "model": "qwen2.5:7b",
+      "status": "Partially Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The HA configuration is explicitly stated in the 'ha_configuration.json' artifact, indicating the presence of a load balancer with backends and health checks.\",\"source_files\":[\"ha_configuration.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The 'architecture_document' and 'failover_test' records indicate that availability information is not collected, which is required by the criterion.\",\"source_files\":[\"ha_configuration.json\"]}]}",
+      "source_hashes": {
+        "ha_configuration.json": "13f617a9061f8460a722f83520a32f37e79bd31ebe2cc1bc9a020b137c35376d"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The HA configuration is explicitly stated in the 'ha_configuration.json' artifact, indicating the presence of a load balancer with backends and health checks.",
+          "source_files": [
+            "ha_configuration.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "not_met",
+          "rationale": "The 'architecture_document' and 'failover_test' records indicate that availability information is not collected, which is required by the criterion.",
+          "source_files": [
+            "ha_configuration.json"
+          ]
+        }
+      ],
+      "duration_ms": 2844
+    }
+  ],
+  "final_results": [
+    {
+      "control_id": "A.6.1",
+      "model": "qwen2.5:7b",
+      "status": "Partially Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The artifact contains a record of a background check that was completed on 2026-09-28, indicating the existence of a background check record.\",\"source_files\":[\"screening.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"There is no confirmation from the HR department as the 'confirmed_by' field is null and the state is 'draft' in the HR confirmation record.\",\"source_files\":[\"screening.json\"]}]}",
+      "source_hashes": {
+        "screening.json": "76fc96ae2258c6bc6a83011236d1b0764da2a4cc3c76519babac67799056ecc4"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The artifact contains a record of a background check that was completed on 2026-09-28, indicating the existence of a background check record.",
+          "source_files": [
+            "screening.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "not_met",
+          "rationale": "There is no confirmation from the HR department as the 'confirmed_by' field is null and the state is 'draft' in the HR confirmation record.",
+          "source_files": [
+            "screening.json"
+          ]
+        }
+      ],
+      "duration_ms": 8016
+    },
+    {
+      "control_id": "A.6.2",
+      "model": "qwen2.5:7b",
+      "status": "Partially Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The contract includes a security clause regarding the protection of confidential data, reporting incidents, returning assets, and retaining confidentiality after termination.\",\"source_files\":[\"contract.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The employee has not yet signed the contract as indicated by the null value in the 'signed_on' field for the employee party.\",\"source_files\":[\"contract.json\"]}]}",
+      "source_hashes": {
+        "contract.json": "86a8679e8c1b3739a2882ccb77936907cc74cde9d2b4718996f7c8eefb573eb9"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The contract includes a security clause regarding the protection of confidential data, reporting incidents, returning assets, and retaining confidentiality after termination.",
+          "source_files": [
+            "contract.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "not_met",
+          "rationale": "The employee has not yet signed the contract as indicated by the null value in the 'signed_on' field for the employee party.",
+          "source_files": [
+            "contract.json"
+          ]
+        }
+      ],
+      "duration_ms": 3078
+    },
+    {
+      "control_id": "A.6.3",
+      "model": "qwen2.5:7b",
+      "status": "Partially Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"All employees have completed the course as the number of completed employees (48) equals the required number (50) minus the pending employees (2).\",\"source_files\":[\"lms_export.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"There is no evidence of a test being conducted as the records do not include any information about a test or assessment results.\",\"source_files\":[\"lms_export.json\"]}] }",
+      "source_hashes": {
+        "lms_export.json": "f70013b57a59185769d06bad02d9b63dbc39e3b9fe66c46676c6fb1e3e01577b"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "All employees have completed the course as the number of completed employees (48) equals the required number (50) minus the pending employees (2).",
+          "source_files": [
+            "lms_export.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "not_met",
+          "rationale": "There is no evidence of a test being conducted as the records do not include any information about a test or assessment results.",
+          "source_files": [
+            "lms_export.json"
+          ]
+        }
+      ],
+      "duration_ms": 3328
+    },
+    {
+      "control_id": "A.6.4",
+      "model": "qwen2.5:7b",
+      "status": "Insufficient Evidence",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The artifact 'discipline_policy.json' shows that a discipline policy document (LAB-HR-DISCIPLINE-1) has been published and is in effect on 2026-10-01.\",\"source_files\":[\"discipline_policy.json\"]},{\"criterion_index\":1,\"verdict\":\"unknown\",\"rationale\":\"While the policy document has been published, there is no explicit record of it being distributed to all employees.\",\"source_files\":[\"discipline_policy.json\"]}]}",
+      "source_hashes": {
+        "discipline_policy.json": "0de370c95839ce63e05fb96e2f7df2002506644be35a5175fde05b041fe1ae38"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The artifact 'discipline_policy.json' shows that a discipline policy document (LAB-HR-DISCIPLINE-1) has been published and is in effect on 2026-10-01.",
+          "source_files": [
+            "discipline_policy.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "unknown",
+          "rationale": "While the policy document has been published, there is no explicit record of it being distributed to all employees.",
+          "source_files": [
+            "discipline_policy.json"
+          ]
+        }
+      ],
+      "duration_ms": 3640
+    },
+    {
+      "control_id": "A.6.5",
+      "model": "qwen2.5:7b",
+      "status": "Insufficient Evidence",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"not_met\",\"rationale\":\"The 'access_revocation_export' is not_collected due to IAM audit export not being supplied.\",\"source_files\":[\"offboarding.json\"]},{\"criterion_index\":1,\"verdict\":\"unknown\",\"rationale\":\"The 'access_revocation_export' is not_collected, making the 'Biên bản xác nhận cắt quyền truy cập hệ thống' status unknown.\",\"source_files\":[\"offboarding.json\"]}]}",
+      "source_hashes": {
+        "offboarding.json": "1de7dfe37fc6382f20b444a7c1875a92cc807ee06b1588c451e1b259a81bc07a"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "not_met",
+          "rationale": "The 'access_revocation_export' is not_collected due to IAM audit export not being supplied.",
+          "source_files": [
+            "offboarding.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "unknown",
+          "rationale": "The 'access_revocation_export' is not_collected, making the 'Biên bản xác nhận cắt quyền truy cập hệ thống' status unknown.",
+          "source_files": [
+            "offboarding.json"
+          ]
+        }
+      ],
+      "duration_ms": 2891
+    },
+    {
+      "control_id": "A.6.6",
+      "model": "qwen2.5:7b",
+      "status": "Insufficient Evidence",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The records show that both EMP-001 and LAB-VENDOR-01 have signed NDAs, with EMP-001's NDA expiring on 2025-12-31 and LAB-VENDOR-01's NDA also expiring on 2025-12-31.\",\"source_files\":[\"nda_register.json\"]},{\"criterion_index\":1,\"verdict\":\"unknown\",\"rationale\":\"The records do not provide information on the current validity of the NDAs beyond their expiration dates. There is no explicit mention of whether the NDAs are still effective after their expiration dates.\",\"source_files\":[\"nda_register.json\"]}] }",
+      "source_hashes": {
+        "nda_register.json": "5a68f08680e07c831366f4854f77e6e98d1ec32745437d1d98ae58398848b6eb"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The records show that both EMP-001 and LAB-VENDOR-01 have signed NDAs, with EMP-001's NDA expiring on 2025-12-31 and LAB-VENDOR-01's NDA also expiring on 2025-12-31.",
+          "source_files": [
+            "nda_register.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "unknown",
+          "rationale": "The records do not provide information on the current validity of the NDAs beyond their expiration dates. There is no explicit mention of whether the NDAs are still effective after their expiration dates.",
+          "source_files": [
+            "nda_register.json"
+          ]
+        }
+      ],
+      "duration_ms": 4375
+    },
+    {
+      "control_id": "A.6.7",
+      "model": "qwen2.5:7b",
+      "status": "Non-Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"not_met\",\"rationale\":\"The policy is in draft state and not published, indicating no official remote work policy.\",\"source_files\":[\"remote_configuration.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The endpoint uses plain HTTP for remote transport and has antivirus disabled, indicating lack of security measures.\",\"source_files\":[\"remote_configuration.json\"]}]}",
+      "source_hashes": {
+        "remote_configuration.json": "0fa0a02f2f0ce6b827ebbfab31529a56ea1b8b68abea491611e16903a7e1efbf"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "not_met",
+          "rationale": "The policy is in draft state and not published, indicating no official remote work policy.",
+          "source_files": [
+            "remote_configuration.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "not_met",
+          "rationale": "The endpoint uses plain HTTP for remote transport and has antivirus disabled, indicating lack of security measures.",
+          "source_files": [
+            "remote_configuration.json"
+          ]
+        }
+      ],
+      "duration_ms": 2469
+    },
+    {
+      "control_id": "A.6.8",
+      "model": "qwen2.5:7b",
+      "status": "Insufficient Evidence",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The artifact contains a reporting form URL, indicating a channel for incident reporting.\",\"source_files\":[\"incident_channel.json\"]},{\"criterion_index\":1,\"verdict\":\"unknown\",\"rationale\":\"While the artifact includes an event register, there is no explicit mention of an ATT&CK (Advanced Threat Detection and Knowledge) log, only a generic event register.\",\"source_files\":[\"incident_channel.json\"]}] }",
+      "source_hashes": {
+        "incident_channel.json": "fc565ddd2ea365fb4ed3a555f6a7792e4db52f0ad112a16342fd454563b0d669"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The artifact contains a reporting form URL, indicating a channel for incident reporting.",
+          "source_files": [
+            "incident_channel.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "unknown",
+          "rationale": "While the artifact includes an event register, there is no explicit mention of an ATT&CK (Advanced Threat Detection and Knowledge) log, only a generic event register.",
+          "source_files": [
+            "incident_channel.json"
+          ]
+        }
+      ],
+      "duration_ms": 2781
+    },
+    {
+      "control_id": "A.7.1",
+      "model": "qwen2.5:7b",
+      "status": "Partially Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The 'zones' record explicitly states that the 'server-room' is marked as 'restricted', indicating a physical security perimeter.\",\"source_files\":[\"perimeter_inspection.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The 'lock_test' for 'LAB-D1' in the 'doors' record is 'failed', indicating that the physical security check did not meet the required standard.\",\"source_files\":[\"perimeter_inspection.json\"]}] }",
+      "source_hashes": {
+        "perimeter_inspection.json": "ee148307130171c0f669add914b040da9e5fb0b19eefbbccaf878cce05b2f100"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The 'zones' record explicitly states that the 'server-room' is marked as 'restricted', indicating a physical security perimeter.",
+          "source_files": [
+            "perimeter_inspection.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "not_met",
+          "rationale": "The 'lock_test' for 'LAB-D1' in the 'doors' record is 'failed', indicating that the physical security check did not meet the required standard.",
+          "source_files": [
+            "perimeter_inspection.json"
+          ]
+        }
+      ],
+      "duration_ms": 3188
+    },
+    {
+      "control_id": "A.7.2",
+      "model": "qwen2.5:7b",
+      "status": "Partially Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The badge log contains records of card swipes and biometric access, including 'EMP-001' and 'EMP-002' entering the server room.\",\"source_files\":[\"badge_log.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The log does not explicitly show that only authorized personnel are allowed entry, as 'EMP-002' entered without an escort or additional authorization.\",\"source_files\":[\"badge_log.json\"]}]}",
+      "source_hashes": {
+        "badge_log.json": "25051f3a60251e175c798c57393f0af30a8a87714445b2f2c5b5e22bbd7b081c"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The badge log contains records of card swipes and biometric access, including 'EMP-001' and 'EMP-002' entering the server room.",
+          "source_files": [
+            "badge_log.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "not_met",
+          "rationale": "The log does not explicitly show that only authorized personnel are allowed entry, as 'EMP-002' entered without an escort or additional authorization.",
+          "source_files": [
+            "badge_log.json"
+          ]
+        }
+      ],
+      "duration_ms": 3203
+    },
+    {
+      "control_id": "A.7.3",
+      "model": "qwen2.5:7b",
+      "status": "Insufficient Evidence",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The inspection record shows no obstruction at the emergency exit, indicating compliance with safety checks.\",\"source_files\":[\"office_inspection.json\"]},{\"criterion_index\":1,\"verdict\":\"unknown\",\"rationale\":\"The artifact does not provide information on the key custodian's actions after 18:00 to confirm if the doors were locked as per the policy.\",\"source_files\":[\"office_inspection.json\"]}]}",
+      "source_hashes": {
+        "office_inspection.json": "46f2e585238406ad36f5def4d45274b762c08743d8480507cf595cc0dbfb2959"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The inspection record shows no obstruction at the emergency exit, indicating compliance with safety checks.",
+          "source_files": [
+            "office_inspection.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "unknown",
+          "rationale": "The artifact does not provide information on the key custodian's actions after 18:00 to confirm if the doors were locked as per the policy.",
+          "source_files": [
+            "office_inspection.json"
+          ]
+        }
+      ],
+      "duration_ms": 3047
+    },
+    {
+      "control_id": "A.7.4",
+      "model": "qwen2.5:7b",
+      "status": "Insufficient Evidence",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The system is recording as of 2026-11-21T08:59:50+07:00, indicating it is operational.\",\"source_files\":[\"cctv_status.json\"]},{\"criterion_index\":1,\"verdict\":\"unknown\",\"rationale\":\"The artifact does not provide information on the actual time period the video recordings are stored, only the policy and retention period.\",\"source_files\":[\"cctv_status.json\"]}]}",
+      "source_hashes": {
+        "cctv_status.json": "3060ba80ac718139a23155922f79ea29a1b123249e0c95f41e7acd04ab992158"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The system is recording as of 2026-11-21T08:59:50+07:00, indicating it is operational.",
+          "source_files": [
+            "cctv_status.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "unknown",
+          "rationale": "The artifact does not provide information on the actual time period the video recordings are stored, only the policy and retention period.",
+          "source_files": [
+            "cctv_status.json"
+          ]
+        }
+      ],
+      "duration_ms": 3421
+    },
+    {
+      "control_id": "A.7.5",
+      "model": "qwen2.5:7b",
+      "status": "Partially Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"not_met\",\"rationale\":\"The 'Biên bản nghiệm thu/bảo trì PCCC' is not collected according to the records.\",\"source_files\":[\"environmental_records.json\"]},{\"criterion_index\":1,\"verdict\":\"met\",\"rationale\":\"The temperature and humidity sensor 'LAB-TEMP-01' is reported as 'responding' and measures a temperature of 23.4°C and humidity of 46% at the observed time.\",\"source_files\":[\"environmental_records.json\"]}]}",
+      "source_hashes": {
+        "environmental_records.json": "153ae079b8327d3959726a90057d311c629ccb41976344ec8079b389beca15fa"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "not_met",
+          "rationale": "The 'Biên bản nghiệm thu/bảo trì PCCC' is not collected according to the records.",
+          "source_files": [
+            "environmental_records.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "met",
+          "rationale": "The temperature and humidity sensor 'LAB-TEMP-01' is reported as 'responding' and measures a temperature of 23.4°C and humidity of 46% at the observed time.",
+          "source_files": [
+            "environmental_records.json"
+          ]
+        }
+      ],
+      "duration_ms": 3344
+    },
+    {
+      "control_id": "A.7.6",
+      "model": "qwen2.5:7b",
+      "status": "Partially Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The records show that visits to secure areas are being monitored, as evidenced by the visitor register entry for LAB-VISITOR-1.\",\"source_files\":[\"visitor_register.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The records do not contain any explicit prohibition against photography or any other form of media capture in secure areas.\",\"source_files\":[\"visitor_register.json\"]}]}",
+      "source_hashes": {
+        "visitor_register.json": "0c8b8bec430def792b8febca32e53071028417288df4154d9b57eb14d23c4238"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The records show that visits to secure areas are being monitored, as evidenced by the visitor register entry for LAB-VISITOR-1.",
+          "source_files": [
+            "visitor_register.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "not_met",
+          "rationale": "The records do not contain any explicit prohibition against photography or any other form of media capture in secure areas.",
+          "source_files": [
+            "visitor_register.json"
+          ]
+        }
+      ],
+      "duration_ms": 2906
+    },
+    {
+      "control_id": "A.7.7",
+      "model": "qwen2.5:7b",
+      "status": "Non-Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"not_met\",\"rationale\":\"Unsecured papers observed on LAB-DESK-01 during inspection.\",\"source_files\":[\"desk_endpoint_audit.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"Screen lock idle seconds is 0, indicating the screen is not configured to lock automatically.\",\"source_files\":[\"desk_endpoint_audit.json\"]}] }",
+      "source_hashes": {
+        "desk_endpoint_audit.json": "48ccf3a8e814176552b028ac4f80f8696800200ab0adbbb8e695dbcfd2b7fd6f"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "not_met",
+          "rationale": "Unsecured papers observed on LAB-DESK-01 during inspection.",
+          "source_files": [
+            "desk_endpoint_audit.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "not_met",
+          "rationale": "Screen lock idle seconds is 0, indicating the screen is not configured to lock automatically.",
+          "source_files": [
+            "desk_endpoint_audit.json"
+          ]
+        }
+      ],
+      "duration_ms": 2641
+    },
+    {
+      "control_id": "A.7.8",
+      "model": "qwen2.5:7b",
+      "status": "Partially Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The asset record specifies the physical location of the critical equipment.\",\"source_files\":[\"rack_inventory.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The rack check indicates that the door lock for rack-01 is missing, which does not meet the requirement for locked cabinets.\",\"source_files\":[\"rack_inventory.json\"]}]}",
+      "source_hashes": {
+        "rack_inventory.json": "36d98981fe445a296bcb115fce78fa58f8b1f56578743358bd00955057c8e619"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The asset record specifies the physical location of the critical equipment.",
+          "source_files": [
+            "rack_inventory.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "not_met",
+          "rationale": "The rack check indicates that the door lock for rack-01 is missing, which does not meet the requirement for locked cabinets.",
+          "source_files": [
+            "rack_inventory.json"
+          ]
+        }
+      ],
+      "duration_ms": 2531
+    },
+    {
+      "control_id": "A.7.9",
+      "model": "qwen2.5:7b",
+      "status": "Partially Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The handover record is present.\",\"source_files\":[\"offsite_assets.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The disk encryption status is not collected.\",\"source_files\":[\"offsite_assets.json\"]}]}",
+      "source_hashes": {
+        "offsite_assets.json": "8d2acefb8139254d961d5590061c3356c4ec27f6094f211bd713e3e441267dbb"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The handover record is present.",
+          "source_files": [
+            "offsite_assets.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "not_met",
+          "rationale": "The disk encryption status is not collected.",
+          "source_files": [
+            "offsite_assets.json"
+          ]
+        }
+      ],
+      "duration_ms": 2156
+    },
+    {
+      "control_id": "A.7.10",
+      "model": "qwen2.5:7b",
+      "status": "Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The records show that the inventory includes a USB device with a capacity of 32GB and a custodian, indicating that the storage media is documented.\",\"source_files\":[\"removable_media.json\"]},{\"criterion_index\":1,\"verdict\":\"met\",\"rationale\":\"The policy states that the default is 'deny' and specifies the exception process, logging, and state, indicating that a policy for controlling USB usage is in place.\",\"source_files\":[\"removable_media.json\"]}]}",
+      "source_hashes": {
+        "removable_media.json": "ee1670358f7c64fd74d234e33957a243c2644b881e363bd0b3a8c4f5cd49e0fd"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The records show that the inventory includes a USB device with a capacity of 32GB and a custodian, indicating that the storage media is documented.",
+          "source_files": [
+            "removable_media.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "met",
+          "rationale": "The policy states that the default is 'deny' and specifies the exception process, logging, and state, indicating that a policy for controlling USB usage is in place.",
+          "source_files": [
+            "removable_media.json"
+          ]
+        }
+      ],
+      "duration_ms": 3281
+    },
+    {
+      "control_id": "A.7.11",
+      "model": "qwen2.5:7b",
+      "status": "Insufficient Evidence",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"not_met\",\"rationale\":\"The criterion requires 'Nhật ký bảo trì UPS, máy phát điện', but the artifact records show 'availability': 'not_collected' for 'ups_generator_records'.\",\"source_files\":[\"utility_maintenance.json\"]},{\"criterion_index\":1,\"verdict\":\"unknown\",\"rationale\":\"The criterion requires 'Biên bản kiểm tra hệ thống làm mát', but the artifact records show 'availability': 'not_collected' for 'cooling_inspections'.\",\"source_files\":[\"utility_maintenance.json\"]}] }",
+      "source_hashes": {
+        "utility_maintenance.json": "bd06a1d8d4f45e73b7b6d419ce8c8b1444f8116e7fcebae6c5ea6ec1f5c1c820"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "not_met",
+          "rationale": "The criterion requires 'Nhật ký bảo trì UPS, máy phát điện', but the artifact records show 'availability': 'not_collected' for 'ups_generator_records'.",
+          "source_files": [
+            "utility_maintenance.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "unknown",
+          "rationale": "The criterion requires 'Biên bản kiểm tra hệ thống làm mát', but the artifact records show 'availability': 'not_collected' for 'cooling_inspections'.",
+          "source_files": [
+            "utility_maintenance.json"
+          ]
+        }
+      ],
+      "duration_ms": 3468
+    },
+    {
+      "control_id": "A.7.12",
+      "model": "qwen2.5:7b",
+      "status": "Insufficient Evidence",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"not_met\",\"rationale\":\"The inspection found that the cable was exposed on the floor, which does not meet the criterion of being run in conduit or tubing.\",\"source_files\":[\"cable_inspection.json\"]},{\"criterion_index\":1,\"verdict\":\"unknown\",\"rationale\":\"The artifact does not contain a physical inspection report, only a synthetic inspection record.\",\"source_files\":[\"cable_inspection.json\"]}]}",
+      "source_hashes": {
+        "cable_inspection.json": "00e04aa94dfb321393a3dd1dcd7ba2b86d3f440edc30bc0eb7e3a142b7e5d24b"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "not_met",
+          "rationale": "The inspection found that the cable was exposed on the floor, which does not meet the criterion of being run in conduit or tubing.",
+          "source_files": [
+            "cable_inspection.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "unknown",
+          "rationale": "The artifact does not contain a physical inspection report, only a synthetic inspection record.",
+          "source_files": [
+            "cable_inspection.json"
+          ]
+        }
+      ],
+      "duration_ms": 2594
+    },
+    {
+      "control_id": "A.7.13",
+      "model": "qwen2.5:7b",
+      "status": "Insufficient Evidence",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The artifact contains a maintenance contract for LAB-SRV-01 with a schedule interval of 90 days, indicating that there is a contract/literal 'Có hợp đồng/lịch bảo trì' in place.\",\"source_files\":[\"maintenance_register.json\"]},{\"criterion_index\":1,\"verdict\":\"unknown\",\"rationale\":\"The artifact does not contain any explicit 'Biên bản bảo trì thiết bị lưu hệ thống' (maintenance log) entries, only a register of completed and scheduled maintenance.\",\"source_files\":[\"maintenance_register.json\"]}] }",
+      "source_hashes": {
+        "maintenance_register.json": "5dbbb461fbee963c6ccd6515cd3793ccdcc2affa9813186d3deb336fe0c3c94b"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The artifact contains a maintenance contract for LAB-SRV-01 with a schedule interval of 90 days, indicating that there is a contract/literal 'Có hợp đồng/lịch bảo trì' in place.",
+          "source_files": [
+            "maintenance_register.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "unknown",
+          "rationale": "The artifact does not contain any explicit 'Biên bản bảo trì thiết bị lưu hệ thống' (maintenance log) entries, only a register of completed and scheduled maintenance.",
+          "source_files": [
+            "maintenance_register.json"
+          ]
+        }
+      ],
+      "duration_ms": 3656
+    },
+    {
+      "control_id": "A.7.14",
+      "model": "qwen2.5:7b",
+      "status": "Partially Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The record shows that LAB-DISK-01 was wiped and the verification was successful.\",\"source_files\":[\"disposal_register.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"There is no destruction certificate provided for LAB-DISK-02, and it is located in an unlocked store, which does not meet the criterion for physical destruction of failed disks.\",\"source_files\":[\"disposal_register.json\"]}]}",
+      "source_hashes": {
+        "disposal_register.json": "0d33cb26283bf185233585b786aea09023f0983ab6976383baa18527d120f5f0"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The record shows that LAB-DISK-01 was wiped and the verification was successful.",
+          "source_files": [
+            "disposal_register.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "not_met",
+          "rationale": "There is no destruction certificate provided for LAB-DISK-02, and it is located in an unlocked store, which does not meet the criterion for physical destruction of failed disks.",
+          "source_files": [
+            "disposal_register.json"
+          ]
+        }
+      ],
+      "duration_ms": 3078
+    },
+    {
+      "control_id": "A.8.4",
+      "model": "qwen2.5:7b",
+      "status": "Non-Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"not_met\",\"rationale\":\"allow_force_push is set to true, which does not meet the requirement for branch protection.\",\"source_files\":[\"repository_settings.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The roles are not clearly defined as read/write. LAB-AUDIT is listed as read, but there is no explicit write role defined for any member.\",\"source_files\":[\"repository_settings.json\"]}] }",
+      "source_hashes": {
+        "repository_settings.json": "72acfc35d75426a2e0a12c418bb5bfd7ad31cfb19bd6fcd93402f57086e4e12d"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "not_met",
+          "rationale": "allow_force_push is set to true, which does not meet the requirement for branch protection.",
+          "source_files": [
+            "repository_settings.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "not_met",
+          "rationale": "The roles are not clearly defined as read/write. LAB-AUDIT is listed as read, but there is no explicit write role defined for any member.",
+          "source_files": [
+            "repository_settings.json"
+          ]
+        }
+      ],
+      "duration_ms": 2922
+    },
+    {
+      "control_id": "A.8.6",
+      "model": "qwen2.5:7b",
+      "status": "Partially Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The artifact contains metrics for CPU, RAM, and Disk usage, indicating that the system is monitoring these resources.\",\"source_files\":[\"capacity_export.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The artifact does not contain any alert rules, which means that there are no configured warning thresholds in place.\",\"source_files\":[\"capacity_export.json\"]}]}",
+      "source_hashes": {
+        "capacity_export.json": "ec2fa324f973e643b90ff1ec82da0a3a4b332da5b838753380f1a1851199c3b9"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The artifact contains metrics for CPU, RAM, and Disk usage, indicating that the system is monitoring these resources.",
+          "source_files": [
+            "capacity_export.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "not_met",
+          "rationale": "The artifact does not contain any alert rules, which means that there are no configured warning thresholds in place.",
+          "source_files": [
+            "capacity_export.json"
+          ]
+        }
+      ],
+      "duration_ms": 2734
+    },
+    {
+      "control_id": "A.8.11",
+      "model": "qwen2.5:7b",
+      "status": "Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The policy in the artifact specifies that the email and national_id columns are masked in the test environment, which meets the criterion.\",\"source_files\":[\"masking_export.json\"]},{ \"criterion_index\":1,\"verdict\":\"met\",\"rationale\":\"The sample data shows that the email and national_id fields are masked, indicating that sensitive data is hidden in the non-Production environment as required.\",\"source_files\":[\"masking_export.json\"]}] }",
+      "source_hashes": {
+        "masking_export.json": "4fbbb76efeacd25c5128381d510278592199222adf99b8ba498780d7d7eb94de"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The policy in the artifact specifies that the email and national_id columns are masked in the test environment, which meets the criterion.",
+          "source_files": [
+            "masking_export.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "met",
+          "rationale": "The sample data shows that the email and national_id fields are masked, indicating that sensitive data is hidden in the non-Production environment as required.",
+          "source_files": [
+            "masking_export.json"
+          ]
+        }
+      ],
+      "duration_ms": 3172
+    },
+    {
+      "control_id": "A.8.14",
+      "model": "qwen2.5:7b",
+      "status": "Partially Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The HA configuration is explicitly stated in the 'ha_configuration.json' artifact, indicating the presence of a load balancer with backends and health checks.\",\"source_files\":[\"ha_configuration.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The 'architecture_document' and 'failover_test' records indicate that availability information is not collected, which is required by the criterion.\",\"source_files\":[\"ha_configuration.json\"]}]}",
+      "source_hashes": {
+        "ha_configuration.json": "13f617a9061f8460a722f83520a32f37e79bd31ebe2cc1bc9a020b137c35376d"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The HA configuration is explicitly stated in the 'ha_configuration.json' artifact, indicating the presence of a load balancer with backends and health checks.",
+          "source_files": [
+            "ha_configuration.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "not_met",
+          "rationale": "The 'architecture_document' and 'failover_test' records indicate that availability information is not collected, which is required by the criterion.",
+          "source_files": [
+            "ha_configuration.json"
+          ]
+        }
+      ],
+      "duration_ms": 2844
+    },
+    {
+      "control_id": "A.8.18",
+      "model": "qwen2.5:7b",
+      "status": "Insufficient Evidence",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"not_met\",\"rationale\":\"The scenario does not show any SUID/SGID files with restricted execution groups other than 'all users'.\",\"source_files\":[\"utility_permissions.json\"]},{\"criterion_index\":1,\"verdict\":\"unknown\",\"rationale\":\"The scenario does not provide a list of authorized utility programs or any review tickets related to the authorization process.\",\"source_files\":[\"utility_permissions.json\"]}]}",
+      "source_hashes": {
+        "utility_permissions.json": "c433bf231c3ca49b7231f378b555d0f79daa1f6ab7815e8c75dfe5c0c2956554"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "not_met",
+          "rationale": "The scenario does not show any SUID/SGID files with restricted execution groups other than 'all users'.",
+          "source_files": [
+            "utility_permissions.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "unknown",
+          "rationale": "The scenario does not provide a list of authorized utility programs or any review tickets related to the authorization process.",
+          "source_files": [
+            "utility_permissions.json"
+          ]
+        }
+      ],
+      "duration_ms": 2672
+    },
+    {
+      "control_id": "A.8.21",
+      "model": "qwen2.5:7b",
+      "status": "Partially Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"not_met\",\"rationale\":\"The criterion states that there should be a security SLA with the network service provider, but the artifact does not provide this information.\",\"source_files\":[\"network_service_records.json\"]},{ \"criterion_index\":1,\"verdict\":\"met\",\"rationale\":\"The artifact includes configurations for DNS and VPN, which meet the requirement for configuring security services.\",\"source_files\":[\"network_service_records.json\"]}]}",
+      "source_hashes": {
+        "network_service_records.json": "b73156e9f6d6a255b4c833f7dfe6f3746719d954e5aa6c22e858fbff2a1e8f34"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "not_met",
+          "rationale": "The criterion states that there should be a security SLA with the network service provider, but the artifact does not provide this information.",
+          "source_files": [
+            "network_service_records.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "met",
+          "rationale": "The artifact includes configurations for DNS and VPN, which meet the requirement for configuring security services.",
+          "source_files": [
+            "network_service_records.json"
+          ]
+        }
+      ],
+      "duration_ms": 2765
+    },
+    {
+      "control_id": "A.8.23",
+      "model": "qwen2.5:7b",
+      "status": "Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"Proxy mode is explicitly configured and rule order includes deny-blocklist.\",\"source_files\":[\"web_filter_config.json\"]},{\"criterion_index\":1,\"verdict\":\"met\",\"rationale\":\"Blocklist contains entries for malware.example.invalid and phishing.example.invalid.\",\"source_files\":[\"web_filter_config.json\"]}]}",
+      "source_hashes": {
+        "web_filter_config.json": "70c218383d9ca65af86beb10090f610787a2c5607f176afea745c4cd94aed799"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "Proxy mode is explicitly configured and rule order includes deny-blocklist.",
+          "source_files": [
+            "web_filter_config.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "met",
+          "rationale": "Blocklist contains entries for malware.example.invalid and phishing.example.invalid.",
+          "source_files": [
+            "web_filter_config.json"
+          ]
+        }
+      ],
+      "duration_ms": 2250
+    },
+    {
+      "control_id": "A.8.25",
+      "model": "qwen2.5:7b",
+      "status": "Partially Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The artifact contains a documented SDLC process with defined stages.\",\"source_files\":[\"development_workflow.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The CI/CD pipeline does not include any security scan jobs.\",\"source_files\":[\"development_workflow.json\"]}]}",
+      "source_hashes": {
+        "development_workflow.json": "a272b08fd2ff85ef9c180de64680e98c0034f97697ca0c940572624d4a5ef463"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The artifact contains a documented SDLC process with defined stages.",
+          "source_files": [
+            "development_workflow.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "not_met",
+          "rationale": "The CI/CD pipeline does not include any security scan jobs.",
+          "source_files": [
+            "development_workflow.json"
+          ]
+        }
+      ],
+      "duration_ms": 2172
+    },
+    {
+      "control_id": "A.8.26",
+      "model": "qwen2.5:7b",
+      "status": "Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The artifact contains a detailed software security requirement document (SEC-01 and SEC-02) as per the specified format.\",\"source_files\":[\"application_requirements.json\"]}] }",
+      "source_hashes": {
+        "application_requirements.json": "7cb15ca4955c3f212e4071e1f7b3441e05d2815e671de9e9f5eb9695a982272f"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The artifact contains a detailed software security requirement document (SEC-01 and SEC-02) as per the specified format.",
+          "source_files": [
+            "application_requirements.json"
+          ]
+        }
+      ],
+      "duration_ms": 1610
+    },
+    {
+      "control_id": "A.8.27",
+      "model": "qwen2.5:7b",
+      "status": "Insufficient Evidence",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The design document 'LAB-ARCH-01' is present in the records.\",\"source_files\":[\"architecture_and_deployment.json\"]},{\"criterion_index\":1,\"verdict\":\"unknown\",\"rationale\":\"The availability of the deployment export is not collected, as stated in the records.\",\"source_files\":[\"architecture_and_deployment.json\"]}]}",
+      "source_hashes": {
+        "architecture_and_deployment.json": "a6afc2bb305369dbb9d2c559b48742928a147862da4db91d84f35e40965ce6cd"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The design document 'LAB-ARCH-01' is present in the records.",
+          "source_files": [
+            "architecture_and_deployment.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "unknown",
+          "rationale": "The availability of the deployment export is not collected, as stated in the records.",
+          "source_files": [
+            "architecture_and_deployment.json"
+          ]
+        }
+      ],
+      "duration_ms": 2484
+    },
+    {
+      "control_id": "A.8.28",
+      "model": "qwen2.5:7b",
+      "status": "Partially Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The secure coding guidelines are documented in the 'LAB-CODING-01' document, which includes rules such as parameterized SQL, validate input, and no hardcoded secrets.\",\"source_files\":[\"coding_and_sast.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The SAST report contains critical findings, specifically an open SQL injection vulnerability in 'lab/example.py' at line 42, indicating the presence of a serious coding issue.\",\"source_files\":[\"coding_and_sast.json\"]}]}",
+      "source_hashes": {
+        "coding_and_sast.json": "57c7354caef2142317827599b5edfdc73c296b8fa8e0a14e305dba6898d3ff66"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The secure coding guidelines are documented in the 'LAB-CODING-01' document, which includes rules such as parameterized SQL, validate input, and no hardcoded secrets.",
+          "source_files": [
+            "coding_and_sast.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "not_met",
+          "rationale": "The SAST report contains critical findings, specifically an open SQL injection vulnerability in 'lab/example.py' at line 42, indicating the presence of a serious coding issue.",
+          "source_files": [
+            "coding_and_sast.json"
+          ]
+        }
+      ],
+      "duration_ms": 3500
+    },
+    {
+      "control_id": "A.8.29",
+      "model": "qwen2.5:7b",
+      "status": "Partially Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The artifact contains a DAST report (LAB-DAST-01) with findings, meeting the criterion.\",\"source_files\":[\"acceptance_testing.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The security acceptance record does not show approval by any party, only that it is pending.\",\"source_files\":[\"acceptance_testing.json\"]}]}",
+      "source_hashes": {
+        "acceptance_testing.json": "8f7413fa4296e454439fb75f4b99e50a4ff6da7e4ddd959498bbc22ed9a6b027"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The artifact contains a DAST report (LAB-DAST-01) with findings, meeting the criterion.",
+          "source_files": [
+            "acceptance_testing.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "not_met",
+          "rationale": "The security acceptance record does not show approval by any party, only that it is pending.",
+          "source_files": [
+            "acceptance_testing.json"
+          ]
+        }
+      ],
+      "duration_ms": 2594
+    },
+    {
+      "control_id": "A.8.30",
+      "model": "qwen2.5:7b",
+      "status": "Insufficient Evidence",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The contract includes clauses on confidentiality, secure coding, vulnerability remediation, and right to review source.\",\"source_files\":[\"supplier_delivery.json\"]},{\"criterion_index\":1,\"verdict\":\"unknown\",\"rationale\":\"There is no explicit mention of a source code review log or record in the provided artifact.\",\"source_files\":[\"supplier_delivery.json\"]}]}",
+      "source_hashes": {
+        "supplier_delivery.json": "45657133fffda32ecba90da2f0d86c21cbe201aebd70e9b676b7a25676daa0c5"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The contract includes clauses on confidentiality, secure coding, vulnerability remediation, and right to review source.",
+          "source_files": [
+            "supplier_delivery.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "unknown",
+          "rationale": "There is no explicit mention of a source code review log or record in the provided artifact.",
+          "source_files": [
+            "supplier_delivery.json"
+          ]
+        }
+      ],
+      "duration_ms": 2531
+    },
+    {
+      "control_id": "A.8.31",
+      "model": "qwen2.5:7b",
+      "status": "Partially Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The environment networks are clearly defined with separate subnets for development and production.\",\"source_files\":[\"environment_access.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The development account (LAB-DEV-1) is allowed to perform a SELECT operation on the production database (LAB-PROD-DB), which violates the criterion of separation between development and production environments.\",\"source_files\":[\"environment_access.json\"]}]}",
+      "source_hashes": {
+        "environment_access.json": "b92fe8f867bb7618004b18e3a3dc84668a80ddfdca1635e2afc9b387dfb7d742"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The environment networks are clearly defined with separate subnets for development and production.",
+          "source_files": [
+            "environment_access.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "not_met",
+          "rationale": "The development account (LAB-DEV-1) is allowed to perform a SELECT operation on the production database (LAB-PROD-DB), which violates the criterion of separation between development and production environments.",
+          "source_files": [
+            "environment_access.json"
+          ]
+        }
+      ],
+      "duration_ms": 3016
+    },
+    {
+      "control_id": "A.8.33",
+      "model": "qwen2.5:7b",
+      "status": "Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The dataset is generated by 'LAB-FAKER-SEED-2026' and does not use a production export, indicating it is anonymized.\",\"source_files\":[\"test_dataset_provenance.json\"]},{\"criterion_index\":1,\"verdict\":\"met\",\"rationale\":\"The 'is_synthetic' field is set to true, confirming the data is synthetic.\",\"source_files\":[\"test_dataset_provenance.json\"]}]}",
+      "source_hashes": {
+        "test_dataset_provenance.json": "34743483c47ccbf805a5e873b16b9de45cf978d551c63488a1531c3901281d64"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The dataset is generated by 'LAB-FAKER-SEED-2026' and does not use a production export, indicating it is anonymized.",
+          "source_files": [
+            "test_dataset_provenance.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "met",
+          "rationale": "The 'is_synthetic' field is set to true, confirming the data is synthetic.",
+          "source_files": [
+            "test_dataset_provenance.json"
+          ]
+        }
+      ],
+      "duration_ms": 2984
+    },
+    {
+      "control_id": "A.8.34",
+      "model": "qwen2.5:7b",
+      "status": "Partially Compliant",
+      "error": null,
+      "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The audit account 'LAB-AUDIT' has been granted 'SELECT' privileges, which are read-only.\",\"source_files\":[\"audit_access_plan.json\"]},{ \"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The scan plan has an approval state of 'pending' and no approval by a specific individual is recorded.\",\"source_files\":[\"audit_access_plan.json\"]}] }",
+      "source_hashes": {
+        "audit_access_plan.json": "f9469df91e0cc7ebd9a201a64dad7126dbceadd6674ea48154276b4016dab464"
+      },
+      "checks": [
+        {
+          "criterion_index": 0,
+          "verdict": "met",
+          "rationale": "The audit account 'LAB-AUDIT' has been granted 'SELECT' privileges, which are read-only.",
+          "source_files": [
+            "audit_access_plan.json"
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "verdict": "not_met",
+          "rationale": "The scan plan has an approval state of 'pending' and no approval by a specific individual is recorded.",
+          "source_files": [
+            "audit_access_plan.json"
+          ]
+        }
+      ],
+      "duration_ms": 2750
+    }
+  ],
+  "designer_comparison_after_retry": {
+    "source": "ASSISTANT_AUTHORED_DESIGNER_KEY_NOT_HUMAN_REVIEW",
+    "total": 38,
+    "correct": 23,
+    "per_control": [
+      {
+        "control_id": "A.6.1",
+        "expected": "Partially Compliant",
+        "actual": "Partially Compliant",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.6.2",
+        "expected": "Partially Compliant",
+        "actual": "Partially Compliant",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.6.3",
+        "expected": "Partially Compliant",
+        "actual": "Partially Compliant",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.6.4",
+        "expected": "Compliant",
+        "actual": "Insufficient Evidence",
+        "correct": false,
+        "error": null
+      },
+      {
+        "control_id": "A.6.5",
+        "expected": "Insufficient Evidence",
+        "actual": "Insufficient Evidence",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.6.6",
+        "expected": "Partially Compliant",
+        "actual": "Insufficient Evidence",
+        "correct": false,
+        "error": null
+      },
+      {
+        "control_id": "A.6.7",
+        "expected": "Non-Compliant",
+        "actual": "Non-Compliant",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.6.8",
+        "expected": "Compliant",
+        "actual": "Insufficient Evidence",
+        "correct": false,
+        "error": null
+      },
+      {
+        "control_id": "A.7.1",
+        "expected": "Partially Compliant",
+        "actual": "Partially Compliant",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.7.2",
+        "expected": "Partially Compliant",
+        "actual": "Partially Compliant",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.7.3",
+        "expected": "Compliant",
+        "actual": "Insufficient Evidence",
+        "correct": false,
+        "error": null
+      },
+      {
+        "control_id": "A.7.4",
+        "expected": "Partially Compliant",
+        "actual": "Insufficient Evidence",
+        "correct": false,
+        "error": null
+      },
+      {
+        "control_id": "A.7.5",
+        "expected": "Insufficient Evidence",
+        "actual": "Partially Compliant",
+        "correct": false,
+        "error": null
+      },
+      {
+        "control_id": "A.7.6",
+        "expected": "Compliant",
+        "actual": "Partially Compliant",
+        "correct": false,
+        "error": null
+      },
+      {
+        "control_id": "A.7.7",
+        "expected": "Non-Compliant",
+        "actual": "Non-Compliant",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.7.8",
+        "expected": "Partially Compliant",
+        "actual": "Partially Compliant",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.7.9",
+        "expected": "Insufficient Evidence",
+        "actual": "Partially Compliant",
+        "correct": false,
+        "error": null
+      },
+      {
+        "control_id": "A.7.10",
+        "expected": "Compliant",
+        "actual": "Compliant",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.7.11",
+        "expected": "Insufficient Evidence",
+        "actual": "Insufficient Evidence",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.7.12",
+        "expected": "Partially Compliant",
+        "actual": "Insufficient Evidence",
+        "correct": false,
+        "error": null
+      },
+      {
+        "control_id": "A.7.13",
+        "expected": "Compliant",
+        "actual": "Insufficient Evidence",
+        "correct": false,
+        "error": null
+      },
+      {
+        "control_id": "A.7.14",
+        "expected": "Partially Compliant",
+        "actual": "Partially Compliant",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.8.4",
+        "expected": "Partially Compliant",
+        "actual": "Non-Compliant",
+        "correct": false,
+        "error": null
+      },
+      {
+        "control_id": "A.8.6",
+        "expected": "Partially Compliant",
+        "actual": "Partially Compliant",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.8.11",
+        "expected": "Compliant",
+        "actual": "Compliant",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.8.14",
+        "expected": "Insufficient Evidence",
+        "actual": "Partially Compliant",
+        "correct": false,
+        "error": null
+      },
+      {
+        "control_id": "A.8.18",
+        "expected": "Non-Compliant",
+        "actual": "Insufficient Evidence",
+        "correct": false,
+        "error": null
+      },
+      {
+        "control_id": "A.8.21",
+        "expected": "Insufficient Evidence",
+        "actual": "Partially Compliant",
+        "correct": false,
+        "error": null
+      },
+      {
+        "control_id": "A.8.23",
+        "expected": "Compliant",
+        "actual": "Compliant",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.8.25",
+        "expected": "Partially Compliant",
+        "actual": "Partially Compliant",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.8.26",
+        "expected": "Compliant",
+        "actual": "Compliant",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.8.27",
+        "expected": "Insufficient Evidence",
+        "actual": "Insufficient Evidence",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.8.28",
+        "expected": "Partially Compliant",
+        "actual": "Partially Compliant",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.8.29",
+        "expected": "Partially Compliant",
+        "actual": "Partially Compliant",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.8.30",
+        "expected": "Compliant",
+        "actual": "Insufficient Evidence",
+        "correct": false,
+        "error": null
+      },
+      {
+        "control_id": "A.8.31",
+        "expected": "Partially Compliant",
+        "actual": "Partially Compliant",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.8.33",
+        "expected": "Compliant",
+        "actual": "Compliant",
+        "correct": true,
+        "error": null
+      },
+      {
+        "control_id": "A.8.34",
+        "expected": "Partially Compliant",
+        "actual": "Partially Compliant",
+        "correct": true,
+        "error": null
+      }
+    ],
+    "note": "Khớp đáp án của bộ phát triển đã biết; không phải độ đúng với người đánh giá độc lập."
+  },
+  "bundle_snapshot": {
+    "protocol": "assistant-development-lab-v1",
+    "is_synthetic": true,
+    "purpose": "ASSISTANT_GENERATED_DEVELOPMENT_FIXTURES_NOT_INDEPENDENT_VALIDATION",
+    "professional_confirmation": false,
+    "independent_validation": false,
+    "cases": [
+      {
+        "control_id": "A.6.1",
+        "name": "Screening",
+        "criteria": [
+          "Tồn tại hồ sơ kiểm tra lý lịch",
+          "Có xác nhận từ bộ phận nhân sự (HR)"
+        ],
+        "artifacts": [
+          {
+            "filename": "screening.json",
+            "content": "{\"control_id\": \"A.6.1\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"background_check\": {\"completed_on\": \"2026-09-28\", \"reference_contact\": \"SIMULATED-REF-01\"}, \"employee_id\": \"EMP-001\", \"hired_on\": \"2026-10-01\", \"hr_confirmation\": {\"confirmed_by\": null, \"state\": \"draft\"}}}",
+            "sha256": "76fc96ae2258c6bc6a83011236d1b0764da2a4cc3c76519babac67799056ecc4"
+          }
+        ]
+      },
+      {
+        "control_id": "A.6.2",
+        "name": "Terms and conditions of employment",
+        "criteria": [
+          "Hợp đồng lao động có điều khoản an toàn thông tin",
+          "Nhân viên đã ký xác nhận"
+        ],
+        "artifacts": [
+          {
+            "filename": "contract.json",
+            "content": "{\"control_id\": \"A.6.2\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"document_id\": \"LAB-CONTRACT-002\", \"employee_id\": \"EMP-002\", \"security_clause\": \"Protect confidential data, report incidents, return assets and retain confidentiality after termination.\", \"signature_register\": [{\"party\": \"LAB-EMPLOYER\", \"signed_on\": \"2026-10-01\"}, {\"party\": \"EMP-002\", \"signed_on\": null}]}}",
+            "sha256": "86a8679e8c1b3739a2882ccb77936907cc74cde9d2b4718996f7c8eefb573eb9"
+          }
+        ]
+      },
+      {
+        "control_id": "A.6.3",
+        "name": "Information security awareness, education and training",
+        "criteria": [
+          "Tỷ lệ nhân sự hoàn thành khóa học đạt 100%",
+          "Có bài kiểm tra đánh giá nhận thức"
+        ],
+        "artifacts": [
+          {
+            "filename": "lms_export.json",
+            "content": "{\"control_id\": \"A.6.3\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"assessment\": {\"attempts_recorded\": 48, \"pass_score\": 16, \"questions\": 20}, \"completed_employees\": 48, \"course\": \"LAB-SECURITY-2026\", \"pending\": [\"EMP-002\", \"EMP-003\"], \"required_employees\": 50}}",
+            "sha256": "f70013b57a59185769d06bad02d9b63dbc39e3b9fe66c46676c6fb1e3e01577b"
+          }
+        ]
+      },
+      {
+        "control_id": "A.6.4",
+        "name": "Disciplinary process",
+        "criteria": [
+          "Có tài liệu quy trình xử lý kỷ luật đã ban hành",
+          "Được truyền đạt đến toàn bộ nhân viên"
+        ],
+        "artifacts": [
+          {
+            "filename": "discipline_policy.json",
+            "content": "{\"control_id\": \"A.6.4\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"distribution\": {\"acknowledgments\": 50, \"employees\": 50, \"register\": \"LAB-ACK-01\"}, \"document\": \"LAB-HR-DISCIPLINE-1\", \"effective_on\": \"2026-10-01\", \"state\": \"published\", \"steps\": [\"report\", \"investigate\", \"hear employee\", \"decide proportionate action\", \"appeal\"]}}",
+            "sha256": "0de370c95839ce63e05fb96e2f7df2002506644be35a5175fde05b041fe1ae38"
+          }
+        ]
+      },
+      {
+        "control_id": "A.6.5",
+        "name": "Responsibilities after termination or change of employment",
+        "criteria": [
+          "Có checklist thu hồi tài sản",
+          "Biên bản xác nhận cắt quyền truy cập hệ thống"
+        ],
+        "artifacts": [
+          {
+            "filename": "offboarding.json",
+            "content": "{\"control_id\": \"A.6.5\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"access_revocation_export\": {\"availability\": \"not_collected\", \"reason\": \"IAM audit export was not supplied\"}, \"employee_id\": \"EMP-003\", \"left_on\": \"2026-11-01\", \"returned_assets\": [{\"asset\": \"LAB-LAPTOP-003\", \"received_on\": \"2026-11-01\"}]}}",
+            "sha256": "1de7dfe37fc6382f20b444a7c1875a92cc807ee06b1588c451e1b259a81bc07a"
+          }
+        ]
+      },
+      {
+        "control_id": "A.6.6",
+        "name": "Confidentiality or non-disclosure agreements",
+        "criteria": [
+          "Danh sách nhân sự/đối tác đã ký NDA",
+          "Văn bản NDA còn hiệu lực"
+        ],
+        "artifacts": [
+          {
+            "filename": "nda_register.json",
+            "content": "{\"control_id\": \"A.6.6\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"parties\": [{\"expires_on\": \"2025-12-31\", \"id\": \"EMP-001\", \"nda_id\": \"LAB-NDA-1\", \"signed_on\": \"2025-01-01\"}, {\"expires_on\": \"2025-12-31\", \"id\": \"LAB-VENDOR-01\", \"nda_id\": \"LAB-NDA-2\", \"signed_on\": \"2025-01-02\"}], \"review_date\": \"2026-11-21\"}}",
+            "sha256": "5a68f08680e07c831366f4854f77e6e98d1ec32745437d1d98ae58398848b6eb"
+          }
+        ]
+      },
+      {
+        "control_id": "A.6.7",
+        "name": "Remote working",
+        "criteria": [
+          "Có chính sách remote work",
+          "Thiết bị từ xa được cài đặt bảo mật và VPN"
+        ],
+        "artifacts": [
+          {
+            "filename": "remote_configuration.json",
+            "content": "{\"control_id\": \"A.6.7\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"endpoint\": {\"antivirus_state\": \"disabled\", \"id\": \"LAB-REMOTE-01\", \"remote_transport\": \"plain HTTP\", \"vpn_profile\": null}, \"policy\": {\"published_on\": null, \"state\": \"draft\"}}}",
+            "sha256": "0fa0a02f2f0ce6b827ebbfab31529a56ea1b8b68abea491611e16903a7e1efbf"
+          }
+        ]
+      },
+      {
+        "control_id": "A.6.8",
+        "name": "Information security event reporting",
+        "criteria": [
+          "Có kênh/biểu mẫu báo cáo sự cố",
+          "Nhật ký ghi nhận sự kiện ATTT"
+        ],
+        "artifacts": [
+          {
+            "filename": "incident_channel.json",
+            "content": "{\"control_id\": \"A.6.8\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"event_register\": [{\"assigned_role\": \"LAB-SOC\", \"id\": \"LAB-INC-001\", \"received_at\": \"2026-11-20T09:00:00+07:00\", \"reported_by\": \"EMP-004\", \"type\": \"suspicious email\"}], \"reporting_form\": {\"fields\": [\"time\", \"asset\", \"description\", \"contact\"], \"url\": \"https://helpdesk.example.invalid/security\"}}}",
+            "sha256": "fc565ddd2ea365fb4ed3a555f6a7792e4db52f0ad112a16342fd454563b0d669"
+          }
+        ]
+      },
+      {
+        "control_id": "A.7.1",
+        "name": "Physical security perimeters",
+        "criteria": [
+          "Sơ đồ phân chia khu vực an ninh",
+          "Checklist kiểm tra cửa/khóa vật lý đạt yêu cầu"
+        ],
+        "artifacts": [
+          {
+            "filename": "perimeter_inspection.json",
+            "content": "{\"control_id\": \"A.7.1\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"doors\": [{\"finding\": \"latch does not engage\", \"id\": \"LAB-D1\", \"lock_test\": \"failed\", \"zone\": \"server-room\"}], \"zones\": [{\"access\": \"public\", \"name\": \"reception\"}, {\"access\": \"restricted\", \"name\": \"server-room\"}]}}",
+            "sha256": "ee148307130171c0f669add914b040da9e5fb0b19eefbbccaf878cce05b2f100"
+          }
+        ]
+      },
+      {
+        "control_id": "A.7.2",
+        "name": "Physical entry",
+        "criteria": [
+          "Có nhật ký quẹt thẻ/sinh trắc học",
+          "Chỉ những người được cấp quyền mới được vào phòng Server"
+        ],
+        "artifacts": [
+          {
+            "filename": "badge_log.json",
+            "content": "{\"control_id\": \"A.7.2\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"authorized_server_staff\": [\"EMP-001\"], \"events\": [{\"decision\": \"allow\", \"person\": \"EMP-001\", \"zone\": \"server-room\"}, {\"decision\": \"allow\", \"escort\": null, \"person\": \"EMP-002\", \"zone\": \"server-room\"}]}}",
+            "sha256": "25051f3a60251e175c798c57393f0af30a8a87714445b2f2c5b5e22bbd7b081c"
+          }
+        ]
+      },
+      {
+        "control_id": "A.7.3",
+        "name": "Securing offices, rooms and facilities",
+        "criteria": [
+          "Biên bản kiểm tra an toàn định kỳ",
+          "Quy định khóa cửa ngoài giờ làm việc"
+        ],
+        "artifacts": [
+          {
+            "filename": "office_inspection.json",
+            "content": "{\"control_id\": \"A.7.3\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"closure_policy\": {\"key_custodian\": \"LAB-FACILITIES\", \"lock_after\": \"18:00\", \"state\": \"published\"}, \"inspection\": {\"findings\": [\"no obstruction at emergency exit\"], \"id\": \"LAB-OFFICE-01\", \"performed_on\": \"2026-11-20\"}}}",
+            "sha256": "46f2e585238406ad36f5def4d45274b762c08743d8480507cf595cc0dbfb2959"
+          }
+        ]
+      },
+      {
+        "control_id": "A.7.4",
+        "name": "Physical security monitoring",
+        "criteria": [
+          "Hệ thống CCTV hoạt động",
+          "Thời gian lưu trữ video đáp ứng quy định"
+        ],
+        "artifacts": [
+          {
+            "filename": "cctv_status.json",
+            "content": "{\"control_id\": \"A.7.4\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"camera\": \"LAB-CAM-01\", \"health\": {\"last_frame_at\": \"2026-11-21T08:59:50+07:00\", \"state\": \"recording\"}, \"retention\": {\"disk_overwrite_days\": 7, \"oldest_recording_days\": 7, \"policy_days\": 30}}}",
+            "sha256": "3060ba80ac718139a23155922f79ea29a1b123249e0c95f41e7acd04ab992158"
+          }
+        ]
+      },
+      {
+        "control_id": "A.7.5",
+        "name": "Protecting against physical and environmental threats",
+        "criteria": [
+          "Biên bản nghiệm thu/bảo trì PCCC",
+          "Cảm biến nhiệt độ, độ ẩm hoạt động"
+        ],
+        "artifacts": [
+          {
+            "filename": "environmental_records.json",
+            "content": "{\"control_id\": \"A.7.5\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"fire_maintenance\": {\"availability\": \"not_collected\"}, \"sensors\": [{\"health\": \"responding\", \"humidity_percent\": 46, \"id\": \"LAB-TEMP-01\", \"measured_at\": \"2026-11-21T08:59:00+07:00\", \"temperature_c\": 23.4}]}}",
+            "sha256": "153ae079b8327d3959726a90057d311c629ccb41976344ec8079b389beca15fa"
+          }
+        ]
+      },
+      {
+        "control_id": "A.7.6",
+        "name": "Working in secure areas",
+        "criteria": [
+          "Nhật ký giám sát khách/nhà thầu",
+          "Quy định cấm quay phim/chụp ảnh"
+        ],
+        "artifacts": [
+          {
+            "filename": "visitor_register.json",
+            "content": "{\"control_id\": \"A.7.6\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"secure_area_policy\": {\"photography\": \"prohibited\", \"posted_at\": [\"server-room-door\"], \"state\": \"published\"}, \"visits\": [{\"escort\": \"EMP-001\", \"in\": \"2026-11-20T09:00:00+07:00\", \"out\": \"2026-11-20T09:30:00+07:00\", \"visitor\": \"LAB-VISITOR-1\"}]}}",
+            "sha256": "0c8b8bec430def792b8febca32e53071028417288df4154d9b57eb14d23c4238"
+          }
+        ]
+      },
+      {
+        "control_id": "A.7.7",
+        "name": "Clear desk and clear screen",
+        "criteria": [
+          "Biên bản kiểm tra bàn làm việc sạch",
+          "Máy tính có cấu hình tự khóa màn hình"
+        ],
+        "artifacts": [
+          {
+            "filename": "desk_endpoint_audit.json",
+            "content": "{\"control_id\": \"A.7.7\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"endpoints\": [{\"id\": \"LAB-PC-01\", \"policy_required_seconds\": 300, \"screen_lock_idle_seconds\": 0}], \"inspection\": {\"checked_desks\": 12, \"record\": \"LAB-DESK-01\", \"unsecured_papers\": 3}}}",
+            "sha256": "48ccf3a8e814176552b028ac4f80f8696800200ab0adbbb8e695dbcfd2b7fd6f"
+          }
+        ]
+      },
+      {
+        "control_id": "A.7.8",
+        "name": "Equipment siting and protection",
+        "criteria": [
+          "Danh mục tài sản có ghi nhận vị trí vật lý",
+          "Thiết bị quan trọng được đặt trong tủ rack có khóa"
+        ],
+        "artifacts": [
+          {
+            "filename": "rack_inventory.json",
+            "content": "{\"control_id\": \"A.7.8\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"assets\": [{\"criticality\": \"high\", \"id\": \"LAB-SRV-01\", \"location\": \"server-room/rack-01/U10\"}], \"rack_checks\": [{\"checked_on\": \"2026-11-21\", \"door_lock\": \"missing\", \"id\": \"rack-01\"}]}}",
+            "sha256": "36d98981fe445a296bcb115fce78fa58f8b1f56578743358bd00955057c8e619"
+          }
+        ]
+      },
+      {
+        "control_id": "A.7.9",
+        "name": "Security of assets off-premises",
+        "criteria": [
+          "Biên bản bàn giao thiết bị mang ra ngoài",
+          "Thiết bị được mã hóa ổ cứng"
+        ],
+        "artifacts": [
+          {
+            "filename": "offsite_assets.json",
+            "content": "{\"control_id\": \"A.7.9\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"disk_encryption_export\": {\"availability\": \"not_collected\", \"note\": \"No OS disk-encryption status supplied\"}, \"handover\": [{\"employee\": \"EMP-004\", \"id\": \"LAB-LAPTOP-004\", \"receipt\": \"LAB-RECEIPT-04\", \"taken_out_on\": \"2026-11-20\"}]}}",
+            "sha256": "8d2acefb8139254d961d5590061c3356c4ec27f6094f211bd713e3e441267dbb"
+          }
+        ]
+      },
+      {
+        "control_id": "A.7.10",
+        "name": "Storage media",
+        "criteria": [
+          "Danh mục thiết bị lưu trữ (USB, ổ cứng rời)",
+          "Chính sách kiểm soát sử dụng USB"
+        ],
+        "artifacts": [
+          {
+            "filename": "removable_media.json",
+            "content": "{\"control_id\": \"A.7.10\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"inventory\": [{\"capacity_gb\": 32, \"custodian\": \"EMP-001\", \"id\": \"LAB-USB-01\"}], \"policy\": {\"default\": \"deny\", \"exception_process\": \"ticket, approval and expiry\", \"logging\": \"required\", \"state\": \"published\"}}}",
+            "sha256": "ee1670358f7c64fd74d234e33957a243c2644b881e363bd0b3a8c4f5cd49e0fd"
+          }
+        ]
+      },
+      {
+        "control_id": "A.7.11",
+        "name": "Supporting utilities",
+        "criteria": [
+          "Nhật ký bảo trì UPS, máy phát điện",
+          "Biên bản kiểm tra hệ thống làm mát"
+        ],
+        "artifacts": [
+          {
+            "filename": "utility_maintenance.json",
+            "content": "{\"control_id\": \"A.7.11\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"cooling_inspections\": {\"availability\": \"not_collected\"}, \"request_ids\": [\"LAB-REQ-UPS\", \"LAB-REQ-COOLING\"], \"ups_generator_records\": {\"availability\": \"not_collected\"}}}",
+            "sha256": "bd06a1d8d4f45e73b7b6d419ce8c8b1444f8116e7fcebae6c5ea6ec1f5c1c820"
+          }
+        ]
+      },
+      {
+        "control_id": "A.7.12",
+        "name": "Cabling security",
+        "criteria": [
+          "Hệ thống dây cáp được đi trong máng/ống bảo vệ",
+          "Biên bản kiểm tra hạ tầng vật lý"
+        ],
+        "artifacts": [
+          {
+            "filename": "cable_inspection.json",
+            "content": "{\"control_id\": \"A.7.12\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"inspection_id\": \"LAB-CABLE-01\", \"performed_on\": \"2026-11-20\", \"segments\": [{\"finding\": \"conduit missing\", \"id\": \"LAB-C1\", \"protection\": \"exposed cable on floor\", \"route\": \"corridor-to-server-room\"}]}}",
+            "sha256": "00e04aa94dfb321393a3dd1dcd7ba2b86d3f440edc30bc0eb7e3a142b7e5d24b"
+          }
+        ]
+      },
+      {
+        "control_id": "A.7.13",
+        "name": "Equipment maintenance",
+        "criteria": [
+          "Có hợp đồng/lịch bảo trì",
+          "Biên bản bảo trì thiết bị lưu hệ thống"
+        ],
+        "artifacts": [
+          {
+            "filename": "maintenance_register.json",
+            "content": "{\"control_id\": \"A.7.13\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"completed_records\": [{\"asset\": \"LAB-SRV-01\", \"performed_on\": \"2026-09-01\", \"result\": \"fan replaced; diagnostics completed\", \"technician_role\": \"LAB-VENDOR\"}], \"schedule\": [{\"asset\": \"LAB-SRV-01\", \"contract\": \"LAB-SERVICE-01\", \"interval_days\": 90, \"next_due\": \"2026-12-01\"}]}}",
+            "sha256": "5dbbb461fbee963c6ccd6515cd3793ccdcc2affa9813186d3deb336fe0c3c94b"
+          }
+        ]
+      },
+      {
+        "control_id": "A.7.14",
+        "name": "Secure disposal or re-use of equipment",
+        "criteria": [
+          "Biên bản xóa dữ liệu (wiping) đạt chuẩn",
+          "Biên bản tiêu hủy vật lý đối với ổ cứng hỏng"
+        ],
+        "artifacts": [
+          {
+            "filename": "disposal_register.json",
+            "content": "{\"control_id\": \"A.7.14\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"disposals\": [{\"asset\": \"LAB-DISK-01\", \"state\": \"readable\", \"verification\": \"readback contains zeros\", \"wipe_log\": \"LAB-WIPE-01\"}], \"failed_disks\": [{\"asset\": \"LAB-DISK-02\", \"destruction_certificate\": null, \"location\": \"unlocked store\"}]}}",
+            "sha256": "0d33cb26283bf185233585b786aea09023f0983ab6976383baa18527d120f5f0"
+          }
+        ]
+      },
+      {
+        "control_id": "A.8.4",
+        "name": "Access to source code",
+        "criteria": [
+          "Cấu hình Git bảo vệ branch (branch protection)",
+          "Phân quyền read/write kho mã nguồn rõ ràng"
+        ],
+        "artifacts": [
+          {
+            "filename": "repository_settings.json",
+            "content": "{\"control_id\": \"A.8.4\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"branch_rules\": {\"allow_force_push\": true, \"required_reviews\": 0}, \"default_branch\": \"main\", \"members\": [{\"id\": \"LAB-DEV-1\", \"role\": \"write\"}, {\"id\": \"LAB-AUDIT\", \"role\": \"read\"}], \"repository\": \"LAB-PROJECT\"}}",
+            "sha256": "72acfc35d75426a2e0a12c418bb5bfd7ad31cfb19bd6fcd93402f57086e4e12d"
+          }
+        ]
+      },
+      {
+        "control_id": "A.8.6",
+        "name": "Capacity management",
+        "criteria": [
+          "Hệ thống giám sát CPU/RAM/Disk đang thu thập dữ liệu",
+          "Cấu hình cảnh báo khi quá ngưỡng dung lượng"
+        ],
+        "artifacts": [
+          {
+            "filename": "capacity_export.json",
+            "content": "{\"control_id\": \"A.8.6\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"alert_rules\": [], \"metrics\": [{\"cpu_percent\": 93, \"disk_percent\": 96, \"host\": \"LAB-SRV-01\", \"memory_percent\": 88, \"sampled_at\": \"2026-11-21T08:59:00+07:00\"}], \"notification_routes\": []}}",
+            "sha256": "ec2fa324f973e643b90ff1ec82da0a3a4b332da5b838753380f1a1851199c3b9"
+          }
+        ]
+      },
+      {
+        "control_id": "A.8.11",
+        "name": "Data masking",
+        "criteria": [
+          "Cấu hình hoặc quy tắc che giấu dữ liệu PII",
+          "Dữ liệu nhạy cảm bị ẩn trên môi trường không phải Production"
+        ],
+        "artifacts": [
+          {
+            "filename": "masking_export.json",
+            "content": "{\"control_id\": \"A.8.11\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"dataset_origin\": \"synthetic generator\", \"policy\": {\"columns\": {\"email\": \"replace-domain\", \"national_id\": \"redact\"}, \"environment\": \"test\"}, \"sample_after_masking\": [{\"email\": \"lab-user@example.invalid\", \"national_id\": \"********\"}]}}",
+            "sha256": "4fbbb76efeacd25c5128381d510278592199222adf99b8ba498780d7d7eb94de"
+          }
+        ]
+      },
+      {
+        "control_id": "A.8.14",
+        "name": "Redundancy of information processing facilities",
+        "criteria": [
+          "Cấu hình High Availability (HA) hoặc Load Balancing",
+          "Tài liệu kiến trúc hệ thống dự phòng"
+        ],
+        "artifacts": [
+          {
+            "filename": "ha_configuration.json",
+            "content": "{\"control_id\": \"A.8.14\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"architecture_document\": {\"availability\": \"not_collected\"}, \"failover_test\": {\"availability\": \"not_collected\"}, \"load_balancer\": {\"backends\": [\"LAB-APP-01\", \"LAB-APP-02\"], \"health_check\": \"GET /health every 5 seconds\"}}}",
+            "sha256": "13f617a9061f8460a722f83520a32f37e79bd31ebe2cc1bc9a020b137c35376d"
+          }
+        ]
+      },
+      {
+        "control_id": "A.8.18",
+        "name": "Use of privileged utility programs",
+        "criteria": [
+          "Giới hạn quyền thực thi các file SUID/SGID",
+          "Danh sách công cụ quản trị được cấp quyền hợp lý"
+        ],
+        "artifacts": [
+          {
+            "filename": "utility_permissions.json",
+            "content": "{\"control_id\": \"A.8.18\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"authorized_utility_register\": [], \"review_ticket\": null, \"suid_files\": [{\"execution_group\": \"all users\", \"mode\": \"4755\", \"owner\": \"root\", \"path\": \"/opt/lab-maint\"}]}}",
+            "sha256": "c433bf231c3ca49b7231f378b555d0f79daa1f6ab7815e8c75dfe5c0c2956554"
+          }
+        ]
+      },
+      {
+        "control_id": "A.8.21",
+        "name": "Security of network services",
+        "criteria": [
+          "Tài liệu yêu cầu SLA bảo mật với nhà cung cấp mạng",
+          "Cấu hình bảo mật dịch vụ mạng (DNS, VPN)"
+        ],
+        "artifacts": [
+          {
+            "filename": "network_service_records.json",
+            "content": "{\"control_id\": \"A.8.21\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"dns_configuration\": {\"recursion_clients\": [\"10.10.0.0/24\"], \"zone_transfer\": \"deny\"}, \"provider_sla\": {\"availability\": \"not_collected\"}, \"vpn_configuration\": {\"client_certificate\": \"required\", \"min_version\": \"1.2\", \"transport\": \"TLS\"}}}",
+            "sha256": "b73156e9f6d6a255b4c833f7dfe6f3746719d954e5aa6c22e858fbff2a1e8f34"
+          }
+        ]
+      },
+      {
+        "control_id": "A.8.23",
+        "name": "Web filtering",
+        "criteria": [
+          "Cấu hình Proxy/DNS lọc web",
+          "Danh sách blacklist tên miền/IP bị cấm"
+        ],
+        "artifacts": [
+          {
+            "filename": "web_filter_config.json",
+            "content": "{\"control_id\": \"A.8.23\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"blocklist\": [\"malware.example.invalid\", \"phishing.example.invalid\"], \"events\": [{\"action\": \"deny\", \"domain\": \"malware.example.invalid\"}], \"proxy\": {\"mode\": \"explicit\", \"rule_order\": [\"deny-blocklist\", \"allow-authenticated\"]}}}",
+            "sha256": "70c218383d9ca65af86beb10090f610787a2c5607f176afea745c4cd94aed799"
+          }
+        ]
+      },
+      {
+        "control_id": "A.8.25",
+        "name": "Secure development life cycle",
+        "criteria": [
+          "Tài liệu quy trình SDLC",
+          "Có pipeline CI/CD tích hợp quét bảo mật mã nguồn"
+        ],
+        "artifacts": [
+          {
+            "filename": "development_workflow.json",
+            "content": "{\"control_id\": \"A.8.25\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"ci_pipeline\": {\"jobs\": [\"build\", \"unit-tests\"], \"security_scan_jobs\": []}, \"sdlc\": {\"document\": \"LAB-SDLC-01\", \"stages\": [\"requirements\", \"design\", \"coding\", \"review\", \"test\", \"release\"]}}}",
+            "sha256": "a272b08fd2ff85ef9c180de64680e98c0034f97697ca0c940572624d4a5ef463"
+          }
+        ]
+      },
+      {
+        "control_id": "A.8.26",
+        "name": "Application security requirements",
+        "criteria": [
+          "Tài liệu đặc tả yêu cầu bảo mật phần mềm (VD: theo OWASP ASVS)"
+        ],
+        "artifacts": [
+          {
+            "filename": "application_requirements.json",
+            "content": "{\"control_id\": \"A.8.26\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"document\": \"LAB-APP-REQ-01\", \"requirements\": [{\"id\": \"SEC-01\", \"requirement\": \"MFA for privileged users\", \"test\": \"attempt login without second factor must fail\"}, {\"id\": \"SEC-02\", \"requirement\": \"Parameterized database queries\", \"test\": \"SQL injection payload must be rejected\"}], \"status\": \"versioned design specification\"}}",
+            "sha256": "7cb15ca4955c3f212e4071e1f7b3441e05d2815e671de9e9f5eb9695a982272f"
+          }
+        ]
+      },
+      {
+        "control_id": "A.8.27",
+        "name": "Secure system architecture and engineering principles",
+        "criteria": [
+          "Tài liệu thiết kế kiến trúc bảo mật",
+          "Bằng chứng triển khai theo kiến trúc đã duyệt"
+        ],
+        "artifacts": [
+          {
+            "filename": "architecture_and_deployment.json",
+            "content": "{\"control_id\": \"A.8.27\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"deployment_export\": {\"availability\": \"not_collected\"}, \"design\": {\"document\": \"LAB-ARCH-01\", \"identity\": \"separate service identities\", \"network\": \"web -> application -> private database\"}}}",
+            "sha256": "a6afc2bb305369dbb9d2c559b48742928a147862da4db91d84f35e40965ce6cd"
+          }
+        ]
+      },
+      {
+        "control_id": "A.8.28",
+        "name": "Secure coding",
+        "criteria": [
+          "Quy chuẩn lập trình an toàn (Secure Coding Guidelines)",
+          "Kết quả quét mã tĩnh (SAST report) không có lỗi nghiêm trọng"
+        ],
+        "artifacts": [
+          {
+            "filename": "coding_and_sast.json",
+            "content": "{\"control_id\": \"A.8.28\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"guideline\": {\"document\": \"LAB-CODING-01\", \"rules\": [\"parameterized SQL\", \"validate input\", \"no hardcoded secrets\"]}, \"sast\": {\"critical_findings\": [{\"file\": \"lab/example.py\", \"id\": \"SQL-INJECTION-01\", \"line\": 42, \"state\": \"open\"}], \"scan_id\": \"LAB-SAST-01\"}}}",
+            "sha256": "57c7354caef2142317827599b5edfdc73c296b8fa8e0a14e305dba6898d3ff66"
+          }
+        ]
+      },
+      {
+        "control_id": "A.8.29",
+        "name": "Security testing in development and acceptance",
+        "criteria": [
+          "Báo cáo kiểm thử động (DAST) hoặc Pentest report",
+          "Biên bản nghiệm thu bảo mật"
+        ],
+        "artifacts": [
+          {
+            "filename": "acceptance_testing.json",
+            "content": "{\"control_id\": \"A.8.29\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"dast\": {\"findings\": [{\"id\": \"LAB-XSS-1\", \"severity\": \"medium\", \"state\": \"open\"}], \"report\": \"LAB-DAST-01\", \"targets\": [\"https://application.example.invalid\"]}, \"security_acceptance\": {\"approved_by\": null, \"state\": \"pending\"}}}",
+            "sha256": "8f7413fa4296e454439fb75f4b99e50a4ff6da7e4ddd959498bbc22ed9a6b027"
+          }
+        ]
+      },
+      {
+        "control_id": "A.8.30",
+        "name": "Outsourced development",
+        "criteria": [
+          "Hợp đồng thuê ngoài có điều khoản bảo mật",
+          "Biên bản rà soát mã nguồn do bên gia công bàn giao"
+        ],
+        "artifacts": [
+          {
+            "filename": "supplier_delivery.json",
+            "content": "{\"control_id\": \"A.8.30\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"contract\": {\"clauses\": [\"confidentiality\", \"secure coding\", \"vulnerability remediation\", \"right to review source\"], \"id\": \"LAB-SUPPLIER-01\"}, \"source_review\": {\"delivery\": \"LAB-DELIVERY-01\", \"findings\": [\"input validation reviewed\"], \"review_on\": \"2026-11-20\", \"review_role\": \"LAB-REVIEWER\", \"state\": \"completed\"}}}",
+            "sha256": "45657133fffda32ecba90da2f0d86c21cbe201aebd70e9b676b7a25676daa0c5"
+          }
+        ]
+      },
+      {
+        "control_id": "A.8.31",
+        "name": "Separation of development, test and production environments",
+        "criteria": [
+          "Danh sách máy chủ/mạng phân định rõ các môi trường",
+          "Tài khoản dev không thể truy cập DB Production"
+        ],
+        "artifacts": [
+          {
+            "filename": "environment_access.json",
+            "content": "{\"control_id\": \"A.8.31\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"access_test\": {\"identity\": \"LAB-DEV-1\", \"operation\": \"SELECT employee\", \"result\": \"allowed\", \"target\": \"LAB-PROD-DB\"}, \"servers\": [{\"environment\": \"dev\", \"id\": \"LAB-DEV-DB\", \"network\": \"10.10.10.0/24\"}, {\"environment\": \"simulated-prod\", \"id\": \"LAB-PROD-DB\", \"network\": \"10.10.20.0/24\"}]}}",
+            "sha256": "b92fe8f867bb7618004b18e3a3dc84668a80ddfdca1635e2afc9b387dfb7d742"
+          }
+        ]
+      },
+      {
+        "control_id": "A.8.33",
+        "name": "Test information",
+        "criteria": [
+          "Quy định làm ẩn danh dữ liệu test",
+          "Bằng chứng dữ liệu trên môi trường test là dữ liệu giả lập (synthetic)"
+        ],
+        "artifacts": [
+          {
+            "filename": "test_dataset_provenance.json",
+            "content": "{\"control_id\": \"A.8.33\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"dataset\": {\"generator\": \"LAB-FAKER-SEED-2026\", \"production_export_used\": false, \"sample\": [{\"email\": \"person01@example.invalid\", \"id\": \"LAB-PERSON-01\"}]}, \"policy\": {\"document\": \"LAB-TEST-DATA-01\", \"requirement\": \"Use only anonymized or synthetic test records\"}}}",
+            "sha256": "34743483c47ccbf805a5e873b16b9de45cf978d551c63488a1531c3901281d64"
+          }
+        ]
+      },
+      {
+        "control_id": "A.8.34",
+        "name": "Protection of information systems during audit testing",
+        "criteria": [
+          "Tài khoản audit chỉ được cấp quyền Read-Only",
+          "Kế hoạch kiểm toán được phê duyệt trước khi chạy scan"
+        ],
+        "artifacts": [
+          {
+            "filename": "audit_access_plan.json",
+            "content": "{\"control_id\": \"A.8.34\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"database_grants\": [{\"identity\": \"LAB-AUDIT\", \"privileges\": [\"SELECT\"], \"write_privileges\": []}], \"scan_plan\": {\"approval_state\": \"pending\", \"approved_by\": null, \"id\": \"LAB-AUDIT-PLAN-01\", \"targets\": [\"LAB-SRV-01\"], \"window\": \"2026-11-22T09:00:00+07:00\"}}}",
+            "sha256": "f9469df91e0cc7ebd9a201a64dad7126dbceadd6674ea48154276b4016dab464"
+          }
+        ]
+      }
+    ],
+    "note": "Dữ liệu phát triển do trợ lý tạo, không phải hồ sơ con người xác nhận hoặc tập kiểm định độc lập. Không nhập vào đợt đánh giá chính.",
+    "sha256": "9a4277bc02ab2df4552f871ec8c621445126f69dc820c9575456c865fed8d588"
+  },
+  "experiment_note": "ASSISTANT_GENERATED_DEVELOPMENT_FIXTURES; not human review, independent validation, production evidence or formal SoA approval."
+}
