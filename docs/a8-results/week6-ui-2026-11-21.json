@@ -1,0 +1,64 @@
+{
+  "protocol": "week6-ui-readiness-check-v1",
+  "checked_at": "2026-11-21T19:36:53.521051+07:00",
+  "stats": {
+    "startTime": "2026-11-21T12:21:38.473Z",
+    "duration": 75483.329,
+    "expected": 8,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "tests": [
+    {
+      "file": "tests/isolated-workflow.spec.js",
+      "title": "isolated UI: valid upload, original download, stale review, criteria and decision draft",
+      "status": "passed",
+      "duration_ms": 6773
+    },
+    {
+      "file": "tests/isolated-workflow.spec.js",
+      "title": "isolated UI: blind submission hides answers and removes locked controls after reload",
+      "status": "passed",
+      "duration_ms": 1639
+    },
+    {
+      "file": "tests/navigation.spec.js",
+      "title": "employee, dossier, control and source-run context survive navigation, reload and back",
+      "status": "passed",
+      "duration_ms": 33927
+    },
+    {
+      "file": "tests/release.spec.js",
+      "title": "admin: navigation, scope and safe exports",
+      "status": "passed",
+      "duration_ms": 7494
+    },
+    {
+      "file": "tests/release.spec.js",
+      "title": "ledangkhoa: navigation, scope and safe exports",
+      "status": "passed",
+      "duration_ms": 6693
+    },
+    {
+      "file": "tests/release.spec.js",
+      "title": "ledoanvantu: navigation, scope and safe exports",
+      "status": "passed",
+      "duration_ms": 6098
+    },
+    {
+      "file": "tests/week6-gaps.spec.js",
+      "title": "batch UI: rejects stale start, follows running batch across reload and stops without losing results",
+      "status": "passed",
+      "duration_ms": 9868
+    },
+    {
+      "file": "tests/week6-gaps.spec.js",
+      "title": "candidate UI: invalid JSON, server refusal, receipt, changed engine and concurrent run",
+      "status": "passed",
+      "duration_ms": 1933
+    }
+  ],
+  "writes": "New batch/candidate UI writes intercepted; no real jobs, labels or approval created in main assessment.",
+  "human_assessment": false
+}
