@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "oxlint",
-    "test:ui": "playwright test tests/release.spec.js tests/isolated-workflow.spec.js --workers=1 --reporter=list",
+    "test:ui": "playwright test tests/release.spec.js tests/isolated-workflow.spec.js tests/navigation.spec.js --workers=1 --reporter=list",
     "preview": "vite preview"
   },
   "dependencies": {

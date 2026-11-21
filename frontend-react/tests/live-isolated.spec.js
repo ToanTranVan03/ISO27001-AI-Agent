@@ -100,7 +100,7 @@ test('real isolated writes: source, review, SoA lifecycle and two synthetic rate
   const duplicate=await page.request.post(base+'/a8/runs/'+run.run_id+'/reviews',{headers:{Authorization:`Bearer ${token}`},data:payload(cid)});
   expect(duplicate.status()).toBe(409);
   for(const record of blind.evidence_pack.slice(1))await request('POST',base+'/a8/runs/'+run.run_id+'/reviews',payload(record.control_id),token);
-  await page.reload();await expect(page.getByRole('heading',{name:'Tổng quan đánh giá tuân thủ',exact:true})).toBeVisible();
+  await page.reload();await expect(page.getByRole('heading',{name:'Đánh giá chuyên sâu A.8',exact:true})).toBeVisible();
   const full=await request('GET',base+'/a8/runs/'+run.run_id,undefined,token);
   expect(full.blind).not.toBe(true);expect(full.review_analysis.submitted_label_count).toBe(18);
   expect(full.review_analysis.complete_independent_reviewers).toHaveLength(0);

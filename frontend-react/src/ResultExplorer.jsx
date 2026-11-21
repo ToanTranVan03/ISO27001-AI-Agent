@@ -10,8 +10,14 @@ const outcomes=[
 const pending={label:'Chưa có kết luận hiện hành',icon:FileQuestion,tone:'border-slate-600 bg-slate-800 text-slate-300'};
 function outcome(status){if(status==='RUNNING')return {...pending,label:'Agent đang kiểm tra'};if(status==='ERROR')return {...pending,label:'Lỗi thực thi · chưa kết luận'};return outcomes.find(x=>x.id===status)||pending;}
 
-export default function ResultExplorer({records,title,description,onOpen,onRun,busy=false}) {
- const [query,setQuery]=useState(''),[filter,setFilter]=useState('all'),[selected,setSelected]=useState(records[0]?.control_id||'');
+export default function ResultExplorer({records,title,description,onOpen,onRun,busy=false,selectedControlId='',onSelect}) {
+ const [localSelected,setSelected]=useState(records[0]?.control_id||'');
+ const [viewFilter,setViewFilter]=useState({control:selectedControlId,query:'',filter:'all'});
+ const activeFilter=viewFilter.control===selectedControlId?viewFilter:{query:'',filter:'all'};
+ const {query,filter}=activeFilter;
+ const selected=selectedControlId||localSelected;
+ const setFilter=value=>setViewFilter({...activeFilter,control:selectedControlId,filter:value});
+ const setQuery=value=>setViewFilter({...activeFilter,control:selectedControlId,query:value});
  const filtered=records.filter(r=>(filter==='all'||(filter==='pending'?!outcomes.some(o=>o.id===r.status):r.status===filter))&&`${r.control_id} ${r.name}`.toLocaleLowerCase().includes(query.toLocaleLowerCase()));
  const item=filtered.find(r=>r.control_id===selected)||filtered[0];
  const current=outcome(item?.status),Icon=current.icon;
@@ -22,7 +28,7 @@ export default function ResultExplorer({records,title,description,onOpen,onRun,b
   </header>
   <div className="grid lg:grid-cols-[310px_1fr]">
    <aside className="border-b border-slate-700 p-4 lg:border-r lg:border-b-0"><label className="flex items-center gap-2 rounded-xl border border-slate-600 bg-slate-950 px-3 py-2"><Search size={17} className="text-slate-400"/><input aria-label="Tìm control theo mã hoặc tên" value={query} onChange={e=>setQuery(e.target.value)} placeholder="Tìm A.8.13, backup…" className="min-w-0 w-full bg-transparent text-sm outline-none"/></label><div className="my-3 flex flex-wrap gap-2"><button onClick={()=>setFilter('all')} aria-pressed={filter==='all'} className="rounded-full bg-slate-800 px-3 py-1 text-xs">Tất cả ({records.length})</button><button onClick={()=>setFilter('pending')} aria-pressed={filter==='pending'} className="rounded-full bg-slate-800 px-3 py-1 text-xs">Chưa có kết luận ({records.filter(r=>!outcomes.some(o=>o.id===r.status)).length})</button></div>
-    <div className="max-h-[440px] space-y-2 overflow-auto" aria-label="Danh sách control">{filtered.length===0&&<p className="p-3 text-sm text-slate-400">Không có control khớp bộ lọc.</p>}{filtered.map(r=>{const view=outcome(r.status),SmallIcon=view.icon;return <button key={r.control_id} onClick={()=>setSelected(r.control_id)} aria-pressed={item?.control_id===r.control_id} className={`flex w-full items-start gap-3 rounded-xl border p-3 text-left transition hover:bg-slate-800 ${item?.control_id===r.control_id?'border-teal-400 bg-teal-400/10':'border-slate-700'}`}><SmallIcon size={18} className={`mt-1 shrink-0 ${view.tone.split(' ').at(-1)}`}/><span><strong className="text-sm">{r.control_id}</strong><span className="mt-1 block text-xs text-slate-300">{r.name}</span><span className="mt-1 block text-xs text-slate-400">{view.label}</span></span></button>;})}</div>
+    <div className="max-h-[440px] space-y-2 overflow-auto" aria-label="Danh sách control">{filtered.length===0&&<p className="p-3 text-sm text-slate-400">Không có control khớp bộ lọc.</p>}{filtered.map(r=>{const view=outcome(r.status),SmallIcon=view.icon;return <button key={r.control_id} onClick={()=>{setSelected(r.control_id);onSelect?.(r.control_id);}} aria-pressed={item?.control_id===r.control_id} className={`flex w-full items-start gap-3 rounded-xl border p-3 text-left transition hover:bg-slate-800 ${item?.control_id===r.control_id?'border-teal-400 bg-teal-400/10':'border-slate-700'}`}><SmallIcon size={18} className={`mt-1 shrink-0 ${view.tone.split(' ').at(-1)}`}/><span><strong className="text-sm">{r.control_id}</strong><span className="mt-1 block text-xs text-slate-300">{r.name}</span><span className="mt-1 block text-xs text-slate-400">{view.label}</span></span></button>;})}</div>
    </aside>
    <div className="min-w-0 p-5 sm:p-7">{!item?<div className="flex min-h-72 flex-col items-center justify-center gap-3 text-center text-slate-400"><FileQuestion size={40}/><h3 className="text-lg text-slate-200">Chọn một control để xem kết quả</h3><p className="max-w-sm text-sm">Kết luận, lý do và nguồn được trình bày cùng nhau. Chi tiết kỹ thuật chỉ mở khi cần.</p></div>:<div className="space-y-5">
     <div className="flex flex-wrap items-start justify-between gap-3"><div><p className="text-xs tracking-widest text-teal-300">{item.control_id}</p><h3 className="mt-2 text-xl font-bold">{item.name}</h3></div><span className={`flex items-center gap-2 rounded-full border px-3 py-2 text-xs ${current.tone}`}><Icon size={16}/>{current.label}</span></div>

@@ -88,7 +88,7 @@ def main():
                     time.sleep(.5)
                 else:raise RuntimeError('Isolated backend startup timed out')
                 runner=ROOT/'frontend-react/node_modules/@playwright/test/cli.js'
-                result=subprocess.run(['node',str(runner),'test','tests/live-isolated.spec.js','--workers=1','--reporter=list'],
+                result=subprocess.run(['node',str(runner),'test','tests/live-isolated.spec.js','--workers=1','--reporter=list','--output',str(directory/'browser-results')],
                     cwd=ROOT/'frontend-react',env=env,capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=240)
                 (directory/'browser.log').write_text(result.stdout+'\n'+result.stderr,encoding='utf-8')
                 report['browser_exit_code']=result.returncode

@@ -1,5 +1,6 @@
 import AccountProfile from './AccountProfile';
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, useRef } from "react";
+import {readNavigation,navigationHash,mergeNavigation} from './navigation';
 import { Bot, KeyRound, LogIn, ShieldCheck, UserRound, LayoutDashboard, FlaskConical, Building2, FolderCheck, LogOut } from "lucide-react";
 import { ApiError, apiRequest } from "./api";
 import A8ComplianceStudy from "./A8ComplianceStudy";
@@ -17,13 +18,37 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
-const [view, setView] = useState("scope56");
+  const [navigation,setNavigation]=useState(()=>readNavigation(window.location.hash));
+  const navigationRef=useRef(navigation);
+  const view=navigation.view;
+  const navigate=useCallback((patch,replace=false)=>{
+    const next=mergeNavigation(navigationRef.current,patch);
+    const hash=navigationHash(next);
+    const changedView=next.view!==navigationRef.current.view;
+    if(hash===navigationHash(navigationRef.current))return;
+    navigationRef.current=next;setNavigation(next);
+    window.history[replace?'replaceState':'pushState'](null,'',window.location.pathname+window.location.search+hash);
+    if(changedView)window.scrollTo({top:0,behavior:'instant'});
+  },[]);
+  const updateContext=useCallback(patch=>navigate({assessmentId:assessment?.assessment_id,...patch},true),[navigate,assessment?.assessment_id]);
+  useEffect(()=>{
+    const update=()=>{const next=readNavigation(window.location.hash);navigationRef.current=next;setNavigation(next);};
+    window.addEventListener('popstate',update);window.addEventListener('hashchange',update);
+    return()=>{window.removeEventListener('popstate',update);window.removeEventListener('hashchange',update);};
+  },[]);
+  useEffect(()=>{
+    if(!assessment||!navigation.assessmentId||navigation.assessmentId===assessment.assessment_id)return;
+    const frame=requestAnimationFrame(()=>navigate({...readNavigation(''),assessmentId:assessment.assessment_id},true));
+    return()=>cancelAnimationFrame(frame);
+  },[assessment,navigation.assessmentId,navigate]);
   const clearSession = useCallback(() => {
     sessionStorage.removeItem(SESSION_KEY);
     sessionStorage.removeItem("iso_team_assessment");
     setToken("");
     setUser(null);
     setAssessment(null);
+    const empty=readNavigation('');navigationRef.current=empty;setNavigation(empty);
+    window.history.replaceState(null,'',window.location.pathname+window.location.search);
   }, []);
 
   useEffect(() => {
@@ -43,7 +68,12 @@ const [view, setView] = useState("scope56");
         if (cancelled) return;
         if (!campaigns.length) throw new ApiError("Tài khoản chưa thuộc đợt đánh giá nào.", 403);
         setUser(profile);
-        setAssessment(campaigns[0]);
+        const target=campaigns.find(c=>c.assessment_id===navigationRef.current.assessmentId)||campaigns[0];
+        setAssessment(target);
+        if(navigationRef.current.assessmentId&&navigationRef.current.assessmentId!==target.assessment_id){
+          navigationRef.current=readNavigation('');setNavigation(navigationRef.current);
+          window.history.replaceState(null,'',window.location.pathname+window.location.search);
+        }else navigate({assessmentId:target.assessment_id},true);
       } catch (err) {
         if (!cancelled) {
           if (err.status === 401) clearSession();
@@ -55,7 +85,7 @@ const [view, setView] = useState("scope56");
     }
     restore();
     return () => { cancelled = true; };
-  }, [token, clearSession]);
+  }, [token, clearSession,navigate]);
 
   const request = useCallback(async (path, options = {}) => {
     try {
@@ -82,8 +112,10 @@ const [view, setView] = useState("scope56");
       sessionStorage.setItem(SESSION_KEY, session.access_token);
       setToken(session.access_token);
       setUser(session.user);
-      setAssessment(campaigns[0]);
-      setView("scope56");
+      const target=campaigns.find(c=>c.assessment_id===navigationRef.current.assessmentId)||campaigns[0];
+      setAssessment(target);
+      if(navigationRef.current.assessmentId&&navigationRef.current.assessmentId!==target.assessment_id)navigate({...readNavigation(''),assessmentId:target.assessment_id},true);
+      else navigate({assessmentId:target.assessment_id},true);
     } catch (err) {
       setError(err.message || "Không thể đăng nhập.");
     } finally {
@@ -112,12 +144,12 @@ if (user && assessment && token) {
         <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-2 px-4 py-3 lg:flex-nowrap lg:gap-3"><div className="mr-auto flex shrink-0 items-center gap-2 lg:mr-0 lg:gap-3"><span className="rounded-xl bg-teal-400/10 p-2 text-teal-300"><ShieldCheck size={24}/></span><span className="text-sm font-bold">ISO 27001<span className="block text-[8px] font-normal tracking-wider text-slate-400 sm:text-[10px]">AI AGENT · ĐÁNH GIÁ TUÂN THỦ</span></span></div>
         <nav aria-label="Điều hướng chính" className="order-last flex w-full min-w-0 gap-1 overflow-x-auto lg:order-none lg:w-auto lg:flex-1">{[
           ['scope56','Tổng quan 56 control',LayoutDashboard],['a8','Thực nghiệm A.8',FlaskConical],['company','Doanh nghiệp',Building2],['dossier','Hồ sơ ISO',FolderCheck]
-        ].map(([id,label,Icon])=><button key={id} type="button" onClick={()=>{setView(id);window.scrollTo({top:0,behavior:'instant'});}} aria-current={view===id?'page':undefined} className={`flex shrink-0 items-center gap-2 whitespace-nowrap rounded-xl px-3 py-3 text-xs font-semibold transition ${view===id?'bg-teal-400/15 text-teal-200 ring-1 ring-teal-400/30':'text-slate-400 hover:bg-slate-800 hover:text-white'}`}><Icon size={16}/>{label}</button>)}</nav>
+        ].map(([id,label,Icon])=><button key={id} type="button" onClick={()=>navigate({view:id,assessmentId:assessment.assessment_id})} aria-current={view===id?'page':undefined} className={`flex shrink-0 items-center gap-2 whitespace-nowrap rounded-xl px-3 py-3 text-xs font-semibold transition ${view===id?'bg-teal-400/15 text-teal-200 ring-1 ring-teal-400/30':'text-slate-400 hover:bg-slate-800 hover:text-white'}`}><Icon size={16}/>{label}</button>)}</nav>
         <AccountProfile user={user} assessment={assessment} request={request} onSaved={setUser}/><button type="button" onClick={logout} aria-label="Đăng xuất" title="Đăng xuất" className="rounded-xl p-3 text-slate-400 hover:bg-slate-800 hover:text-white"><LogOut size={18}/></button></div>
       </header>
 
-      {view === "scope56" ? <Scope56 assessment={assessment} request={request} onOpenA8={()=>setView("a8")} /> : view === "company" ? <CompanyInventory assessment={assessment} request={request} onOpenDossier={() => setView("dossier")} /> : view === "dossier" ? <ComplianceDossier user={user} assessment={assessment} request={request} onOpenDashboard={()=>{setView("scope56");window.scrollTo({top:0,behavior:"instant"});}} onOpenCompany={() => setView("company")} /> : (
-        <A8ComplianceStudy assessment={assessment} request={request} />
+      {view === "scope56" ? <Scope56 assessment={assessment} request={request} controlId={navigation.controlId} employeeId={navigation.employeeId} runId={navigation.runId} onContext={updateContext} onOpenA8={context=>navigate({view:'a8',...context})} onOpenDossier={context=>navigate({view:'dossier',...context})} onOpenCompany={context=>navigate({view:'company',...context})}/> : view === "company" ? <CompanyInventory assessment={assessment} request={request} employeeId={navigation.employeeId} onContext={updateContext} onOpenDossier={context=>navigate({view:'dossier',...context})}/> : view === "dossier" ? <ComplianceDossier user={user} assessment={assessment} request={request} controlId={navigation.controlId} employeeId={navigation.employeeId} onContext={updateContext} onOpenDashboard={context=>navigate({view:'scope56',...context})} onOpenCompany={context=>navigate({view:'company',...context})} onOpenA8={context=>navigate({view:'a8',...context})}/> : (
+        <A8ComplianceStudy assessment={assessment} request={request} controlId={navigation.controlId} runId={navigation.runId} onContext={updateContext} onOpenDashboard={context=>navigate({view:'scope56',...context})}/>
       )}
     </>
   );

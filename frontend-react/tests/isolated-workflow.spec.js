@@ -156,8 +156,8 @@ test('isolated UI: blind submission hides answers and removes locked controls af
   await expect(page.getByText(/Đã nộp 1\/18/)).toBeVisible();
   expect(submitted).toEqual([cid]);
   expect(await page.getByLabel('Control chấm mù',{exact:true}).locator('option').evaluateAll(options=>options.map(o=>o.value))).not.toContain(cid);
-  await page.reload();await expect(page.getByRole('heading',{name:'Tổng quan đánh giá tuân thủ',exact:true})).toBeVisible();
-  await open();await expect(page.getByText(/Đã nộp 1\/18/)).toBeVisible();
+  await page.reload();await expect(page.getByRole('heading',{name:'Đánh giá chuyên sâu A.8',exact:true})).toBeVisible();
+  await expect(page.getByText(/Đã nộp 1\/18/)).toBeVisible();
   expect(await page.getByLabel('Control chấm mù',{exact:true}).locator('option').evaluateAll(options=>options.map(o=>o.value))).not.toContain(cid);
   await expect(page.getByRole('heading',{name:'Kết quả kiểm tra A.8',exact:true})).toHaveCount(0);
  }finally{if(token)await page.request.post('/api/auth/logout',{headers:{Authorization:`Bearer ${token}`}});}

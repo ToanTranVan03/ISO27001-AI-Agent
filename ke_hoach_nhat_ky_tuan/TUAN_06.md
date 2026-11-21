@@ -26,6 +26,7 @@ Phần triển khai kỹ thuật đã hoàn thành trong tuần:
 
 - [x] Kiểm tra nội dung nguồn trước suy luận, giữ dữ liệu cũ và yêu cầu nộp lại nguồn không dùng được.
 - [x] Trực quan hóa và thống nhất bốn màn hình; phân biệt kết quả, tiến độ, bằng chứng và thẩm định.
+- [x] Nối ngữ cảnh đợt/control/nhân viên/lượt nguồn giữa bốn màn hình; giữ mục đang xem khi tải lại hoặc Back/Forward, nhập nguồn A.8 dẫn về đúng hồ sơ và lọc nhân viên theo viện dẫn bằng chứng.
 - [x] Bổ sung xem trước thay đổi doanh nghiệp, kiểm tra snapshot và lịch sử người cập nhật/giá trị trước–sau.
 - [x] Nộp nguồn gốc trên web cho 56 control, lưu/tải bản gốc có hash và nối nguồn với hàng đợi đánh giá.
 - [x] Kiểm tra lặp API bằng ba tài khoản và lưu báo cáo 39 bước ngày 20/11; chưa thay kiểm thử toàn UI.
@@ -90,6 +91,9 @@ Các thông tin trên là **trạng thái bàn giao từ tuần 5**, không ph�
 
 ### Trạng thái chốt ngày 21/11
 
+- **Liên kết giao diện bổ sung:** đã kiểm chứng điều hướng nhân viên → hồ sơ → control → lượt A.8 và quay lại; 14 test JavaScript, 6 kịch bản Edge và lint/build đạt. POST nhập nguồn trong kịch bản điều hướng được mô phỏng; fingerprint SoA và trạng thái nghiệm thu đợt chính không đổi. Không tự chạy Agent hoặc duyệt khi chuyển màn hình.
+- **Kiểm tra ghi sau nối điều hướng:** một kịch bản PostgreSQL/backend/Edge cô lập đạt, gồm nguồn/thẩm định/kế hoạch/SoA và hai tài khoản thử. Hai lần lỗi thư mục kết quả được giữ lại; đã tách thư mục Playwright từng lượt và 5 test bảo vệ database đạt. Database thử được dọn, ba bảng chính không đổi; không tạo phê duyệt hay nhãn người thật.
+
 - **Kiểm chứng phần mềm:** 337 test Python, 11 test JavaScript, 5 kịch bản Edge và lint/build đạt; có thêm một kịch bản tích hợp ghi thật trên PostgreSQL/backend/Edge cô lập. Phân biệt dữ liệu thử, API mô phỏng và ghi thật; các mốc thấp hơn trong bảng là lịch sử.
 - **18 nguồn A.8 hiện hành:** đã lưu kết quả thực thi; kết luận máy mới nhất gồm 3 không tuân thủ, 6 một phần, 9 thiếu bằng chứng. Không phải độ đúng so với người chấm.
 - **38 hồ sơ phát triển:** chạy đủ, giữ phản hồi gốc và 3 lần thử lại lỗi; khớp khóa thiết kế 23/38 sau thử lại. Có 15 control lệch kết luận tổng, 18 control lệch tiêu chí và tổng 19 tiêu chí khác khóa. Đây là bộ do trợ lý tạo, chưa được xác nhận chuyên môn hoặc tính độc lập.
@@ -98,6 +102,7 @@ Các thông tin trên là **trạng thái bàn giao từ tuần 5**, không ph�
 
 ### Tài liệu đối chiếu
 
+- [Liên kết bốn màn hình](../docs/LIEN_KET_DIEU_HUONG_HE_THONG.md): cách đi theo control/nhân viên/lượt nguồn, khôi phục đường dẫn và giới hạn kiểm chứng.
 - [Kết quả 18 nguồn A.8](../docs/KET_QUA_DANH_GIA_NGUON_18_2026_11_18.md): job, lỗi và kết quả từng control.
 - [Kết quả 38 hồ sơ mô phỏng](../docs/KET_QUA_LAB_HO_SO_38_2026_11_21.md): snapshot nguồn, phản hồi đầu/thử lại và khóa thiết kế.
 - [Rà sai khác tiêu chí lab 38](../docs/RA_SAI_KHAC_TIEU_CHI_LAB_38.md): 19 tiêu chí cần rà, lý do model và viện dẫn/hash; chưa kết luận bên nào đúng.
