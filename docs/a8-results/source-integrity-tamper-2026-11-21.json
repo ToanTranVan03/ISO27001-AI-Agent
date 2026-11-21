@@ -1,0 +1,363 @@
+{
+  "protocol": "isolated-real-write-acceptance-v1",
+  "checked_at": "2026-11-21T22:14:03.263099+07:00",
+  "database": "iso_acceptance_9b5941c77fde",
+  "test_data_only": true,
+  "human_assessment": false,
+  "professional_approval": false,
+  "api_mocked": false,
+  "passed": true,
+  "database_dropped": true,
+  "main_table_counts_unchanged": true,
+  "extended_orchestration": {
+    "batch_engine": "real-configured-Ollama",
+    "candidate_engine": "rules",
+    "candidate_data": "modified-known-fixture-transport-regression-not-independent"
+  },
+  "browser_exit_code": 0,
+  "orchestration_receipt": {
+    "test_data_only": true,
+    "human_assessment": false,
+    "independent_validation": false,
+    "stopped_batch": {
+      "batch_id": "ed72a969-3360-4c6c-94d9-b464b623ce75",
+      "status": "STOPPED",
+      "planned": 2,
+      "results": [
+        {
+          "error": null,
+          "job_id": "b4d5f36d-3909-40ac-85df-31402369f890",
+          "status": "SUCCEEDED",
+          "control_id": "A.6.1",
+          "started_at": "2026-11-21T15:14:22.137599+00:00",
+          "finished_at": "2026-11-21T15:14:34.398202+00:00",
+          "source_token": "633d9f6c2363ade32e81fa4e208801437551a377e0fabdc37e895e111b2fc6d7"
+        }
+      ]
+    },
+    "completed_batch": {
+      "batch_id": "e8e6c856-689a-40d9-af48-f7875be9be2a",
+      "status": "COMPLETED",
+      "planned": 1,
+      "results": [
+        {
+          "error": null,
+          "job_id": "2ab70ac9-e00d-439f-a376-4d9762964e96",
+          "status": "SUCCEEDED",
+          "control_id": "A.6.2",
+          "started_at": "2026-11-21T15:14:39.221265+00:00",
+          "finished_at": "2026-11-21T15:14:44.808364+00:00",
+          "source_token": "7b8f4b07f5050a9b0ddf3ece5dcaf3a658e2fe82fddd511bb47ca145689793db"
+        }
+      ]
+    },
+    "candidate": {
+      "run_id": "b539fb43-b019-49d3-8114-9445697bd72c",
+      "engine": "rules",
+      "state": "finished",
+      "records": 18,
+      "capture_sha256": "9238efb6e12e28c33539309e78b9955d819382b513919e713c488072aecc2e44",
+      "plan_sha256": "b3dea6292658c1cbbbaf349dfdd85c120aa560bfb56abbe8c8327f58facfe5d9",
+      "report_sha256": "dc3d35662c849d8e8886c95a9fb195b62491176c3ecb7982362752dcbaa2b3b4",
+      "model": null,
+      "results": [
+        {
+          "control_id": "A.8.1",
+          "status": "Partially Compliant",
+          "error": null,
+          "execution_source": "a8-lab-rules",
+          "attempts": [
+            {
+              "attempt": 1,
+              "status": "Partially Compliant",
+              "error": null,
+              "duration_ms": 0.01
+            }
+          ],
+          "repaired": false
+        },
+        {
+          "control_id": "A.8.2",
+          "status": "Non-Compliant",
+          "error": null,
+          "execution_source": "a8-lab-rules",
+          "attempts": [
+            {
+              "attempt": 1,
+              "status": "Non-Compliant",
+              "error": null,
+              "duration_ms": 0
+            }
+          ],
+          "repaired": false
+        },
+        {
+          "control_id": "A.8.3",
+          "status": "Non-Compliant",
+          "error": null,
+          "execution_source": "a8-lab-rules",
+          "attempts": [
+            {
+              "attempt": 1,
+              "status": "Non-Compliant",
+              "error": null,
+              "duration_ms": 0
+            }
+          ],
+          "repaired": false
+        },
+        {
+          "control_id": "A.8.5",
+          "status": "Partially Compliant",
+          "error": null,
+          "execution_source": "a8-lab-rules",
+          "attempts": [
+            {
+              "attempt": 1,
+              "status": "Partially Compliant",
+              "error": null,
+              "duration_ms": 0
+            }
+          ],
+          "repaired": false
+        },
+        {
+          "control_id": "A.8.7",
+          "status": "Insufficient Evidence",
+          "error": null,
+          "execution_source": "a8-lab-rules",
+          "attempts": [
+            {
+              "attempt": 1,
+              "status": "Insufficient Evidence",
+              "error": null,
+              "duration_ms": 0.01
+            }
+          ],
+          "repaired": false
+        },
+        {
+          "control_id": "A.8.8",
+          "status": "Insufficient Evidence",
+          "error": null,
+          "execution_source": "a8-lab-rules",
+          "attempts": [
+            {
+              "attempt": 1,
+              "status": "Insufficient Evidence",
+              "error": null,
+              "duration_ms": 0
+            }
+          ],
+          "repaired": false
+        },
+        {
+          "control_id": "A.8.9",
+          "status": "Partially Compliant",
+          "error": null,
+          "execution_source": "a8-lab-rules",
+          "attempts": [
+            {
+              "attempt": 1,
+              "status": "Partially Compliant",
+              "error": null,
+              "duration_ms": 0
+            }
+          ],
+          "repaired": false
+        },
+        {
+          "control_id": "A.8.10",
+          "status": "Insufficient Evidence",
+          "error": null,
+          "execution_source": "a8-lab-rules",
+          "attempts": [
+            {
+              "attempt": 1,
+              "status": "Insufficient Evidence",
+              "error": null,
+              "duration_ms": 0
+            }
+          ],
+          "repaired": false
+        },
+        {
+          "control_id": "A.8.12",
+          "status": "Partially Compliant",
+          "error": null,
+          "execution_source": "a8-lab-rules",
+          "attempts": [
+            {
+              "attempt": 1,
+              "status": "Partially Compliant",
+              "error": null,
+              "duration_ms": 0
+            }
+          ],
+          "repaired": false
+        },
+        {
+          "control_id": "A.8.13",
+          "status": "Non-Compliant",
+          "error": null,
+          "execution_source": "a8-lab-rules",
+          "attempts": [
+            {
+              "attempt": 1,
+              "status": "Non-Compliant",
+              "error": null,
+              "duration_ms": 0
+            }
+          ],
+          "repaired": false
+        },
+        {
+          "control_id": "A.8.15",
+          "status": "Partially Compliant",
+          "error": null,
+          "execution_source": "a8-lab-rules",
+          "attempts": [
+            {
+              "attempt": 1,
+              "status": "Partially Compliant",
+              "error": null,
+              "duration_ms": 0
+            }
+          ],
+          "repaired": false
+        },
+        {
+          "control_id": "A.8.16",
+          "status": "Insufficient Evidence",
+          "error": null,
+          "execution_source": "a8-lab-rules",
+          "attempts": [
+            {
+              "attempt": 1,
+              "status": "Insufficient Evidence",
+              "error": null,
+              "duration_ms": 0
+            }
+          ],
+          "repaired": false
+        },
+        {
+          "control_id": "A.8.17",
+          "status": "Partially Compliant",
+          "error": null,
+          "execution_source": "a8-lab-rules",
+          "attempts": [
+            {
+              "attempt": 1,
+              "status": "Partially Compliant",
+              "error": null,
+              "duration_ms": 0
+            }
+          ],
+          "repaired": false
+        },
+        {
+          "control_id": "A.8.19",
+          "status": "Partially Compliant",
+          "error": null,
+          "execution_source": "a8-lab-rules",
+          "attempts": [
+            {
+              "attempt": 1,
+              "status": "Partially Compliant",
+              "error": null,
+              "duration_ms": 0
+            }
+          ],
+          "repaired": false
+        },
+        {
+          "control_id": "A.8.20",
+          "status": "Partially Compliant",
+          "error": null,
+          "execution_source": "a8-lab-rules",
+          "attempts": [
+            {
+              "attempt": 1,
+              "status": "Partially Compliant",
+              "error": null,
+              "duration_ms": 0
+            }
+          ],
+          "repaired": false
+        },
+        {
+          "control_id": "A.8.22",
+          "status": "Insufficient Evidence",
+          "error": null,
+          "execution_source": "a8-lab-rules",
+          "attempts": [
+            {
+              "attempt": 1,
+              "status": "Insufficient Evidence",
+              "error": null,
+              "duration_ms": 0
+            }
+          ],
+          "repaired": false
+        },
+        {
+          "control_id": "A.8.24",
+          "status": "Partially Compliant",
+          "error": null,
+          "execution_source": "a8-lab-rules",
+          "attempts": [
+            {
+              "attempt": 1,
+              "status": "Partially Compliant",
+              "error": null,
+              "duration_ms": 0
+            }
+          ],
+          "repaired": false
+        },
+        {
+          "control_id": "A.8.32",
+          "status": "Insufficient Evidence",
+          "error": null,
+          "execution_source": "a8-lab-rules",
+          "attempts": [
+            {
+              "attempt": 1,
+              "status": "Insufficient Evidence",
+              "error": null,
+              "duration_ms": 0
+            }
+          ],
+          "repaired": false
+        }
+      ]
+    },
+    "synthetic_raters": [
+      {
+        "username": "release_rater1",
+        "report_sha256": "dc3d35662c849d8e8886c95a9fb195b62491176c3ecb7982362752dcbaa2b3b4",
+        "submitted": 0
+      },
+      {
+        "username": "release_rater2",
+        "report_sha256": "dc3d35662c849d8e8886c95a9fb195b62491176c3ecb7982362752dcbaa2b3b4",
+        "submitted": 0
+      }
+    ],
+    "integrity_tamper": {
+      "control_id": "A.6.2",
+      "evidence_id": "WEB-ef642964e388fda0b515930d3f2bf616",
+      "original_integrity": "failed",
+      "assessment_state": "stale",
+      "prior_evaluation_preserved": true,
+      "start_rejected_status": 409
+    }
+  },
+  "synthetic_database_counts": {
+    "evidence": 4,
+    "evaluations": 2,
+    "team_users": 3
+  },
+  "note": "Synthetic integration test only. Real requests on a disposable database; no member grades, source validation or professional SoA approval."
+}

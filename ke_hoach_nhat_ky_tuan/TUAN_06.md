@@ -18,7 +18,7 @@ Giữ phạm vi 56 control (8 A.6, 14 A.7, 34 A.8), ưu tiên kiểm định sâ
 - [x] Chạy Agent trên 18 nguồn A.8 lab hiện hành, xuất kết quả từng control và giữ riêng các lần lỗi/kiểm tra lại.
 - [x] Mở rộng thực nghiệm phát triển bằng 38 hồ sơ mô phỏng ngoài nhóm 18 A.8; chạy Agent, giữ lỗi/thử lại và xuất kết quả từng control.
 - [ ] Đánh giá trên nguồn được chấp nhận trong phạm vi 56; đo độ đúng bằng bộ kiểm định và nhãn người đánh giá đủ điều kiện. Bộ phát triển 38 hồ sơ chưa hoàn tất mục này.
-- [ ] Kiểm thử đầy đủ giao diện bằng các tài khoản: đọc/thu nguồn, chấm, khóa nhãn, cập nhật tiến độ, xuất báo cáo và các trường hợp bị chặn.
+- [x] Kiểm thử các luồng giao diện chính theo ma trận nghiệm thu tuần 6: đọc/thu nguồn, chấm/khóa nhãn, tiến độ, xuất báo cáo và các gate quyền/phiên bản. Có 11 kịch bản UI cùng kiểm thử ghi thật trên database riêng; không đồng nghĩa đã kiểm thử mọi ngoại lệ hoặc nghiệm thu chuyên môn.
 - [ ] Người phụ trách ghi 56 quyết định tính áp dụng, lý do và kế hoạch xử lý/duy trì; bổ sung người nhận, hạn và cách kiểm tra lại.
 - [ ] Thẩm định từng tiêu chí trên nguồn hiện hành, hoàn thiện và trình người có trách nhiệm phê duyệt SoA khi đủ điều kiện.
 
@@ -47,6 +47,8 @@ Phần triển khai kỹ thuật đã hoàn thành trong tuần:
 - [x] Kiểm thử ghi thật luồng lô/dừng/chạy tiếp bằng Ollama trên database riêng; nhập gói ứng viên qua worker luật, hai tài khoản thử đọc cùng gói mù. Sửa lưu JSON nguyên tử khi Windows tạm giữ tệp; giữ báo cáo lỗi và bản ghi cũ khi hết lượt thử.
 - [x] Chạy đủ gói ứng viên kỹ thuật 18 control bằng Qwen thật, giữ snapshot/đường nguồn và số lần gọi; kiểm tra ngắt backend thử giữa lúc worker chạy, phục hồi trạng thái gián đoạn, mở khóa và giữ kết quả cũ. Không gọi gói hồi quy này là bộ kiểm định độc lập.
 - [x] Nhập quyết định/kế hoạch theo lô có mẫu 56 dòng, xem trước thay đổi, kiểm tra quyền/đợt/fingerprint và lưu nguyên tử với danh tính/mã lô; không tự chọn tính áp dụng hoặc phê duyệt. Kiểm thử 55 quyết định tổng hợp trên database riêng và API xem trước không ghi vào đợt chính.
+- [x] Dùng chung gate toàn vẹn nguồn cho báo cáo, đầu vào Agent và thẩm định; kiểm tra định danh/bản gốc/checksum artifact. Nguồn lỗi bị loại khỏi suy luận và thẩm định conclusive; kết quả cũ viện dẫn nguồn lỗi chuyển cần tái đánh giá, giữ lịch sử.
+- [x] Rà kỹ thuật 37 bản ghi nguồn của 19 control và 56 manifest; 36 bản thu lab khớp kiểm tra, A.6.2 vẫn là nguồn cũ không dùng được, các manifest chưa có nguồn mới. Không biến audit kỹ thuật thành xác nhận mức bao phủ/chuyên môn.
 
 Chỉ đánh dấu hoàn thành khi có kết quả và minh chứng. Hoàn thành phần mềm, có nguồn hoặc chạy xong không đồng nghĩa control tuân thủ hay đã nghiệm thu chuyên môn.
 
@@ -98,8 +100,11 @@ Các thông tin trên là **trạng thái bàn giao từ tuần 5**, không ph�
 | 21/11/2026 | Kiểm thử điều phối ghi thật và sửa lỗi lưu Windows | Lô hai control dùng Ollama thật: dừng sau A.6.1, lượt mới chỉ chạy A.6.2; cả hai job thành công. Gói ứng viên luật đủ 18 bản ghi, hai tài khoản thử cùng hash/gói mù. Lần đầu lỗi thay tệp quyết định được giữ; sửa tệp tạm riêng và thử lại có giới hạn, lần sau hai kịch bản ghi thật đạt. 345 test Python, 14 test JavaScript và lint/build đạt; database thử đã dọn, fingerprint/trạng thái nghiệm thu chính không đổi |
 | 21/11/2026 | Kiểm chứng gói LLM và phục hồi sau ngắt API | Qwen2.5:7b trả đủ 18 bản ghi hợp lệ lần đầu trên gói hồi quy kỹ thuật; không fallback luật. Ngắt backend thử: job/lô gián đoạn, control được mở khóa, giữ kết quả cũ và snapshot; hai tài khoản thử cùng gói mù. Giữ lần lỗi bộ kiểm tra đọc nhầm endpoint và báo cáo chạy lại đạt; không phải đo độ đúng với người chấm |
 | 21/11/2026 | Bổ sung nhập tính áp dụng và kế hoạch theo lô | Xuất mẫu 56 dòng không tự điền; xem trước, chặn sai đợt/fingerprint/dòng trùng/ngày sai và không có quyền, lưu một lô có lịch sử. Ghi thử 55 quyết định trên database riêng; API chính chỉ xem trước và giữ 0 quyết định. 355 test Python, 14 test JavaScript, 8 kịch bản Edge thường, hai kịch bản ghi thật và phép thử khởi động lại đạt; lint/build đạt |
+| 21/11/2026 | Rà toàn vẹn nguồn và chốt kiểm thử UI theo ma trận | Gate dùng chung cho báo cáo/Agent/thẩm định; thử làm lệch bản gốc trên kho riêng, giữ kết quả cũ và chặn nguồn lỗi. Audit 19 control/37 bản ghi; 56 manifest chưa có nguồn mới. 365 test Python, 14 test JavaScript, 11 kịch bản UI và kiểm thử ghi thật đạt; chốt mục kiểm thử kỹ thuật, không đóng nguồn/chuyên môn/phê duyệt |
 
 ## Kết quả và minh chứng
+
+Cập nhật chốt kiểm thử UI và gate nguồn: **365 test Python, 14 test JavaScript, 11 kịch bản Edge và lint/build đạt**. Hai kịch bản ghi thật trên PostgreSQL/backend/Edge riêng cũng đạt; phép thử làm lệch bản gốc đánh dấu kết quả cũ cần tái đánh giá, giữ evaluation ID và chặn khởi chạy nguồn lỗi bằng 409. Đã chốt mục kiểm thử UI trong phạm vi [ma trận các luồng chính](../docs/MA_TRAN_NGHIEM_THU_UI_TUAN_06.md); không khẳng định mọi ngoại lệ đã được bao phủ. Nhóm xác nhận chưa có nguồn hoặc xác nhận mới để nhập; các mục chuyên môn/nguồn vẫn mở.
 
 Cập nhật sửa lỗi F5: đã tách khôi phục ngữ cảnh khỏi cuộn tới chi tiết. Tải lại giữ control/nhân viên đang chọn nhưng mở đầu trang; chỉ cuộn khi chủ động mở hồ sơ. Kiểm tra cả Tổng quan, Hồ sơ ISO và Doanh nghiệp, không gửi POST chạy Agent khi F5. **355 test Python, 14 test JavaScript, 9 kịch bản Edge và lint/build đạt**; [báo cáo UI](../docs/a8-results/f5-scroll-ui-2026-11-21.json). Đã build và xác nhận cổng 8000 phục vụ đúng bản sửa; các mốc 8 kịch bản dưới đây là lịch sử trước sửa lỗi này.
 
@@ -116,6 +121,8 @@ Cập nhật sửa lỗi F5: đã tách khôi phục ngữ cảnh khỏi cuộn 
 
 ### Tài liệu đối chiếu
 
+- [Ma trận UI tuần 6](../docs/MA_TRAN_NGHIEM_THU_UI_TUAN_06.md), [11 kịch bản UI](../docs/a8-results/ui-acceptance-2026-11-21.json): phạm vi đã kiểm tra, loại dữ liệu và giới hạn.
+- [Kiểm tra toàn vẹn nguồn](../docs/KIEM_TRA_TOAN_VEN_NGUON.md), [audit nguồn hiện hành](../docs/a8-results/source-integrity-audit-2026-11-21.json), [phép thử lệch bản gốc](../docs/a8-results/source-integrity-tamper-2026-11-21.json): chưa xác nhận nguồn thật hoặc đủ control.
 - [Nhập quyết định và kế hoạch theo lô](../docs/NHAP_QUYET_DINH_KE_HOACH_THEO_LO.md): mẫu, trường dữ liệu, xem trước và lịch sử; [gói LLM/phục hồi đạt](../docs/a8-results/isolated-llm-restart-2026-11-21-retry.json), [API xem trước không ghi](../docs/a8-results/decision-batch-preview-2026-11-21.json).
 - [Kiểm thử điều phối ghi thật](../docs/KIEM_THU_DIEU_PHOI_GHI_THAT.md): lô/dừng/chạy tiếp, gói ứng viên, hai tài khoản thử và sửa lỗi lưu JSON Windows; [báo cáo đạt](../docs/a8-results/isolated-orchestration-2026-11-21-retry.json) giữ riêng với [lần đầu lỗi](../docs/a8-results/isolated-orchestration-2026-11-21.json).
 - [Chốt việc theo snapshot 21/11](../docs/CHOT_VIEC_TUAN_06_2026_11_21.md): trạng thái API, ba nhóm phiếu nguồn, các bước và đầu vào nhóm cần thực hiện; [8 kịch bản Edge](../docs/a8-results/week6-ui-2026-11-21.json), [kiểm tra API gói lỗi](../docs/a8-results/week6-preflight-api-2026-11-21.json).
@@ -139,7 +146,8 @@ Tài liệu bàn giao tuần trước: [Nhật ký tuần 5](TUAN_05.md), [phi�
 - Probe lab chỉ kiểm tra tiêu chí đại diện, chưa chứng minh đầy đủ nội dung từng control hoặc toàn bộ ISMS.
 - Sổ xử lý đã có công cụ nhưng chưa có biên bản đối soát chuyên môn thật; ghi chú không tự giải quyết căn cứ sai hoặc biến nhãn có hỗ trợ thành độc lập.
 - Bộ 38 hồ sơ do trợ lý tạo là dữ liệu phát triển, chưa có người xác nhận phạm vi/chất lượng khóa thiết kế; 15 ca Agent lệch khóa vẫn cần rà cả tiêu chí, dữ liệu và kết luận. Không dùng bộ này để tuyên bố kiểm định độc lập hoặc tự đóng 37 control thiếu nguồn chính thức.
-- Đã kiểm thử ghi thật trên đợt riêng cho nguồn/thẩm định/SoA, nhập quyết định theo lô, lô/dừng/chạy tiếp với Ollama và gói 18 control bằng LLM; đã ngắt/khởi động lại backend thử để xác nhận giữ kết quả/snapshot và mở khóa. Chưa bao phủ mọi lỗi đồng thời, mất mạng, mọi thời điểm ngắt hoặc mọi loại gói; chưa tích hoàn tất kiểm thử toàn UI. Tập thử vẫn là fixture đã sửa, không phải bộ kiểm định mới độc lập. Chấm thật, xác nhận rubric, quyết định thật và duyệt doanh nghiệp vẫn cần đúng người thực hiện.
+- Đã chốt kiểm thử kỹ thuật các luồng UI chính theo ma trận; có ghi thật trên đợt riêng cho nguồn/thẩm định/SoA, nhập quyết định theo lô, lô/dừng/chạy tiếp với Ollama, gói 18 control bằng LLM và phục hồi sau ngắt API. Chưa bao phủ mọi lỗi đồng thời, mất mạng, thời điểm ngắt hoặc mọi loại gói. Tập thử vẫn là fixture đã sửa, không phải bộ kiểm định mới độc lập. Chấm thật, xác nhận rubric, quyết định thật và duyệt doanh nghiệp vẫn cần đúng người thực hiện.
+- Audit toàn vẹn chỉ xác nhận tính khớp bản lưu/định danh, không xác nhận nguồn có thật hoặc đủ tiêu chí. Nguồn cũ/connector chưa hỗ trợ bản gốc vẫn cần đối chiếu; không tự gắn xác minh hoặc tự thay nguồn A.6.2 bằng dữ liệu tạo mới.
 - Quét trùng mới nhận biết thêm bản sao chỉ thay định dạng, không chứng minh nguồn mới độc lập. Gói ứng viên chuẩn bị theo cơ chế cũ cần đóng gói lại với `cosmetic-text-v2`; lịch sử đã lưu không sửa. Bộ kiểm định mới và lịch sử sử dụng vẫn cần nhóm cung cấp/xác nhận.
 
 ## Việc chuyển tiếp sang tuần 7

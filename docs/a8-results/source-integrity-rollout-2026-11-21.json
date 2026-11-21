@@ -1,0 +1,21 @@
+{
+  "checked_at": "2026-11-21T22:19:34.868131+07:00",
+  "read_only": true,
+  "acceptance_unchanged_since_handoff": true,
+  "soa_fingerprint_unchanged": true,
+  "acceptance": {
+    "total_controls": 56,
+    "rubric_approved": false,
+    "applicability_recorded": 0,
+    "controls_with_evidence": 29,
+    "controls_with_submitted_sources": 1,
+    "controls_with_captured_lab_sources": 18,
+    "controls_with_explicit_sources": 19,
+    "controls_with_usable_text_sources": 18,
+    "controls_with_source_quality_issues": 1,
+    "controls_with_current_human_review": 0,
+    "soa_approved": false,
+    "note": "Nguồn nộp không tự đồng nghĩa đã xác thực. Số control có bằng chứng/thẩm định không phải số control đạt ISO."
+  },
+  "soa_approval": "DRAFT_NOT_APPROVED"
+}

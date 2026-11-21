@@ -1,0 +1,690 @@
+{
+  "protocol": "source-integrity-audit-v1",
+  "checked_at": "2026-11-21T22:08:53.876890+07:00",
+  "assessment_id": "7f7c009b-bdcd-5b33-934e-15251ad2c976",
+  "read_only": true,
+  "professional_confirmation": false,
+  "semantic_coverage": "PENDING_HUMAN_REVIEW",
+  "control_count": 19,
+  "integrity_counts": {
+    "verified": 36,
+    "not_verifiable": 1
+  },
+  "sources": [
+    {
+      "control_id": "A.8.1",
+      "evidence_id": "A8CAP-2dde3a7734659b8355fcf059e50a766dc6eea35c",
+      "source": "a8-capture://0b7dc9e9-4d6c-4e0a-9a0f-df3a78feea9e/A.8.1",
+      "sha256_hash": "52305f5626b5fa1885e265b7353414bccde6920d3f8c9af4c412764e8599a041",
+      "source_quality": {
+        "usable": true,
+        "issues": [],
+        "alphanumeric_characters": 1898,
+        "policy": "text-usability-v1",
+        "note": "Ngưỡng kỹ thuật của dự án; không xác nhận tính đúng, đủ tiêu chí, nguồn gốc hoặc tuân thủ ISO.",
+        "integrity": {
+          "state": "verified",
+          "policy": "source-integrity-v1",
+          "note": "Hash gói thu và artifact khớp; chỉ xác minh tính toàn vẹn bản lưu trong lab."
+        }
+      }
+    },
+    {
+      "control_id": "A.8.1",
+      "evidence_id": "A8CAP-44cea96f2be9969e90641a54044e872404b508ef",
+      "source": "a8-capture://67d38694-724e-4cc1-83f8-9df07f5cc3b2/A.8.1",
+      "sha256_hash": "52dac427b26e3a5305993579641d9810684e64f89c7a33e191dc2e9397fd0e4d",
+      "source_quality": {
+        "usable": true,
+        "issues": [],
+        "alphanumeric_characters": 1898,
+        "policy": "text-usability-v1",
+        "note": "Ngưỡng kỹ thuật của dự án; không xác nhận tính đúng, đủ tiêu chí, nguồn gốc hoặc tuân thủ ISO.",
+        "integrity": {
+          "state": "verified",
+          "policy": "source-integrity-v1",
+          "note": "Hash gói thu và artifact khớp; chỉ xác minh tính toàn vẹn bản lưu trong lab."
+        }
+      }
+    },
+    {
+      "control_id": "A.8.32",
+      "evidence_id": "A8CAP-e77afe7b1185150d33117bd590a0137807eae268",
+      "source": "a8-capture://0b7dc9e9-4d6c-4e0a-9a0f-df3a78feea9e/A.8.32",
+      "sha256_hash": "09d797cbaffc94cd3672299a448f96652317d8081ecb3a35f336f95b162f5a0c",
+      "source_quality": {
+        "usable": true,
+        "issues": [],
+        "alphanumeric_characters": 2024,
+        "policy": "text-usability-v1",
+        "note": "Ngưỡng kỹ thuật của dự án; không xác nhận tính đúng, đủ tiêu chí, nguồn gốc hoặc tuân thủ ISO.",
+        "integrity": {
+          "state": "verified",
+          "policy": "source-integrity-v1",
+          "note": "Hash gói thu và artifact khớp; chỉ xác minh tính toàn vẹn bản lưu trong lab."
+        }
+      }
+    },
+    {
+      "control_id": "A.8.32",
+      "evidence_id": "A8CAP-ac2281e47cc8dca790c9a7598047b24a91905834",
+      "source": "a8-capture://67d38694-724e-4cc1-83f8-9df07f5cc3b2/A.8.32",
+      "sha256_hash": "13cd871fcdf8f5e1d539acc232b098a27d92f2ea959f4292b4f0a41ae6f64420",
+      "source_quality": {
+        "usable": true,
+        "issues": [],
+        "alphanumeric_characters": 2024,
+        "policy": "text-usability-v1",
+        "note": "Ngưỡng kỹ thuật của dự án; không xác nhận tính đúng, đủ tiêu chí, nguồn gốc hoặc tuân thủ ISO.",
+        "integrity": {
+          "state": "verified",
+          "policy": "source-integrity-v1",
+          "note": "Hash gói thu và artifact khớp; chỉ xác minh tính toàn vẹn bản lưu trong lab."
+        }
+      }
+    },
+    {
+      "control_id": "A.8.24",
+      "evidence_id": "A8CAP-6e343a39369861d17647936a4e1c6f7619f4d2f4",
+      "source": "a8-capture://0b7dc9e9-4d6c-4e0a-9a0f-df3a78feea9e/A.8.24",
+      "sha256_hash": "96c4be247c472dff0434098844f6ed1eaac4f5295d1de5028eb417c62195af29",
+      "source_quality": {
+        "usable": true,
+        "issues": [],
+        "alphanumeric_characters": 1764,
+        "policy": "text-usability-v1",
+        "note": "Ngưỡng kỹ thuật của dự án; không xác nhận tính đúng, đủ tiêu chí, nguồn gốc hoặc tuân thủ ISO.",
+        "integrity": {
+          "state": "verified",
+          "policy": "source-integrity-v1",
+          "note": "Hash gói thu và artifact khớp; chỉ xác minh tính toàn vẹn bản lưu trong lab."
+        }
+      }
+    },
+    {
+      "control_id": "A.8.24",
+      "evidence_id": "A8CAP-a4eb2459788429948240fa639f336d3e96768267",
+      "source": "a8-capture://67d38694-724e-4cc1-83f8-9df07f5cc3b2/A.8.24",
+      "sha256_hash": "858074b2e084c456ec790083b9e8b71830ccd34f0b8d29e650a9d2fc463484ce",
+      "source_quality": {
+        "usable": true,
+        "issues": [],
+        "alphanumeric_characters": 1764,
+        "policy": "text-usability-v1",
+        "note": "Ngưỡng kỹ thuật của dự án; không xác nhận tính đúng, đủ tiêu chí, nguồn gốc hoặc tuân thủ ISO.",
+        "integrity": {
+          "state": "verified",
+          "policy": "source-integrity-v1",
+          "note": "Hash gói thu và artifact khớp; chỉ xác minh tính toàn vẹn bản lưu trong lab."
+        }
+      }
+    },
+    {
+      "control_id": "A.8.22",
+      "evidence_id": "A8CAP-ee4807616708ec078304f5aa0d2242ba77aa17bd",
+      "source": "a8-capture://0b7dc9e9-4d6c-4e0a-9a0f-df3a78feea9e/A.8.22",
+      "sha256_hash": "fbd8288e4d960a120b48a0862b197cb3076476cf01ca4c8dbead1ed0e75ab2e8",
+      "source_quality": {
+        "usable": true,
+        "issues": [],
+        "alphanumeric_characters": 1862,
+        "policy": "text-usability-v1",
+        "note": "Ngưỡng kỹ thuật của dự án; không xác nhận tính đúng, đủ tiêu chí, nguồn gốc hoặc tuân thủ ISO.",
+        "integrity": {
+          "state": "verified",
+          "policy": "source-integrity-v1",
+          "note": "Hash gói thu và artifact khớp; chỉ xác minh tính toàn vẹn bản lưu trong lab."
+        }
+      }
+    },
+    {
+      "control_id": "A.8.22",
+      "evidence_id": "A8CAP-1c954d7fb9e886a8a91be7dfa90ba08046af681f",
+      "source": "a8-capture://67d38694-724e-4cc1-83f8-9df07f5cc3b2/A.8.22",
+      "sha256_hash": "b15eb9fb933680c631d7cf85988d3ec94c4eb8eba62479dd4a8cea9c33f721e9",
+      "source_quality": {
+        "usable": true,
+        "issues": [],
+        "alphanumeric_characters": 1862,
+        "policy": "text-usability-v1",
+        "note": "Ngưỡng kỹ thuật của dự án; không xác nhận tính đúng, đủ tiêu chí, nguồn gốc hoặc tuân thủ ISO.",
+        "integrity": {
+          "state": "verified",
+          "policy": "source-integrity-v1",
+          "note": "Hash gói thu và artifact khớp; chỉ xác minh tính toàn vẹn bản lưu trong lab."
+        }
+      }
+    },
+    {
+      "control_id": "A.8.20",
+      "evidence_id": "A8CAP-e61dc2bd4b269303a14ea59d3ecfd11432c400a4",
+      "source": "a8-capture://0b7dc9e9-4d6c-4e0a-9a0f-df3a78feea9e/A.8.20",
+      "sha256_hash": "578477b64ce1c13c04cf1fc7b23ca1148fc930c6b04c12be0932815193051c5d",
+      "source_quality": {
+        "usable": true,
+        "issues": [],
+        "alphanumeric_characters": 1821,
+        "policy": "text-usability-v1",
+        "note": "Ngưỡng kỹ thuật của dự án; không xác nhận tính đúng, đủ tiêu chí, nguồn gốc hoặc tuân thủ ISO.",
+        "integrity": {
+          "state": "verified",
+          "policy": "source-integrity-v1",
+          "note": "Hash gói thu và artifact khớp; chỉ xác minh tính toàn vẹn bản lưu trong lab."
+        }
+      }
+    },
+    {
+      "control_id": "A.8.20",
+      "evidence_id": "A8CAP-2e2d47afc634522dd0499dd645f27e0e7fbd07eb",
+      "source": "a8-capture://67d38694-724e-4cc1-83f8-9df07f5cc3b2/A.8.20",
+      "sha256_hash": "6136b9dad486c761bcbd906d1795b08ecb1e8777b4cc97bda8a18bed984c18ed",
+      "source_quality": {
+        "usable": true,
+        "issues": [],
+        "alphanumeric_characters": 1821,
+        "policy": "text-usability-v1",
+        "note": "Ngưỡng kỹ thuật của dự án; không xác nhận tính đúng, đủ tiêu chí, nguồn gốc hoặc tuân thủ ISO.",
+        "integrity": {
+          "state": "verified",
+          "policy": "source-integrity-v1",
+          "note": "Hash gói thu và artifact khớp; chỉ xác minh tính toàn vẹn bản lưu trong lab."
+        }
+      }
+    },
+    {
+      "control_id": "A.8.19",
+      "evidence_id": "A8CAP-9ac27c01b67702d4b6675d84beca5bd6353430eb",
+      "source": "a8-capture://0b7dc9e9-4d6c-4e0a-9a0f-df3a78feea9e/A.8.19",
+      "sha256_hash": "45425d5fcc5b1e98d0bd60c7290b8ff640cec5e8d25323de2c4eb4913b792d61",
+      "source_quality": {
+        "usable": true,
+        "issues": [],
+        "alphanumeric_characters": 3761,
+        "policy": "text-usability-v1",
+        "note": "Ngưỡng kỹ thuật của dự án; không xác nhận tính đúng, đủ tiêu chí, nguồn gốc hoặc tuân thủ ISO.",
+        "integrity": {
+          "state": "verified",
+          "policy": "source-integrity-v1",
+          "note": "Hash gói thu và artifact khớp; chỉ xác minh tính toàn vẹn bản lưu trong lab."
+        }
+      }
+    },
+    {
+      "control_id": "A.8.19",
+      "evidence_id": "A8CAP-bde6e149b94b95bebcb32c85678594a367d92fd5",
+      "source": "a8-capture://67d38694-724e-4cc1-83f8-9df07f5cc3b2/A.8.19",
+      "sha256_hash": "b3f5cb8b8d17692d2dd74899ad7e675fb269d759fada10fc1841557fc834a91f",
+      "source_quality": {
+        "usable": true,
+        "issues": [],
+        "alphanumeric_characters": 3761,
+        "policy": "text-usability-v1",
+        "note": "Ngưỡng kỹ thuật của dự án; không xác nhận tính đúng, đủ tiêu chí, nguồn gốc hoặc tuân thủ ISO.",
+        "integrity": {
+          "state": "verified",
+          "policy": "source-integrity-v1",
+          "note": "Hash gói thu và artifact khớp; chỉ xác minh tính toàn vẹn bản lưu trong lab."
+        }
+      }
+    },
+    {
+      "control_id": "A.8.17",
+      "evidence_id": "A8CAP-6e36a3ee80086cdcf1d21ae8cc86a228f9bbefee",
+      "source": "a8-capture://0b7dc9e9-4d6c-4e0a-9a0f-df3a78feea9e/A.8.17",
+      "sha256_hash": "887217905805d7cfe23a0ef3a9ecf0a050a5a16fd18a76f968790b9d9b33cf72",
+      "source_quality": {
+        "usable": true,
+        "issues": [],
+        "alphanumeric_characters": 1879,
+        "policy": "text-usability-v1",
+        "note": "Ngưỡng kỹ thuật của dự án; không xác nhận tính đúng, đủ tiêu chí, nguồn gốc hoặc tuân thủ ISO.",
+        "integrity": {
+          "state": "verified",
+          "policy": "source-integrity-v1",
+          "note": "Hash gói thu và artifact khớp; chỉ xác minh tính toàn vẹn bản lưu trong lab."
+        }
+      }
+    },
+    {
+      "control_id": "A.8.17",
+      "evidence_id": "A8CAP-069b8914e7421e30d8ac536d65c699e2c250b586",
+      "source": "a8-capture://67d38694-724e-4cc1-83f8-9df07f5cc3b2/A.8.17",
+      "sha256_hash": "880b71674ac0ba3b997756be7c49e19f7de480d009a5f55b6972f6fd2b73c48f",
+      "source_quality": {
+        "usable": true,
+        "issues": [],
+        "alphanumeric_characters": 1879,
+        "policy": "text-usability-v1",
+        "note": "Ngưỡng kỹ thuật của dự án; không xác nhận tính đúng, đủ tiêu chí, nguồn gốc hoặc tuân thủ ISO.",
+        "integrity": {
+          "state": "verified",
+          "policy": "source-integrity-v1",
+          "note": "Hash gói thu và artifact khớp; chỉ xác minh tính toàn vẹn bản lưu trong lab."
+        }
+      }
+    },
+    {
+      "control_id": "A.8.16",
+      "evidence_id": "A8CAP-65b60c56df0ace08ceb5c4bc56335fd7a8baa77f",
+      "source": "a8-capture://0b7dc9e9-4d6c-4e0a-9a0f-df3a78feea9e/A.8.16",
+      "sha256_hash": "e2db947060d6f3f79912e4ce52080cd14a145f0e8d8bef95bf9a1aeb66875a05",
+      "source_quality": {
+        "usable": true,
+        "issues": [],
+        "alphanumeric_characters": 1690,
+        "policy": "text-usability-v1",
+        "note": "Ngưỡng kỹ thuật của dự án; không xác nhận tính đúng, đủ tiêu chí, nguồn gốc hoặc tuân thủ ISO.",
+        "integrity": {
+          "state": "verified",
+          "policy": "source-integrity-v1",
+          "note": "Hash gói thu và artifact khớp; chỉ xác minh tính toàn vẹn bản lưu trong lab."
+        }
+      }
+    },
+    {
+      "control_id": "A.8.16",
+      "evidence_id": "A8CAP-a713f9fa99c99167cf0cad5cff36d366a593f140",
+      "source": "a8-capture://67d38694-724e-4cc1-83f8-9df07f5cc3b2/A.8.16",
+      "sha256_hash": "9b1083892e72fd9a60af072142513b0d44d0982a1a99b097aa9a300c2157e6a7",
+      "source_quality": {
+        "usable": true,
+        "issues": [],
+        "alphanumeric_characters": 1690,
+        "policy": "text-usability-v1",
+        "note": "Ngưỡng kỹ thuật của dự án; không xác nhận tính đúng, đủ tiêu chí, nguồn gốc hoặc tuân thủ ISO.",
+        "integrity": {
+          "state": "verified",
+          "policy": "source-integrity-v1",
+          "note": "Hash gói thu và artifact khớp; chỉ xác minh tính toàn vẹn bản lưu trong lab."
+        }
+      }
+    },
+    {
+      "control_id": "A.8.15",
+      "evidence_id": "A8CAP-701453fb7db7c91765e65ffd12ebcc2096e95970",
+      "source": "a8-capture://0b7dc9e9-4d6c-4e0a-9a0f-df3a78feea9e/A.8.15",
+      "sha256_hash": "bcf538e39bccd2ee415a246c6d12e32bde8b443963195fb22012a675587824c0",
+      "source_quality": {
+        "usable": true,
+        "issues": [],
+        "alphanumeric_characters": 1710,
+        "policy": "text-usability-v1",
+        "note": "Ngưỡng kỹ thuật của dự án; không xác nhận tính đúng, đủ tiêu chí, nguồn gốc hoặc tuân thủ ISO.",
+        "integrity": {
+          "state": "verified",
+          "policy": "source-integrity-v1",
+          "note": "Hash gói thu và artifact khớp; chỉ xác minh tính toàn vẹn bản lưu trong lab."
+        }
+      }
+    },
+    {
+      "control_id": "A.8.15",
+      "evidence_id": "A8CAP-024cdd973148a2651c48fdfd2ddcc5b4cd78b0e7",
+      "source": "a8-capture://67d38694-724e-4cc1-83f8-9df07f5cc3b2/A.8.15",
+      "sha256_hash": "dbf15514e04ce237d258fa6e8c89cff5c2463f3dd2222a20b278f4376e6f4829",
+      "source_quality": {
+        "usable": true,
+        "issues": [],
+        "alphanumeric_characters": 1710,
+        "policy": "text-usability-v1",
+        "note": "Ngưỡng kỹ thuật của dự án; không xác nhận tính đúng, đủ tiêu chí, nguồn gốc hoặc tuân thủ ISO.",
+        "integrity": {
+          "state": "verified",
+          "policy": "source-integrity-v1",
+          "note": "Hash gói thu và artifact khớp; chỉ xác minh tính toàn vẹn bản lưu trong lab."
+        }
+      }
+    },
+    {
+      "control_id": "A.8.13",
+      "evidence_id": "A8CAP-9a4313b18c29c30afff20516ea49e166ac261b02",
+      "source": "a8-capture://0b7dc9e9-4d6c-4e0a-9a0f-df3a78feea9e/A.8.13",
+      "sha256_hash": "bb6bf992143d24571cb36e5f6075ea7526bfe42d95679a392fbf877889c579de",
+      "source_quality": {
+        "usable": true,
+        "issues": [],
+        "alphanumeric_characters": 1611,
+        "policy": "text-usability-v1",
+        "note": "Ngưỡng kỹ thuật của dự án; không xác nhận tính đúng, đủ tiêu chí, nguồn gốc hoặc tuân thủ ISO.",
+        "integrity": {
+          "state": "verified",
+          "policy": "source-integrity-v1",
+          "note": "Hash gói thu và artifact khớp; chỉ xác minh tính toàn vẹn bản lưu trong lab."
+        }
+      }
+    },
+    {
+      "control_id": "A.8.13",
+      "evidence_id": "A8CAP-03c0aceb28e763c1a5fc5ffef66afd7a4973d552",
+      "source": "a8-capture://67d38694-724e-4cc1-83f8-9df07f5cc3b2/A.8.13",
+      "sha256_hash": "cdf85aa6f727dede5d111a1a6d9f9ac96782ab50766a10a354fca6bfe729afd3",
+      "source_quality": {
+        "usable": true,
+        "issues": [],
+        "alphanumeric_characters": 1611,
+        "policy": "text-usability-v1",
+        "note": "Ngưỡng kỹ thuật của dự án; không xác nhận tính đúng, đủ tiêu chí, nguồn gốc hoặc tuân thủ ISO.",
+        "integrity": {
+          "state": "verified",
+          "policy": "source-integrity-v1",
+          "note": "Hash gói thu và artifact khớp; chỉ xác minh tính toàn vẹn bản lưu trong lab."
+        }
+      }
+    },
+    {
+      "control_id": "A.8.12",
+      "evidence_id": "A8CAP-55a18974d78c34bf1c0d0a9157d56882c9717aff",
+      "source": "a8-capture://0b7dc9e9-4d6c-4e0a-9a0f-df3a78feea9e/A.8.12",
+      "sha256_hash": "5335c118deadc31bdf87cb7f77818b4bb95a9a5e5750e47e385194e9c4652b44",
+      "source_quality": {
+        "usable": true,
+        "issues": [],
+        "alphanumeric_characters": 1626,
+        "policy": "text-usability-v1",
+        "note": "Ngưỡng kỹ thuật của dự án; không xác nhận tính đúng, đủ tiêu chí, nguồn gốc hoặc tuân thủ ISO.",
+        "integrity": {
+          "state": "verified",
+          "policy": "source-integrity-v1",
+          "note": "Hash gói thu và artifact khớp; chỉ xác minh tính toàn vẹn bản lưu trong lab."
+        }
+      }
+    },
+    {
+      "control_id": "A.8.12",
+      "evidence_id": "A8CAP-049a459298395b29c35013f777e0a97db2b898fd",
+      "source": "a8-capture://67d38694-724e-4cc1-83f8-9df07f5cc3b2/A.8.12",
+      "sha256_hash": "979d9bb66e6db2b1fc3d5a8a30ef9b0a20d5d6196ec1326891598cd0a4f6e47b",
+      "source_quality": {
+        "usable": true,
+        "issues": [],
+        "alphanumeric_characters": 1626,
+        "policy": "text-usability-v1",
+        "note": "Ngưỡng kỹ thuật của dự án; không xác nhận tính đúng, đủ tiêu chí, nguồn gốc hoặc tuân thủ ISO.",
+        "integrity": {
+          "state": "verified",
+          "policy": "source-integrity-v1",
+          "note": "Hash gói thu và artifact khớp; chỉ xác minh tính toàn vẹn bản lưu trong lab."
+        }
+      }
+    },
+    {
+      "control_id": "A.8.10",
+      "evidence_id": "A8CAP-f0a7fd8324e644643d6092a335076e99c2dfdfd4",
+      "source": "a8-capture://0b7dc9e9-4d6c-4e0a-9a0f-df3a78feea9e/A.8.10",
+      "sha256_hash": "9728c9965d8ba6346affe22f46236f24e43c3644273e37132a42723a167e42be",
+      "source_quality": {
+        "usable": true,
+        "issues": [],
+        "alphanumeric_characters": 1581,
+        "policy": "text-usability-v1",
+        "note": "Ngưỡng kỹ thuật của dự án; không xác nhận tính đúng, đủ tiêu chí, nguồn gốc hoặc tuân thủ ISO.",
+        "integrity": {
+          "state": "verified",
+          "policy": "source-integrity-v1",
+          "note": "Hash gói thu và artifact khớp; chỉ xác minh tính toàn vẹn bản lưu trong lab."
+        }
+      }
+    },
+    {
+      "control_id": "A.8.10",
+      "evidence_id": "A8CAP-f8e9fb75af2fa20dce130f2d7873d5b4973c4654",
+      "source": "a8-capture://67d38694-724e-4cc1-83f8-9df07f5cc3b2/A.8.10",
+      "sha256_hash": "4f4a5f68c37cd7e218f43034200f7999a03b44d4f3433ec6a465e86de43a6f5a",
+      "source_quality": {
+        "usable": true,
+        "issues": [],
+        "alphanumeric_characters": 1581,
+        "policy": "text-usability-v1",
+        "note": "Ngưỡng kỹ thuật của dự án; không xác nhận tính đúng, đủ tiêu chí, nguồn gốc hoặc tuân thủ ISO.",
+        "integrity": {
+          "state": "verified",
+          "policy": "source-integrity-v1",
+          "note": "Hash gói thu và artifact khớp; chỉ xác minh tính toàn vẹn bản lưu trong lab."
+        }
+      }
+    },
+    {
+      "control_id": "A.8.9",
+      "evidence_id": "A8CAP-749fb7a15ba6509171d475672ad8ca620b4e1dca",
+      "source": "a8-capture://0b7dc9e9-4d6c-4e0a-9a0f-df3a78feea9e/A.8.9",
+      "sha256_hash": "8e106714dfb1895d3483d4081de0bb61309fe4f4df3d038218a42b846f1aa5c0",
+      "source_quality": {
+        "usable": true,
+        "issues": [],
+        "alphanumeric_characters": 1799,
+        "policy": "text-usability-v1",
+        "note": "Ngưỡng kỹ thuật của dự án; không xác nhận tính đúng, đủ tiêu chí, nguồn gốc hoặc tuân thủ ISO.",
+        "integrity": {
+          "state": "verified",
+          "policy": "source-integrity-v1",
+          "note": "Hash gói thu và artifact khớp; chỉ xác minh tính toàn vẹn bản lưu trong lab."
+        }
+      }
+    },
+    {
+      "control_id": "A.8.9",
+      "evidence_id": "A8CAP-1f9bbd0a1795fb577c141f4730f6e1c47b3a79a3",
+      "source": "a8-capture://67d38694-724e-4cc1-83f8-9df07f5cc3b2/A.8.9",
+      "sha256_hash": "233684735651ef8455ba837e1303e3dd575dd70225ab8f5ccbdb7c5be33729bc",
+      "source_quality": {
+        "usable": true,
+        "issues": [],
+        "alphanumeric_characters": 1799,
+        "policy": "text-usability-v1",
+        "note": "Ngưỡng kỹ thuật của dự án; không xác nhận tính đúng, đủ tiêu chí, nguồn gốc hoặc tuân thủ ISO.",
+        "integrity": {
+          "state": "verified",
+          "policy": "source-integrity-v1",
+          "note": "Hash gói thu và artifact khớp; chỉ xác minh tính toàn vẹn bản lưu trong lab."
+        }
+      }
+    },
+    {
+      "control_id": "A.8.8",
+      "evidence_id": "A8CAP-99fb6baf65624d3a0a5b61b2ee5b8c078bc1ad8a",
+      "source": "a8-capture://0b7dc9e9-4d6c-4e0a-9a0f-df3a78feea9e/A.8.8",
+      "sha256_hash": "931392cf38aae5134ba9455b231dbe31f7aa51e332dfd161f1d4145b5132bb3e",
+      "source_quality": {
+        "usable": true,
+        "issues": [],
+        "alphanumeric_characters": 3841,
+        "policy": "text-usability-v1",
+        "note": "Ngưỡng kỹ thuật của dự án; không xác nhận tính đúng, đủ tiêu chí, nguồn gốc hoặc tuân thủ ISO.",
+        "integrity": {
+          "state": "verified",
+          "policy": "source-integrity-v1",
+          "note": "Hash gói thu và artifact khớp; chỉ xác minh tính toàn vẹn bản lưu trong lab."
+        }
+      }
+    },
+    {
+      "control_id": "A.8.8",
+      "evidence_id": "A8CAP-a74dfad8d31b03db5d86a30f56561d5c96abc8a8",
+      "source": "a8-capture://67d38694-724e-4cc1-83f8-9df07f5cc3b2/A.8.8",
+      "sha256_hash": "66461da9bf54d20ec31bddd6b8925d1dad6e8539f1e29e07ae35e88510a8ec21",
+      "source_quality": {
+        "usable": true,
+        "issues": [],
+        "alphanumeric_characters": 3841,
+        "policy": "text-usability-v1",
+        "note": "Ngưỡng kỹ thuật của dự án; không xác nhận tính đúng, đủ tiêu chí, nguồn gốc hoặc tuân thủ ISO.",
+        "integrity": {
+          "state": "verified",
+          "policy": "source-integrity-v1",
+          "note": "Hash gói thu và artifact khớp; chỉ xác minh tính toàn vẹn bản lưu trong lab."
+        }
+      }
+    },
+    {
+      "control_id": "A.8.7",
+      "evidence_id": "A8CAP-04f9a3878cd79ee4236df80b5be93960b851ab41",
+      "source": "a8-capture://0b7dc9e9-4d6c-4e0a-9a0f-df3a78feea9e/A.8.7",
+      "sha256_hash": "a8cc5e4e9bc78fe08669ab007b927ecd4e703cd1ca8d431259d3c34ed8e5213a",
+      "source_quality": {
+        "usable": true,
+        "issues": [],
+        "alphanumeric_characters": 1837,
+        "policy": "text-usability-v1",
+        "note": "Ngưỡng kỹ thuật của dự án; không xác nhận tính đúng, đủ tiêu chí, nguồn gốc hoặc tuân thủ ISO.",
+        "integrity": {
+          "state": "verified",
+          "policy": "source-integrity-v1",
+          "note": "Hash gói thu và artifact khớp; chỉ xác minh tính toàn vẹn bản lưu trong lab."
+        }
+      }
+    },
+    {
+      "control_id": "A.8.7",
+      "evidence_id": "A8CAP-2e434c67aeaa3e181d2871e80d18cfde45ade118",
+      "source": "a8-capture://67d38694-724e-4cc1-83f8-9df07f5cc3b2/A.8.7",
+      "sha256_hash": "86d57da458d587224a5d91fe9d9148b90d0b94a8ead7964b494b9b2ea1c3739f",
+      "source_quality": {
+        "usable": true,
+        "issues": [],
+        "alphanumeric_characters": 1837,
+        "policy": "text-usability-v1",
+        "note": "Ngưỡng kỹ thuật của dự án; không xác nhận tính đúng, đủ tiêu chí, nguồn gốc hoặc tuân thủ ISO.",
+        "integrity": {
+          "state": "verified",
+          "policy": "source-integrity-v1",
+          "note": "Hash gói thu và artifact khớp; chỉ xác minh tính toàn vẹn bản lưu trong lab."
+        }
+      }
+    },
+    {
+      "control_id": "A.8.5",
+      "evidence_id": "A8CAP-2e8c77befeef95e5e265d44c319916f0e11815c5",
+      "source": "a8-capture://0b7dc9e9-4d6c-4e0a-9a0f-df3a78feea9e/A.8.5",
+      "sha256_hash": "0d75397acaf4f85dfb9191a65ca3889be16452e792cbf3f94682cd241db3761d",
+      "source_quality": {
+        "usable": true,
+        "issues": [],
+        "alphanumeric_characters": 1876,
+        "policy": "text-usability-v1",
+        "note": "Ngưỡng kỹ thuật của dự án; không xác nhận tính đúng, đủ tiêu chí, nguồn gốc hoặc tuân thủ ISO.",
+        "integrity": {
+          "state": "verified",
+          "policy": "source-integrity-v1",
+          "note": "Hash gói thu và artifact khớp; chỉ xác minh tính toàn vẹn bản lưu trong lab."
+        }
+      }
+    },
+    {
+      "control_id": "A.8.5",
+      "evidence_id": "A8CAP-db4051d2219b1058e9f8f9a3438ba4552f4ec720",
+      "source": "a8-capture://67d38694-724e-4cc1-83f8-9df07f5cc3b2/A.8.5",
+      "sha256_hash": "0bd496aa96f84e60bac6354237ca90bde821af2ffea4e61a9595e92ea4aba72e",
+      "source_quality": {
+        "usable": true,
+        "issues": [],
+        "alphanumeric_characters": 1876,
+        "policy": "text-usability-v1",
+        "note": "Ngưỡng kỹ thuật của dự án; không xác nhận tính đúng, đủ tiêu chí, nguồn gốc hoặc tuân thủ ISO.",
+        "integrity": {
+          "state": "verified",
+          "policy": "source-integrity-v1",
+          "note": "Hash gói thu và artifact khớp; chỉ xác minh tính toàn vẹn bản lưu trong lab."
+        }
+      }
+    },
+    {
+      "control_id": "A.8.3",
+      "evidence_id": "A8CAP-2041a7d32385d61e383457e991a20df6b26d6fba",
+      "source": "a8-capture://0b7dc9e9-4d6c-4e0a-9a0f-df3a78feea9e/A.8.3",
+      "sha256_hash": "8865fb85e16ba4146b806f62177f5f5813bbabed4204e9c60f0e81bd348ab28c",
+      "source_quality": {
+        "usable": true,
+        "issues": [],
+        "alphanumeric_characters": 1639,
+        "policy": "text-usability-v1",
+        "note": "Ngưỡng kỹ thuật của dự án; không xác nhận tính đúng, đủ tiêu chí, nguồn gốc hoặc tuân thủ ISO.",
+        "integrity": {
+          "state": "verified",
+          "policy": "source-integrity-v1",
+          "note": "Hash gói thu và artifact khớp; chỉ xác minh tính toàn vẹn bản lưu trong lab."
+        }
+      }
+    },
+    {
+      "control_id": "A.8.3",
+      "evidence_id": "A8CAP-f0ff998745f599c53ac48fa7adf0df0a813820ed",
+      "source": "a8-capture://67d38694-724e-4cc1-83f8-9df07f5cc3b2/A.8.3",
+      "sha256_hash": "ff2dd28d189f0581d8987ef09baa8349036b4436d26e97cadb2427c32ae1d443",
+      "source_quality": {
+        "usable": true,
+        "issues": [],
+        "alphanumeric_characters": 1639,
+        "policy": "text-usability-v1",
+        "note": "Ngưỡng kỹ thuật của dự án; không xác nhận tính đúng, đủ tiêu chí, nguồn gốc hoặc tuân thủ ISO.",
+        "integrity": {
+          "state": "verified",
+          "policy": "source-integrity-v1",
+          "note": "Hash gói thu và artifact khớp; chỉ xác minh tính toàn vẹn bản lưu trong lab."
+        }
+      }
+    },
+    {
+      "control_id": "A.8.2",
+      "evidence_id": "A8CAP-841bd9158844e7b074dc95ac2b3954ecbe813d13",
+      "source": "a8-capture://0b7dc9e9-4d6c-4e0a-9a0f-df3a78feea9e/A.8.2",
+      "sha256_hash": "d3cbc9dece539db57515a1da35b0e2c4bb1d5dc819ecd49b2356e9590e9887f7",
+      "source_quality": {
+        "usable": true,
+        "issues": [],
+        "alphanumeric_characters": 1727,
+        "policy": "text-usability-v1",
+        "note": "Ngưỡng kỹ thuật của dự án; không xác nhận tính đúng, đủ tiêu chí, nguồn gốc hoặc tuân thủ ISO.",
+        "integrity": {
+          "state": "verified",
+          "policy": "source-integrity-v1",
+          "note": "Hash gói thu và artifact khớp; chỉ xác minh tính toàn vẹn bản lưu trong lab."
+        }
+      }
+    },
+    {
+      "control_id": "A.8.2",
+      "evidence_id": "A8CAP-2b3187732da6b13fa7852e531273d61c74a5b26a",
+      "source": "a8-capture://67d38694-724e-4cc1-83f8-9df07f5cc3b2/A.8.2",
+      "sha256_hash": "c906f10970b69ad2457beee4763879a99b0a7cab62a7124ff292bbd43e012476",
+      "source_quality": {
+        "usable": true,
+        "issues": [],
+        "alphanumeric_characters": 1727,
+        "policy": "text-usability-v1",
+        "note": "Ngưỡng kỹ thuật của dự án; không xác nhận tính đúng, đủ tiêu chí, nguồn gốc hoặc tuân thủ ISO.",
+        "integrity": {
+          "state": "verified",
+          "policy": "source-integrity-v1",
+          "note": "Hash gói thu và artifact khớp; chỉ xác minh tính toàn vẹn bản lưu trong lab."
+        }
+      }
+    },
+    {
+      "control_id": "A.6.2",
+      "evidence_id": "c6e06211-2486-492e-82a4-8673bbe80d45",
+      "source": "bc.docx",
+      "sha256_hash": "59af226edcad36cca001b8bc4796ac5468c8580ce2e02a51d2dca166400cb856",
+      "source_quality": {
+        "usable": false,
+        "issues": [
+          "too_little_extracted_text"
+        ],
+        "alphanumeric_characters": 1,
+        "policy": "text-usability-v1",
+        "note": "Ngưỡng kỹ thuật của dự án; không xác nhận tính đúng, đủ tiêu chí, nguồn gốc hoặc tuân thủ ISO.",
+        "integrity": {
+          "state": "not_verifiable",
+          "policy": "source-integrity-v1",
+          "note": "Nguồn cũ/connector chưa có kiểm tra bản gốc tự động; cần người phụ trách đối chiếu."
+        }
+      }
+    }
+  ],
+  "source_record_count": 37,
+  "local_package_scan": {
+    "manifest_count": 56,
+    "prepared_source_items": 0,
+    "controls_with_items": [],
+    "note": "Read-only scan; templates and empty manifests are not evidence."
+  }
+}

@@ -38,9 +38,9 @@ Trong **Thực nghiệm 18 A.8 → Nhập gói nguồn ứng viên đã chốt**
 
 Người rà: ______; vai trò: ______; thời điểm: ______; phiên bản/hash đã rà: ______; căn cứ/ngoại lệ: ______. Phiếu trống không phải bằng chứng phê duyệt và không được nạp như nguồn tuân thủ.
 
-## Checklist UI còn phải thao tác
+## Checklist UI ban đầu — mốc 15/11
 
-Các dòng dưới đây chưa được tích bằng test API. Computer Use/native pipe và browser host không kết nối trong phiên kiểm tra, nên chưa xác nhận thao tác toàn giao diện.
+Các dòng dưới đây giữ trạng thái tại ngày 15/11, không phải danh sách tồn đọng hiện hành. Cập nhật 21/11: đã chốt kiểm thử kỹ thuật các luồng chính theo [ma trận UI tuần 6](MA_TRAN_NGHIEM_THU_UI_TUAN_06.md), có Edge và ghi thật trên database riêng. Trạng thái nguồn, chấm độc lập và phê duyệt vẫn cần hồ sơ của nhóm.
 
 | Thao tác trên UI | Kỳ vọng | Kết quả UI |
 |---|---|---|
