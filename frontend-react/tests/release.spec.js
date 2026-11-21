@@ -22,6 +22,16 @@ for(const [username,key] of [['admin','INITIAL_ADMIN_PASSWORD'],['ledangkhoa','A
   await page.getByLabel('Mật khẩu').fill(password);
   await page.getByRole('button',{name:'ĐĂNG NHẬP HỆ THỐNG'}).click();
   await expect(page.getByRole('heading',{name:'Tổng quan đánh giá tuân thủ',exact:true})).toBeVisible();
+  await page.getByText('Cần làm gì để hoàn tất? · Hướng dẫn theo hồ sơ hiện tại',{exact:true}).click();
+  await expect(page.getByRole('heading',{name:'1. Chốt tiêu chí và người đánh giá',exact:true})).toBeVisible();
+  const guideDownloading=page.waitForEvent('download');
+  await page.getByRole('button',{name:'Xuất hướng dẫn JSON',exact:true}).click();
+  const guideStream=await (await guideDownloading).createReadStream();let guideText='';
+  for await(const chunk of guideStream)guideText+=chunk.toString();
+  const guide=JSON.parse(guideText);
+  expect(guide.steps).toHaveLength(7);
+  expect(guide.meaning).toBe('GUIDANCE_ONLY_NOT_EVIDENCE_OR_APPROVAL');
+  expect(guide.steps.find(s=>s.id==='research').pending).toBeNull();
   await page.getByText('Quản lý nguồn, tiêu chí và hồ sơ bàn giao',{exact:true}).click();
   await page.getByText('Hồ sơ bàn giao và công cụ quản lý',{exact:true}).click();
   await expect(page.getByRole('heading',{name:'Việc còn thiếu để bàn giao',exact:true})).toBeVisible();
