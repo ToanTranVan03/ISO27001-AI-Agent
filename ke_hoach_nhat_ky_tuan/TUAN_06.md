@@ -38,6 +38,7 @@ Phần triển khai kỹ thuật đã hoàn thành trong tuần:
 - [x] Mở rộng kiểm thử Edge cho nộp nguồn hợp lệ/tải bản gốc, chặn token thẩm định cũ, thẩm định tiêu chí/lưu kế hoạch nháp và nộp/khóa nhãn mù sau tải lại bằng phản hồi API mô phỏng; tách kết quả mô phỏng khỏi kiểm thử ghi thật và nghiệm thu chuyên môn.
 - [x] Bổ sung kiểm thử tích hợp ghi thật trên PostgreSQL/backend/Edge cô lập: nguồn, thẩm định, kế hoạch, chu kỳ duyệt/hết hiệu lực SoA và hai tài khoản thử chấm 36 nhãn có hỗ trợ. Dữ liệu tổng hợp, không nhập vào đợt chính; giữ lần lỗi và dọn database thử.
 - [x] Chuẩn bị 38 hồ sơ mô phỏng phát triển bổ sung cho nhóm ngoài 18 A.8, tách khóa thiết kế khỏi đầu vào Agent; thêm khu lab riêng trong Doanh nghiệp, chạy Qwen2.5:7b và giữ phản hồi/lỗi/thử lại. Không cộng nguồn hoặc nhãn mô phỏng vào nghiệm thu đợt chính.
+- [x] Phân tích kỹ thuật sai khác từng tiêu chí lab, kiểm tra raw response/viện dẫn/hash, xuất phiếu rà và bổ sung lịch sử chọn lượt; lượt mới chốt snapshot/hash khóa thiết kế trước suy luận, lượt cũ giữ cảnh báo chưa chốt.
 
 Chỉ đánh dấu hoàn thành khi có kết quả và minh chứng. Hoàn thành phần mềm, có nguồn hoặc chạy xong không đồng nghĩa control tuân thủ hay đã nghiệm thu chuyên môn.
 
@@ -82,6 +83,9 @@ Các thông tin trên là **trạng thái bàn giao từ tuần 5**, không ph�
 
 ### Bổ sung ngày 21/11 — phân việc còn chờ và mở rộng kiểm thử
 
+- Hoàn thiện [rà sai khác tiêu chí lab 38](../docs/RA_SAI_KHAC_TIEU_CHI_LAB_38.md): 38 control được đối chiếu, 15 lệch kết luận tổng nhưng 18 lệch ít nhất một tiêu chí, tổng 19 tiêu chí khác khóa. A.6.3, A.6.5, A.7.11 có kết luận tổng trùng khóa nhưng tiêu chí vẫn lệch. Bảng trên UI hiển thị căn cứ model, tệp/hash và phân loại khác biệt; xuất JSON để người phụ trách rà, không tự phán quyết model/khóa đúng.
+- Lượt lab mới lưu khóa thiết kế và hash trước khi gọi model; khóa không vào prompt. Lượt cũ được ghi `LEGACY_CURRENT_KEY_NOT_FROZEN`, không gán hồi tố là đã chốt. Chặn phân tích khi nguồn/hash đổi, kiểm tra kết luận lưu với phản hồi model gốc và không nhận index tiêu chí dạng bool/float. **337 test Python, 5 kịch bản Edge, lint/build đạt**; không chạy model lại hoặc thay kết quả/nhãn để tăng điểm.
+
 - Bổ sung 38 tình huống hồ sơ có nội dung cụ thể: 8 A.6, 14 A.7 và 16 A.8 ngoài nhóm thực nghiệm 18; có hợp đồng/đào tạo, nhật ký vật lý, cấu hình và tài liệu kỹ thuật. Nguồn do trợ lý tạo, đánh dấu phát triển đã biết, không phải nguồn độc lập hoặc xác nhận của thành viên.
 - Agent Qwen2.5:7b chạy 38/38 ca: 3 lỗi cấu trúc đầu được giữ lại; thử đúng một lần bằng JSON Schema cho 3 ca lỗi, còn 0 lỗi cấu trúc cuối. Khớp khóa thiết kế lần đầu 22/38, sau thử lại 23/38 (60,53%); 15 ca lệch giữ nguyên để rà, không coi đây là accuracy so với người đánh giá.
 - [Kết quả và snapshot nguồn 38 hồ sơ](../docs/KET_QUA_LAB_HO_SO_38_2026_11_21.md). Xem trên **Doanh nghiệp → Lab hồ sơ bổ sung · 38 control**; admin chạy lượt mới, các tài khoản đọc/xuất được gói không có đáp án. Kết quả lưu riêng, không sửa hồ sơ/nhãn/SoA đợt chính.
@@ -94,7 +98,7 @@ Các thông tin trên là **trạng thái bàn giao từ tuần 5**, không ph�
 - Kiểm chứng phần mới: **11 test JavaScript, 5 kịch bản Edge, lint/build đạt**. Ba kịch bản đọc/xuất bằng tài khoản thật; hai kịch bản ghi nguồn/thẩm định/quyết định và nộp/khóa nhãn dùng API mô phỏng trên trình duyệt. Kiểm tra không làm thay đổi hồ sơ đợt thật. Không chạy lại bộ Python vì không sửa backend; mốc gần nhất vẫn 319 test đạt.
 - Chưa đóng các mục cần con người: xác nhận rubric/phương pháp, bổ sung nguồn, tập kiểm định mới, tự chấm phù hợp, xử lý bất đồng thật, 56 quyết định/thẩm định và phê duyệt SoA. Đã bổ sung một kịch bản UI ghi thật trên đợt riêng; mục kiểm thử đầy đủ toàn giao diện vẫn mở vì chưa bao phủ mọi chức năng/tình huống.
 
-Mốc mới nhất ngày 21/11: **331 test Python đạt**; frontend đã đạt **11 test JavaScript, 5 kịch bản Edge và lint/build**, cùng một kịch bản tích hợp Edge ghi thật trên database thử. Đã chạy LLM thật trên 38 ca hồ sơ phát triển, giữ cả lỗi/ca lệch. Phân biệt kiểm thử dữ liệu tổng hợp với nhãn và hồ sơ chuyên môn; các số test thấp hơn là mốc lịch sử.
+Mốc mới nhất ngày 21/11: **337 test Python đạt**; frontend đã đạt **11 test JavaScript, 5 kịch bản Edge và lint/build**, cùng một kịch bản tích hợp Edge ghi thật trên database thử. Đã chạy LLM thật trên 38 ca hồ sơ phát triển và rà sai khác từng tiêu chí, giữ cả lỗi/ca lệch. Phân biệt kiểm thử dữ liệu tổng hợp với nhãn và hồ sơ chuyên môn; các số test thấp hơn là mốc lịch sử.
 
 - [Sổ xử lý bất đồng A.8](../docs/SO_XU_LY_BAT_DONG_A8.md): cách ghi biên bản riêng, xuất báo cáo và giới hạn kiểm thử lưu.
 - [Biên bản kiểm thử Edge và cách chạy lại](../docs/KIEM_THU_RELEASE_2026_11_20.md): phạm vi đọc/xuất, từ chối tệp lỗi; mốc 316 test trước khi thêm sổ xử lý.
