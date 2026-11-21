@@ -42,6 +42,7 @@ def parse_result(raw,case):
     checks=value['checks']
     if not isinstance(checks,list) or len(checks)!=len(case['criteria']):raise ValueError('Missing criterion verdicts')
     if any(not isinstance(c,dict) for c in checks):raise ValueError('Invalid checks')
+    if any(type(c.get('criterion_index')) is not int for c in checks):raise ValueError('Criterion index must be an integer')
     if {c.get('criterion_index') for c in checks}!=set(range(len(checks))):raise ValueError('Duplicate or invalid criterion index')
     files={a['filename'] for a in case['artifacts']}
     for check in checks:
@@ -88,8 +89,16 @@ def evaluate(case,model,generate=None):
     return result
 
 
-def compare_designer(results):
-    reference=json.loads(DATA.read_text(encoding='utf-8'))['cases']
+def designer_reference():
+    return {cid:{'designer_verdicts':value['designer_verdicts']} for cid,value in json.loads(DATA.read_text(encoding='utf-8'))['cases'].items()}
+
+
+def reference_hash(reference):
+    return hashlib.sha256(json.dumps(reference,sort_keys=True,ensure_ascii=False).encode()).hexdigest()
+
+
+def compare_designer(results,reference=None):
+    reference=reference if reference is not None else designer_reference()
     comparisons=[]
     for row in results:
         expected=expected_status(reference[row['control_id']]['designer_verdicts'])

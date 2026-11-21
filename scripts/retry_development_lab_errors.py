@@ -26,7 +26,7 @@ def retry(path):
     updates={r['control_id']:r for r in repairs}
     doc.update(repair_protocol='schema-constrained-json-v1',repair_at=datetime.now(timezone.utc).isoformat(),repair_attempts=repairs,
         final_results=[updates.get(r['control_id'],r) for r in doc['results']])
-    doc['designer_comparison_after_retry']=compare_designer(doc['final_results'])
+    doc['designer_comparison_after_retry']=compare_designer(doc['final_results'],doc.get('designer_reference_snapshot'))
     temporary=path.with_suffix('.tmp');temporary.write_text(json.dumps(doc,ensure_ascii=False,indent=2),encoding='utf-8');temporary.replace(path)
     return doc
 

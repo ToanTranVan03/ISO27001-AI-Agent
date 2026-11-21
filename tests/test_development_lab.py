@@ -61,6 +61,8 @@ def test_duplicate_development_runs_are_blocked_and_restart_is_explicit(monkeypa
     try:
         first=api.start_lab(aid,dict(role='admin'))
         assert first['is_synthetic'] and first['total']==38 and len(scheduled)==1
+        assert first['designer_reference_sha256']==lab.reference_hash(first['designer_reference_snapshot'])
+        assert 'designer_verdicts' not in json.dumps(scheduled[0][-1])
         with pytest.raises(HTTPException) as error:api.start_lab(aid,dict(role='admin'))
         assert error.value.status_code==409
         api.active.pop(str(aid))
@@ -73,6 +75,13 @@ def test_schema_bounds_criteria_and_exact_source_filenames():
     checks=schema['properties']['checks']
     assert checks['minItems']==checks['maxItems']==len(case['criteria'])
     assert checks['items']['properties']['source_files']['items']['enum']==[a['filename'] for a in case['artifacts']]
+
+
+@pytest.mark.parametrize('bad_index',[False,0.0])
+def test_parser_rejects_boolean_or_float_criterion_indexes(bad_index):
+    case=next(c for c in lab.build_bundle()['cases'] if len(c['criteria'])==1)
+    raw=json.dumps({'checks':[dict(criterion_index=bad_index,verdict='unknown',rationale='Missing verification evidence',source_files=[case['artifacts'][0]['filename']])]})
+    with pytest.raises(ValueError,match='integer'):lab.parse_result(raw,case)
 
 
 def test_retry_only_technical_errors_once_and_keeps_first_results(monkeypatch,tmp_path):
