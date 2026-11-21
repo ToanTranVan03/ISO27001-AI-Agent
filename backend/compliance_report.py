@@ -5,7 +5,7 @@ import hashlib
 import json
 from backend.enterprise_spec import NODE_SPECS, CONTROL_TO_NODE
 from backend.database import get_connection
-from evidence_collectors.source_quality import evidence_quality
+from evidence_collectors.source_verification import source_quality
 
 
 def campaign_evidence(assessment_id):
@@ -31,7 +31,7 @@ def campaign_evidence(assessment_id):
             'is_synthetic': synthetic, 'revision': payload.get('revision'),
             'facts': payload.get('facts', {}), 'entity_refs': payload.get('entity_refs', {}),
             'snapshot_hash': payload.get('snapshot_hash'), 'origin': 'lab' if synthetic else 'uploaded_or_imported',
-            'source_quality': evidence_quality(text)})
+            'source_quality': source_quality(assessment_id,cid,eid,kind,source,text,digest)})
     return grouped
 
 
@@ -56,6 +56,9 @@ def build_dossier(assessment_id, board, evidence_by_control, history_by_control=
         latest = next((h for h in history if h['evaluation_id'] == item.get('latest_evaluation_id')), None)
         stale = bool(latest and any(newer_evidence(e, latest) for e in evidence_by_control.get(cid, [])))
         used = [e for e in evidence_by_control.get(cid, []) if latest and e.get('evidence_id') in latest.get('evidence_ids', [])]
+        # Losing/tampering with a cited original invalidates freshness even when
+        # the database row itself was not edited. Preserve the historical result.
+        stale = stale or any(e.get('source_quality',{}).get('integrity',{}).get('state')=='failed' for e in used)
         document_only=bool(latest and any('USER_EVIDENCE_ONLY' in str(t) for t in latest.get('audit_trail',[])))
         failed=item.get('workflow_status')=='FAILED'
         if evaluated and not document_only and company_snapshot and (cid in PEOPLE_CONTROLS | set(CONTROL_TO_NODE) or any(e.get('snapshot_hash') for e in used)):

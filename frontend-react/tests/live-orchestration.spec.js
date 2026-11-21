@@ -1,5 +1,6 @@
 import {test,expect} from '@playwright/test';
 import {readFileSync,writeFileSync} from 'node:fs';
+import {resolve,relative} from 'node:path';
 const enabled=process.env.ISO_ISOLATED_TEST==='1'&&/^iso_acceptance_[a-f0-9]{12}$/.test(process.env.ISO_ISOLATED_DBNAME||'')&&!!process.env.ISO_ISOLATED_CANDIDATE_PATH;
 test.use({baseURL:process.env.UI_BASE_URL,channel:'msedge',headless:true,actionTimeout:15000});
 const candidateEngine=process.env.ISO_ISOLATED_CANDIDATE_ENGINE||'rules';
@@ -100,6 +101,19 @@ test('real isolated orchestration: Ollama batch stop/resume and sealed candidate
    }finally{await page.request.post('/api/auth/logout',{headers:memberHeaders});}
   }
   expect(raters[0].report_sha256).toBe(raters[1].report_sha256);expect(raters.every(r=>r.submitted===0)).toBe(true);
+  // Corrupt only an original in the disposable store, never the main campaign.
+  const protectedControl=after.controls.find(c=>c.control_id==='A.6.2');
+  const originalEvidence=protectedControl.evidence.find(e=>e.source?.endsWith('synthetic-orchestration-A.6.2.txt'));
+  expect(originalEvidence.source_quality.integrity.state).toBe('verified');expect(originalEvidence.sha256_hash).toMatch(/^[a-f0-9]{64}$/);
+  const directory=resolve(process.env.ISO_ISOLATED_DIRECTORY),originalPath=resolve(directory,'evidence-originals',aid,originalEvidence.sha256_hash+'.bin');
+  expect(relative(directory,originalPath).startsWith('..')).toBe(false);
+  writeFileSync(originalPath,'SYNTHETIC TAMPER TEST ONLY: original no longer matches stored checksum.','utf8');
+  const tamperedScope=await json('GET',base+'/enterprise/scope56'),tampered= tamperedScope.controls.find(c=>c.control_id==='A.6.2');
+  expect(tampered.evidence.find(e=>e.evidence_id===originalEvidence.evidence_id).source_quality.integrity.state).toBe('failed');
+  expect(tampered.assessment_state).toBe('stale');expect(tampered.latest_evaluation_id).toBe(protectedControl.latest_evaluation_id);
+  expect(tampered.usable_source_count).toBe(0);
+  const rejectedStart=await page.request.post(base+'/enterprise/shared-work/start',{headers,data:{control_id:'A.6.2',force:true}});
+  expect(rejectedStart.status()).toBe(409);
   writeFileSync(process.env.ISO_ISOLATED_ORCHESTRATION_RECEIPT,JSON.stringify({
    test_data_only:true,human_assessment:false,independent_validation:false,
    stopped_batch:{batch_id:stopped.batch_id,status:stopped.status,planned:stopped.plan.length,results:stopped.results},
@@ -107,7 +121,8 @@ test('real isolated orchestration: Ollama batch stop/resume and sealed candidate
    candidate:{run_id:created.run_id,engine:candidateEngine,state:result.state,records:result.report.records.length,capture_sha256:result.report.capture_sha256,plan_sha256:plan.sha256,
     report_sha256:result.report.sha256,model:result.report.model,
     results:result.report.records.map(r=>({control_id:r.control_id,status:r.status,error:r.error,execution_source:r.execution_source,attempts:r.attempts,repaired:r.repaired}))},
-   synthetic_raters:raters
+   synthetic_raters:raters,
+   integrity_tamper:{control_id:'A.6.2',evidence_id:originalEvidence.evidence_id,original_integrity:'failed',assessment_state:tampered.assessment_state,prior_evaluation_preserved:true,start_rejected_status:rejectedStart.status()}
   },null,2),'utf8');
  }finally{await page.request.post('/api/auth/logout',{headers});}
 });
