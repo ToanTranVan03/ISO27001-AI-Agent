@@ -12,7 +12,7 @@ import AcceptanceWorklist from './AcceptanceWorklist';
 import ControlCriteriaReview from './ControlCriteriaReview';
 const staleReviewMessage='Dữ liệu đã đổi; chọn lại control và đọc lại nguồn trước khi thẩm định.';
 import {useCallback,useEffect,useState,useRef} from 'react';
-export default function Scope56({assessment,request,onOpenA8,onOpenDossier,onOpenCompany,controlId='',employeeId='',runId='',onContext,canManage=false}){
+export default function Scope56({assessment,request,onOpenA8,onOpenDossier,onOpenCompany,controlId='',employeeId='',runId='',onContext,canManage=false,focusDetails=false}){
  const base=`/api/assessments/${assessment.assessment_id}`,path=`${base}/enterprise/scope56`;
  const detailRef=useRef(null),reportRef=useRef(null);
  const appliedControl=useRef('');
@@ -34,10 +34,10 @@ export default function Scope56({assessment,request,onOpenA8,onOpenDossier,onOpe
    if(!controlId){appliedControl.current='';setSelected('');return;}
    if(!data||appliedControl.current===controlId)return;
    const c=data.controls.find(c=>c.control_id===controlId);
-   if(c){select(c);requestAnimationFrame(()=>detailRef.current?.scrollIntoView({behavior:'smooth',block:'start'}));}
+   if(c){select(c);if(focusDetails)requestAnimationFrame(()=>detailRef.current?.scrollIntoView({behavior:'smooth',block:'start'}));}
   });
   return()=>cancelAnimationFrame(frame);
- },[data,controlId,select]);
+ },[data,controlId,select,focusDetails]);
  function openControl(id){const c=data.controls.find(r=>r.control_id===id);if(c){select(c);requestAnimationFrame(()=>detailRef.current?.scrollIntoView({behavior:'smooth',block:'start'}));}}
  async function action(work){setBusy(true);setError('');try{await work();await load();}catch(e){setError(e.message);}finally{setBusy(false);}}
  function exportFile(value,name,type='application/json'){const text=typeof value==='string'?value:JSON.stringify(value,null,2);const url=URL.createObjectURL(new Blob([text],{type}));const a=document.createElement('a');a.href=url;a.download=name;a.click();URL.revokeObjectURL(url);}

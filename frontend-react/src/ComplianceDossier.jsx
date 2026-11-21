@@ -5,7 +5,7 @@ import {conclusionLabels} from './assessmentLabels';
 import {PageHeader,WorkflowGuide,StatusBadge} from './AssessmentUI';
 import {Search,RefreshCw,Download} from 'lucide-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
-export default function ComplianceDossier({ assessment, request, onOpenDashboard, onOpenCompany,onOpenA8, user,controlId='',employeeId='',onContext }) {
+export default function ComplianceDossier({ assessment, request, onOpenDashboard, onOpenCompany,onOpenA8, user,controlId='',employeeId='',onContext,focusDetails=false }) {
   const [report, setReport] = useState(null), [error, setError] = useState(''), [selected, setSelected] = useState(controlId);
   const [employeeFilter,setEmployeeFilter]=useState({employeeId,value:!!employeeId});
   const employeeOnly=employeeFilter.employeeId===employeeId?employeeFilter.value:!!employeeId;
@@ -35,14 +35,14 @@ export default function ComplianceDossier({ assessment, request, onOpenDashboard
   const detailRef=useRef(null);
   const detail=report?.controls.find(c=>c.control_id===selected);
   const filtered=(report?.controls||[]).filter(c=>(!employeeId||!employeeOnly||controlReferencesEmployee(c,employeeId))&&(filter==='all'||c.shared_state===filter)&&`${c.control_id} ${c.name}`.toLocaleLowerCase().includes(query.toLocaleLowerCase()));
-  const openDetail=useCallback(id=>{appliedControl.current=id;setSelected(id);onContext?.({controlId:id});requestAnimationFrame(()=>detailRef.current?.scrollIntoView({behavior:'smooth',block:'start'}));},[onContext]);
+  const openDetail=useCallback((id,scroll=true)=>{appliedControl.current=id;setSelected(id);onContext?.({controlId:id});if(scroll)requestAnimationFrame(()=>detailRef.current?.scrollIntoView({behavior:'smooth',block:'start'}));},[onContext]);
   useEffect(()=>{
     const frame=requestAnimationFrame(()=>{
       if(!controlId){appliedControl.current='';setSelected('');return;}
-      if(report&&appliedControl.current!==controlId&&report.controls.some(c=>c.control_id===controlId))openDetail(controlId);
+      if(report&&appliedControl.current!==controlId&&report.controls.some(c=>c.control_id===controlId))openDetail(controlId,focusDetails);
     });
     return()=>cancelAnimationFrame(frame);
-  },[report,controlId,openDetail]);
+  },[report,controlId,openDetail,focusDetails]);
   return <main className="app-page min-h-screen text-slate-100"><section className="space-y-6">
     <PageHeader step="Theo dõi công việc" title="Hồ sơ & công việc chung" description="Theo dõi kết quả đã lưu, tiếp tục công việc còn thiếu và đọc căn cứ đánh giá. Mọi tài khoản trong đợt cùng nhìn vào hồ sơ này."><button onClick={refresh} className="flex items-center gap-2 rounded-xl border border-slate-600 px-4 py-3 text-xs"><RefreshCw size={15}/>Làm mới</button><button disabled={!report} onClick={download} className="flex items-center gap-2 rounded-xl bg-teal-700 px-4 py-3 text-xs"><Download size={15}/>Xuất hồ sơ</button></PageHeader>
     <WorkflowGuide current={2}/>{employeeId&&<section className="space-y-2 rounded-xl border border-teal-800 p-4"><h2 className="font-semibold">Hồ sơ liên quan nhân viên {employeeId}</h2><p className="text-xs text-slate-400">Bộ lọc dựa trên mã nhân viên được viện dẫn trong bằng chứng. Kết luận control vẫn ở cấp đợt, không phải kết luận riêng cho nhân viên.</p><label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={employeeOnly} onChange={e=>setEmployeeOnly(e.target.checked)}/>Chỉ control có bằng chứng liên quan nhân viên</label><button className="rounded border border-slate-600 p-2 text-xs" onClick={()=>onOpenCompany?.({employeeId,controlId:selected})}>Quay về nhân viên {employeeId}</button><button className="ml-2 rounded border border-slate-600 p-2 text-xs" onClick={()=>onContext?.({employeeId:''})}>Bỏ ngữ cảnh nhân viên</button></section>}

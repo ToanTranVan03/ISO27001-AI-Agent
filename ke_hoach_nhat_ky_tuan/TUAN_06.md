@@ -101,6 +101,8 @@ Các thông tin trên là **trạng thái bàn giao từ tuần 5**, không ph�
 
 ## Kết quả và minh chứng
 
+Cập nhật sửa lỗi F5: đã tách khôi phục ngữ cảnh khỏi cuộn tới chi tiết. Tải lại giữ control/nhân viên đang chọn nhưng mở đầu trang; chỉ cuộn khi chủ động mở hồ sơ. Kiểm tra cả Tổng quan, Hồ sơ ISO và Doanh nghiệp, không gửi POST chạy Agent khi F5. **355 test Python, 14 test JavaScript, 9 kịch bản Edge và lint/build đạt**; [báo cáo UI](../docs/a8-results/f5-scroll-ui-2026-11-21.json). Đã build và xác nhận cổng 8000 phục vụ đúng bản sửa; các mốc 8 kịch bản dưới đây là lịch sử trước sửa lỗi này.
+
 ### Trạng thái chốt ngày 21/11
 
 - **Liên kết giao diện bổ sung:** đã kiểm chứng điều hướng nhân viên → hồ sơ → control → lượt A.8 và quay lại; 14 test JavaScript, 6 kịch bản Edge và lint/build đạt. POST nhập nguồn trong kịch bản điều hướng được mô phỏng; fingerprint SoA và trạng thái nghiệm thu đợt chính không đổi. Không tự chạy Agent hoặc duyệt khi chuyển màn hình.

@@ -10,6 +10,8 @@ Ngày kiểm tra: 21/11/2026.
 4. Trong **Thực nghiệm A.8**, chọn lượt/control rồi mở hồ sơ tương ứng. Sau khi nhập nguồn vào hồ sơ 56, ứng dụng tự mở control liên quan; phiếu tiếp nhận vẫn được tải về.
 5. Tải lại trang hoặc dùng Back/Forward để trở lại màn hình và mục đang xem. Nếu control không có trong lượt A.8 đang chọn, giao diện báo rõ để tránh đọc nhầm nguồn.
 
+Cập nhật lỗi cuộn trang: F5 vẫn giữ mã control/nhân viên/lượt trong đường dẫn nhưng mở ở đầu trang, không tự kéo xuống hồ sơ. Chỉ khi chủ động bấm mở control, nhân viên hoặc liên kết hồ sơ tương ứng, ứng dụng mới cuộn tới chi tiết. Tải lại không gửi lệnh chạy Agent hoặc lưu dữ liệu.
+
 ## Ngữ cảnh và giới hạn
 
 - Đường dẫn dùng các trường hash `view`, `assessment`, `control`, `employee`, `run`. Không đưa mật khẩu, token, nội dung hồ sơ hoặc kết luận vào URL.

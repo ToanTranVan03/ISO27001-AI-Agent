@@ -4,6 +4,41 @@ process.loadEnvFile(fileURLToPath(new URL('../../.env',import.meta.url)));
 test.use({baseURL:process.env.UI_BASE_URL||'http://127.0.0.1:5173',channel:'msedge',headless:true,actionTimeout:15000});
 test.setTimeout(60000);
 
+test('F5 keeps selection without scrolling to a control or starting work',async({page})=>{
+ test.skip(!process.env.INITIAL_ADMIN_PASSWORD,'Admin credential required');let token;
+ const mutations=[];
+ try{
+  await page.goto('/');await page.getByLabel('Tên đăng nhập').fill(process.env.INITIAL_ADMIN_USERNAME||'admin');
+  await page.getByLabel('Mật khẩu').fill(process.env.INITIAL_ADMIN_PASSWORD);
+  await page.getByRole('button',{name:'ĐĂNG NHẬP HỆ THỐNG'}).click();
+  await expect(page.getByRole('heading',{name:'Tổng quan đánh giá tuân thủ',exact:true})).toBeVisible();
+  const session=await page.evaluate(()=>({token:sessionStorage.getItem('iso_team_token'),aid:sessionStorage.getItem('iso_team_assessment')}));token=session.token;
+  page.on('request',r=>{if(r.method()==='POST')mutations.push(new URL(r.url()).pathname);});
+  await page.goto('/#'+new URLSearchParams({view:'scope56',control:'A.6.3',assessment:session.aid}));
+  await expect(page.getByRole('heading',{name:'A.6.3 · Information security awareness, education and training',exact:true})).toBeAttached();
+  await expect.poll(()=>page.evaluate(()=>window.scrollY)).toBe(0);
+  // Opening the control deliberately still moves to its detail.
+  await page.getByRole('button',{name:/^A\.6\.3: /}).click();
+  await expect.poll(()=>page.evaluate(()=>window.scrollY)).toBeGreaterThan(100);
+  await page.reload();
+  await expect(page.getByRole('heading',{name:'A.6.3 · Information security awareness, education and training',exact:true})).toBeAttached();
+  await expect.poll(()=>page.evaluate(()=>window.scrollY)).toBe(0);
+  expect(new URLSearchParams(new URL(page.url()).hash.slice(1)).get('control')).toBe('A.6.3');
+  for(const [view,context,heading] of [
+   ['dossier',{control:'A.6.3'},'A.6.3 · Information security awareness, education and training'],
+   ['company',{employee:'EMP-001'},/^EMP-001 ·/]
+  ]){
+   await page.goto('/#'+new URLSearchParams({view,assessment:session.aid,...context}));
+   await expect(page.getByRole('heading',{name:heading,exact:true})).toBeAttached();
+   await page.evaluate(()=>window.scrollTo(0,document.body.scrollHeight));
+   await page.reload();
+   await expect(page.getByRole('heading',{name:heading,exact:true})).toBeAttached();
+   await expect.poll(()=>page.evaluate(()=>window.scrollY)).toBe(0);
+  }
+  expect(mutations).toEqual([]);
+ }finally{if(token)await page.request.post('/api/auth/logout',{headers:{Authorization:`Bearer ${token}`}});}
+});
+
 test('employee, dossier, control and source-run context survive navigation, reload and back',async({page})=>{
  const password=process.env.INITIAL_ADMIN_PASSWORD;test.skip(!password,'Admin credential required');
  const errors=[];page.on('pageerror',e=>errors.push(e.message));let token;

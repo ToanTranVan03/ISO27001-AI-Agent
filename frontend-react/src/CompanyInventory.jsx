@@ -3,16 +3,16 @@ import DevelopmentLabPanel from './DevelopmentLabPanel';
 import CompanyChanges, {ChangeList} from './CompanyChanges';
 import { useEffect, useState,useRef } from 'react';
 
-export default function CompanyInventory({assessment,request,onOpenDossier,employeeId='',onContext}) {
+export default function CompanyInventory({assessment,request,onOpenDossier,employeeId='',onContext,focusDetails=false}) {
   const [data,setData]=useState(null),[selected,setSelected]=useState(employeeId),[action,setAction]=useState('training_missing');
-  const personRef=useRef(null),scrolledEmployee=useRef('');
+  const personRef=useRef(null),requestedPerson=useRef(''),scrolledEmployee=useRef('');
   const [error,setError]=useState(''),[busy,setBusy]=useState(false),[query,setQuery]=useState(''),[preview,setPreview]=useState(null),[notice,setNotice]=useState('');
   useEffect(()=>{const frame=requestAnimationFrame(()=>{setSelected(employeeId);setPreview(null);});return()=>cancelAnimationFrame(frame);},[employeeId]);
   const path=`/api/assessments/${assessment.assessment_id}/enterprise/company`;
   useEffect(()=>{let active=true,loading=false;async function load(){if(loading)return;loading=true;try{const result=await request(path);if(active){setData(result);setError('');}}catch(e){if(active)setError(e.message);}finally{loading=false;}}load();const timer=setInterval(load,5000);return()=>{active=false;clearInterval(timer);};},[path,request]);
   const person=data?.people.find(p=>p.id===selected);
-  useEffect(()=>{if(person&&scrolledEmployee.current!==selected){scrolledEmployee.current=selected;requestAnimationFrame(()=>personRef.current?.scrollIntoView({behavior:'smooth',block:'start'}));}},[person,selected]);
-  function choosePerson(id){setSelected(id);setPreview(null);setNotice('');onContext?.({employeeId:id,controlId:'',runId:''});}
+  useEffect(()=>{if(person&&(focusDetails||requestedPerson.current===selected)&&scrolledEmployee.current!==selected){scrolledEmployee.current=selected;requestAnimationFrame(()=>personRef.current?.scrollIntoView({behavior:'smooth',block:'start'}));}},[person,selected,focusDetails]);
+  function choosePerson(id){requestedPerson.current=id;scrolledEmployee.current='';setSelected(id);setPreview(null);setNotice('');onContext?.({employeeId:id,controlId:'',runId:''});}
   const currentPreview=preview?.employee_id===selected&&preview?.action===action?preview:null;
   const stale=currentPreview&&currentPreview.snapshot_hash!==data?.snapshot_hash;
   async function previewChange(){setBusy(true);setError('');setNotice('');setPreview(null);try{setPreview(await request(path+'/events/preview',{method:'POST',body:JSON.stringify({employee_id:selected,action})}));}catch(e){setError(e.message);}finally{setBusy(false);}}

@@ -1,5 +1,5 @@
 import AccountProfile from './AccountProfile';
-import { useCallback, useEffect, useState, useRef } from "react";
+import { useCallback, useEffect, useState, useRef, useLayoutEffect } from "react";
 import {readNavigation,navigationHash,mergeNavigation} from './navigation';
 import { Bot, KeyRound, LogIn, ShieldCheck, UserRound, LayoutDashboard, FlaskConical, Building2, FolderCheck, LogOut } from "lucide-react";
 import { ApiError, apiRequest } from "./api";
@@ -19,6 +19,8 @@ export default function App() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [navigation,setNavigation]=useState(()=>readNavigation(window.location.hash));
+  const [focusDetails,setFocusDetails]=useState(false);
+  useLayoutEffect(()=>{const previous=window.history.scrollRestoration;window.history.scrollRestoration='manual';window.scrollTo({top:0,behavior:'instant'});return()=>{window.history.scrollRestoration=previous;};},[]);
   const navigationRef=useRef(navigation);
   const view=navigation.view;
   const navigate=useCallback((patch,replace=false)=>{
@@ -26,13 +28,14 @@ export default function App() {
     const hash=navigationHash(next);
     const changedView=next.view!==navigationRef.current.view;
     if(hash===navigationHash(navigationRef.current))return;
+    if(!replace)setFocusDetails(!!(patch?.controlId||patch?.employeeId));
     navigationRef.current=next;setNavigation(next);
     window.history[replace?'replaceState':'pushState'](null,'',window.location.pathname+window.location.search+hash);
     if(changedView)window.scrollTo({top:0,behavior:'instant'});
   },[]);
   const updateContext=useCallback(patch=>navigate({assessmentId:assessment?.assessment_id,...patch},true),[navigate,assessment?.assessment_id]);
   useEffect(()=>{
-    const update=()=>{const next=readNavigation(window.location.hash);navigationRef.current=next;setNavigation(next);};
+    const update=()=>{setFocusDetails(false);const next=readNavigation(window.location.hash);navigationRef.current=next;setNavigation(next);};
     window.addEventListener('popstate',update);window.addEventListener('hashchange',update);
     return()=>{window.removeEventListener('popstate',update);window.removeEventListener('hashchange',update);};
   },[]);
@@ -148,7 +151,7 @@ if (user && assessment && token) {
         <AccountProfile user={user} assessment={assessment} request={request} onSaved={setUser}/><button type="button" onClick={logout} aria-label="Đăng xuất" title="Đăng xuất" className="rounded-xl p-3 text-slate-400 hover:bg-slate-800 hover:text-white"><LogOut size={18}/></button></div>
       </header>
 
-      {view === "scope56" ? <Scope56 canManage={user.role==='admin'} assessment={assessment} request={request} controlId={navigation.controlId} employeeId={navigation.employeeId} runId={navigation.runId} onContext={updateContext} onOpenA8={context=>navigate({view:'a8',...context})} onOpenDossier={context=>navigate({view:'dossier',...context})} onOpenCompany={context=>navigate({view:'company',...context})}/> : view === "company" ? <CompanyInventory assessment={assessment} request={request} employeeId={navigation.employeeId} onContext={updateContext} onOpenDossier={context=>navigate({view:'dossier',...context})}/> : view === "dossier" ? <ComplianceDossier user={user} assessment={assessment} request={request} controlId={navigation.controlId} employeeId={navigation.employeeId} onContext={updateContext} onOpenDashboard={context=>navigate({view:'scope56',...context})} onOpenCompany={context=>navigate({view:'company',...context})} onOpenA8={context=>navigate({view:'a8',...context})}/> : (
+      {view === "scope56" ? <Scope56 focusDetails={focusDetails} canManage={user.role==='admin'} assessment={assessment} request={request} controlId={navigation.controlId} employeeId={navigation.employeeId} runId={navigation.runId} onContext={updateContext} onOpenA8={context=>navigate({view:'a8',...context})} onOpenDossier={context=>navigate({view:'dossier',...context})} onOpenCompany={context=>navigate({view:'company',...context})}/> : view === "company" ? <CompanyInventory focusDetails={focusDetails} assessment={assessment} request={request} employeeId={navigation.employeeId} onContext={updateContext} onOpenDossier={context=>navigate({view:'dossier',...context})}/> : view === "dossier" ? <ComplianceDossier focusDetails={focusDetails} user={user} assessment={assessment} request={request} controlId={navigation.controlId} employeeId={navigation.employeeId} onContext={updateContext} onOpenDashboard={context=>navigate({view:'scope56',...context})} onOpenCompany={context=>navigate({view:'company',...context})} onOpenA8={context=>navigate({view:'a8',...context})}/> : (
         <A8ComplianceStudy assessment={assessment} request={request} controlId={navigation.controlId} runId={navigation.runId} onContext={updateContext} onOpenDashboard={context=>navigate({view:'scope56',...context})}/>
       )}
     </>
