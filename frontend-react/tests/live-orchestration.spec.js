@@ -2,7 +2,8 @@ import {test,expect} from '@playwright/test';
 import {readFileSync,writeFileSync} from 'node:fs';
 const enabled=process.env.ISO_ISOLATED_TEST==='1'&&/^iso_acceptance_[a-f0-9]{12}$/.test(process.env.ISO_ISOLATED_DBNAME||'')&&!!process.env.ISO_ISOLATED_CANDIDATE_PATH;
 test.use({baseURL:process.env.UI_BASE_URL,channel:'msedge',headless:true,actionTimeout:15000});
-test.setTimeout(240000);
+const candidateEngine=process.env.ISO_ISOLATED_CANDIDATE_ENGINE||'rules';
+test.setTimeout(candidateEngine==='llm'?750000:240000);
 
 test('real isolated orchestration: Ollama batch stop/resume and sealed candidate worker',async({page})=>{
  test.skip(!enabled,'Requires --extended on the disposable database runner');
@@ -60,7 +61,7 @@ test('real isolated orchestration: Ollama batch stop/resume and sealed candidate
   expect(after.soa.approval).toBe('DRAFT_NOT_APPROVED');
   const plan=JSON.parse(readFileSync(process.env.ISO_ISOLATED_CANDIDATE_PATH,'utf8'));
   await page.getByRole('button',{name:'Thực nghiệm A.8',exact:true}).click();
-  await page.getByRole('combobox',{name:'Engine',exact:true}).selectOption('rules');
+  await page.getByRole('combobox',{name:'Engine',exact:true}).selectOption(candidateEngine);
   await page.getByText('Tổng hợp nghiên cứu & nhập gói nguồn kiểm định',{exact:true}).click();
   await page.getByText('Nhập gói nguồn ứng viên đã chốt · admin',{exact:true}).click();
   await page.getByLabel('Gói ứng viên JSON đã chốt').setInputFiles(process.env.ISO_ISOLATED_CANDIDATE_PATH);
@@ -73,9 +74,15 @@ test('real isolated orchestration: Ollama batch stop/resume and sealed candidate
   const created=await (await createdResponse).json();expect(created.candidate_source).toBe(true);
   await expect(page.getByLabel('Mở lượt đánh giá đã lưu')).toHaveValue(created.run_id);
   let result;
-  await expect.poll(async()=>{result=await json('GET',base+'/a8/runs/'+created.run_id);return result.state;},{timeout:30000}).toBe('finished');
+  await expect.poll(async()=>{result=await json('GET',base+'/a8/runs/'+created.run_id);return result.state;},{timeout:candidateEngine==='llm'?600000:30000}).toBe('finished');
   expect(result.report.capture_sha256).toBe(plan.snapshot.sha256);
-  expect(result.report.records).toHaveLength(18);expect(result.report.records.every(r=>!r.error)).toBe(true);
+  expect(result.report.records).toHaveLength(18);expect(result.report.mode).toBe(candidateEngine);
+  if(candidateEngine==='rules')expect(result.report.records.every(r=>!r.error)).toBe(true);
+  else{
+   expect(result.report.records.some(r=>r.execution_source==='ollama-a8-evidence-judgment')).toBe(true);
+   expect(result.report.records.every(r=>r.attempts.length>=1&&r.attempts.length<=2)).toBe(true);
+   expect(result.report.records.every(r=>r.execution_source!=='a8-lab-rules')).toBe(true);
+  }
   expect(result.independent_validation).toBe(false);expect(result.designer_reference||[]).toEqual([]);
   await page.reload();await expect(page.getByLabel('Mở lượt đánh giá đã lưu')).toHaveValue(created.run_id);
   // Separate test identities read the same frozen pack; no human labels invented.
@@ -97,7 +104,9 @@ test('real isolated orchestration: Ollama batch stop/resume and sealed candidate
    test_data_only:true,human_assessment:false,independent_validation:false,
    stopped_batch:{batch_id:stopped.batch_id,status:stopped.status,planned:stopped.plan.length,results:stopped.results},
    completed_batch:{batch_id:completed.batch_id,status:completed.status,planned:completed.plan.length,results:completed.results},
-   candidate:{run_id:created.run_id,engine:'rules',state:result.state,records:result.report.records.length,capture_sha256:result.report.capture_sha256,plan_sha256:plan.sha256},
+   candidate:{run_id:created.run_id,engine:candidateEngine,state:result.state,records:result.report.records.length,capture_sha256:result.report.capture_sha256,plan_sha256:plan.sha256,
+    report_sha256:result.report.sha256,model:result.report.model,
+    results:result.report.records.map(r=>({control_id:r.control_id,status:r.status,error:r.error,execution_source:r.execution_source,attempts:r.attempts,repaired:r.repaired}))},
    synthetic_raters:raters
   },null,2),'utf8');
  }finally{await page.request.post('/api/auth/logout',{headers});}
