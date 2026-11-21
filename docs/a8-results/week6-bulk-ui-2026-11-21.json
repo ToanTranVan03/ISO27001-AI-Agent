@@ -1,0 +1,53 @@
+{
+  "stats": {
+    "startTime": "2026-11-21T13:28:03.873Z",
+    "duration": 76150.59000000001,
+    "expected": 8,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "tests": [
+    {
+      "file": "tests/isolated-workflow.spec.js",
+      "title": "isolated UI: valid upload, original download, stale review, criteria and decision draft",
+      "status": "passed"
+    },
+    {
+      "file": "tests/isolated-workflow.spec.js",
+      "title": "isolated UI: blind submission hides answers and removes locked controls after reload",
+      "status": "passed"
+    },
+    {
+      "file": "tests/navigation.spec.js",
+      "title": "employee, dossier, control and source-run context survive navigation, reload and back",
+      "status": "passed"
+    },
+    {
+      "file": "tests/release.spec.js",
+      "title": "admin: navigation, scope and safe exports",
+      "status": "passed"
+    },
+    {
+      "file": "tests/release.spec.js",
+      "title": "ledangkhoa: navigation, scope and safe exports",
+      "status": "passed"
+    },
+    {
+      "file": "tests/release.spec.js",
+      "title": "ledoanvantu: navigation, scope and safe exports",
+      "status": "passed"
+    },
+    {
+      "file": "tests/week6-gaps.spec.js",
+      "title": "batch UI: rejects stale start, follows running batch across reload and stops without losing results",
+      "status": "passed"
+    },
+    {
+      "file": "tests/week6-gaps.spec.js",
+      "title": "candidate UI: invalid JSON, server refusal, receipt, changed engine and concurrent run",
+      "status": "passed"
+    }
+  ],
+  "note": "Regular UI regression. Writes intercepted; bulk decisions are exercised separately on a disposable database."
+}

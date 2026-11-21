@@ -30,3 +30,24 @@ Sáu test hồi quy kiểm tra bản cũ còn đọc được khi bị giữ m�
 Yêu cầu PostgreSQL và Ollama local đang chạy, dependencies đã cài, giao diện đã build. Chọn tên báo cáo mới để giữ lịch sử. Runner tạo database có tên riêng, kho tệp và tài khoản thử riêng; sau kiểm thử dọn database. Kết quả trình duyệt từng lượt lưu dưới `work/iso_acceptance_.../browser-results`.
 
 Không dùng các hồ sơ, quyết định, phê duyệt hoặc nhãn tổng hợp của kiểm thử làm bằng chứng nghiệm thu của nhóm. Rubric, nguồn được chấp nhận, chấm thật và SoA chính vẫn do đúng người thực hiện.
+
+## Bổ sung: gói LLM và khôi phục sau khi API bị ngắt
+
+[Lượt mở rộng đạt](a8-results/isolated-llm-restart-2026-11-21-retry.json) chạy Qwen2.5:7b trên đủ 18 bản ghi của gói ứng viên kỹ thuật: 18 phản hồi hợp lệ lần đầu, không lỗi cuối và không chuyển sang luật. Hai tài khoản thử đọc cùng report hash, chưa nộp nhãn vào gói này. Nguồn vẫn là fixture đã sửa phục vụ hồi quy, **không phải tập kiểm định mới độc lập** và không dùng để công bố accuracy với người đánh giá.
+
+Runner khởi chạy công việc/lô và lượt A.8 mới rồi ngắt **backend thử riêng**. Sau khi khởi động lại:
+
+- Job và lô giữ trạng thái `INTERRUPTED`; control về `FAILED`, bỏ khóa đang chạy.
+- Kết quả đánh giá trước đó không bị thay bằng kết quả giả của job bị ngắt.
+- Lượt A.8 bị ngắt chuyển `failed`; giữ snapshot đã chốt. Các lượt hoàn tất trước đó vẫn nguyên trạng.
+- Database thử đã dọn; ba bảng chính không đổi. Không khởi động lại API chính trong phép thử này.
+
+[Lượt đầu](a8-results/isolated-llm-restart-2026-11-21.json) đã chạy xong gói LLM và hai kịch bản trình duyệt, nhưng bộ kiểm tra phục hồi đọc nhầm `active_job_id` từ API scope thay vì API progress. Báo cáo toàn lượt được giữ là `failed`; sửa bộ kiểm tra rồi chạy lại, không đổi nhãn/kết quả để hợp thức hóa.
+
+Kịch bản nguồn/SoA nay kiểm tra thêm [nhập quyết định theo lô](NHAP_QUYET_DINH_KE_HOACH_THEO_LO.md): xem trước 55 quyết định tổng hợp chưa làm tăng số đã lưu, lưu một lô trên database riêng, kiểm tra 55 bản ghi và từ chối gửi lại bằng fingerprint cũ. Đây là phạm vi giả định để kiểm thử, không phải quyết định loại trừ thật của nhóm.
+
+```powershell
+.venv\Scripts\python.exe run_isolated_acceptance.py --execute --extended --candidate-engine llm --verify-restart --output docs/a8-results/isolated-llm-restart-MOC_MOI.json
+```
+
+Hồi quy mới nhất: **355 test Python, 14 test JavaScript, lint/build đạt**, [8 kịch bản UI thường đạt](a8-results/week6-bulk-ui-2026-11-21.json). API chính chỉ [xem trước dữ liệu tổng hợp](a8-results/decision-batch-preview-2026-11-21.json), không gọi nhập thật; 0 quyết định chính và fingerprint SoA giữ nguyên. Chưa khẳng định đã bao phủ mọi lỗi đồng thời, mất mạng hoặc mọi cấu hình triển khai.

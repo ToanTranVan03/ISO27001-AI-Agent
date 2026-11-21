@@ -1,0 +1,11 @@
+{
+  "checked_at": "2026-11-21T20:32:41.637532+07:00",
+  "protocol": "decision-batch-readonly-preview-api-v1",
+  "http_status": 200,
+  "proposed_changed_count": 1,
+  "acceptance_unchanged": true,
+  "soa_fingerprint_unchanged": true,
+  "recorded_decisions": 0,
+  "test_data_only": true,
+  "real_import_called": false
+}
