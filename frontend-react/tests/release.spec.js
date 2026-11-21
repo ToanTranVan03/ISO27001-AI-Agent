@@ -64,6 +64,20 @@ for(const [username,key] of [['admin','INITIAL_ADMIN_PASSWORD'],['ledangkhoa','A
   }
   await page.getByRole('button',{name:'Doanh nghiệp',exact:true}).click();
   await expect(page.getByRole('heading',{name:'Doanh nghiệp dùng chung',exact:true})).toBeVisible();
+  await page.getByText('Lab hồ sơ bổ sung · 38 control · Dữ liệu phát triển do trợ lý tạo',{exact:true}).click();
+  await expect(page.getByLabel('Đọc hồ sơ lab bổ sung')).toBeVisible();
+  await page.getByLabel('Đọc hồ sơ lab bổ sung').selectOption('A.6.2');
+  await expect(page.getByRole('heading',{name:'A.6.2 · Terms and conditions of employment',exact:true})).toBeVisible();
+  const labDownloading=page.waitForEvent('download');
+  await page.getByRole('button',{name:'Xuất hồ sơ mô phỏng (không có đáp án)',exact:true}).click();
+  const labStream=await (await labDownloading).createReadStream();let labText='';
+  for await(const chunk of labStream)labText+=chunk.toString();
+  const lab=JSON.parse(labText);
+  expect(lab.cases).toHaveLength(38);
+  expect(lab.is_synthetic).toBe(true);
+  expect(lab.independent_validation).toBe(false);
+  expect(labText).not.toContain('designer_verdicts');
+  if(username!=='admin')await expect(page.getByRole('button',{name:'Agent kiểm tra 38 hồ sơ phát triển',exact:true})).toHaveCount(0);
   await page.getByRole('button',{name:'Hồ sơ ISO',exact:true}).click();
   await expect(page.getByRole('heading',{name:'Hồ sơ & công việc chung',exact:true})).toBeVisible();
   if(username!=='admin')await expect(page.getByRole('button',{name:'Bắt đầu lượt',exact:true})).toHaveCount(0);
