@@ -77,6 +77,17 @@ for(const [username,key] of [['admin','INITIAL_ADMIN_PASSWORD'],['ledangkhoa','A
   expect(lab.is_synthetic).toBe(true);
   expect(lab.independent_validation).toBe(false);
   expect(labText).not.toContain('designer_verdicts');
+  await expect(page.getByRole('heading',{name:'Rà sai khác theo từng tiêu chí lab',exact:true})).toBeVisible();
+  const auditDownloading=page.waitForEvent('download');
+  await page.getByRole('button',{name:'Xuất phân tích tiêu chí',exact:true}).click();
+  const auditStream=await (await auditDownloading).createReadStream();let auditText='';
+  for await(const chunk of auditStream)auditText+=chunk.toString();
+  const audit=JSON.parse(auditText);
+  expect(audit.controls_audited).toBe(38);
+  expect(audit.independent_validation).toBe(false);
+  expect(audit.controls.every(c=>c.review_state==='PENDING_HUMAN_REVIEW')).toBe(true);
+  expect(audit.report_sha256).toMatch(/^[a-f0-9]{64}$/);
+  await expect(page.getByLabel('Lượt lab phát triển đã lưu')).toBeVisible();
   if(username!=='admin')await expect(page.getByRole('button',{name:'Agent kiểm tra 38 hồ sơ phát triển',exact:true})).toHaveCount(0);
   await page.getByRole('button',{name:'Hồ sơ ISO',exact:true}).click();
   await expect(page.getByRole('heading',{name:'Hồ sơ & công việc chung',exact:true})).toBeVisible();
