@@ -3,7 +3,7 @@
 - Thời gian: **16/11/2026–22/11/2026 (thứ Hai–Chủ nhật).**
 - Trạng thái: **Đang thực hiện.**
 - Lập kế hoạch: **15/11/2026**.
-- Cập nhật: **21/11/2026**.
+- Cập nhật: **22/11/2026** (chuẩn bị bàn giao sang tuần 7).
 
 ## Mục tiêu và kế hoạch
 
@@ -144,7 +144,18 @@ Tài liệu bàn giao tuần trước: [Nhật ký tuần 5](TUAN_05.md), [phi�
 
 ## Việc chuyển tiếp sang tuần 7
 
-Chưa xác định. Rà kết quả cuối tuần 6 rồi chốt; chưa tạo file tuần 7–10.
+Đã chuẩn bị chuyển tiếp ngày **22/11/2026** sang [Tuần 7 — 23–29/11/2026](TUAN_07.md), gồm tám mục còn mở:
+
+1. Xác nhận rubric, phạm vi nguồn và người đánh giá với giảng viên/người phụ trách.
+2. Bổ sung nguồn cho 37 control, thay A.6.2 và rà mức bao phủ nguồn đã có.
+3. Chuẩn bị/xác nhận bộ kiểm định mới, lịch sử tiếp xúc và snapshot.
+4. Tổ chức chấm cùng lượt, khai đúng hỗ trợ/tiếp xúc.
+5. Người đánh giá xử lý bất đồng và rà căn cứ, giữ nhãn khóa/lịch sử.
+6. Đánh giá trên nguồn được chấp nhận và đo độ đúng với người đánh giá đủ điều kiện.
+7. Ghi 56 quyết định tính áp dụng và kế hoạch có người nhận/hạn/cách kiểm tra lại.
+8. Thẩm định hiện hành, hoàn thiện và trình duyệt SoA khi đủ điều kiện.
+
+Các mục trên vẫn chưa hoàn thành tại mốc bàn giao; giữ checkbox mở ở tuần 6 và theo dõi thực hiện ở tuần 7. Không chuyển các kết quả đã làm trong tuần 6 thành thành tích tuần 7; chưa tạo file tuần 8–10.
 
 ## Đồng bộ GitHub
 

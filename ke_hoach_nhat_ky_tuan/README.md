@@ -5,7 +5,7 @@
 **Thời gian thực hiện đồ án: 12/10/2026–20/12/2026 (10 tuần).**
 Mỗi tuần tính từ **thứ Hai đến Chủ nhật**.
 
-**Tuần hiện tại: Tuần 6.** Cập nhật ngày 18/11/2026.
+**Tuần hiện tại: Tuần 6 (đến hết 22/11/2026).** Đã chuẩn bị nhật ký tuần 7 cho ngày 23/11. Cập nhật ngày 22/11/2026.
 
 | Tuần | Thời gian (thứ Hai–Chủ nhật) | Nội dung / trạng thái |
 |---|---|---|
@@ -13,8 +13,9 @@ Mỗi tuần tính từ **thứ Hai đến Chủ nhật**.
 | [Tuần 2](TUAN_02.md) | 19/10/2026–25/10/2026 | Chờ bổ sung nội dung thực tế |
 | [Tuần 3](TUAN_03.md) | 26/10/2026–01/11/2026 | Benchmark, ground truth và guardrail; cần đối chiếu thời điểm minh chứng |
 | **[Tuần 4](TUAN_04.md)** | **02/11/2026–08/11/2026** | **Đã tổng hợp tiến độ cuối tuần, có việc chuyển tiếp** |
-| **[Tuần 5](TUAN_05.md)** | **09/11/2026–15/11/2026** | **Đang thực hiện — phạm vi 56 control, ưu tiên 18 A.8, raw lab, chấm mù và SoA** |
+| [Tuần 5](TUAN_05.md) | 09/11/2026–15/11/2026 | Đã tổng hợp; tồn đọng được theo dõi tiếp ở tuần 6 |
 | [Tuần 6](TUAN_06.md) | 16/11/2026–22/11/2026 | Đang thực hiện — bổ sung nguồn, kiểm định, chấm và hoàn thiện hồ sơ/SoA |
+| [Tuần 7](TUAN_07.md) | 23/11/2026–29/11/2026 | Chuẩn bị — tiếp nhận tám mục còn mở từ tuần 6 |
 
 ## Cách sử dụng
 
@@ -28,6 +29,6 @@ Mỗi tuần tính từ **thứ Hai đến Chủ nhật**.
 - Phân biệt kết quả mô phỏng, số liệu benchmark lịch sử và kiểm tra thực tế mới chạy.
 
 Tuần 5 đã cập nhật đến ngày 15/11/2026; các mục nghiệm thu chuyên môn còn mở được đưa vào kế hoạch tuần 6, không tự coi là đã hoàn thành.
-Tuần 6 đang thực hiện; tuần 7–10 chưa tạo file, khi gần đến tuần tương ứng mới tạo.
+Tuần 6 đã chuẩn bị bàn giao ngày 22/11; tuần 7 đã có kế hoạch chuyển tiếp. Tuần 8–10 chưa tạo file, khi gần đến tuần tương ứng mới tạo.
 Khi đến tuần tương ứng, cập nhật nội dung và tuần hiện tại trong file này
 và chuyển những việc còn lại đã thống nhất từ tuần trước.
