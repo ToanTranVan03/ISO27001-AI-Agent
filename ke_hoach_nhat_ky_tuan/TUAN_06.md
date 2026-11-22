@@ -18,7 +18,7 @@ Giữ phạm vi 56 control (8 A.6, 14 A.7, 34 A.8), ưu tiên kiểm định sâ
 - [x] Chạy Agent trên 18 nguồn A.8 lab hiện hành, xuất kết quả từng control và giữ riêng các lần lỗi/kiểm tra lại.
 - [x] Mở rộng thực nghiệm phát triển bằng 38 hồ sơ mô phỏng ngoài nhóm 18 A.8; chạy Agent, giữ lỗi/thử lại và xuất kết quả từng control.
 - [ ] Đánh giá trên nguồn được chấp nhận trong phạm vi 56; đo độ đúng bằng bộ kiểm định và nhãn người đánh giá đủ điều kiện. Bộ phát triển 38 hồ sơ chưa hoàn tất mục này.
-- [x] Kiểm thử các luồng giao diện chính theo ma trận nghiệm thu tuần 6: đọc/thu nguồn, chấm/khóa nhãn, tiến độ, xuất báo cáo và các gate quyền/phiên bản. Có 11 kịch bản UI cùng kiểm thử ghi thật trên database riêng; không đồng nghĩa đã kiểm thử mọi ngoại lệ hoặc nghiệm thu chuyên môn.
+- [x] Kiểm thử các luồng giao diện chính theo ma trận nghiệm thu tuần 6: đọc/thu nguồn, chấm/khóa nhãn, tiến độ, xuất báo cáo và các gate quyền/phiên bản. Ngày 22/11 đã kiểm chứng 12 kịch bản qua hai lần chạy (11 luồng cũ đạt, ca nguồn mới đạt sau sửa test), cùng ghi thật trên database riêng; không đồng nghĩa đã kiểm thử mọi ngoại lệ hoặc nghiệm thu chuyên môn.
 - [ ] Người phụ trách ghi 56 quyết định tính áp dụng, lý do và kế hoạch xử lý/duy trì; bổ sung người nhận, hạn và cách kiểm tra lại.
 - [ ] Thẩm định từng tiêu chí trên nguồn hiện hành, hoàn thiện và trình người có trách nhiệm phê duyệt SoA khi đủ điều kiện.
 
@@ -28,6 +28,7 @@ Phần triển khai kỹ thuật đã hoàn thành trong tuần:
 - [x] Bổ sung so sánh hai báo cáo A.8 có kiểm hash, recipe, nguồn/lỗi/kết luận; không suy thay đổi trạng thái là khắc phục thành công hoặc sửa kết quả cũ.
 - [x] Bổ sung runner 38 hồ sơ chống ghi đè, chốt nguồn/khóa trước suy luận, lưu từng control và chỉ thử lại lỗi kỹ thuật; chạy Qwen lại đủ 18 + 38, xuất riêng hai nhóm và rà 19 sai khác tiêu chí.
 - [x] Kiểm chứng hồi quy phần nguồn mới bằng Edge: ba trạng thái, mã lỗi, mở đúng control và không ghi nguồn; 11 luồng cũ đạt, ca mới đạt sau sửa thao tác test mở khối cha (giữ báo cáo lỗi). Tổng 12 kịch bản qua hai lần chạy, 380 Python/14 JavaScript, lint/build đạt; [minh chứng 22/11](../docs/HOAN_THIEN_TUAN_06_2026_11_22.md).
+- [x] Lưu đầy đủ CSV và 132 artifact có manifest hash; đối chiếu hash với byte đã lưu trong Git, giữ nguyên LF/CRLF của minh chứng để có thể kiểm tra lại khi tải repo.
 - [x] Kiểm tra nội dung nguồn trước suy luận, giữ dữ liệu cũ và yêu cầu nộp lại nguồn không dùng được.
 - [x] Trực quan hóa và thống nhất bốn màn hình; phân biệt kết quả, tiến độ, bằng chứng và thẩm định.
 - [x] Nối ngữ cảnh đợt/control/nhân viên/lượt nguồn giữa bốn màn hình; giữ mục đang xem khi tải lại hoặc Back/Forward, nhập nguồn A.8 dẫn về đúng hồ sơ và lọc nhân viên theo viện dẫn bằng chứng.
@@ -56,6 +57,8 @@ Phần triển khai kỹ thuật đã hoàn thành trong tuần:
 
 Chỉ đánh dấu hoàn thành khi có kết quả và minh chứng. Hoàn thành phần mềm, có nguồn hoặc chạy xong không đồng nghĩa control tuân thủ hay đã nghiệm thu chuyên môn.
 
+Tám mục còn mở phía trên đã hoàn thành phần chuẩn bị kỹ thuật: phiếu rà rubric, danh sách nguồn thiếu, công cụ chốt snapshot/so sánh, luồng chấm và thẩm định, báo cáo/SoA dự thảo. Chưa tích các mục tổng thể vì còn thiếu nguồn mới, kết luận người thật và quyết định/phê duyệt thực tế; chuyển phần này sang tuần 7.
+
 ## Công việc chuyển tiếp từ tuần 5
 
 - Phần mềm đã có luồng đánh giá 56 control, probe đại diện 18 A.8, chấm mù, báo cáo, SoA dự thảo và công cụ nhập gói nguồn ngoài đã chốt.
@@ -70,7 +73,7 @@ Các thông tin trên là **trạng thái bàn giao từ tuần 5**, không ph�
 | Ngày | Công việc | Kết quả / minh chứng |
 |---|---|---|
 | 22/11/2026 | Chạy lại và khóa sổ kỹ thuật theo checklist | Chốt snapshot rồi chạy 18 A.8 live và 38 hồ sơ mô phỏng bằng Qwen: 0 lỗi đầu/cuối; 18 A.8 một phần, bộ 38 khớp khóa phát triển 23/38, giữ 15 lệch tổng và 19 lệch tiêu chí. Export trạng thái 56, so sánh hai lượt, chuẩn bị phiếu rà rubric; API 39 bước/ba tài khoản và ghi thật database riêng đạt. Packet/rubric/chỉ số nghiệm thu chính trước–sau không đổi; xem [báo cáo và artifact 22/11](../docs/HOAN_THIEN_TUAN_06_2026_11_22.md). Tám mục nguồn/xác nhận bên ngoài vẫn mở |
-| 22/11/2026 | Làm rõ yêu cầu bổ sung/đối chiếu nguồn | Gói bàn giao và phiếu nguồn phân biệt thiếu hồ sơ, nội dung không dùng được và lỗi toàn vẹn; giữ mã bằng chứng/lỗi trong JSON/Markdown, hiển thị trên UI và mở đúng control. Nguồn hỏng vẫn được yêu cầu đối chiếu khi control còn nguồn khác dùng được; nguồn cũ chưa xác minh không bị coi là hỏng. 367 test Python, lint/build đạt; chưa kiểm thử trình duyệt thay đổi này. Không thay bằng chứng, nhãn, quyết định hay phê duyệt thật |
+| 22/11/2026 | Làm rõ yêu cầu bổ sung/đối chiếu nguồn | Phân biệt thiếu hồ sơ, nội dung không dùng được và lỗi toàn vẹn; giữ mã bằng chứng/lỗi, hiển thị trên UI và mở đúng control. Mốc đầu 367 test Python đạt; sau đó đã kiểm thử Edge phần nguồn mới trong đợt khóa sổ cùng ngày. Không thay bằng chứng, nhãn, quyết định hay phê duyệt thật |
 | 18/11/2026 | Củng cố kiểm tra nội dung nguồn và đầu vào Agent | Chặn tài liệu quá ít/ký tự lặp khi nạp mới, lọc nguồn cũ trước suy luận, giữ lịch sử; thêm cảnh báo và việc yêu cầu nộp lại trên Phạm vi 56 |
 | 18/11/2026 | Kiểm chứng và rà nguồn A.6.2 | Nguồn 1 ký tự không đưa vào model; Mốc đầu: 253 test Python, 5 test JavaScript, lint/build đạt. Không coi ngưỡng văn bản là đủ bằng chứng tuân thủ |
 | 18/11/2026 | Thống nhất giao diện hệ thống đánh giá | Bản đồ 56 control, tiến độ/Agent đang chạy, tìm kiếm và lọc; sắp xếp bốn màn hình, thu gọn quản trị/JSON, tách luyện tập khỏi chấm thật; giữ tên ISO 27001 và mô tả luôn hiện, điều hướng xuống hàng khi cửa sổ hẹp |
@@ -106,9 +109,18 @@ Các thông tin trên là **trạng thái bàn giao từ tuần 5**, không ph�
 
 ## Kết quả và minh chứng
 
+### Cập nhật mới nhất ngày 22/11
+
+- **Triển khai:** công cụ xuất hiện trạng nguồn/packet/CSV 56 control; so sánh hai lần đánh giá theo nguồn/rubric/model; runner 38 hồ sơ chốt nguồn và khóa trước suy luận, chống ghi đè, giữ lỗi và chỉ thử lại lỗi kỹ thuật.
+- **Agent 18 A.8 live:** chạy Qwen đủ 18/18, không lỗi đầu/cuối; 18 kết luận một phần trên snapshot lab mới. Kết quả riêng từng control, không thay các kết luận của đợt chính.
+- **38 hồ sơ mô phỏng:** chạy đủ, không lỗi đầu/cuối; khớp khóa phát triển 23/38, giữ 15 lệch tổng và 19 lệch tiêu chí ở 18 control. Không phải accuracy độc lập; một số lý do LLM vẫn cần người đánh giá rà.
+- **Kiểm chứng:** 380 Python, 14 JavaScript; API 39 kiểm tra ba tài khoản; 11 UI cũ đạt, ca nguồn mới đạt sau sửa test, tổng 12 kịch bản qua hai lần chạy; ghi thật trên database riêng, lint/build và kiểm tra khởi động đạt.
+- **Bảo toàn và tồn đọng:** packet/rubric/chỉ số nghiệm thu chính trước–sau không đổi; còn 37 control thiếu nguồn và A.6.2 cần thay. Chưa có thẩm định, quyết định áp dụng hoặc phê duyệt thật; giữ tám mục tương ứng mở.
+- **Minh chứng:** [báo cáo tổng kết và file kết quả](../docs/HOAN_THIEN_TUAN_06_2026_11_22.md), [phiếu rà rubric](../docs/RA_SOAT_RUBRIC_2026_11_22.md), [manifest 132 artifact](../docs/a8-results/release-2026-11-22-manifest.json).
+
 ### Trạng thái chốt ngày 21/11
 
-- **Kiểm chứng kỹ thuật mới nhất:** 365 test Python, 14 test JavaScript, 11 kịch bản Edge, lint/build đạt. Hai kịch bản ghi thật trên PostgreSQL/backend/Edge riêng và phép thử phục hồi sau ngắt API đã đạt; dữ liệu thử không nhập vào đợt chính. Số test là mốc mới nhất, không cộng dồn các lần chạy.
+- **Mốc kiểm chứng ngày 21/11:** 365 test Python, 14 test JavaScript, 11 kịch bản Edge, lint/build đạt. Hai kịch bản ghi thật trên PostgreSQL/backend/Edge riêng và phép thử phục hồi sau ngắt API đã đạt; dữ liệu thử không nhập vào đợt chính. Đây là mốc lịch sử; số mới nhất ở mục 22/11 phía trên, không cộng dồn các lần chạy.
 - **Giao diện và điều hướng:** bốn màn hình giữ cùng đợt/control/nhân viên/lượt nguồn; F5 giữ lựa chọn nhưng mở đầu trang, không gửi lệnh chạy Agent. Đã chốt kiểm thử các luồng chính theo ma trận, chưa khẳng định mọi ngoại lệ đã được bao phủ.
 - **18 nguồn A.8 trong đợt chính:** kết luận máy mới nhất gồm 3 không tuân thủ, 6 một phần, 9 thiếu bằng chứng; giữ riêng job lỗi và các lần kiểm tra lại. Không phải độ đúng so với người chấm.
 - **Gói ứng viên kỹ thuật 18 A.8:** Qwen2.5:7b trả đủ 18 bản ghi hợp lệ lần đầu, không fallback luật. Đây là fixture đã sửa phục vụ hồi quy; không gộp với kết quả đợt chính hoặc gọi là tập kiểm định độc lập.
@@ -154,7 +166,7 @@ Tài liệu bàn giao tuần trước: [Nhật ký tuần 5](TUAN_05.md), [phi�
 
 1. Xác nhận rubric, phạm vi nguồn và người đánh giá với giảng viên/người phụ trách.
 2. Bổ sung nguồn cho 37 control, thay A.6.2 và rà mức bao phủ nguồn đã có.
-3. Chuẩn bị/xác nhận bộ kiểm định mới, lịch sử tiếp xúc và snapshot.
+3. Chuẩn bị/xác nhận bộ kiểm định mới, lịch sử tiếp  xúc và snapshot.
 4. Tổ chức chấm cùng lượt, khai đúng hỗ trợ/tiếp xúc.
 5. Người đánh giá xử lý bất đồng và rà căn cứ, giữ nhãn khóa/lịch sử.
 6. Đánh giá trên nguồn được chấp nhận và đo độ đúng với người đánh giá đủ điều kiện.
