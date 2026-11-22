@@ -1,0 +1,29 @@
+{
+  "control_id": "A.8.25",
+  "model": "qwen2.5:7b",
+  "status": "Partially Compliant",
+  "error": null,
+  "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The artifact contains a documented SDLC process with defined stages.\",\"source_files\":[\"development_workflow.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The CI/CD pipeline does not include any security scan jobs.\",\"source_files\":[\"development_workflow.json\"]}]}",
+  "source_hashes": {
+    "development_workflow.json": "a272b08fd2ff85ef9c180de64680e98c0034f97697ca0c940572624d4a5ef463"
+  },
+  "checks": [
+    {
+      "criterion_index": 0,
+      "verdict": "met",
+      "rationale": "The artifact contains a documented SDLC process with defined stages.",
+      "source_files": [
+        "development_workflow.json"
+      ]
+    },
+    {
+      "criterion_index": 1,
+      "verdict": "not_met",
+      "rationale": "The CI/CD pipeline does not include any security scan jobs.",
+      "source_files": [
+        "development_workflow.json"
+      ]
+    }
+  ],
+  "duration_ms": 2297
+}

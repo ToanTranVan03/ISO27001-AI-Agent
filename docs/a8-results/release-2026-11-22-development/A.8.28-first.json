@@ -1,0 +1,29 @@
+{
+  "control_id": "A.8.28",
+  "model": "qwen2.5:7b",
+  "status": "Partially Compliant",
+  "error": null,
+  "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The secure coding guidelines are documented in the 'LAB-CODING-01' document, which includes rules such as parameterized SQL, validate input, and no hardcoded secrets.\",\"source_files\":[\"coding_and_sast.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The SAST report contains critical findings, specifically an open SQL injection vulnerability in 'lab/example.py' at line 42, indicating the presence of a serious coding issue.\",\"source_files\":[\"coding_and_sast.json\"]}]}",
+  "source_hashes": {
+    "coding_and_sast.json": "57c7354caef2142317827599b5edfdc73c296b8fa8e0a14e305dba6898d3ff66"
+  },
+  "checks": [
+    {
+      "criterion_index": 0,
+      "verdict": "met",
+      "rationale": "The secure coding guidelines are documented in the 'LAB-CODING-01' document, which includes rules such as parameterized SQL, validate input, and no hardcoded secrets.",
+      "source_files": [
+        "coding_and_sast.json"
+      ]
+    },
+    {
+      "criterion_index": 1,
+      "verdict": "not_met",
+      "rationale": "The SAST report contains critical findings, specifically an open SQL injection vulnerability in 'lab/example.py' at line 42, indicating the presence of a serious coding issue.",
+      "source_files": [
+        "coding_and_sast.json"
+      ]
+    }
+  ],
+  "duration_ms": 3453
+}

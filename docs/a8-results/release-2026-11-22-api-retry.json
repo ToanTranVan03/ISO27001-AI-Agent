@@ -1,0 +1,285 @@
+{
+  "protocol": "live-api-acceptance-v1",
+  "checked_at": "2026-11-22T10:22:39.849080+07:00",
+  "surface": "API_ONLY",
+  "gui_tested": false,
+  "human_assessment": false,
+  "checks": [
+    {
+      "name": "Profile requires login",
+      "actor": "anonymous",
+      "expected_status": 401,
+      "actual_status": 401,
+      "passed": true
+    },
+    {
+      "name": "Login",
+      "actor": "admin",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true
+    },
+    {
+      "name": "Current account",
+      "actor": "admin",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true
+    },
+    {
+      "name": "Campaign membership",
+      "actor": "admin",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true
+    },
+    {
+      "name": "Account profile",
+      "actor": "admin",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true
+    },
+    {
+      "name": "56-control scope",
+      "actor": "admin",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true
+    },
+    {
+      "name": "Company inventory",
+      "actor": "admin",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true
+    },
+    {
+      "name": "Shared dossier",
+      "actor": "admin",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true
+    },
+    {
+      "name": "Batch history",
+      "actor": "admin",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true
+    },
+    {
+      "name": "A8 catalog",
+      "actor": "admin",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true
+    },
+    {
+      "name": "Reject foreign campaign",
+      "actor": "admin",
+      "expected_status": 403,
+      "actual_status": 403,
+      "passed": true
+    },
+    {
+      "name": "Invalid validation plan rejected",
+      "actor": "admin",
+      "expected_status": 422,
+      "actual_status": 422,
+      "passed": true
+    },
+    {
+      "name": "Logout",
+      "actor": "admin",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true
+    },
+    {
+      "name": "Login",
+      "actor": "ledangkhoa",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true
+    },
+    {
+      "name": "Current account",
+      "actor": "ledangkhoa",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true
+    },
+    {
+      "name": "Campaign membership",
+      "actor": "ledangkhoa",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true
+    },
+    {
+      "name": "Account profile",
+      "actor": "ledangkhoa",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true
+    },
+    {
+      "name": "56-control scope",
+      "actor": "ledangkhoa",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true
+    },
+    {
+      "name": "Company inventory",
+      "actor": "ledangkhoa",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true
+    },
+    {
+      "name": "Shared dossier",
+      "actor": "ledangkhoa",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true
+    },
+    {
+      "name": "Batch history",
+      "actor": "ledangkhoa",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true
+    },
+    {
+      "name": "A8 catalog",
+      "actor": "ledangkhoa",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true
+    },
+    {
+      "name": "Reject foreign campaign",
+      "actor": "ledangkhoa",
+      "expected_status": 403,
+      "actual_status": 403,
+      "passed": true
+    },
+    {
+      "name": "Assessor cannot start batch",
+      "actor": "ledangkhoa",
+      "expected_status": 403,
+      "actual_status": 403,
+      "passed": true
+    },
+    {
+      "name": "Assessor cannot approve SoA",
+      "actor": "ledangkhoa",
+      "expected_status": 403,
+      "actual_status": 403,
+      "passed": true
+    },
+    {
+      "name": "Logout",
+      "actor": "ledangkhoa",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true
+    },
+    {
+      "name": "Login",
+      "actor": "ledoanvantu",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true
+    },
+    {
+      "name": "Current account",
+      "actor": "ledoanvantu",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true
+    },
+    {
+      "name": "Campaign membership",
+      "actor": "ledoanvantu",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true
+    },
+    {
+      "name": "Account profile",
+      "actor": "ledoanvantu",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true
+    },
+    {
+      "name": "56-control scope",
+      "actor": "ledoanvantu",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true
+    },
+    {
+      "name": "Company inventory",
+      "actor": "ledoanvantu",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true
+    },
+    {
+      "name": "Shared dossier",
+      "actor": "ledoanvantu",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true
+    },
+    {
+      "name": "Batch history",
+      "actor": "ledoanvantu",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true
+    },
+    {
+      "name": "A8 catalog",
+      "actor": "ledoanvantu",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true
+    },
+    {
+      "name": "Reject foreign campaign",
+      "actor": "ledoanvantu",
+      "expected_status": 403,
+      "actual_status": 403,
+      "passed": true
+    },
+    {
+      "name": "Assessor cannot start batch",
+      "actor": "ledoanvantu",
+      "expected_status": 403,
+      "actual_status": 403,
+      "passed": true
+    },
+    {
+      "name": "Assessor cannot approve SoA",
+      "actor": "ledoanvantu",
+      "expected_status": 403,
+      "actual_status": 403,
+      "passed": true
+    },
+    {
+      "name": "Logout",
+      "actor": "ledoanvantu",
+      "expected_status": 200,
+      "actual_status": 200,
+      "passed": true
+    }
+  ],
+  "missing_credentials": [],
+  "passed": true,
+  "note": "API behavior only. No evidence uploaded, model started, human label submitted or approval created. Not UI acceptance or ISO certification."
+}

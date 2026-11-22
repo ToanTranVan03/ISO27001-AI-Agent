@@ -1,0 +1,29 @@
+{
+  "control_id": "A.7.5",
+  "model": "qwen2.5:7b",
+  "status": "Partially Compliant",
+  "error": null,
+  "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"not_met\",\"rationale\":\"The 'Biên bản nghiệm thu/bảo trì PCCC' is not collected according to the records.\",\"source_files\":[\"environmental_records.json\"]},{\"criterion_index\":1,\"verdict\":\"met\",\"rationale\":\"The temperature and humidity sensor 'LAB-TEMP-01' is reported as 'responding' and measures a temperature of 23.4°C and humidity of 46% at the observed time.\",\"source_files\":[\"environmental_records.json\"]}]}",
+  "source_hashes": {
+    "environmental_records.json": "153ae079b8327d3959726a90057d311c629ccb41976344ec8079b389beca15fa"
+  },
+  "checks": [
+    {
+      "criterion_index": 0,
+      "verdict": "not_met",
+      "rationale": "The 'Biên bản nghiệm thu/bảo trì PCCC' is not collected according to the records.",
+      "source_files": [
+        "environmental_records.json"
+      ]
+    },
+    {
+      "criterion_index": 1,
+      "verdict": "met",
+      "rationale": "The temperature and humidity sensor 'LAB-TEMP-01' is reported as 'responding' and measures a temperature of 23.4°C and humidity of 46% at the observed time.",
+      "source_files": [
+        "environmental_records.json"
+      ]
+    }
+  ],
+  "duration_ms": 3156
+}

@@ -1,0 +1,29 @@
+{
+  "control_id": "A.6.7",
+  "model": "qwen2.5:7b",
+  "status": "Non-Compliant",
+  "error": null,
+  "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"not_met\",\"rationale\":\"The policy is in draft state and not published, indicating no official remote work policy.\",\"source_files\":[\"remote_configuration.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The endpoint uses plain HTTP for remote transport and has antivirus disabled, indicating lack of security measures.\",\"source_files\":[\"remote_configuration.json\"]}]}",
+  "source_hashes": {
+    "remote_configuration.json": "0fa0a02f2f0ce6b827ebbfab31529a56ea1b8b68abea491611e16903a7e1efbf"
+  },
+  "checks": [
+    {
+      "criterion_index": 0,
+      "verdict": "not_met",
+      "rationale": "The policy is in draft state and not published, indicating no official remote work policy.",
+      "source_files": [
+        "remote_configuration.json"
+      ]
+    },
+    {
+      "criterion_index": 1,
+      "verdict": "not_met",
+      "rationale": "The endpoint uses plain HTTP for remote transport and has antivirus disabled, indicating lack of security measures.",
+      "source_files": [
+        "remote_configuration.json"
+      ]
+    }
+  ],
+  "duration_ms": 2407
+}

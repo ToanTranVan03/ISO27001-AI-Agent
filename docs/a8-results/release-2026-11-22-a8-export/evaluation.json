@@ -1,0 +1,2022 @@
+{
+  "protocol": "integrated-branches-export-v1",
+  "input_report_hashes": [
+    "6576560a43f83b975c66fdbe77ea2baba93a3f41a102a84ce745835c6046744d"
+  ],
+  "source": "EXISTING_REPORT_EXPORT_NOT_NEW_INFERENCE",
+  "designer_comparisons": [
+    {
+      "report_sha256": "6576560a43f83b975c66fdbe77ea2baba93a3f41a102a84ce745835c6046744d",
+      "mode": "llm",
+      "transport": "live",
+      "rubric_version": "a8-live-v2-active",
+      "comparison": {
+        "per_control": [
+          {
+            "control_id": "A.8.1",
+            "total": 1,
+            "rated": 0,
+            "class_metrics": {
+              "Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Partially Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Non-Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Insufficient Evidence": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              }
+            },
+            "mean_duration_ms": 10821.19,
+            "errors": 0,
+            "collection_issues": 0,
+            "correct": 0,
+            "accuracy": null,
+            "first_pass_accuracy": null,
+            "repaired": 0,
+            "observations": 1,
+            "inference_attempts": 1,
+            "availability_guard_results": 0,
+            "confusion": {
+              "Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Partially Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Non-Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Insufficient Evidence": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              }
+            }
+          },
+          {
+            "control_id": "A.8.2",
+            "total": 1,
+            "rated": 0,
+            "class_metrics": {
+              "Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Partially Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Non-Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Insufficient Evidence": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              }
+            },
+            "mean_duration_ms": 6804.07,
+            "errors": 0,
+            "collection_issues": 0,
+            "correct": 0,
+            "accuracy": null,
+            "first_pass_accuracy": null,
+            "repaired": 0,
+            "observations": 1,
+            "inference_attempts": 1,
+            "availability_guard_results": 0,
+            "confusion": {
+              "Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Partially Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Non-Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Insufficient Evidence": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              }
+            }
+          },
+          {
+            "control_id": "A.8.3",
+            "total": 1,
+            "rated": 0,
+            "class_metrics": {
+              "Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Partially Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Non-Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Insufficient Evidence": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              }
+            },
+            "mean_duration_ms": 6791.32,
+            "errors": 0,
+            "collection_issues": 0,
+            "correct": 0,
+            "accuracy": null,
+            "first_pass_accuracy": null,
+            "repaired": 0,
+            "observations": 1,
+            "inference_attempts": 1,
+            "availability_guard_results": 0,
+            "confusion": {
+              "Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Partially Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Non-Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Insufficient Evidence": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              }
+            }
+          },
+          {
+            "control_id": "A.8.5",
+            "total": 1,
+            "rated": 0,
+            "class_metrics": {
+              "Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Partially Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Non-Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Insufficient Evidence": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              }
+            },
+            "mean_duration_ms": 6833.7,
+            "errors": 0,
+            "collection_issues": 0,
+            "correct": 0,
+            "accuracy": null,
+            "first_pass_accuracy": null,
+            "repaired": 0,
+            "observations": 1,
+            "inference_attempts": 1,
+            "availability_guard_results": 0,
+            "confusion": {
+              "Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Partially Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Non-Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Insufficient Evidence": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              }
+            }
+          },
+          {
+            "control_id": "A.8.7",
+            "total": 1,
+            "rated": 0,
+            "class_metrics": {
+              "Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Partially Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Non-Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Insufficient Evidence": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              }
+            },
+            "mean_duration_ms": 6598.8,
+            "errors": 0,
+            "collection_issues": 0,
+            "correct": 0,
+            "accuracy": null,
+            "first_pass_accuracy": null,
+            "repaired": 0,
+            "observations": 1,
+            "inference_attempts": 1,
+            "availability_guard_results": 0,
+            "confusion": {
+              "Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Partially Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Non-Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Insufficient Evidence": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              }
+            }
+          },
+          {
+            "control_id": "A.8.8",
+            "total": 1,
+            "rated": 0,
+            "class_metrics": {
+              "Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Partially Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Non-Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Insufficient Evidence": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              }
+            },
+            "mean_duration_ms": 8247.09,
+            "errors": 0,
+            "collection_issues": 0,
+            "correct": 0,
+            "accuracy": null,
+            "first_pass_accuracy": null,
+            "repaired": 0,
+            "observations": 1,
+            "inference_attempts": 1,
+            "availability_guard_results": 0,
+            "confusion": {
+              "Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Partially Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Non-Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Insufficient Evidence": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              }
+            }
+          },
+          {
+            "control_id": "A.8.9",
+            "total": 1,
+            "rated": 0,
+            "class_metrics": {
+              "Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Partially Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Non-Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Insufficient Evidence": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              }
+            },
+            "mean_duration_ms": 5991.83,
+            "errors": 0,
+            "collection_issues": 0,
+            "correct": 0,
+            "accuracy": null,
+            "first_pass_accuracy": null,
+            "repaired": 0,
+            "observations": 1,
+            "inference_attempts": 1,
+            "availability_guard_results": 0,
+            "confusion": {
+              "Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Partially Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Non-Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Insufficient Evidence": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              }
+            }
+          },
+          {
+            "control_id": "A.8.10",
+            "total": 1,
+            "rated": 0,
+            "class_metrics": {
+              "Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Partially Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Non-Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Insufficient Evidence": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              }
+            },
+            "mean_duration_ms": 6024.19,
+            "errors": 0,
+            "collection_issues": 0,
+            "correct": 0,
+            "accuracy": null,
+            "first_pass_accuracy": null,
+            "repaired": 0,
+            "observations": 1,
+            "inference_attempts": 1,
+            "availability_guard_results": 0,
+            "confusion": {
+              "Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Partially Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Non-Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Insufficient Evidence": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              }
+            }
+          },
+          {
+            "control_id": "A.8.12",
+            "total": 1,
+            "rated": 0,
+            "class_metrics": {
+              "Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Partially Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Non-Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Insufficient Evidence": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              }
+            },
+            "mean_duration_ms": 6710.86,
+            "errors": 0,
+            "collection_issues": 0,
+            "correct": 0,
+            "accuracy": null,
+            "first_pass_accuracy": null,
+            "repaired": 0,
+            "observations": 1,
+            "inference_attempts": 1,
+            "availability_guard_results": 0,
+            "confusion": {
+              "Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Partially Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Non-Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Insufficient Evidence": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              }
+            }
+          },
+          {
+            "control_id": "A.8.13",
+            "total": 1,
+            "rated": 0,
+            "class_metrics": {
+              "Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Partially Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Non-Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Insufficient Evidence": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              }
+            },
+            "mean_duration_ms": 6270.89,
+            "errors": 0,
+            "collection_issues": 0,
+            "correct": 0,
+            "accuracy": null,
+            "first_pass_accuracy": null,
+            "repaired": 0,
+            "observations": 1,
+            "inference_attempts": 1,
+            "availability_guard_results": 0,
+            "confusion": {
+              "Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Partially Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Non-Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Insufficient Evidence": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              }
+            }
+          },
+          {
+            "control_id": "A.8.15",
+            "total": 1,
+            "rated": 0,
+            "class_metrics": {
+              "Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Partially Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Non-Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Insufficient Evidence": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              }
+            },
+            "mean_duration_ms": 5927.77,
+            "errors": 0,
+            "collection_issues": 0,
+            "correct": 0,
+            "accuracy": null,
+            "first_pass_accuracy": null,
+            "repaired": 0,
+            "observations": 1,
+            "inference_attempts": 1,
+            "availability_guard_results": 0,
+            "confusion": {
+              "Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Partially Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Non-Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Insufficient Evidence": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              }
+            }
+          },
+          {
+            "control_id": "A.8.16",
+            "total": 1,
+            "rated": 0,
+            "class_metrics": {
+              "Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Partially Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Non-Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Insufficient Evidence": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              }
+            },
+            "mean_duration_ms": 5999.01,
+            "errors": 0,
+            "collection_issues": 0,
+            "correct": 0,
+            "accuracy": null,
+            "first_pass_accuracy": null,
+            "repaired": 0,
+            "observations": 1,
+            "inference_attempts": 1,
+            "availability_guard_results": 0,
+            "confusion": {
+              "Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Partially Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Non-Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Insufficient Evidence": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              }
+            }
+          },
+          {
+            "control_id": "A.8.17",
+            "total": 1,
+            "rated": 0,
+            "class_metrics": {
+              "Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Partially Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Non-Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Insufficient Evidence": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              }
+            },
+            "mean_duration_ms": 6713.16,
+            "errors": 0,
+            "collection_issues": 0,
+            "correct": 0,
+            "accuracy": null,
+            "first_pass_accuracy": null,
+            "repaired": 0,
+            "observations": 1,
+            "inference_attempts": 1,
+            "availability_guard_results": 0,
+            "confusion": {
+              "Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Partially Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Non-Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Insufficient Evidence": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              }
+            }
+          },
+          {
+            "control_id": "A.8.19",
+            "total": 1,
+            "rated": 0,
+            "class_metrics": {
+              "Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Partially Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Non-Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Insufficient Evidence": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              }
+            },
+            "mean_duration_ms": 7418.27,
+            "errors": 0,
+            "collection_issues": 0,
+            "correct": 0,
+            "accuracy": null,
+            "first_pass_accuracy": null,
+            "repaired": 0,
+            "observations": 1,
+            "inference_attempts": 1,
+            "availability_guard_results": 0,
+            "confusion": {
+              "Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Partially Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Non-Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Insufficient Evidence": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              }
+            }
+          },
+          {
+            "control_id": "A.8.20",
+            "total": 1,
+            "rated": 0,
+            "class_metrics": {
+              "Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Partially Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Non-Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Insufficient Evidence": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              }
+            },
+            "mean_duration_ms": 6618.68,
+            "errors": 0,
+            "collection_issues": 0,
+            "correct": 0,
+            "accuracy": null,
+            "first_pass_accuracy": null,
+            "repaired": 0,
+            "observations": 1,
+            "inference_attempts": 1,
+            "availability_guard_results": 0,
+            "confusion": {
+              "Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Partially Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Non-Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Insufficient Evidence": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              }
+            }
+          },
+          {
+            "control_id": "A.8.22",
+            "total": 1,
+            "rated": 0,
+            "class_metrics": {
+              "Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Partially Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Non-Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Insufficient Evidence": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              }
+            },
+            "mean_duration_ms": 6328.39,
+            "errors": 0,
+            "collection_issues": 0,
+            "correct": 0,
+            "accuracy": null,
+            "first_pass_accuracy": null,
+            "repaired": 0,
+            "observations": 1,
+            "inference_attempts": 1,
+            "availability_guard_results": 0,
+            "confusion": {
+              "Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Partially Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Non-Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Insufficient Evidence": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              }
+            }
+          },
+          {
+            "control_id": "A.8.24",
+            "total": 1,
+            "rated": 0,
+            "class_metrics": {
+              "Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Partially Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Non-Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Insufficient Evidence": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              }
+            },
+            "mean_duration_ms": 6555.45,
+            "errors": 0,
+            "collection_issues": 0,
+            "correct": 0,
+            "accuracy": null,
+            "first_pass_accuracy": null,
+            "repaired": 0,
+            "observations": 1,
+            "inference_attempts": 1,
+            "availability_guard_results": 0,
+            "confusion": {
+              "Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Partially Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Non-Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Insufficient Evidence": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              }
+            }
+          },
+          {
+            "control_id": "A.8.32",
+            "total": 1,
+            "rated": 0,
+            "class_metrics": {
+              "Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Partially Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Non-Compliant": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              },
+              "Insufficient Evidence": {
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "support": 0
+              }
+            },
+            "mean_duration_ms": 6542.23,
+            "errors": 0,
+            "collection_issues": 0,
+            "correct": 0,
+            "accuracy": null,
+            "first_pass_accuracy": null,
+            "repaired": 0,
+            "observations": 1,
+            "inference_attempts": 1,
+            "availability_guard_results": 0,
+            "confusion": {
+              "Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Partially Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Non-Compliant": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              },
+              "Insufficient Evidence": {
+                "Compliant": 0,
+                "Partially Compliant": 0,
+                "Non-Compliant": 0,
+                "Insufficient Evidence": 0,
+                "ERROR": 0
+              }
+            }
+          }
+        ],
+        "cases": [
+          {
+            "control_id": "A.8.1",
+            "case_id": "A.8.1-mixed",
+            "prediction": "Partially Compliant",
+            "expected": null,
+            "label_origin": null,
+            "assistance": null,
+            "prior_exposure": null,
+            "correct": null,
+            "first_pass_prediction": "Partially Compliant",
+            "repaired": false,
+            "attempt_count": 1,
+            "execution_source": "ollama-a8-evidence-judgment",
+            "has_observations": true,
+            "inference_attempts": 1,
+            "error": null,
+            "collection_issue_count": 0,
+            "duration_ms": 10821.19
+          },
+          {
+            "control_id": "A.8.2",
+            "case_id": "A.8.2-mixed",
+            "prediction": "Partially Compliant",
+            "expected": null,
+            "label_origin": null,
+            "assistance": null,
+            "prior_exposure": null,
+            "correct": null,
+            "first_pass_prediction": "Partially Compliant",
+            "repaired": false,
+            "attempt_count": 1,
+            "execution_source": "ollama-a8-evidence-judgment",
+            "has_observations": true,
+            "inference_attempts": 1,
+            "error": null,
+            "collection_issue_count": 0,
+            "duration_ms": 6804.07
+          },
+          {
+            "control_id": "A.8.3",
+            "case_id": "A.8.3-mixed",
+            "prediction": "Partially Compliant",
+            "expected": null,
+            "label_origin": null,
+            "assistance": null,
+            "prior_exposure": null,
+            "correct": null,
+            "first_pass_prediction": "Partially Compliant",
+            "repaired": false,
+            "attempt_count": 1,
+            "execution_source": "ollama-a8-evidence-judgment",
+            "has_observations": true,
+            "inference_attempts": 1,
+            "error": null,
+            "collection_issue_count": 0,
+            "duration_ms": 6791.32
+          },
+          {
+            "control_id": "A.8.5",
+            "case_id": "A.8.5-mixed",
+            "prediction": "Partially Compliant",
+            "expected": null,
+            "label_origin": null,
+            "assistance": null,
+            "prior_exposure": null,
+            "correct": null,
+            "first_pass_prediction": "Partially Compliant",
+            "repaired": false,
+            "attempt_count": 1,
+            "execution_source": "ollama-a8-evidence-judgment",
+            "has_observations": true,
+            "inference_attempts": 1,
+            "error": null,
+            "collection_issue_count": 0,
+            "duration_ms": 6833.7
+          },
+          {
+            "control_id": "A.8.7",
+            "case_id": "A.8.7-mixed",
+            "prediction": "Partially Compliant",
+            "expected": null,
+            "label_origin": null,
+            "assistance": null,
+            "prior_exposure": null,
+            "correct": null,
+            "first_pass_prediction": "Partially Compliant",
+            "repaired": false,
+            "attempt_count": 1,
+            "execution_source": "ollama-a8-evidence-judgment",
+            "has_observations": true,
+            "inference_attempts": 1,
+            "error": null,
+            "collection_issue_count": 0,
+            "duration_ms": 6598.8
+          },
+          {
+            "control_id": "A.8.8",
+            "case_id": "A.8.8-mixed",
+            "prediction": "Partially Compliant",
+            "expected": null,
+            "label_origin": null,
+            "assistance": null,
+            "prior_exposure": null,
+            "correct": null,
+            "first_pass_prediction": "Partially Compliant",
+            "repaired": false,
+            "attempt_count": 1,
+            "execution_source": "ollama-a8-evidence-judgment",
+            "has_observations": true,
+            "inference_attempts": 1,
+            "error": null,
+            "collection_issue_count": 0,
+            "duration_ms": 8247.09
+          },
+          {
+            "control_id": "A.8.9",
+            "case_id": "A.8.9-mixed",
+            "prediction": "Partially Compliant",
+            "expected": null,
+            "label_origin": null,
+            "assistance": null,
+            "prior_exposure": null,
+            "correct": null,
+            "first_pass_prediction": "Partially Compliant",
+            "repaired": false,
+            "attempt_count": 1,
+            "execution_source": "ollama-a8-evidence-judgment",
+            "has_observations": true,
+            "inference_attempts": 1,
+            "error": null,
+            "collection_issue_count": 0,
+            "duration_ms": 5991.83
+          },
+          {
+            "control_id": "A.8.10",
+            "case_id": "A.8.10-mixed",
+            "prediction": "Partially Compliant",
+            "expected": null,
+            "label_origin": null,
+            "assistance": null,
+            "prior_exposure": null,
+            "correct": null,
+            "first_pass_prediction": "Partially Compliant",
+            "repaired": false,
+            "attempt_count": 1,
+            "execution_source": "ollama-a8-evidence-judgment",
+            "has_observations": true,
+            "inference_attempts": 1,
+            "error": null,
+            "collection_issue_count": 0,
+            "duration_ms": 6024.19
+          },
+          {
+            "control_id": "A.8.12",
+            "case_id": "A.8.12-mixed",
+            "prediction": "Partially Compliant",
+            "expected": null,
+            "label_origin": null,
+            "assistance": null,
+            "prior_exposure": null,
+            "correct": null,
+            "first_pass_prediction": "Partially Compliant",
+            "repaired": false,
+            "attempt_count": 1,
+            "execution_source": "ollama-a8-evidence-judgment",
+            "has_observations": true,
+            "inference_attempts": 1,
+            "error": null,
+            "collection_issue_count": 0,
+            "duration_ms": 6710.86
+          },
+          {
+            "control_id": "A.8.13",
+            "case_id": "A.8.13-mixed",
+            "prediction": "Partially Compliant",
+            "expected": null,
+            "label_origin": null,
+            "assistance": null,
+            "prior_exposure": null,
+            "correct": null,
+            "first_pass_prediction": "Partially Compliant",
+            "repaired": false,
+            "attempt_count": 1,
+            "execution_source": "ollama-a8-evidence-judgment",
+            "has_observations": true,
+            "inference_attempts": 1,
+            "error": null,
+            "collection_issue_count": 0,
+            "duration_ms": 6270.89
+          },
+          {
+            "control_id": "A.8.15",
+            "case_id": "A.8.15-mixed",
+            "prediction": "Partially Compliant",
+            "expected": null,
+            "label_origin": null,
+            "assistance": null,
+            "prior_exposure": null,
+            "correct": null,
+            "first_pass_prediction": "Partially Compliant",
+            "repaired": false,
+            "attempt_count": 1,
+            "execution_source": "ollama-a8-evidence-judgment",
+            "has_observations": true,
+            "inference_attempts": 1,
+            "error": null,
+            "collection_issue_count": 0,
+            "duration_ms": 5927.77
+          },
+          {
+            "control_id": "A.8.16",
+            "case_id": "A.8.16-mixed",
+            "prediction": "Partially Compliant",
+            "expected": null,
+            "label_origin": null,
+            "assistance": null,
+            "prior_exposure": null,
+            "correct": null,
+            "first_pass_prediction": "Partially Compliant",
+            "repaired": false,
+            "attempt_count": 1,
+            "execution_source": "ollama-a8-evidence-judgment",
+            "has_observations": true,
+            "inference_attempts": 1,
+            "error": null,
+            "collection_issue_count": 0,
+            "duration_ms": 5999.01
+          },
+          {
+            "control_id": "A.8.17",
+            "case_id": "A.8.17-mixed",
+            "prediction": "Partially Compliant",
+            "expected": null,
+            "label_origin": null,
+            "assistance": null,
+            "prior_exposure": null,
+            "correct": null,
+            "first_pass_prediction": "Partially Compliant",
+            "repaired": false,
+            "attempt_count": 1,
+            "execution_source": "ollama-a8-evidence-judgment",
+            "has_observations": true,
+            "inference_attempts": 1,
+            "error": null,
+            "collection_issue_count": 0,
+            "duration_ms": 6713.16
+          },
+          {
+            "control_id": "A.8.19",
+            "case_id": "A.8.19-mixed",
+            "prediction": "Partially Compliant",
+            "expected": null,
+            "label_origin": null,
+            "assistance": null,
+            "prior_exposure": null,
+            "correct": null,
+            "first_pass_prediction": "Partially Compliant",
+            "repaired": false,
+            "attempt_count": 1,
+            "execution_source": "ollama-a8-evidence-judgment",
+            "has_observations": true,
+            "inference_attempts": 1,
+            "error": null,
+            "collection_issue_count": 0,
+            "duration_ms": 7418.27
+          },
+          {
+            "control_id": "A.8.20",
+            "case_id": "A.8.20-mixed",
+            "prediction": "Partially Compliant",
+            "expected": null,
+            "label_origin": null,
+            "assistance": null,
+            "prior_exposure": null,
+            "correct": null,
+            "first_pass_prediction": "Partially Compliant",
+            "repaired": false,
+            "attempt_count": 1,
+            "execution_source": "ollama-a8-evidence-judgment",
+            "has_observations": true,
+            "inference_attempts": 1,
+            "error": null,
+            "collection_issue_count": 0,
+            "duration_ms": 6618.68
+          },
+          {
+            "control_id": "A.8.22",
+            "case_id": "A.8.22-mixed",
+            "prediction": "Partially Compliant",
+            "expected": null,
+            "label_origin": null,
+            "assistance": null,
+            "prior_exposure": null,
+            "correct": null,
+            "first_pass_prediction": "Partially Compliant",
+            "repaired": false,
+            "attempt_count": 1,
+            "execution_source": "ollama-a8-evidence-judgment",
+            "has_observations": true,
+            "inference_attempts": 1,
+            "error": null,
+            "collection_issue_count": 0,
+            "duration_ms": 6328.39
+          },
+          {
+            "control_id": "A.8.24",
+            "case_id": "A.8.24-mixed",
+            "prediction": "Partially Compliant",
+            "expected": null,
+            "label_origin": null,
+            "assistance": null,
+            "prior_exposure": null,
+            "correct": null,
+            "first_pass_prediction": "Partially Compliant",
+            "repaired": false,
+            "attempt_count": 1,
+            "execution_source": "ollama-a8-evidence-judgment",
+            "has_observations": true,
+            "inference_attempts": 1,
+            "error": null,
+            "collection_issue_count": 0,
+            "duration_ms": 6555.45
+          },
+          {
+            "control_id": "A.8.32",
+            "case_id": "A.8.32-mixed",
+            "prediction": "Partially Compliant",
+            "expected": null,
+            "label_origin": null,
+            "assistance": null,
+            "prior_exposure": null,
+            "correct": null,
+            "first_pass_prediction": "Partially Compliant",
+            "repaired": false,
+            "attempt_count": 1,
+            "execution_source": "ollama-a8-evidence-judgment",
+            "has_observations": true,
+            "inference_attempts": 1,
+            "error": null,
+            "collection_issue_count": 0,
+            "duration_ms": 6542.23
+          }
+        ],
+        "reference_kind": [],
+        "unique_cases": 18,
+        "total_observations": 18,
+        "note": "Nhãn designer không phải kết quả người đánh giá độc lập. Lỗi engine tính là không khớp, không loại khỏi mẫu có nhãn."
+      }
+    }
+  ],
+  "human_comparisons": [
+    {
+      "report_sha256": "6576560a43f83b975c66fdbe77ea2baba93a3f41a102a84ce745835c6046744d",
+      "analysis": {
+        "reviewer_comparisons": {},
+        "pairwise_agreement": [],
+        "disagreements": [],
+        "reviewer_progress": [],
+        "submitted_label_count": 0,
+        "complete_reviewers": [],
+        "complete_independent_reviewers": [],
+        "independent_reviewer_comparisons": {},
+        "rejected_labels": 0,
+        "note": "Chỉ ghép nhãn đúng report/hash; tách nhãn có hỗ trợ hoặc chưa khai báo khỏi đối chiếu độc lập. Tự khai báo chưa chứng minh chuyên môn hay độc lập bên ngoài. Không sửa nhãn mù gốc."
+      },
+      "rationale_quality_issues": [],
+      "quality_eligible_independently_declared_reviewers": [],
+      "human_comparisons": {},
+      "pending_human_comparison": true,
+      "note": "Each reviewer remains separate. Declaration is not proof of expertise or external independence."
+    }
+  ],
+  "soa_drafts": [
+    {
+      "title": "Dự thảo SoA — phạm vi 18 control A.8",
+      "approval": "DRAFT_NOT_APPROVED",
+      "scope": "Doanh nghiệp lab; chỉ 18 control trong catalog, không phải SoA đầy đủ của ISMS.",
+      "report_sha256": "6576560a43f83b975c66fdbe77ea2baba93a3f41a102a84ce745835c6046744d",
+      "generated_at": "2026-11-22T03:21:41.498291+00:00",
+      "entries": [
+        {
+          "control_id": "A.8.1",
+          "name": "User endpoint devices",
+          "applicable": null,
+          "inclusion_reason": "Pending owner applicability decision; lab scope alone does not approve applicability.",
+          "applicability_approved": false,
+          "owner": "IT Endpoint",
+          "implementation_status": "Partially Compliant",
+          "rationale": "Dữ liệu cho thấy endpoint_record_private là true, chứng tỏ labworker không đọc được hồ sơ tệp endpoint. Tuy nhiên, endpoint_file_encryption_verified là false, cho thấy tệp mẫu đã được giải mã đúng hash nhưng vẫn tồn tại bản plaintext phụ và đã mã hóa ổ đĩa, không thỏa mãn điều kiện lab. Do đó, hệ thống chỉ đạt trạng thái Partially Compliant.",
+          "evidence_ids": [
+            "A8LIVE-202b6f770c6e829d57f86742"
+          ],
+          "evidence_source": "live-container://A.8.1",
+          "evidence_sha256": "202b6f770c6e829d57f86742200659c83c6e98c0007a851db1c543abccfb67ed",
+          "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+          "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt.",
+          "remediation_suggestion": "Bật đầy đủ tác nhân EDR và kích hoạt mã hóa toàn bộ ổ đĩa (BitLocker/LUKS) trên toàn bộ thiết bị đầu cuối người dùng.",
+          "suggestion_note": "Draft technical option from branch Tuan5, not an ISO mandate, completed action or owner approval."
+        },
+        {
+          "control_id": "A.8.2",
+          "name": "Privileged access rights",
+          "applicable": null,
+          "inclusion_reason": "Pending owner applicability decision; lab scope alone does not approve applicability.",
+          "applicability_approved": false,
+          "owner": "IAM",
+          "implementation_status": "Partially Compliant",
+          "rationale": "Tiêu chí A.8.2.1 về hạn chế quyền thực hiện các thao tác quản trị đã được tuân thủ, vì không có quan sát hợp lệ cho thấy labworker có thể ghi cấu hình quản trị. Tuy nhiên, tiêu chí A.8.2.2 về việc xem xét phê duyệt quyền quản trị trong 90 ngày chưa được tuân thủ, vì labadmin đã bị từ chối phê duyệt trong thời gian gần đây.",
+          "evidence_ids": [
+            "A8LIVE-f7e5392a73e79427e7ee22b1"
+          ],
+          "evidence_source": "live-container://A.8.2",
+          "evidence_sha256": "f7e5392a73e79427e7ee22b13d364f31899b68d23db42c9c45d608730a1e76c9",
+          "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+          "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt.",
+          "remediation_suggestion": "Thu hồi các quyền sudo/admin vượt mức trên hệ thống và thực hiện rà soát định kỳ danh sách tài khoản đặc quyền.",
+          "suggestion_note": "Draft technical option from branch Tuan5, not an ISO mandate, completed action or owner approval."
+        },
+        {
+          "control_id": "A.8.3",
+          "name": "Information access restriction",
+          "applicable": null,
+          "inclusion_reason": "Pending owner applicability decision; lab scope alone does not approve applicability.",
+          "applicability_approved": false,
+          "owner": "IAM",
+          "implementation_status": "Partially Compliant",
+          "rationale": "Trong bằng chứng, kiểm tra access_default_deny đã đạt yêu cầu, vì labworker không thể ghi tệp nghiệp vụ (write_access_rc = 1, resource_stat = 644 root root). Tuy nhiên, kiểm tra access_review_current không đạt yêu cầu, vì hồ sơ review cho labworker đã bị từ chối (access-review.csv). Do đó, hệ thống không tuân thủ yêu cầu về đánh giá quyền truy cập hiện tại.",
+          "evidence_ids": [
+            "A8LIVE-54f491578f94c2eef7d4bcde"
+          ],
+          "evidence_source": "live-container://A.8.3",
+          "evidence_sha256": "54f491578f94c2eef7d4bcde64e1cca3a70b1c1c399543460816c81fc9f8ed4b",
+          "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+          "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt.",
+          "remediation_suggestion": "Áp dụng chính sách mặc định từ chối (default-deny) trên ACL và cập nhật biên bản rà soát quyền truy cập tài nguyên nhạy cảm.",
+          "suggestion_note": "Draft technical option from branch Tuan5, not an ISO mandate, completed action or owner approval."
+        },
+        {
+          "control_id": "A.8.5",
+          "name": "Secure authentication",
+          "applicable": null,
+          "inclusion_reason": "Pending owner applicability decision; lab scope alone does not approve applicability.",
+          "applicability_approved": false,
+          "owner": "IAM",
+          "implementation_status": "Partially Compliant",
+          "rationale": "Dịch vụ lab đã từ chối mật khẩu sai và chấp nhận thông tin đúng, do đó tiêu chí 'password_rejection_verified' được đáp ứng. Tuy nhiên, tiêu chí 'second_factor_enforced' không được đáp ứng vì dịch vụ đã chấp nhận thông tin đầy đủ mà không yêu cầu yếu tố thứ hai. Điều này cho thấy rằng mặc dù có kiểm tra mật khẩu, nhưng không có yêu cầu xác thực hai yếu tố.",
+          "evidence_ids": [
+            "A8LIVE-5f44104d813f4ac3fc891dfd"
+          ],
+          "evidence_source": "live-container://A.8.5",
+          "evidence_sha256": "5f44104d813f4ac3fc891dfddb9b0f0a47290f413c6b6b1304574531cf4735f4",
+          "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+          "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt.",
+          "remediation_suggestion": "Bắt buộc xác thực đa yếu tố (MFA/2FA) cho mọi tài khoản truy cập hệ thống và khóa đăng nhập mật khẩu yếu.",
+          "suggestion_note": "Draft technical option from branch Tuan5, not an ISO mandate, completed action or owner approval."
+        },
+        {
+          "control_id": "A.8.7",
+          "name": "Protection against malware",
+          "applicable": null,
+          "inclusion_reason": "Pending owner applicability decision; lab scope alone does not approve applicability.",
+          "applicability_approved": false,
+          "owner": "SOC",
+          "implementation_status": "Partially Compliant",
+          "rationale": "Tiêu chí A.8.7 về bảo vệ chống vi-rút đã được tuân thủ trong phần test_signature_quarantined, nhưng signature_database_fresh không đáp ứng yêu cầu. Scanner đã thực hiện chuyển mẫu vô hại mang chữ ký thử vào quarantine, nhưng cơ sở chữ ký lab đã không được cập nhật trong 48 giờ, vi phạm điều kiện lab.",
+          "evidence_ids": [
+            "A8LIVE-f2a0a00f02370da1bcaf4efe"
+          ],
+          "evidence_source": "live-container://A.8.7",
+          "evidence_sha256": "f2a0a00f02370da1bcaf4efe6be67d342106195b552feda674dcd63b3fbffdc0",
+          "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+          "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt.",
+          "remediation_suggestion": "Bật cơ chế tự động cách ly mã độc theo thời gian thực và cập nhật cơ sở dữ liệu chữ ký nhận diện mới nhất.",
+          "suggestion_note": "Draft technical option from branch Tuan5, not an ISO mandate, completed action or owner approval."
+        },
+        {
+          "control_id": "A.8.8",
+          "name": "Management of technical vulnerabilities",
+          "applicable": null,
+          "inclusion_reason": "Pending owner applicability decision; lab scope alone does not approve applicability.",
+          "applicability_approved": false,
+          "owner": "SecOps",
+          "implementation_status": "Partially Compliant",
+          "rationale": "Trong bằng chứng, `inventory_scan_enabled` được đánh giá là `true`, cho thấy quét inventory đã được bật. Tuy nhiên, `no_critical_lab_advisory_match` được đánh giá là `false`, cho thấy có ít nhất một package/version đang cài đặt khớp với advisory critical tổng hợp của lab. Điều này vi phạm yêu cầu của kiểm soát A.8.8, vì vậy hệ thống không được đánh giá là tuân thủ hoàn toàn.",
+          "evidence_ids": [
+            "A8LIVE-a87fc1d57e86dd86c6e53800"
+          ],
+          "evidence_source": "live-container://A.8.8",
+          "evidence_sha256": "a87fc1d57e86dd86c6e53800b9cc62844552099fb44f0a02aa7c54b8ce8fd975",
+          "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+          "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt.",
+          "remediation_suggestion": "Thực hiện quét lỗ hổng kỹ thuật định kỳ và cài đặt bản vá khẩn cấp cho các gói phần mềm có CVE mức Critical/High.",
+          "suggestion_note": "Draft technical option from branch Tuan5, not an ISO mandate, completed action or owner approval."
+        },
+        {
+          "control_id": "A.8.9",
+          "name": "Configuration management",
+          "applicable": null,
+          "inclusion_reason": "Pending owner applicability decision; lab scope alone does not approve applicability.",
+          "applicability_approved": false,
+          "owner": "IT Operations",
+          "implementation_status": "Partially Compliant",
+          "rationale": "Bằng chứng cho thấy mã CAB-LAB hiện diện trong bản ghi baseline lab, nhưng cấu hình hiện tại không khớp với baseline đã đăng ký. Điều này cho thấy có sự tuân thủ đối với việc xác định hóa cấu hình, nhưng cấu hình hiện tại không đúng với baseline đã xác định.",
+          "evidence_ids": [
+            "A8LIVE-9db62ed08e1b2931368010e4"
+          ],
+          "evidence_source": "live-container://A.8.9",
+          "evidence_sha256": "9db62ed08e1b2931368010e4afb25559b92863d85f4ba0bfea50fe78804191f9",
+          "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+          "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt.",
+          "remediation_suggestion": "Đồng bộ hóa cấu hình thực tế của máy chủ theo đúng hồ sơ cấu hình chuẩn (Hardening Baseline) đã phê duyệt.",
+          "suggestion_note": "Draft technical option from branch Tuan5, not an ISO mandate, completed action or owner approval."
+        },
+        {
+          "control_id": "A.8.10",
+          "name": "Information deletion",
+          "applicable": null,
+          "inclusion_reason": "Pending owner applicability decision; lab scope alone does not approve applicability.",
+          "applicability_approved": false,
+          "owner": "Data owner",
+          "implementation_status": "Partially Compliant",
+          "rationale": "Deletion policy is enforced with a retention period of 30 days as specified in the 'retention.conf' file. However, the deletion verification step failed because the object still exists, as indicated by the 'object_exists_rc' value of 0. This indicates that the deletion process has not been fully completed or verified.",
+          "evidence_ids": [
+            "A8LIVE-a02e7c5f2fc52fff1143f054"
+          ],
+          "evidence_source": "live-container://A.8.10",
+          "evidence_sha256": "a02e7c5f2fc52fff1143f0541e25ea229c30debcdf32d768f20992c7013d1473",
+          "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+          "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt.",
+          "remediation_suggestion": "Thực thi quy trình xóa an toàn dữ liệu hết hạn lưu trữ và lập biên bản xác minh kết quả hủy dữ liệu.",
+          "suggestion_note": "Draft technical option from branch Tuan5, not an ISO mandate, completed action or owner approval."
+        },
+        {
+          "control_id": "A.8.12",
+          "name": "Data leakage prevention",
+          "applicable": null,
+          "inclusion_reason": "Pending owner applicability decision; lab scope alone does not approve applicability.",
+          "applicability_approved": false,
+          "owner": "SOC",
+          "implementation_status": "Partially Compliant",
+          "rationale": "Dữ liệu cho thấy giao dịch TCP mang mẫu LAB-CONFIDENTIAL đã bị chặn (sensitive_transfer_blocked: true), nhưng không có sự kiện audit gắn hash payload của phép thử (blocked_transfer_audited: false). Điều này cho thấy mặc dù ngăn chặn thành công, việc theo dõi và ghi lại sự kiện này chưa được thực hiện đầy đủ.",
+          "evidence_ids": [
+            "A8LIVE-0eb700382c350b323b53c5cf"
+          ],
+          "evidence_source": "live-container://A.8.12",
+          "evidence_sha256": "0eb700382c350b323b53c5cfa176ae71e7a6d6b673ac63f38acfb1962bb1e4bd",
+          "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+          "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt.",
+          "remediation_suggestion": "Kích hoạt chính sách chặn rò rỉ dữ liệu (DLP) trên kênh truyền và bật ghi nhật ký kiểm toán đầy đủ các sự kiện vi phạm.",
+          "suggestion_note": "Draft technical option from branch Tuan5, not an ISO mandate, completed action or owner approval."
+        },
+        {
+          "control_id": "A.8.13",
+          "name": "Information backup",
+          "applicable": null,
+          "inclusion_reason": "Pending owner applicability decision; lab scope alone does not approve applicability.",
+          "applicability_approved": false,
+          "owner": "IT Operations",
+          "implementation_status": "Partially Compliant",
+          "rationale": "Trong bằng chứng, kiểm tra backup_success đã đạt yêu cầu (trạng thái true), nhưng kiểm tra restore_test_passed không đạt yêu cầu (trạng thái false). Điều này cho thấy hệ thống đã tạo backup thành công nhưng quá trình khôi phục không thành công, do đó chỉ đạt yêu cầu một phần.",
+          "evidence_ids": [
+            "A8LIVE-5e1d71c3e0e700b9da7b7f55"
+          ],
+          "evidence_source": "live-container://A.8.13",
+          "evidence_sha256": "5e1d71c3e0e700b9da7b7f5576414489b9ee498c2c933750e9db7598a86d63be",
+          "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+          "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt.",
+          "remediation_suggestion": "Duy trì lịch sao lưu tự động hằng ngày và thực hiện diễn tập khôi phục dữ liệu (Restore Test) định kỳ.",
+          "suggestion_note": "Draft technical option from branch Tuan5, not an ISO mandate, completed action or owner approval."
+        },
+        {
+          "control_id": "A.8.15",
+          "name": "Logging",
+          "applicable": null,
+          "inclusion_reason": "Pending owner applicability decision; lab scope alone does not approve applicability.",
+          "applicability_approved": false,
+          "owner": "SOC",
+          "implementation_status": "Partially Compliant",
+          "rationale": "Ứng dụng lab đã ghi ít nhất một sự kiện trong tệp log, do đó thỏa mãn điều kiện audit_logs_enabled. Tuy nhiên, tệp log không được bảo vệ về mặt-integrity, do đó không thỏa mãn điều kiện logs_integrity_protected.",
+          "evidence_ids": [
+            "A8LIVE-4e5fbaf2b37cef6fd3878733"
+          ],
+          "evidence_source": "live-container://A.8.15",
+          "evidence_sha256": "4e5fbaf2b37cef6fd3878733721e8559e4452639cb4cae265a3f09f537a4b598",
+          "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+          "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt.",
+          "remediation_suggestion": "Kích hoạt ghi nhật ký kiểm toán tập trung và bảo vệ tính toàn vẹn của tệp log bằng chữ ký số hoặc lưu trữ bất biến (WORM).",
+          "suggestion_note": "Draft technical option from branch Tuan5, not an ISO mandate, completed action or owner approval."
+        },
+        {
+          "control_id": "A.8.16",
+          "name": "Monitoring activities",
+          "applicable": null,
+          "inclusion_reason": "Pending owner applicability decision; lab scope alone does not approve applicability.",
+          "applicability_approved": false,
+          "owner": "SOC",
+          "implementation_status": "Partially Compliant",
+          "rationale": "Tiêu chí file_change_detected_within_sla đã được thỏa mãn, nhưng alert_delivery_receipt_present không có biên nhận sự kiện. Điều này cho thấy có thể có vấn đề trong việc giao nhận thông báo, mặc dù phát hiện thay đổi tệp đã được thực hiện đúng hạn.",
+          "evidence_ids": [
+            "A8LIVE-e18ba0318ed460564289c569"
+          ],
+          "evidence_source": "live-container://A.8.16",
+          "evidence_sha256": "e18ba0318ed460564289c569528ed78578c2d957774083550b6629c1879e3492",
+          "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+          "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt.",
+          "remediation_suggestion": "Cấu hình giám sát tính toàn vẹn tệp (FIM) phát hiện bất thường trong SLA và đảm bảo cảnh báo được gửi tới trực ban SOC.",
+          "suggestion_note": "Draft technical option from branch Tuan5, not an ISO mandate, completed action or owner approval."
+        },
+        {
+          "control_id": "A.8.17",
+          "name": "Clock synchronization",
+          "applicable": null,
+          "inclusion_reason": "Pending owner applicability decision; lab scope alone does not approve applicability.",
+          "applicability_approved": false,
+          "owner": "IT Operations",
+          "implementation_status": "Partially Compliant",
+          "rationale": "Tiêu chí A.8.17 về đồng bộ thời gian đã được kiểm tra và có bằng chứng cho thấy Client đã xác minh HMAC/nonce nguồn thời gian ứng dụng (time_reference_signature_valid: true). Tuy nhiên, độ lệch thời gian so với nguồn không nằm trong phạm vi chính sách (application_time_offset_within_policy: false), do đó không đáp ứng yêu cầu của tiêu chí.",
+          "evidence_ids": [
+            "A8LIVE-5bbd11528ca585fc24941c04"
+          ],
+          "evidence_source": "live-container://A.8.17",
+          "evidence_sha256": "5bbd11528ca585fc24941c046d43f09f8927f43234f2e7486d9754ebdf325984",
+          "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+          "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt.",
+          "remediation_suggestion": "Đồng bộ thời gian tất cả máy chủ với máy chủ NTP chuẩn có xác thực chữ ký và kiểm soát độ lệch dưới ngưỡng cho phép.",
+          "suggestion_note": "Draft technical option from branch Tuan5, not an ISO mandate, completed action or owner approval."
+        },
+        {
+          "control_id": "A.8.19",
+          "name": "Installation of software on operational systems",
+          "applicable": null,
+          "inclusion_reason": "Pending owner applicability decision; lab scope alone does not approve applicability.",
+          "applicability_approved": false,
+          "owner": "IT Operations",
+          "implementation_status": "Partially Compliant",
+          "rationale": "Trong bằng chứng, kiểm tra 'installation_restricted' đã được thực hiện và đạt được kết quả đúng. Tuy nhiên, kiểm tra 'installed_software_approved' không đạt được kết quả đúng vì danh sách phần mềm đã cài đặt không khớp với danh sách phần mềm đã được phê duyệt. Điều này cho thấy có thể có sự thay đổi phần mềm không được quản lý hoặc phê duyệt.",
+          "evidence_ids": [
+            "A8LIVE-eaedfdfbdeefe7cf82b45a53"
+          ],
+          "evidence_source": "live-container://A.8.19",
+          "evidence_sha256": "eaedfdfbdeefe7cf82b45a53f7bd5f9565c71e58cdc1cf8aecfbbd62e1af5cfc",
+          "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+          "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt.",
+          "remediation_suggestion": "Chặn quyền cài đặt phần mềm trái phép của người dùng thường và gỡ bỏ các gói không nằm trong danh mục phê duyệt (Allowlist).",
+          "suggestion_note": "Draft technical option from branch Tuan5, not an ISO mandate, completed action or owner approval."
+        },
+        {
+          "control_id": "A.8.20",
+          "name": "Networks security",
+          "applicable": null,
+          "inclusion_reason": "Pending owner applicability decision; lab scope alone does not approve applicability.",
+          "applicability_approved": false,
+          "owner": "Network",
+          "implementation_status": "Partially Compliant",
+          "rationale": "Dịch vụ TCP từ chối nguồn không được chấp thuận (unapproved_source_denied) là đúng, nhưng nguồn được chấp thuận không thể truy cập dịch vụ lab (approved_network_flow_available) là sai. Điều này cho thấy có vấn đề với cấu hình hoặc thực thi chính sách mạng, cần điều chỉnh để đảm bảo cả hai tiêu chí đều được đáp ứng.",
+          "evidence_ids": [
+            "A8LIVE-4906e09d2cd42b51b211e9f5"
+          ],
+          "evidence_source": "live-container://A.8.20",
+          "evidence_sha256": "4906e09d2cd42b51b211e9f5deb48178a454f3d2a321910bff8b17debf68a66c",
+          "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+          "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt.",
+          "remediation_suggestion": "Rà soát quy tắc tường lửa chặn mọi kết nối từ mạng không tin cậy và duy trì luồng lưu lượng nghiệp vụ được phê duyệt.",
+          "suggestion_note": "Draft technical option from branch Tuan5, not an ISO mandate, completed action or owner approval."
+        },
+        {
+          "control_id": "A.8.22",
+          "name": "Segregation of networks",
+          "applicable": null,
+          "inclusion_reason": "Pending owner applicability decision; lab scope alone does not approve applicability.",
+          "applicability_approved": false,
+          "owner": "Network",
+          "implementation_status": "Partially Compliant",
+          "rationale": "Dữ liệu bằng chứng cho thấy Client vùng nhân viên bị từ chối dịch vụ quản trị (cross_zone_service_denied: true), đáp ứng yêu cầu. Tuy nhiên, Client vùng nhân viên không thể sử dụng dịch vụ nghiệp vụ (business_zone_service_available: false), không đáp ứng yêu cầu. Do đó, hệ thống chỉ được đánh giá là Partially Compliant.",
+          "evidence_ids": [
+            "A8LIVE-f3e1ce6782b4d6cc1d8db2dc"
+          ],
+          "evidence_source": "live-container://A.8.22",
+          "evidence_sha256": "f3e1ce6782b4d6cc1d8db2dc7a57d3047e99c46e7f9062d3ed1c5f15963ee75d",
+          "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+          "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt.",
+          "remediation_suggestion": "Phân tách vùng mạng (Network Segmentation) giữa vùng người dùng, vùng máy chủ nghiệp vụ và vùng quản trị.",
+          "suggestion_note": "Draft technical option from branch Tuan5, not an ISO mandate, completed action or owner approval."
+        },
+        {
+          "control_id": "A.8.24",
+          "name": "Use of cryptography",
+          "applicable": null,
+          "inclusion_reason": "Pending owner applicability decision; lab scope alone does not approve applicability.",
+          "applicability_approved": false,
+          "owner": "Security",
+          "implementation_status": "Partially Compliant",
+          "rationale": "Tiêu chí 'Use of cryptography' đã được đánh giá là đủ điều kiện cho hai kiểm tra: 'strong_tls_handshake_verified' và 'private_key_access_restricted'. Tuy nhiên, kiểm tra 'private_key_access_restricted' không thỏa mãn điều kiện lab, do đó toàn bộ tiêu chí này chỉ được đánh giá là Partially Compliant.",
+          "evidence_ids": [
+            "A8LIVE-52975d1fcc2c137b55e45559"
+          ],
+          "evidence_source": "live-container://A.8.24",
+          "evidence_sha256": "52975d1fcc2c137b55e45559022863797e1c509f4cd291e83d6e0ffb3e8c12f0",
+          "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+          "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt.",
+          "remediation_suggestion": "Bắt buộc giao thức TLS 1.2/1.3 với bộ mã mạnh và giới hạn quyền truy cập tệp khóa riêng (chmod 600).",
+          "suggestion_note": "Draft technical option from branch Tuan5, not an ISO mandate, completed action or owner approval."
+        },
+        {
+          "control_id": "A.8.32",
+          "name": "Change management",
+          "applicable": null,
+          "inclusion_reason": "Pending owner applicability decision; lab scope alone does not approve applicability.",
+          "applicability_approved": false,
+          "owner": "IT Operations",
+          "implementation_status": "Partially Compliant",
+          "rationale": "Thao tác copy rollback không thực hiện khôi phục đúng nội dung release đã đăng ký, dẫn đến không thỏa mãn tiêu chí 'rollback_restores_release'. Tuy nhiên, bản ghi CAB-LAB gắn đúng hash release và approval do lab dựng, chưa có người thật duyệt, thỏa mãn tiêu chí 'change_bound_to_current_release'.",
+          "evidence_ids": [
+            "A8LIVE-19ccebfbf319beb546371044"
+          ],
+          "evidence_source": "live-container://A.8.32",
+          "evidence_sha256": "19ccebfbf319beb546371044962c9f2431bf3bb33b16346af3c54fc6d708f4a5",
+          "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+          "required_action": "Người phụ trách rà soát tính áp dụng, bằng chứng và phần chưa đáp ứng; chưa tự phê duyệt.",
+          "remediation_suggestion": "Đảm bảo mọi thay đổi trên môi trường vận hành đều gắn với phiếu duyệt Change Ticket và kiểm thử thành công kịch bản Rollback.",
+          "suggestion_note": "Draft technical option from branch Tuan5, not an ISO mandate, completed action or owner approval."
+        }
+      ]
+    }
+  ],
+  "note": "No pooled accuracy across different engines/rubrics. Missing human labels remain missing. Designer labels are not human judgments.",
+  "sha256": "e1123af72bfe1e43b6be6226ee4a267a3bd20641b179d1b517325e1ff2305fc6"
+}

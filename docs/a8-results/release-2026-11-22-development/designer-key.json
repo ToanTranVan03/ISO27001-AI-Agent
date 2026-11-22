@@ -1,0 +1,229 @@
+{
+  "A.6.1": {
+    "designer_verdicts": [
+      "met",
+      "not_met"
+    ]
+  },
+  "A.6.2": {
+    "designer_verdicts": [
+      "met",
+      "not_met"
+    ]
+  },
+  "A.6.3": {
+    "designer_verdicts": [
+      "not_met",
+      "met"
+    ]
+  },
+  "A.6.4": {
+    "designer_verdicts": [
+      "met",
+      "met"
+    ]
+  },
+  "A.6.5": {
+    "designer_verdicts": [
+      "met",
+      "unknown"
+    ]
+  },
+  "A.6.6": {
+    "designer_verdicts": [
+      "met",
+      "not_met"
+    ]
+  },
+  "A.6.7": {
+    "designer_verdicts": [
+      "not_met",
+      "not_met"
+    ]
+  },
+  "A.6.8": {
+    "designer_verdicts": [
+      "met",
+      "met"
+    ]
+  },
+  "A.7.1": {
+    "designer_verdicts": [
+      "met",
+      "not_met"
+    ]
+  },
+  "A.7.2": {
+    "designer_verdicts": [
+      "met",
+      "not_met"
+    ]
+  },
+  "A.7.3": {
+    "designer_verdicts": [
+      "met",
+      "met"
+    ]
+  },
+  "A.7.4": {
+    "designer_verdicts": [
+      "met",
+      "not_met"
+    ]
+  },
+  "A.7.5": {
+    "designer_verdicts": [
+      "unknown",
+      "met"
+    ]
+  },
+  "A.7.6": {
+    "designer_verdicts": [
+      "met",
+      "met"
+    ]
+  },
+  "A.7.7": {
+    "designer_verdicts": [
+      "not_met",
+      "not_met"
+    ]
+  },
+  "A.7.8": {
+    "designer_verdicts": [
+      "met",
+      "not_met"
+    ]
+  },
+  "A.7.9": {
+    "designer_verdicts": [
+      "met",
+      "unknown"
+    ]
+  },
+  "A.7.10": {
+    "designer_verdicts": [
+      "met",
+      "met"
+    ]
+  },
+  "A.7.11": {
+    "designer_verdicts": [
+      "unknown",
+      "unknown"
+    ]
+  },
+  "A.7.12": {
+    "designer_verdicts": [
+      "not_met",
+      "met"
+    ]
+  },
+  "A.7.13": {
+    "designer_verdicts": [
+      "met",
+      "met"
+    ]
+  },
+  "A.7.14": {
+    "designer_verdicts": [
+      "met",
+      "not_met"
+    ]
+  },
+  "A.8.4": {
+    "designer_verdicts": [
+      "not_met",
+      "met"
+    ]
+  },
+  "A.8.6": {
+    "designer_verdicts": [
+      "met",
+      "not_met"
+    ]
+  },
+  "A.8.11": {
+    "designer_verdicts": [
+      "met",
+      "met"
+    ]
+  },
+  "A.8.14": {
+    "designer_verdicts": [
+      "met",
+      "unknown"
+    ]
+  },
+  "A.8.18": {
+    "designer_verdicts": [
+      "not_met",
+      "not_met"
+    ]
+  },
+  "A.8.21": {
+    "designer_verdicts": [
+      "unknown",
+      "met"
+    ]
+  },
+  "A.8.23": {
+    "designer_verdicts": [
+      "met",
+      "met"
+    ]
+  },
+  "A.8.25": {
+    "designer_verdicts": [
+      "met",
+      "not_met"
+    ]
+  },
+  "A.8.26": {
+    "designer_verdicts": [
+      "met"
+    ]
+  },
+  "A.8.27": {
+    "designer_verdicts": [
+      "met",
+      "unknown"
+    ]
+  },
+  "A.8.28": {
+    "designer_verdicts": [
+      "met",
+      "not_met"
+    ]
+  },
+  "A.8.29": {
+    "designer_verdicts": [
+      "met",
+      "not_met"
+    ]
+  },
+  "A.8.30": {
+    "designer_verdicts": [
+      "met",
+      "met"
+    ]
+  },
+  "A.8.31": {
+    "designer_verdicts": [
+      "met",
+      "not_met"
+    ]
+  },
+  "A.8.33": {
+    "designer_verdicts": [
+      "met",
+      "met"
+    ]
+  },
+  "A.8.34": {
+    "designer_verdicts": [
+      "met",
+      "not_met"
+    ]
+  }
+}

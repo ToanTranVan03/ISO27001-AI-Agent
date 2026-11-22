@@ -1,0 +1,29 @@
+{
+  "control_id": "A.7.8",
+  "model": "qwen2.5:7b",
+  "status": "Partially Compliant",
+  "error": null,
+  "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The asset record specifies the physical location of the critical equipment.\",\"source_files\":[\"rack_inventory.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The rack check indicates that the door lock for rack-01 is missing, which does not meet the requirement for locked cabinets.\",\"source_files\":[\"rack_inventory.json\"]}]}",
+  "source_hashes": {
+    "rack_inventory.json": "36d98981fe445a296bcb115fce78fa58f8b1f56578743358bd00955057c8e619"
+  },
+  "checks": [
+    {
+      "criterion_index": 0,
+      "verdict": "met",
+      "rationale": "The asset record specifies the physical location of the critical equipment.",
+      "source_files": [
+        "rack_inventory.json"
+      ]
+    },
+    {
+      "criterion_index": 1,
+      "verdict": "not_met",
+      "rationale": "The rack check indicates that the door lock for rack-01 is missing, which does not meet the requirement for locked cabinets.",
+      "source_files": [
+        "rack_inventory.json"
+      ]
+    }
+  ],
+  "duration_ms": 2344
+}

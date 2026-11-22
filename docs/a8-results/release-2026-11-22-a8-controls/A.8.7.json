@@ -1,0 +1,91 @@
+{
+  "parent_report_sha256": "6576560a43f83b975c66fdbe77ea2baba93a3f41a102a84ce745835c6046744d",
+  "capture_sha256": "c438a71be61bfc9d7293bb6e89f86aec27f542f2eb0d382476291493af9f7d40",
+  "independent_validation": false,
+  "record": {
+    "control_id": "A.8.7",
+    "case_id": "A.8.7-mixed",
+    "name": "Protection against malware",
+    "criteria_checks": [
+      "test_signature_quarantined",
+      "signature_database_fresh"
+    ],
+    "criteria_details": [
+      {
+        "check": "test_signature_quarantined",
+        "raw_source": "probe.json: scanner_exit_code + quarantine_files",
+        "pass_condition": "Scanner lab thực chuyển mẫu vô hại mang chữ ký thử vào quarantine; không phải sản phẩm antivirus.",
+        "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+        "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+        "verification_kind": "container-active-self-test"
+      },
+      {
+        "check": "signature_database_fresh",
+        "raw_source": "probe.json: signature_mtime",
+        "pass_condition": "Cơ sở chữ ký lab được cập nhật không quá 48 giờ.",
+        "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+        "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+        "verification_kind": "container-active-self-test"
+      }
+    ],
+    "evidence": {
+      "evidence_id": "A8LIVE-f2a0a00f02370da1bcaf4efe",
+      "source": "live-container://A.8.7",
+      "source_sha256": "f2a0a00f02370da1bcaf4efe6be67d342106195b552feda674dcd63b3fbffdc0",
+      "collected_at": "2026-11-22T03:18:04.191467+00:00",
+      "observed_at": "2026-11-22T03:18:04.146377+00:00",
+      "asset_id": "08b11382ce92",
+      "control_id": "A.8.7",
+      "facts": {
+        "test_signature_quarantined": true,
+        "signature_database_fresh": false
+      },
+      "artifacts": [
+        {
+          "artifact": "observed_at",
+          "content": "2026-11-22T03:18:04.146377+00:00",
+          "sha256": "8dd258d246bee40ae160c84443ae8059152cfec79de14845dc942044a4fec925"
+        },
+        {
+          "artifact": "asset_id",
+          "content": "08b11382ce92",
+          "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+        },
+        {
+          "artifact": "probe.json",
+          "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.7\", \"observed_at\": \"2026-11-22T03:18:04.146377+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"scanner_configuration\": {\"enabled\": true}, \"sample_sha256\": \"8dda30955b01bea35f8403e63547dbb63be0376b5a74125464905de592e53f51\", \"scanner_exit_code\": 66, \"quarantine_files\": [\"quarantined.txt\"], \"signature_mtime\": \"2026-11-12T03:17:51.457368+00:00\", \"scanner\": \"Lab signature scanner on harmless custom marker; not EDR/antivirus product\"}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+          "sha256": "38b7461d921db8a12b4d4fbeec4ce3e15561b491572e58118502a4ca055720d7"
+        }
+      ],
+      "collection_errors": [],
+      "is_synthetic": true,
+      "transport": "live",
+      "source_kind": "live-container-observation",
+      "probe_kind": "container-active-self-test",
+      "observation_available": true,
+      "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+    },
+    "owner": "SOC",
+    "applicable": true,
+    "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Endpoint; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+    "applicability_approved": false,
+    "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+    "status": "Partially Compliant",
+    "rationale": "Tiêu chí A.8.7 về bảo vệ chống vi-rút đã được tuân thủ trong phần test_signature_quarantined, nhưng signature_database_fresh không đáp ứng yêu cầu. Scanner đã thực hiện chuyển mẫu vô hại mang chữ ký thử vào quarantine, nhưng cơ sở chữ ký lab đã không được cập nhật trong 48 giờ, vi phạm điều kiện lab.",
+    "evidence_ids": [
+      "A8LIVE-f2a0a00f02370da1bcaf4efe"
+    ],
+    "execution_source": "ollama-a8-evidence-judgment",
+    "attempts": [
+      {
+        "attempt": 1,
+        "status": "Partially Compliant",
+        "error": null,
+        "duration_ms": 6598.79
+      }
+    ],
+    "repaired": false,
+    "error": null,
+    "duration_ms": 6598.8
+  }
+}

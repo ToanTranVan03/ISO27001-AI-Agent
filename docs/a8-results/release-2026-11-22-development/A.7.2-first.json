@@ -1,0 +1,29 @@
+{
+  "control_id": "A.7.2",
+  "model": "qwen2.5:7b",
+  "status": "Partially Compliant",
+  "error": null,
+  "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The badge log contains records of card swipes and biometric access, including 'EMP-001' and 'EMP-002' entering the server room.\",\"source_files\":[\"badge_log.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The log does not explicitly show that only authorized personnel are allowed entry, as 'EMP-002' entered without an escort or additional authorization.\",\"source_files\":[\"badge_log.json\"]}]}",
+  "source_hashes": {
+    "badge_log.json": "25051f3a60251e175c798c57393f0af30a8a87714445b2f2c5b5e22bbd7b081c"
+  },
+  "checks": [
+    {
+      "criterion_index": 0,
+      "verdict": "met",
+      "rationale": "The badge log contains records of card swipes and biometric access, including 'EMP-001' and 'EMP-002' entering the server room.",
+      "source_files": [
+        "badge_log.json"
+      ]
+    },
+    {
+      "criterion_index": 1,
+      "verdict": "not_met",
+      "rationale": "The log does not explicitly show that only authorized personnel are allowed entry, as 'EMP-002' entered without an escort or additional authorization.",
+      "source_files": [
+        "badge_log.json"
+      ]
+    }
+  ],
+  "duration_ms": 2985
+}

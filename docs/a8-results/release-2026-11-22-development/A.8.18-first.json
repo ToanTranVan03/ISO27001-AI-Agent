@@ -1,0 +1,29 @@
+{
+  "control_id": "A.8.18",
+  "model": "qwen2.5:7b",
+  "status": "Insufficient Evidence",
+  "error": null,
+  "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"not_met\",\"rationale\":\"The scenario does not show any SUID/SGID files with restricted execution groups other than 'all users'.\",\"source_files\":[\"utility_permissions.json\"]},{\"criterion_index\":1,\"verdict\":\"unknown\",\"rationale\":\"The scenario does not provide a list of authorized utility programs or any review tickets related to the authorization process.\",\"source_files\":[\"utility_permissions.json\"]}]}",
+  "source_hashes": {
+    "utility_permissions.json": "c433bf231c3ca49b7231f378b555d0f79daa1f6ab7815e8c75dfe5c0c2956554"
+  },
+  "checks": [
+    {
+      "criterion_index": 0,
+      "verdict": "not_met",
+      "rationale": "The scenario does not show any SUID/SGID files with restricted execution groups other than 'all users'.",
+      "source_files": [
+        "utility_permissions.json"
+      ]
+    },
+    {
+      "criterion_index": 1,
+      "verdict": "unknown",
+      "rationale": "The scenario does not provide a list of authorized utility programs or any review tickets related to the authorization process.",
+      "source_files": [
+        "utility_permissions.json"
+      ]
+    }
+  ],
+  "duration_ms": 2703
+}

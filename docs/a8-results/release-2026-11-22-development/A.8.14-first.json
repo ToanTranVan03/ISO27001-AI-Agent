@@ -1,0 +1,29 @@
+{
+  "control_id": "A.8.14",
+  "model": "qwen2.5:7b",
+  "status": "Partially Compliant",
+  "error": null,
+  "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The HA configuration is explicitly stated in the artifact, indicating the presence of a load balancer with backends.\",\"source_files\":[\"ha_configuration.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The artifact does not provide any information about the availability of the architecture document or the results of failover tests.\",\"source_files\":[\"ha_configuration.json\"]}]}",
+  "source_hashes": {
+    "ha_configuration.json": "13f617a9061f8460a722f83520a32f37e79bd31ebe2cc1bc9a020b137c35376d"
+  },
+  "checks": [
+    {
+      "criterion_index": 0,
+      "verdict": "met",
+      "rationale": "The HA configuration is explicitly stated in the artifact, indicating the presence of a load balancer with backends.",
+      "source_files": [
+        "ha_configuration.json"
+      ]
+    },
+    {
+      "criterion_index": 1,
+      "verdict": "not_met",
+      "rationale": "The artifact does not provide any information about the availability of the architecture document or the results of failover tests.",
+      "source_files": [
+        "ha_configuration.json"
+      ]
+    }
+  ],
+  "duration_ms": 2672
+}

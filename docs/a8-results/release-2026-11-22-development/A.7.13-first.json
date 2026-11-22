@@ -1,0 +1,29 @@
+{
+  "control_id": "A.7.13",
+  "model": "qwen2.5:7b",
+  "status": "Insufficient Evidence",
+  "error": null,
+  "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The artifact contains a maintenance contract for LAB-SRV-01 with a schedule interval of 90 days, indicating that there is a contract/literal 'Có hợp đồng/lịch bảo trì' in place.\",\"source_files\":[\"maintenance_register.json\"]},{\"criterion_index\":1,\"verdict\":\"unknown\",\"rationale\":\"The artifact does not contain any explicit 'Biên bản bảo trì thiết bị lưu hệ thống' (maintenance log) entries, only a register of completed and scheduled maintenance.\",\"source_files\":[\"maintenance_register.json\"]}] }",
+  "source_hashes": {
+    "maintenance_register.json": "5dbbb461fbee963c6ccd6515cd3793ccdcc2affa9813186d3deb336fe0c3c94b"
+  },
+  "checks": [
+    {
+      "criterion_index": 0,
+      "verdict": "met",
+      "rationale": "The artifact contains a maintenance contract for LAB-SRV-01 with a schedule interval of 90 days, indicating that there is a contract/literal 'Có hợp đồng/lịch bảo trì' in place.",
+      "source_files": [
+        "maintenance_register.json"
+      ]
+    },
+    {
+      "criterion_index": 1,
+      "verdict": "unknown",
+      "rationale": "The artifact does not contain any explicit 'Biên bản bảo trì thiết bị lưu hệ thống' (maintenance log) entries, only a register of completed and scheduled maintenance.",
+      "source_files": [
+        "maintenance_register.json"
+      ]
+    }
+  ],
+  "duration_ms": 3453
+}

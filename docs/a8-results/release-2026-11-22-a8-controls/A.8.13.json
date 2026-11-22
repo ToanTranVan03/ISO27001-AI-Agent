@@ -1,0 +1,101 @@
+{
+  "parent_report_sha256": "6576560a43f83b975c66fdbe77ea2baba93a3f41a102a84ce745835c6046744d",
+  "capture_sha256": "c438a71be61bfc9d7293bb6e89f86aec27f542f2eb0d382476291493af9f7d40",
+  "independent_validation": false,
+  "record": {
+    "control_id": "A.8.13",
+    "case_id": "A.8.13-mixed",
+    "name": "Information backup",
+    "criteria_checks": [
+      "backup_success",
+      "restore_test_passed"
+    ],
+    "criteria_details": [
+      {
+        "check": "backup_success",
+        "raw_source": "backup.dat + backup.sha256",
+        "pass_condition": "Hash nội dung backup khớp seal lúc tạo backup.",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "live-container-observation"
+      },
+      {
+        "check": "restore_test_passed",
+        "raw_source": "backup.dat + restored.dat",
+        "pass_condition": "Nội dung đã khôi phục khớp backup.",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "live-container-observation"
+      }
+    ],
+    "evidence": {
+      "evidence_id": "A8LIVE-5e1d71c3e0e700b9da7b7f55",
+      "source": "live-container://A.8.13",
+      "source_sha256": "5e1d71c3e0e700b9da7b7f5576414489b9ee498c2c933750e9db7598a86d63be",
+      "collected_at": "2026-11-22T03:18:05.144126+00:00",
+      "observed_at": "2026-11-22T03:18:05Z",
+      "asset_id": "08b11382ce92",
+      "control_id": "A.8.13",
+      "facts": {
+        "backup_success": true,
+        "restore_test_passed": false
+      },
+      "artifacts": [
+        {
+          "artifact": "observed_at",
+          "content": "2026-11-22T03:18:05Z",
+          "sha256": "5c72464797a850b75a5a880a86ceb4d991f87fb00ffcb64dcb730c06d3fce1c4"
+        },
+        {
+          "artifact": "asset_id",
+          "content": "08b11382ce92",
+          "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+        },
+        {
+          "artifact": "backup.dat",
+          "content": "business-records-backup\n",
+          "sha256": "2a12d75abad6bec7cb1be6b383cf1258d589454918e87024279a25c4405d12de"
+        },
+        {
+          "artifact": "backup.sha256",
+          "content": "2a12d75abad6bec7cb1be6b383cf1258d589454918e87024279a25c4405d12de\n",
+          "sha256": "dc3327d7e8fc3cf125e4e575eeebceb3cd3593a12a227218646f650839a45fd1"
+        },
+        {
+          "artifact": "restored.dat",
+          "content": "restore-does-not-match\n",
+          "sha256": "14548bc699c9ebda80b5b8ab98f44cff011f5b58c86ae5f0d9666d8746940568"
+        }
+      ],
+      "collection_errors": [],
+      "is_synthetic": true,
+      "transport": "live",
+      "source_kind": "live-container-observation",
+      "probe_kind": "read-only-resource-observation",
+      "observation_available": true,
+      "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+    },
+    "owner": "IT Operations",
+    "applicable": true,
+    "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Backup; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+    "applicability_approved": false,
+    "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+    "status": "Partially Compliant",
+    "rationale": "Trong bằng chứng, kiểm tra backup_success đã đạt yêu cầu (trạng thái true), nhưng kiểm tra restore_test_passed không đạt yêu cầu (trạng thái false). Điều này cho thấy hệ thống đã tạo backup thành công nhưng quá trình khôi phục không thành công, do đó chỉ đạt yêu cầu một phần.",
+    "evidence_ids": [
+      "A8LIVE-5e1d71c3e0e700b9da7b7f55"
+    ],
+    "execution_source": "ollama-a8-evidence-judgment",
+    "attempts": [
+      {
+        "attempt": 1,
+        "status": "Partially Compliant",
+        "error": null,
+        "duration_ms": 6270.88
+      }
+    ],
+    "repaired": false,
+    "error": null,
+    "duration_ms": 6270.89
+  }
+}

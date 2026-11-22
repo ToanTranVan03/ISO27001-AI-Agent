@@ -1,0 +1,101 @@
+{
+  "parent_report_sha256": "6576560a43f83b975c66fdbe77ea2baba93a3f41a102a84ce745835c6046744d",
+  "capture_sha256": "c438a71be61bfc9d7293bb6e89f86aec27f542f2eb0d382476291493af9f7d40",
+  "independent_validation": false,
+  "record": {
+    "control_id": "A.8.15",
+    "case_id": "A.8.15-mixed",
+    "name": "Logging",
+    "criteria_checks": [
+      "audit_logs_enabled",
+      "logs_integrity_protected"
+    ],
+    "criteria_details": [
+      {
+        "check": "audit_logs_enabled",
+        "raw_source": "application.log",
+        "pass_condition": "Ứng dụng lab thực sự ghi ít nhất một sự kiện.",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "live-container-observation"
+      },
+      {
+        "check": "logs_integrity_protected",
+        "raw_source": "application.log + application.sha256 + resource_stat",
+        "pass_condition": "Log khớp seal và không cho group/other ghi; chưa kiểm chứng auditd/SIEM.",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "live-container-observation"
+      }
+    ],
+    "evidence": {
+      "evidence_id": "A8LIVE-4e5fbaf2b37cef6fd3878733",
+      "source": "live-container://A.8.15",
+      "source_sha256": "4e5fbaf2b37cef6fd3878733721e8559e4452639cb4cae265a3f09f537a4b598",
+      "collected_at": "2026-11-22T03:18:05.221512+00:00",
+      "observed_at": "2026-11-22T03:18:05Z",
+      "asset_id": "08b11382ce92",
+      "control_id": "A.8.15",
+      "facts": {
+        "audit_logs_enabled": true,
+        "logs_integrity_protected": false
+      },
+      "artifacts": [
+        {
+          "artifact": "observed_at",
+          "content": "2026-11-22T03:18:05Z",
+          "sha256": "5c72464797a850b75a5a880a86ceb4d991f87fb00ffcb64dcb730c06d3fce1c4"
+        },
+        {
+          "artifact": "asset_id",
+          "content": "08b11382ce92",
+          "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+        },
+        {
+          "artifact": "application.log",
+          "content": "event=application_start actor=lab-service\nevent=changed-after-integrity-seal\nevent=application_start actor=lab-service\nevent=changed-after-integrity-seal\nevent=application_start actor=lab-service\nevent=changed-after-integrity-seal\nevent=application_start actor=lab-service\nevent=changed-after-integrity-seal\nevent=application_start actor=lab-service\nevent=changed-after-integrity-seal\nevent=application_start actor=lab-service\nevent=changed-after-integrity-seal\nevent=application_start actor=lab-service\nevent=changed-after-integrity-seal\nevent=application_start actor=lab-service\nevent=changed-after-integrity-seal\nevent=application_start actor=lab-service\nevent=changed-after-integrity-seal\nevent=application_start actor=lab-service\nevent=changed-after-integrity-seal\nevent=application_start actor=lab-service\nevent=changed-after-integrity-seal\n",
+          "sha256": "b6cfed01e234f787a7a59df19c219f74972b0dc177c247c4f86019e0fb06b558"
+        },
+        {
+          "artifact": "application.sha256",
+          "content": "ff8b42bcf53b123ce787fa615765aa438999ef6368f9842f484f9c2887172036\n",
+          "sha256": "6f5a242e5c43e06d524a21b12883447accf38cabac51bd7e54407659b7601f41"
+        },
+        {
+          "artifact": "resource_stat",
+          "content": "644 root root",
+          "sha256": "b9f0b72765fd8a7e8740f30f05af0fa9b4c6ce0bc9b67f5a48360ceceeee59d3"
+        }
+      ],
+      "collection_errors": [],
+      "is_synthetic": true,
+      "transport": "live",
+      "source_kind": "live-container-observation",
+      "probe_kind": "read-only-resource-observation",
+      "observation_available": true,
+      "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+    },
+    "owner": "SOC",
+    "applicable": true,
+    "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Logging; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+    "applicability_approved": false,
+    "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+    "status": "Partially Compliant",
+    "rationale": "Ứng dụng lab đã ghi ít nhất một sự kiện trong tệp log, do đó thỏa mãn điều kiện audit_logs_enabled. Tuy nhiên, tệp log không được bảo vệ về mặt-integrity, do đó không thỏa mãn điều kiện logs_integrity_protected.",
+    "evidence_ids": [
+      "A8LIVE-4e5fbaf2b37cef6fd3878733"
+    ],
+    "execution_source": "ollama-a8-evidence-judgment",
+    "attempts": [
+      {
+        "attempt": 1,
+        "status": "Partially Compliant",
+        "error": null,
+        "duration_ms": 5927.75
+      }
+    ],
+    "repaired": false,
+    "error": null,
+    "duration_ms": 5927.77
+  }
+}

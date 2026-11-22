@@ -1,0 +1,29 @@
+{
+  "control_id": "A.8.11",
+  "model": "qwen2.5:7b",
+  "status": "Compliant",
+  "error": null,
+  "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The policy in the artifact specifies that the email and national_id columns are masked in the test environment, which meets the criterion.\",\"source_files\":[\"masking_export.json\"]},{ \"criterion_index\":1,\"verdict\":\"met\",\"rationale\":\"The sample data shows that the email and national_id fields are masked, indicating that sensitive data is hidden in the non-Production environment as required.\",\"source_files\":[\"masking_export.json\"]}] }",
+  "source_hashes": {
+    "masking_export.json": "4fbbb76efeacd25c5128381d510278592199222adf99b8ba498780d7d7eb94de"
+  },
+  "checks": [
+    {
+      "criterion_index": 0,
+      "verdict": "met",
+      "rationale": "The policy in the artifact specifies that the email and national_id columns are masked in the test environment, which meets the criterion.",
+      "source_files": [
+        "masking_export.json"
+      ]
+    },
+    {
+      "criterion_index": 1,
+      "verdict": "met",
+      "rationale": "The sample data shows that the email and national_id fields are masked, indicating that sensitive data is hidden in the non-Production environment as required.",
+      "source_files": [
+        "masking_export.json"
+      ]
+    }
+  ],
+  "duration_ms": 2906
+}

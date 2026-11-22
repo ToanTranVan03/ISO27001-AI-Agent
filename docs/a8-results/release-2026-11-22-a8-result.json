@@ -1,0 +1,1631 @@
+{
+  "protocol_sha256": "4e143ceaaeb0bd2cd624751a5f793dab0abb6bd4c2a8491ef3545b5e1bba47d8",
+  "registered_at": "2026-11-22T03:18:06.882412+00:00",
+  "dataset_usage": "live-pilot-not-independent-validation",
+  "independent_validation": false,
+  "report": {
+    "profile": "mixed",
+    "mode": "llm",
+    "created_at": "2026-11-22T03:20:22.737884+00:00",
+    "is_synthetic": true,
+    "rubric_version": "a8-live-v2-active",
+    "assessor_version": "evidence-guard-v5-bounded-repair",
+    "transport": "live",
+    "catalog_sha256": "135424a5cad9a5a55ac88337b7b2efe375c1edd731b5b3f47708098bf062f09f",
+    "capture_sha256": "c438a71be61bfc9d7293bb6e89f86aec27f542f2eb0d382476291493af9f7d40",
+    "implementation_sha256": "8a6a8e7d79ebde5294da2461018dda1205dfde03c8de46fde6a75f3387359bf4",
+    "ollama_sdk_version": "0.4.0",
+    "model": "qwen2.5:7b",
+    "generation_options": {
+      "temperature": 0,
+      "num_predict": 400,
+      "num_ctx": 4096
+    },
+    "records": [
+      {
+        "control_id": "A.8.1",
+        "case_id": "A.8.1-mixed",
+        "name": "User endpoint devices",
+        "criteria_checks": [
+          "endpoint_record_private",
+          "endpoint_file_encryption_verified"
+        ],
+        "criteria_details": [
+          {
+            "check": "endpoint_record_private",
+            "raw_source": "probe.json: read_rc + resource_mode",
+            "pass_condition": "labworker không đọc được hồ sơ tệp endpoint.",
+            "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+            "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+            "verification_kind": "container-active-self-test"
+          },
+          {
+            "check": "endpoint_file_encryption_verified",
+            "raw_source": "probe.json: decrypt_rc + decrypted_sha256 + original_sha256 + plaintext_copy_exists",
+            "pass_condition": "Giải mã tệp mẫu đúng hash và không còn bản plaintext phụ; không phải mã hóa ổ đĩa.",
+            "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+            "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+            "verification_kind": "container-active-self-test"
+          }
+        ],
+        "evidence": {
+          "evidence_id": "A8LIVE-202b6f770c6e829d57f86742",
+          "source": "live-container://A.8.1",
+          "source_sha256": "202b6f770c6e829d57f86742200659c83c6e98c0007a851db1c543abccfb67ed",
+          "collected_at": "2026-11-22T03:18:03.185699+00:00",
+          "observed_at": "2026-11-22T03:18:03.137414+00:00",
+          "asset_id": "08b11382ce92",
+          "control_id": "A.8.1",
+          "facts": {
+            "endpoint_record_private": true,
+            "endpoint_file_encryption_verified": false
+          },
+          "artifacts": [
+            {
+              "artifact": "observed_at",
+              "content": "2026-11-22T03:18:03.137414+00:00",
+              "sha256": "ac0876baa4d440bd4c94fd9dbb7a07680c2dd2bfa07a4f1863b9632449fcbe3f"
+            },
+            {
+              "artifact": "asset_id",
+              "content": "08b11382ce92",
+              "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+            },
+            {
+              "artifact": "probe.json",
+              "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.1\", \"observed_at\": \"2026-11-22T03:18:03.137414+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"read_rc\": 1, \"resource_mode\": \"0o600\", \"decrypt_rc\": 0, \"decrypted_sha256\": \"c5c183c96b1eb3e0114bdf0d41524e68fdc4a4c112752c0cfaa01097dd3a15b3\", \"original_sha256\": \"c5c183c96b1eb3e0114bdf0d41524e68fdc4a4c112752c0cfaa01097dd3a15b3\", \"ciphertext_prefix\": \"U2FsdGVkX1/xsZPu09NTRw==\", \"plaintext_copy_exists\": true, \"cipher\": \"AES-256-CBC-PBKDF2 application file, not disk encryption\"}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+              "sha256": "540bd27e26ce90fa85958381833f1455c72a93337a68c30ee87fa79f749d1e2f"
+            }
+          ],
+          "collection_errors": [],
+          "is_synthetic": true,
+          "transport": "live",
+          "source_kind": "live-container-observation",
+          "probe_kind": "container-active-self-test",
+          "observation_available": true,
+          "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+        },
+        "owner": "IT Endpoint",
+        "applicable": true,
+        "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Endpoint; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+        "applicability_approved": false,
+        "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+        "status": "Partially Compliant",
+        "rationale": "Dữ liệu cho thấy endpoint_record_private là true, chứng tỏ labworker không đọc được hồ sơ tệp endpoint. Tuy nhiên, endpoint_file_encryption_verified là false, cho thấy tệp mẫu đã được giải mã đúng hash nhưng vẫn tồn tại bản plaintext phụ và đã mã hóa ổ đĩa, không thỏa mãn điều kiện lab. Do đó, hệ thống chỉ đạt trạng thái Partially Compliant.",
+        "evidence_ids": [
+          "A8LIVE-202b6f770c6e829d57f86742"
+        ],
+        "execution_source": "ollama-a8-evidence-judgment",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "Partially Compliant",
+            "error": null,
+            "duration_ms": 10821.15
+          }
+        ],
+        "repaired": false,
+        "error": null,
+        "duration_ms": 10821.19
+      },
+      {
+        "control_id": "A.8.2",
+        "case_id": "A.8.2-mixed",
+        "name": "Privileged access rights",
+        "criteria_checks": [
+          "privileged_operation_restricted",
+          "privileged_review_current"
+        ],
+        "criteria_details": [
+          {
+            "check": "privileged_operation_restricted",
+            "raw_source": "probe.json: privileged_write_rc + account",
+            "pass_condition": "labworker không ghi được cấu hình quản trị; có tài khoản labadmin.",
+            "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+            "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+            "verification_kind": "container-active-self-test"
+          },
+          {
+            "check": "privileged_review_current",
+            "raw_source": "probe.json: review_csv",
+            "pass_condition": "Review labadmin approved trong 90 ngày; bản ghi lab chưa phải phê duyệt người thật.",
+            "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+            "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+            "verification_kind": "container-active-self-test"
+          }
+        ],
+        "evidence": {
+          "evidence_id": "A8LIVE-f7e5392a73e79427e7ee22b1",
+          "source": "live-container://A.8.2",
+          "source_sha256": "f7e5392a73e79427e7ee22b13d364f31899b68d23db42c9c45d608730a1e76c9",
+          "collected_at": "2026-11-22T03:18:03.477813+00:00",
+          "observed_at": "2026-11-22T03:18:03.424965+00:00",
+          "asset_id": "08b11382ce92",
+          "control_id": "A.8.2",
+          "facts": {
+            "privileged_operation_restricted": true,
+            "privileged_review_current": false
+          },
+          "artifacts": [
+            {
+              "artifact": "observed_at",
+              "content": "2026-11-22T03:18:03.424965+00:00",
+              "sha256": "8af8f4094e4b56499fba1367d979b5f7b40b68fc5ce4e4ae054951e5b7c50fdd"
+            },
+            {
+              "artifact": "asset_id",
+              "content": "08b11382ce92",
+              "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+            },
+            {
+              "artifact": "probe.json",
+              "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.2\", \"observed_at\": \"2026-11-22T03:18:03.424965+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"privileged_write_rc\": 1, \"account\": \"uid=1001(labadmin) gid=1001(labadmin) groups=1001(labadmin)\\n\", \"review_csv\": \"subject,decision,reviewed_at\\nlabadmin,rejected,2026-11-22T03:17:51.434976+00:00\\n\"}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+              "sha256": "80c8cc200494222701505d29b7967418dc7fefb5a26ffa044318fbfb6aab65b2"
+            }
+          ],
+          "collection_errors": [],
+          "is_synthetic": true,
+          "transport": "live",
+          "source_kind": "live-container-observation",
+          "probe_kind": "container-active-self-test",
+          "observation_available": true,
+          "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+        },
+        "owner": "IAM",
+        "applicable": true,
+        "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ IAM; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+        "applicability_approved": false,
+        "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+        "status": "Partially Compliant",
+        "rationale": "Tiêu chí A.8.2.1 về hạn chế quyền thực hiện các thao tác quản trị đã được tuân thủ, vì không có quan sát hợp lệ cho thấy labworker có thể ghi cấu hình quản trị. Tuy nhiên, tiêu chí A.8.2.2 về việc xem xét phê duyệt quyền quản trị trong 90 ngày chưa được tuân thủ, vì labadmin đã bị từ chối phê duyệt trong thời gian gần đây.",
+        "evidence_ids": [
+          "A8LIVE-f7e5392a73e79427e7ee22b1"
+        ],
+        "execution_source": "ollama-a8-evidence-judgment",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "Partially Compliant",
+            "error": null,
+            "duration_ms": 6804.05
+          }
+        ],
+        "repaired": false,
+        "error": null,
+        "duration_ms": 6804.07
+      },
+      {
+        "control_id": "A.8.3",
+        "case_id": "A.8.3-mixed",
+        "name": "Information access restriction",
+        "criteria_checks": [
+          "access_default_deny",
+          "access_review_current"
+        ],
+        "criteria_details": [
+          {
+            "check": "access_default_deny",
+            "raw_source": "write_access_rc + resource_stat",
+            "pass_condition": "labworker không ghi được tệp nghiệp vụ (test -w trả 1).",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "live-container-observation"
+          },
+          {
+            "check": "access_review_current",
+            "raw_source": "access-review.csv",
+            "pass_condition": "Review cho labworker được approved trong 90 ngày; là hồ sơ lab, chưa phải phê duyệt chuyên gia.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "live-container-observation"
+          }
+        ],
+        "evidence": {
+          "evidence_id": "A8LIVE-54f491578f94c2eef7d4bcde",
+          "source": "live-container://A.8.3",
+          "source_sha256": "54f491578f94c2eef7d4bcde64e1cca3a70b1c1c399543460816c81fc9f8ed4b",
+          "collected_at": "2026-11-22T03:18:03.597059+00:00",
+          "observed_at": "2026-11-22T03:18:03Z",
+          "asset_id": "08b11382ce92",
+          "control_id": "A.8.3",
+          "facts": {
+            "access_default_deny": true,
+            "access_review_current": false
+          },
+          "artifacts": [
+            {
+              "artifact": "observed_at",
+              "content": "2026-11-22T03:18:03Z",
+              "sha256": "0d10f7cc5ed1189d5328321d46c3391399148421c16357c71670e39eb9225418"
+            },
+            {
+              "artifact": "asset_id",
+              "content": "08b11382ce92",
+              "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+            },
+            {
+              "artifact": "write_access_rc",
+              "content": "1",
+              "sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b"
+            },
+            {
+              "artifact": "resource_stat",
+              "content": "644 root root",
+              "sha256": "b9f0b72765fd8a7e8740f30f05af0fa9b4c6ce0bc9b67f5a48360ceceeee59d3"
+            },
+            {
+              "artifact": "access-review.csv",
+              "content": "subject,decision,reviewed_at\nlabworker,rejected,2026-11-22T03:17:51Z\n",
+              "sha256": "720e1372f716803ba7536cceedaa441e3a3efaf8818b8c67d7a4847ca5f43818"
+            }
+          ],
+          "collection_errors": [],
+          "is_synthetic": true,
+          "transport": "live",
+          "source_kind": "live-container-observation",
+          "probe_kind": "read-only-resource-observation",
+          "observation_available": true,
+          "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+        },
+        "owner": "IAM",
+        "applicable": true,
+        "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ IAM; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+        "applicability_approved": false,
+        "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+        "status": "Partially Compliant",
+        "rationale": "Trong bằng chứng, kiểm tra access_default_deny đã đạt yêu cầu, vì labworker không thể ghi tệp nghiệp vụ (write_access_rc = 1, resource_stat = 644 root root). Tuy nhiên, kiểm tra access_review_current không đạt yêu cầu, vì hồ sơ review cho labworker đã bị từ chối (access-review.csv). Do đó, hệ thống không tuân thủ yêu cầu về đánh giá quyền truy cập hiện tại.",
+        "evidence_ids": [
+          "A8LIVE-54f491578f94c2eef7d4bcde"
+        ],
+        "execution_source": "ollama-a8-evidence-judgment",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "Partially Compliant",
+            "error": null,
+            "duration_ms": 6791.3
+          }
+        ],
+        "repaired": false,
+        "error": null,
+        "duration_ms": 6791.32
+      },
+      {
+        "control_id": "A.8.5",
+        "case_id": "A.8.5-mixed",
+        "name": "Secure authentication",
+        "criteria_checks": [
+          "password_rejection_verified",
+          "second_factor_enforced"
+        ],
+        "criteria_details": [
+          {
+            "check": "password_rejection_verified",
+            "raw_source": "probe.json: bad_password + authenticated",
+            "pass_condition": "Dịch vụ lab từ chối mật khẩu sai và chấp nhận thông tin đúng.",
+            "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+            "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+            "verification_kind": "container-active-self-test"
+          },
+          {
+            "check": "second_factor_enforced",
+            "raw_source": "probe.json: no_second_factor + authenticated",
+            "pass_condition": "Dịch vụ lab từ chối thiếu yếu tố thứ hai và cho phép thông tin đầy đủ; không phải tích hợp IAM production.",
+            "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+            "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+            "verification_kind": "container-active-self-test"
+          }
+        ],
+        "evidence": {
+          "evidence_id": "A8LIVE-5f44104d813f4ac3fc891dfd",
+          "source": "live-container://A.8.5",
+          "source_sha256": "5f44104d813f4ac3fc891dfddb9b0f0a47290f413c6b6b1304574531cf4735f4",
+          "collected_at": "2026-11-22T03:18:03.944482+00:00",
+          "observed_at": "2026-11-22T03:18:03.899005+00:00",
+          "asset_id": "08b11382ce92",
+          "control_id": "A.8.5",
+          "facts": {
+            "password_rejection_verified": true,
+            "second_factor_enforced": false
+          },
+          "artifacts": [
+            {
+              "artifact": "observed_at",
+              "content": "2026-11-22T03:18:03.899005+00:00",
+              "sha256": "7d85fbca2b743ef8607024e9fcfcf10d0cb32548f08084b1dad15e1ec90d9a8f"
+            },
+            {
+              "artifact": "asset_id",
+              "content": "08b11382ce92",
+              "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+            },
+            {
+              "artifact": "probe.json",
+              "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.5\", \"observed_at\": \"2026-11-22T03:18:03.899005+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"bad_password\": {\"response\": \"401 invalid password\", \"tls_version\": null, \"source_address\": \"127.0.0.1\"}, \"no_second_factor\": {\"response\": \"200 authenticated\", \"tls_version\": null, \"source_address\": \"127.0.0.1\"}, \"authenticated\": {\"response\": \"200 authenticated\", \"tls_version\": null, \"source_address\": \"127.0.0.1\"}, \"mechanism\": \"PBKDF2 + lab time-based HMAC token, not production IAM/TOTP certification\"}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+              "sha256": "3e1342310fda79c01be280a749c5e647c82d563b496cdb7c98ba7f69dfd87e5c"
+            }
+          ],
+          "collection_errors": [],
+          "is_synthetic": true,
+          "transport": "live",
+          "source_kind": "live-container-observation",
+          "probe_kind": "container-active-self-test",
+          "observation_available": true,
+          "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+        },
+        "owner": "IAM",
+        "applicable": true,
+        "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ IAM; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+        "applicability_approved": false,
+        "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+        "status": "Partially Compliant",
+        "rationale": "Dịch vụ lab đã từ chối mật khẩu sai và chấp nhận thông tin đúng, do đó tiêu chí 'password_rejection_verified' được đáp ứng. Tuy nhiên, tiêu chí 'second_factor_enforced' không được đáp ứng vì dịch vụ đã chấp nhận thông tin đầy đủ mà không yêu cầu yếu tố thứ hai. Điều này cho thấy rằng mặc dù có kiểm tra mật khẩu, nhưng không có yêu cầu xác thực hai yếu tố.",
+        "evidence_ids": [
+          "A8LIVE-5f44104d813f4ac3fc891dfd"
+        ],
+        "execution_source": "ollama-a8-evidence-judgment",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "Partially Compliant",
+            "error": null,
+            "duration_ms": 6833.68
+          }
+        ],
+        "repaired": false,
+        "error": null,
+        "duration_ms": 6833.7
+      },
+      {
+        "control_id": "A.8.7",
+        "case_id": "A.8.7-mixed",
+        "name": "Protection against malware",
+        "criteria_checks": [
+          "test_signature_quarantined",
+          "signature_database_fresh"
+        ],
+        "criteria_details": [
+          {
+            "check": "test_signature_quarantined",
+            "raw_source": "probe.json: scanner_exit_code + quarantine_files",
+            "pass_condition": "Scanner lab thực chuyển mẫu vô hại mang chữ ký thử vào quarantine; không phải sản phẩm antivirus.",
+            "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+            "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+            "verification_kind": "container-active-self-test"
+          },
+          {
+            "check": "signature_database_fresh",
+            "raw_source": "probe.json: signature_mtime",
+            "pass_condition": "Cơ sở chữ ký lab được cập nhật không quá 48 giờ.",
+            "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+            "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+            "verification_kind": "container-active-self-test"
+          }
+        ],
+        "evidence": {
+          "evidence_id": "A8LIVE-f2a0a00f02370da1bcaf4efe",
+          "source": "live-container://A.8.7",
+          "source_sha256": "f2a0a00f02370da1bcaf4efe6be67d342106195b552feda674dcd63b3fbffdc0",
+          "collected_at": "2026-11-22T03:18:04.191467+00:00",
+          "observed_at": "2026-11-22T03:18:04.146377+00:00",
+          "asset_id": "08b11382ce92",
+          "control_id": "A.8.7",
+          "facts": {
+            "test_signature_quarantined": true,
+            "signature_database_fresh": false
+          },
+          "artifacts": [
+            {
+              "artifact": "observed_at",
+              "content": "2026-11-22T03:18:04.146377+00:00",
+              "sha256": "8dd258d246bee40ae160c84443ae8059152cfec79de14845dc942044a4fec925"
+            },
+            {
+              "artifact": "asset_id",
+              "content": "08b11382ce92",
+              "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+            },
+            {
+              "artifact": "probe.json",
+              "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.7\", \"observed_at\": \"2026-11-22T03:18:04.146377+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"scanner_configuration\": {\"enabled\": true}, \"sample_sha256\": \"8dda30955b01bea35f8403e63547dbb63be0376b5a74125464905de592e53f51\", \"scanner_exit_code\": 66, \"quarantine_files\": [\"quarantined.txt\"], \"signature_mtime\": \"2026-11-12T03:17:51.457368+00:00\", \"scanner\": \"Lab signature scanner on harmless custom marker; not EDR/antivirus product\"}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+              "sha256": "38b7461d921db8a12b4d4fbeec4ce3e15561b491572e58118502a4ca055720d7"
+            }
+          ],
+          "collection_errors": [],
+          "is_synthetic": true,
+          "transport": "live",
+          "source_kind": "live-container-observation",
+          "probe_kind": "container-active-self-test",
+          "observation_available": true,
+          "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+        },
+        "owner": "SOC",
+        "applicable": true,
+        "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Endpoint; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+        "applicability_approved": false,
+        "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+        "status": "Partially Compliant",
+        "rationale": "Tiêu chí A.8.7 về bảo vệ chống vi-rút đã được tuân thủ trong phần test_signature_quarantined, nhưng signature_database_fresh không đáp ứng yêu cầu. Scanner đã thực hiện chuyển mẫu vô hại mang chữ ký thử vào quarantine, nhưng cơ sở chữ ký lab đã không được cập nhật trong 48 giờ, vi phạm điều kiện lab.",
+        "evidence_ids": [
+          "A8LIVE-f2a0a00f02370da1bcaf4efe"
+        ],
+        "execution_source": "ollama-a8-evidence-judgment",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "Partially Compliant",
+            "error": null,
+            "duration_ms": 6598.79
+          }
+        ],
+        "repaired": false,
+        "error": null,
+        "duration_ms": 6598.8
+      },
+      {
+        "control_id": "A.8.8",
+        "case_id": "A.8.8-mixed",
+        "name": "Management of technical vulnerabilities",
+        "criteria_checks": [
+          "inventory_scan_enabled",
+          "no_critical_lab_advisory_match"
+        ],
+        "criteria_details": [
+          {
+            "check": "inventory_scan_enabled",
+            "raw_source": "probe.json: scan_configuration + inventory_rc + inventory",
+            "pass_condition": "Job scan bật và truy vấn được inventory dpkg thực tại lúc thu.",
+            "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+            "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+            "verification_kind": "container-active-self-test"
+          },
+          {
+            "check": "no_critical_lab_advisory_match",
+            "raw_source": "probe.json: inventory + advisory_catalog",
+            "pass_condition": "Không có package/version đang cài khớp advisory critical tổng hợp của lab; không phải feed CVE thật.",
+            "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+            "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+            "verification_kind": "container-active-self-test"
+          }
+        ],
+        "evidence": {
+          "evidence_id": "A8LIVE-a87fc1d57e86dd86c6e53800",
+          "source": "live-container://A.8.8",
+          "source_sha256": "a87fc1d57e86dd86c6e53800b9cc62844552099fb44f0a02aa7c54b8ce8fd975",
+          "collected_at": "2026-11-22T03:18:04.436726+00:00",
+          "observed_at": "2026-11-22T03:18:04.391335+00:00",
+          "asset_id": "08b11382ce92",
+          "control_id": "A.8.8",
+          "facts": {
+            "inventory_scan_enabled": true,
+            "no_critical_lab_advisory_match": false
+          },
+          "artifacts": [
+            {
+              "artifact": "observed_at",
+              "content": "2026-11-22T03:18:04.391335+00:00",
+              "sha256": "8ab40562589119eee0c68bfe8f0bc3d07aee6b758be61bf732d5df425efbff44"
+            },
+            {
+              "artifact": "asset_id",
+              "content": "08b11382ce92",
+              "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+            },
+            {
+              "artifact": "probe.json",
+              "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.8\", \"observed_at\": \"2026-11-22T03:18:04.391335+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"scan_configuration\": {\"enabled\": true}, \"inventory_rc\": 0, \"inventory\": \"adduser\\t3.134\\napt\\t2.6.2\\nbase-files\\t12.4+deb12u15\\nbase-passwd\\t3.6.1\\nbash\\t5.2.15-2+b13\\nbsdutils\\t1:2.38.1-5+deb12u3\\nca-certificates\\t20250419~deb12u2\\ncoreutils\\t9.1-1\\ndash\\t0.5.12-2\\ndebconf\\t1.5.82\\ndebian-archive-keyring\\t2023.3+deb12u2\\ndebianutils\\t5.7-0.5~deb12u1\\ndiffutils\\t1:3.8-4\\ndpkg\\t1.21.23\\ne2fsprogs\\t1.47.0-2+b2\\nfindutils\\t4.9.0-4\\ngcc-12-base\\t12.2.0-14+deb12u1\\ngpgv\\t2.2.40-1.1+deb12u2\\ngrep\\t3.8-5\\ngzip\\t1.12-1\\nhostname\\t3.23+nmu1\\ninit-system-helpers\\t1.65.2+deb12u1\\nlibacl1\\t2.3.1-3\\nlibapt-pkg6.0\\t2.6.2\\nlibattr1\\t1:2.5.1-4\\nlibaudit-common\\t1:3.0.9-1\\nlibaudit1\\t1:3.0.9-1\\nlibblkid1\\t2.38.1-5+deb12u3\\nlibbz2-1.0\\t1.0.8-5+b1\\nlibc-bin\\t2.36-9+deb12u14\\nlibc6\\t2.36-9+deb12u14\\nlibcap-ng0\\t0.8.3-1+b3\\nlibcap2\\t1:2.66-4+deb12u3+b1\\nlibcom-err2\\t1.47.0-2+b2\\nlibcrypt1\\t1:4.4.33-2\\nlibdb5.3\\t5.3.28+dfsg2-1\\nlibdebconfclient0\\t0.270\\nlibext2fs2\\t1.47.0-2+b2\\nlibffi8\\t3.4.4-1\\nlibgcc-s1\\t12.2.0-14+deb12u1\\nlibgcrypt20\\t1.10.1-3+deb12u1\\nlibgdbm6\\t1.23-3\\nlibgmp10\\t2:6.2.1+dfsg1-1.1\\nlibgnutls30\\t3.7.9-2+deb12u7\\nlibgpg-error0\\t1.46-1\\nlibgssapi-krb5-2\\t1.20.1-2+deb12u5\\nlibhogweed6\\t3.8.1-2\\nlibidn2-0\\t2.3.3-1+b1\\nlibk5crypto3\\t1.20.1-2+deb12u5\\nlibkeyutils1\\t1.6.3-2\\nlibkrb5-3\\t1.20.1-2+deb12u5\\nlibkrb5support0\\t1.20.1-2+deb12u5\\nliblz4-1\\t1.9.4-1\\nliblzma5\\t5.4.1-1+deb12u2\\nlibmd0\\t1.0.4-2\\nlibmount1\\t2.38.1-5+deb12u3\\nlibncursesw6\\t6.4-4\\nlibnettle8\\t3.8.1-2\\nlibnsl2\\t1.3.0-2\\nlibp11-kit0\\t0.24.1-2\\nlibpam-modules\\t1.5.2-6+deb12u2\\nlibpam-modules-bin\\t1.5.2-6+deb12u2\\nlibpam-runtime\\t1.5.2-6+deb12u2\\nlibpam0g\\t1.5.2-6+deb12u2\\nlibpcre2-8-0\\t10.42-1+deb12u2\\nlibreadline8\\t8.2-1.3\\nlibseccomp2\\t2.5.4-1+deb12u1\\nlibselinux1\\t3.4-1+b6\\nlibsemanage-common\\t3.4-1\\nlibsemanage2\\t3.4-1+b5\\nlibsepol2\\t3.4-2.1\\nlibsmartcols1\\t2.38.1-5+deb12u3\\nlibsqlite3-0\\t3.40.1-2+deb12u2\\nlibss2\\t1.47.0-2+b2\\nlibssl3\\t3.0.22-1~deb12u2\\nlibstdc++6\\t12.2.0-14+deb12u1\\nlibsystemd0\\t252.39-1~deb12u2\\nlibtasn1-6\\t4.19.0-2+deb12u1\\nlibtinfo6\\t6.4-4\\nlibtirpc-common\\t1.3.3+ds-1\\nlibtirpc3\\t1.3.3+ds-1\\nlibudev1\\t252.39-1~deb12u2\\nlibunistring2\\t1.0-2\\nlibuuid1\\t2.38.1-5+deb12u3\\nlibxxhash0\\t0.8.1-1\\nlibzstd1\\t1.5.4+dfsg2-5\\nlogin\\t1:4.13+dfsg1-1+deb12u2\\nlogsave\\t1.47.0-2+b2\\nmawk\\t1.3.4.20200120-3.1\\nmount\\t2.38.1-5+deb12u3\\nncurses-base\\t6.4-4\\nncurses-bin\\t6.4-4\\nnetbase\\t6.4\\nopenssl\\t3.0.22-1~deb12u2\\npasswd\\t1:4.13+dfsg1-1+deb12u2\\nperl-base\\t5.36.0-7+deb12u4\\nreadline-common\\t8.2-1.3\\nsed\\t4.9-1+deb12u1\\nsysvinit-utils\\t3.06-4\\ntar\\t1.34+dfsg-1.2+deb12u1\\ntzdata\\t2026f-0+deb12u1\\nusr-is-merged\\t37~deb12u1\\nutil-linux\\t2.38.1-5+deb12u3\\nutil-linux-extra\\t2.38.1-5+deb12u3\\nzlib1g\\t1:1.2.13.dfsg-1\\n\", \"advisory_catalog\": [{\"advisory_id\": \"LAB-ADVISORY-001-NOT-A-CVE\", \"package\": \"adduser\", \"affected_version\": \"3.134\", \"severity\": \"critical\"}], \"advisory_scope\": \"Synthetic lab advisory, not a real CVE feed\"}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+              "sha256": "b9b518f66fa52fd7897f36f060656db395d9d28a602b785e153940dd5199fa99"
+            }
+          ],
+          "collection_errors": [],
+          "is_synthetic": true,
+          "transport": "live",
+          "source_kind": "live-container-observation",
+          "probe_kind": "container-active-self-test",
+          "observation_available": true,
+          "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+        },
+        "owner": "SecOps",
+        "applicable": true,
+        "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Vulnerability; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+        "applicability_approved": false,
+        "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+        "status": "Partially Compliant",
+        "rationale": "Trong bằng chứng, `inventory_scan_enabled` được đánh giá là `true`, cho thấy quét inventory đã được bật. Tuy nhiên, `no_critical_lab_advisory_match` được đánh giá là `false`, cho thấy có ít nhất một package/version đang cài đặt khớp với advisory critical tổng hợp của lab. Điều này vi phạm yêu cầu của kiểm soát A.8.8, vì vậy hệ thống không được đánh giá là tuân thủ hoàn toàn.",
+        "evidence_ids": [
+          "A8LIVE-a87fc1d57e86dd86c6e53800"
+        ],
+        "execution_source": "ollama-a8-evidence-judgment",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "Partially Compliant",
+            "error": null,
+            "duration_ms": 8247.07
+          }
+        ],
+        "repaired": false,
+        "error": null,
+        "duration_ms": 8247.09
+      },
+      {
+        "control_id": "A.8.9",
+        "case_id": "A.8.9-mixed",
+        "name": "Configuration management",
+        "criteria_checks": [
+          "baseline_authorization_present",
+          "configuration_matches_baseline"
+        ],
+        "criteria_details": [
+          {
+            "check": "baseline_authorization_present",
+            "raw_source": "probe.json: baseline.ticket",
+            "pass_condition": "Có mã CAB-LAB hợp lệ trong bản ghi baseline lab.",
+            "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+            "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+            "verification_kind": "container-active-self-test"
+          },
+          {
+            "check": "configuration_matches_baseline",
+            "raw_source": "probe.json: baseline.sha256 + current_sha256",
+            "pass_condition": "Hash cấu hình hiện tại khớp baseline đã đăng ký.",
+            "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+            "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+            "verification_kind": "container-active-self-test"
+          }
+        ],
+        "evidence": {
+          "evidence_id": "A8LIVE-9db62ed08e1b2931368010e4",
+          "source": "live-container://A.8.9",
+          "source_sha256": "9db62ed08e1b2931368010e4afb25559b92863d85f4ba0bfea50fe78804191f9",
+          "collected_at": "2026-11-22T03:18:04.683543+00:00",
+          "observed_at": "2026-11-22T03:18:04.632576+00:00",
+          "asset_id": "08b11382ce92",
+          "control_id": "A.8.9",
+          "facts": {
+            "baseline_authorization_present": true,
+            "configuration_matches_baseline": false
+          },
+          "artifacts": [
+            {
+              "artifact": "observed_at",
+              "content": "2026-11-22T03:18:04.632576+00:00",
+              "sha256": "f5307ed7d3b5141f7f598685bd47e3c9c34ab903646bec19527de7decc4a9ec7"
+            },
+            {
+              "artifact": "asset_id",
+              "content": "08b11382ce92",
+              "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+            },
+            {
+              "artifact": "probe.json",
+              "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.9\", \"observed_at\": \"2026-11-22T03:18:04.632576+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"baseline\": {\"ticket\": \"CAB-LAB-001\", \"sha256\": \"c5edeccfbb4df1f664a6110a4a25c4caa35b7e0bda2058e37649a608655b9921\"}, \"current_configuration\": \"protected-mode=off\\n\", \"current_sha256\": \"ba0e290b8fc9c7fa16d9606c287b08d20e8901e1b811fc3ee066b2b50da02751\", \"approval_source\": \"Authored lab CAB record, not human sign-off\"}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+              "sha256": "f846192c36130f1189e2fcb71deda89c16f46c7c63640a433130543c91f813d6"
+            }
+          ],
+          "collection_errors": [],
+          "is_synthetic": true,
+          "transport": "live",
+          "source_kind": "live-container-observation",
+          "probe_kind": "container-active-self-test",
+          "observation_available": true,
+          "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+        },
+        "owner": "IT Operations",
+        "applicable": true,
+        "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Configuration; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+        "applicability_approved": false,
+        "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+        "status": "Partially Compliant",
+        "rationale": "Bằng chứng cho thấy mã CAB-LAB hiện diện trong bản ghi baseline lab, nhưng cấu hình hiện tại không khớp với baseline đã đăng ký. Điều này cho thấy có sự tuân thủ đối với việc xác định hóa cấu hình, nhưng cấu hình hiện tại không đúng với baseline đã xác định.",
+        "evidence_ids": [
+          "A8LIVE-9db62ed08e1b2931368010e4"
+        ],
+        "execution_source": "ollama-a8-evidence-judgment",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "Partially Compliant",
+            "error": null,
+            "duration_ms": 5991.81
+          }
+        ],
+        "repaired": false,
+        "error": null,
+        "duration_ms": 5991.83
+      },
+      {
+        "control_id": "A.8.10",
+        "case_id": "A.8.10-mixed",
+        "name": "Information deletion",
+        "criteria_checks": [
+          "deletion_policy_enforced",
+          "deletion_verified"
+        ],
+        "criteria_details": [
+          {
+            "check": "deletion_policy_enforced",
+            "raw_source": "retention.conf",
+            "pass_condition": "Cấu hình retention của lab trong 1–30 ngày.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "live-container-observation"
+          },
+          {
+            "check": "deletion_verified",
+            "raw_source": "object_exists_rc + deletion-receipt",
+            "pass_condition": "Có biên nhận phép kiểm tra và đối tượng đã không còn tồn tại.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "live-container-observation"
+          }
+        ],
+        "evidence": {
+          "evidence_id": "A8LIVE-a02e7c5f2fc52fff1143f054",
+          "source": "live-container://A.8.10",
+          "source_sha256": "a02e7c5f2fc52fff1143f0541e25ea229c30debcdf32d768f20992c7013d1473",
+          "collected_at": "2026-11-22T03:18:04.781903+00:00",
+          "observed_at": "2026-11-22T03:18:04Z",
+          "asset_id": "08b11382ce92",
+          "control_id": "A.8.10",
+          "facts": {
+            "deletion_policy_enforced": true,
+            "deletion_verified": false
+          },
+          "artifacts": [
+            {
+              "artifact": "observed_at",
+              "content": "2026-11-22T03:18:04Z",
+              "sha256": "f59a22879cc84e0f714f82b4d83cca010d6a6b5d4bd1a514203e15c5a8007db2"
+            },
+            {
+              "artifact": "asset_id",
+              "content": "08b11382ce92",
+              "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+            },
+            {
+              "artifact": "retention.conf",
+              "content": "retention_days=30\n",
+              "sha256": "c39297e265909ab8f32772838a6c4ab42b2cdac5268cdeeee49983a2758e12af"
+            },
+            {
+              "artifact": "deletion-receipt",
+              "content": "deletion-check-authorized\n",
+              "sha256": "0c563d9c8bd47030042cb1f0e5e50e287bb726c7af1b401f865417506445f55c"
+            },
+            {
+              "artifact": "object_exists_rc",
+              "content": "0",
+              "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+            }
+          ],
+          "collection_errors": [],
+          "is_synthetic": true,
+          "transport": "live",
+          "source_kind": "live-container-observation",
+          "probe_kind": "read-only-resource-observation",
+          "observation_available": true,
+          "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+        },
+        "owner": "Data owner",
+        "applicable": true,
+        "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Data; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+        "applicability_approved": false,
+        "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+        "status": "Partially Compliant",
+        "rationale": "Deletion policy is enforced with a retention period of 30 days as specified in the 'retention.conf' file. However, the deletion verification step failed because the object still exists, as indicated by the 'object_exists_rc' value of 0. This indicates that the deletion process has not been fully completed or verified.",
+        "evidence_ids": [
+          "A8LIVE-a02e7c5f2fc52fff1143f054"
+        ],
+        "execution_source": "ollama-a8-evidence-judgment",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "Partially Compliant",
+            "error": null,
+            "duration_ms": 6024.18
+          }
+        ],
+        "repaired": false,
+        "error": null,
+        "duration_ms": 6024.19
+      },
+      {
+        "control_id": "A.8.12",
+        "case_id": "A.8.12-mixed",
+        "name": "Data leakage prevention",
+        "criteria_checks": [
+          "sensitive_transfer_blocked",
+          "blocked_transfer_audited"
+        ],
+        "criteria_details": [
+          {
+            "check": "sensitive_transfer_blocked",
+            "raw_source": "probe.json: transaction",
+            "pass_condition": "Giao dịch TCP mang mẫu LAB-CONFIDENTIAL bị chặn.",
+            "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+            "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+            "verification_kind": "container-active-self-test"
+          },
+          {
+            "check": "blocked_transfer_audited",
+            "raw_source": "probe.json: audit_events",
+            "pass_condition": "Có sự kiện audit blocked gắn hash payload của phép thử.",
+            "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+            "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+            "verification_kind": "container-active-self-test"
+          }
+        ],
+        "evidence": {
+          "evidence_id": "A8LIVE-0eb700382c350b323b53c5cf",
+          "source": "live-container://A.8.12",
+          "source_sha256": "0eb700382c350b323b53c5cfa176ae71e7a6d6b673ac63f38acfb1962bb1e4bd",
+          "collected_at": "2026-11-22T03:18:05.045661+00:00",
+          "observed_at": "2026-11-22T03:18:05.003023+00:00",
+          "asset_id": "08b11382ce92",
+          "control_id": "A.8.12",
+          "facts": {
+            "sensitive_transfer_blocked": true,
+            "blocked_transfer_audited": false
+          },
+          "artifacts": [
+            {
+              "artifact": "observed_at",
+              "content": "2026-11-22T03:18:05.003023+00:00",
+              "sha256": "99cd5732748521456340b7102eb90ce93882f14969dd34251827068cf258939b"
+            },
+            {
+              "artifact": "asset_id",
+              "content": "08b11382ce92",
+              "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+            },
+            {
+              "artifact": "probe.json",
+              "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.12\", \"observed_at\": \"2026-11-22T03:18:05.003023+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"policy\": {\"mode\": \"block\", \"audit\": false}, \"transaction\": {\"response\": \"403 DLP blocked\", \"tls_version\": null, \"source_address\": \"127.0.0.1\"}, \"audit_events\": []}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+              "sha256": "0e2accd9e0c837971764fab1f1f5c98dd01d96509458bd82268cac8e1ef1d5a7"
+            }
+          ],
+          "collection_errors": [],
+          "is_synthetic": true,
+          "transport": "live",
+          "source_kind": "live-container-observation",
+          "probe_kind": "container-active-self-test",
+          "observation_available": true,
+          "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+        },
+        "owner": "SOC",
+        "applicable": true,
+        "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Data; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+        "applicability_approved": false,
+        "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+        "status": "Partially Compliant",
+        "rationale": "Dữ liệu cho thấy giao dịch TCP mang mẫu LAB-CONFIDENTIAL đã bị chặn (sensitive_transfer_blocked: true), nhưng không có sự kiện audit gắn hash payload của phép thử (blocked_transfer_audited: false). Điều này cho thấy mặc dù ngăn chặn thành công, việc theo dõi và ghi lại sự kiện này chưa được thực hiện đầy đủ.",
+        "evidence_ids": [
+          "A8LIVE-0eb700382c350b323b53c5cf"
+        ],
+        "execution_source": "ollama-a8-evidence-judgment",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "Partially Compliant",
+            "error": null,
+            "duration_ms": 6710.84
+          }
+        ],
+        "repaired": false,
+        "error": null,
+        "duration_ms": 6710.86
+      },
+      {
+        "control_id": "A.8.13",
+        "case_id": "A.8.13-mixed",
+        "name": "Information backup",
+        "criteria_checks": [
+          "backup_success",
+          "restore_test_passed"
+        ],
+        "criteria_details": [
+          {
+            "check": "backup_success",
+            "raw_source": "backup.dat + backup.sha256",
+            "pass_condition": "Hash nội dung backup khớp seal lúc tạo backup.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "live-container-observation"
+          },
+          {
+            "check": "restore_test_passed",
+            "raw_source": "backup.dat + restored.dat",
+            "pass_condition": "Nội dung đã khôi phục khớp backup.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "live-container-observation"
+          }
+        ],
+        "evidence": {
+          "evidence_id": "A8LIVE-5e1d71c3e0e700b9da7b7f55",
+          "source": "live-container://A.8.13",
+          "source_sha256": "5e1d71c3e0e700b9da7b7f5576414489b9ee498c2c933750e9db7598a86d63be",
+          "collected_at": "2026-11-22T03:18:05.144126+00:00",
+          "observed_at": "2026-11-22T03:18:05Z",
+          "asset_id": "08b11382ce92",
+          "control_id": "A.8.13",
+          "facts": {
+            "backup_success": true,
+            "restore_test_passed": false
+          },
+          "artifacts": [
+            {
+              "artifact": "observed_at",
+              "content": "2026-11-22T03:18:05Z",
+              "sha256": "5c72464797a850b75a5a880a86ceb4d991f87fb00ffcb64dcb730c06d3fce1c4"
+            },
+            {
+              "artifact": "asset_id",
+              "content": "08b11382ce92",
+              "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+            },
+            {
+              "artifact": "backup.dat",
+              "content": "business-records-backup\n",
+              "sha256": "2a12d75abad6bec7cb1be6b383cf1258d589454918e87024279a25c4405d12de"
+            },
+            {
+              "artifact": "backup.sha256",
+              "content": "2a12d75abad6bec7cb1be6b383cf1258d589454918e87024279a25c4405d12de\n",
+              "sha256": "dc3327d7e8fc3cf125e4e575eeebceb3cd3593a12a227218646f650839a45fd1"
+            },
+            {
+              "artifact": "restored.dat",
+              "content": "restore-does-not-match\n",
+              "sha256": "14548bc699c9ebda80b5b8ab98f44cff011f5b58c86ae5f0d9666d8746940568"
+            }
+          ],
+          "collection_errors": [],
+          "is_synthetic": true,
+          "transport": "live",
+          "source_kind": "live-container-observation",
+          "probe_kind": "read-only-resource-observation",
+          "observation_available": true,
+          "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+        },
+        "owner": "IT Operations",
+        "applicable": true,
+        "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Backup; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+        "applicability_approved": false,
+        "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+        "status": "Partially Compliant",
+        "rationale": "Trong bằng chứng, kiểm tra backup_success đã đạt yêu cầu (trạng thái true), nhưng kiểm tra restore_test_passed không đạt yêu cầu (trạng thái false). Điều này cho thấy hệ thống đã tạo backup thành công nhưng quá trình khôi phục không thành công, do đó chỉ đạt yêu cầu một phần.",
+        "evidence_ids": [
+          "A8LIVE-5e1d71c3e0e700b9da7b7f55"
+        ],
+        "execution_source": "ollama-a8-evidence-judgment",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "Partially Compliant",
+            "error": null,
+            "duration_ms": 6270.88
+          }
+        ],
+        "repaired": false,
+        "error": null,
+        "duration_ms": 6270.89
+      },
+      {
+        "control_id": "A.8.15",
+        "case_id": "A.8.15-mixed",
+        "name": "Logging",
+        "criteria_checks": [
+          "audit_logs_enabled",
+          "logs_integrity_protected"
+        ],
+        "criteria_details": [
+          {
+            "check": "audit_logs_enabled",
+            "raw_source": "application.log",
+            "pass_condition": "Ứng dụng lab thực sự ghi ít nhất một sự kiện.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "live-container-observation"
+          },
+          {
+            "check": "logs_integrity_protected",
+            "raw_source": "application.log + application.sha256 + resource_stat",
+            "pass_condition": "Log khớp seal và không cho group/other ghi; chưa kiểm chứng auditd/SIEM.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "live-container-observation"
+          }
+        ],
+        "evidence": {
+          "evidence_id": "A8LIVE-4e5fbaf2b37cef6fd3878733",
+          "source": "live-container://A.8.15",
+          "source_sha256": "4e5fbaf2b37cef6fd3878733721e8559e4452639cb4cae265a3f09f537a4b598",
+          "collected_at": "2026-11-22T03:18:05.221512+00:00",
+          "observed_at": "2026-11-22T03:18:05Z",
+          "asset_id": "08b11382ce92",
+          "control_id": "A.8.15",
+          "facts": {
+            "audit_logs_enabled": true,
+            "logs_integrity_protected": false
+          },
+          "artifacts": [
+            {
+              "artifact": "observed_at",
+              "content": "2026-11-22T03:18:05Z",
+              "sha256": "5c72464797a850b75a5a880a86ceb4d991f87fb00ffcb64dcb730c06d3fce1c4"
+            },
+            {
+              "artifact": "asset_id",
+              "content": "08b11382ce92",
+              "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+            },
+            {
+              "artifact": "application.log",
+              "content": "event=application_start actor=lab-service\nevent=changed-after-integrity-seal\nevent=application_start actor=lab-service\nevent=changed-after-integrity-seal\nevent=application_start actor=lab-service\nevent=changed-after-integrity-seal\nevent=application_start actor=lab-service\nevent=changed-after-integrity-seal\nevent=application_start actor=lab-service\nevent=changed-after-integrity-seal\nevent=application_start actor=lab-service\nevent=changed-after-integrity-seal\nevent=application_start actor=lab-service\nevent=changed-after-integrity-seal\nevent=application_start actor=lab-service\nevent=changed-after-integrity-seal\nevent=application_start actor=lab-service\nevent=changed-after-integrity-seal\nevent=application_start actor=lab-service\nevent=changed-after-integrity-seal\nevent=application_start actor=lab-service\nevent=changed-after-integrity-seal\n",
+              "sha256": "b6cfed01e234f787a7a59df19c219f74972b0dc177c247c4f86019e0fb06b558"
+            },
+            {
+              "artifact": "application.sha256",
+              "content": "ff8b42bcf53b123ce787fa615765aa438999ef6368f9842f484f9c2887172036\n",
+              "sha256": "6f5a242e5c43e06d524a21b12883447accf38cabac51bd7e54407659b7601f41"
+            },
+            {
+              "artifact": "resource_stat",
+              "content": "644 root root",
+              "sha256": "b9f0b72765fd8a7e8740f30f05af0fa9b4c6ce0bc9b67f5a48360ceceeee59d3"
+            }
+          ],
+          "collection_errors": [],
+          "is_synthetic": true,
+          "transport": "live",
+          "source_kind": "live-container-observation",
+          "probe_kind": "read-only-resource-observation",
+          "observation_available": true,
+          "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+        },
+        "owner": "SOC",
+        "applicable": true,
+        "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Logging; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+        "applicability_approved": false,
+        "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+        "status": "Partially Compliant",
+        "rationale": "Ứng dụng lab đã ghi ít nhất một sự kiện trong tệp log, do đó thỏa mãn điều kiện audit_logs_enabled. Tuy nhiên, tệp log không được bảo vệ về mặt-integrity, do đó không thỏa mãn điều kiện logs_integrity_protected.",
+        "evidence_ids": [
+          "A8LIVE-4e5fbaf2b37cef6fd3878733"
+        ],
+        "execution_source": "ollama-a8-evidence-judgment",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "Partially Compliant",
+            "error": null,
+            "duration_ms": 5927.75
+          }
+        ],
+        "repaired": false,
+        "error": null,
+        "duration_ms": 5927.77
+      },
+      {
+        "control_id": "A.8.16",
+        "case_id": "A.8.16-mixed",
+        "name": "Monitoring activities",
+        "criteria_checks": [
+          "file_change_detected_within_sla",
+          "alert_delivery_receipt_present"
+        ],
+        "criteria_details": [
+          {
+            "check": "file_change_detected_within_sla",
+            "raw_source": "probe.json: monitor_configuration + events",
+            "pass_condition": "Watcher lab phát hiện thay đổi tệp thử trong 5 giây.",
+            "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+            "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+            "verification_kind": "container-active-self-test"
+          },
+          {
+            "check": "alert_delivery_receipt_present",
+            "raw_source": "probe.json: delivery_receipts",
+            "pass_condition": "Sink lab có biên nhận sự kiện; không phải SIEM ngoài container.",
+            "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+            "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+            "verification_kind": "container-active-self-test"
+          }
+        ],
+        "evidence": {
+          "evidence_id": "A8LIVE-e18ba0318ed460564289c569",
+          "source": "live-container://A.8.16",
+          "source_sha256": "e18ba0318ed460564289c569528ed78578c2d957774083550b6629c1879e3492",
+          "collected_at": "2026-11-22T03:18:05.476630+00:00",
+          "observed_at": "2026-11-22T03:18:05.446459+00:00",
+          "asset_id": "08b11382ce92",
+          "control_id": "A.8.16",
+          "facts": {
+            "file_change_detected_within_sla": true,
+            "alert_delivery_receipt_present": false
+          },
+          "artifacts": [
+            {
+              "artifact": "observed_at",
+              "content": "2026-11-22T03:18:05.446459+00:00",
+              "sha256": "d177e74d9f2959e85d38ef79c61cfc03dcafa554117602aa920c963c868b6606"
+            },
+            {
+              "artifact": "asset_id",
+              "content": "08b11382ce92",
+              "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+            },
+            {
+              "artifact": "probe.json",
+              "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.16\", \"observed_at\": \"2026-11-22T03:18:05.446459+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"monitor_configuration\": {\"enabled\": true, \"delivery_enabled\": false}, \"events\": [{\"event\": \"file_changed\", \"latency_ms\": 10.55, \"at\": \"2026-11-22T03:18:05.445000+00:00\"}], \"delivery_receipts\": []}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+              "sha256": "5038664f42c9fad1a4166409a844717ce9b6f9323a6ae62a885725ad2f85dc4b"
+            }
+          ],
+          "collection_errors": [],
+          "is_synthetic": true,
+          "transport": "live",
+          "source_kind": "live-container-observation",
+          "probe_kind": "container-active-self-test",
+          "observation_available": true,
+          "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+        },
+        "owner": "SOC",
+        "applicable": true,
+        "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Monitoring; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+        "applicability_approved": false,
+        "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+        "status": "Partially Compliant",
+        "rationale": "Tiêu chí file_change_detected_within_sla đã được thỏa mãn, nhưng alert_delivery_receipt_present không có biên nhận sự kiện. Điều này cho thấy có thể có vấn đề trong việc giao nhận thông báo, mặc dù phát hiện thay đổi tệp đã được thực hiện đúng hạn.",
+        "evidence_ids": [
+          "A8LIVE-e18ba0318ed460564289c569"
+        ],
+        "execution_source": "ollama-a8-evidence-judgment",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "Partially Compliant",
+            "error": null,
+            "duration_ms": 5998.99
+          }
+        ],
+        "repaired": false,
+        "error": null,
+        "duration_ms": 5999.01
+      },
+      {
+        "control_id": "A.8.17",
+        "case_id": "A.8.17-mixed",
+        "name": "Clock synchronization",
+        "criteria_checks": [
+          "time_reference_signature_valid",
+          "application_time_offset_within_policy"
+        ],
+        "criteria_details": [
+          {
+            "check": "time_reference_signature_valid",
+            "raw_source": "probe.json: reference_reply + signature_verify_rc",
+            "pass_condition": "Client xác minh HMAC/nonce nguồn thời gian ứng dụng lab.",
+            "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+            "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+            "verification_kind": "container-active-self-test"
+          },
+          {
+            "check": "application_time_offset_within_policy",
+            "raw_source": "probe.json: offset_ms + round_trip_ms",
+            "pass_condition": "Độ lệch so với nguồn cùng container không quá 100ms; không chứng minh NTP/OS đồng bộ độc lập.",
+            "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+            "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+            "verification_kind": "container-active-self-test"
+          }
+        ],
+        "evidence": {
+          "evidence_id": "A8LIVE-5bbd11528ca585fc24941c04",
+          "source": "live-container://A.8.17",
+          "source_sha256": "5bbd11528ca585fc24941c046d43f09f8927f43234f2e7486d9754ebdf325984",
+          "collected_at": "2026-11-22T03:18:05.701858+00:00",
+          "observed_at": "2026-11-22T03:18:05.674306+00:00",
+          "asset_id": "08b11382ce92",
+          "control_id": "A.8.17",
+          "facts": {
+            "time_reference_signature_valid": true,
+            "application_time_offset_within_policy": false
+          },
+          "artifacts": [
+            {
+              "artifact": "observed_at",
+              "content": "2026-11-22T03:18:05.674306+00:00",
+              "sha256": "46dba40c6eac25bd4b8a3b3c1e301055f7a507433a7451cc64549ddca7a60c8f"
+            },
+            {
+              "artifact": "asset_id",
+              "content": "08b11382ce92",
+              "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+            },
+            {
+              "artifact": "probe.json",
+              "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.17\", \"observed_at\": \"2026-11-22T03:18:05.674306+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"reference_reply\": {\"body\": \"{\\\"nonce\\\": \\\"a4c92a95930011316480a0b15fd7ad51\\\", \\\"time\\\": 1795317490.6739542}\", \"signature\": \"417a0bbf6480a1c6036cf23bf6814ca0ce0c25cd508323614a2255d476a2ec45\"}, \"signature_verify_rc\": 0, \"offset_ms\": 5000.13, \"round_trip_ms\": 0.875, \"scope\": \"Signed application time reference on same container clock; not NTP or OS synchronization\"}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+              "sha256": "ffa8803078a6f95332397e9529ba8eade3d29f30a52f071534d868c79e25423a"
+            }
+          ],
+          "collection_errors": [],
+          "is_synthetic": true,
+          "transport": "live",
+          "source_kind": "live-container-observation",
+          "probe_kind": "container-active-self-test",
+          "observation_available": true,
+          "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+        },
+        "owner": "IT Operations",
+        "applicable": true,
+        "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Time; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+        "applicability_approved": false,
+        "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+        "status": "Partially Compliant",
+        "rationale": "Tiêu chí A.8.17 về đồng bộ thời gian đã được kiểm tra và có bằng chứng cho thấy Client đã xác minh HMAC/nonce nguồn thời gian ứng dụng (time_reference_signature_valid: true). Tuy nhiên, độ lệch thời gian so với nguồn không nằm trong phạm vi chính sách (application_time_offset_within_policy: false), do đó không đáp ứng yêu cầu của tiêu chí.",
+        "evidence_ids": [
+          "A8LIVE-5bbd11528ca585fc24941c04"
+        ],
+        "execution_source": "ollama-a8-evidence-judgment",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "Partially Compliant",
+            "error": null,
+            "duration_ms": 6713.14
+          }
+        ],
+        "repaired": false,
+        "error": null,
+        "duration_ms": 6713.16
+      },
+      {
+        "control_id": "A.8.19",
+        "case_id": "A.8.19-mixed",
+        "name": "Installation of software on operational systems",
+        "criteria_checks": [
+          "installation_restricted",
+          "installed_software_approved"
+        ],
+        "criteria_details": [
+          {
+            "check": "installation_restricted",
+            "raw_source": "install_access_rc",
+            "pass_condition": "labworker không có quyền ghi thư mục cài đặt (test -w trả 1).",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "live-container-observation"
+          },
+          {
+            "check": "installed_software_approved",
+            "raw_source": "installed.tsv + approved.tsv",
+            "pass_condition": "Inventory dpkg-query lúc thu khớp danh mục phê duyệt của lab; chưa xác nhận quản trị thay đổi ngoài lab.",
+            "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+            "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+            "verification_kind": "live-container-observation"
+          }
+        ],
+        "evidence": {
+          "evidence_id": "A8LIVE-eaedfdfbdeefe7cf82b45a53",
+          "source": "live-container://A.8.19",
+          "source_sha256": "eaedfdfbdeefe7cf82b45a53f7bd5f9565c71e58cdc1cf8aecfbbd62e1af5cfc",
+          "collected_at": "2026-11-22T03:18:05.805909+00:00",
+          "observed_at": "2026-11-22T03:18:05Z",
+          "asset_id": "08b11382ce92",
+          "control_id": "A.8.19",
+          "facts": {
+            "installation_restricted": true,
+            "installed_software_approved": false
+          },
+          "artifacts": [
+            {
+              "artifact": "observed_at",
+              "content": "2026-11-22T03:18:05Z",
+              "sha256": "5c72464797a850b75a5a880a86ceb4d991f87fb00ffcb64dcb730c06d3fce1c4"
+            },
+            {
+              "artifact": "asset_id",
+              "content": "08b11382ce92",
+              "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+            },
+            {
+              "artifact": "install_access_rc",
+              "content": "1",
+              "sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b"
+            },
+            {
+              "artifact": "install_stat",
+              "content": "755 root root",
+              "sha256": "e1020b4af2ee4d200daaa39d4fb9759b695b3ce568dc313410d924e83ef87ba3"
+            },
+            {
+              "artifact": "installed.tsv",
+              "content": "adduser\t3.134\napt\t2.6.2\nbase-files\t12.4+deb12u15\nbase-passwd\t3.6.1\nbash\t5.2.15-2+b13\nbsdutils\t1:2.38.1-5+deb12u3\nca-certificates\t20250419~deb12u2\ncoreutils\t9.1-1\ndash\t0.5.12-2\ndebconf\t1.5.82\ndebian-archive-keyring\t2023.3+deb12u2\ndebianutils\t5.7-0.5~deb12u1\ndiffutils\t1:3.8-4\ndpkg\t1.21.23\ne2fsprogs\t1.47.0-2+b2\nfindutils\t4.9.0-4\ngcc-12-base\t12.2.0-14+deb12u1\ngpgv\t2.2.40-1.1+deb12u2\ngrep\t3.8-5\ngzip\t1.12-1\nhostname\t3.23+nmu1\ninit-system-helpers\t1.65.2+deb12u1\nlibacl1\t2.3.1-3\nlibapt-pkg6.0\t2.6.2\nlibattr1\t1:2.5.1-4\nlibaudit-common\t1:3.0.9-1\nlibaudit1\t1:3.0.9-1\nlibblkid1\t2.38.1-5+deb12u3\nlibbz2-1.0\t1.0.8-5+b1\nlibc-bin\t2.36-9+deb12u14\nlibc6\t2.36-9+deb12u14\nlibcap-ng0\t0.8.3-1+b3\nlibcap2\t1:2.66-4+deb12u3+b1\nlibcom-err2\t1.47.0-2+b2\nlibcrypt1\t1:4.4.33-2\nlibdb5.3\t5.3.28+dfsg2-1\nlibdebconfclient0\t0.270\nlibext2fs2\t1.47.0-2+b2\nlibffi8\t3.4.4-1\nlibgcc-s1\t12.2.0-14+deb12u1\nlibgcrypt20\t1.10.1-3+deb12u1\nlibgdbm6\t1.23-3\nlibgmp10\t2:6.2.1+dfsg1-1.1\nlibgnutls30\t3.7.9-2+deb12u7\nlibgpg-error0\t1.46-1\nlibgssapi-krb5-2\t1.20.1-2+deb12u5\nlibhogweed6\t3.8.1-2\nlibidn2-0\t2.3.3-1+b1\nlibk5crypto3\t1.20.1-2+deb12u5\nlibkeyutils1\t1.6.3-2\nlibkrb5-3\t1.20.1-2+deb12u5\nlibkrb5support0\t1.20.1-2+deb12u5\nliblz4-1\t1.9.4-1\nliblzma5\t5.4.1-1+deb12u2\nlibmd0\t1.0.4-2\nlibmount1\t2.38.1-5+deb12u3\nlibncursesw6\t6.4-4\nlibnettle8\t3.8.1-2\nlibnsl2\t1.3.0-2\nlibp11-kit0\t0.24.1-2\nlibpam-modules\t1.5.2-6+deb12u2\nlibpam-modules-bin\t1.5.2-6+deb12u2\nlibpam-runtime\t1.5.2-6+deb12u2\nlibpam0g\t1.5.2-6+deb12u2\nlibpcre2-8-0\t10.42-1+deb12u2\nlibreadline8\t8.2-1.3\nlibseccomp2\t2.5.4-1+deb12u1\nlibselinux1\t3.4-1+b6\nlibsemanage-common\t3.4-1\nlibsemanage2\t3.4-1+b5\nlibsepol2\t3.4-2.1\nlibsmartcols1\t2.38.1-5+deb12u3\nlibsqlite3-0\t3.40.1-2+deb12u2\nlibss2\t1.47.0-2+b2\nlibssl3\t3.0.22-1~deb12u2\nlibstdc++6\t12.2.0-14+deb12u1\nlibsystemd0\t252.39-1~deb12u2\nlibtasn1-6\t4.19.0-2+deb12u1\nlibtinfo6\t6.4-4\nlibtirpc-common\t1.3.3+ds-1\nlibtirpc3\t1.3.3+ds-1\nlibudev1\t252.39-1~deb12u2\nlibunistring2\t1.0-2\nlibuuid1\t2.38.1-5+deb12u3\nlibxxhash0\t0.8.1-1\nlibzstd1\t1.5.4+dfsg2-5\nlogin\t1:4.13+dfsg1-1+deb12u2\nlogsave\t1.47.0-2+b2\nmawk\t1.3.4.20200120-3.1\nmount\t2.38.1-5+deb12u3\nncurses-base\t6.4-4\nncurses-bin\t6.4-4\nnetbase\t6.4\nopenssl\t3.0.22-1~deb12u2\npasswd\t1:4.13+dfsg1-1+deb12u2\nperl-base\t5.36.0-7+deb12u4\nreadline-common\t8.2-1.3\nsed\t4.9-1+deb12u1\nsysvinit-utils\t3.06-4\ntar\t1.34+dfsg-1.2+deb12u1\ntzdata\t2026f-0+deb12u1\nusr-is-merged\t37~deb12u1\nutil-linux\t2.38.1-5+deb12u3\nutil-linux-extra\t2.38.1-5+deb12u3\nzlib1g\t1:1.2.13.dfsg-1\n",
+              "sha256": "04718567ebeb17d0b4e1deed96777db6f0c32639d2cb6597d7d4a47bbdfd9acd"
+            },
+            {
+              "artifact": "approved.tsv",
+              "content": "not-the-installed-inventory\n",
+              "sha256": "8cd94d2e99243dd04cbec1511e6bbdb9e371d428c535de58fac9a652eb770fa1"
+            }
+          ],
+          "collection_errors": [],
+          "is_synthetic": true,
+          "transport": "live",
+          "source_kind": "live-container-observation",
+          "probe_kind": "read-only-resource-observation",
+          "observation_available": true,
+          "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+        },
+        "owner": "IT Operations",
+        "applicable": true,
+        "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Software; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+        "applicability_approved": false,
+        "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+        "status": "Partially Compliant",
+        "rationale": "Trong bằng chứng, kiểm tra 'installation_restricted' đã được thực hiện và đạt được kết quả đúng. Tuy nhiên, kiểm tra 'installed_software_approved' không đạt được kết quả đúng vì danh sách phần mềm đã cài đặt không khớp với danh sách phần mềm đã được phê duyệt. Điều này cho thấy có thể có sự thay đổi phần mềm không được quản lý hoặc phê duyệt.",
+        "evidence_ids": [
+          "A8LIVE-eaedfdfbdeefe7cf82b45a53"
+        ],
+        "execution_source": "ollama-a8-evidence-judgment",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "Partially Compliant",
+            "error": null,
+            "duration_ms": 7418.26
+          }
+        ],
+        "repaired": false,
+        "error": null,
+        "duration_ms": 7418.27
+      },
+      {
+        "control_id": "A.8.20",
+        "case_id": "A.8.20-mixed",
+        "name": "Networks security",
+        "criteria_checks": [
+          "unapproved_source_denied",
+          "approved_network_flow_available"
+        ],
+        "criteria_details": [
+          {
+            "check": "unapproved_source_denied",
+            "raw_source": "probe.json: unapproved_source",
+            "pass_condition": "Dịch vụ TCP thực từ chối loopback source chưa cho phép; không phải firewall kernel.",
+            "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+            "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+            "verification_kind": "container-active-self-test"
+          },
+          {
+            "check": "approved_network_flow_available",
+            "raw_source": "probe.json: approved_source",
+            "pass_condition": "Nguồn TCP được phép truy cập thành công dịch vụ lab.",
+            "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+            "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+            "verification_kind": "container-active-self-test"
+          }
+        ],
+        "evidence": {
+          "evidence_id": "A8LIVE-4906e09d2cd42b51b211e9f5",
+          "source": "live-container://A.8.20",
+          "source_sha256": "4906e09d2cd42b51b211e9f5deb48178a454f3d2a321910bff8b17debf68a66c",
+          "collected_at": "2026-11-22T03:18:06.068369+00:00",
+          "observed_at": "2026-11-22T03:18:06.042965+00:00",
+          "asset_id": "08b11382ce92",
+          "control_id": "A.8.20",
+          "facts": {
+            "unapproved_source_denied": true,
+            "approved_network_flow_available": false
+          },
+          "artifacts": [
+            {
+              "artifact": "observed_at",
+              "content": "2026-11-22T03:18:06.042965+00:00",
+              "sha256": "ed09d89bec0fcbe446cd27b7d8d338d290453e2d4eb8da61004a8326ef4f60ff"
+            },
+            {
+              "artifact": "asset_id",
+              "content": "08b11382ce92",
+              "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+            },
+            {
+              "artifact": "probe.json",
+              "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.20\", \"observed_at\": \"2026-11-22T03:18:06.042965+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"policy\": {\"denied_sources\": [\"127.0.0.2\"], \"approved_flow\": false}, \"unapproved_source\": {\"response\": \"403 source denied\", \"tls_version\": null, \"source_address\": \"127.0.0.2\"}, \"approved_source\": {\"response\": \"503 approved flow unavailable\", \"tls_version\": null, \"source_address\": \"127.0.0.1\"}, \"boundary\": \"Application source ACL on actual loopback TCP, not kernel firewall\"}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+              "sha256": "fe8ba5831e303fada5f90d1b5fde232f2002cd2314c55c58d965a4f78de9a9cd"
+            }
+          ],
+          "collection_errors": [],
+          "is_synthetic": true,
+          "transport": "live",
+          "source_kind": "live-container-observation",
+          "probe_kind": "container-active-self-test",
+          "observation_available": true,
+          "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+        },
+        "owner": "Network",
+        "applicable": true,
+        "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Network; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+        "applicability_approved": false,
+        "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+        "status": "Partially Compliant",
+        "rationale": "Dịch vụ TCP từ chối nguồn không được chấp thuận (unapproved_source_denied) là đúng, nhưng nguồn được chấp thuận không thể truy cập dịch vụ lab (approved_network_flow_available) là sai. Điều này cho thấy có vấn đề với cấu hình hoặc thực thi chính sách mạng, cần điều chỉnh để đảm bảo cả hai tiêu chí đều được đáp ứng.",
+        "evidence_ids": [
+          "A8LIVE-4906e09d2cd42b51b211e9f5"
+        ],
+        "execution_source": "ollama-a8-evidence-judgment",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "Partially Compliant",
+            "error": null,
+            "duration_ms": 6618.66
+          }
+        ],
+        "repaired": false,
+        "error": null,
+        "duration_ms": 6618.68
+      },
+      {
+        "control_id": "A.8.22",
+        "case_id": "A.8.22-mixed",
+        "name": "Segregation of networks",
+        "criteria_checks": [
+          "cross_zone_service_denied",
+          "business_zone_service_available"
+        ],
+        "criteria_details": [
+          {
+            "check": "cross_zone_service_denied",
+            "raw_source": "probe.json: employee_to_admin",
+            "pass_condition": "Client vùng nhân viên bị từ chối dịch vụ quản trị trong gate ứng dụng lab.",
+            "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+            "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+            "verification_kind": "container-active-self-test"
+          },
+          {
+            "check": "business_zone_service_available",
+            "raw_source": "probe.json: employee_to_business",
+            "pass_condition": "Client vùng nhân viên dùng được dịch vụ nghiệp vụ; không chứng minh VLAN/subnet isolation.",
+            "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+            "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+            "verification_kind": "container-active-self-test"
+          }
+        ],
+        "evidence": {
+          "evidence_id": "A8LIVE-f3e1ce6782b4d6cc1d8db2dc",
+          "source": "live-container://A.8.22",
+          "source_sha256": "f3e1ce6782b4d6cc1d8db2dc7a57d3047e99c46e7f9062d3ed1c5f15963ee75d",
+          "collected_at": "2026-11-22T03:18:06.323300+00:00",
+          "observed_at": "2026-11-22T03:18:06.308349+00:00",
+          "asset_id": "08b11382ce92",
+          "control_id": "A.8.22",
+          "facts": {
+            "cross_zone_service_denied": true,
+            "business_zone_service_available": false
+          },
+          "artifacts": [
+            {
+              "artifact": "observed_at",
+              "content": "2026-11-22T03:18:06.308349+00:00",
+              "sha256": "c3bcc972a608627ab2afea47163c4e1f9ff4c4f44ed39bf8487f777958ca0395"
+            },
+            {
+              "artifact": "asset_id",
+              "content": "08b11382ce92",
+              "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+            },
+            {
+              "artifact": "probe.json",
+              "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.22\", \"observed_at\": \"2026-11-22T03:18:06.308349+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"policy\": {\"deny_employee_admin\": true, \"business_available\": false}, \"employee_to_admin\": {\"response\": \"403 cross-zone denied\", \"tls_version\": null, \"source_address\": \"127.0.0.2\"}, \"employee_to_business\": {\"response\": \"503 business unavailable\", \"tls_version\": null, \"source_address\": \"127.0.0.2\"}, \"boundary\": \"Application zone gate on loopback; not VLAN, subnet or namespace isolation\"}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+              "sha256": "398c5804f13f673af38b14a0de49609b6706d4bbc65d6825a4a9624175e1abaa"
+            }
+          ],
+          "collection_errors": [],
+          "is_synthetic": true,
+          "transport": "live",
+          "source_kind": "live-container-observation",
+          "probe_kind": "container-active-self-test",
+          "observation_available": true,
+          "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+        },
+        "owner": "Network",
+        "applicable": true,
+        "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Network; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+        "applicability_approved": false,
+        "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+        "status": "Partially Compliant",
+        "rationale": "Dữ liệu bằng chứng cho thấy Client vùng nhân viên bị từ chối dịch vụ quản trị (cross_zone_service_denied: true), đáp ứng yêu cầu. Tuy nhiên, Client vùng nhân viên không thể sử dụng dịch vụ nghiệp vụ (business_zone_service_available: false), không đáp ứng yêu cầu. Do đó, hệ thống chỉ được đánh giá là Partially Compliant.",
+        "evidence_ids": [
+          "A8LIVE-f3e1ce6782b4d6cc1d8db2dc"
+        ],
+        "execution_source": "ollama-a8-evidence-judgment",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "Partially Compliant",
+            "error": null,
+            "duration_ms": 6328.37
+          }
+        ],
+        "repaired": false,
+        "error": null,
+        "duration_ms": 6328.39
+      },
+      {
+        "control_id": "A.8.24",
+        "case_id": "A.8.24-mixed",
+        "name": "Use of cryptography",
+        "criteria_checks": [
+          "strong_tls_handshake_verified",
+          "private_key_access_restricted"
+        ],
+        "criteria_details": [
+          {
+            "check": "strong_tls_handshake_verified",
+            "raw_source": "probe.json: handshake_rc + handshake.tls_version",
+            "pass_condition": "Handshake xác minh chứng chỉ lab thành công với TLS 1.2/1.3.",
+            "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+            "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+            "verification_kind": "container-active-self-test"
+          },
+          {
+            "check": "private_key_access_restricted",
+            "raw_source": "probe.json: key_read_rc + key_mode",
+            "pass_condition": "labworker không đọc được private key và mode không cấp quyền group/other.",
+            "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+            "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+            "verification_kind": "container-active-self-test"
+          }
+        ],
+        "evidence": {
+          "evidence_id": "A8LIVE-52975d1fcc2c137b55e45559",
+          "source": "live-container://A.8.24",
+          "source_sha256": "52975d1fcc2c137b55e45559022863797e1c509f4cd291e83d6e0ffb3e8c12f0",
+          "collected_at": "2026-11-22T03:18:06.620202+00:00",
+          "observed_at": "2026-11-22T03:18:06.606309+00:00",
+          "asset_id": "08b11382ce92",
+          "control_id": "A.8.24",
+          "facts": {
+            "strong_tls_handshake_verified": true,
+            "private_key_access_restricted": false
+          },
+          "artifacts": [
+            {
+              "artifact": "observed_at",
+              "content": "2026-11-22T03:18:06.606309+00:00",
+              "sha256": "b37fca649779d28d67a932095f92f0e54076aee4c65bef977c91fb9a3b038e57"
+            },
+            {
+              "artifact": "asset_id",
+              "content": "08b11382ce92",
+              "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+            },
+            {
+              "artifact": "probe.json",
+              "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.24\", \"observed_at\": \"2026-11-22T03:18:06.606309+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"handshake\": {\"response\": \"200 secure lab service\", \"tls_version\": \"TLSv1.3\", \"source_address\": \"127.0.0.1\"}, \"handshake_rc\": 0, \"key_read_rc\": 0, \"key_mode\": \"0o644\", \"certificate_sha256\": \"47eb6867b79c15db9a45f40e108632197b1bd59db88623dfd3a7ad24a759fa2d\"}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+              "sha256": "b5ecd87d999db5380ca1a9a813deddd683a3681a42e876699a519337f5fa0f70"
+            }
+          ],
+          "collection_errors": [],
+          "is_synthetic": true,
+          "transport": "live",
+          "source_kind": "live-container-observation",
+          "probe_kind": "container-active-self-test",
+          "observation_available": true,
+          "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+        },
+        "owner": "Security",
+        "applicable": true,
+        "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Crypto; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+        "applicability_approved": false,
+        "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+        "status": "Partially Compliant",
+        "rationale": "Tiêu chí 'Use of cryptography' đã được đánh giá là đủ điều kiện cho hai kiểm tra: 'strong_tls_handshake_verified' và 'private_key_access_restricted'. Tuy nhiên, kiểm tra 'private_key_access_restricted' không thỏa mãn điều kiện lab, do đó toàn bộ tiêu chí này chỉ được đánh giá là Partially Compliant.",
+        "evidence_ids": [
+          "A8LIVE-52975d1fcc2c137b55e45559"
+        ],
+        "execution_source": "ollama-a8-evidence-judgment",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "Partially Compliant",
+            "error": null,
+            "duration_ms": 6555.43
+          }
+        ],
+        "repaired": false,
+        "error": null,
+        "duration_ms": 6555.45
+      },
+      {
+        "control_id": "A.8.32",
+        "case_id": "A.8.32-mixed",
+        "name": "Change management",
+        "criteria_checks": [
+          "change_bound_to_current_release",
+          "rollback_restores_release"
+        ],
+        "criteria_details": [
+          {
+            "check": "change_bound_to_current_release",
+            "raw_source": "probe.json: approval + current_release_sha256",
+            "pass_condition": "Bản ghi CAB-LAB gắn đúng hash release; approval do lab dựng, chưa có người thật duyệt.",
+            "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+            "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+            "verification_kind": "container-active-self-test"
+          },
+          {
+            "check": "rollback_restores_release",
+            "raw_source": "probe.json: rollback_rc + restored_sha256 + expected_release_sha256",
+            "pass_condition": "Thao tác copy rollback thực khôi phục đúng nội dung release đã đăng ký.",
+            "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+            "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+            "verification_kind": "container-active-self-test"
+          }
+        ],
+        "evidence": {
+          "evidence_id": "A8LIVE-19ccebfbf319beb546371044",
+          "source": "live-container://A.8.32",
+          "source_sha256": "19ccebfbf319beb546371044962c9f2431bf3bb33b16346af3c54fc6d708f4a5",
+          "collected_at": "2026-11-22T03:18:06.881862+00:00",
+          "observed_at": "2026-11-22T03:18:06.860088+00:00",
+          "asset_id": "08b11382ce92",
+          "control_id": "A.8.32",
+          "facts": {
+            "change_bound_to_current_release": true,
+            "rollback_restores_release": false
+          },
+          "artifacts": [
+            {
+              "artifact": "observed_at",
+              "content": "2026-11-22T03:18:06.860088+00:00",
+              "sha256": "f3423716935d8fc599e24e6dcb3a904325ccc7506fcad5f85ae936d1da12ccdd"
+            },
+            {
+              "artifact": "asset_id",
+              "content": "08b11382ce92",
+              "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+            },
+            {
+              "artifact": "probe.json",
+              "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.32\", \"observed_at\": \"2026-11-22T03:18:06.860088+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"approval\": {\"ticket\": \"CAB-LAB-032\", \"sha256\": \"2d22208d4ca5d4c8c9ac7ec29c32bc7e48c9fd0eccdd9ef700a5c683b6f6cd82\"}, \"current_release_sha256\": \"2d22208d4ca5d4c8c9ac7ec29c32bc7e48c9fd0eccdd9ef700a5c683b6f6cd82\", \"rollback_rc\": 0, \"restored_sha256\": \"f78aba6dbe6b8bdf6d4ca9d4c2a1b382b9275d3a0515c9431d803fe126c92cbc\", \"expected_release_sha256\": \"2d22208d4ca5d4c8c9ac7ec29c32bc7e48c9fd0eccdd9ef700a5c683b6f6cd82\", \"approval_source\": \"Authored lab change record, not human sign-off\"}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+              "sha256": "114f1d316597b92bf7343ceb5d9fb1a36e14a413d2d80e7b57098ea942d51ce3"
+            }
+          ],
+          "collection_errors": [],
+          "is_synthetic": true,
+          "transport": "live",
+          "source_kind": "live-container-observation",
+          "probe_kind": "container-active-self-test",
+          "observation_available": true,
+          "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+        },
+        "owner": "IT Operations",
+        "applicable": true,
+        "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Change; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+        "applicability_approved": false,
+        "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+        "status": "Partially Compliant",
+        "rationale": "Thao tác copy rollback không thực hiện khôi phục đúng nội dung release đã đăng ký, dẫn đến không thỏa mãn tiêu chí 'rollback_restores_release'. Tuy nhiên, bản ghi CAB-LAB gắn đúng hash release và approval do lab dựng, chưa có người thật duyệt, thỏa mãn tiêu chí 'change_bound_to_current_release'.",
+        "evidence_ids": [
+          "A8LIVE-19ccebfbf319beb546371044"
+        ],
+        "execution_source": "ollama-a8-evidence-judgment",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "Partially Compliant",
+            "error": null,
+            "duration_ms": 6542.21
+          }
+        ],
+        "repaired": false,
+        "error": null,
+        "duration_ms": 6542.23
+      }
+    ],
+    "sha256": "6576560a43f83b975c66fdbe77ea2baba93a3f41a102a84ce745835c6046744d"
+  }
+}

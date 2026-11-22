@@ -1,0 +1,29 @@
+{
+  "control_id": "A.7.6",
+  "model": "qwen2.5:7b",
+  "status": "Partially Compliant",
+  "error": null,
+  "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The records show that visits to secure areas are being monitored, as evidenced by the visitor register entry for LAB-VISITOR-1.\",\"source_files\":[\"visitor_register.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The records do not contain any explicit prohibition against photography or any other form of media capture in secure areas.\",\"source_files\":[\"visitor_register.json\"]}]}",
+  "source_hashes": {
+    "visitor_register.json": "0c8b8bec430def792b8febca32e53071028417288df4154d9b57eb14d23c4238"
+  },
+  "checks": [
+    {
+      "criterion_index": 0,
+      "verdict": "met",
+      "rationale": "The records show that visits to secure areas are being monitored, as evidenced by the visitor register entry for LAB-VISITOR-1.",
+      "source_files": [
+        "visitor_register.json"
+      ]
+    },
+    {
+      "criterion_index": 1,
+      "verdict": "not_met",
+      "rationale": "The records do not contain any explicit prohibition against photography or any other form of media capture in secure areas.",
+      "source_files": [
+        "visitor_register.json"
+      ]
+    }
+  ],
+  "duration_ms": 3047
+}

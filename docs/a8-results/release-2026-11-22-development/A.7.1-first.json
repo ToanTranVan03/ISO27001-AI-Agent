@@ -1,0 +1,29 @@
+{
+  "control_id": "A.7.1",
+  "model": "qwen2.5:7b",
+  "status": "Partially Compliant",
+  "error": null,
+  "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The 'zones' record explicitly states that the 'server-room' is marked as 'restricted', indicating a physical security perimeter.\",\"source_files\":[\"perimeter_inspection.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The 'lock_test' for 'LAB-D1' in the 'doors' record is 'failed', indicating that the physical security check did not meet the required standard.\",\"source_files\":[\"perimeter_inspection.json\"]}] }",
+  "source_hashes": {
+    "perimeter_inspection.json": "ee148307130171c0f669add914b040da9e5fb0b19eefbbccaf878cce05b2f100"
+  },
+  "checks": [
+    {
+      "criterion_index": 0,
+      "verdict": "met",
+      "rationale": "The 'zones' record explicitly states that the 'server-room' is marked as 'restricted', indicating a physical security perimeter.",
+      "source_files": [
+        "perimeter_inspection.json"
+      ]
+    },
+    {
+      "criterion_index": 1,
+      "verdict": "not_met",
+      "rationale": "The 'lock_test' for 'LAB-D1' in the 'doors' record is 'failed', indicating that the physical security check did not meet the required standard.",
+      "source_files": [
+        "perimeter_inspection.json"
+      ]
+    }
+  ],
+  "duration_ms": 2969
+}

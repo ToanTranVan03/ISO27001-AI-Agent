@@ -1,0 +1,12 @@
+{
+  "protocol": "development-regression-v1",
+  "model": "qwen2.5:7b",
+  "started_at": "2026-11-22T03:21:31.085584+00:00",
+  "bundle_sha256": "9a4277bc02ab2df4552f871ec8c621445126f69dc820c9575456c865fed8d588",
+  "designer_reference_sha256": "9fa574e94d42372c1699ddc625dd19255a9eb3b1a99df00373d2be5cf16267da",
+  "total": 38,
+  "is_synthetic": true,
+  "independent_validation": false,
+  "professional_confirmation": false,
+  "policy": "One retry of technical errors only; never retry a key mismatch."
+}

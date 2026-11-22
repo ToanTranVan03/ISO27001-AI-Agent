@@ -1,0 +1,29 @@
+{
+  "control_id": "A.7.10",
+  "model": "qwen2.5:7b",
+  "status": "Compliant",
+  "error": null,
+  "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The records show that the inventory includes a USB device with a capacity of 32GB and a custodian, indicating that the storage media is documented.\",\"source_files\":[\"removable_media.json\"]},{\"criterion_index\":1,\"verdict\":\"met\",\"rationale\":\"The policy states that the default is 'deny' and specifies the exception process, logging, and state, indicating that a policy for controlling USB usage is in place.\",\"source_files\":[\"removable_media.json\"]}]}",
+  "source_hashes": {
+    "removable_media.json": "ee1670358f7c64fd74d234e33957a243c2644b881e363bd0b3a8c4f5cd49e0fd"
+  },
+  "checks": [
+    {
+      "criterion_index": 0,
+      "verdict": "met",
+      "rationale": "The records show that the inventory includes a USB device with a capacity of 32GB and a custodian, indicating that the storage media is documented.",
+      "source_files": [
+        "removable_media.json"
+      ]
+    },
+    {
+      "criterion_index": 1,
+      "verdict": "met",
+      "rationale": "The policy states that the default is 'deny' and specifies the exception process, logging, and state, indicating that a policy for controlling USB usage is in place.",
+      "source_files": [
+        "removable_media.json"
+      ]
+    }
+  ],
+  "duration_ms": 3015
+}

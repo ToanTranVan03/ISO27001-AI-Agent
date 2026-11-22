@@ -1,0 +1,24 @@
+{
+  "full_run": {
+    "startTime": "2026-11-22T03:29:57.861Z",
+    "duration": 120258.49299999999,
+    "expected": 11,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  },
+  "source_regression_retry": {
+    "startTime": "2026-11-22T03:31:19.622Z",
+    "duration": 8500.375,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "existing_scenarios_passed": 11,
+  "new_source_regression_passed_after_test_fix": true,
+  "total_distinct_scenarios_verified": 12,
+  "all_passed_in_single_run": false,
+  "failure_cause": "New test tried clicking nested summary before opening its parent details; test now follows actual user flow.",
+  "data": "Source status UI uses mocked GET; permission/read-only exports use real API. No human assessment or professional approval."
+}

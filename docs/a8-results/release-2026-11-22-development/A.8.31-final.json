@@ -1,0 +1,29 @@
+{
+  "control_id": "A.8.31",
+  "model": "qwen2.5:7b",
+  "status": "Partially Compliant",
+  "error": null,
+  "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The environment networks are clearly defined with separate subnets for development and production.\",\"source_files\":[\"environment_access.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The development account (LAB-DEV-1) is allowed to perform a SELECT operation on the production database (LAB-PROD-DB), which violates the criterion of separation between development and production environments.\",\"source_files\":[\"environment_access.json\"]}]}",
+  "source_hashes": {
+    "environment_access.json": "b92fe8f867bb7618004b18e3a3dc84668a80ddfdca1635e2afc9b387dfb7d742"
+  },
+  "checks": [
+    {
+      "criterion_index": 0,
+      "verdict": "met",
+      "rationale": "The environment networks are clearly defined with separate subnets for development and production.",
+      "source_files": [
+        "environment_access.json"
+      ]
+    },
+    {
+      "criterion_index": 1,
+      "verdict": "not_met",
+      "rationale": "The development account (LAB-DEV-1) is allowed to perform a SELECT operation on the production database (LAB-PROD-DB), which violates the criterion of separation between development and production environments.",
+      "source_files": [
+        "environment_access.json"
+      ]
+    }
+  ],
+  "duration_ms": 3094
+}

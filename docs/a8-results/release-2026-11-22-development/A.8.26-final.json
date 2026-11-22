@@ -1,0 +1,21 @@
+{
+  "control_id": "A.8.26",
+  "model": "qwen2.5:7b",
+  "status": "Compliant",
+  "error": null,
+  "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The artifact contains a detailed software security requirement document (SEC-01 and SEC-02) as per the specified format.\",\"source_files\":[\"application_requirements.json\"]}] }",
+  "source_hashes": {
+    "application_requirements.json": "7cb15ca4955c3f212e4071e1f7b3441e05d2815e671de9e9f5eb9695a982272f"
+  },
+  "checks": [
+    {
+      "criterion_index": 0,
+      "verdict": "met",
+      "rationale": "The artifact contains a detailed software security requirement document (SEC-01 and SEC-02) as per the specified format.",
+      "source_files": [
+        "application_requirements.json"
+      ]
+    }
+  ],
+  "duration_ms": 1719
+}

@@ -1,0 +1,29 @@
+{
+  "control_id": "A.7.11",
+  "model": "qwen2.5:7b",
+  "status": "Insufficient Evidence",
+  "error": null,
+  "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"not_met\",\"rationale\":\"The criterion requires 'Nhật ký bảo trì UPS, máy phát điện', but 'ups_generator_records' is marked as 'not_collected'.\",\"source_files\":[\"utility_maintenance.json\"]},{\"criterion_index\":1,\"verdict\":\"unknown\",\"rationale\":\"The criterion requires 'Biên bản kiểm tra hệ thống làm mát', but 'cooling_inspections' is marked as 'not_collected'.\",\"source_files\":[\"utility_maintenance.json\"]}] }",
+  "source_hashes": {
+    "utility_maintenance.json": "bd06a1d8d4f45e73b7b6d419ce8c8b1444f8116e7fcebae6c5ea6ec1f5c1c820"
+  },
+  "checks": [
+    {
+      "criterion_index": 0,
+      "verdict": "not_met",
+      "rationale": "The criterion requires 'Nhật ký bảo trì UPS, máy phát điện', but 'ups_generator_records' is marked as 'not_collected'.",
+      "source_files": [
+        "utility_maintenance.json"
+      ]
+    },
+    {
+      "criterion_index": 1,
+      "verdict": "unknown",
+      "rationale": "The criterion requires 'Biên bản kiểm tra hệ thống làm mát', but 'cooling_inspections' is marked as 'not_collected'.",
+      "source_files": [
+        "utility_maintenance.json"
+      ]
+    }
+  ],
+  "duration_ms": 2969
+}

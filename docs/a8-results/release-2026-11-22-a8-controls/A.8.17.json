@@ -1,0 +1,91 @@
+{
+  "parent_report_sha256": "6576560a43f83b975c66fdbe77ea2baba93a3f41a102a84ce745835c6046744d",
+  "capture_sha256": "c438a71be61bfc9d7293bb6e89f86aec27f542f2eb0d382476291493af9f7d40",
+  "independent_validation": false,
+  "record": {
+    "control_id": "A.8.17",
+    "case_id": "A.8.17-mixed",
+    "name": "Clock synchronization",
+    "criteria_checks": [
+      "time_reference_signature_valid",
+      "application_time_offset_within_policy"
+    ],
+    "criteria_details": [
+      {
+        "check": "time_reference_signature_valid",
+        "raw_source": "probe.json: reference_reply + signature_verify_rc",
+        "pass_condition": "Client xác minh HMAC/nonce nguồn thời gian ứng dụng lab.",
+        "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+        "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+        "verification_kind": "container-active-self-test"
+      },
+      {
+        "check": "application_time_offset_within_policy",
+        "raw_source": "probe.json: offset_ms + round_trip_ms",
+        "pass_condition": "Độ lệch so với nguồn cùng container không quá 100ms; không chứng minh NTP/OS đồng bộ độc lập.",
+        "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+        "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+        "verification_kind": "container-active-self-test"
+      }
+    ],
+    "evidence": {
+      "evidence_id": "A8LIVE-5bbd11528ca585fc24941c04",
+      "source": "live-container://A.8.17",
+      "source_sha256": "5bbd11528ca585fc24941c046d43f09f8927f43234f2e7486d9754ebdf325984",
+      "collected_at": "2026-11-22T03:18:05.701858+00:00",
+      "observed_at": "2026-11-22T03:18:05.674306+00:00",
+      "asset_id": "08b11382ce92",
+      "control_id": "A.8.17",
+      "facts": {
+        "time_reference_signature_valid": true,
+        "application_time_offset_within_policy": false
+      },
+      "artifacts": [
+        {
+          "artifact": "observed_at",
+          "content": "2026-11-22T03:18:05.674306+00:00",
+          "sha256": "46dba40c6eac25bd4b8a3b3c1e301055f7a507433a7451cc64549ddca7a60c8f"
+        },
+        {
+          "artifact": "asset_id",
+          "content": "08b11382ce92",
+          "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+        },
+        {
+          "artifact": "probe.json",
+          "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.17\", \"observed_at\": \"2026-11-22T03:18:05.674306+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"reference_reply\": {\"body\": \"{\\\"nonce\\\": \\\"a4c92a95930011316480a0b15fd7ad51\\\", \\\"time\\\": 1795317490.6739542}\", \"signature\": \"417a0bbf6480a1c6036cf23bf6814ca0ce0c25cd508323614a2255d476a2ec45\"}, \"signature_verify_rc\": 0, \"offset_ms\": 5000.13, \"round_trip_ms\": 0.875, \"scope\": \"Signed application time reference on same container clock; not NTP or OS synchronization\"}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+          "sha256": "ffa8803078a6f95332397e9529ba8eade3d29f30a52f071534d868c79e25423a"
+        }
+      ],
+      "collection_errors": [],
+      "is_synthetic": true,
+      "transport": "live",
+      "source_kind": "live-container-observation",
+      "probe_kind": "container-active-self-test",
+      "observation_available": true,
+      "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+    },
+    "owner": "IT Operations",
+    "applicable": true,
+    "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Time; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+    "applicability_approved": false,
+    "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+    "status": "Partially Compliant",
+    "rationale": "Tiêu chí A.8.17 về đồng bộ thời gian đã được kiểm tra và có bằng chứng cho thấy Client đã xác minh HMAC/nonce nguồn thời gian ứng dụng (time_reference_signature_valid: true). Tuy nhiên, độ lệch thời gian so với nguồn không nằm trong phạm vi chính sách (application_time_offset_within_policy: false), do đó không đáp ứng yêu cầu của tiêu chí.",
+    "evidence_ids": [
+      "A8LIVE-5bbd11528ca585fc24941c04"
+    ],
+    "execution_source": "ollama-a8-evidence-judgment",
+    "attempts": [
+      {
+        "attempt": 1,
+        "status": "Partially Compliant",
+        "error": null,
+        "duration_ms": 6713.14
+      }
+    ],
+    "repaired": false,
+    "error": null,
+    "duration_ms": 6713.16
+  }
+}

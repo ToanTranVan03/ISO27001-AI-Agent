@@ -1,0 +1,29 @@
+{
+  "control_id": "A.6.8",
+  "model": "qwen2.5:7b",
+  "status": "Insufficient Evidence",
+  "error": null,
+  "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The artifact contains a reporting form URL, indicating a channel for incident reporting.\",\"source_files\":[\"incident_channel.json\"]},{\"criterion_index\":1,\"verdict\":\"unknown\",\"rationale\":\"While the artifact includes an event register, there is no explicit mention of an ATT&CK (Advanced Threat Detection and Knowledge) log, only a generic event register.\",\"source_files\":[\"incident_channel.json\"]}] }",
+  "source_hashes": {
+    "incident_channel.json": "fc565ddd2ea365fb4ed3a555f6a7792e4db52f0ad112a16342fd454563b0d669"
+  },
+  "checks": [
+    {
+      "criterion_index": 0,
+      "verdict": "met",
+      "rationale": "The artifact contains a reporting form URL, indicating a channel for incident reporting.",
+      "source_files": [
+        "incident_channel.json"
+      ]
+    },
+    {
+      "criterion_index": 1,
+      "verdict": "unknown",
+      "rationale": "While the artifact includes an event register, there is no explicit mention of an ATT&CK (Advanced Threat Detection and Knowledge) log, only a generic event register.",
+      "source_files": [
+        "incident_channel.json"
+      ]
+    }
+  ],
+  "duration_ms": 2609
+}

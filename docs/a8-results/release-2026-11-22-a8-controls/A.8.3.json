@@ -1,0 +1,101 @@
+{
+  "parent_report_sha256": "6576560a43f83b975c66fdbe77ea2baba93a3f41a102a84ce745835c6046744d",
+  "capture_sha256": "c438a71be61bfc9d7293bb6e89f86aec27f542f2eb0d382476291493af9f7d40",
+  "independent_validation": false,
+  "record": {
+    "control_id": "A.8.3",
+    "case_id": "A.8.3-mixed",
+    "name": "Information access restriction",
+    "criteria_checks": [
+      "access_default_deny",
+      "access_review_current"
+    ],
+    "criteria_details": [
+      {
+        "check": "access_default_deny",
+        "raw_source": "write_access_rc + resource_stat",
+        "pass_condition": "labworker không ghi được tệp nghiệp vụ (test -w trả 1).",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "live-container-observation"
+      },
+      {
+        "check": "access_review_current",
+        "raw_source": "access-review.csv",
+        "pass_condition": "Review cho labworker được approved trong 90 ngày; là hồ sơ lab, chưa phải phê duyệt chuyên gia.",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "live-container-observation"
+      }
+    ],
+    "evidence": {
+      "evidence_id": "A8LIVE-54f491578f94c2eef7d4bcde",
+      "source": "live-container://A.8.3",
+      "source_sha256": "54f491578f94c2eef7d4bcde64e1cca3a70b1c1c399543460816c81fc9f8ed4b",
+      "collected_at": "2026-11-22T03:18:03.597059+00:00",
+      "observed_at": "2026-11-22T03:18:03Z",
+      "asset_id": "08b11382ce92",
+      "control_id": "A.8.3",
+      "facts": {
+        "access_default_deny": true,
+        "access_review_current": false
+      },
+      "artifacts": [
+        {
+          "artifact": "observed_at",
+          "content": "2026-11-22T03:18:03Z",
+          "sha256": "0d10f7cc5ed1189d5328321d46c3391399148421c16357c71670e39eb9225418"
+        },
+        {
+          "artifact": "asset_id",
+          "content": "08b11382ce92",
+          "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+        },
+        {
+          "artifact": "write_access_rc",
+          "content": "1",
+          "sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b"
+        },
+        {
+          "artifact": "resource_stat",
+          "content": "644 root root",
+          "sha256": "b9f0b72765fd8a7e8740f30f05af0fa9b4c6ce0bc9b67f5a48360ceceeee59d3"
+        },
+        {
+          "artifact": "access-review.csv",
+          "content": "subject,decision,reviewed_at\nlabworker,rejected,2026-11-22T03:17:51Z\n",
+          "sha256": "720e1372f716803ba7536cceedaa441e3a3efaf8818b8c67d7a4847ca5f43818"
+        }
+      ],
+      "collection_errors": [],
+      "is_synthetic": true,
+      "transport": "live",
+      "source_kind": "live-container-observation",
+      "probe_kind": "read-only-resource-observation",
+      "observation_available": true,
+      "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+    },
+    "owner": "IAM",
+    "applicable": true,
+    "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ IAM; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+    "applicability_approved": false,
+    "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+    "status": "Partially Compliant",
+    "rationale": "Trong bằng chứng, kiểm tra access_default_deny đã đạt yêu cầu, vì labworker không thể ghi tệp nghiệp vụ (write_access_rc = 1, resource_stat = 644 root root). Tuy nhiên, kiểm tra access_review_current không đạt yêu cầu, vì hồ sơ review cho labworker đã bị từ chối (access-review.csv). Do đó, hệ thống không tuân thủ yêu cầu về đánh giá quyền truy cập hiện tại.",
+    "evidence_ids": [
+      "A8LIVE-54f491578f94c2eef7d4bcde"
+    ],
+    "execution_source": "ollama-a8-evidence-judgment",
+    "attempts": [
+      {
+        "attempt": 1,
+        "status": "Partially Compliant",
+        "error": null,
+        "duration_ms": 6791.3
+      }
+    ],
+    "repaired": false,
+    "error": null,
+    "duration_ms": 6791.32
+  }
+}

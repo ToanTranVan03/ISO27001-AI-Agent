@@ -1,0 +1,29 @@
+{
+  "control_id": "A.6.6",
+  "model": "qwen2.5:7b",
+  "status": "Insufficient Evidence",
+  "error": null,
+  "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The records show that both EMP-001 and LAB-VENDOR-01 have signed NDAs, with EMP-001's NDA expiring on 2025-12-31 and LAB-VENDOR-01's NDA also expiring on 2025-12-31.\",\"source_files\":[\"nda_register.json\"]},{\"criterion_index\":1,\"verdict\":\"unknown\",\"rationale\":\"The records do not provide information on the current validity of the NDAs beyond their expiration dates. There is no explicit mention of whether the NDAs are still effective after their expiration dates.\",\"source_files\":[\"nda_register.json\"]}] }",
+  "source_hashes": {
+    "nda_register.json": "5a68f08680e07c831366f4854f77e6e98d1ec32745437d1d98ae58398848b6eb"
+  },
+  "checks": [
+    {
+      "criterion_index": 0,
+      "verdict": "met",
+      "rationale": "The records show that both EMP-001 and LAB-VENDOR-01 have signed NDAs, with EMP-001's NDA expiring on 2025-12-31 and LAB-VENDOR-01's NDA also expiring on 2025-12-31.",
+      "source_files": [
+        "nda_register.json"
+      ]
+    },
+    {
+      "criterion_index": 1,
+      "verdict": "unknown",
+      "rationale": "The records do not provide information on the current validity of the NDAs beyond their expiration dates. There is no explicit mention of whether the NDAs are still effective after their expiration dates.",
+      "source_files": [
+        "nda_register.json"
+      ]
+    }
+  ],
+  "duration_ms": 5031
+}

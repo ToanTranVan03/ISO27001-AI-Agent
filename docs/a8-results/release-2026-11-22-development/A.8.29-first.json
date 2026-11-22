@@ -1,0 +1,29 @@
+{
+  "control_id": "A.8.29",
+  "model": "qwen2.5:7b",
+  "status": "Partially Compliant",
+  "error": null,
+  "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The artifact contains a DAST report (LAB-DAST-01) with findings, meeting the criterion.\",\"source_files\":[\"acceptance_testing.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The security acceptance record does not show approval by any party, only that it is pending.\",\"source_files\":[\"acceptance_testing.json\"]}]}",
+  "source_hashes": {
+    "acceptance_testing.json": "8f7413fa4296e454439fb75f4b99e50a4ff6da7e4ddd959498bbc22ed9a6b027"
+  },
+  "checks": [
+    {
+      "criterion_index": 0,
+      "verdict": "met",
+      "rationale": "The artifact contains a DAST report (LAB-DAST-01) with findings, meeting the criterion.",
+      "source_files": [
+        "acceptance_testing.json"
+      ]
+    },
+    {
+      "criterion_index": 1,
+      "verdict": "not_met",
+      "rationale": "The security acceptance record does not show approval by any party, only that it is pending.",
+      "source_files": [
+        "acceptance_testing.json"
+      ]
+    }
+  ],
+  "duration_ms": 2594
+}

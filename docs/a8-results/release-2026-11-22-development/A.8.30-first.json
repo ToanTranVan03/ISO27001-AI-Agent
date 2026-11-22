@@ -1,0 +1,29 @@
+{
+  "control_id": "A.8.30",
+  "model": "qwen2.5:7b",
+  "status": "Insufficient Evidence",
+  "error": null,
+  "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The contract includes clauses on confidentiality, secure coding, vulnerability remediation, and right to review source.\",\"source_files\":[\"supplier_delivery.json\"]},{\"criterion_index\":1,\"verdict\":\"unknown\",\"rationale\":\"There is no explicit mention of a source code review log or record in the provided artifact.\",\"source_files\":[\"supplier_delivery.json\"]}]}",
+  "source_hashes": {
+    "supplier_delivery.json": "45657133fffda32ecba90da2f0d86c21cbe201aebd70e9b676b7a25676daa0c5"
+  },
+  "checks": [
+    {
+      "criterion_index": 0,
+      "verdict": "met",
+      "rationale": "The contract includes clauses on confidentiality, secure coding, vulnerability remediation, and right to review source.",
+      "source_files": [
+        "supplier_delivery.json"
+      ]
+    },
+    {
+      "criterion_index": 1,
+      "verdict": "unknown",
+      "rationale": "There is no explicit mention of a source code review log or record in the provided artifact.",
+      "source_files": [
+        "supplier_delivery.json"
+      ]
+    }
+  ],
+  "duration_ms": 2547
+}

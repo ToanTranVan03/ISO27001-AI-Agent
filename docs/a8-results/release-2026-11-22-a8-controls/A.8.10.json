@@ -1,0 +1,101 @@
+{
+  "parent_report_sha256": "6576560a43f83b975c66fdbe77ea2baba93a3f41a102a84ce745835c6046744d",
+  "capture_sha256": "c438a71be61bfc9d7293bb6e89f86aec27f542f2eb0d382476291493af9f7d40",
+  "independent_validation": false,
+  "record": {
+    "control_id": "A.8.10",
+    "case_id": "A.8.10-mixed",
+    "name": "Information deletion",
+    "criteria_checks": [
+      "deletion_policy_enforced",
+      "deletion_verified"
+    ],
+    "criteria_details": [
+      {
+        "check": "deletion_policy_enforced",
+        "raw_source": "retention.conf",
+        "pass_condition": "Cấu hình retention của lab trong 1–30 ngày.",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "live-container-observation"
+      },
+      {
+        "check": "deletion_verified",
+        "raw_source": "object_exists_rc + deletion-receipt",
+        "pass_condition": "Có biên nhận phép kiểm tra và đối tượng đã không còn tồn tại.",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "live-container-observation"
+      }
+    ],
+    "evidence": {
+      "evidence_id": "A8LIVE-a02e7c5f2fc52fff1143f054",
+      "source": "live-container://A.8.10",
+      "source_sha256": "a02e7c5f2fc52fff1143f0541e25ea229c30debcdf32d768f20992c7013d1473",
+      "collected_at": "2026-11-22T03:18:04.781903+00:00",
+      "observed_at": "2026-11-22T03:18:04Z",
+      "asset_id": "08b11382ce92",
+      "control_id": "A.8.10",
+      "facts": {
+        "deletion_policy_enforced": true,
+        "deletion_verified": false
+      },
+      "artifacts": [
+        {
+          "artifact": "observed_at",
+          "content": "2026-11-22T03:18:04Z",
+          "sha256": "f59a22879cc84e0f714f82b4d83cca010d6a6b5d4bd1a514203e15c5a8007db2"
+        },
+        {
+          "artifact": "asset_id",
+          "content": "08b11382ce92",
+          "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+        },
+        {
+          "artifact": "retention.conf",
+          "content": "retention_days=30\n",
+          "sha256": "c39297e265909ab8f32772838a6c4ab42b2cdac5268cdeeee49983a2758e12af"
+        },
+        {
+          "artifact": "deletion-receipt",
+          "content": "deletion-check-authorized\n",
+          "sha256": "0c563d9c8bd47030042cb1f0e5e50e287bb726c7af1b401f865417506445f55c"
+        },
+        {
+          "artifact": "object_exists_rc",
+          "content": "0",
+          "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+        }
+      ],
+      "collection_errors": [],
+      "is_synthetic": true,
+      "transport": "live",
+      "source_kind": "live-container-observation",
+      "probe_kind": "read-only-resource-observation",
+      "observation_available": true,
+      "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+    },
+    "owner": "Data owner",
+    "applicable": true,
+    "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Data; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+    "applicability_approved": false,
+    "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+    "status": "Partially Compliant",
+    "rationale": "Deletion policy is enforced with a retention period of 30 days as specified in the 'retention.conf' file. However, the deletion verification step failed because the object still exists, as indicated by the 'object_exists_rc' value of 0. This indicates that the deletion process has not been fully completed or verified.",
+    "evidence_ids": [
+      "A8LIVE-a02e7c5f2fc52fff1143f054"
+    ],
+    "execution_source": "ollama-a8-evidence-judgment",
+    "attempts": [
+      {
+        "attempt": 1,
+        "status": "Partially Compliant",
+        "error": null,
+        "duration_ms": 6024.18
+      }
+    ],
+    "repaired": false,
+    "error": null,
+    "duration_ms": 6024.19
+  }
+}

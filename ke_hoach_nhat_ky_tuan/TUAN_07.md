@@ -26,7 +26,8 @@ Khi có thay đổi code/nguồn, chạy kiểm tra phù hợp và lưu minh ch�
 Đây là trạng thái tại mốc bàn giao **21–22/11**, không phải thành tích thực hiện tuần 7:
 
 - Đã có luồng quản lý 56 control, thu/kiểm toàn vẹn nguồn, Agent chạy lô, chấm mù, thẩm định, báo cáo và SoA dự thảo; có nhập quyết định/kế hoạch theo lô và điều hướng bốn màn hình.
-- Kiểm chứng gần nhất: **365 test Python, 14 test JavaScript, 11 kịch bản UI, lint/build đạt**; có kiểm thử ghi thật trên database riêng và phục hồi sau ngắt API.
+- Kiểm chứng mới nhất ngày 22/11: **380 test Python, 14 JavaScript**, API 39 kiểm tra ba tài khoản và ghi thật trên database riêng đạt; 11 luồng UI cũ đạt, ca nguồn mới đạt sau sửa test, tổng 12 kịch bản qua hai lần chạy. Xem [báo cáo khóa sổ 22/11](../docs/HOAN_THIEN_TUAN_06_2026_11_22.md); không chuyển công việc này thành thành tích tuần 7.
+- Đã chạy lại 18 A.8 lab và 38 hồ sơ mô phỏng ngày 22/11, không lỗi kỹ thuật cuối; bộ 38 khớp khóa phát triển 23/38, còn 15 lệch tổng và 19 lệch tiêu chí. Có công cụ so sánh hai lượt và xuất hiện trạng nguồn 56; đây vẫn là thực nghiệm phát triển, chưa phải độ đúng độc lập.
 - Đợt chính: 19 control có nguồn ngoài preset, 18 qua ngưỡng nội dung; 37 thiếu nguồn và A.6.2 cần thay. Có 0 quyết định áp dụng, 0 thẩm định hiện hành; rubric/SoA chưa được phê duyệt ở mốc bàn giao.
 - 38 hồ sơ do trợ lý tạo và gói ứng viên kỹ thuật là dữ liệu phát triển/hồi quy; không thay bộ kiểm định độc lập hoặc nguồn được người phụ trách chấp nhận.
 

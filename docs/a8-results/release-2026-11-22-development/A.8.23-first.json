@@ -1,0 +1,29 @@
+{
+  "control_id": "A.8.23",
+  "model": "qwen2.5:7b",
+  "status": "Compliant",
+  "error": null,
+  "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"Proxy mode is explicitly configured and rule order includes deny-blocklist.\",\"source_files\":[\"web_filter_config.json\"]},{\"criterion_index\":1,\"verdict\":\"met\",\"rationale\":\"Blocklist contains entries for malware.example.invalid and phishing.example.invalid.\",\"source_files\":[\"web_filter_config.json\"]}]}",
+  "source_hashes": {
+    "web_filter_config.json": "70c218383d9ca65af86beb10090f610787a2c5607f176afea745c4cd94aed799"
+  },
+  "checks": [
+    {
+      "criterion_index": 0,
+      "verdict": "met",
+      "rationale": "Proxy mode is explicitly configured and rule order includes deny-blocklist.",
+      "source_files": [
+        "web_filter_config.json"
+      ]
+    },
+    {
+      "criterion_index": 1,
+      "verdict": "met",
+      "rationale": "Blocklist contains entries for malware.example.invalid and phishing.example.invalid.",
+      "source_files": [
+        "web_filter_config.json"
+      ]
+    }
+  ],
+  "duration_ms": 2250
+}

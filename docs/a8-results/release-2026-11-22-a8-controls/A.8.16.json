@@ -1,0 +1,91 @@
+{
+  "parent_report_sha256": "6576560a43f83b975c66fdbe77ea2baba93a3f41a102a84ce745835c6046744d",
+  "capture_sha256": "c438a71be61bfc9d7293bb6e89f86aec27f542f2eb0d382476291493af9f7d40",
+  "independent_validation": false,
+  "record": {
+    "control_id": "A.8.16",
+    "case_id": "A.8.16-mixed",
+    "name": "Monitoring activities",
+    "criteria_checks": [
+      "file_change_detected_within_sla",
+      "alert_delivery_receipt_present"
+    ],
+    "criteria_details": [
+      {
+        "check": "file_change_detected_within_sla",
+        "raw_source": "probe.json: monitor_configuration + events",
+        "pass_condition": "Watcher lab phát hiện thay đổi tệp thử trong 5 giây.",
+        "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+        "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+        "verification_kind": "container-active-self-test"
+      },
+      {
+        "check": "alert_delivery_receipt_present",
+        "raw_source": "probe.json: delivery_receipts",
+        "pass_condition": "Sink lab có biên nhận sự kiện; không phải SIEM ngoài container.",
+        "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+        "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+        "verification_kind": "container-active-self-test"
+      }
+    ],
+    "evidence": {
+      "evidence_id": "A8LIVE-e18ba0318ed460564289c569",
+      "source": "live-container://A.8.16",
+      "source_sha256": "e18ba0318ed460564289c569528ed78578c2d957774083550b6629c1879e3492",
+      "collected_at": "2026-11-22T03:18:05.476630+00:00",
+      "observed_at": "2026-11-22T03:18:05.446459+00:00",
+      "asset_id": "08b11382ce92",
+      "control_id": "A.8.16",
+      "facts": {
+        "file_change_detected_within_sla": true,
+        "alert_delivery_receipt_present": false
+      },
+      "artifacts": [
+        {
+          "artifact": "observed_at",
+          "content": "2026-11-22T03:18:05.446459+00:00",
+          "sha256": "d177e74d9f2959e85d38ef79c61cfc03dcafa554117602aa920c963c868b6606"
+        },
+        {
+          "artifact": "asset_id",
+          "content": "08b11382ce92",
+          "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+        },
+        {
+          "artifact": "probe.json",
+          "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.16\", \"observed_at\": \"2026-11-22T03:18:05.446459+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"monitor_configuration\": {\"enabled\": true, \"delivery_enabled\": false}, \"events\": [{\"event\": \"file_changed\", \"latency_ms\": 10.55, \"at\": \"2026-11-22T03:18:05.445000+00:00\"}], \"delivery_receipts\": []}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+          "sha256": "5038664f42c9fad1a4166409a844717ce9b6f9323a6ae62a885725ad2f85dc4b"
+        }
+      ],
+      "collection_errors": [],
+      "is_synthetic": true,
+      "transport": "live",
+      "source_kind": "live-container-observation",
+      "probe_kind": "container-active-self-test",
+      "observation_available": true,
+      "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+    },
+    "owner": "SOC",
+    "applicable": true,
+    "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Monitoring; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+    "applicability_approved": false,
+    "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+    "status": "Partially Compliant",
+    "rationale": "Tiêu chí file_change_detected_within_sla đã được thỏa mãn, nhưng alert_delivery_receipt_present không có biên nhận sự kiện. Điều này cho thấy có thể có vấn đề trong việc giao nhận thông báo, mặc dù phát hiện thay đổi tệp đã được thực hiện đúng hạn.",
+    "evidence_ids": [
+      "A8LIVE-e18ba0318ed460564289c569"
+    ],
+    "execution_source": "ollama-a8-evidence-judgment",
+    "attempts": [
+      {
+        "attempt": 1,
+        "status": "Partially Compliant",
+        "error": null,
+        "duration_ms": 5998.99
+      }
+    ],
+    "repaired": false,
+    "error": null,
+    "duration_ms": 5999.01
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "parent_report_sha256": "6576560a43f83b975c66fdbe77ea2baba93a3f41a102a84ce745835c6046744d",
+  "capture_sha256": "c438a71be61bfc9d7293bb6e89f86aec27f542f2eb0d382476291493af9f7d40",
+  "independent_validation": false,
+  "record": {
+    "control_id": "A.8.9",
+    "case_id": "A.8.9-mixed",
+    "name": "Configuration management",
+    "criteria_checks": [
+      "baseline_authorization_present",
+      "configuration_matches_baseline"
+    ],
+    "criteria_details": [
+      {
+        "check": "baseline_authorization_present",
+        "raw_source": "probe.json: baseline.ticket",
+        "pass_condition": "Có mã CAB-LAB hợp lệ trong bản ghi baseline lab.",
+        "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+        "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+        "verification_kind": "container-active-self-test"
+      },
+      {
+        "check": "configuration_matches_baseline",
+        "raw_source": "probe.json: baseline.sha256 + current_sha256",
+        "pass_condition": "Hash cấu hình hiện tại khớp baseline đã đăng ký.",
+        "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+        "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+        "verification_kind": "container-active-self-test"
+      }
+    ],
+    "evidence": {
+      "evidence_id": "A8LIVE-9db62ed08e1b2931368010e4",
+      "source": "live-container://A.8.9",
+      "source_sha256": "9db62ed08e1b2931368010e4afb25559b92863d85f4ba0bfea50fe78804191f9",
+      "collected_at": "2026-11-22T03:18:04.683543+00:00",
+      "observed_at": "2026-11-22T03:18:04.632576+00:00",
+      "asset_id": "08b11382ce92",
+      "control_id": "A.8.9",
+      "facts": {
+        "baseline_authorization_present": true,
+        "configuration_matches_baseline": false
+      },
+      "artifacts": [
+        {
+          "artifact": "observed_at",
+          "content": "2026-11-22T03:18:04.632576+00:00",
+          "sha256": "f5307ed7d3b5141f7f598685bd47e3c9c34ab903646bec19527de7decc4a9ec7"
+        },
+        {
+          "artifact": "asset_id",
+          "content": "08b11382ce92",
+          "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+        },
+        {
+          "artifact": "probe.json",
+          "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.9\", \"observed_at\": \"2026-11-22T03:18:04.632576+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"baseline\": {\"ticket\": \"CAB-LAB-001\", \"sha256\": \"c5edeccfbb4df1f664a6110a4a25c4caa35b7e0bda2058e37649a608655b9921\"}, \"current_configuration\": \"protected-mode=off\\n\", \"current_sha256\": \"ba0e290b8fc9c7fa16d9606c287b08d20e8901e1b811fc3ee066b2b50da02751\", \"approval_source\": \"Authored lab CAB record, not human sign-off\"}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+          "sha256": "f846192c36130f1189e2fcb71deda89c16f46c7c63640a433130543c91f813d6"
+        }
+      ],
+      "collection_errors": [],
+      "is_synthetic": true,
+      "transport": "live",
+      "source_kind": "live-container-observation",
+      "probe_kind": "container-active-self-test",
+      "observation_available": true,
+      "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+    },
+    "owner": "IT Operations",
+    "applicable": true,
+    "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Configuration; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+    "applicability_approved": false,
+    "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+    "status": "Partially Compliant",
+    "rationale": "Bằng chứng cho thấy mã CAB-LAB hiện diện trong bản ghi baseline lab, nhưng cấu hình hiện tại không khớp với baseline đã đăng ký. Điều này cho thấy có sự tuân thủ đối với việc xác định hóa cấu hình, nhưng cấu hình hiện tại không đúng với baseline đã xác định.",
+    "evidence_ids": [
+      "A8LIVE-9db62ed08e1b2931368010e4"
+    ],
+    "execution_source": "ollama-a8-evidence-judgment",
+    "attempts": [
+      {
+        "attempt": 1,
+        "status": "Partially Compliant",
+        "error": null,
+        "duration_ms": 5991.81
+      }
+    ],
+    "repaired": false,
+    "error": null,
+    "duration_ms": 5991.83
+  }
+}

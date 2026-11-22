@@ -1,0 +1,91 @@
+{
+  "parent_report_sha256": "6576560a43f83b975c66fdbe77ea2baba93a3f41a102a84ce745835c6046744d",
+  "capture_sha256": "c438a71be61bfc9d7293bb6e89f86aec27f542f2eb0d382476291493af9f7d40",
+  "independent_validation": false,
+  "record": {
+    "control_id": "A.8.1",
+    "case_id": "A.8.1-mixed",
+    "name": "User endpoint devices",
+    "criteria_checks": [
+      "endpoint_record_private",
+      "endpoint_file_encryption_verified"
+    ],
+    "criteria_details": [
+      {
+        "check": "endpoint_record_private",
+        "raw_source": "probe.json: read_rc + resource_mode",
+        "pass_condition": "labworker không đọc được hồ sơ tệp endpoint.",
+        "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+        "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+        "verification_kind": "container-active-self-test"
+      },
+      {
+        "check": "endpoint_file_encryption_verified",
+        "raw_source": "probe.json: decrypt_rc + decrypted_sha256 + original_sha256 + plaintext_copy_exists",
+        "pass_condition": "Giải mã tệp mẫu đúng hash và không còn bản plaintext phụ; không phải mã hóa ổ đĩa.",
+        "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+        "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+        "verification_kind": "container-active-self-test"
+      }
+    ],
+    "evidence": {
+      "evidence_id": "A8LIVE-202b6f770c6e829d57f86742",
+      "source": "live-container://A.8.1",
+      "source_sha256": "202b6f770c6e829d57f86742200659c83c6e98c0007a851db1c543abccfb67ed",
+      "collected_at": "2026-11-22T03:18:03.185699+00:00",
+      "observed_at": "2026-11-22T03:18:03.137414+00:00",
+      "asset_id": "08b11382ce92",
+      "control_id": "A.8.1",
+      "facts": {
+        "endpoint_record_private": true,
+        "endpoint_file_encryption_verified": false
+      },
+      "artifacts": [
+        {
+          "artifact": "observed_at",
+          "content": "2026-11-22T03:18:03.137414+00:00",
+          "sha256": "ac0876baa4d440bd4c94fd9dbb7a07680c2dd2bfa07a4f1863b9632449fcbe3f"
+        },
+        {
+          "artifact": "asset_id",
+          "content": "08b11382ce92",
+          "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+        },
+        {
+          "artifact": "probe.json",
+          "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.1\", \"observed_at\": \"2026-11-22T03:18:03.137414+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"read_rc\": 1, \"resource_mode\": \"0o600\", \"decrypt_rc\": 0, \"decrypted_sha256\": \"c5c183c96b1eb3e0114bdf0d41524e68fdc4a4c112752c0cfaa01097dd3a15b3\", \"original_sha256\": \"c5c183c96b1eb3e0114bdf0d41524e68fdc4a4c112752c0cfaa01097dd3a15b3\", \"ciphertext_prefix\": \"U2FsdGVkX1/xsZPu09NTRw==\", \"plaintext_copy_exists\": true, \"cipher\": \"AES-256-CBC-PBKDF2 application file, not disk encryption\"}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+          "sha256": "540bd27e26ce90fa85958381833f1455c72a93337a68c30ee87fa79f749d1e2f"
+        }
+      ],
+      "collection_errors": [],
+      "is_synthetic": true,
+      "transport": "live",
+      "source_kind": "live-container-observation",
+      "probe_kind": "container-active-self-test",
+      "observation_available": true,
+      "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+    },
+    "owner": "IT Endpoint",
+    "applicable": true,
+    "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Endpoint; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+    "applicability_approved": false,
+    "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+    "status": "Partially Compliant",
+    "rationale": "Dữ liệu cho thấy endpoint_record_private là true, chứng tỏ labworker không đọc được hồ sơ tệp endpoint. Tuy nhiên, endpoint_file_encryption_verified là false, cho thấy tệp mẫu đã được giải mã đúng hash nhưng vẫn tồn tại bản plaintext phụ và đã mã hóa ổ đĩa, không thỏa mãn điều kiện lab. Do đó, hệ thống chỉ đạt trạng thái Partially Compliant.",
+    "evidence_ids": [
+      "A8LIVE-202b6f770c6e829d57f86742"
+    ],
+    "execution_source": "ollama-a8-evidence-judgment",
+    "attempts": [
+      {
+        "attempt": 1,
+        "status": "Partially Compliant",
+        "error": null,
+        "duration_ms": 10821.15
+      }
+    ],
+    "repaired": false,
+    "error": null,
+    "duration_ms": 10821.19
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "control_id": "A.7.14",
+  "model": "qwen2.5:7b",
+  "status": "Partially Compliant",
+  "error": null,
+  "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The record shows that LAB-DISK-01 was wiped and the verification was successful.\",\"source_files\":[\"disposal_register.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"There is no destruction certificate provided for LAB-DISK-02, and it is located in an unlocked store, which does not meet the criterion for physical destruction of failed disks.\",\"source_files\":[\"disposal_register.json\"]}]}",
+  "source_hashes": {
+    "disposal_register.json": "0d33cb26283bf185233585b786aea09023f0983ab6976383baa18527d120f5f0"
+  },
+  "checks": [
+    {
+      "criterion_index": 0,
+      "verdict": "met",
+      "rationale": "The record shows that LAB-DISK-01 was wiped and the verification was successful.",
+      "source_files": [
+        "disposal_register.json"
+      ]
+    },
+    {
+      "criterion_index": 1,
+      "verdict": "not_met",
+      "rationale": "There is no destruction certificate provided for LAB-DISK-02, and it is located in an unlocked store, which does not meet the criterion for physical destruction of failed disks.",
+      "source_files": [
+        "disposal_register.json"
+      ]
+    }
+  ],
+  "duration_ms": 3078
+}

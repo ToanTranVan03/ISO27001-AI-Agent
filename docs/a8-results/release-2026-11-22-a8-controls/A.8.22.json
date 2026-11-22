@@ -1,0 +1,91 @@
+{
+  "parent_report_sha256": "6576560a43f83b975c66fdbe77ea2baba93a3f41a102a84ce745835c6046744d",
+  "capture_sha256": "c438a71be61bfc9d7293bb6e89f86aec27f542f2eb0d382476291493af9f7d40",
+  "independent_validation": false,
+  "record": {
+    "control_id": "A.8.22",
+    "case_id": "A.8.22-mixed",
+    "name": "Segregation of networks",
+    "criteria_checks": [
+      "cross_zone_service_denied",
+      "business_zone_service_available"
+    ],
+    "criteria_details": [
+      {
+        "check": "cross_zone_service_denied",
+        "raw_source": "probe.json: employee_to_admin",
+        "pass_condition": "Client vùng nhân viên bị từ chối dịch vụ quản trị trong gate ứng dụng lab.",
+        "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+        "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+        "verification_kind": "container-active-self-test"
+      },
+      {
+        "check": "business_zone_service_available",
+        "raw_source": "probe.json: employee_to_business",
+        "pass_condition": "Client vùng nhân viên dùng được dịch vụ nghiệp vụ; không chứng minh VLAN/subnet isolation.",
+        "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+        "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+        "verification_kind": "container-active-self-test"
+      }
+    ],
+    "evidence": {
+      "evidence_id": "A8LIVE-f3e1ce6782b4d6cc1d8db2dc",
+      "source": "live-container://A.8.22",
+      "source_sha256": "f3e1ce6782b4d6cc1d8db2dc7a57d3047e99c46e7f9062d3ed1c5f15963ee75d",
+      "collected_at": "2026-11-22T03:18:06.323300+00:00",
+      "observed_at": "2026-11-22T03:18:06.308349+00:00",
+      "asset_id": "08b11382ce92",
+      "control_id": "A.8.22",
+      "facts": {
+        "cross_zone_service_denied": true,
+        "business_zone_service_available": false
+      },
+      "artifacts": [
+        {
+          "artifact": "observed_at",
+          "content": "2026-11-22T03:18:06.308349+00:00",
+          "sha256": "c3bcc972a608627ab2afea47163c4e1f9ff4c4f44ed39bf8487f777958ca0395"
+        },
+        {
+          "artifact": "asset_id",
+          "content": "08b11382ce92",
+          "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+        },
+        {
+          "artifact": "probe.json",
+          "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.22\", \"observed_at\": \"2026-11-22T03:18:06.308349+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"policy\": {\"deny_employee_admin\": true, \"business_available\": false}, \"employee_to_admin\": {\"response\": \"403 cross-zone denied\", \"tls_version\": null, \"source_address\": \"127.0.0.2\"}, \"employee_to_business\": {\"response\": \"503 business unavailable\", \"tls_version\": null, \"source_address\": \"127.0.0.2\"}, \"boundary\": \"Application zone gate on loopback; not VLAN, subnet or namespace isolation\"}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+          "sha256": "398c5804f13f673af38b14a0de49609b6706d4bbc65d6825a4a9624175e1abaa"
+        }
+      ],
+      "collection_errors": [],
+      "is_synthetic": true,
+      "transport": "live",
+      "source_kind": "live-container-observation",
+      "probe_kind": "container-active-self-test",
+      "observation_available": true,
+      "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+    },
+    "owner": "Network",
+    "applicable": true,
+    "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Network; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+    "applicability_approved": false,
+    "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+    "status": "Partially Compliant",
+    "rationale": "Dữ liệu bằng chứng cho thấy Client vùng nhân viên bị từ chối dịch vụ quản trị (cross_zone_service_denied: true), đáp ứng yêu cầu. Tuy nhiên, Client vùng nhân viên không thể sử dụng dịch vụ nghiệp vụ (business_zone_service_available: false), không đáp ứng yêu cầu. Do đó, hệ thống chỉ được đánh giá là Partially Compliant.",
+    "evidence_ids": [
+      "A8LIVE-f3e1ce6782b4d6cc1d8db2dc"
+    ],
+    "execution_source": "ollama-a8-evidence-judgment",
+    "attempts": [
+      {
+        "attempt": 1,
+        "status": "Partially Compliant",
+        "error": null,
+        "duration_ms": 6328.37
+      }
+    ],
+    "repaired": false,
+    "error": null,
+    "duration_ms": 6328.39
+  }
+}

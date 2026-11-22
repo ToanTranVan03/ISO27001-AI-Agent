@@ -1,0 +1,29 @@
+{
+  "control_id": "A.8.4",
+  "model": "qwen2.5:7b",
+  "status": "Non-Compliant",
+  "error": null,
+  "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"not_met\",\"rationale\":\"allow_force_push is set to true, which does not meet the requirement for branch protection.\",\"source_files\":[\"repository_settings.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The roles are not clearly defined as read/write. LAB-AUDIT is listed as read, but there is no explicit write role defined for any member.\",\"source_files\":[\"repository_settings.json\"]}] }",
+  "source_hashes": {
+    "repository_settings.json": "72acfc35d75426a2e0a12c418bb5bfd7ad31cfb19bd6fcd93402f57086e4e12d"
+  },
+  "checks": [
+    {
+      "criterion_index": 0,
+      "verdict": "not_met",
+      "rationale": "allow_force_push is set to true, which does not meet the requirement for branch protection.",
+      "source_files": [
+        "repository_settings.json"
+      ]
+    },
+    {
+      "criterion_index": 1,
+      "verdict": "not_met",
+      "rationale": "The roles are not clearly defined as read/write. LAB-AUDIT is listed as read, but there is no explicit write role defined for any member.",
+      "source_files": [
+        "repository_settings.json"
+      ]
+    }
+  ],
+  "duration_ms": 2953
+}

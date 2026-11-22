@@ -1,0 +1,29 @@
+{
+  "control_id": "A.7.9",
+  "model": "qwen2.5:7b",
+  "status": "Partially Compliant",
+  "error": null,
+  "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The handover record is present.\",\"source_files\":[\"offsite_assets.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The disk encryption status is not collected.\",\"source_files\":[\"offsite_assets.json\"]}]}",
+  "source_hashes": {
+    "offsite_assets.json": "8d2acefb8139254d961d5590061c3356c4ec27f6094f211bd713e3e441267dbb"
+  },
+  "checks": [
+    {
+      "criterion_index": 0,
+      "verdict": "met",
+      "rationale": "The handover record is present.",
+      "source_files": [
+        "offsite_assets.json"
+      ]
+    },
+    {
+      "criterion_index": 1,
+      "verdict": "not_met",
+      "rationale": "The disk encryption status is not collected.",
+      "source_files": [
+        "offsite_assets.json"
+      ]
+    }
+  ],
+  "duration_ms": 1860
+}

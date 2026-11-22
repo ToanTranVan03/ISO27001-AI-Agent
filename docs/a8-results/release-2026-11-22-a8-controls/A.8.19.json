@@ -1,0 +1,106 @@
+{
+  "parent_report_sha256": "6576560a43f83b975c66fdbe77ea2baba93a3f41a102a84ce745835c6046744d",
+  "capture_sha256": "c438a71be61bfc9d7293bb6e89f86aec27f542f2eb0d382476291493af9f7d40",
+  "independent_validation": false,
+  "record": {
+    "control_id": "A.8.19",
+    "case_id": "A.8.19-mixed",
+    "name": "Installation of software on operational systems",
+    "criteria_checks": [
+      "installation_restricted",
+      "installed_software_approved"
+    ],
+    "criteria_details": [
+      {
+        "check": "installation_restricted",
+        "raw_source": "install_access_rc",
+        "pass_condition": "labworker không có quyền ghi thư mục cài đặt (test -w trả 1).",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "live-container-observation"
+      },
+      {
+        "check": "installed_software_approved",
+        "raw_source": "installed.tsv + approved.tsv",
+        "pass_condition": "Inventory dpkg-query lúc thu khớp danh mục phê duyệt của lab; chưa xác nhận quản trị thay đổi ngoài lab.",
+        "missing_condition": "Thiếu tệp/trường, sai định dạng hoặc nguồn không đọc được => unknown; không tự coi là đạt.",
+        "fail_condition": "Có đủ dữ liệu nhưng không thỏa điều kiện pass.",
+        "verification_kind": "live-container-observation"
+      }
+    ],
+    "evidence": {
+      "evidence_id": "A8LIVE-eaedfdfbdeefe7cf82b45a53",
+      "source": "live-container://A.8.19",
+      "source_sha256": "eaedfdfbdeefe7cf82b45a53f7bd5f9565c71e58cdc1cf8aecfbbd62e1af5cfc",
+      "collected_at": "2026-11-22T03:18:05.805909+00:00",
+      "observed_at": "2026-11-22T03:18:05Z",
+      "asset_id": "08b11382ce92",
+      "control_id": "A.8.19",
+      "facts": {
+        "installation_restricted": true,
+        "installed_software_approved": false
+      },
+      "artifacts": [
+        {
+          "artifact": "observed_at",
+          "content": "2026-11-22T03:18:05Z",
+          "sha256": "5c72464797a850b75a5a880a86ceb4d991f87fb00ffcb64dcb730c06d3fce1c4"
+        },
+        {
+          "artifact": "asset_id",
+          "content": "08b11382ce92",
+          "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+        },
+        {
+          "artifact": "install_access_rc",
+          "content": "1",
+          "sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b"
+        },
+        {
+          "artifact": "install_stat",
+          "content": "755 root root",
+          "sha256": "e1020b4af2ee4d200daaa39d4fb9759b695b3ce568dc313410d924e83ef87ba3"
+        },
+        {
+          "artifact": "installed.tsv",
+          "content": "adduser\t3.134\napt\t2.6.2\nbase-files\t12.4+deb12u15\nbase-passwd\t3.6.1\nbash\t5.2.15-2+b13\nbsdutils\t1:2.38.1-5+deb12u3\nca-certificates\t20250419~deb12u2\ncoreutils\t9.1-1\ndash\t0.5.12-2\ndebconf\t1.5.82\ndebian-archive-keyring\t2023.3+deb12u2\ndebianutils\t5.7-0.5~deb12u1\ndiffutils\t1:3.8-4\ndpkg\t1.21.23\ne2fsprogs\t1.47.0-2+b2\nfindutils\t4.9.0-4\ngcc-12-base\t12.2.0-14+deb12u1\ngpgv\t2.2.40-1.1+deb12u2\ngrep\t3.8-5\ngzip\t1.12-1\nhostname\t3.23+nmu1\ninit-system-helpers\t1.65.2+deb12u1\nlibacl1\t2.3.1-3\nlibapt-pkg6.0\t2.6.2\nlibattr1\t1:2.5.1-4\nlibaudit-common\t1:3.0.9-1\nlibaudit1\t1:3.0.9-1\nlibblkid1\t2.38.1-5+deb12u3\nlibbz2-1.0\t1.0.8-5+b1\nlibc-bin\t2.36-9+deb12u14\nlibc6\t2.36-9+deb12u14\nlibcap-ng0\t0.8.3-1+b3\nlibcap2\t1:2.66-4+deb12u3+b1\nlibcom-err2\t1.47.0-2+b2\nlibcrypt1\t1:4.4.33-2\nlibdb5.3\t5.3.28+dfsg2-1\nlibdebconfclient0\t0.270\nlibext2fs2\t1.47.0-2+b2\nlibffi8\t3.4.4-1\nlibgcc-s1\t12.2.0-14+deb12u1\nlibgcrypt20\t1.10.1-3+deb12u1\nlibgdbm6\t1.23-3\nlibgmp10\t2:6.2.1+dfsg1-1.1\nlibgnutls30\t3.7.9-2+deb12u7\nlibgpg-error0\t1.46-1\nlibgssapi-krb5-2\t1.20.1-2+deb12u5\nlibhogweed6\t3.8.1-2\nlibidn2-0\t2.3.3-1+b1\nlibk5crypto3\t1.20.1-2+deb12u5\nlibkeyutils1\t1.6.3-2\nlibkrb5-3\t1.20.1-2+deb12u5\nlibkrb5support0\t1.20.1-2+deb12u5\nliblz4-1\t1.9.4-1\nliblzma5\t5.4.1-1+deb12u2\nlibmd0\t1.0.4-2\nlibmount1\t2.38.1-5+deb12u3\nlibncursesw6\t6.4-4\nlibnettle8\t3.8.1-2\nlibnsl2\t1.3.0-2\nlibp11-kit0\t0.24.1-2\nlibpam-modules\t1.5.2-6+deb12u2\nlibpam-modules-bin\t1.5.2-6+deb12u2\nlibpam-runtime\t1.5.2-6+deb12u2\nlibpam0g\t1.5.2-6+deb12u2\nlibpcre2-8-0\t10.42-1+deb12u2\nlibreadline8\t8.2-1.3\nlibseccomp2\t2.5.4-1+deb12u1\nlibselinux1\t3.4-1+b6\nlibsemanage-common\t3.4-1\nlibsemanage2\t3.4-1+b5\nlibsepol2\t3.4-2.1\nlibsmartcols1\t2.38.1-5+deb12u3\nlibsqlite3-0\t3.40.1-2+deb12u2\nlibss2\t1.47.0-2+b2\nlibssl3\t3.0.22-1~deb12u2\nlibstdc++6\t12.2.0-14+deb12u1\nlibsystemd0\t252.39-1~deb12u2\nlibtasn1-6\t4.19.0-2+deb12u1\nlibtinfo6\t6.4-4\nlibtirpc-common\t1.3.3+ds-1\nlibtirpc3\t1.3.3+ds-1\nlibudev1\t252.39-1~deb12u2\nlibunistring2\t1.0-2\nlibuuid1\t2.38.1-5+deb12u3\nlibxxhash0\t0.8.1-1\nlibzstd1\t1.5.4+dfsg2-5\nlogin\t1:4.13+dfsg1-1+deb12u2\nlogsave\t1.47.0-2+b2\nmawk\t1.3.4.20200120-3.1\nmount\t2.38.1-5+deb12u3\nncurses-base\t6.4-4\nncurses-bin\t6.4-4\nnetbase\t6.4\nopenssl\t3.0.22-1~deb12u2\npasswd\t1:4.13+dfsg1-1+deb12u2\nperl-base\t5.36.0-7+deb12u4\nreadline-common\t8.2-1.3\nsed\t4.9-1+deb12u1\nsysvinit-utils\t3.06-4\ntar\t1.34+dfsg-1.2+deb12u1\ntzdata\t2026f-0+deb12u1\nusr-is-merged\t37~deb12u1\nutil-linux\t2.38.1-5+deb12u3\nutil-linux-extra\t2.38.1-5+deb12u3\nzlib1g\t1:1.2.13.dfsg-1\n",
+          "sha256": "04718567ebeb17d0b4e1deed96777db6f0c32639d2cb6597d7d4a47bbdfd9acd"
+        },
+        {
+          "artifact": "approved.tsv",
+          "content": "not-the-installed-inventory\n",
+          "sha256": "8cd94d2e99243dd04cbec1511e6bbdb9e371d428c535de58fac9a652eb770fa1"
+        }
+      ],
+      "collection_errors": [],
+      "is_synthetic": true,
+      "transport": "live",
+      "source_kind": "live-container-observation",
+      "probe_kind": "read-only-resource-observation",
+      "observation_available": true,
+      "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+    },
+    "owner": "IT Operations",
+    "applicable": true,
+    "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Software; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+    "applicability_approved": false,
+    "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+    "status": "Partially Compliant",
+    "rationale": "Trong bằng chứng, kiểm tra 'installation_restricted' đã được thực hiện và đạt được kết quả đúng. Tuy nhiên, kiểm tra 'installed_software_approved' không đạt được kết quả đúng vì danh sách phần mềm đã cài đặt không khớp với danh sách phần mềm đã được phê duyệt. Điều này cho thấy có thể có sự thay đổi phần mềm không được quản lý hoặc phê duyệt.",
+    "evidence_ids": [
+      "A8LIVE-eaedfdfbdeefe7cf82b45a53"
+    ],
+    "execution_source": "ollama-a8-evidence-judgment",
+    "attempts": [
+      {
+        "attempt": 1,
+        "status": "Partially Compliant",
+        "error": null,
+        "duration_ms": 7418.26
+      }
+    ],
+    "repaired": false,
+    "error": null,
+    "duration_ms": 7418.27
+  }
+}

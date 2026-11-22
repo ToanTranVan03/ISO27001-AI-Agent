@@ -1,0 +1,29 @@
+{
+  "control_id": "A.6.3",
+  "model": "qwen2.5:7b",
+  "status": "Partially Compliant",
+  "error": null,
+  "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"All employees have completed the course as the number of completed employees (48) equals the required number (50) minus the pending employees (2).\",\"source_files\":[\"lms_export.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"There is no evidence of a test being conducted as the records do not include any information about a test or assessment results.\",\"source_files\":[\"lms_export.json\"]}] }",
+  "source_hashes": {
+    "lms_export.json": "f70013b57a59185769d06bad02d9b63dbc39e3b9fe66c46676c6fb1e3e01577b"
+  },
+  "checks": [
+    {
+      "criterion_index": 0,
+      "verdict": "met",
+      "rationale": "All employees have completed the course as the number of completed employees (48) equals the required number (50) minus the pending employees (2).",
+      "source_files": [
+        "lms_export.json"
+      ]
+    },
+    {
+      "criterion_index": 1,
+      "verdict": "not_met",
+      "rationale": "There is no evidence of a test being conducted as the records do not include any information about a test or assessment results.",
+      "source_files": [
+        "lms_export.json"
+      ]
+    }
+  ],
+  "duration_ms": 2953
+}

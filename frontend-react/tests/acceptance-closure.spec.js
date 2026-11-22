@@ -28,7 +28,7 @@ test('acceptance: exported A8 JSON, CSV and Markdown bind to the selected report
   const rows=csv.replace(/^\uFEFF/,'').split('\r\n');expect(rows).toHaveLength(doc.report.records.length+1);
   expect(rows[0]).toContain('"Khớp người đánh giá"');
   for(const record of doc.report.records){
-   const row=rows.slice(1).map(line=>line.slice(1,-1).split('\",\"')).find(c=>c[0]===record.control_id);
+   const row=rows.slice(1).map(line=>line.slice(1,-1).split('","')).find(c=>c[0]===record.control_id);
    expect(row).toBeTruthy();expect(row[1]).toBe(record.status||'');
    const human=doc.human_comparison.cases.find(c=>c.case_id===record.case_id);
    expect(row[4]).toBe(human?.expected||'');expect(row[5]).toBe(String(human?.correct??''));
@@ -74,5 +74,39 @@ test('acceptance: old run is read-only, rationale errors and warning acknowledgm
   await page.getByLabel('Lý do đánh giá mù').fill('UI MOCK: changed rationale must remove the prior warning acknowledgment.');await expect(ack).toHaveCount(0);
   await page.getByRole('button',{name:'Kiểm tra căn cứ trước khi nộp',exact:true}).click();await expect(ack).not.toBeChecked();
   expect(submits).toBe(1);
+ }finally{if(session)await page.request.post('/api/auth/logout',{headers:{Authorization:`Bearer ${session.token}`}});}
+});
+
+test('acceptance: source requests distinguish missing, unusable and corrupt originals without writing evidence',async({page})=>{
+ test.skip(!process.env.INITIAL_ADMIN_PASSWORD,'Local admin required');let session;
+ try{
+  session=await login(page,process.env.INITIAL_ADMIN_USERNAME||'admin',process.env.INITIAL_ADMIN_PASSWORD);
+  const path=`/api/assessments/${session.aid}/enterprise/scope56`,headers={Authorization:`Bearer ${session.token}`};
+  const before=await (await page.request.get(path,{headers})).json();
+  const mocked=structuredClone(before),controls=mocked.controls.slice(0,3);let writes=0;
+  mocked.source_requests.requests=controls.map((c,i)=>({control_id:c.control_id,name:`UI MOCK SOURCE ${i+1}`,
+   owner_role:'UI MOCK — no assignment',reason:['supply_missing_source','replace_unusable_source','restore_source_integrity'][i],
+   source_issues:i===2?[{evidence_id:'UI-MOCK-LOST-ORIGINAL',issues:['original_missing'],integrity_state:'failed'}]:[]}));
+  await page.route(`**${path}**`,async route=>{
+   const request=route.request();
+   if(request.method()!=='GET'){writes++;return route.abort('blockedbyclient');}
+   if(new URL(request.url()).pathname===path)return route.fulfill({json:mocked});
+   return route.continue();
+  });
+  await page.reload();
+  await page.getByText('Quản lý nguồn, tiêu chí và hồ sơ bàn giao',{exact:true}).click();
+  await page.getByText('Hồ sơ bàn giao và công cụ quản lý',{exact:true}).click();
+  await page.getByText('Nguồn cần bổ sung hoặc đối chiếu · 3 control',{exact:true}).click();
+  await expect(page.getByText('Chưa có nguồn ngoài preset — cần cung cấp hồ sơ gốc.',{exact:true})).toBeVisible();
+  await expect(page.getByText('Nội dung chưa dùng được — kiểm tra bản gốc/OCR và nộp lại.',{exact:true})).toBeVisible();
+  await expect(page.getByText('Bản lưu thiếu hoặc lệch kiểm tra toàn vẹn — đối chiếu bản gốc, không sửa hash để bỏ qua lỗi.',{exact:true})).toBeVisible();
+  await expect(page.getByText('UI-MOCK-LOST-ORIGINAL: original_missing',{exact:true})).toBeVisible();
+  await page.getByRole('button',{name:`${controls[2].control_id} · UI MOCK SOURCE 3`,exact:true}).click();
+  await expect(page).toHaveURL(new RegExp(`control=${controls[2].control_id.replaceAll('.','\\.')}`));
+  await expect(page.getByRole('heading',{name:`${controls[2].control_id} · ${controls[2].name}`,exact:true})).toBeVisible();
+  expect(writes).toBe(0);
+  const after=await (await page.request.get(path,{headers})).json();
+  expect(after.handoff_packet.sha256).toBe(before.handoff_packet.sha256);
+  expect(after.soa.fingerprint).toBe(before.soa.fingerprint);
  }finally{if(session)await page.request.post('/api/auth/logout',{headers:{Authorization:`Bearer ${session.token}`}});}
 });

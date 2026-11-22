@@ -1,0 +1,91 @@
+{
+  "parent_report_sha256": "6576560a43f83b975c66fdbe77ea2baba93a3f41a102a84ce745835c6046744d",
+  "capture_sha256": "c438a71be61bfc9d7293bb6e89f86aec27f542f2eb0d382476291493af9f7d40",
+  "independent_validation": false,
+  "record": {
+    "control_id": "A.8.20",
+    "case_id": "A.8.20-mixed",
+    "name": "Networks security",
+    "criteria_checks": [
+      "unapproved_source_denied",
+      "approved_network_flow_available"
+    ],
+    "criteria_details": [
+      {
+        "check": "unapproved_source_denied",
+        "raw_source": "probe.json: unapproved_source",
+        "pass_condition": "Dịch vụ TCP thực từ chối loopback source chưa cho phép; không phải firewall kernel.",
+        "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+        "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+        "verification_kind": "container-active-self-test"
+      },
+      {
+        "check": "approved_network_flow_available",
+        "raw_source": "probe.json: approved_source",
+        "pass_condition": "Nguồn TCP được phép truy cập thành công dịch vụ lab.",
+        "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+        "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+        "verification_kind": "container-active-self-test"
+      }
+    ],
+    "evidence": {
+      "evidence_id": "A8LIVE-4906e09d2cd42b51b211e9f5",
+      "source": "live-container://A.8.20",
+      "source_sha256": "4906e09d2cd42b51b211e9f5deb48178a454f3d2a321910bff8b17debf68a66c",
+      "collected_at": "2026-11-22T03:18:06.068369+00:00",
+      "observed_at": "2026-11-22T03:18:06.042965+00:00",
+      "asset_id": "08b11382ce92",
+      "control_id": "A.8.20",
+      "facts": {
+        "unapproved_source_denied": true,
+        "approved_network_flow_available": false
+      },
+      "artifacts": [
+        {
+          "artifact": "observed_at",
+          "content": "2026-11-22T03:18:06.042965+00:00",
+          "sha256": "ed09d89bec0fcbe446cd27b7d8d338d290453e2d4eb8da61004a8326ef4f60ff"
+        },
+        {
+          "artifact": "asset_id",
+          "content": "08b11382ce92",
+          "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+        },
+        {
+          "artifact": "probe.json",
+          "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.20\", \"observed_at\": \"2026-11-22T03:18:06.042965+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"policy\": {\"denied_sources\": [\"127.0.0.2\"], \"approved_flow\": false}, \"unapproved_source\": {\"response\": \"403 source denied\", \"tls_version\": null, \"source_address\": \"127.0.0.2\"}, \"approved_source\": {\"response\": \"503 approved flow unavailable\", \"tls_version\": null, \"source_address\": \"127.0.0.1\"}, \"boundary\": \"Application source ACL on actual loopback TCP, not kernel firewall\"}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+          "sha256": "fe8ba5831e303fada5f90d1b5fde232f2002cd2314c55c58d965a4f78de9a9cd"
+        }
+      ],
+      "collection_errors": [],
+      "is_synthetic": true,
+      "transport": "live",
+      "source_kind": "live-container-observation",
+      "probe_kind": "container-active-self-test",
+      "observation_available": true,
+      "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+    },
+    "owner": "Network",
+    "applicable": true,
+    "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Network; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+    "applicability_approved": false,
+    "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+    "status": "Partially Compliant",
+    "rationale": "Dịch vụ TCP từ chối nguồn không được chấp thuận (unapproved_source_denied) là đúng, nhưng nguồn được chấp thuận không thể truy cập dịch vụ lab (approved_network_flow_available) là sai. Điều này cho thấy có vấn đề với cấu hình hoặc thực thi chính sách mạng, cần điều chỉnh để đảm bảo cả hai tiêu chí đều được đáp ứng.",
+    "evidence_ids": [
+      "A8LIVE-4906e09d2cd42b51b211e9f5"
+    ],
+    "execution_source": "ollama-a8-evidence-judgment",
+    "attempts": [
+      {
+        "attempt": 1,
+        "status": "Partially Compliant",
+        "error": null,
+        "duration_ms": 6618.66
+      }
+    ],
+    "repaired": false,
+    "error": null,
+    "duration_ms": 6618.68
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "parent_report_sha256": "6576560a43f83b975c66fdbe77ea2baba93a3f41a102a84ce745835c6046744d",
+  "capture_sha256": "c438a71be61bfc9d7293bb6e89f86aec27f542f2eb0d382476291493af9f7d40",
+  "independent_validation": false,
+  "record": {
+    "control_id": "A.8.32",
+    "case_id": "A.8.32-mixed",
+    "name": "Change management",
+    "criteria_checks": [
+      "change_bound_to_current_release",
+      "rollback_restores_release"
+    ],
+    "criteria_details": [
+      {
+        "check": "change_bound_to_current_release",
+        "raw_source": "probe.json: approval + current_release_sha256",
+        "pass_condition": "Bản ghi CAB-LAB gắn đúng hash release; approval do lab dựng, chưa có người thật duyệt.",
+        "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+        "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+        "verification_kind": "container-active-self-test"
+      },
+      {
+        "check": "rollback_restores_release",
+        "raw_source": "probe.json: rollback_rc + restored_sha256 + expected_release_sha256",
+        "pass_condition": "Thao tác copy rollback thực khôi phục đúng nội dung release đã đăng ký.",
+        "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+        "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+        "verification_kind": "container-active-self-test"
+      }
+    ],
+    "evidence": {
+      "evidence_id": "A8LIVE-19ccebfbf319beb546371044",
+      "source": "live-container://A.8.32",
+      "source_sha256": "19ccebfbf319beb546371044962c9f2431bf3bb33b16346af3c54fc6d708f4a5",
+      "collected_at": "2026-11-22T03:18:06.881862+00:00",
+      "observed_at": "2026-11-22T03:18:06.860088+00:00",
+      "asset_id": "08b11382ce92",
+      "control_id": "A.8.32",
+      "facts": {
+        "change_bound_to_current_release": true,
+        "rollback_restores_release": false
+      },
+      "artifacts": [
+        {
+          "artifact": "observed_at",
+          "content": "2026-11-22T03:18:06.860088+00:00",
+          "sha256": "f3423716935d8fc599e24e6dcb3a904325ccc7506fcad5f85ae936d1da12ccdd"
+        },
+        {
+          "artifact": "asset_id",
+          "content": "08b11382ce92",
+          "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+        },
+        {
+          "artifact": "probe.json",
+          "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.32\", \"observed_at\": \"2026-11-22T03:18:06.860088+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"approval\": {\"ticket\": \"CAB-LAB-032\", \"sha256\": \"2d22208d4ca5d4c8c9ac7ec29c32bc7e48c9fd0eccdd9ef700a5c683b6f6cd82\"}, \"current_release_sha256\": \"2d22208d4ca5d4c8c9ac7ec29c32bc7e48c9fd0eccdd9ef700a5c683b6f6cd82\", \"rollback_rc\": 0, \"restored_sha256\": \"f78aba6dbe6b8bdf6d4ca9d4c2a1b382b9275d3a0515c9431d803fe126c92cbc\", \"expected_release_sha256\": \"2d22208d4ca5d4c8c9ac7ec29c32bc7e48c9fd0eccdd9ef700a5c683b6f6cd82\", \"approval_source\": \"Authored lab change record, not human sign-off\"}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+          "sha256": "114f1d316597b92bf7343ceb5d9fb1a36e14a413d2d80e7b57098ea942d51ce3"
+        }
+      ],
+      "collection_errors": [],
+      "is_synthetic": true,
+      "transport": "live",
+      "source_kind": "live-container-observation",
+      "probe_kind": "container-active-self-test",
+      "observation_available": true,
+      "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+    },
+    "owner": "IT Operations",
+    "applicable": true,
+    "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Change; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+    "applicability_approved": false,
+    "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+    "status": "Partially Compliant",
+    "rationale": "Thao tác copy rollback không thực hiện khôi phục đúng nội dung release đã đăng ký, dẫn đến không thỏa mãn tiêu chí 'rollback_restores_release'. Tuy nhiên, bản ghi CAB-LAB gắn đúng hash release và approval do lab dựng, chưa có người thật duyệt, thỏa mãn tiêu chí 'change_bound_to_current_release'.",
+    "evidence_ids": [
+      "A8LIVE-19ccebfbf319beb546371044"
+    ],
+    "execution_source": "ollama-a8-evidence-judgment",
+    "attempts": [
+      {
+        "attempt": 1,
+        "status": "Partially Compliant",
+        "error": null,
+        "duration_ms": 6542.21
+      }
+    ],
+    "repaired": false,
+    "error": null,
+    "duration_ms": 6542.23
+  }
+}

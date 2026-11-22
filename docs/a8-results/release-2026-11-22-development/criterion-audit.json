@@ -1,0 +1,1693 @@
+{
+  "protocol": "development-criterion-audit-v1",
+  "run_id": "066bd029-1904-5ba2-acea-cffa086f5c7f",
+  "bundle_sha256": "9a4277bc02ab2df4552f871ec8c621445126f69dc820c9575456c865fed8d588",
+  "report_sha256": "dcd09ffb8324d66ed55fbd607ffe47f9266a936661ad9df9bbd0fa1d75377dec",
+  "is_synthetic": true,
+  "independent_validation": false,
+  "key_authority": "ASSISTANT_DESIGNER_NOT_PROFESSIONALLY_VALIDATED",
+  "key_binding": "FROZEN_BEFORE_RUN",
+  "designer_reference_sha256": "9fa574e94d42372c1699ddc625dd19255a9eb3b1a99df00373d2be5cf16267da",
+  "key_matches_current": true,
+  "result_stage": "first_attempt",
+  "controls_audited": 38,
+  "pending_controls": [],
+  "controls_with_status_difference": 15,
+  "controls_with_criterion_difference": 18,
+  "differing_criteria": 19,
+  "categories": {
+    "key_not_met_model_met": 1,
+    "other_verdict_difference": 7,
+    "key_met_model_unknown": 6,
+    "key_unknown_model_not_met": 5
+  },
+  "invalid_results": [],
+  "controls": [
+    {
+      "control_id": "A.6.1",
+      "name": "Screening",
+      "designer_status": "Partially Compliant",
+      "model_status": "Partially Compliant",
+      "status_differs": false,
+      "error": null,
+      "criteria": [
+        {
+          "criterion_index": 0,
+          "criterion": "Tồn tại hồ sơ kiểm tra lý lịch",
+          "designer_verdict": "met",
+          "model_verdict": "met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The artifact contains a record of a background check that was completed on 2026-09-28, indicating the existence of a background check record.",
+          "citations": [
+            {
+              "filename": "screening.json",
+              "sha256": "76fc96ae2258c6bc6a83011236d1b0764da2a4cc3c76519babac67799056ecc4"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "criterion": "Có xác nhận từ bộ phận nhân sự (HR)",
+          "designer_verdict": "not_met",
+          "model_verdict": "not_met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "There is no confirmation from the HR department as the 'confirmed_by' field is null and the state is 'draft' in the HR confirmation record.",
+          "citations": [
+            {
+              "filename": "screening.json",
+              "sha256": "76fc96ae2258c6bc6a83011236d1b0764da2a4cc3c76519babac67799056ecc4"
+            }
+          ]
+        }
+      ],
+      "differing_criteria": 0,
+      "review_state": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "control_id": "A.6.2",
+      "name": "Terms and conditions of employment",
+      "designer_status": "Partially Compliant",
+      "model_status": "Partially Compliant",
+      "status_differs": false,
+      "error": null,
+      "criteria": [
+        {
+          "criterion_index": 0,
+          "criterion": "Hợp đồng lao động có điều khoản an toàn thông tin",
+          "designer_verdict": "met",
+          "model_verdict": "met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The contract includes a security clause regarding the protection of confidential data, reporting incidents, returning assets, and retaining confidentiality after termination.",
+          "citations": [
+            {
+              "filename": "contract.json",
+              "sha256": "86a8679e8c1b3739a2882ccb77936907cc74cde9d2b4718996f7c8eefb573eb9"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "criterion": "Nhân viên đã ký xác nhận",
+          "designer_verdict": "not_met",
+          "model_verdict": "not_met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The employee has not yet signed the contract as indicated by the null value in the 'signed_on' field for the employee party.",
+          "citations": [
+            {
+              "filename": "contract.json",
+              "sha256": "86a8679e8c1b3739a2882ccb77936907cc74cde9d2b4718996f7c8eefb573eb9"
+            }
+          ]
+        }
+      ],
+      "differing_criteria": 0,
+      "review_state": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "control_id": "A.6.3",
+      "name": "Information security awareness, education and training",
+      "designer_status": "Partially Compliant",
+      "model_status": "Partially Compliant",
+      "status_differs": false,
+      "error": null,
+      "criteria": [
+        {
+          "criterion_index": 0,
+          "criterion": "Tỷ lệ nhân sự hoàn thành khóa học đạt 100%",
+          "designer_verdict": "not_met",
+          "model_verdict": "met",
+          "differs": true,
+          "category": "key_not_met_model_met",
+          "category_label": "Khóa thiết kế ghi không đạt, model ghi đạt",
+          "model_rationale": "All employees have completed the course as the number of completed employees (48) equals the required number (50) minus the pending employees (2).",
+          "citations": [
+            {
+              "filename": "lms_export.json",
+              "sha256": "f70013b57a59185769d06bad02d9b63dbc39e3b9fe66c46676c6fb1e3e01577b"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "criterion": "Có bài kiểm tra đánh giá nhận thức",
+          "designer_verdict": "met",
+          "model_verdict": "not_met",
+          "differs": true,
+          "category": "other_verdict_difference",
+          "category_label": "Khác kết quả tiêu chí giữa model và khóa thiết kế",
+          "model_rationale": "There is no evidence of a test being conducted as the records do not include any information about a test or assessment results.",
+          "citations": [
+            {
+              "filename": "lms_export.json",
+              "sha256": "f70013b57a59185769d06bad02d9b63dbc39e3b9fe66c46676c6fb1e3e01577b"
+            }
+          ]
+        }
+      ],
+      "differing_criteria": 2,
+      "review_state": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "control_id": "A.6.4",
+      "name": "Disciplinary process",
+      "designer_status": "Compliant",
+      "model_status": "Insufficient Evidence",
+      "status_differs": true,
+      "error": null,
+      "criteria": [
+        {
+          "criterion_index": 0,
+          "criterion": "Có tài liệu quy trình xử lý kỷ luật đã ban hành",
+          "designer_verdict": "met",
+          "model_verdict": "met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The artifact 'discipline_policy.json' shows that a discipline policy document (LAB-HR-DISCIPLINE-1) has been published and is in effect on 2026-10-01.",
+          "citations": [
+            {
+              "filename": "discipline_policy.json",
+              "sha256": "0de370c95839ce63e05fb96e2f7df2002506644be35a5175fde05b041fe1ae38"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "criterion": "Được truyền đạt đến toàn bộ nhân viên",
+          "designer_verdict": "met",
+          "model_verdict": "unknown",
+          "differs": true,
+          "category": "key_met_model_unknown",
+          "category_label": "Khóa thiết kế ghi đạt, model yêu cầu thêm bằng chứng",
+          "model_rationale": "While the policy document has been published, there is no explicit record of it being distributed to all employees.",
+          "citations": [
+            {
+              "filename": "discipline_policy.json",
+              "sha256": "0de370c95839ce63e05fb96e2f7df2002506644be35a5175fde05b041fe1ae38"
+            }
+          ]
+        }
+      ],
+      "differing_criteria": 1,
+      "review_state": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "control_id": "A.6.5",
+      "name": "Responsibilities after termination or change of employment",
+      "designer_status": "Insufficient Evidence",
+      "model_status": "Insufficient Evidence",
+      "status_differs": false,
+      "error": null,
+      "criteria": [
+        {
+          "criterion_index": 0,
+          "criterion": "Có checklist thu hồi tài sản",
+          "designer_verdict": "met",
+          "model_verdict": "not_met",
+          "differs": true,
+          "category": "other_verdict_difference",
+          "category_label": "Khác kết quả tiêu chí giữa model và khóa thiết kế",
+          "model_rationale": "The 'access_revocation_export' is not_collected due to IAM audit export not being supplied.",
+          "citations": [
+            {
+              "filename": "offboarding.json",
+              "sha256": "1de7dfe37fc6382f20b444a7c1875a92cc807ee06b1588c451e1b259a81bc07a"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "criterion": "Biên bản xác nhận cắt quyền truy cập hệ thống",
+          "designer_verdict": "unknown",
+          "model_verdict": "unknown",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The 'access_revocation_export' is not_collected, making the 'Biên bản xác nhận cắt quyền truy cập hệ thống' status unknown.",
+          "citations": [
+            {
+              "filename": "offboarding.json",
+              "sha256": "1de7dfe37fc6382f20b444a7c1875a92cc807ee06b1588c451e1b259a81bc07a"
+            }
+          ]
+        }
+      ],
+      "differing_criteria": 1,
+      "review_state": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "control_id": "A.6.6",
+      "name": "Confidentiality or non-disclosure agreements",
+      "designer_status": "Partially Compliant",
+      "model_status": "Insufficient Evidence",
+      "status_differs": true,
+      "error": null,
+      "criteria": [
+        {
+          "criterion_index": 0,
+          "criterion": "Danh sách nhân sự/đối tác đã ký NDA",
+          "designer_verdict": "met",
+          "model_verdict": "met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The records show that both EMP-001 and LAB-VENDOR-01 have signed NDAs, with EMP-001's NDA expiring on 2025-12-31 and LAB-VENDOR-01's NDA also expiring on 2025-12-31.",
+          "citations": [
+            {
+              "filename": "nda_register.json",
+              "sha256": "5a68f08680e07c831366f4854f77e6e98d1ec32745437d1d98ae58398848b6eb"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "criterion": "Văn bản NDA còn hiệu lực",
+          "designer_verdict": "not_met",
+          "model_verdict": "unknown",
+          "differs": true,
+          "category": "other_verdict_difference",
+          "category_label": "Khác kết quả tiêu chí giữa model và khóa thiết kế",
+          "model_rationale": "The records do not provide information on the current validity of the NDAs beyond their expiration dates. There is no explicit mention of whether the NDAs are still effective after their expiration dates.",
+          "citations": [
+            {
+              "filename": "nda_register.json",
+              "sha256": "5a68f08680e07c831366f4854f77e6e98d1ec32745437d1d98ae58398848b6eb"
+            }
+          ]
+        }
+      ],
+      "differing_criteria": 1,
+      "review_state": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "control_id": "A.6.7",
+      "name": "Remote working",
+      "designer_status": "Non-Compliant",
+      "model_status": "Non-Compliant",
+      "status_differs": false,
+      "error": null,
+      "criteria": [
+        {
+          "criterion_index": 0,
+          "criterion": "Có chính sách remote work",
+          "designer_verdict": "not_met",
+          "model_verdict": "not_met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The policy is in draft state and not published, indicating no official remote work policy.",
+          "citations": [
+            {
+              "filename": "remote_configuration.json",
+              "sha256": "0fa0a02f2f0ce6b827ebbfab31529a56ea1b8b68abea491611e16903a7e1efbf"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "criterion": "Thiết bị từ xa được cài đặt bảo mật và VPN",
+          "designer_verdict": "not_met",
+          "model_verdict": "not_met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The endpoint uses plain HTTP for remote transport and has antivirus disabled, indicating lack of security measures.",
+          "citations": [
+            {
+              "filename": "remote_configuration.json",
+              "sha256": "0fa0a02f2f0ce6b827ebbfab31529a56ea1b8b68abea491611e16903a7e1efbf"
+            }
+          ]
+        }
+      ],
+      "differing_criteria": 0,
+      "review_state": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "control_id": "A.6.8",
+      "name": "Information security event reporting",
+      "designer_status": "Compliant",
+      "model_status": "Insufficient Evidence",
+      "status_differs": true,
+      "error": null,
+      "criteria": [
+        {
+          "criterion_index": 0,
+          "criterion": "Có kênh/biểu mẫu báo cáo sự cố",
+          "designer_verdict": "met",
+          "model_verdict": "met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The artifact contains a reporting form URL, indicating a channel for incident reporting.",
+          "citations": [
+            {
+              "filename": "incident_channel.json",
+              "sha256": "fc565ddd2ea365fb4ed3a555f6a7792e4db52f0ad112a16342fd454563b0d669"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "criterion": "Nhật ký ghi nhận sự kiện ATTT",
+          "designer_verdict": "met",
+          "model_verdict": "unknown",
+          "differs": true,
+          "category": "key_met_model_unknown",
+          "category_label": "Khóa thiết kế ghi đạt, model yêu cầu thêm bằng chứng",
+          "model_rationale": "While the artifact includes an event register, there is no explicit mention of an ATT&CK (Advanced Threat Detection and Knowledge) log, only a generic event register.",
+          "citations": [
+            {
+              "filename": "incident_channel.json",
+              "sha256": "fc565ddd2ea365fb4ed3a555f6a7792e4db52f0ad112a16342fd454563b0d669"
+            }
+          ]
+        }
+      ],
+      "differing_criteria": 1,
+      "review_state": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "control_id": "A.7.1",
+      "name": "Physical security perimeters",
+      "designer_status": "Partially Compliant",
+      "model_status": "Partially Compliant",
+      "status_differs": false,
+      "error": null,
+      "criteria": [
+        {
+          "criterion_index": 0,
+          "criterion": "Sơ đồ phân chia khu vực an ninh",
+          "designer_verdict": "met",
+          "model_verdict": "met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The 'zones' record explicitly states that the 'server-room' is marked as 'restricted', indicating a physical security perimeter.",
+          "citations": [
+            {
+              "filename": "perimeter_inspection.json",
+              "sha256": "ee148307130171c0f669add914b040da9e5fb0b19eefbbccaf878cce05b2f100"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "criterion": "Checklist kiểm tra cửa/khóa vật lý đạt yêu cầu",
+          "designer_verdict": "not_met",
+          "model_verdict": "not_met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The 'lock_test' for 'LAB-D1' in the 'doors' record is 'failed', indicating that the physical security check did not meet the required standard.",
+          "citations": [
+            {
+              "filename": "perimeter_inspection.json",
+              "sha256": "ee148307130171c0f669add914b040da9e5fb0b19eefbbccaf878cce05b2f100"
+            }
+          ]
+        }
+      ],
+      "differing_criteria": 0,
+      "review_state": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "control_id": "A.7.2",
+      "name": "Physical entry",
+      "designer_status": "Partially Compliant",
+      "model_status": "Partially Compliant",
+      "status_differs": false,
+      "error": null,
+      "criteria": [
+        {
+          "criterion_index": 0,
+          "criterion": "Có nhật ký quẹt thẻ/sinh trắc học",
+          "designer_verdict": "met",
+          "model_verdict": "met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The badge log contains records of card swipes and biometric access, including 'EMP-001' and 'EMP-002' entering the server room.",
+          "citations": [
+            {
+              "filename": "badge_log.json",
+              "sha256": "25051f3a60251e175c798c57393f0af30a8a87714445b2f2c5b5e22bbd7b081c"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "criterion": "Chỉ những người được cấp quyền mới được vào phòng Server",
+          "designer_verdict": "not_met",
+          "model_verdict": "not_met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The log does not explicitly show that only authorized personnel are allowed entry, as 'EMP-002' entered without an escort or additional authorization.",
+          "citations": [
+            {
+              "filename": "badge_log.json",
+              "sha256": "25051f3a60251e175c798c57393f0af30a8a87714445b2f2c5b5e22bbd7b081c"
+            }
+          ]
+        }
+      ],
+      "differing_criteria": 0,
+      "review_state": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "control_id": "A.7.3",
+      "name": "Securing offices, rooms and facilities",
+      "designer_status": "Compliant",
+      "model_status": "Insufficient Evidence",
+      "status_differs": true,
+      "error": null,
+      "criteria": [
+        {
+          "criterion_index": 0,
+          "criterion": "Biên bản kiểm tra an toàn định kỳ",
+          "designer_verdict": "met",
+          "model_verdict": "met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The inspection record shows no obstruction at the emergency exit, indicating compliance with safety checks.",
+          "citations": [
+            {
+              "filename": "office_inspection.json",
+              "sha256": "46f2e585238406ad36f5def4d45274b762c08743d8480507cf595cc0dbfb2959"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "criterion": "Quy định khóa cửa ngoài giờ làm việc",
+          "designer_verdict": "met",
+          "model_verdict": "unknown",
+          "differs": true,
+          "category": "key_met_model_unknown",
+          "category_label": "Khóa thiết kế ghi đạt, model yêu cầu thêm bằng chứng",
+          "model_rationale": "The artifact does not provide information on the key custodian's actions after 18:00 to confirm if the doors were locked as per the policy.",
+          "citations": [
+            {
+              "filename": "office_inspection.json",
+              "sha256": "46f2e585238406ad36f5def4d45274b762c08743d8480507cf595cc0dbfb2959"
+            }
+          ]
+        }
+      ],
+      "differing_criteria": 1,
+      "review_state": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "control_id": "A.7.4",
+      "name": "Physical security monitoring",
+      "designer_status": "Partially Compliant",
+      "model_status": "Insufficient Evidence",
+      "status_differs": true,
+      "error": null,
+      "criteria": [
+        {
+          "criterion_index": 0,
+          "criterion": "Hệ thống CCTV hoạt động",
+          "designer_verdict": "met",
+          "model_verdict": "met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The system is recording as of 2026-11-21T08:59:50+07:00, indicating it is operational.",
+          "citations": [
+            {
+              "filename": "cctv_status.json",
+              "sha256": "3060ba80ac718139a23155922f79ea29a1b123249e0c95f41e7acd04ab992158"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "criterion": "Thời gian lưu trữ video đáp ứng quy định",
+          "designer_verdict": "not_met",
+          "model_verdict": "unknown",
+          "differs": true,
+          "category": "other_verdict_difference",
+          "category_label": "Khác kết quả tiêu chí giữa model và khóa thiết kế",
+          "model_rationale": "The artifact does not provide information on the actual time period the video recordings are stored, only the policy and retention period.",
+          "citations": [
+            {
+              "filename": "cctv_status.json",
+              "sha256": "3060ba80ac718139a23155922f79ea29a1b123249e0c95f41e7acd04ab992158"
+            }
+          ]
+        }
+      ],
+      "differing_criteria": 1,
+      "review_state": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "control_id": "A.7.5",
+      "name": "Protecting against physical and environmental threats",
+      "designer_status": "Insufficient Evidence",
+      "model_status": "Partially Compliant",
+      "status_differs": true,
+      "error": null,
+      "criteria": [
+        {
+          "criterion_index": 0,
+          "criterion": "Biên bản nghiệm thu/bảo trì PCCC",
+          "designer_verdict": "unknown",
+          "model_verdict": "not_met",
+          "differs": true,
+          "category": "key_unknown_model_not_met",
+          "category_label": "Khóa thiết kế chưa rõ, model kết luận không đạt",
+          "model_rationale": "The 'Biên bản nghiệm thu/bảo trì PCCC' is not collected according to the records.",
+          "citations": [
+            {
+              "filename": "environmental_records.json",
+              "sha256": "153ae079b8327d3959726a90057d311c629ccb41976344ec8079b389beca15fa"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "criterion": "Cảm biến nhiệt độ, độ ẩm hoạt động",
+          "designer_verdict": "met",
+          "model_verdict": "met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The temperature and humidity sensor 'LAB-TEMP-01' is reported as 'responding' and measures a temperature of 23.4°C and humidity of 46% at the observed time.",
+          "citations": [
+            {
+              "filename": "environmental_records.json",
+              "sha256": "153ae079b8327d3959726a90057d311c629ccb41976344ec8079b389beca15fa"
+            }
+          ]
+        }
+      ],
+      "differing_criteria": 1,
+      "review_state": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "control_id": "A.7.6",
+      "name": "Working in secure areas",
+      "designer_status": "Compliant",
+      "model_status": "Partially Compliant",
+      "status_differs": true,
+      "error": null,
+      "criteria": [
+        {
+          "criterion_index": 0,
+          "criterion": "Nhật ký giám sát khách/nhà thầu",
+          "designer_verdict": "met",
+          "model_verdict": "met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The records show that visits to secure areas are being monitored, as evidenced by the visitor register entry for LAB-VISITOR-1.",
+          "citations": [
+            {
+              "filename": "visitor_register.json",
+              "sha256": "0c8b8bec430def792b8febca32e53071028417288df4154d9b57eb14d23c4238"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "criterion": "Quy định cấm quay phim/chụp ảnh",
+          "designer_verdict": "met",
+          "model_verdict": "not_met",
+          "differs": true,
+          "category": "other_verdict_difference",
+          "category_label": "Khác kết quả tiêu chí giữa model và khóa thiết kế",
+          "model_rationale": "The records do not contain any explicit prohibition against photography or any other form of media capture in secure areas.",
+          "citations": [
+            {
+              "filename": "visitor_register.json",
+              "sha256": "0c8b8bec430def792b8febca32e53071028417288df4154d9b57eb14d23c4238"
+            }
+          ]
+        }
+      ],
+      "differing_criteria": 1,
+      "review_state": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "control_id": "A.7.7",
+      "name": "Clear desk and clear screen",
+      "designer_status": "Non-Compliant",
+      "model_status": "Non-Compliant",
+      "status_differs": false,
+      "error": null,
+      "criteria": [
+        {
+          "criterion_index": 0,
+          "criterion": "Biên bản kiểm tra bàn làm việc sạch",
+          "designer_verdict": "not_met",
+          "model_verdict": "not_met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "Unsecured papers observed on LAB-DESK-01 during inspection.",
+          "citations": [
+            {
+              "filename": "desk_endpoint_audit.json",
+              "sha256": "48ccf3a8e814176552b028ac4f80f8696800200ab0adbbb8e695dbcfd2b7fd6f"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "criterion": "Máy tính có cấu hình tự khóa màn hình",
+          "designer_verdict": "not_met",
+          "model_verdict": "not_met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "Screen lock idle seconds is 0, indicating the screen is not configured to lock automatically.",
+          "citations": [
+            {
+              "filename": "desk_endpoint_audit.json",
+              "sha256": "48ccf3a8e814176552b028ac4f80f8696800200ab0adbbb8e695dbcfd2b7fd6f"
+            }
+          ]
+        }
+      ],
+      "differing_criteria": 0,
+      "review_state": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "control_id": "A.7.8",
+      "name": "Equipment siting and protection",
+      "designer_status": "Partially Compliant",
+      "model_status": "Partially Compliant",
+      "status_differs": false,
+      "error": null,
+      "criteria": [
+        {
+          "criterion_index": 0,
+          "criterion": "Danh mục tài sản có ghi nhận vị trí vật lý",
+          "designer_verdict": "met",
+          "model_verdict": "met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The asset record specifies the physical location of the critical equipment.",
+          "citations": [
+            {
+              "filename": "rack_inventory.json",
+              "sha256": "36d98981fe445a296bcb115fce78fa58f8b1f56578743358bd00955057c8e619"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "criterion": "Thiết bị quan trọng được đặt trong tủ rack có khóa",
+          "designer_verdict": "not_met",
+          "model_verdict": "not_met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The rack check indicates that the door lock for rack-01 is missing, which does not meet the requirement for locked cabinets.",
+          "citations": [
+            {
+              "filename": "rack_inventory.json",
+              "sha256": "36d98981fe445a296bcb115fce78fa58f8b1f56578743358bd00955057c8e619"
+            }
+          ]
+        }
+      ],
+      "differing_criteria": 0,
+      "review_state": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "control_id": "A.7.9",
+      "name": "Security of assets off-premises",
+      "designer_status": "Insufficient Evidence",
+      "model_status": "Partially Compliant",
+      "status_differs": true,
+      "error": null,
+      "criteria": [
+        {
+          "criterion_index": 0,
+          "criterion": "Biên bản bàn giao thiết bị mang ra ngoài",
+          "designer_verdict": "met",
+          "model_verdict": "met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The handover record is present.",
+          "citations": [
+            {
+              "filename": "offsite_assets.json",
+              "sha256": "8d2acefb8139254d961d5590061c3356c4ec27f6094f211bd713e3e441267dbb"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "criterion": "Thiết bị được mã hóa ổ cứng",
+          "designer_verdict": "unknown",
+          "model_verdict": "not_met",
+          "differs": true,
+          "category": "key_unknown_model_not_met",
+          "category_label": "Khóa thiết kế chưa rõ, model kết luận không đạt",
+          "model_rationale": "The disk encryption status is not collected.",
+          "citations": [
+            {
+              "filename": "offsite_assets.json",
+              "sha256": "8d2acefb8139254d961d5590061c3356c4ec27f6094f211bd713e3e441267dbb"
+            }
+          ]
+        }
+      ],
+      "differing_criteria": 1,
+      "review_state": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "control_id": "A.7.10",
+      "name": "Storage media",
+      "designer_status": "Compliant",
+      "model_status": "Compliant",
+      "status_differs": false,
+      "error": null,
+      "criteria": [
+        {
+          "criterion_index": 0,
+          "criterion": "Danh mục thiết bị lưu trữ (USB, ổ cứng rời)",
+          "designer_verdict": "met",
+          "model_verdict": "met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The records show that the inventory includes a USB device with a capacity of 32GB and a custodian, indicating that the storage media is documented.",
+          "citations": [
+            {
+              "filename": "removable_media.json",
+              "sha256": "ee1670358f7c64fd74d234e33957a243c2644b881e363bd0b3a8c4f5cd49e0fd"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "criterion": "Chính sách kiểm soát sử dụng USB",
+          "designer_verdict": "met",
+          "model_verdict": "met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The policy states that the default is 'deny' and specifies the exception process, logging, and state, indicating that a policy for controlling USB usage is in place.",
+          "citations": [
+            {
+              "filename": "removable_media.json",
+              "sha256": "ee1670358f7c64fd74d234e33957a243c2644b881e363bd0b3a8c4f5cd49e0fd"
+            }
+          ]
+        }
+      ],
+      "differing_criteria": 0,
+      "review_state": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "control_id": "A.7.11",
+      "name": "Supporting utilities",
+      "designer_status": "Insufficient Evidence",
+      "model_status": "Insufficient Evidence",
+      "status_differs": false,
+      "error": null,
+      "criteria": [
+        {
+          "criterion_index": 0,
+          "criterion": "Nhật ký bảo trì UPS, máy phát điện",
+          "designer_verdict": "unknown",
+          "model_verdict": "not_met",
+          "differs": true,
+          "category": "key_unknown_model_not_met",
+          "category_label": "Khóa thiết kế chưa rõ, model kết luận không đạt",
+          "model_rationale": "The criterion requires 'Nhật ký bảo trì UPS, máy phát điện', but 'ups_generator_records' is marked as 'not_collected'.",
+          "citations": [
+            {
+              "filename": "utility_maintenance.json",
+              "sha256": "bd06a1d8d4f45e73b7b6d419ce8c8b1444f8116e7fcebae6c5ea6ec1f5c1c820"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "criterion": "Biên bản kiểm tra hệ thống làm mát",
+          "designer_verdict": "unknown",
+          "model_verdict": "unknown",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The criterion requires 'Biên bản kiểm tra hệ thống làm mát', but 'cooling_inspections' is marked as 'not_collected'.",
+          "citations": [
+            {
+              "filename": "utility_maintenance.json",
+              "sha256": "bd06a1d8d4f45e73b7b6d419ce8c8b1444f8116e7fcebae6c5ea6ec1f5c1c820"
+            }
+          ]
+        }
+      ],
+      "differing_criteria": 1,
+      "review_state": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "control_id": "A.7.12",
+      "name": "Cabling security",
+      "designer_status": "Partially Compliant",
+      "model_status": "Insufficient Evidence",
+      "status_differs": true,
+      "error": null,
+      "criteria": [
+        {
+          "criterion_index": 0,
+          "criterion": "Hệ thống dây cáp được đi trong máng/ống bảo vệ",
+          "designer_verdict": "not_met",
+          "model_verdict": "not_met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The inspection found that the conduit was missing, leaving the cable exposed on the floor. This does not meet the criterion of cabling being protected in conduits.",
+          "citations": [
+            {
+              "filename": "cable_inspection.json",
+              "sha256": "00e04aa94dfb321393a3dd1dcd7ba2b86d3f440edc30bc0eb7e3a142b7e5d24b"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "criterion": "Biên bản kiểm tra hạ tầng vật lý",
+          "designer_verdict": "met",
+          "model_verdict": "unknown",
+          "differs": true,
+          "category": "key_met_model_unknown",
+          "category_label": "Khóa thiết kế ghi đạt, model yêu cầu thêm bằng chứng",
+          "model_rationale": "The artifact does not provide information about a physical infrastructure inspection record, only an inspection performed by the assistant.",
+          "citations": [
+            {
+              "filename": "cable_inspection.json",
+              "sha256": "00e04aa94dfb321393a3dd1dcd7ba2b86d3f440edc30bc0eb7e3a142b7e5d24b"
+            }
+          ]
+        }
+      ],
+      "differing_criteria": 1,
+      "review_state": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "control_id": "A.7.13",
+      "name": "Equipment maintenance",
+      "designer_status": "Compliant",
+      "model_status": "Insufficient Evidence",
+      "status_differs": true,
+      "error": null,
+      "criteria": [
+        {
+          "criterion_index": 0,
+          "criterion": "Có hợp đồng/lịch bảo trì",
+          "designer_verdict": "met",
+          "model_verdict": "met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The artifact contains a maintenance contract for LAB-SRV-01 with a schedule interval of 90 days, indicating that there is a contract/literal 'Có hợp đồng/lịch bảo trì' in place.",
+          "citations": [
+            {
+              "filename": "maintenance_register.json",
+              "sha256": "5dbbb461fbee963c6ccd6515cd3793ccdcc2affa9813186d3deb336fe0c3c94b"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "criterion": "Biên bản bảo trì thiết bị lưu hệ thống",
+          "designer_verdict": "met",
+          "model_verdict": "unknown",
+          "differs": true,
+          "category": "key_met_model_unknown",
+          "category_label": "Khóa thiết kế ghi đạt, model yêu cầu thêm bằng chứng",
+          "model_rationale": "The artifact does not contain any explicit 'Biên bản bảo trì thiết bị lưu hệ thống' (maintenance log) entries, only a register of completed and scheduled maintenance.",
+          "citations": [
+            {
+              "filename": "maintenance_register.json",
+              "sha256": "5dbbb461fbee963c6ccd6515cd3793ccdcc2affa9813186d3deb336fe0c3c94b"
+            }
+          ]
+        }
+      ],
+      "differing_criteria": 1,
+      "review_state": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "control_id": "A.7.14",
+      "name": "Secure disposal or re-use of equipment",
+      "designer_status": "Partially Compliant",
+      "model_status": "Partially Compliant",
+      "status_differs": false,
+      "error": null,
+      "criteria": [
+        {
+          "criterion_index": 0,
+          "criterion": "Biên bản xóa dữ liệu (wiping) đạt chuẩn",
+          "designer_verdict": "met",
+          "model_verdict": "met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The record shows that LAB-DISK-01 was wiped and the verification was successful.",
+          "citations": [
+            {
+              "filename": "disposal_register.json",
+              "sha256": "0d33cb26283bf185233585b786aea09023f0983ab6976383baa18527d120f5f0"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "criterion": "Biên bản tiêu hủy vật lý đối với ổ cứng hỏng",
+          "designer_verdict": "not_met",
+          "model_verdict": "not_met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "There is no destruction certificate provided for LAB-DISK-02, and it is located in an unlocked store, which does not meet the criterion for physical destruction of failed disks.",
+          "citations": [
+            {
+              "filename": "disposal_register.json",
+              "sha256": "0d33cb26283bf185233585b786aea09023f0983ab6976383baa18527d120f5f0"
+            }
+          ]
+        }
+      ],
+      "differing_criteria": 0,
+      "review_state": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "control_id": "A.8.4",
+      "name": "Access to source code",
+      "designer_status": "Partially Compliant",
+      "model_status": "Non-Compliant",
+      "status_differs": true,
+      "error": null,
+      "criteria": [
+        {
+          "criterion_index": 0,
+          "criterion": "Cấu hình Git bảo vệ branch (branch protection)",
+          "designer_verdict": "not_met",
+          "model_verdict": "not_met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "allow_force_push is set to true, which does not meet the requirement for branch protection.",
+          "citations": [
+            {
+              "filename": "repository_settings.json",
+              "sha256": "72acfc35d75426a2e0a12c418bb5bfd7ad31cfb19bd6fcd93402f57086e4e12d"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "criterion": "Phân quyền read/write kho mã nguồn rõ ràng",
+          "designer_verdict": "met",
+          "model_verdict": "not_met",
+          "differs": true,
+          "category": "other_verdict_difference",
+          "category_label": "Khác kết quả tiêu chí giữa model và khóa thiết kế",
+          "model_rationale": "The roles are not clearly defined as read/write. LAB-AUDIT is listed as read, but there is no explicit write role defined for any member.",
+          "citations": [
+            {
+              "filename": "repository_settings.json",
+              "sha256": "72acfc35d75426a2e0a12c418bb5bfd7ad31cfb19bd6fcd93402f57086e4e12d"
+            }
+          ]
+        }
+      ],
+      "differing_criteria": 1,
+      "review_state": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "control_id": "A.8.6",
+      "name": "Capacity management",
+      "designer_status": "Partially Compliant",
+      "model_status": "Partially Compliant",
+      "status_differs": false,
+      "error": null,
+      "criteria": [
+        {
+          "criterion_index": 0,
+          "criterion": "Hệ thống giám sát CPU/RAM/Disk đang thu thập dữ liệu",
+          "designer_verdict": "met",
+          "model_verdict": "met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The artifact contains metrics for CPU, RAM, and Disk usage, indicating that the system is monitoring these resources.",
+          "citations": [
+            {
+              "filename": "capacity_export.json",
+              "sha256": "ec2fa324f973e643b90ff1ec82da0a3a4b332da5b838753380f1a1851199c3b9"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "criterion": "Cấu hình cảnh báo khi quá ngưỡng dung lượng",
+          "designer_verdict": "not_met",
+          "model_verdict": "not_met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The artifact does not contain any alert rules, which means that there are no configured warning thresholds in place.",
+          "citations": [
+            {
+              "filename": "capacity_export.json",
+              "sha256": "ec2fa324f973e643b90ff1ec82da0a3a4b332da5b838753380f1a1851199c3b9"
+            }
+          ]
+        }
+      ],
+      "differing_criteria": 0,
+      "review_state": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "control_id": "A.8.11",
+      "name": "Data masking",
+      "designer_status": "Compliant",
+      "model_status": "Compliant",
+      "status_differs": false,
+      "error": null,
+      "criteria": [
+        {
+          "criterion_index": 0,
+          "criterion": "Cấu hình hoặc quy tắc che giấu dữ liệu PII",
+          "designer_verdict": "met",
+          "model_verdict": "met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The policy in the artifact specifies that the email and national_id columns are masked in the test environment, which meets the criterion.",
+          "citations": [
+            {
+              "filename": "masking_export.json",
+              "sha256": "4fbbb76efeacd25c5128381d510278592199222adf99b8ba498780d7d7eb94de"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "criterion": "Dữ liệu nhạy cảm bị ẩn trên môi trường không phải Production",
+          "designer_verdict": "met",
+          "model_verdict": "met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The sample data shows that the email and national_id fields are masked, indicating that sensitive data is hidden in the non-Production environment as required.",
+          "citations": [
+            {
+              "filename": "masking_export.json",
+              "sha256": "4fbbb76efeacd25c5128381d510278592199222adf99b8ba498780d7d7eb94de"
+            }
+          ]
+        }
+      ],
+      "differing_criteria": 0,
+      "review_state": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "control_id": "A.8.14",
+      "name": "Redundancy of information processing facilities",
+      "designer_status": "Insufficient Evidence",
+      "model_status": "Partially Compliant",
+      "status_differs": true,
+      "error": null,
+      "criteria": [
+        {
+          "criterion_index": 0,
+          "criterion": "Cấu hình High Availability (HA) hoặc Load Balancing",
+          "designer_verdict": "met",
+          "model_verdict": "met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The HA configuration is explicitly stated in the artifact, indicating the presence of a load balancer with backends.",
+          "citations": [
+            {
+              "filename": "ha_configuration.json",
+              "sha256": "13f617a9061f8460a722f83520a32f37e79bd31ebe2cc1bc9a020b137c35376d"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "criterion": "Tài liệu kiến trúc hệ thống dự phòng",
+          "designer_verdict": "unknown",
+          "model_verdict": "not_met",
+          "differs": true,
+          "category": "key_unknown_model_not_met",
+          "category_label": "Khóa thiết kế chưa rõ, model kết luận không đạt",
+          "model_rationale": "The artifact does not provide any information about the availability of the architecture document or the results of failover tests.",
+          "citations": [
+            {
+              "filename": "ha_configuration.json",
+              "sha256": "13f617a9061f8460a722f83520a32f37e79bd31ebe2cc1bc9a020b137c35376d"
+            }
+          ]
+        }
+      ],
+      "differing_criteria": 1,
+      "review_state": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "control_id": "A.8.18",
+      "name": "Use of privileged utility programs",
+      "designer_status": "Non-Compliant",
+      "model_status": "Insufficient Evidence",
+      "status_differs": true,
+      "error": null,
+      "criteria": [
+        {
+          "criterion_index": 0,
+          "criterion": "Giới hạn quyền thực thi các file SUID/SGID",
+          "designer_verdict": "not_met",
+          "model_verdict": "not_met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The scenario does not show any SUID/SGID files with restricted execution groups other than 'all users'.",
+          "citations": [
+            {
+              "filename": "utility_permissions.json",
+              "sha256": "c433bf231c3ca49b7231f378b555d0f79daa1f6ab7815e8c75dfe5c0c2956554"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "criterion": "Danh sách công cụ quản trị được cấp quyền hợp lý",
+          "designer_verdict": "not_met",
+          "model_verdict": "unknown",
+          "differs": true,
+          "category": "other_verdict_difference",
+          "category_label": "Khác kết quả tiêu chí giữa model và khóa thiết kế",
+          "model_rationale": "The scenario does not provide a list of authorized utility programs or any review tickets related to the authorization process.",
+          "citations": [
+            {
+              "filename": "utility_permissions.json",
+              "sha256": "c433bf231c3ca49b7231f378b555d0f79daa1f6ab7815e8c75dfe5c0c2956554"
+            }
+          ]
+        }
+      ],
+      "differing_criteria": 1,
+      "review_state": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "control_id": "A.8.21",
+      "name": "Security of network services",
+      "designer_status": "Insufficient Evidence",
+      "model_status": "Partially Compliant",
+      "status_differs": true,
+      "error": null,
+      "criteria": [
+        {
+          "criterion_index": 0,
+          "criterion": "Tài liệu yêu cầu SLA bảo mật với nhà cung cấp mạng",
+          "designer_verdict": "unknown",
+          "model_verdict": "not_met",
+          "differs": true,
+          "category": "key_unknown_model_not_met",
+          "category_label": "Khóa thiết kế chưa rõ, model kết luận không đạt",
+          "model_rationale": "The criterion states that there should be a security SLA with the network service provider, but the artifact does not provide this information.",
+          "citations": [
+            {
+              "filename": "network_service_records.json",
+              "sha256": "b73156e9f6d6a255b4c833f7dfe6f3746719d954e5aa6c22e858fbff2a1e8f34"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "criterion": "Cấu hình bảo mật dịch vụ mạng (DNS, VPN)",
+          "designer_verdict": "met",
+          "model_verdict": "met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The artifact includes configurations for DNS and VPN, which meet the requirement for configuring security services.",
+          "citations": [
+            {
+              "filename": "network_service_records.json",
+              "sha256": "b73156e9f6d6a255b4c833f7dfe6f3746719d954e5aa6c22e858fbff2a1e8f34"
+            }
+          ]
+        }
+      ],
+      "differing_criteria": 1,
+      "review_state": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "control_id": "A.8.23",
+      "name": "Web filtering",
+      "designer_status": "Compliant",
+      "model_status": "Compliant",
+      "status_differs": false,
+      "error": null,
+      "criteria": [
+        {
+          "criterion_index": 0,
+          "criterion": "Cấu hình Proxy/DNS lọc web",
+          "designer_verdict": "met",
+          "model_verdict": "met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "Proxy mode is explicitly configured and rule order includes deny-blocklist.",
+          "citations": [
+            {
+              "filename": "web_filter_config.json",
+              "sha256": "70c218383d9ca65af86beb10090f610787a2c5607f176afea745c4cd94aed799"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "criterion": "Danh sách blacklist tên miền/IP bị cấm",
+          "designer_verdict": "met",
+          "model_verdict": "met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "Blocklist contains entries for malware.example.invalid and phishing.example.invalid.",
+          "citations": [
+            {
+              "filename": "web_filter_config.json",
+              "sha256": "70c218383d9ca65af86beb10090f610787a2c5607f176afea745c4cd94aed799"
+            }
+          ]
+        }
+      ],
+      "differing_criteria": 0,
+      "review_state": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "control_id": "A.8.25",
+      "name": "Secure development life cycle",
+      "designer_status": "Partially Compliant",
+      "model_status": "Partially Compliant",
+      "status_differs": false,
+      "error": null,
+      "criteria": [
+        {
+          "criterion_index": 0,
+          "criterion": "Tài liệu quy trình SDLC",
+          "designer_verdict": "met",
+          "model_verdict": "met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The artifact contains a documented SDLC process with defined stages.",
+          "citations": [
+            {
+              "filename": "development_workflow.json",
+              "sha256": "a272b08fd2ff85ef9c180de64680e98c0034f97697ca0c940572624d4a5ef463"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "criterion": "Có pipeline CI/CD tích hợp quét bảo mật mã nguồn",
+          "designer_verdict": "not_met",
+          "model_verdict": "not_met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The CI/CD pipeline does not include any security scan jobs.",
+          "citations": [
+            {
+              "filename": "development_workflow.json",
+              "sha256": "a272b08fd2ff85ef9c180de64680e98c0034f97697ca0c940572624d4a5ef463"
+            }
+          ]
+        }
+      ],
+      "differing_criteria": 0,
+      "review_state": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "control_id": "A.8.26",
+      "name": "Application security requirements",
+      "designer_status": "Compliant",
+      "model_status": "Compliant",
+      "status_differs": false,
+      "error": null,
+      "criteria": [
+        {
+          "criterion_index": 0,
+          "criterion": "Tài liệu đặc tả yêu cầu bảo mật phần mềm (VD: theo OWASP ASVS)",
+          "designer_verdict": "met",
+          "model_verdict": "met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The artifact contains a detailed software security requirement document (SEC-01 and SEC-02) as per the specified format.",
+          "citations": [
+            {
+              "filename": "application_requirements.json",
+              "sha256": "7cb15ca4955c3f212e4071e1f7b3441e05d2815e671de9e9f5eb9695a982272f"
+            }
+          ]
+        }
+      ],
+      "differing_criteria": 0,
+      "review_state": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "control_id": "A.8.27",
+      "name": "Secure system architecture and engineering principles",
+      "designer_status": "Insufficient Evidence",
+      "model_status": "Insufficient Evidence",
+      "status_differs": false,
+      "error": null,
+      "criteria": [
+        {
+          "criterion_index": 0,
+          "criterion": "Tài liệu thiết kế kiến trúc bảo mật",
+          "designer_verdict": "met",
+          "model_verdict": "met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The design document 'LAB-ARCH-01' is present in the records.",
+          "citations": [
+            {
+              "filename": "architecture_and_deployment.json",
+              "sha256": "a6afc2bb305369dbb9d2c559b48742928a147862da4db91d84f35e40965ce6cd"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "criterion": "Bằng chứng triển khai theo kiến trúc đã duyệt",
+          "designer_verdict": "unknown",
+          "model_verdict": "unknown",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The availability of the deployment export is not collected, as stated in the records.",
+          "citations": [
+            {
+              "filename": "architecture_and_deployment.json",
+              "sha256": "a6afc2bb305369dbb9d2c559b48742928a147862da4db91d84f35e40965ce6cd"
+            }
+          ]
+        }
+      ],
+      "differing_criteria": 0,
+      "review_state": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "control_id": "A.8.28",
+      "name": "Secure coding",
+      "designer_status": "Partially Compliant",
+      "model_status": "Partially Compliant",
+      "status_differs": false,
+      "error": null,
+      "criteria": [
+        {
+          "criterion_index": 0,
+          "criterion": "Quy chuẩn lập trình an toàn (Secure Coding Guidelines)",
+          "designer_verdict": "met",
+          "model_verdict": "met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The secure coding guidelines are documented in the 'LAB-CODING-01' document, which includes rules such as parameterized SQL, validate input, and no hardcoded secrets.",
+          "citations": [
+            {
+              "filename": "coding_and_sast.json",
+              "sha256": "57c7354caef2142317827599b5edfdc73c296b8fa8e0a14e305dba6898d3ff66"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "criterion": "Kết quả quét mã tĩnh (SAST report) không có lỗi nghiêm trọng",
+          "designer_verdict": "not_met",
+          "model_verdict": "not_met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The SAST report contains critical findings, specifically an open SQL injection vulnerability in 'lab/example.py' at line 42, indicating the presence of a serious coding issue.",
+          "citations": [
+            {
+              "filename": "coding_and_sast.json",
+              "sha256": "57c7354caef2142317827599b5edfdc73c296b8fa8e0a14e305dba6898d3ff66"
+            }
+          ]
+        }
+      ],
+      "differing_criteria": 0,
+      "review_state": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "control_id": "A.8.29",
+      "name": "Security testing in development and acceptance",
+      "designer_status": "Partially Compliant",
+      "model_status": "Partially Compliant",
+      "status_differs": false,
+      "error": null,
+      "criteria": [
+        {
+          "criterion_index": 0,
+          "criterion": "Báo cáo kiểm thử động (DAST) hoặc Pentest report",
+          "designer_verdict": "met",
+          "model_verdict": "met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The artifact contains a DAST report (LAB-DAST-01) with findings, meeting the criterion.",
+          "citations": [
+            {
+              "filename": "acceptance_testing.json",
+              "sha256": "8f7413fa4296e454439fb75f4b99e50a4ff6da7e4ddd959498bbc22ed9a6b027"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "criterion": "Biên bản nghiệm thu bảo mật",
+          "designer_verdict": "not_met",
+          "model_verdict": "not_met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The security acceptance record does not show approval by any party, only that it is pending.",
+          "citations": [
+            {
+              "filename": "acceptance_testing.json",
+              "sha256": "8f7413fa4296e454439fb75f4b99e50a4ff6da7e4ddd959498bbc22ed9a6b027"
+            }
+          ]
+        }
+      ],
+      "differing_criteria": 0,
+      "review_state": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "control_id": "A.8.30",
+      "name": "Outsourced development",
+      "designer_status": "Compliant",
+      "model_status": "Insufficient Evidence",
+      "status_differs": true,
+      "error": null,
+      "criteria": [
+        {
+          "criterion_index": 0,
+          "criterion": "Hợp đồng thuê ngoài có điều khoản bảo mật",
+          "designer_verdict": "met",
+          "model_verdict": "met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The contract includes clauses on confidentiality, secure coding, vulnerability remediation, and right to review source.",
+          "citations": [
+            {
+              "filename": "supplier_delivery.json",
+              "sha256": "45657133fffda32ecba90da2f0d86c21cbe201aebd70e9b676b7a25676daa0c5"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "criterion": "Biên bản rà soát mã nguồn do bên gia công bàn giao",
+          "designer_verdict": "met",
+          "model_verdict": "unknown",
+          "differs": true,
+          "category": "key_met_model_unknown",
+          "category_label": "Khóa thiết kế ghi đạt, model yêu cầu thêm bằng chứng",
+          "model_rationale": "There is no explicit mention of a source code review log or record in the provided artifact.",
+          "citations": [
+            {
+              "filename": "supplier_delivery.json",
+              "sha256": "45657133fffda32ecba90da2f0d86c21cbe201aebd70e9b676b7a25676daa0c5"
+            }
+          ]
+        }
+      ],
+      "differing_criteria": 1,
+      "review_state": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "control_id": "A.8.31",
+      "name": "Separation of development, test and production environments",
+      "designer_status": "Partially Compliant",
+      "model_status": "Partially Compliant",
+      "status_differs": false,
+      "error": null,
+      "criteria": [
+        {
+          "criterion_index": 0,
+          "criterion": "Danh sách máy chủ/mạng phân định rõ các môi trường",
+          "designer_verdict": "met",
+          "model_verdict": "met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The environment networks are clearly defined with separate subnets for development and production.",
+          "citations": [
+            {
+              "filename": "environment_access.json",
+              "sha256": "b92fe8f867bb7618004b18e3a3dc84668a80ddfdca1635e2afc9b387dfb7d742"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "criterion": "Tài khoản dev không thể truy cập DB Production",
+          "designer_verdict": "not_met",
+          "model_verdict": "not_met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The development account (LAB-DEV-1) is allowed to perform a SELECT operation on the production database (LAB-PROD-DB), which violates the criterion of separation between development and production environments.",
+          "citations": [
+            {
+              "filename": "environment_access.json",
+              "sha256": "b92fe8f867bb7618004b18e3a3dc84668a80ddfdca1635e2afc9b387dfb7d742"
+            }
+          ]
+        }
+      ],
+      "differing_criteria": 0,
+      "review_state": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "control_id": "A.8.33",
+      "name": "Test information",
+      "designer_status": "Compliant",
+      "model_status": "Compliant",
+      "status_differs": false,
+      "error": null,
+      "criteria": [
+        {
+          "criterion_index": 0,
+          "criterion": "Quy định làm ẩn danh dữ liệu test",
+          "designer_verdict": "met",
+          "model_verdict": "met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The dataset is generated by 'LAB-FAKER-SEED-2026' and does not use a production export, indicating it is anonymized.",
+          "citations": [
+            {
+              "filename": "test_dataset_provenance.json",
+              "sha256": "34743483c47ccbf805a5e873b16b9de45cf978d551c63488a1531c3901281d64"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "criterion": "Bằng chứng dữ liệu trên môi trường test là dữ liệu giả lập (synthetic)",
+          "designer_verdict": "met",
+          "model_verdict": "met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The 'is_synthetic' field is set to true, confirming the data is synthetic.",
+          "citations": [
+            {
+              "filename": "test_dataset_provenance.json",
+              "sha256": "34743483c47ccbf805a5e873b16b9de45cf978d551c63488a1531c3901281d64"
+            }
+          ]
+        }
+      ],
+      "differing_criteria": 0,
+      "review_state": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "control_id": "A.8.34",
+      "name": "Protection of information systems during audit testing",
+      "designer_status": "Partially Compliant",
+      "model_status": "Partially Compliant",
+      "status_differs": false,
+      "error": null,
+      "criteria": [
+        {
+          "criterion_index": 0,
+          "criterion": "Tài khoản audit chỉ được cấp quyền Read-Only",
+          "designer_verdict": "met",
+          "model_verdict": "met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The audit account 'LAB-AUDIT' has been granted 'SELECT' privileges, which are read-only.",
+          "citations": [
+            {
+              "filename": "audit_access_plan.json",
+              "sha256": "f9469df91e0cc7ebd9a201a64dad7126dbceadd6674ea48154276b4016dab464"
+            }
+          ]
+        },
+        {
+          "criterion_index": 1,
+          "criterion": "Kế hoạch kiểm toán được phê duyệt trước khi chạy scan",
+          "designer_verdict": "not_met",
+          "model_verdict": "not_met",
+          "differs": false,
+          "category": null,
+          "category_label": null,
+          "model_rationale": "The scan plan has an approval state of 'pending' and no approval by a specific individual is recorded.",
+          "citations": [
+            {
+              "filename": "audit_access_plan.json",
+              "sha256": "f9469df91e0cc7ebd9a201a64dad7126dbceadd6674ea48154276b4016dab464"
+            }
+          ]
+        }
+      ],
+      "differing_criteria": 0,
+      "review_state": "PENDING_HUMAN_REVIEW"
+    }
+  ],
+  "note": "Đối chiếu khóa thiết kế do trợ lý soạn; khác biệt là mục cần rà, chưa chứng minh model hoặc khóa đúng/sai. Không thay nhãn, nguồn hoặc phê duyệt.",
+  "adapter_provenance": {
+    "protocol": "development-report-adapter-v1",
+    "original_report": "report.json",
+    "original_report_file_sha256": "1c85cb6152b33e0e8c711b0379367f28e1124ab391bcdfb32cc34149a4a1d6eb",
+    "key_file": "designer-key.json",
+    "key_file_sha256": "fad0794bca28a3e9b41a001b099f97f1b9ec8ee756ea586c09c5a0a5c78a350a",
+    "source_snapshot": "source-snapshot.json",
+    "note": "Post-run compatibility adapter only. Run ID is derived from original report hash after execution, not preregistered. The actual key file was sealed by the runner before model calls and verified against the original manifest. No model re-run, new labels or changed results."
+  }
+}

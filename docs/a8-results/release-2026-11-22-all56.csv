@@ -1,0 +1,57 @@
+﻿control_id,test_source,machine_status,error,internal_reference_kind,internal_reference_matches,human_confirmation
+A.6.1,assistant_development_fixture,Partially Compliant,,designer_key_NOT_HUMAN,True,PENDING
+A.6.2,assistant_development_fixture,Partially Compliant,,designer_key_NOT_HUMAN,True,PENDING
+A.6.3,assistant_development_fixture,Partially Compliant,,designer_key_NOT_HUMAN,True,PENDING
+A.6.4,assistant_development_fixture,Insufficient Evidence,,designer_key_NOT_HUMAN,False,PENDING
+A.6.5,assistant_development_fixture,Insufficient Evidence,,designer_key_NOT_HUMAN,True,PENDING
+A.6.6,assistant_development_fixture,Insufficient Evidence,,designer_key_NOT_HUMAN,False,PENDING
+A.6.7,assistant_development_fixture,Non-Compliant,,designer_key_NOT_HUMAN,True,PENDING
+A.6.8,assistant_development_fixture,Insufficient Evidence,,designer_key_NOT_HUMAN,False,PENDING
+A.7.1,assistant_development_fixture,Partially Compliant,,designer_key_NOT_HUMAN,True,PENDING
+A.7.2,assistant_development_fixture,Partially Compliant,,designer_key_NOT_HUMAN,True,PENDING
+A.7.3,assistant_development_fixture,Insufficient Evidence,,designer_key_NOT_HUMAN,False,PENDING
+A.7.4,assistant_development_fixture,Insufficient Evidence,,designer_key_NOT_HUMAN,False,PENDING
+A.7.5,assistant_development_fixture,Partially Compliant,,designer_key_NOT_HUMAN,False,PENDING
+A.7.6,assistant_development_fixture,Partially Compliant,,designer_key_NOT_HUMAN,False,PENDING
+A.7.7,assistant_development_fixture,Non-Compliant,,designer_key_NOT_HUMAN,True,PENDING
+A.7.8,assistant_development_fixture,Partially Compliant,,designer_key_NOT_HUMAN,True,PENDING
+A.7.9,assistant_development_fixture,Partially Compliant,,designer_key_NOT_HUMAN,False,PENDING
+A.7.10,assistant_development_fixture,Compliant,,designer_key_NOT_HUMAN,True,PENDING
+A.7.11,assistant_development_fixture,Insufficient Evidence,,designer_key_NOT_HUMAN,True,PENDING
+A.7.12,assistant_development_fixture,Insufficient Evidence,,designer_key_NOT_HUMAN,False,PENDING
+A.7.13,assistant_development_fixture,Insufficient Evidence,,designer_key_NOT_HUMAN,False,PENDING
+A.7.14,assistant_development_fixture,Partially Compliant,,designer_key_NOT_HUMAN,True,PENDING
+A.8.1,synthetic_live_lab,Partially Compliant,,same_snapshot_rules_NOT_HUMAN,True,PENDING
+A.8.2,synthetic_live_lab,Partially Compliant,,same_snapshot_rules_NOT_HUMAN,True,PENDING
+A.8.3,synthetic_live_lab,Partially Compliant,,same_snapshot_rules_NOT_HUMAN,True,PENDING
+A.8.4,assistant_development_fixture,Non-Compliant,,designer_key_NOT_HUMAN,False,PENDING
+A.8.5,synthetic_live_lab,Partially Compliant,,same_snapshot_rules_NOT_HUMAN,True,PENDING
+A.8.6,assistant_development_fixture,Partially Compliant,,designer_key_NOT_HUMAN,True,PENDING
+A.8.7,synthetic_live_lab,Partially Compliant,,same_snapshot_rules_NOT_HUMAN,True,PENDING
+A.8.8,synthetic_live_lab,Partially Compliant,,same_snapshot_rules_NOT_HUMAN,True,PENDING
+A.8.9,synthetic_live_lab,Partially Compliant,,same_snapshot_rules_NOT_HUMAN,True,PENDING
+A.8.10,synthetic_live_lab,Partially Compliant,,same_snapshot_rules_NOT_HUMAN,True,PENDING
+A.8.11,assistant_development_fixture,Compliant,,designer_key_NOT_HUMAN,True,PENDING
+A.8.12,synthetic_live_lab,Partially Compliant,,same_snapshot_rules_NOT_HUMAN,True,PENDING
+A.8.13,synthetic_live_lab,Partially Compliant,,same_snapshot_rules_NOT_HUMAN,True,PENDING
+A.8.14,assistant_development_fixture,Partially Compliant,,designer_key_NOT_HUMAN,False,PENDING
+A.8.15,synthetic_live_lab,Partially Compliant,,same_snapshot_rules_NOT_HUMAN,True,PENDING
+A.8.16,synthetic_live_lab,Partially Compliant,,same_snapshot_rules_NOT_HUMAN,True,PENDING
+A.8.17,synthetic_live_lab,Partially Compliant,,same_snapshot_rules_NOT_HUMAN,True,PENDING
+A.8.18,assistant_development_fixture,Insufficient Evidence,,designer_key_NOT_HUMAN,False,PENDING
+A.8.19,synthetic_live_lab,Partially Compliant,,same_snapshot_rules_NOT_HUMAN,True,PENDING
+A.8.20,synthetic_live_lab,Partially Compliant,,same_snapshot_rules_NOT_HUMAN,True,PENDING
+A.8.21,assistant_development_fixture,Partially Compliant,,designer_key_NOT_HUMAN,False,PENDING
+A.8.22,synthetic_live_lab,Partially Compliant,,same_snapshot_rules_NOT_HUMAN,True,PENDING
+A.8.23,assistant_development_fixture,Compliant,,designer_key_NOT_HUMAN,True,PENDING
+A.8.24,synthetic_live_lab,Partially Compliant,,same_snapshot_rules_NOT_HUMAN,True,PENDING
+A.8.25,assistant_development_fixture,Partially Compliant,,designer_key_NOT_HUMAN,True,PENDING
+A.8.26,assistant_development_fixture,Compliant,,designer_key_NOT_HUMAN,True,PENDING
+A.8.27,assistant_development_fixture,Insufficient Evidence,,designer_key_NOT_HUMAN,True,PENDING
+A.8.28,assistant_development_fixture,Partially Compliant,,designer_key_NOT_HUMAN,True,PENDING
+A.8.29,assistant_development_fixture,Partially Compliant,,designer_key_NOT_HUMAN,True,PENDING
+A.8.30,assistant_development_fixture,Insufficient Evidence,,designer_key_NOT_HUMAN,False,PENDING
+A.8.31,assistant_development_fixture,Partially Compliant,,designer_key_NOT_HUMAN,True,PENDING
+A.8.32,synthetic_live_lab,Partially Compliant,,same_snapshot_rules_NOT_HUMAN,True,PENDING
+A.8.33,assistant_development_fixture,Compliant,,designer_key_NOT_HUMAN,True,PENDING
+A.8.34,assistant_development_fixture,Partially Compliant,,designer_key_NOT_HUMAN,True,PENDING

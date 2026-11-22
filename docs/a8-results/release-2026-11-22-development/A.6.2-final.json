@@ -1,0 +1,29 @@
+{
+  "control_id": "A.6.2",
+  "model": "qwen2.5:7b",
+  "status": "Partially Compliant",
+  "error": null,
+  "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The contract includes a security clause regarding the protection of confidential data, reporting incidents, returning assets, and retaining confidentiality after termination.\",\"source_files\":[\"contract.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The employee has not yet signed the contract as indicated by the null value in the 'signed_on' field for the employee party.\",\"source_files\":[\"contract.json\"]}]}",
+  "source_hashes": {
+    "contract.json": "86a8679e8c1b3739a2882ccb77936907cc74cde9d2b4718996f7c8eefb573eb9"
+  },
+  "checks": [
+    {
+      "criterion_index": 0,
+      "verdict": "met",
+      "rationale": "The contract includes a security clause regarding the protection of confidential data, reporting incidents, returning assets, and retaining confidentiality after termination.",
+      "source_files": [
+        "contract.json"
+      ]
+    },
+    {
+      "criterion_index": 1,
+      "verdict": "not_met",
+      "rationale": "The employee has not yet signed the contract as indicated by the null value in the 'signed_on' field for the employee party.",
+      "source_files": [
+        "contract.json"
+      ]
+    }
+  ],
+  "duration_ms": 2641
+}

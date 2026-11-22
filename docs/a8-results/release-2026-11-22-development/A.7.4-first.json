@@ -1,0 +1,29 @@
+{
+  "control_id": "A.7.4",
+  "model": "qwen2.5:7b",
+  "status": "Insufficient Evidence",
+  "error": null,
+  "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The system is recording as of 2026-11-21T08:59:50+07:00, indicating it is operational.\",\"source_files\":[\"cctv_status.json\"]},{\"criterion_index\":1,\"verdict\":\"unknown\",\"rationale\":\"The artifact does not provide information on the actual time period the video recordings are stored, only the policy and retention period.\",\"source_files\":[\"cctv_status.json\"]}]}",
+  "source_hashes": {
+    "cctv_status.json": "3060ba80ac718139a23155922f79ea29a1b123249e0c95f41e7acd04ab992158"
+  },
+  "checks": [
+    {
+      "criterion_index": 0,
+      "verdict": "met",
+      "rationale": "The system is recording as of 2026-11-21T08:59:50+07:00, indicating it is operational.",
+      "source_files": [
+        "cctv_status.json"
+      ]
+    },
+    {
+      "criterion_index": 1,
+      "verdict": "unknown",
+      "rationale": "The artifact does not provide information on the actual time period the video recordings are stored, only the policy and retention period.",
+      "source_files": [
+        "cctv_status.json"
+      ]
+    }
+  ],
+  "duration_ms": 3016
+}

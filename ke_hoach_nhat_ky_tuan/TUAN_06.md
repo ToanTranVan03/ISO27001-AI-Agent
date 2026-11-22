@@ -24,6 +24,10 @@ Giữ phạm vi 56 control (8 A.6, 14 A.7, 34 A.8), ưu tiên kiểm định sâ
 
 Phần triển khai kỹ thuật đã hoàn thành trong tuần:
 
+- [x] Rà rubric 56 control/113 tiêu chí và lập ma trận nguồn/phiên bản cho người xác nhận; đọc lại API, xuất packet/CSV 56 dòng và phiếu nguồn, giữ xác nhận chuyên môn ở trạng thái chờ. [Báo cáo 22/11](../docs/HOAN_THIEN_TUAN_06_2026_11_22.md).
+- [x] Bổ sung so sánh hai báo cáo A.8 có kiểm hash, recipe, nguồn/lỗi/kết luận; không suy thay đổi trạng thái là khắc phục thành công hoặc sửa kết quả cũ.
+- [x] Bổ sung runner 38 hồ sơ chống ghi đè, chốt nguồn/khóa trước suy luận, lưu từng control và chỉ thử lại lỗi kỹ thuật; chạy Qwen lại đủ 18 + 38, xuất riêng hai nhóm và rà 19 sai khác tiêu chí.
+- [x] Kiểm chứng hồi quy phần nguồn mới bằng Edge: ba trạng thái, mã lỗi, mở đúng control và không ghi nguồn; 11 luồng cũ đạt, ca mới đạt sau sửa thao tác test mở khối cha (giữ báo cáo lỗi). Tổng 12 kịch bản qua hai lần chạy, 380 Python/14 JavaScript, lint/build đạt; [minh chứng 22/11](../docs/HOAN_THIEN_TUAN_06_2026_11_22.md).
 - [x] Kiểm tra nội dung nguồn trước suy luận, giữ dữ liệu cũ và yêu cầu nộp lại nguồn không dùng được.
 - [x] Trực quan hóa và thống nhất bốn màn hình; phân biệt kết quả, tiến độ, bằng chứng và thẩm định.
 - [x] Nối ngữ cảnh đợt/control/nhân viên/lượt nguồn giữa bốn màn hình; giữ mục đang xem khi tải lại hoặc Back/Forward, nhập nguồn A.8 dẫn về đúng hồ sơ và lọc nhân viên theo viện dẫn bằng chứng.
@@ -65,6 +69,7 @@ Các thông tin trên là **trạng thái bàn giao từ tuần 5**, không ph�
 
 | Ngày | Công việc | Kết quả / minh chứng |
 |---|---|---|
+| 22/11/2026 | Chạy lại và khóa sổ kỹ thuật theo checklist | Chốt snapshot rồi chạy 18 A.8 live và 38 hồ sơ mô phỏng bằng Qwen: 0 lỗi đầu/cuối; 18 A.8 một phần, bộ 38 khớp khóa phát triển 23/38, giữ 15 lệch tổng và 19 lệch tiêu chí. Export trạng thái 56, so sánh hai lượt, chuẩn bị phiếu rà rubric; API 39 bước/ba tài khoản và ghi thật database riêng đạt. Packet/rubric/chỉ số nghiệm thu chính trước–sau không đổi; xem [báo cáo và artifact 22/11](../docs/HOAN_THIEN_TUAN_06_2026_11_22.md). Tám mục nguồn/xác nhận bên ngoài vẫn mở |
 | 22/11/2026 | Làm rõ yêu cầu bổ sung/đối chiếu nguồn | Gói bàn giao và phiếu nguồn phân biệt thiếu hồ sơ, nội dung không dùng được và lỗi toàn vẹn; giữ mã bằng chứng/lỗi trong JSON/Markdown, hiển thị trên UI và mở đúng control. Nguồn hỏng vẫn được yêu cầu đối chiếu khi control còn nguồn khác dùng được; nguồn cũ chưa xác minh không bị coi là hỏng. 367 test Python, lint/build đạt; chưa kiểm thử trình duyệt thay đổi này. Không thay bằng chứng, nhãn, quyết định hay phê duyệt thật |
 | 18/11/2026 | Củng cố kiểm tra nội dung nguồn và đầu vào Agent | Chặn tài liệu quá ít/ký tự lặp khi nạp mới, lọc nguồn cũ trước suy luận, giữ lịch sử; thêm cảnh báo và việc yêu cầu nộp lại trên Phạm vi 56 |
 | 18/11/2026 | Kiểm chứng và rà nguồn A.6.2 | Nguồn 1 ký tự không đưa vào model; Mốc đầu: 253 test Python, 5 test JavaScript, lint/build đạt. Không coi ngưỡng văn bản là đủ bằng chứng tuân thủ |

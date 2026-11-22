@@ -1,0 +1,29 @@
+{
+  "control_id": "A.8.27",
+  "model": "qwen2.5:7b",
+  "status": "Insufficient Evidence",
+  "error": null,
+  "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The design document 'LAB-ARCH-01' is present in the records.\",\"source_files\":[\"architecture_and_deployment.json\"]},{\"criterion_index\":1,\"verdict\":\"unknown\",\"rationale\":\"The availability of the deployment export is not collected, as stated in the records.\",\"source_files\":[\"architecture_and_deployment.json\"]}]}",
+  "source_hashes": {
+    "architecture_and_deployment.json": "a6afc2bb305369dbb9d2c559b48742928a147862da4db91d84f35e40965ce6cd"
+  },
+  "checks": [
+    {
+      "criterion_index": 0,
+      "verdict": "met",
+      "rationale": "The design document 'LAB-ARCH-01' is present in the records.",
+      "source_files": [
+        "architecture_and_deployment.json"
+      ]
+    },
+    {
+      "criterion_index": 1,
+      "verdict": "unknown",
+      "rationale": "The availability of the deployment export is not collected, as stated in the records.",
+      "source_files": [
+        "architecture_and_deployment.json"
+      ]
+    }
+  ],
+  "duration_ms": 2625
+}

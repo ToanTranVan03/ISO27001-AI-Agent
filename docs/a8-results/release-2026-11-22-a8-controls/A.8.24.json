@@ -1,0 +1,91 @@
+{
+  "parent_report_sha256": "6576560a43f83b975c66fdbe77ea2baba93a3f41a102a84ce745835c6046744d",
+  "capture_sha256": "c438a71be61bfc9d7293bb6e89f86aec27f542f2eb0d382476291493af9f7d40",
+  "independent_validation": false,
+  "record": {
+    "control_id": "A.8.24",
+    "case_id": "A.8.24-mixed",
+    "name": "Use of cryptography",
+    "criteria_checks": [
+      "strong_tls_handshake_verified",
+      "private_key_access_restricted"
+    ],
+    "criteria_details": [
+      {
+        "check": "strong_tls_handshake_verified",
+        "raw_source": "probe.json: handshake_rc + handshake.tls_version",
+        "pass_condition": "Handshake xác minh chứng chỉ lab thành công với TLS 1.2/1.3.",
+        "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+        "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+        "verification_kind": "container-active-self-test"
+      },
+      {
+        "check": "private_key_access_restricted",
+        "raw_source": "probe.json: key_read_rc + key_mode",
+        "pass_condition": "labworker không đọc được private key và mode không cấp quyền group/other.",
+        "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+        "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+        "verification_kind": "container-active-self-test"
+      }
+    ],
+    "evidence": {
+      "evidence_id": "A8LIVE-52975d1fcc2c137b55e45559",
+      "source": "live-container://A.8.24",
+      "source_sha256": "52975d1fcc2c137b55e45559022863797e1c509f4cd291e83d6e0ffb3e8c12f0",
+      "collected_at": "2026-11-22T03:18:06.620202+00:00",
+      "observed_at": "2026-11-22T03:18:06.606309+00:00",
+      "asset_id": "08b11382ce92",
+      "control_id": "A.8.24",
+      "facts": {
+        "strong_tls_handshake_verified": true,
+        "private_key_access_restricted": false
+      },
+      "artifacts": [
+        {
+          "artifact": "observed_at",
+          "content": "2026-11-22T03:18:06.606309+00:00",
+          "sha256": "b37fca649779d28d67a932095f92f0e54076aee4c65bef977c91fb9a3b038e57"
+        },
+        {
+          "artifact": "asset_id",
+          "content": "08b11382ce92",
+          "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+        },
+        {
+          "artifact": "probe.json",
+          "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.24\", \"observed_at\": \"2026-11-22T03:18:06.606309+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"handshake\": {\"response\": \"200 secure lab service\", \"tls_version\": \"TLSv1.3\", \"source_address\": \"127.0.0.1\"}, \"handshake_rc\": 0, \"key_read_rc\": 0, \"key_mode\": \"0o644\", \"certificate_sha256\": \"47eb6867b79c15db9a45f40e108632197b1bd59db88623dfd3a7ad24a759fa2d\"}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+          "sha256": "b5ecd87d999db5380ca1a9a813deddd683a3681a42e876699a519337f5fa0f70"
+        }
+      ],
+      "collection_errors": [],
+      "is_synthetic": true,
+      "transport": "live",
+      "source_kind": "live-container-observation",
+      "probe_kind": "container-active-self-test",
+      "observation_available": true,
+      "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+    },
+    "owner": "Security",
+    "applicable": true,
+    "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Crypto; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+    "applicability_approved": false,
+    "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+    "status": "Partially Compliant",
+    "rationale": "Tiêu chí 'Use of cryptography' đã được đánh giá là đủ điều kiện cho hai kiểm tra: 'strong_tls_handshake_verified' và 'private_key_access_restricted'. Tuy nhiên, kiểm tra 'private_key_access_restricted' không thỏa mãn điều kiện lab, do đó toàn bộ tiêu chí này chỉ được đánh giá là Partially Compliant.",
+    "evidence_ids": [
+      "A8LIVE-52975d1fcc2c137b55e45559"
+    ],
+    "execution_source": "ollama-a8-evidence-judgment",
+    "attempts": [
+      {
+        "attempt": 1,
+        "status": "Partially Compliant",
+        "error": null,
+        "duration_ms": 6555.43
+      }
+    ],
+    "repaired": false,
+    "error": null,
+    "duration_ms": 6555.45
+  }
+}

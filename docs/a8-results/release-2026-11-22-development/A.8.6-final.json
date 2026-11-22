@@ -1,0 +1,29 @@
+{
+  "control_id": "A.8.6",
+  "model": "qwen2.5:7b",
+  "status": "Partially Compliant",
+  "error": null,
+  "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The artifact contains metrics for CPU, RAM, and Disk usage, indicating that the system is monitoring these resources.\",\"source_files\":[\"capacity_export.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The artifact does not contain any alert rules, which means that there are no configured warning thresholds in place.\",\"source_files\":[\"capacity_export.json\"]}]}",
+  "source_hashes": {
+    "capacity_export.json": "ec2fa324f973e643b90ff1ec82da0a3a4b332da5b838753380f1a1851199c3b9"
+  },
+  "checks": [
+    {
+      "criterion_index": 0,
+      "verdict": "met",
+      "rationale": "The artifact contains metrics for CPU, RAM, and Disk usage, indicating that the system is monitoring these resources.",
+      "source_files": [
+        "capacity_export.json"
+      ]
+    },
+    {
+      "criterion_index": 1,
+      "verdict": "not_met",
+      "rationale": "The artifact does not contain any alert rules, which means that there are no configured warning thresholds in place.",
+      "source_files": [
+        "capacity_export.json"
+      ]
+    }
+  ],
+  "duration_ms": 2766
+}

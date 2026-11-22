@@ -1,0 +1,26 @@
+{
+  "protocol": "scope-readiness-export-v1",
+  "checked_at": "2026-11-22T10:21:06.706677+07:00",
+  "assessment_id": "7f7c009b-bdcd-5b33-934e-15251ad2c976",
+  "rubric_sha256": "dbf106d4cc9cf939e8bd3aba2cc7bf61c605b4c0e0068d6f113a14c942087c9c",
+  "handoff_sha256": "c033651bd15e24a7cfcb9447a2015e83b3c4a08a1699cc5e2bf97fff86434d30",
+  "acceptance": {
+    "total_controls": 56,
+    "rubric_approved": false,
+    "applicability_recorded": 0,
+    "controls_with_evidence": 29,
+    "controls_with_submitted_sources": 1,
+    "controls_with_captured_lab_sources": 18,
+    "controls_with_explicit_sources": 19,
+    "controls_with_usable_text_sources": 18,
+    "controls_with_source_quality_issues": 1,
+    "controls_with_current_human_review": 0,
+    "soa_approved": false,
+    "note": "Nguồn nộp không tự đồng nghĩa đã xác thực. Số control có bằng chứng/thẩm định không phải số control đạt ISO."
+  },
+  "rubric_confirmed": false,
+  "soa_status": "DRAFT_NOT_APPROVED",
+  "human_assessment": false,
+  "read_only": true,
+  "note": "A recorded or technically usable source is not proof of authenticity, coverage or compliance. Unknown metadata is not automatically a corruption. Independent accuracy is not asserted."
+}

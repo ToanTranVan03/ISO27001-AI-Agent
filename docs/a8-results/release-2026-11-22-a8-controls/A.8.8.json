@@ -1,0 +1,91 @@
+{
+  "parent_report_sha256": "6576560a43f83b975c66fdbe77ea2baba93a3f41a102a84ce745835c6046744d",
+  "capture_sha256": "c438a71be61bfc9d7293bb6e89f86aec27f542f2eb0d382476291493af9f7d40",
+  "independent_validation": false,
+  "record": {
+    "control_id": "A.8.8",
+    "case_id": "A.8.8-mixed",
+    "name": "Management of technical vulnerabilities",
+    "criteria_checks": [
+      "inventory_scan_enabled",
+      "no_critical_lab_advisory_match"
+    ],
+    "criteria_details": [
+      {
+        "check": "inventory_scan_enabled",
+        "raw_source": "probe.json: scan_configuration + inventory_rc + inventory",
+        "pass_condition": "Job scan bật và truy vấn được inventory dpkg thực tại lúc thu.",
+        "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+        "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+        "verification_kind": "container-active-self-test"
+      },
+      {
+        "check": "no_critical_lab_advisory_match",
+        "raw_source": "probe.json: inventory + advisory_catalog",
+        "pass_condition": "Không có package/version đang cài khớp advisory critical tổng hợp của lab; không phải feed CVE thật.",
+        "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+        "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+        "verification_kind": "container-active-self-test"
+      }
+    ],
+    "evidence": {
+      "evidence_id": "A8LIVE-a87fc1d57e86dd86c6e53800",
+      "source": "live-container://A.8.8",
+      "source_sha256": "a87fc1d57e86dd86c6e53800b9cc62844552099fb44f0a02aa7c54b8ce8fd975",
+      "collected_at": "2026-11-22T03:18:04.436726+00:00",
+      "observed_at": "2026-11-22T03:18:04.391335+00:00",
+      "asset_id": "08b11382ce92",
+      "control_id": "A.8.8",
+      "facts": {
+        "inventory_scan_enabled": true,
+        "no_critical_lab_advisory_match": false
+      },
+      "artifacts": [
+        {
+          "artifact": "observed_at",
+          "content": "2026-11-22T03:18:04.391335+00:00",
+          "sha256": "8ab40562589119eee0c68bfe8f0bc3d07aee6b758be61bf732d5df425efbff44"
+        },
+        {
+          "artifact": "asset_id",
+          "content": "08b11382ce92",
+          "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+        },
+        {
+          "artifact": "probe.json",
+          "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.8\", \"observed_at\": \"2026-11-22T03:18:04.391335+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"scan_configuration\": {\"enabled\": true}, \"inventory_rc\": 0, \"inventory\": \"adduser\\t3.134\\napt\\t2.6.2\\nbase-files\\t12.4+deb12u15\\nbase-passwd\\t3.6.1\\nbash\\t5.2.15-2+b13\\nbsdutils\\t1:2.38.1-5+deb12u3\\nca-certificates\\t20250419~deb12u2\\ncoreutils\\t9.1-1\\ndash\\t0.5.12-2\\ndebconf\\t1.5.82\\ndebian-archive-keyring\\t2023.3+deb12u2\\ndebianutils\\t5.7-0.5~deb12u1\\ndiffutils\\t1:3.8-4\\ndpkg\\t1.21.23\\ne2fsprogs\\t1.47.0-2+b2\\nfindutils\\t4.9.0-4\\ngcc-12-base\\t12.2.0-14+deb12u1\\ngpgv\\t2.2.40-1.1+deb12u2\\ngrep\\t3.8-5\\ngzip\\t1.12-1\\nhostname\\t3.23+nmu1\\ninit-system-helpers\\t1.65.2+deb12u1\\nlibacl1\\t2.3.1-3\\nlibapt-pkg6.0\\t2.6.2\\nlibattr1\\t1:2.5.1-4\\nlibaudit-common\\t1:3.0.9-1\\nlibaudit1\\t1:3.0.9-1\\nlibblkid1\\t2.38.1-5+deb12u3\\nlibbz2-1.0\\t1.0.8-5+b1\\nlibc-bin\\t2.36-9+deb12u14\\nlibc6\\t2.36-9+deb12u14\\nlibcap-ng0\\t0.8.3-1+b3\\nlibcap2\\t1:2.66-4+deb12u3+b1\\nlibcom-err2\\t1.47.0-2+b2\\nlibcrypt1\\t1:4.4.33-2\\nlibdb5.3\\t5.3.28+dfsg2-1\\nlibdebconfclient0\\t0.270\\nlibext2fs2\\t1.47.0-2+b2\\nlibffi8\\t3.4.4-1\\nlibgcc-s1\\t12.2.0-14+deb12u1\\nlibgcrypt20\\t1.10.1-3+deb12u1\\nlibgdbm6\\t1.23-3\\nlibgmp10\\t2:6.2.1+dfsg1-1.1\\nlibgnutls30\\t3.7.9-2+deb12u7\\nlibgpg-error0\\t1.46-1\\nlibgssapi-krb5-2\\t1.20.1-2+deb12u5\\nlibhogweed6\\t3.8.1-2\\nlibidn2-0\\t2.3.3-1+b1\\nlibk5crypto3\\t1.20.1-2+deb12u5\\nlibkeyutils1\\t1.6.3-2\\nlibkrb5-3\\t1.20.1-2+deb12u5\\nlibkrb5support0\\t1.20.1-2+deb12u5\\nliblz4-1\\t1.9.4-1\\nliblzma5\\t5.4.1-1+deb12u2\\nlibmd0\\t1.0.4-2\\nlibmount1\\t2.38.1-5+deb12u3\\nlibncursesw6\\t6.4-4\\nlibnettle8\\t3.8.1-2\\nlibnsl2\\t1.3.0-2\\nlibp11-kit0\\t0.24.1-2\\nlibpam-modules\\t1.5.2-6+deb12u2\\nlibpam-modules-bin\\t1.5.2-6+deb12u2\\nlibpam-runtime\\t1.5.2-6+deb12u2\\nlibpam0g\\t1.5.2-6+deb12u2\\nlibpcre2-8-0\\t10.42-1+deb12u2\\nlibreadline8\\t8.2-1.3\\nlibseccomp2\\t2.5.4-1+deb12u1\\nlibselinux1\\t3.4-1+b6\\nlibsemanage-common\\t3.4-1\\nlibsemanage2\\t3.4-1+b5\\nlibsepol2\\t3.4-2.1\\nlibsmartcols1\\t2.38.1-5+deb12u3\\nlibsqlite3-0\\t3.40.1-2+deb12u2\\nlibss2\\t1.47.0-2+b2\\nlibssl3\\t3.0.22-1~deb12u2\\nlibstdc++6\\t12.2.0-14+deb12u1\\nlibsystemd0\\t252.39-1~deb12u2\\nlibtasn1-6\\t4.19.0-2+deb12u1\\nlibtinfo6\\t6.4-4\\nlibtirpc-common\\t1.3.3+ds-1\\nlibtirpc3\\t1.3.3+ds-1\\nlibudev1\\t252.39-1~deb12u2\\nlibunistring2\\t1.0-2\\nlibuuid1\\t2.38.1-5+deb12u3\\nlibxxhash0\\t0.8.1-1\\nlibzstd1\\t1.5.4+dfsg2-5\\nlogin\\t1:4.13+dfsg1-1+deb12u2\\nlogsave\\t1.47.0-2+b2\\nmawk\\t1.3.4.20200120-3.1\\nmount\\t2.38.1-5+deb12u3\\nncurses-base\\t6.4-4\\nncurses-bin\\t6.4-4\\nnetbase\\t6.4\\nopenssl\\t3.0.22-1~deb12u2\\npasswd\\t1:4.13+dfsg1-1+deb12u2\\nperl-base\\t5.36.0-7+deb12u4\\nreadline-common\\t8.2-1.3\\nsed\\t4.9-1+deb12u1\\nsysvinit-utils\\t3.06-4\\ntar\\t1.34+dfsg-1.2+deb12u1\\ntzdata\\t2026f-0+deb12u1\\nusr-is-merged\\t37~deb12u1\\nutil-linux\\t2.38.1-5+deb12u3\\nutil-linux-extra\\t2.38.1-5+deb12u3\\nzlib1g\\t1:1.2.13.dfsg-1\\n\", \"advisory_catalog\": [{\"advisory_id\": \"LAB-ADVISORY-001-NOT-A-CVE\", \"package\": \"adduser\", \"affected_version\": \"3.134\", \"severity\": \"critical\"}], \"advisory_scope\": \"Synthetic lab advisory, not a real CVE feed\"}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+          "sha256": "b9b518f66fa52fd7897f36f060656db395d9d28a602b785e153940dd5199fa99"
+        }
+      ],
+      "collection_errors": [],
+      "is_synthetic": true,
+      "transport": "live",
+      "source_kind": "live-container-observation",
+      "probe_kind": "container-active-self-test",
+      "observation_available": true,
+      "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+    },
+    "owner": "SecOps",
+    "applicable": true,
+    "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Vulnerability; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+    "applicability_approved": false,
+    "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+    "status": "Partially Compliant",
+    "rationale": "Trong bằng chứng, `inventory_scan_enabled` được đánh giá là `true`, cho thấy quét inventory đã được bật. Tuy nhiên, `no_critical_lab_advisory_match` được đánh giá là `false`, cho thấy có ít nhất một package/version đang cài đặt khớp với advisory critical tổng hợp của lab. Điều này vi phạm yêu cầu của kiểm soát A.8.8, vì vậy hệ thống không được đánh giá là tuân thủ hoàn toàn.",
+    "evidence_ids": [
+      "A8LIVE-a87fc1d57e86dd86c6e53800"
+    ],
+    "execution_source": "ollama-a8-evidence-judgment",
+    "attempts": [
+      {
+        "attempt": 1,
+        "status": "Partially Compliant",
+        "error": null,
+        "duration_ms": 8247.07
+      }
+    ],
+    "repaired": false,
+    "error": null,
+    "duration_ms": 8247.09
+  }
+}

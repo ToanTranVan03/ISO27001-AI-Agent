@@ -1,0 +1,29 @@
+{
+  "control_id": "A.7.3",
+  "model": "qwen2.5:7b",
+  "status": "Insufficient Evidence",
+  "error": null,
+  "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The inspection record shows no obstruction at the emergency exit, indicating compliance with safety checks.\",\"source_files\":[\"office_inspection.json\"]},{\"criterion_index\":1,\"verdict\":\"unknown\",\"rationale\":\"The artifact does not provide information on the key custodian's actions after 18:00 to confirm if the doors were locked as per the policy.\",\"source_files\":[\"office_inspection.json\"]}]}",
+  "source_hashes": {
+    "office_inspection.json": "46f2e585238406ad36f5def4d45274b762c08743d8480507cf595cc0dbfb2959"
+  },
+  "checks": [
+    {
+      "criterion_index": 0,
+      "verdict": "met",
+      "rationale": "The inspection record shows no obstruction at the emergency exit, indicating compliance with safety checks.",
+      "source_files": [
+        "office_inspection.json"
+      ]
+    },
+    {
+      "criterion_index": 1,
+      "verdict": "unknown",
+      "rationale": "The artifact does not provide information on the key custodian's actions after 18:00 to confirm if the doors were locked as per the policy.",
+      "source_files": [
+        "office_inspection.json"
+      ]
+    }
+  ],
+  "duration_ms": 2625
+}

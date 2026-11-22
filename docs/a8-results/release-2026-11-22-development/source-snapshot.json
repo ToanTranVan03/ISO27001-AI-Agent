@@ -1,0 +1,580 @@
+{
+  "protocol": "assistant-development-lab-v1",
+  "is_synthetic": true,
+  "purpose": "ASSISTANT_GENERATED_DEVELOPMENT_FIXTURES_NOT_INDEPENDENT_VALIDATION",
+  "professional_confirmation": false,
+  "independent_validation": false,
+  "cases": [
+    {
+      "control_id": "A.6.1",
+      "name": "Screening",
+      "criteria": [
+        "Tồn tại hồ sơ kiểm tra lý lịch",
+        "Có xác nhận từ bộ phận nhân sự (HR)"
+      ],
+      "artifacts": [
+        {
+          "filename": "screening.json",
+          "content": "{\"control_id\": \"A.6.1\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"background_check\": {\"completed_on\": \"2026-09-28\", \"reference_contact\": \"SIMULATED-REF-01\"}, \"employee_id\": \"EMP-001\", \"hired_on\": \"2026-10-01\", \"hr_confirmation\": {\"confirmed_by\": null, \"state\": \"draft\"}}}",
+          "sha256": "76fc96ae2258c6bc6a83011236d1b0764da2a4cc3c76519babac67799056ecc4"
+        }
+      ]
+    },
+    {
+      "control_id": "A.6.2",
+      "name": "Terms and conditions of employment",
+      "criteria": [
+        "Hợp đồng lao động có điều khoản an toàn thông tin",
+        "Nhân viên đã ký xác nhận"
+      ],
+      "artifacts": [
+        {
+          "filename": "contract.json",
+          "content": "{\"control_id\": \"A.6.2\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"document_id\": \"LAB-CONTRACT-002\", \"employee_id\": \"EMP-002\", \"security_clause\": \"Protect confidential data, report incidents, return assets and retain confidentiality after termination.\", \"signature_register\": [{\"party\": \"LAB-EMPLOYER\", \"signed_on\": \"2026-10-01\"}, {\"party\": \"EMP-002\", \"signed_on\": null}]}}",
+          "sha256": "86a8679e8c1b3739a2882ccb77936907cc74cde9d2b4718996f7c8eefb573eb9"
+        }
+      ]
+    },
+    {
+      "control_id": "A.6.3",
+      "name": "Information security awareness, education and training",
+      "criteria": [
+        "Tỷ lệ nhân sự hoàn thành khóa học đạt 100%",
+        "Có bài kiểm tra đánh giá nhận thức"
+      ],
+      "artifacts": [
+        {
+          "filename": "lms_export.json",
+          "content": "{\"control_id\": \"A.6.3\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"assessment\": {\"attempts_recorded\": 48, \"pass_score\": 16, \"questions\": 20}, \"completed_employees\": 48, \"course\": \"LAB-SECURITY-2026\", \"pending\": [\"EMP-002\", \"EMP-003\"], \"required_employees\": 50}}",
+          "sha256": "f70013b57a59185769d06bad02d9b63dbc39e3b9fe66c46676c6fb1e3e01577b"
+        }
+      ]
+    },
+    {
+      "control_id": "A.6.4",
+      "name": "Disciplinary process",
+      "criteria": [
+        "Có tài liệu quy trình xử lý kỷ luật đã ban hành",
+        "Được truyền đạt đến toàn bộ nhân viên"
+      ],
+      "artifacts": [
+        {
+          "filename": "discipline_policy.json",
+          "content": "{\"control_id\": \"A.6.4\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"distribution\": {\"acknowledgments\": 50, \"employees\": 50, \"register\": \"LAB-ACK-01\"}, \"document\": \"LAB-HR-DISCIPLINE-1\", \"effective_on\": \"2026-10-01\", \"state\": \"published\", \"steps\": [\"report\", \"investigate\", \"hear employee\", \"decide proportionate action\", \"appeal\"]}}",
+          "sha256": "0de370c95839ce63e05fb96e2f7df2002506644be35a5175fde05b041fe1ae38"
+        }
+      ]
+    },
+    {
+      "control_id": "A.6.5",
+      "name": "Responsibilities after termination or change of employment",
+      "criteria": [
+        "Có checklist thu hồi tài sản",
+        "Biên bản xác nhận cắt quyền truy cập hệ thống"
+      ],
+      "artifacts": [
+        {
+          "filename": "offboarding.json",
+          "content": "{\"control_id\": \"A.6.5\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"access_revocation_export\": {\"availability\": \"not_collected\", \"reason\": \"IAM audit export was not supplied\"}, \"employee_id\": \"EMP-003\", \"left_on\": \"2026-11-01\", \"returned_assets\": [{\"asset\": \"LAB-LAPTOP-003\", \"received_on\": \"2026-11-01\"}]}}",
+          "sha256": "1de7dfe37fc6382f20b444a7c1875a92cc807ee06b1588c451e1b259a81bc07a"
+        }
+      ]
+    },
+    {
+      "control_id": "A.6.6",
+      "name": "Confidentiality or non-disclosure agreements",
+      "criteria": [
+        "Danh sách nhân sự/đối tác đã ký NDA",
+        "Văn bản NDA còn hiệu lực"
+      ],
+      "artifacts": [
+        {
+          "filename": "nda_register.json",
+          "content": "{\"control_id\": \"A.6.6\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"parties\": [{\"expires_on\": \"2025-12-31\", \"id\": \"EMP-001\", \"nda_id\": \"LAB-NDA-1\", \"signed_on\": \"2025-01-01\"}, {\"expires_on\": \"2025-12-31\", \"id\": \"LAB-VENDOR-01\", \"nda_id\": \"LAB-NDA-2\", \"signed_on\": \"2025-01-02\"}], \"review_date\": \"2026-11-21\"}}",
+          "sha256": "5a68f08680e07c831366f4854f77e6e98d1ec32745437d1d98ae58398848b6eb"
+        }
+      ]
+    },
+    {
+      "control_id": "A.6.7",
+      "name": "Remote working",
+      "criteria": [
+        "Có chính sách remote work",
+        "Thiết bị từ xa được cài đặt bảo mật và VPN"
+      ],
+      "artifacts": [
+        {
+          "filename": "remote_configuration.json",
+          "content": "{\"control_id\": \"A.6.7\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"endpoint\": {\"antivirus_state\": \"disabled\", \"id\": \"LAB-REMOTE-01\", \"remote_transport\": \"plain HTTP\", \"vpn_profile\": null}, \"policy\": {\"published_on\": null, \"state\": \"draft\"}}}",
+          "sha256": "0fa0a02f2f0ce6b827ebbfab31529a56ea1b8b68abea491611e16903a7e1efbf"
+        }
+      ]
+    },
+    {
+      "control_id": "A.6.8",
+      "name": "Information security event reporting",
+      "criteria": [
+        "Có kênh/biểu mẫu báo cáo sự cố",
+        "Nhật ký ghi nhận sự kiện ATTT"
+      ],
+      "artifacts": [
+        {
+          "filename": "incident_channel.json",
+          "content": "{\"control_id\": \"A.6.8\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"event_register\": [{\"assigned_role\": \"LAB-SOC\", \"id\": \"LAB-INC-001\", \"received_at\": \"2026-11-20T09:00:00+07:00\", \"reported_by\": \"EMP-004\", \"type\": \"suspicious email\"}], \"reporting_form\": {\"fields\": [\"time\", \"asset\", \"description\", \"contact\"], \"url\": \"https://helpdesk.example.invalid/security\"}}}",
+          "sha256": "fc565ddd2ea365fb4ed3a555f6a7792e4db52f0ad112a16342fd454563b0d669"
+        }
+      ]
+    },
+    {
+      "control_id": "A.7.1",
+      "name": "Physical security perimeters",
+      "criteria": [
+        "Sơ đồ phân chia khu vực an ninh",
+        "Checklist kiểm tra cửa/khóa vật lý đạt yêu cầu"
+      ],
+      "artifacts": [
+        {
+          "filename": "perimeter_inspection.json",
+          "content": "{\"control_id\": \"A.7.1\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"doors\": [{\"finding\": \"latch does not engage\", \"id\": \"LAB-D1\", \"lock_test\": \"failed\", \"zone\": \"server-room\"}], \"zones\": [{\"access\": \"public\", \"name\": \"reception\"}, {\"access\": \"restricted\", \"name\": \"server-room\"}]}}",
+          "sha256": "ee148307130171c0f669add914b040da9e5fb0b19eefbbccaf878cce05b2f100"
+        }
+      ]
+    },
+    {
+      "control_id": "A.7.2",
+      "name": "Physical entry",
+      "criteria": [
+        "Có nhật ký quẹt thẻ/sinh trắc học",
+        "Chỉ những người được cấp quyền mới được vào phòng Server"
+      ],
+      "artifacts": [
+        {
+          "filename": "badge_log.json",
+          "content": "{\"control_id\": \"A.7.2\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"authorized_server_staff\": [\"EMP-001\"], \"events\": [{\"decision\": \"allow\", \"person\": \"EMP-001\", \"zone\": \"server-room\"}, {\"decision\": \"allow\", \"escort\": null, \"person\": \"EMP-002\", \"zone\": \"server-room\"}]}}",
+          "sha256": "25051f3a60251e175c798c57393f0af30a8a87714445b2f2c5b5e22bbd7b081c"
+        }
+      ]
+    },
+    {
+      "control_id": "A.7.3",
+      "name": "Securing offices, rooms and facilities",
+      "criteria": [
+        "Biên bản kiểm tra an toàn định kỳ",
+        "Quy định khóa cửa ngoài giờ làm việc"
+      ],
+      "artifacts": [
+        {
+          "filename": "office_inspection.json",
+          "content": "{\"control_id\": \"A.7.3\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"closure_policy\": {\"key_custodian\": \"LAB-FACILITIES\", \"lock_after\": \"18:00\", \"state\": \"published\"}, \"inspection\": {\"findings\": [\"no obstruction at emergency exit\"], \"id\": \"LAB-OFFICE-01\", \"performed_on\": \"2026-11-20\"}}}",
+          "sha256": "46f2e585238406ad36f5def4d45274b762c08743d8480507cf595cc0dbfb2959"
+        }
+      ]
+    },
+    {
+      "control_id": "A.7.4",
+      "name": "Physical security monitoring",
+      "criteria": [
+        "Hệ thống CCTV hoạt động",
+        "Thời gian lưu trữ video đáp ứng quy định"
+      ],
+      "artifacts": [
+        {
+          "filename": "cctv_status.json",
+          "content": "{\"control_id\": \"A.7.4\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"camera\": \"LAB-CAM-01\", \"health\": {\"last_frame_at\": \"2026-11-21T08:59:50+07:00\", \"state\": \"recording\"}, \"retention\": {\"disk_overwrite_days\": 7, \"oldest_recording_days\": 7, \"policy_days\": 30}}}",
+          "sha256": "3060ba80ac718139a23155922f79ea29a1b123249e0c95f41e7acd04ab992158"
+        }
+      ]
+    },
+    {
+      "control_id": "A.7.5",
+      "name": "Protecting against physical and environmental threats",
+      "criteria": [
+        "Biên bản nghiệm thu/bảo trì PCCC",
+        "Cảm biến nhiệt độ, độ ẩm hoạt động"
+      ],
+      "artifacts": [
+        {
+          "filename": "environmental_records.json",
+          "content": "{\"control_id\": \"A.7.5\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"fire_maintenance\": {\"availability\": \"not_collected\"}, \"sensors\": [{\"health\": \"responding\", \"humidity_percent\": 46, \"id\": \"LAB-TEMP-01\", \"measured_at\": \"2026-11-21T08:59:00+07:00\", \"temperature_c\": 23.4}]}}",
+          "sha256": "153ae079b8327d3959726a90057d311c629ccb41976344ec8079b389beca15fa"
+        }
+      ]
+    },
+    {
+      "control_id": "A.7.6",
+      "name": "Working in secure areas",
+      "criteria": [
+        "Nhật ký giám sát khách/nhà thầu",
+        "Quy định cấm quay phim/chụp ảnh"
+      ],
+      "artifacts": [
+        {
+          "filename": "visitor_register.json",
+          "content": "{\"control_id\": \"A.7.6\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"secure_area_policy\": {\"photography\": \"prohibited\", \"posted_at\": [\"server-room-door\"], \"state\": \"published\"}, \"visits\": [{\"escort\": \"EMP-001\", \"in\": \"2026-11-20T09:00:00+07:00\", \"out\": \"2026-11-20T09:30:00+07:00\", \"visitor\": \"LAB-VISITOR-1\"}]}}",
+          "sha256": "0c8b8bec430def792b8febca32e53071028417288df4154d9b57eb14d23c4238"
+        }
+      ]
+    },
+    {
+      "control_id": "A.7.7",
+      "name": "Clear desk and clear screen",
+      "criteria": [
+        "Biên bản kiểm tra bàn làm việc sạch",
+        "Máy tính có cấu hình tự khóa màn hình"
+      ],
+      "artifacts": [
+        {
+          "filename": "desk_endpoint_audit.json",
+          "content": "{\"control_id\": \"A.7.7\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"endpoints\": [{\"id\": \"LAB-PC-01\", \"policy_required_seconds\": 300, \"screen_lock_idle_seconds\": 0}], \"inspection\": {\"checked_desks\": 12, \"record\": \"LAB-DESK-01\", \"unsecured_papers\": 3}}}",
+          "sha256": "48ccf3a8e814176552b028ac4f80f8696800200ab0adbbb8e695dbcfd2b7fd6f"
+        }
+      ]
+    },
+    {
+      "control_id": "A.7.8",
+      "name": "Equipment siting and protection",
+      "criteria": [
+        "Danh mục tài sản có ghi nhận vị trí vật lý",
+        "Thiết bị quan trọng được đặt trong tủ rack có khóa"
+      ],
+      "artifacts": [
+        {
+          "filename": "rack_inventory.json",
+          "content": "{\"control_id\": \"A.7.8\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"assets\": [{\"criticality\": \"high\", \"id\": \"LAB-SRV-01\", \"location\": \"server-room/rack-01/U10\"}], \"rack_checks\": [{\"checked_on\": \"2026-11-21\", \"door_lock\": \"missing\", \"id\": \"rack-01\"}]}}",
+          "sha256": "36d98981fe445a296bcb115fce78fa58f8b1f56578743358bd00955057c8e619"
+        }
+      ]
+    },
+    {
+      "control_id": "A.7.9",
+      "name": "Security of assets off-premises",
+      "criteria": [
+        "Biên bản bàn giao thiết bị mang ra ngoài",
+        "Thiết bị được mã hóa ổ cứng"
+      ],
+      "artifacts": [
+        {
+          "filename": "offsite_assets.json",
+          "content": "{\"control_id\": \"A.7.9\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"disk_encryption_export\": {\"availability\": \"not_collected\", \"note\": \"No OS disk-encryption status supplied\"}, \"handover\": [{\"employee\": \"EMP-004\", \"id\": \"LAB-LAPTOP-004\", \"receipt\": \"LAB-RECEIPT-04\", \"taken_out_on\": \"2026-11-20\"}]}}",
+          "sha256": "8d2acefb8139254d961d5590061c3356c4ec27f6094f211bd713e3e441267dbb"
+        }
+      ]
+    },
+    {
+      "control_id": "A.7.10",
+      "name": "Storage media",
+      "criteria": [
+        "Danh mục thiết bị lưu trữ (USB, ổ cứng rời)",
+        "Chính sách kiểm soát sử dụng USB"
+      ],
+      "artifacts": [
+        {
+          "filename": "removable_media.json",
+          "content": "{\"control_id\": \"A.7.10\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"inventory\": [{\"capacity_gb\": 32, \"custodian\": \"EMP-001\", \"id\": \"LAB-USB-01\"}], \"policy\": {\"default\": \"deny\", \"exception_process\": \"ticket, approval and expiry\", \"logging\": \"required\", \"state\": \"published\"}}}",
+          "sha256": "ee1670358f7c64fd74d234e33957a243c2644b881e363bd0b3a8c4f5cd49e0fd"
+        }
+      ]
+    },
+    {
+      "control_id": "A.7.11",
+      "name": "Supporting utilities",
+      "criteria": [
+        "Nhật ký bảo trì UPS, máy phát điện",
+        "Biên bản kiểm tra hệ thống làm mát"
+      ],
+      "artifacts": [
+        {
+          "filename": "utility_maintenance.json",
+          "content": "{\"control_id\": \"A.7.11\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"cooling_inspections\": {\"availability\": \"not_collected\"}, \"request_ids\": [\"LAB-REQ-UPS\", \"LAB-REQ-COOLING\"], \"ups_generator_records\": {\"availability\": \"not_collected\"}}}",
+          "sha256": "bd06a1d8d4f45e73b7b6d419ce8c8b1444f8116e7fcebae6c5ea6ec1f5c1c820"
+        }
+      ]
+    },
+    {
+      "control_id": "A.7.12",
+      "name": "Cabling security",
+      "criteria": [
+        "Hệ thống dây cáp được đi trong máng/ống bảo vệ",
+        "Biên bản kiểm tra hạ tầng vật lý"
+      ],
+      "artifacts": [
+        {
+          "filename": "cable_inspection.json",
+          "content": "{\"control_id\": \"A.7.12\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"inspection_id\": \"LAB-CABLE-01\", \"performed_on\": \"2026-11-20\", \"segments\": [{\"finding\": \"conduit missing\", \"id\": \"LAB-C1\", \"protection\": \"exposed cable on floor\", \"route\": \"corridor-to-server-room\"}]}}",
+          "sha256": "00e04aa94dfb321393a3dd1dcd7ba2b86d3f440edc30bc0eb7e3a142b7e5d24b"
+        }
+      ]
+    },
+    {
+      "control_id": "A.7.13",
+      "name": "Equipment maintenance",
+      "criteria": [
+        "Có hợp đồng/lịch bảo trì",
+        "Biên bản bảo trì thiết bị lưu hệ thống"
+      ],
+      "artifacts": [
+        {
+          "filename": "maintenance_register.json",
+          "content": "{\"control_id\": \"A.7.13\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"completed_records\": [{\"asset\": \"LAB-SRV-01\", \"performed_on\": \"2026-09-01\", \"result\": \"fan replaced; diagnostics completed\", \"technician_role\": \"LAB-VENDOR\"}], \"schedule\": [{\"asset\": \"LAB-SRV-01\", \"contract\": \"LAB-SERVICE-01\", \"interval_days\": 90, \"next_due\": \"2026-12-01\"}]}}",
+          "sha256": "5dbbb461fbee963c6ccd6515cd3793ccdcc2affa9813186d3deb336fe0c3c94b"
+        }
+      ]
+    },
+    {
+      "control_id": "A.7.14",
+      "name": "Secure disposal or re-use of equipment",
+      "criteria": [
+        "Biên bản xóa dữ liệu (wiping) đạt chuẩn",
+        "Biên bản tiêu hủy vật lý đối với ổ cứng hỏng"
+      ],
+      "artifacts": [
+        {
+          "filename": "disposal_register.json",
+          "content": "{\"control_id\": \"A.7.14\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"disposals\": [{\"asset\": \"LAB-DISK-01\", \"state\": \"readable\", \"verification\": \"readback contains zeros\", \"wipe_log\": \"LAB-WIPE-01\"}], \"failed_disks\": [{\"asset\": \"LAB-DISK-02\", \"destruction_certificate\": null, \"location\": \"unlocked store\"}]}}",
+          "sha256": "0d33cb26283bf185233585b786aea09023f0983ab6976383baa18527d120f5f0"
+        }
+      ]
+    },
+    {
+      "control_id": "A.8.4",
+      "name": "Access to source code",
+      "criteria": [
+        "Cấu hình Git bảo vệ branch (branch protection)",
+        "Phân quyền read/write kho mã nguồn rõ ràng"
+      ],
+      "artifacts": [
+        {
+          "filename": "repository_settings.json",
+          "content": "{\"control_id\": \"A.8.4\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"branch_rules\": {\"allow_force_push\": true, \"required_reviews\": 0}, \"default_branch\": \"main\", \"members\": [{\"id\": \"LAB-DEV-1\", \"role\": \"write\"}, {\"id\": \"LAB-AUDIT\", \"role\": \"read\"}], \"repository\": \"LAB-PROJECT\"}}",
+          "sha256": "72acfc35d75426a2e0a12c418bb5bfd7ad31cfb19bd6fcd93402f57086e4e12d"
+        }
+      ]
+    },
+    {
+      "control_id": "A.8.6",
+      "name": "Capacity management",
+      "criteria": [
+        "Hệ thống giám sát CPU/RAM/Disk đang thu thập dữ liệu",
+        "Cấu hình cảnh báo khi quá ngưỡng dung lượng"
+      ],
+      "artifacts": [
+        {
+          "filename": "capacity_export.json",
+          "content": "{\"control_id\": \"A.8.6\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"alert_rules\": [], \"metrics\": [{\"cpu_percent\": 93, \"disk_percent\": 96, \"host\": \"LAB-SRV-01\", \"memory_percent\": 88, \"sampled_at\": \"2026-11-21T08:59:00+07:00\"}], \"notification_routes\": []}}",
+          "sha256": "ec2fa324f973e643b90ff1ec82da0a3a4b332da5b838753380f1a1851199c3b9"
+        }
+      ]
+    },
+    {
+      "control_id": "A.8.11",
+      "name": "Data masking",
+      "criteria": [
+        "Cấu hình hoặc quy tắc che giấu dữ liệu PII",
+        "Dữ liệu nhạy cảm bị ẩn trên môi trường không phải Production"
+      ],
+      "artifacts": [
+        {
+          "filename": "masking_export.json",
+          "content": "{\"control_id\": \"A.8.11\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"dataset_origin\": \"synthetic generator\", \"policy\": {\"columns\": {\"email\": \"replace-domain\", \"national_id\": \"redact\"}, \"environment\": \"test\"}, \"sample_after_masking\": [{\"email\": \"lab-user@example.invalid\", \"national_id\": \"********\"}]}}",
+          "sha256": "4fbbb76efeacd25c5128381d510278592199222adf99b8ba498780d7d7eb94de"
+        }
+      ]
+    },
+    {
+      "control_id": "A.8.14",
+      "name": "Redundancy of information processing facilities",
+      "criteria": [
+        "Cấu hình High Availability (HA) hoặc Load Balancing",
+        "Tài liệu kiến trúc hệ thống dự phòng"
+      ],
+      "artifacts": [
+        {
+          "filename": "ha_configuration.json",
+          "content": "{\"control_id\": \"A.8.14\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"architecture_document\": {\"availability\": \"not_collected\"}, \"failover_test\": {\"availability\": \"not_collected\"}, \"load_balancer\": {\"backends\": [\"LAB-APP-01\", \"LAB-APP-02\"], \"health_check\": \"GET /health every 5 seconds\"}}}",
+          "sha256": "13f617a9061f8460a722f83520a32f37e79bd31ebe2cc1bc9a020b137c35376d"
+        }
+      ]
+    },
+    {
+      "control_id": "A.8.18",
+      "name": "Use of privileged utility programs",
+      "criteria": [
+        "Giới hạn quyền thực thi các file SUID/SGID",
+        "Danh sách công cụ quản trị được cấp quyền hợp lý"
+      ],
+      "artifacts": [
+        {
+          "filename": "utility_permissions.json",
+          "content": "{\"control_id\": \"A.8.18\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"authorized_utility_register\": [], \"review_ticket\": null, \"suid_files\": [{\"execution_group\": \"all users\", \"mode\": \"4755\", \"owner\": \"root\", \"path\": \"/opt/lab-maint\"}]}}",
+          "sha256": "c433bf231c3ca49b7231f378b555d0f79daa1f6ab7815e8c75dfe5c0c2956554"
+        }
+      ]
+    },
+    {
+      "control_id": "A.8.21",
+      "name": "Security of network services",
+      "criteria": [
+        "Tài liệu yêu cầu SLA bảo mật với nhà cung cấp mạng",
+        "Cấu hình bảo mật dịch vụ mạng (DNS, VPN)"
+      ],
+      "artifacts": [
+        {
+          "filename": "network_service_records.json",
+          "content": "{\"control_id\": \"A.8.21\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"dns_configuration\": {\"recursion_clients\": [\"10.10.0.0/24\"], \"zone_transfer\": \"deny\"}, \"provider_sla\": {\"availability\": \"not_collected\"}, \"vpn_configuration\": {\"client_certificate\": \"required\", \"min_version\": \"1.2\", \"transport\": \"TLS\"}}}",
+          "sha256": "b73156e9f6d6a255b4c833f7dfe6f3746719d954e5aa6c22e858fbff2a1e8f34"
+        }
+      ]
+    },
+    {
+      "control_id": "A.8.23",
+      "name": "Web filtering",
+      "criteria": [
+        "Cấu hình Proxy/DNS lọc web",
+        "Danh sách blacklist tên miền/IP bị cấm"
+      ],
+      "artifacts": [
+        {
+          "filename": "web_filter_config.json",
+          "content": "{\"control_id\": \"A.8.23\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"blocklist\": [\"malware.example.invalid\", \"phishing.example.invalid\"], \"events\": [{\"action\": \"deny\", \"domain\": \"malware.example.invalid\"}], \"proxy\": {\"mode\": \"explicit\", \"rule_order\": [\"deny-blocklist\", \"allow-authenticated\"]}}}",
+          "sha256": "70c218383d9ca65af86beb10090f610787a2c5607f176afea745c4cd94aed799"
+        }
+      ]
+    },
+    {
+      "control_id": "A.8.25",
+      "name": "Secure development life cycle",
+      "criteria": [
+        "Tài liệu quy trình SDLC",
+        "Có pipeline CI/CD tích hợp quét bảo mật mã nguồn"
+      ],
+      "artifacts": [
+        {
+          "filename": "development_workflow.json",
+          "content": "{\"control_id\": \"A.8.25\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"ci_pipeline\": {\"jobs\": [\"build\", \"unit-tests\"], \"security_scan_jobs\": []}, \"sdlc\": {\"document\": \"LAB-SDLC-01\", \"stages\": [\"requirements\", \"design\", \"coding\", \"review\", \"test\", \"release\"]}}}",
+          "sha256": "a272b08fd2ff85ef9c180de64680e98c0034f97697ca0c940572624d4a5ef463"
+        }
+      ]
+    },
+    {
+      "control_id": "A.8.26",
+      "name": "Application security requirements",
+      "criteria": [
+        "Tài liệu đặc tả yêu cầu bảo mật phần mềm (VD: theo OWASP ASVS)"
+      ],
+      "artifacts": [
+        {
+          "filename": "application_requirements.json",
+          "content": "{\"control_id\": \"A.8.26\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"document\": \"LAB-APP-REQ-01\", \"requirements\": [{\"id\": \"SEC-01\", \"requirement\": \"MFA for privileged users\", \"test\": \"attempt login without second factor must fail\"}, {\"id\": \"SEC-02\", \"requirement\": \"Parameterized database queries\", \"test\": \"SQL injection payload must be rejected\"}], \"status\": \"versioned design specification\"}}",
+          "sha256": "7cb15ca4955c3f212e4071e1f7b3441e05d2815e671de9e9f5eb9695a982272f"
+        }
+      ]
+    },
+    {
+      "control_id": "A.8.27",
+      "name": "Secure system architecture and engineering principles",
+      "criteria": [
+        "Tài liệu thiết kế kiến trúc bảo mật",
+        "Bằng chứng triển khai theo kiến trúc đã duyệt"
+      ],
+      "artifacts": [
+        {
+          "filename": "architecture_and_deployment.json",
+          "content": "{\"control_id\": \"A.8.27\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"deployment_export\": {\"availability\": \"not_collected\"}, \"design\": {\"document\": \"LAB-ARCH-01\", \"identity\": \"separate service identities\", \"network\": \"web -> application -> private database\"}}}",
+          "sha256": "a6afc2bb305369dbb9d2c559b48742928a147862da4db91d84f35e40965ce6cd"
+        }
+      ]
+    },
+    {
+      "control_id": "A.8.28",
+      "name": "Secure coding",
+      "criteria": [
+        "Quy chuẩn lập trình an toàn (Secure Coding Guidelines)",
+        "Kết quả quét mã tĩnh (SAST report) không có lỗi nghiêm trọng"
+      ],
+      "artifacts": [
+        {
+          "filename": "coding_and_sast.json",
+          "content": "{\"control_id\": \"A.8.28\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"guideline\": {\"document\": \"LAB-CODING-01\", \"rules\": [\"parameterized SQL\", \"validate input\", \"no hardcoded secrets\"]}, \"sast\": {\"critical_findings\": [{\"file\": \"lab/example.py\", \"id\": \"SQL-INJECTION-01\", \"line\": 42, \"state\": \"open\"}], \"scan_id\": \"LAB-SAST-01\"}}}",
+          "sha256": "57c7354caef2142317827599b5edfdc73c296b8fa8e0a14e305dba6898d3ff66"
+        }
+      ]
+    },
+    {
+      "control_id": "A.8.29",
+      "name": "Security testing in development and acceptance",
+      "criteria": [
+        "Báo cáo kiểm thử động (DAST) hoặc Pentest report",
+        "Biên bản nghiệm thu bảo mật"
+      ],
+      "artifacts": [
+        {
+          "filename": "acceptance_testing.json",
+          "content": "{\"control_id\": \"A.8.29\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"dast\": {\"findings\": [{\"id\": \"LAB-XSS-1\", \"severity\": \"medium\", \"state\": \"open\"}], \"report\": \"LAB-DAST-01\", \"targets\": [\"https://application.example.invalid\"]}, \"security_acceptance\": {\"approved_by\": null, \"state\": \"pending\"}}}",
+          "sha256": "8f7413fa4296e454439fb75f4b99e50a4ff6da7e4ddd959498bbc22ed9a6b027"
+        }
+      ]
+    },
+    {
+      "control_id": "A.8.30",
+      "name": "Outsourced development",
+      "criteria": [
+        "Hợp đồng thuê ngoài có điều khoản bảo mật",
+        "Biên bản rà soát mã nguồn do bên gia công bàn giao"
+      ],
+      "artifacts": [
+        {
+          "filename": "supplier_delivery.json",
+          "content": "{\"control_id\": \"A.8.30\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"contract\": {\"clauses\": [\"confidentiality\", \"secure coding\", \"vulnerability remediation\", \"right to review source\"], \"id\": \"LAB-SUPPLIER-01\"}, \"source_review\": {\"delivery\": \"LAB-DELIVERY-01\", \"findings\": [\"input validation reviewed\"], \"review_on\": \"2026-11-20\", \"review_role\": \"LAB-REVIEWER\", \"state\": \"completed\"}}}",
+          "sha256": "45657133fffda32ecba90da2f0d86c21cbe201aebd70e9b676b7a25676daa0c5"
+        }
+      ]
+    },
+    {
+      "control_id": "A.8.31",
+      "name": "Separation of development, test and production environments",
+      "criteria": [
+        "Danh sách máy chủ/mạng phân định rõ các môi trường",
+        "Tài khoản dev không thể truy cập DB Production"
+      ],
+      "artifacts": [
+        {
+          "filename": "environment_access.json",
+          "content": "{\"control_id\": \"A.8.31\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"access_test\": {\"identity\": \"LAB-DEV-1\", \"operation\": \"SELECT employee\", \"result\": \"allowed\", \"target\": \"LAB-PROD-DB\"}, \"servers\": [{\"environment\": \"dev\", \"id\": \"LAB-DEV-DB\", \"network\": \"10.10.10.0/24\"}, {\"environment\": \"simulated-prod\", \"id\": \"LAB-PROD-DB\", \"network\": \"10.10.20.0/24\"}]}}",
+          "sha256": "b92fe8f867bb7618004b18e3a3dc84668a80ddfdca1635e2afc9b387dfb7d742"
+        }
+      ]
+    },
+    {
+      "control_id": "A.8.33",
+      "name": "Test information",
+      "criteria": [
+        "Quy định làm ẩn danh dữ liệu test",
+        "Bằng chứng dữ liệu trên môi trường test là dữ liệu giả lập (synthetic)"
+      ],
+      "artifacts": [
+        {
+          "filename": "test_dataset_provenance.json",
+          "content": "{\"control_id\": \"A.8.33\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"dataset\": {\"generator\": \"LAB-FAKER-SEED-2026\", \"production_export_used\": false, \"sample\": [{\"email\": \"person01@example.invalid\", \"id\": \"LAB-PERSON-01\"}]}, \"policy\": {\"document\": \"LAB-TEST-DATA-01\", \"requirement\": \"Use only anonymized or synthetic test records\"}}}",
+          "sha256": "34743483c47ccbf805a5e873b16b9de45cf978d551c63488a1531c3901281d64"
+        }
+      ]
+    },
+    {
+      "control_id": "A.8.34",
+      "name": "Protection of information systems during audit testing",
+      "criteria": [
+        "Tài khoản audit chỉ được cấp quyền Read-Only",
+        "Kế hoạch kiểm toán được phê duyệt trước khi chạy scan"
+      ],
+      "artifacts": [
+        {
+          "filename": "audit_access_plan.json",
+          "content": "{\"control_id\": \"A.8.34\", \"is_synthetic\": true, \"observed_at\": \"2026-11-21T09:00:00+07:00\", \"origin\": \"ASSISTANT_GENERATED_DEVELOPMENT_FIXTURE\", \"professional_confirmation\": false, \"records\": {\"database_grants\": [{\"identity\": \"LAB-AUDIT\", \"privileges\": [\"SELECT\"], \"write_privileges\": []}], \"scan_plan\": {\"approval_state\": \"pending\", \"approved_by\": null, \"id\": \"LAB-AUDIT-PLAN-01\", \"targets\": [\"LAB-SRV-01\"], \"window\": \"2026-11-22T09:00:00+07:00\"}}}",
+          "sha256": "f9469df91e0cc7ebd9a201a64dad7126dbceadd6674ea48154276b4016dab464"
+        }
+      ]
+    }
+  ],
+  "note": "Dữ liệu phát triển do trợ lý tạo, không phải hồ sơ con người xác nhận hoặc tập kiểm định độc lập. Không nhập vào đợt đánh giá chính.",
+  "sha256": "9a4277bc02ab2df4552f871ec8c621445126f69dc820c9575456c865fed8d588"
+}

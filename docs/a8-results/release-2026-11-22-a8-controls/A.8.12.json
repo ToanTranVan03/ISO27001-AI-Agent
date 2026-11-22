@@ -1,0 +1,91 @@
+{
+  "parent_report_sha256": "6576560a43f83b975c66fdbe77ea2baba93a3f41a102a84ce745835c6046744d",
+  "capture_sha256": "c438a71be61bfc9d7293bb6e89f86aec27f542f2eb0d382476291493af9f7d40",
+  "independent_validation": false,
+  "record": {
+    "control_id": "A.8.12",
+    "case_id": "A.8.12-mixed",
+    "name": "Data leakage prevention",
+    "criteria_checks": [
+      "sensitive_transfer_blocked",
+      "blocked_transfer_audited"
+    ],
+    "criteria_details": [
+      {
+        "check": "sensitive_transfer_blocked",
+        "raw_source": "probe.json: transaction",
+        "pass_condition": "Giao dịch TCP mang mẫu LAB-CONFIDENTIAL bị chặn.",
+        "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+        "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+        "verification_kind": "container-active-self-test"
+      },
+      {
+        "check": "blocked_transfer_audited",
+        "raw_source": "probe.json: audit_events",
+        "pass_condition": "Có sự kiện audit blocked gắn hash payload của phép thử.",
+        "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+        "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+        "verification_kind": "container-active-self-test"
+      }
+    ],
+    "evidence": {
+      "evidence_id": "A8LIVE-0eb700382c350b323b53c5cf",
+      "source": "live-container://A.8.12",
+      "source_sha256": "0eb700382c350b323b53c5cfa176ae71e7a6d6b673ac63f38acfb1962bb1e4bd",
+      "collected_at": "2026-11-22T03:18:05.045661+00:00",
+      "observed_at": "2026-11-22T03:18:05.003023+00:00",
+      "asset_id": "08b11382ce92",
+      "control_id": "A.8.12",
+      "facts": {
+        "sensitive_transfer_blocked": true,
+        "blocked_transfer_audited": false
+      },
+      "artifacts": [
+        {
+          "artifact": "observed_at",
+          "content": "2026-11-22T03:18:05.003023+00:00",
+          "sha256": "99cd5732748521456340b7102eb90ce93882f14969dd34251827068cf258939b"
+        },
+        {
+          "artifact": "asset_id",
+          "content": "08b11382ce92",
+          "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+        },
+        {
+          "artifact": "probe.json",
+          "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.12\", \"observed_at\": \"2026-11-22T03:18:05.003023+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"policy\": {\"mode\": \"block\", \"audit\": false}, \"transaction\": {\"response\": \"403 DLP blocked\", \"tls_version\": null, \"source_address\": \"127.0.0.1\"}, \"audit_events\": []}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+          "sha256": "0e2accd9e0c837971764fab1f1f5c98dd01d96509458bd82268cac8e1ef1d5a7"
+        }
+      ],
+      "collection_errors": [],
+      "is_synthetic": true,
+      "transport": "live",
+      "source_kind": "live-container-observation",
+      "probe_kind": "container-active-self-test",
+      "observation_available": true,
+      "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+    },
+    "owner": "SOC",
+    "applicable": true,
+    "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ Data; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+    "applicability_approved": false,
+    "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+    "status": "Partially Compliant",
+    "rationale": "Dữ liệu cho thấy giao dịch TCP mang mẫu LAB-CONFIDENTIAL đã bị chặn (sensitive_transfer_blocked: true), nhưng không có sự kiện audit gắn hash payload của phép thử (blocked_transfer_audited: false). Điều này cho thấy mặc dù ngăn chặn thành công, việc theo dõi và ghi lại sự kiện này chưa được thực hiện đầy đủ.",
+    "evidence_ids": [
+      "A8LIVE-0eb700382c350b323b53c5cf"
+    ],
+    "execution_source": "ollama-a8-evidence-judgment",
+    "attempts": [
+      {
+        "attempt": 1,
+        "status": "Partially Compliant",
+        "error": null,
+        "duration_ms": 6710.84
+      }
+    ],
+    "repaired": false,
+    "error": null,
+    "duration_ms": 6710.86
+  }
+}

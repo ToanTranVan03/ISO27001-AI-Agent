@@ -1,0 +1,29 @@
+{
+  "control_id": "A.7.7",
+  "model": "qwen2.5:7b",
+  "status": "Non-Compliant",
+  "error": null,
+  "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"not_met\",\"rationale\":\"Unsecured papers observed on LAB-DESK-01 during inspection.\",\"source_files\":[\"desk_endpoint_audit.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"Screen lock idle seconds is 0, indicating the screen is not configured to lock automatically.\",\"source_files\":[\"desk_endpoint_audit.json\"]}] }",
+  "source_hashes": {
+    "desk_endpoint_audit.json": "48ccf3a8e814176552b028ac4f80f8696800200ab0adbbb8e695dbcfd2b7fd6f"
+  },
+  "checks": [
+    {
+      "criterion_index": 0,
+      "verdict": "not_met",
+      "rationale": "Unsecured papers observed on LAB-DESK-01 during inspection.",
+      "source_files": [
+        "desk_endpoint_audit.json"
+      ]
+    },
+    {
+      "criterion_index": 1,
+      "verdict": "not_met",
+      "rationale": "Screen lock idle seconds is 0, indicating the screen is not configured to lock automatically.",
+      "source_files": [
+        "desk_endpoint_audit.json"
+      ]
+    }
+  ],
+  "duration_ms": 2406
+}

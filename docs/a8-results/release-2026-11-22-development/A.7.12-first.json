@@ -1,0 +1,29 @@
+{
+  "control_id": "A.7.12",
+  "model": "qwen2.5:7b",
+  "status": "Insufficient Evidence",
+  "error": null,
+  "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"not_met\",\"rationale\":\"The inspection found that the conduit was missing, leaving the cable exposed on the floor. This does not meet the criterion of cabling being protected in conduits.\",\"source_files\":[\"cable_inspection.json\"]},{\"criterion_index\":1,\"verdict\":\"unknown\",\"rationale\":\"The artifact does not provide information about a physical infrastructure inspection record, only an inspection performed by the assistant.\",\"source_files\":[\"cable_inspection.json\"]}] }",
+  "source_hashes": {
+    "cable_inspection.json": "00e04aa94dfb321393a3dd1dcd7ba2b86d3f440edc30bc0eb7e3a142b7e5d24b"
+  },
+  "checks": [
+    {
+      "criterion_index": 0,
+      "verdict": "not_met",
+      "rationale": "The inspection found that the conduit was missing, leaving the cable exposed on the floor. This does not meet the criterion of cabling being protected in conduits.",
+      "source_files": [
+        "cable_inspection.json"
+      ]
+    },
+    {
+      "criterion_index": 1,
+      "verdict": "unknown",
+      "rationale": "The artifact does not provide information about a physical infrastructure inspection record, only an inspection performed by the assistant.",
+      "source_files": [
+        "cable_inspection.json"
+      ]
+    }
+  ],
+  "duration_ms": 2859
+}

@@ -1,0 +1,29 @@
+{
+  "control_id": "A.8.21",
+  "model": "qwen2.5:7b",
+  "status": "Partially Compliant",
+  "error": null,
+  "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"not_met\",\"rationale\":\"The criterion states that there should be a security SLA with the network service provider, but the artifact does not provide this information.\",\"source_files\":[\"network_service_records.json\"]},{ \"criterion_index\":1,\"verdict\":\"met\",\"rationale\":\"The artifact includes configurations for DNS and VPN, which meet the requirement for configuring security services.\",\"source_files\":[\"network_service_records.json\"]}]}",
+  "source_hashes": {
+    "network_service_records.json": "b73156e9f6d6a255b4c833f7dfe6f3746719d954e5aa6c22e858fbff2a1e8f34"
+  },
+  "checks": [
+    {
+      "criterion_index": 0,
+      "verdict": "not_met",
+      "rationale": "The criterion states that there should be a security SLA with the network service provider, but the artifact does not provide this information.",
+      "source_files": [
+        "network_service_records.json"
+      ]
+    },
+    {
+      "criterion_index": 1,
+      "verdict": "met",
+      "rationale": "The artifact includes configurations for DNS and VPN, which meet the requirement for configuring security services.",
+      "source_files": [
+        "network_service_records.json"
+      ]
+    }
+  ],
+  "duration_ms": 2688
+}

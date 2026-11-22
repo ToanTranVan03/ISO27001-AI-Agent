@@ -1,0 +1,12 @@
+{
+  "scope": 56,
+  "a8_live_count": 18,
+  "development_count": 38,
+  "disjoint": true,
+  "a8_llm_rule_status_matches": 18,
+  "a8_errors": 0,
+  "development_errors": 0,
+  "development_key_matches": 23,
+  "independent_accuracy": null,
+  "note": "Two different experiment sources, no pooled accuracy and no updates to formal campaign."
+}

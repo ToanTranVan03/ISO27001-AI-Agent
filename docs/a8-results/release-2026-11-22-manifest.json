@@ -1,0 +1,666 @@
+{
+  "protocol": "release-artifact-manifest-v1",
+  "artifacts": [
+    {
+      "path": "docs/a8-results/release-2026-11-22-a8-comparison.json",
+      "sha256": "744bc6209b228f83945d240d6cdaca739f2601dd7fc66267d506465da9c929fd",
+      "bytes": 9944
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-a8-controls/A.8.1.json",
+      "sha256": "648db24630cd6aad236528b7c089b8ece99f2e989116b7ef4cf24c935c789090",
+      "bytes": 4951
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-a8-controls/A.8.10.json",
+      "sha256": "c37dc4b6aa971c4b25a5ac58e1c0245ca4724fe613e6caf4e52e4215539ea6d3",
+      "bytes": 4444
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-a8-controls/A.8.12.json",
+      "sha256": "c118793ec5b304905f884fce9a567af4b64eda008876a81fc3476c402bcf4675",
+      "bytes": 4543
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-a8-controls/A.8.13.json",
+      "sha256": "ef876fd8520b7be8b3da71e150dcec140acb20cf9fb9fc4889b90b753109b276",
+      "bytes": 4470
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-a8-controls/A.8.15.json",
+      "sha256": "cadcf7ec9af5925ddd081089838ec464c08369f7066a82e4cdb5b3c19eb7021d",
+      "bytes": 5304
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-a8-controls/A.8.16.json",
+      "sha256": "fe0b07da1ea45df9f89d14cc7fa6623869d316e46be401b335ebb5af2592f677",
+      "bytes": 4586
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-a8-controls/A.8.17.json",
+      "sha256": "80dd70e280c092c3dc309936195570ab7bade236d948286ea798f02bb4c7196c",
+      "bytes": 4945
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-a8-controls/A.8.19.json",
+      "sha256": "a1609883554b2d8b2dce763bac8f3898da22bfbba30526574ef0e6aa79837a75",
+      "bytes": 7517
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-a8-controls/A.8.2.json",
+      "sha256": "9e85ac90ccbece384360524600687ba9c39b6861d2d93e1ca733b598e980ebc0",
+      "bytes": 4694
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-a8-controls/A.8.20.json",
+      "sha256": "c9808b26628e214e44c631baf626de70631ce23e3a20fbe4470434a8011131c1",
+      "bytes": 4871
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-a8-controls/A.8.22.json",
+      "sha256": "348973193ba7487ed05a4ab67d42f20a3b4c102c493b48a116c93b81d0b833a7",
+      "bytes": 4919
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-a8-controls/A.8.24.json",
+      "sha256": "62592bc6ebae5d551029e50af9612417d0002841ed9c37f4bdb971824b21a6bf",
+      "bytes": 4709
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-a8-controls/A.8.3.json",
+      "sha256": "5c27417e8edb314e58f4aad19b8c9ceea91bd1c6296bed05a4b8fc546f1a4d66",
+      "bytes": 4631
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-a8-controls/A.8.32.json",
+      "sha256": "b790e1de948df9f49ba3cff929587560dde6070c0eb99dc13389d5d9aa9e84b5",
+      "bytes": 4989
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-a8-controls/A.8.5.json",
+      "sha256": "08818ef2afa9eb75d7b1c8ae07eb3ce198f15b06824242cdb749a6d13c06c1b5",
+      "bytes": 5007
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-a8-controls/A.8.7.json",
+      "sha256": "435bd54242cfc07af4fc030e9a4ca2ff7d35530bff51f781febf86584ac6e2c6",
+      "bytes": 4807
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-a8-controls/A.8.8.json",
+      "sha256": "ebf23f8b30cb15306f31075461b1d483517e6d243225700437bf38997e819b08",
+      "bytes": 7768
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-a8-controls/A.8.9.json",
+      "sha256": "a08440013b73272d903c5dba1d4a3bfae7cb7b6d3be0b5787b0d3de8981f725e",
+      "bytes": 4717
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-a8-export/evaluation.json",
+      "sha256": "d264406e01fc3b1baceb61b4842e9c9ce28a9423e076cbaa95164a2ce0647712",
+      "bytes": 85070
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-a8-export/per-control.csv",
+      "sha256": "2eb676339c910c68c494dc0acc72ca0ae309df4d11f715e30a77738c19a80534",
+      "bytes": 1738
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-a8-export/REPORT.md",
+      "sha256": "ed0b89e2fbe22e8e1f8b9197d250b9fde0402b6195c97ba3efbf065729fa305b",
+      "bytes": 1556
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-a8-plan.json",
+      "sha256": "a60bd2ae706a6887c787d60fe13bfc0e98e73975671ee8fa8e431bc73c677183",
+      "bytes": 79215
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-a8-result.json",
+      "sha256": "3b02698a13ea8a619225b69fc26482663d3761f770b0f9944de591f97b5fbebf",
+      "bytes": 95178
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-a8-rules.json",
+      "sha256": "ed1ba18a445dc55dca85847a7559609da17cfc5b00f19b4746e7fb032d0bbcb0",
+      "bytes": 89702
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-after-ui-preservation.json",
+      "sha256": "e17bad132600dfdf0e079cd544cf57054be63fc780512fa7b2acf5859bc34244",
+      "bytes": 227
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-all56-summary.json",
+      "sha256": "28d027fa19aa782a80f867e88c0050add05c52f8821fd741a858997e6b990408",
+      "bytes": 345
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-all56.csv",
+      "sha256": "1bfbb883af3fbdd075eb30e23c8aa64c8d2672e1e8e110f1fad9c76a0eecbf22",
+      "bytes": 5311
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-api-retry.json",
+      "sha256": "83b95c9f7a0c9d19256afed8b64c476f4a3bd69b94a8deb4871fda099824f00f",
+      "bytes": 6666
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-api.json",
+      "sha256": "fad07ab5d8bc8294de37c1b1908ba53155f034f2e4a821d0d49b5c26b366676e",
+      "bytes": 2486
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-build-final.log",
+      "sha256": "e0fb06967a565d65bf6e169c22f01365ad3fc966e7cf02b4cb8fb56b4fc9969c",
+      "bytes": 804
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-build.log",
+      "sha256": "c6d5ab19f7b752520c00ab4951f1fc55fcf1cca9454278384c1a959bf8b98724",
+      "bytes": 804
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.6.1-final.json",
+      "sha256": "98e43453cce1175d214ff5ace06c149c3b6b22a97dae0f7e28f4aef4a79f0192",
+      "bytes": 1384
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.6.1-first.json",
+      "sha256": "98e43453cce1175d214ff5ace06c149c3b6b22a97dae0f7e28f4aef4a79f0192",
+      "bytes": 1384
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.6.2-final.json",
+      "sha256": "019935a29f7eb69ba302a7a12886c189b06e634d43d38d3fd6cd9a38ba3a52af",
+      "bytes": 1415
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.6.2-first.json",
+      "sha256": "019935a29f7eb69ba302a7a12886c189b06e634d43d38d3fd6cd9a38ba3a52af",
+      "bytes": 1415
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.6.3-final.json",
+      "sha256": "5c3a19c48540d6f4fb16be5c7586b7653d1f96f4018c77dfba5f98239722f851",
+      "bytes": 1378
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.6.3-first.json",
+      "sha256": "5c3a19c48540d6f4fb16be5c7586b7653d1f96f4018c77dfba5f98239722f851",
+      "bytes": 1378
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.6.4-final.json",
+      "sha256": "1a017a05625e2a8b65d1c7528e55ad6411f960e7a006aee7b505a16eaf4ffb77",
+      "bytes": 1396
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.6.4-first.json",
+      "sha256": "1a017a05625e2a8b65d1c7528e55ad6411f960e7a006aee7b505a16eaf4ffb77",
+      "bytes": 1396
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.6.5-final.json",
+      "sha256": "60ad9f144e01c8ac4571a2aea67fc5df2b36e3e6a352c1b1e313c40c580e1bf2",
+      "bytes": 1304
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.6.5-first.json",
+      "sha256": "60ad9f144e01c8ac4571a2aea67fc5df2b36e3e6a352c1b1e313c40c580e1bf2",
+      "bytes": 1304
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.6.6-final.json",
+      "sha256": "88ac349c8dbcd92ce7b7a0874b6be3fddd597fafa06dbd7a88451acc1d5e8757",
+      "bytes": 1580
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.6.6-first.json",
+      "sha256": "88ac349c8dbcd92ce7b7a0874b6be3fddd597fafa06dbd7a88451acc1d5e8757",
+      "bytes": 1580
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.6.7-final.json",
+      "sha256": "071583214b8e2149714b7151eed0f31094f4838a910b386db5fd43c39619d023",
+      "bytes": 1291
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.6.7-first.json",
+      "sha256": "071583214b8e2149714b7151eed0f31094f4838a910b386db5fd43c39619d023",
+      "bytes": 1291
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.6.8-final.json",
+      "sha256": "645388334650a1e2ac00cd70bbf4bd306b73c0f2f986852bc3f364f7645b82ad",
+      "bytes": 1370
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.6.8-first.json",
+      "sha256": "645388334650a1e2ac00cd70bbf4bd306b73c0f2f986852bc3f364f7645b82ad",
+      "bytes": 1370
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.7.1-final.json",
+      "sha256": "1be180e7bf3d21f8fac212c934428b25eb494ff0207cd5e62b429cc5814904ca",
+      "bytes": 1422
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.7.1-first.json",
+      "sha256": "1be180e7bf3d21f8fac212c934428b25eb494ff0207cd5e62b429cc5814904ca",
+      "bytes": 1422
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.7.10-final.json",
+      "sha256": "b42ca00aec6becb62a464de6a895996ac2474ceb6e398f8f7b4258d683913e1b",
+      "bytes": 1461
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.7.10-first.json",
+      "sha256": "b42ca00aec6becb62a464de6a895996ac2474ceb6e398f8f7b4258d683913e1b",
+      "bytes": 1461
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.7.11-final.json",
+      "sha256": "349bc6fccc1463b00df9a0d9a418a13971caf45a09f3c22c7890aeb64edb6101",
+      "bytes": 1398
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.7.11-first.json",
+      "sha256": "349bc6fccc1463b00df9a0d9a418a13971caf45a09f3c22c7890aeb64edb6101",
+      "bytes": 1398
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.7.12-final.json",
+      "sha256": "ed48dffdb8c459f53ff5ab97485136723db913da814b171683bc57e5c2fecb7a",
+      "bytes": 1475
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.7.12-first.json",
+      "sha256": "ed48dffdb8c459f53ff5ab97485136723db913da814b171683bc57e5c2fecb7a",
+      "bytes": 1475
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.7.13-final.json",
+      "sha256": "8225ae877fb1a05e6e0a05c5b7d8c864e1a94287d2cf985438e2f443793a189d",
+      "bytes": 1621
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.7.13-first.json",
+      "sha256": "8225ae877fb1a05e6e0a05c5b7d8c864e1a94287d2cf985438e2f443793a189d",
+      "bytes": 1621
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.7.14-final.json",
+      "sha256": "77e04cda3c1df3c3f6be35ab64def13cc34f9b366e91f426bf8c504c5bb0993f",
+      "bytes": 1379
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.7.14-first.json",
+      "sha256": "77e04cda3c1df3c3f6be35ab64def13cc34f9b366e91f426bf8c504c5bb0993f",
+      "bytes": 1379
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.7.2-final.json",
+      "sha256": "d5a2f65b05b470319cbf109cf58ac2c6b966f9e934c0b001612b74c90f748db5",
+      "bytes": 1378
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.7.2-first.json",
+      "sha256": "d5a2f65b05b470319cbf109cf58ac2c6b966f9e934c0b001612b74c90f748db5",
+      "bytes": 1378
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.7.3-final.json",
+      "sha256": "af2d9d30bda8405ad4ec9196dd7788e0c91f85639bc46d945be5e2ec2779a87c",
+      "bytes": 1358
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.7.3-first.json",
+      "sha256": "af2d9d30bda8405ad4ec9196dd7788e0c91f85639bc46d945be5e2ec2779a87c",
+      "bytes": 1358
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.7.4-final.json",
+      "sha256": "d7b7295fba9232ef63bcfd80c1ee41a2af5351c4d7eee1099b97fc8b4a90172b",
+      "bytes": 1284
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.7.4-first.json",
+      "sha256": "d7b7295fba9232ef63bcfd80c1ee41a2af5351c4d7eee1099b97fc8b4a90172b",
+      "bytes": 1284
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.7.5-final.json",
+      "sha256": "db92d8d709ec495e3524b106a1493b9b5f884ed274a998fbc2ec3685d1c34bad",
+      "bytes": 1376
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.7.5-first.json",
+      "sha256": "db92d8d709ec495e3524b106a1493b9b5f884ed274a998fbc2ec3685d1c34bad",
+      "bytes": 1376
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.7.6-final.json",
+      "sha256": "b4e4641c46d3ca63135324d4c2da3e284d06bafe83e9592ddf13e1a96dc40345",
+      "bytes": 1359
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.7.6-first.json",
+      "sha256": "b4e4641c46d3ca63135324d4c2da3e284d06bafe83e9592ddf13e1a96dc40345",
+      "bytes": 1359
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.7.7-final.json",
+      "sha256": "d1d39a42084e09d3dec008cbd80e73f5e00ecde88efd6e650478fb4090ceb792",
+      "bytes": 1181
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.7.7-first.json",
+      "sha256": "d1d39a42084e09d3dec008cbd80e73f5e00ecde88efd6e650478fb4090ceb792",
+      "bytes": 1181
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.7.8-final.json",
+      "sha256": "e0b043da3a44b60655e067fad08df334856fbdf0ff862b1359fd3d81d7daabae",
+      "bytes": 1247
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.7.8-first.json",
+      "sha256": "e0b043da3a44b60655e067fad08df334856fbdf0ff862b1359fd3d81d7daabae",
+      "bytes": 1247
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.7.9-final.json",
+      "sha256": "e77f7835df0cbf3a1db93cd5e4a5c31d9e51c73430c6c67dbbf726da4a4a7da8",
+      "bytes": 999
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.7.9-first.json",
+      "sha256": "e77f7835df0cbf3a1db93cd5e4a5c31d9e51c73430c6c67dbbf726da4a4a7da8",
+      "bytes": 999
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.8.11-final.json",
+      "sha256": "d883b1f028f8bc12e6db2082332f8daf1ed5d02c850087f22618aa709cc24ff8",
+      "bytes": 1428
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.8.11-first.json",
+      "sha256": "d883b1f028f8bc12e6db2082332f8daf1ed5d02c850087f22618aa709cc24ff8",
+      "bytes": 1428
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.8.14-final.json",
+      "sha256": "4bf2cba02922007cf379fb22fc964c6cc0652031170ca0291ccc66fc0f110e81",
+      "bytes": 1354
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.8.14-first.json",
+      "sha256": "4bf2cba02922007cf379fb22fc964c6cc0652031170ca0291ccc66fc0f110e81",
+      "bytes": 1354
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.8.18-final.json",
+      "sha256": "8e48edf4fc4f9f01c7b44c98cfa5471a4986203676d3cd8b6054568b9862d9f6",
+      "bytes": 1345
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.8.18-first.json",
+      "sha256": "8e48edf4fc4f9f01c7b44c98cfa5471a4986203676d3cd8b6054568b9862d9f6",
+      "bytes": 1345
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.8.21-final.json",
+      "sha256": "20e025b2e438b11b55182a9dce408f84e699047a55845ebef4b88a7a4fe8e917",
+      "bytes": 1412
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.8.21-first.json",
+      "sha256": "20e025b2e438b11b55182a9dce408f84e699047a55845ebef4b88a7a4fe8e917",
+      "bytes": 1412
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.8.23-final.json",
+      "sha256": "172c5f9cc7239d075ee41f9f52a8544d0246513fb4729e2db5b63885ce65d4f1",
+      "bytes": 1165
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.8.23-first.json",
+      "sha256": "172c5f9cc7239d075ee41f9f52a8544d0246513fb4729e2db5b63885ce65d4f1",
+      "bytes": 1165
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.8.25-final.json",
+      "sha256": "0938d5a98745cf283e28ced4d60730e4f4383da609bf62b279f26b4978c7f68c",
+      "bytes": 1134
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.8.25-first.json",
+      "sha256": "0938d5a98745cf283e28ced4d60730e4f4383da609bf62b279f26b4978c7f68c",
+      "bytes": 1134
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.8.26-final.json",
+      "sha256": "f7e12fdcd989d6535f2e489355b9ddedaa12c583ae6e1b7796784f549f77f7cf",
+      "bytes": 839
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.8.26-first.json",
+      "sha256": "f7e12fdcd989d6535f2e489355b9ddedaa12c583ae6e1b7796784f549f77f7cf",
+      "bytes": 839
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.8.27-final.json",
+      "sha256": "7a602a8dabda0b6e4072d0a35ac9e33892c94e6aacd889151137e266ec8f7d21",
+      "bytes": 1207
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.8.27-first.json",
+      "sha256": "7a602a8dabda0b6e4072d0a35ac9e33892c94e6aacd889151137e266ec8f7d21",
+      "bytes": 1207
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.8.28-final.json",
+      "sha256": "5b0ad1afac106323b0430217883fa201f7b5d4ca9524f1face95d3781129b2eb",
+      "bytes": 1537
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.8.28-first.json",
+      "sha256": "5b0ad1afac106323b0430217883fa201f7b5d4ca9524f1face95d3781129b2eb",
+      "bytes": 1537
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.8.29-final.json",
+      "sha256": "7b4cdf3960d0fbfee0c58188e31b9b404fd938d0de1a99e41cb9022bd1eade75",
+      "bytes": 1228
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.8.29-first.json",
+      "sha256": "7b4cdf3960d0fbfee0c58188e31b9b404fd938d0de1a99e41cb9022bd1eade75",
+      "bytes": 1228
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.8.30-final.json",
+      "sha256": "48330b1ed3e1c91f340a8ce293d9b222140cdb8d64dfc003741a552d016d7145",
+      "bytes": 1289
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.8.30-first.json",
+      "sha256": "48330b1ed3e1c91f340a8ce293d9b222140cdb8d64dfc003741a552d016d7145",
+      "bytes": 1289
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.8.31-final.json",
+      "sha256": "d16490675c4c97ddb96d56a19a02317a4819fb46b9355de1f512c7e6f77dd8c7",
+      "bytes": 1486
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.8.31-first.json",
+      "sha256": "d16490675c4c97ddb96d56a19a02317a4819fb46b9355de1f512c7e6f77dd8c7",
+      "bytes": 1486
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.8.33-final.json",
+      "sha256": "18fcf65f02a6246f4531a224d0ce8e13491bcf7ca9f247c79491c0865d943b41",
+      "bytes": 1257
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.8.33-first.json",
+      "sha256": "18fcf65f02a6246f4531a224d0ce8e13491bcf7ca9f247c79491c0865d943b41",
+      "bytes": 1257
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.8.34-final.json",
+      "sha256": "3712927ad1060849f6201c8aa586572266eccd57c71bee49fdab190181285cbe",
+      "bytes": 1247
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.8.34-first.json",
+      "sha256": "3712927ad1060849f6201c8aa586572266eccd57c71bee49fdab190181285cbe",
+      "bytes": 1247
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.8.4-final.json",
+      "sha256": "0947fa372ee5ce6eb9213f9e22115bf266c7cc6eea1f4d57fd33f91ff1c9c7a4",
+      "bytes": 1333
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.8.4-first.json",
+      "sha256": "0947fa372ee5ce6eb9213f9e22115bf266c7cc6eea1f4d57fd33f91ff1c9c7a4",
+      "bytes": 1333
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.8.6-final.json",
+      "sha256": "7d3bdc334514d05b3a9113561755c9852fd9863bd1e816a57afd4909262aca54",
+      "bytes": 1320
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/A.8.6-first.json",
+      "sha256": "7d3bdc334514d05b3a9113561755c9852fd9863bd1e816a57afd4909262aca54",
+      "bytes": 1320
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/audit-compatible-report.json",
+      "sha256": "f17dc097bb1f07b72154db3f97425e64497773aae78b0e70103e672788a73694",
+      "bytes": 130239
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/criterion-audit.json",
+      "sha256": "56337ed726e010c6e743b17ad1eacf879ed15929705f728dc3c45b3e45212c42",
+      "bytes": 67239
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/designer-key.json",
+      "sha256": "fad0794bca28a3e9b41a001b099f97f1b9ec8ee756ea586c09c5a0a5c78a350a",
+      "bytes": 3248
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/manifest.json",
+      "sha256": "82473b21803de18b16b7aa3d44dec4ed07082660f776825601cb5fef12dfe6fe",
+      "bytes": 510
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/progress.jsonl",
+      "sha256": "db765007948956c24bb8dbbef17b633a98f759f69f45125265b3569279922fec",
+      "bytes": 7420
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/report.json",
+      "sha256": "1c85cb6152b33e0e8c711b0379367f28e1124ab391bcdfb32cc34149a4a1d6eb",
+      "bytes": 125754
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-development/source-snapshot.json",
+      "sha256": "6ea0c042d1e85bb4b8c92e53922487dbf6bf8d3b315a6277529cc0359134205d",
+      "bytes": 36117
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-isolated.json",
+      "sha256": "d7937b4e87f03cd7c1bca7fcfcf297217f17bf36c774b225c5d4c17b1112e1d1",
+      "bytes": 642
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-javascript.log",
+      "sha256": "605b1214502e3a99b82bad7648af11572f57873a2dccacedb543bb0db80ca850",
+      "bytes": 2450
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-lint-final.log",
+      "sha256": "2eedaae3604e9e1ba6e33f4c246ecc919aecf1dc9be0fc08ebd0e16ac2b738e6",
+      "bytes": 88
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-lint.log",
+      "sha256": "391a2d8bc8897061de4cff1140b2ddc6e9ef573d29c4d41a245c8a6b8208eab3",
+      "bytes": 640
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-preservation.json",
+      "sha256": "c46af0fa7345fca3b8ed534fd6c6e72ec372c5817c200d72898abf78d6b480fd",
+      "bytes": 286
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-python-final.xml",
+      "sha256": "c5b9a36e384ce9277c4b8e4e457d26b46ec9b1688e22cc9253c42748e01c38a4",
+      "bytes": 51048
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-python.xml",
+      "sha256": "5b633bb738840c23f9d2b49d4859542e502bcad8ed4864aa999512c6d9ed5038",
+      "bytes": 51048
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-scope/controls.csv",
+      "sha256": "49cb18b809382141773184cc41f5559d6d60243af8d3e5ef4667b368a9e8abbf",
+      "bytes": 13067
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-scope/handoff.json",
+      "sha256": "4872f051e16bf642c517fcd321e2d46b844ca29de7d8f350a0d6479936a63c39",
+      "bytes": 229759
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-scope/snapshot.json",
+      "sha256": "d4bb318f009b1c8e47d87c2e95ee8ead6bb603f56940a6b7fe437a160043eed4",
+      "bytes": 1268
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-scope/source-requests.json",
+      "sha256": "bf181cb204a67c6fac5e041f0b8e12cfcdea8634a918e5be82f1c27a9d574cba",
+      "bytes": 57805
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-scope/source-requests.md",
+      "sha256": "a37d5c4eec881093c27180fe5f425a9fa7019822a8f2f73744d5f6f2ff42a3fa",
+      "bytes": 40707
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-scope/worklist.json",
+      "sha256": "06f181fa0138dfa5e1e259d62d29a3510f60ad621c284a0c3682e26106fa32d4",
+      "bytes": 41557
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-startup.json",
+      "sha256": "60827b5e73c87fc28aa64e0f2076f2f46b1baae914e8d785bec5e5958e28693e",
+      "bytes": 351
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-ui-source-retry.json",
+      "sha256": "add476f7cb6d794e66b7b8e9ca990ba3ede5ccc58516521e2f8a22c91d940623",
+      "bytes": 3728
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-ui-summary.json",
+      "sha256": "791ec10c1f6a2eaacb08cce72fe72c2e203e60f490896aa378bd130fb8505fc9",
+      "bytes": 818
+    },
+    {
+      "path": "docs/a8-results/release-2026-11-22-ui.json",
+      "sha256": "f10b49efcedf6e8cb08e2ce609326d59e983c4711a7dd9a26417d718a3e7e2ea",
+      "bytes": 23336
+    }
+  ],
+  "note": "Hash manifest proves saved bytes only, not professional approval."
+}

@@ -1,0 +1,29 @@
+{
+  "control_id": "A.6.1",
+  "model": "qwen2.5:7b",
+  "status": "Partially Compliant",
+  "error": null,
+  "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The artifact contains a record of a background check that was completed on 2026-09-28, indicating the existence of a background check record.\",\"source_files\":[\"screening.json\"]},{\"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"There is no confirmation from the HR department as the 'confirmed_by' field is null and the state is 'draft' in the HR confirmation record.\",\"source_files\":[\"screening.json\"]}]}",
+  "source_hashes": {
+    "screening.json": "76fc96ae2258c6bc6a83011236d1b0764da2a4cc3c76519babac67799056ecc4"
+  },
+  "checks": [
+    {
+      "criterion_index": 0,
+      "verdict": "met",
+      "rationale": "The artifact contains a record of a background check that was completed on 2026-09-28, indicating the existence of a background check record.",
+      "source_files": [
+        "screening.json"
+      ]
+    },
+    {
+      "criterion_index": 1,
+      "verdict": "not_met",
+      "rationale": "There is no confirmation from the HR department as the 'confirmed_by' field is null and the state is 'draft' in the HR confirmation record.",
+      "source_files": [
+        "screening.json"
+      ]
+    }
+  ],
+  "duration_ms": 8390
+}

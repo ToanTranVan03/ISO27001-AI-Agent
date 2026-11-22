@@ -1,0 +1,29 @@
+{
+  "control_id": "A.6.4",
+  "model": "qwen2.5:7b",
+  "status": "Insufficient Evidence",
+  "error": null,
+  "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The artifact 'discipline_policy.json' shows that a discipline policy document (LAB-HR-DISCIPLINE-1) has been published and is in effect on 2026-10-01.\",\"source_files\":[\"discipline_policy.json\"]},{\"criterion_index\":1,\"verdict\":\"unknown\",\"rationale\":\"While the policy document has been published, there is no explicit record of it being distributed to all employees.\",\"source_files\":[\"discipline_policy.json\"]}]}",
+  "source_hashes": {
+    "discipline_policy.json": "0de370c95839ce63e05fb96e2f7df2002506644be35a5175fde05b041fe1ae38"
+  },
+  "checks": [
+    {
+      "criterion_index": 0,
+      "verdict": "met",
+      "rationale": "The artifact 'discipline_policy.json' shows that a discipline policy document (LAB-HR-DISCIPLINE-1) has been published and is in effect on 2026-10-01.",
+      "source_files": [
+        "discipline_policy.json"
+      ]
+    },
+    {
+      "criterion_index": 1,
+      "verdict": "unknown",
+      "rationale": "While the policy document has been published, there is no explicit record of it being distributed to all employees.",
+      "source_files": [
+        "discipline_policy.json"
+      ]
+    }
+  ],
+  "duration_ms": 3203
+}

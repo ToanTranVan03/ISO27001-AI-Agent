@@ -1,0 +1,91 @@
+{
+  "parent_report_sha256": "6576560a43f83b975c66fdbe77ea2baba93a3f41a102a84ce745835c6046744d",
+  "capture_sha256": "c438a71be61bfc9d7293bb6e89f86aec27f542f2eb0d382476291493af9f7d40",
+  "independent_validation": false,
+  "record": {
+    "control_id": "A.8.5",
+    "case_id": "A.8.5-mixed",
+    "name": "Secure authentication",
+    "criteria_checks": [
+      "password_rejection_verified",
+      "second_factor_enforced"
+    ],
+    "criteria_details": [
+      {
+        "check": "password_rejection_verified",
+        "raw_source": "probe.json: bad_password + authenticated",
+        "pass_condition": "Dịch vụ lab từ chối mật khẩu sai và chấp nhận thông tin đúng.",
+        "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+        "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+        "verification_kind": "container-active-self-test"
+      },
+      {
+        "check": "second_factor_enforced",
+        "raw_source": "probe.json: no_second_factor + authenticated",
+        "pass_condition": "Dịch vụ lab từ chối thiếu yếu tố thứ hai và cho phép thông tin đầy đủ; không phải tích hợp IAM production.",
+        "fail_condition": "Có quan sát hợp lệ nhưng không thỏa điều kiện lab.",
+        "missing_condition": "Thiếu nguồn, lỗi công cụ hoặc sai định dạng => unknown.",
+        "verification_kind": "container-active-self-test"
+      }
+    ],
+    "evidence": {
+      "evidence_id": "A8LIVE-5f44104d813f4ac3fc891dfd",
+      "source": "live-container://A.8.5",
+      "source_sha256": "5f44104d813f4ac3fc891dfddb9b0f0a47290f413c6b6b1304574531cf4735f4",
+      "collected_at": "2026-11-22T03:18:03.944482+00:00",
+      "observed_at": "2026-11-22T03:18:03.899005+00:00",
+      "asset_id": "08b11382ce92",
+      "control_id": "A.8.5",
+      "facts": {
+        "password_rejection_verified": true,
+        "second_factor_enforced": false
+      },
+      "artifacts": [
+        {
+          "artifact": "observed_at",
+          "content": "2026-11-22T03:18:03.899005+00:00",
+          "sha256": "7d85fbca2b743ef8607024e9fcfcf10d0cb32548f08084b1dad15e1ec90d9a8f"
+        },
+        {
+          "artifact": "asset_id",
+          "content": "08b11382ce92",
+          "sha256": "9ad7ef860c5a6e3ba02207c52385e2e81b951744440ec7335d0f0281fe5dec07"
+        },
+        {
+          "artifact": "probe.json",
+          "content": "{\"schema\": \"a8-active-observation-v2\", \"control_id\": \"A.8.5\", \"observed_at\": \"2026-11-22T03:18:03.899005+00:00\", \"asset_id\": \"08b11382ce92\", \"observations\": {\"bad_password\": {\"response\": \"401 invalid password\", \"tls_version\": null, \"source_address\": \"127.0.0.1\"}, \"no_second_factor\": {\"response\": \"200 authenticated\", \"tls_version\": null, \"source_address\": \"127.0.0.1\"}, \"authenticated\": {\"response\": \"200 authenticated\", \"tls_version\": null, \"source_address\": \"127.0.0.1\"}, \"mechanism\": \"PBKDF2 + lab time-based HMAC token, not production IAM/TOTP certification\"}, \"collection_errors\": [], \"probe_kind\": \"container-active-self-test\", \"scope\": \"Synthetic isolated lab resources, not production attestation\"}",
+          "sha256": "3e1342310fda79c01be280a749c5e647c82d563b496cdb7c98ba7f69dfd87e5c"
+        }
+      ],
+      "collection_errors": [],
+      "is_synthetic": true,
+      "transport": "live",
+      "source_kind": "live-container-observation",
+      "probe_kind": "container-active-self-test",
+      "observation_available": true,
+      "freshness_note": "Observed now in an isolated, intentionally configured lab; not production evidence."
+    },
+    "owner": "IAM",
+    "applicable": true,
+    "inclusion_reason": "Doanh nghiệp lab sử dụng dịch vụ IAM; lựa chọn trong phạm vi kỹ thuật của đồ án.",
+    "applicability_approved": false,
+    "scope_note": "Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.",
+    "status": "Partially Compliant",
+    "rationale": "Dịch vụ lab đã từ chối mật khẩu sai và chấp nhận thông tin đúng, do đó tiêu chí 'password_rejection_verified' được đáp ứng. Tuy nhiên, tiêu chí 'second_factor_enforced' không được đáp ứng vì dịch vụ đã chấp nhận thông tin đầy đủ mà không yêu cầu yếu tố thứ hai. Điều này cho thấy rằng mặc dù có kiểm tra mật khẩu, nhưng không có yêu cầu xác thực hai yếu tố.",
+    "evidence_ids": [
+      "A8LIVE-5f44104d813f4ac3fc891dfd"
+    ],
+    "execution_source": "ollama-a8-evidence-judgment",
+    "attempts": [
+      {
+        "attempt": 1,
+        "status": "Partially Compliant",
+        "error": null,
+        "duration_ms": 6833.68
+      }
+    ],
+    "repaired": false,
+    "error": null,
+    "duration_ms": 6833.7
+  }
+}

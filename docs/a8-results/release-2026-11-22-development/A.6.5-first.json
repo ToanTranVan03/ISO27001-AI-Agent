@@ -1,0 +1,29 @@
+{
+  "control_id": "A.6.5",
+  "model": "qwen2.5:7b",
+  "status": "Insufficient Evidence",
+  "error": null,
+  "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"not_met\",\"rationale\":\"The 'access_revocation_export' is not_collected due to IAM audit export not being supplied.\",\"source_files\":[\"offboarding.json\"]},{\"criterion_index\":1,\"verdict\":\"unknown\",\"rationale\":\"The 'access_revocation_export' is not_collected, making the 'Biên bản xác nhận cắt quyền truy cập hệ thống' status unknown.\",\"source_files\":[\"offboarding.json\"]}]}",
+  "source_hashes": {
+    "offboarding.json": "1de7dfe37fc6382f20b444a7c1875a92cc807ee06b1588c451e1b259a81bc07a"
+  },
+  "checks": [
+    {
+      "criterion_index": 0,
+      "verdict": "not_met",
+      "rationale": "The 'access_revocation_export' is not_collected due to IAM audit export not being supplied.",
+      "source_files": [
+        "offboarding.json"
+      ]
+    },
+    {
+      "criterion_index": 1,
+      "verdict": "unknown",
+      "rationale": "The 'access_revocation_export' is not_collected, making the 'Biên bản xác nhận cắt quyền truy cập hệ thống' status unknown.",
+      "source_files": [
+        "offboarding.json"
+      ]
+    }
+  ],
+  "duration_ms": 2859
+}

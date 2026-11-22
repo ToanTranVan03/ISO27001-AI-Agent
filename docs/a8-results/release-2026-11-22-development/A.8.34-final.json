@@ -1,0 +1,29 @@
+{
+  "control_id": "A.8.34",
+  "model": "qwen2.5:7b",
+  "status": "Partially Compliant",
+  "error": null,
+  "raw_response": "{\"checks\":[{\"criterion_index\":0,\"verdict\":\"met\",\"rationale\":\"The audit account 'LAB-AUDIT' has been granted 'SELECT' privileges, which are read-only.\",\"source_files\":[\"audit_access_plan.json\"]},{ \"criterion_index\":1,\"verdict\":\"not_met\",\"rationale\":\"The scan plan has an approval state of 'pending' and no approval by a specific individual is recorded.\",\"source_files\":[\"audit_access_plan.json\"]}] }",
+  "source_hashes": {
+    "audit_access_plan.json": "f9469df91e0cc7ebd9a201a64dad7126dbceadd6674ea48154276b4016dab464"
+  },
+  "checks": [
+    {
+      "criterion_index": 0,
+      "verdict": "met",
+      "rationale": "The audit account 'LAB-AUDIT' has been granted 'SELECT' privileges, which are read-only.",
+      "source_files": [
+        "audit_access_plan.json"
+      ]
+    },
+    {
+      "criterion_index": 1,
+      "verdict": "not_met",
+      "rationale": "The scan plan has an approval state of 'pending' and no approval by a specific individual is recorded.",
+      "source_files": [
+        "audit_access_plan.json"
+      ]
+    }
+  ],
+  "duration_ms": 2969
+}
