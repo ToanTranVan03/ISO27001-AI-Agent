@@ -18,23 +18,19 @@ Giữ phạm vi 56 control (8 A.6, 14 A.7, 34 A.8), ưu tiên kiểm định sâ
 - [x] Chạy Agent trên 18 nguồn A.8 lab hiện hành, xuất kết quả từng control và giữ riêng các lần lỗi/kiểm tra lại.
 - [x] Mở rộng thực nghiệm phát triển bằng 38 hồ sơ mô phỏng ngoài nhóm 18 A.8; chạy Agent, giữ lỗi/thử lại và xuất kết quả từng control.
 - [ ] Đánh giá trên nguồn được chấp nhận trong phạm vi 56; đo độ đúng bằng bộ kiểm định và nhãn người đánh giá đủ điều kiện. Bộ phát triển 38 hồ sơ chưa hoàn tất mục này.
-- [x] Kiểm thử các luồng giao diện chính theo ma trận nghiệm thu tuần 6: đọc/thu nguồn, chấm/khóa nhãn, tiến độ, xuất báo cáo và các gate quyền/phiên bản. Ngày 22/11 đã kiểm chứng 12 kịch bản qua hai lần chạy (11 luồng cũ đạt, ca nguồn mới đạt sau sửa test), cùng ghi thật trên database riêng; không đồng nghĩa đã kiểm thử mọi ngoại lệ hoặc nghiệm thu chuyên môn.
+- [x] Kiểm thử các luồng giao diện chính theo ma trận nghiệm thu tuần 6: đọc/thu nguồn, chấm/khóa nhãn, tiến độ, xuất báo cáo và các gate quyền/phiên bản. Ngày 22/11 đã chạy lại đủ 12 kịch bản đạt trong một lần ở đợt kiểm tra trước nguồn, bổ sung ca kiểm lý do khóa nút đạt, cùng ghi thật trên database riêng; không đồng nghĩa đã kiểm thử mọi ngoại lệ hoặc nghiệm thu chuyên môn.
 - [ ] Người phụ trách ghi 56 quyết định tính áp dụng, lý do và kế hoạch xử lý/duy trì; bổ sung người nhận, hạn và cách kiểm tra lại.
 - [ ] Thẩm định từng tiêu chí trên nguồn hiện hành, hoàn thiện và trình người có trách nhiệm phê duyệt SoA khi đủ điều kiện.
 
 Phần triển khai kỹ thuật đã hoàn thành trong tuần:
 
-- [x] Siết gate SoA với quyết định cũ thiếu/sai kiểu `applicable`: không suy thành loại trừ, yêu cầu boolean thật; kiểm 9 trường hợp dữ liệu không hợp lệ, không sửa quyết định cũ. 397 Python và lint/build đạt; [JUnit](../docs/a8-results/release-2026-11-22-soa-guard-python.xml).
-- [x] Kiểm chứng Edge lý do khóa nút do thiếu nguồn, nút chạy không bấm được nhưng mở đúng hồ sơ; [hồi quy UI](../docs/a8-results/release-2026-11-22-blocked-button-ui.json). Hoàn tất phần kiểm trình duyệt còn chờ của dòng giải thích mới, không tự tạo nguồn.
-- [x] Hiển thị lý do khóa nút kiểm tra: thiếu nguồn ngoài preset, nguồn không dùng được/lỗi toàn vẹn hoặc Agent đang xử lý; chỉ dẫn mở hồ sơ để bổ sung. Lint/build đạt; chưa kiểm thử trình duyệt riêng cho dòng giải thích mới, không thay điều kiện cho phép chạy.
-- [x] Nối kiểm tra trước tệp nguồn lên web qua API có kiểm quyền đợt: không lưu bản gốc/bằng chứng, không chạy Agent; kết quả xem trước tự xóa khi đổi tệp/metadata, nút lưu thật tách riêng. 388 Python, 12 Edge trong một lần và lint/build đạt; gọi API thực 200/422, packet/SoA không đổi. [Hướng dẫn và minh chứng](../docs/KIEM_TRA_NGUON_TRUOC_KHI_NOP.md).
-- [x] Bổ sung CLI kiểm tra tệp trước nộp bằng cùng bộ lọc web; xuất hash/lỗi/cảnh báo metadata, không lưu bằng chứng hoặc gọi Agent, chặn ghi đè báo cáo. Chạy thử fixture đã biết, 387 test Python đạt; [hướng dẫn và minh chứng](../docs/KIEM_TRA_NGUON_TRUOC_KHI_NOP.md). Không tự xác nhận phù hợp tiêu chí hoặc bổ sung nguồn còn thiếu.
-- [x] Rà rubric 56 control/113 tiêu chí và lập ma trận nguồn/phiên bản cho người xác nhận; đọc lại API, xuất packet/CSV 56 dòng và phiếu nguồn, giữ xác nhận chuyên môn ở trạng thái chờ. [Báo cáo 22/11](../docs/HOAN_THIEN_TUAN_06_2026_11_22.md).
-- [x] Bổ sung so sánh hai báo cáo A.8 có kiểm hash, recipe, nguồn/lỗi/kết luận; không suy thay đổi trạng thái là khắc phục thành công hoặc sửa kết quả cũ.
-- [x] Bổ sung runner 38 hồ sơ chống ghi đè, chốt nguồn/khóa trước suy luận, lưu từng control và chỉ thử lại lỗi kỹ thuật; chạy Qwen lại đủ 18 + 38, xuất riêng hai nhóm và rà 19 sai khác tiêu chí.
-- [x] Kiểm chứng hồi quy phần nguồn mới bằng Edge: ba trạng thái, mã lỗi, mở đúng control và không ghi nguồn; 11 luồng cũ đạt, ca mới đạt sau sửa thao tác test mở khối cha (giữ báo cáo lỗi). Tổng 12 kịch bản qua hai lần chạy, 380 Python/14 JavaScript, lint/build đạt; [minh chứng 22/11](../docs/HOAN_THIEN_TUAN_06_2026_11_22.md).
-- [x] Lưu đầy đủ CSV và 132 artifact có manifest hash; đối chiếu hash với byte đã lưu trong Git, giữ nguyên LF/CRLF của minh chứng để có thể kiểm tra lại khi tải repo.
-- [x] Thống nhất bộ lọc nguồn giữa nhập thư mục và web: chặn ít/lặp ký tự, NUL và JSON sai cú pháp; tệp lỗi không loại các tệp hợp lệ khác. Quét đọc 56 thư mục chưa có nguồn mới hợp lệ; 385 test Python đạt. [Audit thư mục](../docs/a8-results/release-2026-11-22-folder-intake-audit.json), [JUnit](../docs/a8-results/release-2026-11-22-folder-intake-python.xml).
+- [x] Siết điều kiện duyệt SoA: quyết định cũ thiếu/sai kiểu tính áp dụng bị chặn, không suy thành loại trừ hoặc sửa dữ liệu cũ; kiểm 9 trường hợp không hợp lệ.
+- [x] Hiển thị và kiểm Edge lý do khóa nút kiểm tra do thiếu nguồn; không cho chạy khi thiếu đầu vào, vẫn mở đúng hồ sơ để bổ sung. Hoàn tất phần kiểm trình duyệt trước đó còn chờ.
+- [x] Bổ sung kiểm tra trước nguồn trên CLI/web, dùng cùng bộ lọc: ít/lặp ký tự, NUL, JSON lỗi, loại tệp và metadata. Trả hash/cảnh báo, không lưu nguồn hoặc chạy Agent; đổi tệp/metadata xóa xem trước, lưu thật là thao tác riêng. Tệp lỗi không loại các tệp hợp lệ khác. [Hướng dẫn](../docs/KIEM_TRA_NGUON_TRUOC_KHI_NOP.md).
+- [x] Rà rubric 56 control/113 tiêu chí; xuất packet/CSV, phiếu nguồn và ma trận phiên bản cho người xác nhận. Quét 56 thư mục chưa có nguồn mới hợp lệ; chưa đóng mục bổ sung nguồn. [Phiếu rà rubric](../docs/RA_SOAT_RUBRIC_2026_11_22.md), [audit thư mục](../docs/a8-results/release-2026-11-22-folder-intake-audit.json).
+- [x] Bổ sung so sánh hai báo cáo theo hash nguồn/rubric/model và runner 38 hồ sơ chốt nguồn/khóa trước suy luận, chống ghi đè, chỉ thử lại lỗi kỹ thuật. Chạy lại 18 + 38 và giữ các kết quả lệch; [báo cáo 22/11](../docs/HOAN_THIEN_TUAN_06_2026_11_22.md).
+- [x] Lưu CSV và manifest 132 artifact của đợt khóa sổ; kiểm hash với byte trong Git, bảo toàn LF/CRLF. Các minh chứng bổ sung sau đó được lưu riêng, không ghi đè đợt trước.
+- [x] Kiểm chứng mới nhất: 397 Python, 14 JavaScript; 39 kiểm tra API; 12 Edge đạt trong một lần ở đợt kiểm tra trước nguồn, thêm ca Edge nút bị khóa đạt; lint/build đạt. Kiểm thử ghi thật trên database riêng, không tạo chấm/phê duyệt cho đợt chính.
 - [x] Kiểm tra nội dung nguồn trước suy luận, giữ dữ liệu cũ và yêu cầu nộp lại nguồn không dùng được.
 - [x] Trực quan hóa và thống nhất bốn màn hình; phân biệt kết quả, tiến độ, bằng chứng và thẩm định.
 - [x] Nối ngữ cảnh đợt/control/nhân viên/lượt nguồn giữa bốn màn hình; giữ mục đang xem khi tải lại hoặc Back/Forward, nhập nguồn A.8 dẫn về đúng hồ sơ và lọc nhân viên theo viện dẫn bằng chứng.
@@ -78,6 +74,7 @@ Các thông tin trên là **trạng thái bàn giao từ tuần 5**, không ph�
 
 | Ngày | Công việc | Kết quả / minh chứng |
 |---|---|---|
+| 22/11/2026 | Hoàn thiện tiếp nhận nguồn và chốt điều kiện SoA | Kiểm tra trước nguồn trên CLI/web không ghi dữ liệu; thống nhất lọc nguồn thư mục, hiển thị lý do khóa nút và kiểm Edge; chặn quyết định áp dụng thiếu/sai kiểu. 397 Python, 14 JavaScript, lint/build đạt; 12 luồng Edge đạt và ca bổ sung nút bị khóa đạt. Quét 56 thư mục chưa có nguồn mới hợp lệ; giữ tám mục cần nguồn/xác nhận thật mở |
 | 22/11/2026 | Chạy lại và khóa sổ kỹ thuật theo checklist | Chốt snapshot rồi chạy 18 A.8 live và 38 hồ sơ mô phỏng bằng Qwen: 0 lỗi đầu/cuối; 18 A.8 một phần, bộ 38 khớp khóa phát triển 23/38, giữ 15 lệch tổng và 19 lệch tiêu chí. Export trạng thái 56, so sánh hai lượt, chuẩn bị phiếu rà rubric; API 39 bước/ba tài khoản và ghi thật database riêng đạt. Packet/rubric/chỉ số nghiệm thu chính trước–sau không đổi; xem [báo cáo và artifact 22/11](../docs/HOAN_THIEN_TUAN_06_2026_11_22.md). Tám mục nguồn/xác nhận bên ngoài vẫn mở |
 | 22/11/2026 | Làm rõ yêu cầu bổ sung/đối chiếu nguồn | Phân biệt thiếu hồ sơ, nội dung không dùng được và lỗi toàn vẹn; giữ mã bằng chứng/lỗi, hiển thị trên UI và mở đúng control. Mốc đầu 367 test Python đạt; sau đó đã kiểm thử Edge phần nguồn mới trong đợt khóa sổ cùng ngày. Không thay bằng chứng, nhãn, quyết định hay phê duyệt thật |
 | 18/11/2026 | Củng cố kiểm tra nội dung nguồn và đầu vào Agent | Chặn tài liệu quá ít/ký tự lặp khi nạp mới, lọc nguồn cũ trước suy luận, giữ lịch sử; thêm cảnh báo và việc yêu cầu nộp lại trên Phạm vi 56 |
@@ -117,11 +114,11 @@ Các thông tin trên là **trạng thái bàn giao từ tuần 5**, không ph�
 
 ### Cập nhật mới nhất ngày 22/11
 
-- **Bổ sung sau khóa sổ:** sửa luồng nhập thư mục còn nhận nguồn một ký tự/JSON sai; thống nhất với web, không sửa nguồn cũ. 385 test Python đạt; quét 56 thư mục có 0 nguồn mới hợp lệ, chưa thể đóng các mục thiếu nguồn.
+- **Bổ sung mới nhất:** thống nhất kiểm tra nguồn thư mục/web và đưa kiểm tra trước lên CLI/giao diện; không nhập bằng chứng khi xem trước. Giải thích lý do khóa nút và kiểm trình duyệt; chặn quyết định tính áp dụng sai kiểu trước duyệt SoA. Không sửa nguồn, nhãn hoặc quyết định thật.
 - **Triển khai:** công cụ xuất hiện trạng nguồn/packet/CSV 56 control; so sánh hai lần đánh giá theo nguồn/rubric/model; runner 38 hồ sơ chốt nguồn và khóa trước suy luận, chống ghi đè, giữ lỗi và chỉ thử lại lỗi kỹ thuật.
 - **Agent 18 A.8 live:** chạy Qwen đủ 18/18, không lỗi đầu/cuối; 18 kết luận một phần trên snapshot lab mới. Kết quả riêng từng control, không thay các kết luận của đợt chính.
 - **38 hồ sơ mô phỏng:** chạy đủ, không lỗi đầu/cuối; khớp khóa phát triển 23/38, giữ 15 lệch tổng và 19 lệch tiêu chí ở 18 control. Không phải accuracy độc lập; một số lý do LLM vẫn cần người đánh giá rà.
-- **Kiểm chứng:** 380 Python, 14 JavaScript; API 39 kiểm tra ba tài khoản; 11 UI cũ đạt, ca nguồn mới đạt sau sửa test, tổng 12 kịch bản qua hai lần chạy; ghi thật trên database riêng, lint/build và kiểm tra khởi động đạt.
+- **Kiểm chứng mới nhất:** 397 Python, 14 JavaScript; 39 kiểm tra API ba tài khoản; 12 Edge đạt trong một lần ở đợt kiểm tra trước nguồn và ca Edge bổ sung cho nút bị khóa đạt; lint/build đạt. Các lần lỗi cũ giữ riêng; số test không cộng dồn. [JUnit mới nhất](../docs/a8-results/release-2026-11-22-soa-guard-python.xml), [12 Edge](../docs/a8-results/release-2026-11-22-web-preflight-ui.json), [ca nút bị khóa](../docs/a8-results/release-2026-11-22-blocked-button-ui.json).
 - **Bảo toàn và tồn đọng:** packet/rubric/chỉ số nghiệm thu chính trước–sau không đổi; còn 37 control thiếu nguồn và A.6.2 cần thay. Chưa có thẩm định, quyết định áp dụng hoặc phê duyệt thật; giữ tám mục tương ứng mở.
 - **Minh chứng:** [báo cáo tổng kết và file kết quả](../docs/HOAN_THIEN_TUAN_06_2026_11_22.md), [phiếu rà rubric](../docs/RA_SOAT_RUBRIC_2026_11_22.md), [manifest 132 artifact](../docs/a8-results/release-2026-11-22-manifest.json).
 
