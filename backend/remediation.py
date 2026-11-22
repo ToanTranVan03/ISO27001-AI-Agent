@@ -40,7 +40,7 @@ def transition(document,action_id,command,payload,actor,role,control):
     if item is None:raise ValueError('Không tìm thấy hành động.')
     before=item['state']
     consultant=role in ('consultant','verifier')
-    operator=str(item.get('assignee'))==str(actor)
+    operator=str(item.get('assignee'))==str(actor) or str(actor) in item.get('collaborator_ids',[])
     if command=='approve':
         if role!='consultant' or before!='PENDING_APPROVAL':raise PermissionError('Chỉ tư vấn phê duyệt đề xuất đang chờ.')
         if doc['baseline']['review_token']!=control['review_token']:raise ValueError('Nguồn/kết quả đã đổi; mở phát hiện mới trên snapshot hiện hành.')
@@ -48,7 +48,7 @@ def transition(document,action_id,command,payload,actor,role,control):
         due=date.fromisoformat(payload['due_date'])
         if due<datetime.now(ZoneInfo('Asia/Bangkok')).date():raise ValueError('Hạn giao mới không được ở quá khứ.')
         if not item['tasks']:raise ValueError('Cần ít nhất một công việc.')
-        item.update(state='NOT_STARTED',assignee=payload['assignee'],due_date=due.isoformat(),approved_by=actor)
+        item.update(state='NOT_STARTED',assignee=payload['assignee'],collaborator_ids=payload.get('collaborator_ids',[]),due_date=due.isoformat(),approved_by=actor)
     elif command=='edit':
         if role!='consultant' or before!='PENDING_APPROVAL':raise PermissionError('Chỉ sửa đề xuất chưa phê duyệt.')
         for key in ('title','steps','acceptance','resources','department','priority'):
@@ -75,6 +75,7 @@ def transition(document,action_id,command,payload,actor,role,control):
             ref=dict(evidence_id=evidence['evidence_id'],sha256_hash=evidence['sha256_hash'])
             if ref not in item['evidence']:item['evidence'].append(ref)
         if command=='submit':
+            if str(item.get('assignee'))!=str(actor):raise PermissionError('Người chịu trách nhiệm chính gửi hồ sơ xác minh.')
             if not all(t['done'] for t in item['tasks']) or not item['evidence']:raise ValueError('Hoàn tất công việc và đính kèm nguồn sau thực hiện trước khi gửi.')
             item.update(state='AWAITING_VERIFICATION',submitted_token=control['review_token'])
     elif command=='verify':

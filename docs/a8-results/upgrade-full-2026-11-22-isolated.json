@@ -1,0 +1,577 @@
+{
+  "protocol": "isolated-real-write-acceptance-v1",
+  "checked_at": "2026-11-22T18:32:27.661018+07:00",
+  "database": "iso_acceptance_7397a55e99b1",
+  "test_data_only": true,
+  "human_assessment": false,
+  "professional_approval": false,
+  "api_mocked": false,
+  "passed": true,
+  "database_dropped": true,
+  "main_table_counts_unchanged": true,
+  "browser_exit_code": 0,
+  "remediation_restart_persistence": true,
+  "remediation_receipt": {
+    "origin": "SYNTHETIC_DISPOSABLE_DATABASE_ONLY",
+    "records": {
+      "remediation": [
+        {
+          "record_id": "2d24aab3-109e-42a9-934c-8562eaced340",
+          "kind": "finding",
+          "version": 12,
+          "document": {
+            "risk": "unconfirmed",
+            "actions": [
+              {
+                "state": "CLOSED",
+                "steps": "Request responsible owner records, inspect scope, upload and independently review.",
+                "tasks": [
+                  {
+                    "done": true,
+                    "title": "Collect test records",
+                    "task_id": "00f8bf81-b264-4061-a869-c88131f7e2cd"
+                  },
+                  {
+                    "done": true,
+                    "title": "Review and submit test records",
+                    "task_id": "f9c26547-9391-4aab-b648-6f040e1cc12c"
+                  }
+                ],
+                "title": "Obtain and verify a synthetic HR record",
+                "assignee": "33679c1d-4881-4e71-8f02-8cf1b4d23cb8",
+                "due_date": "2099-12-31",
+                "evidence": [
+                  {
+                    "evidence_id": "WEB-661ee09c32f7616a4fef111a250032e5",
+                    "sha256_hash": "3bc9b391084658129438ff307cd0d8801f54884878ce6b9ba3c2cd42a7c56642"
+                  }
+                ],
+                "priority": "medium",
+                "action_id": "d5a1dccf-4b22-4695-bc21-19cf5028b3b8",
+                "resources": "Test owner and isolated record",
+                "acceptance": "Reviewer inspects each criterion and cites the new test artifact",
+                "department": "Test HR",
+                "approved_by": "7f1b4dbe-8598-4a83-9253-eb39a599b1e4",
+                "verifications": [
+                  {
+                    "at": "2026-11-22T11:32:48.097488+00:00",
+                    "note": "SYNTHETIC acceptance test, not professional verification",
+                    "outcome": "partial",
+                    "conclusion": null,
+                    "reviewer_id": "7f1b4dbe-8598-4a83-9253-eb39a599b1e4",
+                    "review_token": "e32316bcf56b84bd32ed27708b09a77dd4a42a11d34b4b3f3d0c4fa457bab45b",
+                    "human_reviewed_at": null,
+                    "human_review_signature": "be4d39f0c2111eb8e35526ee6cf72f1fdd2b574112452cc9d850df01a4c272ef"
+                  },
+                  {
+                    "at": "2026-11-22T11:32:48.932279+00:00",
+                    "note": "SYNTHETIC acceptance test, not professional verification",
+                    "outcome": "accepted",
+                    "conclusion": "Compliant",
+                    "reviewer_id": "7f1b4dbe-8598-4a83-9253-eb39a599b1e4",
+                    "review_token": "e32316bcf56b84bd32ed27708b09a77dd4a42a11d34b4b3f3d0c4fa457bab45b",
+                    "human_reviewed_at": "2026-11-22T11:32:48.681140+00:00",
+                    "human_review_signature": "7da2799d3490818f7f963d87900c2e37ef6738a49f7b58c44bc432f69cc09512"
+                  }
+                ],
+                "proposal_origin": "CONSULTANT_DRAFT",
+                "submitted_token": "e32316bcf56b84bd32ed27708b09a77dd4a42a11d34b4b3f3d0c4fa457bab45b"
+              }
+            ],
+            "history": [
+              {
+                "at": "2026-11-22T11:32:45.861375+00:00",
+                "actor": "7f1b4dbe-8598-4a83-9253-eb39a599b1e4",
+                "command": "propose"
+              },
+              {
+                "at": "2026-11-22T11:32:46.035118+00:00",
+                "note": "SYNTHETIC acceptance test, not professional verification",
+                "role": "consultant",
+                "actor": "7f1b4dbe-8598-4a83-9253-eb39a599b1e4",
+                "after": "NOT_STARTED",
+                "before": "PENDING_APPROVAL",
+                "command": "approve",
+                "action_id": "d5a1dccf-4b22-4695-bc21-19cf5028b3b8"
+              },
+              {
+                "at": "2026-11-22T11:32:46.293500+00:00",
+                "note": "SYNTHETIC acceptance test, not professional verification",
+                "role": "operator",
+                "actor": "33679c1d-4881-4e71-8f02-8cf1b4d23cb8",
+                "after": "IN_PROGRESS",
+                "before": "NOT_STARTED",
+                "command": "start",
+                "action_id": "d5a1dccf-4b22-4695-bc21-19cf5028b3b8"
+              },
+              {
+                "at": "2026-11-22T11:32:46.795794+00:00",
+                "note": "SYNTHETIC acceptance test, not professional verification",
+                "role": "operator",
+                "actor": "33679c1d-4881-4e71-8f02-8cf1b4d23cb8",
+                "after": "IN_PROGRESS",
+                "before": "IN_PROGRESS",
+                "command": "task",
+                "action_id": "d5a1dccf-4b22-4695-bc21-19cf5028b3b8"
+              },
+              {
+                "at": "2026-11-22T11:32:46.976102+00:00",
+                "note": "SYNTHETIC acceptance test, not professional verification",
+                "role": "operator",
+                "actor": "33679c1d-4881-4e71-8f02-8cf1b4d23cb8",
+                "after": "IN_PROGRESS",
+                "before": "IN_PROGRESS",
+                "command": "task",
+                "action_id": "d5a1dccf-4b22-4695-bc21-19cf5028b3b8"
+              },
+              {
+                "at": "2026-11-22T11:32:47.250896+00:00",
+                "note": "SYNTHETIC acceptance test, not professional verification",
+                "role": "operator",
+                "actor": "33679c1d-4881-4e71-8f02-8cf1b4d23cb8",
+                "after": "IN_PROGRESS",
+                "before": "IN_PROGRESS",
+                "command": "attach",
+                "action_id": "d5a1dccf-4b22-4695-bc21-19cf5028b3b8"
+              },
+              {
+                "at": "2026-11-22T11:32:47.447007+00:00",
+                "note": "SYNTHETIC acceptance test, not professional verification",
+                "role": "operator",
+                "actor": "33679c1d-4881-4e71-8f02-8cf1b4d23cb8",
+                "after": "AWAITING_VERIFICATION",
+                "before": "IN_PROGRESS",
+                "command": "submit",
+                "action_id": "d5a1dccf-4b22-4695-bc21-19cf5028b3b8"
+              },
+              {
+                "at": "2026-11-22T11:32:48.097488+00:00",
+                "note": "SYNTHETIC acceptance test, not professional verification",
+                "role": "consultant",
+                "actor": "7f1b4dbe-8598-4a83-9253-eb39a599b1e4",
+                "after": "REWORK",
+                "before": "AWAITING_VERIFICATION",
+                "command": "verify",
+                "action_id": "d5a1dccf-4b22-4695-bc21-19cf5028b3b8"
+              },
+              {
+                "at": "2026-11-22T11:32:48.276587+00:00",
+                "note": "SYNTHETIC acceptance test, not professional verification",
+                "role": "operator",
+                "actor": "33679c1d-4881-4e71-8f02-8cf1b4d23cb8",
+                "after": "AWAITING_VERIFICATION",
+                "before": "REWORK",
+                "command": "submit",
+                "action_id": "d5a1dccf-4b22-4695-bc21-19cf5028b3b8"
+              },
+              {
+                "at": "2026-11-22T11:32:48.932279+00:00",
+                "note": "SYNTHETIC acceptance test, not professional verification",
+                "role": "consultant",
+                "actor": "7f1b4dbe-8598-4a83-9253-eb39a599b1e4",
+                "after": "VERIFIED",
+                "before": "AWAITING_VERIFICATION",
+                "command": "verify",
+                "action_id": "d5a1dccf-4b22-4695-bc21-19cf5028b3b8"
+              },
+              {
+                "at": "2026-11-22T11:32:49.137145+00:00",
+                "note": "SYNTHETIC acceptance test, not professional verification",
+                "role": "consultant",
+                "actor": "7f1b4dbe-8598-4a83-9253-eb39a599b1e4",
+                "after": "CLOSED",
+                "before": "VERIFIED",
+                "command": "close",
+                "action_id": "d5a1dccf-4b22-4695-bc21-19cf5028b3b8"
+              }
+            ],
+            "baseline": {
+              "criteria": [
+                "Tồn tại hồ sơ kiểm tra lý lịch",
+                "Có xác nhận từ bộ phận nhân sự (HR)"
+              ],
+              "evidence": [
+                {
+                  "source": "upload-source://A.6.1/changed-record.txt",
+                  "evidence_id": "WEB-99b99fbabc8b41505cd90632974336e5",
+                  "sha256_hash": "56e4e5efec8adcdb0dd785078ec02585f6a21665592079ce24249a6b6a87a3e3",
+                  "evidence_type": "EVID_PPL_HR_RECORD"
+                },
+                {
+                  "source": "upload-source://A.6.1/synthetic-record.txt",
+                  "evidence_id": "WEB-26fa6843a4f7c7a1418caa400f178eee",
+                  "sha256_hash": "182e887273c84f7937927ef601d61d23fa99382ffa905a7762b3a522ed8ed2e4",
+                  "evidence_type": "EVID_PPL_HR_RECORD"
+                }
+              ],
+              "conclusion": "Chưa đánh giá",
+              "human_review": null,
+              "review_token": "6438ebd90a059525ecf79d92adf0cfc7e6c715c32538052f3f5954b8d7bc18b5"
+            },
+            "location": "Test HR service",
+            "control_id": "A.6.1",
+            "created_at": "2026-11-22T11:32:45.668453+00:00",
+            "created_by": "7f1b4dbe-8598-4a83-9253-eb39a599b1e4",
+            "finding_id": "2d24aab3-109e-42a9-934c-8562eaced340",
+            "root_cause": "Unconfirmed, requires investigation",
+            "description": "SYNTHETIC test: recorded HR evidence needs further verification",
+            "rubric_sha256": "dbf106d4cc9cf939e8bd3aba2cc7bf61c605b4c0e0068d6f113a14c942087c9c",
+            "context_snapshot": {
+              "version": 1,
+              "document": {
+                "name": "SYNTHETIC acceptance company",
+                "risks": "Unverified sample risk",
+                "sector": "Software test only",
+                "contact": "Synthetic test owner",
+                "history": [
+                  {
+                    "at": "2026-11-22T11:32:45.278550+00:00",
+                    "actor": "7f1b4dbe-8598-4a83-9253-eb39a599b1e4",
+                    "before": null
+                  }
+                ],
+                "locations": "Test location",
+                "isms_scope": "Disposable test records for one isolated service",
+                "departments": "Test IT",
+                "obligations": "Not assessed; synthetic test only",
+                "assets_systems": "Test file system",
+                "standard_reference": "ISO/IEC 27001:2022; Amd 1:2024 — cần xác nhận tài liệu được cấp phép/phạm vi"
+              }
+            },
+            "certification_claim": false,
+            "root_cause_confirmed": false
+          }
+        },
+        {
+          "record_id": "415c6137-218f-431f-bdb5-b58e991c848a",
+          "kind": "finding",
+          "version": 2,
+          "document": {
+            "risk": "unconfirmed",
+            "actions": [
+              {
+                "model": "qwen2.5:7b",
+                "state": "PENDING_APPROVAL",
+                "steps": "Đánh giá và đề xuất cải thiện quy trình lưu trữ hồ sơ kiểm tra lý lịch",
+                "tasks": [
+                  {
+                    "done": false,
+                    "title": "Xác minh tồn tại hồ sơ kiểm tra lý lịch",
+                    "task_id": "4ee759f1-531c-481a-a935-096bb059804e"
+                  },
+                  {
+                    "done": false,
+                    "title": "Xác nhận từ bộ phận nhân sự (HR)",
+                    "task_id": "3e1ee9fc-207b-4f5b-8d01-15f4072c0dcf"
+                  },
+                  {
+                    "done": false,
+                    "title": "Đánh giá quy trình lưu trữ hiện tại",
+                    "task_id": "9c01f54a-ebea-4695-890a-33c97bd0dc59"
+                  },
+                  {
+                    "done": false,
+                    "title": "Đề xuất cải tiến quy trình lưu trữ",
+                    "task_id": "43635d93-2a69-4845-a597-6ee8c11c6862"
+                  },
+                  {
+                    "done": false,
+                    "title": "Xác nhận tài liệu được cấp phép/phạm vi theo ISO/IEC 27001:2022; Amd 1:2024",
+                    "task_id": "d4042af2-e47c-4f30-bcd5-bf7e059c7632"
+                  },
+                  {
+                    "done": false,
+                    "title": "Xác nhận nguồn lực và điều kiện nghiệm thu",
+                    "task_id": "5dd99432-1577-4390-bfb5-2ba1a4e5a9db"
+                  }
+                ],
+                "title": "Đánh giá và cải thiện quy trình lưu trữ hồ sơ kiểm tra lý lịch",
+                "assignee": null,
+                "due_date": null,
+                "evidence": [],
+                "priority": "high",
+                "action_id": "91ff5d6f-eebf-4e17-8659-53af95e8ed9f",
+                "resources": "Nhân sự Test IT, bộ phận nhân sự (HR)",
+                "acceptance": "Quy trình lưu trữ hồ sơ kiểm tra lý lịch được xác nhận và thực hiện đúng theo yêu cầu",
+                "department": "Test IT",
+                "raw_proposal": "{\n  \"title\": \"Đánh giá và cải thiện quy trình lưu trữ hồ sơ kiểm tra lý lịch\",\n  \"steps\": \"Đánh giá và đề xuất cải thiện quy trình lưu trữ hồ sơ kiểm tra lý lịch\",\n  \"acceptance\": \"Quy trình lưu trữ hồ sơ kiểm tra lý lịch được xác nhận và thực hiện đúng theo yêu cầu\",\n  \"department\": \"Test IT\",\n  \"resources\": \"Nhân sự Test IT, bộ phận nhân sự (HR)\",\n  \"tasks\": [\n    \"Xác minh tồn tại hồ sơ kiểm tra lý lịch\",\n    \"Xác nhận từ bộ phận nhân sự (HR)\",\n    \"Đánh giá quy trình lưu trữ hiện tại\",\n    \"Đề xuất cải tiến quy trình lưu trữ\",\n    \"Xác nhận tài liệu được cấp phép/phạm vi theo ISO/IEC 27001:2022; Amd 1:2024\",\n    \"Xác nhận nguồn lực và điều kiện nghiệm thu\"\n  ],\n  \"priority\": \"high\"\n}",
+                "verifications": [],
+                "proposal_origin": "OLLAMA_DRAFT_REQUIRES_REVIEW"
+              }
+            ],
+            "history": [
+              {
+                "at": "2026-11-22T11:33:03.166365+00:00",
+                "actor": "7f1b4dbe-8598-4a83-9253-eb39a599b1e4",
+                "command": "ai_proposal",
+                "action_id": "91ff5d6f-eebf-4e17-8659-53af95e8ed9f"
+              }
+            ],
+            "baseline": {
+              "criteria": [
+                "Tồn tại hồ sơ kiểm tra lý lịch",
+                "Có xác nhận từ bộ phận nhân sự (HR)"
+              ],
+              "evidence": [
+                {
+                  "source": "upload-source://A.6.1/after-remediation.txt",
+                  "evidence_id": "WEB-661ee09c32f7616a4fef111a250032e5",
+                  "sha256_hash": "3bc9b391084658129438ff307cd0d8801f54884878ce6b9ba3c2cd42a7c56642",
+                  "evidence_type": "EVID_PPL_HR_RECORD"
+                },
+                {
+                  "source": "upload-source://A.6.1/changed-record.txt",
+                  "evidence_id": "WEB-99b99fbabc8b41505cd90632974336e5",
+                  "sha256_hash": "56e4e5efec8adcdb0dd785078ec02585f6a21665592079ce24249a6b6a87a3e3",
+                  "evidence_type": "EVID_PPL_HR_RECORD"
+                },
+                {
+                  "source": "upload-source://A.6.1/synthetic-record.txt",
+                  "evidence_id": "WEB-26fa6843a4f7c7a1418caa400f178eee",
+                  "sha256_hash": "182e887273c84f7937927ef601d61d23fa99382ffa905a7762b3a522ed8ed2e4",
+                  "evidence_type": "EVID_PPL_HR_RECORD"
+                }
+              ],
+              "conclusion": "Chưa đánh giá",
+              "human_review": {
+                "protocol": "human-criteria-review-v2",
+                "rationale": "SYNTHETIC test confirms validator wiring only; not an actual human assessment.",
+                "conclusion": "Compliant",
+                "control_id": "A.6.1",
+                "reviewed_at": "2026-11-22T11:32:48.681140+00:00",
+                "reviewed_by": "7f1b4dbe-8598-4a83-9253-eb39a599b1e4",
+                "evidence_ids": [
+                  "WEB-661ee09c32f7616a4fef111a250032e5"
+                ],
+                "review_token": "e32316bcf56b84bd32ed27708b09a77dd4a42a11d34b4b3f3d0c4fa457bab45b",
+                "criteria_reviews": [
+                  {
+                    "verdict": "met",
+                    "rationale": "Synthetic fixture satisfies this test criterion only, not an actual audit judgment.",
+                    "evidence_ids": [
+                      "WEB-661ee09c32f7616a4fef111a250032e5"
+                    ],
+                    "criterion_index": 0
+                  },
+                  {
+                    "verdict": "met",
+                    "rationale": "Synthetic fixture satisfies this test criterion only, not an actual audit judgment.",
+                    "evidence_ids": [
+                      "WEB-661ee09c32f7616a4fef111a250032e5"
+                    ],
+                    "criterion_index": 1
+                  }
+                ],
+                "machine_conclusion": "Chưa đánh giá"
+              },
+              "review_token": "e32316bcf56b84bd32ed27708b09a77dd4a42a11d34b4b3f3d0c4fa457bab45b"
+            },
+            "location": "Test HR",
+            "control_id": "A.6.1",
+            "created_at": "2026-11-22T11:32:50.077126+00:00",
+            "created_by": "7f1b4dbe-8598-4a83-9253-eb39a599b1e4",
+            "finding_id": "415c6137-218f-431f-bdb5-b58e991c848a",
+            "root_cause": "Not confirmed, requires review",
+            "description": "SYNTHETIC test: review future record retention workflow",
+            "rubric_sha256": "dbf106d4cc9cf939e8bd3aba2cc7bf61c605b4c0e0068d6f113a14c942087c9c",
+            "context_snapshot": {
+              "version": 1,
+              "document": {
+                "name": "SYNTHETIC acceptance company",
+                "risks": "Unverified sample risk",
+                "sector": "Software test only",
+                "contact": "Synthetic test owner",
+                "history": [
+                  {
+                    "at": "2026-11-22T11:32:45.278550+00:00",
+                    "actor": "7f1b4dbe-8598-4a83-9253-eb39a599b1e4",
+                    "before": null
+                  }
+                ],
+                "locations": "Test location",
+                "isms_scope": "Disposable test records for one isolated service",
+                "departments": "Test IT",
+                "obligations": "Not assessed; synthetic test only",
+                "assets_systems": "Test file system",
+                "standard_reference": "ISO/IEC 27001:2022; Amd 1:2024 — cần xác nhận tài liệu được cấp phép/phạm vi"
+              }
+            },
+            "certification_claim": false,
+            "root_cause_confirmed": false
+          }
+        },
+        {
+          "record_id": "7f7c009b-bdcd-5b33-934e-15251ad2c976",
+          "kind": "context",
+          "version": 1,
+          "document": {
+            "name": "SYNTHETIC acceptance company",
+            "risks": "Unverified sample risk",
+            "sector": "Software test only",
+            "contact": "Synthetic test owner",
+            "history": [
+              {
+                "at": "2026-11-22T11:32:45.278550+00:00",
+                "actor": "7f1b4dbe-8598-4a83-9253-eb39a599b1e4",
+                "before": null
+              }
+            ],
+            "locations": "Test location",
+            "isms_scope": "Disposable test records for one isolated service",
+            "departments": "Test IT",
+            "obligations": "Not assessed; synthetic test only",
+            "assets_systems": "Test file system",
+            "standard_reference": "ISO/IEC 27001:2022; Amd 1:2024 — cần xác nhận tài liệu được cấp phép/phạm vi"
+          }
+        }
+      ],
+      "governance": [
+        {
+          "record_id": "9992e6a1-fb7c-442c-85c2-ebfa3f4110da",
+          "kind": "requirement",
+          "version": 3,
+          "document": {
+            "title": "SYNTHETIC internal review requirement",
+            "status": "DRAFT",
+            "history": [
+              {
+                "at": "2026-11-22T11:33:04.958788+00:00",
+                "note": "Synthetic requirement fixture, not licensed standard content",
+                "actor": "1da0306d-4cc6-4edc-b148-ef0a7462c24b",
+                "event": "create",
+                "before": null
+              },
+              {
+                "at": "2026-11-22T11:33:05.043499+00:00",
+                "note": "Synthetic second-person source review, no factual compliance assertion.",
+                "actor": "7f1b4dbe-8598-4a83-9253-eb39a599b1e4",
+                "event": "acknowledge"
+              },
+              {
+                "at": "2026-11-22T11:33:05.152499+00:00",
+                "note": "Synthetic source version update must invalidate old acknowledgment",
+                "actor": "1da0306d-4cc6-4edc-b148-ef0a7462c24b",
+                "event": "edit",
+                "before": {
+                  "title": "SYNTHETIC internal review requirement",
+                  "status": "ACKNOWLEDGED",
+                  "category": "internal",
+                  "reference": "TEST-INTERNAL-01",
+                  "control_ids": [
+                    "A.6.1"
+                  ],
+                  "description": "Synthetic source-backed requirement for software acceptance only.",
+                  "last_editor": "1da0306d-4cc6-4edc-b148-ef0a7462c24b",
+                  "rights_basis": "Synthetic test content authored solely for software acceptance",
+                  "source_version": "test-v1",
+                  "context_version": 1,
+                  "source_reference": "SYNTHETIC fixture document reference; not a legal or ISO claim",
+                  "applicability_scope": "Disposable database and test service only",
+                  "independently_verified": false,
+                  "affects_soa_automatically": false
+                }
+              }
+            ],
+            "category": "internal",
+            "reference": "TEST-INTERNAL-01",
+            "control_ids": [
+              "A.6.1"
+            ],
+            "description": "Synthetic source-backed requirement for software acceptance only.",
+            "last_editor": "1da0306d-4cc6-4edc-b148-ef0a7462c24b",
+            "rights_basis": "Synthetic test content authored solely for software acceptance",
+            "source_version": "test-v2",
+            "context_version": 1,
+            "source_reference": "SYNTHETIC fixture document reference; not a legal or ISO claim",
+            "applicability_scope": "Disposable database and test service only",
+            "independently_verified": false,
+            "affects_soa_automatically": false
+          }
+        },
+        {
+          "record_id": "dce130fa-4d8f-48e2-99b6-0b5e1e69d549",
+          "kind": "risk",
+          "version": 3,
+          "document": {
+            "asset": "Isolated test service",
+            "title": "SYNTHETIC service availability risk",
+            "impact": 4,
+            "status": "ACKNOWLEDGED",
+            "history": [
+              {
+                "at": "2026-11-22T11:33:04.408439+00:00",
+                "note": "Synthetic risk fixture only, no professional estimate",
+                "actor": "1da0306d-4cc6-4edc-b148-ef0a7462c24b",
+                "event": "create",
+                "before": null
+              },
+              {
+                "at": "2026-11-22T11:33:04.702400+00:00",
+                "note": "Synthetic residual values for validation wiring only",
+                "actor": "1da0306d-4cc6-4edc-b148-ef0a7462c24b",
+                "event": "edit",
+                "before": {
+                  "asset": "Isolated test service",
+                  "title": "SYNTHETIC service availability risk",
+                  "impact": 4,
+                  "status": "DRAFT",
+                  "due_date": "2099-12-31",
+                  "owner_id": "1da0306d-4cc6-4edc-b148-ef0a7462c24b",
+                  "scenario": "Synthetic test scenario, not an actual threat assessment",
+                  "rationale": "Synthetic fixture: review actual scope before scoring",
+                  "treatment": "mitigate",
+                  "likelihood": 3,
+                  "control_ids": [
+                    "A.6.1"
+                  ],
+                  "finding_ids": [],
+                  "last_editor": "1da0306d-4cc6-4edc-b148-ef0a7462c24b",
+                  "treatment_plan": "Synthetic plan: collect records, act and verify results",
+                  "context_version": 1,
+                  "residual_impact": null,
+                  "residual_likelihood": null,
+                  "independently_verified": false,
+                  "affects_soa_automatically": false
+                }
+              },
+              {
+                "at": "2026-11-22T11:33:04.854221+00:00",
+                "note": "Synthetic separate review, not acceptance of any actual enterprise risk.",
+                "actor": "7f1b4dbe-8598-4a83-9253-eb39a599b1e4",
+                "event": "acknowledge"
+              }
+            ],
+            "due_date": "2099-12-31",
+            "owner_id": "1da0306d-4cc6-4edc-b148-ef0a7462c24b",
+            "scenario": "Synthetic test scenario, not an actual threat assessment",
+            "rationale": "Synthetic fixture: review actual scope before scoring",
+            "treatment": "mitigate",
+            "likelihood": 3,
+            "control_ids": [
+              "A.6.1"
+            ],
+            "finding_ids": [],
+            "last_editor": "1da0306d-4cc6-4edc-b148-ef0a7462c24b",
+            "treatment_plan": "Synthetic plan: collect records, act and verify results",
+            "context_version": 1,
+            "residual_impact": 2,
+            "residual_likelihood": 2,
+            "independently_verified": false,
+            "affects_soa_automatically": false,
+            "inherent_score": 12,
+            "residual_score": 4,
+            "scoring_method": "PROJECT_5x5_NOT_AN_ISO_MANDATE"
+          }
+        }
+      ]
+    },
+    "human_assessment": false,
+    "professional_approval": false
+  },
+  "synthetic_database_counts": {
+    "evidence": 3,
+    "evaluations": 0,
+    "team_users": 5
+  },
+  "note": "Synthetic integration test only. Real requests on a disposable database; no member grades, source validation or professional SoA approval."
+}

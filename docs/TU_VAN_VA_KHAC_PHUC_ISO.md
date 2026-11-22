@@ -13,7 +13,7 @@ Cập nhật 22/11/2026. Mở **Tổng quan 56 control → Tư vấn & khắc ph
 5. **Duyệt/giao:** tư vấn sửa đề xuất còn nháp, chọn thành viên cùng đợt và hạn. Chặn baseline/rubric/phạm vi cũ. Một phát hiện có nhiều hành động, mỗi hành động có nhiều công việc/bằng chứng.
 6. **Thực hiện:** người được giao cập nhật công việc theo thứ tự phụ thuộc. Nộp nguồn qua luồng hiện có, rồi gắn evidence ID mới sau baseline vào hành động. Không lấy snapshot/preset làm nguồn thực hiện. Chưa đủ công việc/nguồn thì chưa gửi xác minh.
 7. **Xác minh:** tư vấn/người xác minh khác người thực hiện có thể yêu cầu bổ sung, trả làm lại hoặc ghi một phần. Muốn xác minh đạt, chính người đó phải thẩm định từng tiêu chí hiện hành, có kết luận tuân thủ và viện dẫn nguồn sau khắc phục. Nguồn, rubric, bối cảnh hoặc thẩm định thay đổi sẽ chặn/đánh dấu kết quả cũ cần rà.
-8. **Báo cáo:** giữ trước–sau, công việc, nguồn, lịch sử và bất đồng; JSON, CSV mở bằng Excel và bản in HTML. Mở HTML, bấm In/Lưu PDF trong trình duyệt. Chưa phải file `.xlsx` hoặc bộ tạo PDF phía server. Không tự cập nhật kết luận control/SoA vì chỉ bấm hoàn thành công việc.
+8. **Báo cáo:** giữ trước–sau, công việc, nguồn, lịch sử và bất đồng; JSON, CSV, bản in HTML, file Excel `.xlsx` và PDF Unicode tạo phía server. Không tự cập nhật kết luận control/SoA vì chỉ bấm hoàn thành công việc.
 
 ## Vai trò và cách dùng lần đầu
 
@@ -77,14 +77,23 @@ Lệnh tự tạo/dọn database có tên giới hạn `iso_acceptance_*`; giữ
 | Nhóm yêu cầu | Kết quả / giới hạn |
 |---|---|
 | Tiếp nhận/bối cảnh | Có phiên bản, lịch sử, trường phạm vi/tài sản/nghĩa vụ/rủi ro; dùng chung assessment ID với inventory hiện có. Chưa có bộ quản trị đa tổ chức đầy đủ hoặc danh mục pháp lý được thẩm định |
-| Tiêu chuẩn/áp dụng | Giữ catalog 56 và luồng quyết định/SoA hiện có; có tham chiếu phiên bản và nguồn chính thức. Chưa nhập toàn văn tiêu chuẩn, điều khoản ISMS/A.5 hoặc một thư viện pháp lý mới |
+| Tiêu chuẩn/áp dụng | Giữ catalog 56 và luồng quyết định/SoA hiện có; có tham chiếu phiên bản và nguồn chính thức. Có sổ yêu cầu với nguồn, phiên bản, quyền sử dụng, liên kết control và lịch sử rà soát. Chưa nhập toàn văn tiêu chuẩn, điều khoản ISMS/A.5 hoặc nội dung pháp lý chưa được cung cấp |
 | Gap → hành động | Có phát hiện thủ công/ứng viên từ kết quả hiện hành, snapshot, nhiều hành động/công việc, Qwen và phê duyệt con người |
-| Triển khai/xác minh | Có phân vai, giao việc, phụ thuộc tuần tự, nguồn sau, trả lại/thẩm định/xác minh và giữ lịch sử. Chưa có sơ đồ phụ thuộc tùy ý/co-assignee, inbox nhận/đọc thông báo hoặc email/scheduler nhắc hạn |
+| Triển khai/xác minh | Có phân vai, giao việc, phụ thuộc tuần tự, nguồn sau, trả lại/thẩm định/xác minh và giữ lịch sử. Có người chính/người phối hợp, inbox đọc/chưa đọc và worker nhắc hạn nội bộ. Chưa có sơ đồ phụ thuộc tùy ý hoặc email ra ngoài |
 | Bằng chứng | Dùng tài liệu/log/cấu hình và nguồn thu hiện có; không tự tạo hồ sơ doanh nghiệp. Chưa có tiếp nhận ảnh/video/OCR và chữ ký điện tử mới |
-| Rủi ro | Có trường rủi ro/nguyên nhân/ưu tiên cần xác nhận, không tự tính thành kết luận chuyên môn. Chưa có risk register định lượng hoặc duyệt risk acceptance riêng |
-| Báo cáo | Có trước–sau JSON/CSV/bản in lưu PDF qua trình duyệt; chưa xuất XLSX hoặc PDF server riêng |
+| Rủi ro | Có trường rủi ro/nguyên nhân/ưu tiên cần xác nhận, không tự tính thành kết luận chuyên môn. Có sổ rủi ro định lượng 5×5 do dự án quy định, phương án/người nhận/hạn và rà soát khác người sửa. Không tự xác nhận chấp nhận rủi ro chuyên môn |
+| Báo cáo | Có trước–sau JSON/CSV/HTML, XLSX và PDF server Unicode; phân quyền tải theo đợt |
 | Nghiệm thu thật | Vẫn cần nguồn, người chấm và xác nhận phạm vi/rubric/SoA. Bài thử tổng hợp không phải kết quả audit độc lập hoặc chứng nhận ISO |
 
 Nguồn tham chiếu metadata tiêu chuẩn: [ISO/IEC 27001:2022](https://www.iso.org/standard/27001), [ISO/IEC 27001:2022/Amd 1:2024 — Climate action changes](https://www.iso.org/standard/88435.html). Không sao chép nội dung tiêu chuẩn có bản quyền hoặc coi rubric dự án là toàn văn ISO. Khi mở rộng ngoài 56 control cần nguồn hợp pháp, rubric và xác nhận phạm vi trước; không tự sinh các yêu cầu bắt buộc.
 
 Các file chính: `backend/remediation.py`, `remediation_api.py`, `remediation_export.py`; nối `backend/main.py`, `enterprise_api.py`; `frontend-react/src/RemediationWorkspace.jsx`, `Scope56.jsx`; test engine/API/discovery/export/UI/ghi thật và `run_isolated_acceptance.py --remediation`. Danh sách chi tiết theo commit và các báo cáo dẫn ở trên.
+
+## Bổ sung theo prompt — 22/11/2026
+
+- Sổ rủi ro/yêu cầu: `backend/governance_api.py`, `GovernanceRegisters.jsx`. Lưu JSONB có phiên bản, bối cảnh, owner, control/finding; sửa làm mất trạng thái đã rà. Điểm 5×5 là quy ước dự án, không phải yêu cầu bắt buộc ISO. Thiếu điểm còn lại thì giữ chưa rõ; không tự chấp nhận rủi ro.
+- Phối hợp: người chính cùng các thành viên cùng đợt cập nhật task/nguồn; chỉ người chính gửi xác minh. Tất cả người thực hiện đều bị chặn tự xác minh.
+- Thông báo: `remediation_notifications.py`, `RemediationNotifications.jsx`. Inbox riêng theo tài khoản/đợt, đọc/chưa đọc, thông báo giao việc/gửi/xác minh và nhắc hạn sắp đến trong 3 ngày/quá hạn, quét mỗi 300 giây UTC+7. Chống trùng; không gửi email ra ngoài hoặc tự gia hạn.
+- Xuất tài liệu: `remediation_document_export.py`, `/report.xlsx`, `/report.pdf`; dùng openpyxl/ReportLab. XLSX chặn công thức, PDF escape nội dung và dùng font Unicode. Windows dùng Arial; Linux cần DejaVu/Liberation hoặc cấu hình `REMEDIATION_PDF_FONT`. Thiếu font trả lỗi rõ, không âm thầm xuất tiếng Việt hỏng.
+- Migration thêm `governance_records` và `remediation_notifications`; không xóa bảng cũ. Worker nhắc hạn dừng theo lifespan.
+- Kiểm chứng mới và toàn bộ giới hạn: [Đối chiếu prompt nâng cấp](DOI_CHIEU_PROMPT_NANG_CAP_2026_11_22.md). Dữ liệu thử không được ghi thành nguồn/thẩm định thật.

@@ -16,6 +16,7 @@ from backend.enterprise_api import router as enterprise_router
 from backend.a8_api import router as a8_router, recover_interrupted
 from backend.development_lab_api import router as development_lab_router
 from backend import remediation_api
+from backend import governance_api,remediation_notifications
 from agent_core.graph_builder import build_iso_agent_graph
 from evidence_collectors.document_parser import extract_document_text
 
@@ -40,10 +41,14 @@ async def lifespan(app):
     database.initialize_database()
     teamwork.init_teamwork()
     remediation_api.initialize()
+    governance_api.initialize()
+    remediation_notifications.initialize()
     enterprise_lab.init_enterprise_lab()
     company_storage.initialize_company_inventory()
     recover_interrupted()
-    yield
+    stop_reminders=remediation_notifications.start()
+    try:yield
+    finally:stop_reminders()
 
 app=FastAPI(title='ISO 27001 AI Agent API',version='1.0',lifespan=lifespan)
 agent_graph=build_iso_agent_graph()
@@ -52,6 +57,8 @@ app.include_router(enterprise_router)
 app.include_router(a8_router)
 app.include_router(development_lab_router)
 app.include_router(remediation_api.router)
+app.include_router(governance_api.router)
+app.include_router(remediation_notifications.router)
 app.mount('/assets',StaticFiles(directory=REACT_DIST/'assets',check_dir=False),name='react-assets')
 
 class EvaluationRequest(BaseModel):

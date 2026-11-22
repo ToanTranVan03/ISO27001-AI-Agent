@@ -15,7 +15,10 @@ test('real remediation: approve, assign, evidence, reject, recheck, verify, pres
  const scopePath=base+'/enterprise/scope56',path=base+'/remediation';
  const person=await call('POST','/api/team/users',{username:'remediation_operator',display_name:'SYNTHETIC enterprise operator',password:process.env.ISO_ASSESSOR_PASSWORD},admin,201);
  const operator=await login('remediation_operator',process.env.ISO_ASSESSOR_PASSWORD);
+ const helperPerson=await call('POST','/api/team/users',{username:'remediation_helper',display_name:'SYNTHETIC collaborator',password:process.env.ISO_ASSESSOR_PASSWORD},admin,201);
+ const helper=await login('remediation_helper',process.env.ISO_ASSESSOR_PASSWORD);
  await call('PUT',path+'/roles',{user_id:person.user_id,role:'operator'});
+ await call('PUT',path+'/roles',{user_id:helperPerson.user_id,role:'operator'});
  await call('GET',`/api/assessments/${randomUUID()}/remediation`,undefined,operator,403);
  await call('PUT',path+'/context',{expected_version:0,name:'SYNTHETIC acceptance company',sector:'Software test only',isms_scope:'Disposable test records for one isolated service',locations:'Test location',departments:'Test IT',assets_systems:'Test file system',obligations:'Not assessed; synthetic test only',risks:'Unverified sample risk',contact:'Synthetic test owner'});
  await call('PUT',path+'/context',{expected_version:0,name:'test',sector:'test',isms_scope:'Stale edit should fail',locations:'',departments:'',assets_systems:'',obligations:'',risks:'',contact:''},admin,409);
@@ -30,8 +33,11 @@ test('real remediation: approve, assign, evidence, reject, recheck, verify, pres
   const value=await call('POST',path+`/findings/${rid}/actions/${act}/events`,{command,expected_version:record.version,note:'SYNTHETIC acceptance test, not professional verification',...payload},token,expected);
   if(expected===200)record=value;return value;
  };
- await event('approve',{assignee:person.user_id,due_date:'2099-12-31'});
- await event('start',{},operator);
+ await event('approve',{assignee:person.user_id,collaborator_ids:[person.user_id],due_date:'2099-12-31'},admin,422);
+ await event('approve',{assignee:person.user_id,collaborator_ids:[helperPerson.user_id],due_date:'2099-12-31'});
+ expect((await call('GET',path,undefined,helper)).records.some(r=>r.record_id===rid)).toBe(true);
+ await event('start',{},helper);
+ await event('submit',{},helper,403);
  await event('submit',{},operator,409);
  for(const task of record.document.actions[0].tasks)await event('task',{task_id:task.task_id,done:true},operator);
  const upload=await request.post(scopePath+'/controls/A.6.1/sources/upload',{headers:{Authorization:`Bearer ${operator}`},multipart:{evidence_type:c.expected_evidence_types[0],origin:'SYNTHETIC remediation test source',file:{name:'after-remediation.txt',mimeType:'text/plain',buffer:Buffer.from('Synthetic AFTER remediation record for software acceptance only. No real HR claims or signatures.')}}});
@@ -56,6 +62,11 @@ test('real remediation: approve, assign, evidence, reject, recheck, verify, pres
   const exported=await request.get(path+'/report.'+extension,{headers:{Authorization:`Bearer ${admin}`}});
   expect(exported.status()).toBe(200);expect(await exported.text()).toContain('A.6.1');
   expect(exported.headers()['content-type']).toContain(extension==='csv'?'text/csv':'text/html');
+ }
+ for(const [extension,signature,mime] of [['xlsx','PK','application/vnd.openxmlformats'],['pdf','%PDF','application/pdf']]){
+  const exported=await request.get(path+'/report.'+extension,{headers:{Authorization:`Bearer ${admin}`}});
+  expect(exported.status()).toBe(200);expect((await exported.body()).subarray(0,signature.length).toString()).toBe(signature);
+  expect(exported.headers()['content-type']).toContain(mime);
  }
  // Exercise real configured model, not a rule/template replacement, on another frozen finding.
  const newControl=(await call('GET',scopePath)).controls.find(c=>c.control_id==='A.6.1');

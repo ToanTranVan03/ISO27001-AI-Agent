@@ -61,6 +61,18 @@ def test_stale_baseline_and_self_verification_are_rejected_without_mutation():
     with pytest.raises(PermissionError):move(d,aid,'verify',c,outcome='accepted')
 
 
+def test_collaborator_can_execute_but_cannot_submit_or_verify():
+    c,d,aid=case()
+    d=move(d,aid,'approve',c,assignee='operator',collaborator_ids=['helper'],due_date='2099-12-31')
+    d=move(d,aid,'start',c,'helper','operator')
+    d=move(d,aid,'task',c,'helper','operator',task_id=d['actions'][0]['tasks'][0]['task_id'],done=True)
+    assert d['actions'][0]['tasks'][0]['done']
+    with pytest.raises(PermissionError):move(d,aid,'submit',c,'helper','operator')
+    d['actions'][0].update(state='AWAITING_VERIFICATION',submitted_token=c['review_token'])
+    with pytest.raises(PermissionError):move(d,aid,'verify',c,'helper','verifier',outcome='accepted')
+    with pytest.raises(PermissionError):move(d,aid,'return',c,'helper','verifier')
+
+
 @pytest.mark.parametrize('outcome,state',[('partial','REWORK'),('rework','REWORK'),('more_information','NEEDS_INFORMATION')])
 def test_rejection_is_logged_without_promoting_control(outcome,state):
     c,d,aid=case();d['actions'][0].update(state='AWAITING_VERIFICATION',assignee='operator',submitted_token='before')

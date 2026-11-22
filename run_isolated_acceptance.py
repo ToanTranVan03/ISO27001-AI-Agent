@@ -133,7 +133,9 @@ def main():
     parser.add_argument('--candidate-engine',choices=('rules','llm'),default='rules')
     parser.add_argument('--verify-restart',action='store_true',help='Restart only the disposable backend while workers run')
     parser.add_argument('--remediation',action='store_true',help='Exercise corrective action lifecycle on disposable records')
+    parser.add_argument('--governance',action='store_true',help='Also verify risk/requirements/inbox on disposable records')
     args=parser.parse_args()
+    if args.governance and not args.remediation:parser.error('Use --remediation with --governance')
     if not args.execute:parser.error('--execute is required')
     if not args.extended and (args.candidate_engine!='rules' or args.verify_restart):parser.error('Use --extended for candidate engine/restart verification')
     output=Path(args.output)
@@ -186,7 +188,7 @@ def main():
                     stop_backend(child);launch()
                 launch()
                 runner=ROOT/'frontend-react/node_modules/@playwright/test/cli.js'
-                specs=['tests/live-isolated.spec.js']+(['tests/live-orchestration.spec.js'] if args.extended else [])+(['tests/live-remediation.spec.js'] if args.remediation else [])
+                specs=['tests/live-isolated.spec.js']+(['tests/live-orchestration.spec.js'] if args.extended else [])+(['tests/live-remediation.spec.js'] if args.remediation else [])+(['tests/live-z-governance.spec.js'] if args.governance else [])
                 result=subprocess.run(['node',str(runner),'test',*specs,'--workers=1','--reporter=list','--output',str(directory/'browser-results')],
                     cwd=ROOT/'frontend-react',env=env,capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=900 if args.candidate_engine=='llm' or args.remediation else 420 if args.extended else 240)
                 (directory/'browser.log').write_text(result.stdout+'\n'+result.stderr,encoding='utf-8')
@@ -199,7 +201,10 @@ def main():
                         try:
                             aid=s.get(env['UI_BASE_URL']+'/api/assessments',timeout=15).json()[0]['assessment_id']
                             response=s.get(env['UI_BASE_URL']+f'/api/assessments/{aid}/remediation',timeout=30);response.raise_for_status()
-                            return response.json()['records']
+                            records=response.json()['records']
+                            if not args.governance:return records
+                            governance=s.get(env['UI_BASE_URL']+f'/api/assessments/{aid}/governance',timeout=30);governance.raise_for_status()
+                            return {'remediation':records,'governance':governance.json()['records']}
                         finally:s.post(env['UI_BASE_URL']+'/api/auth/logout',timeout=15)
                     before_restart=remediation_snapshot();restart()
                     report['remediation_restart_persistence']=before_restart==remediation_snapshot()

@@ -157,6 +157,16 @@ Các thông tin trên là **trạng thái bàn giao từ tuần 5**, không ph�
 
 Tài liệu bàn giao tuần trước: [Nhật ký tuần 5](TUAN_05.md), [phiếu xác nhận và checklist UI](../docs/HOAN_THIEN_NGHIEM_THU_2026_11_15.md), [rà nguồn kiểm định](../docs/RA_SOAT_NGUON_KIEM_DINH_2026_11_15.md), [hướng dẫn chấm](../docs/HUONG_DAN_CHAM_THAT_A8.md).
 
+## Bổ sung vòng đời tư vấn và khắc phục — 22/11/2026
+
+- [x] Hoàn thiện phát hiện → baseline → nháp kế hoạch thủ công/Qwen → tư vấn duyệt → giao việc/task → bằng chứng sau → thẩm định/xác minh → báo cáo trước–sau; giữ lịch sử, chặn tự xác minh và không tự đổi kết luận control/SoA.
+- [x] Bổ sung người chính/người phối hợp cùng đợt; người phối hợp cập nhật công việc, chỉ người chính gửi xác minh. Mọi người thực hiện đều không tự xác minh.
+- [x] Bổ sung sổ rủi ro và yêu cầu có nguồn/phiên bản/quyền sử dụng, liên kết control/phát hiện, owner/hạn, điểm trước/còn lại và rà soát khác người sửa; sửa giữ lịch sử và trở lại nháp. Thang 5×5 là quy ước dự án, không tự xác nhận chuyên môn.
+- [x] Bổ sung inbox đọc/chưa đọc theo tài khoản, giao việc/xác minh và nhắc hạn nội bộ; xuất XLSX/PDF Unicode bên cạnh JSON/CSV/HTML.
+- [x] Kiểm chứng 432 Python, 14 JavaScript, 15 kịch bản giao diện và lint/build; ghi thật PostgreSQL/Qwen trên database tạm, kiểm restart và quyền người phối hợp; API local đã nhận nâng cấp, các bảng chính theo dõi không đổi số dòng.
+
+Minh chứng và phần còn thiếu: [đối chiếu prompt](../docs/DOI_CHIEU_PROMPT_NANG_CAP_2026_11_22.md), [ghi thật có phối hợp](../docs/a8-results/upgrade-collaboration-2026-11-22-isolated.json), [migration](../docs/a8-results/upgrade-main-migration-2026-11-22.json). Các mục cần nguồn/xác nhận/chấm/phê duyệt thật bên trên vẫn giữ mở; không coi bài thử là nghiệm thu chuyên môn.
+
 ## Vướng mắc và giới hạn
 
 - Thiếu nguồn và xác nhận chuyên môn thực tế; công cụ không thể tự tạo phê duyệt hoặc nhãn độc lập thay con người.

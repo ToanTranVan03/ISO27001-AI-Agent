@@ -12,6 +12,7 @@ test('corrective action UI: baseline, consultant approval, assigned work and sep
  let mutations=0,fixture,aid,scopeBefore;
  await page.route('**/remediation**',async route=>{
   const req=route.request(),path=new URL(req.url()).pathname;
+  if(path.includes('/notifications'))return route.fulfill({json:{items:[],unread_count:0,note:'UI MOCK inbox'}});
   if(path.endsWith('/report.csv'))return route.fulfill({contentType:'text/csv',body:'Control,State\nA.6.1,REWORK'});
   if(path.endsWith('/report.html'))return route.fulfill({contentType:'text/html',body:'<!doctype html><html>UI MOCK print report</html>'});
   if(req.method()==='GET')return route.fulfill({json:board});

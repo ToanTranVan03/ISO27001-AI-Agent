@@ -77,6 +77,7 @@ class Event(Input):
     command:Literal['approve','edit','start','task','attach','submit','verify','return','close']
     note:str=Field(min_length=10,max_length=2000)
     assignee:UUID|None=None
+    collaborator_ids:list[UUID]=Field(default_factory=list,max_length=20)
     due_date:str|None=None
     task_id:str|None=None
     done:StrictBool|None=None
@@ -142,10 +143,10 @@ def board(assessment_id:UUID,user=Depends(require_user)):
             WHERE m.assessment_id=%s''',(assessment_id,))
         members=[dict(user_id=str(r[0]),name=r[1],role=r[2]) for r in cur.fetchall()]
     if role=='operator':
-        records=[r for r in records if r['kind']=='context' or any(str(a.get('assignee'))==str(user['user_id']) for a in r['document']['actions'])]
+        records=[r for r in records if r['kind']=='context' or any(str(a.get('assignee'))==str(user['user_id']) or str(user['user_id']) in a.get('collaborator_ids',[]) for a in r['document']['actions'])]
     if role=='operator':
         for record in records:
-            if record['kind']=='finding':record['document']['actions']=[a for a in record['document']['actions'] if str(a.get('assignee'))==str(user['user_id'])]
+            if record['kind']=='finding':record['document']['actions']=[a for a in record['document']['actions'] if str(a.get('assignee'))==str(user['user_id']) or str(user['user_id']) in a.get('collaborator_ids',[])]
     return dict(records=records,members=members,role=role,user_id=user['user_id'],can_manage_roles=user['role']=='admin',
         standard_references=[dict(name='ISO/IEC 27001:2022',url='https://www.iso.org/standard/27001'),
             dict(name='Amd 1:2024 — Climate action changes',url='https://www.iso.org/standard/88435.html')],
@@ -268,6 +269,10 @@ def event(assessment_id:UUID,finding_id:UUID,action_id:UUID,req:Event,user=Depen
         if req.command=='approve':
             cur.execute('SELECT 1 FROM assessment_members WHERE assessment_id=%s AND user_id=%s',(assessment_id,req.assignee))
             if not cur.fetchone():raise HTTPException(422,'Người được giao không thuộc đợt.')
+            if len(req.collaborator_ids)!=len(set(req.collaborator_ids)) or req.assignee in req.collaborator_ids:raise HTTPException(422,'Người phối hợp không trùng người chính hoặc trùng nhau.')
+            for uid in req.collaborator_ids:
+                cur.execute('SELECT 1 FROM assessment_members WHERE assessment_id=%s AND user_id=%s',(assessment_id,uid))
+                if not cur.fetchone():raise HTTPException(422,'Người phối hợp không thuộc đợt.')
         control,scope=scope_control(assessment_id,doc['control_id'],user)
         if scope['rubric_sha256']!=doc['rubric_sha256']:raise HTTPException(409,'Rubric đã đổi; cần rà phát hiện trên phiên bản mới.')
         payload=req.model_dump(mode='json',exclude={'expected_version','command'})
@@ -275,6 +280,8 @@ def event(assessment_id:UUID,finding_id:UUID,action_id:UUID,req:Event,user=Depen
         try:updated=engine.transition(doc,str(action_id),req.command,payload,user['user_id'],role,control)
         except PermissionError as exc:raise HTTPException(403,str(exc)) from exc
         except ValueError as exc:raise HTTPException(409,str(exc)) from exc
+        from backend.remediation_notifications import notify_event
+        notify_event(cur,assessment_id,updated,str(action_id),req.command,user['user_id'],version+1)
         return save(cur,assessment_id,finding_id,version,updated)
 
 
@@ -359,3 +366,23 @@ def print_export(assessment_id:UUID,user=Depends(require_user)):
     from fastapi.responses import HTMLResponse
     from backend.remediation_export import print_report
     return HTMLResponse(print_report(report(assessment_id,user)),headers={'Cache-Control':'no-store','X-Content-Type-Options':'nosniff'})
+
+
+@router.get('/report.xlsx')
+def xlsx_export(assessment_id:UUID,user=Depends(require_user)):
+    from fastapi.responses import Response
+    from backend.remediation_document_export import xlsx_report
+    try:content=xlsx_report(report(assessment_id,user))
+    except ValueError as exc:raise HTTPException(422,str(exc)) from exc
+    return Response(content,media_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        headers={'Content-Disposition':'attachment; filename="remediation-before-after.xlsx"','Cache-Control':'no-store'})
+
+
+@router.get('/report.pdf')
+def pdf_export(assessment_id:UUID,user=Depends(require_user)):
+    from fastapi.responses import Response
+    from backend.remediation_document_export import pdf_report
+    try:content=pdf_report(report(assessment_id,user))
+    except ValueError as exc:raise HTTPException(503,str(exc)) from exc
+    return Response(content,media_type='application/pdf',
+        headers={'Content-Disposition':'attachment; filename="remediation-before-after.pdf"','Cache-Control':'no-store'})
