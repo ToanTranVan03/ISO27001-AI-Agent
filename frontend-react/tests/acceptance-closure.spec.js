@@ -84,6 +84,7 @@ test('acceptance: source requests distinguish missing, unusable and corrupt orig
   const path=`/api/assessments/${session.aid}/enterprise/scope56`,headers={Authorization:`Bearer ${session.token}`};
   const before=await (await page.request.get(path,{headers})).json();
   const mocked=structuredClone(before),controls=mocked.controls.slice(0,3);let writes=0;
+  controls[0].explicit_source_count=0;controls[0].usable_source_count=0;controls[0].workflow_status='NOT_STARTED';
   mocked.source_requests.requests=controls.map((c,i)=>({control_id:c.control_id,name:`UI MOCK SOURCE ${i+1}`,
    owner_role:'UI MOCK — no assignment',reason:['supply_missing_source','replace_unusable_source','restore_source_integrity'][i],
    source_issues:i===2?[{evidence_id:'UI-MOCK-LOST-ORIGINAL',issues:['original_missing'],integrity_state:'failed'}]:[]}));
@@ -94,6 +95,9 @@ test('acceptance: source requests distinguish missing, unusable and corrupt orig
    return route.continue();
   });
   await page.reload();
+  await page.getByRole('button',{name:new RegExp(`^${controls[0].control_id.replaceAll('.','\\.')} `)}).first().click();
+  await expect(page.getByRole('button',{name:'Kiểm tra control này',exact:true})).toBeDisabled();
+  await expect(page.getByRole('note').filter({hasText:'Chưa có nguồn ngoài preset.'})).toBeVisible();
   await page.getByText('Quản lý nguồn, tiêu chí và hồ sơ bàn giao',{exact:true}).click();
   await page.getByText('Hồ sơ bàn giao và công cụ quản lý',{exact:true}).click();
   await page.getByText('Nguồn cần bổ sung hoặc đối chiếu · 3 control',{exact:true}).click();

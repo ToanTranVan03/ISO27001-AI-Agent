@@ -6,6 +6,7 @@ from zoneinfo import ZoneInfo
 PROTOCOL='scope56-approval-v2-followup'
 LABELS={
  'applicability_missing':'Chưa ghi quyết định tính áp dụng',
+ 'applicability_invalid':'Quyết định tính áp dụng thiếu hoặc sai kiểu; cần người phụ trách xác nhận true/false',
  'applicability_reason_missing':'Thiếu căn cứ áp dụng / loại trừ',
  'running':'Agent đang xử lý nguồn',
  'review_missing':'Chưa có thẩm định từng tiêu chí hiện hành',
@@ -25,6 +26,7 @@ def build_readiness(controls,rubric_approved,as_of=None):
         if c.get('workflow_status')=='RUNNING':blockers.append('running')
         if d is None:blockers.append('applicability_missing')
         else:
+            if type(d.get('applicable')) is not bool:blockers.append('applicability_invalid')
             if len((d.get('reason') or '').strip())<10:blockers.append('applicability_reason_missing')
             if d.get('applicable'):
                 if not c.get('human_review_current'):blockers.append('review_missing')

@@ -45,6 +45,21 @@ def test_exclusion_requires_reason_but_does_not_invent_evidence_or_follow_up():
     assert not build_readiness([row],True)['approval_ready']
 
 
+@pytest.mark.parametrize('value',[None,0,1,'false','true','',[],{}])
+def test_legacy_invalid_applicability_never_becomes_an_approved_exclusion(value):
+    row=control();row['applicability']['applicable']=value
+    before=copy.deepcopy(row)
+    result=build_readiness([row],True)
+    assert not result['approval_ready']
+    assert 'applicability_invalid' in result['controls'][0]['blockers']
+    assert row==before
+
+
+def test_legacy_missing_applicability_is_not_exclusion():
+    row=control();row['applicability'].pop('applicable')
+    assert 'applicability_invalid' in build_readiness([row],True)['controls'][0]['blockers']
+
+
 def test_unusable_evidence_cannot_confirm_met_or_not_met_but_can_document_unknown():
     source=[{'evidence_id':'bad','source_quality':{'usable':False}}]
     for verdict in ['met','not_met']:

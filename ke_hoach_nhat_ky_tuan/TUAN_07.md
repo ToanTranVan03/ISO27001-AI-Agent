@@ -25,6 +25,7 @@ Khi có thay đổi code/nguồn, chạy kiểm tra phù hợp và lưu minh ch�
 
 Đây là trạng thái tại mốc bàn giao **21–22/11**, không phải thành tích thực hiện tuần 7:
 
+- Bổ sung gate SoA chặn quyết định thiếu/sai kiểu tính áp dụng; 397 Python đạt. Đã kiểm Edge cho lý do khóa nút thiếu nguồn và điều hướng mở hồ sơ; giữ nguyên các mục chờ nguồn/quyết định thật.
 - Đã có CLI kiểm tra trước tệp nguồn ngày 22/11, không nhập database và không gọi Agent; 387 test Python đạt. Dùng khi nhóm cung cấp nguồn mới theo [hướng dẫn](../docs/KIEM_TRA_NGUON_TRUOC_KHI_NOP.md); các mục chờ nguồn/xác nhận vẫn mở.
 - Đã nối kiểm tra trước nguồn lên web, cùng kiểm quyền đợt và bộ lọc nhập thật; 388 test Python đạt. Đây là phần chuẩn bị kỹ thuật ngày 22/11, chưa thay nguồn thật hoặc phê duyệt còn thiếu.
 - Đã có luồng quản lý 56 control, thu/kiểm toàn vẹn nguồn, Agent chạy lô, chấm mù, thẩm định, báo cáo và SoA dự thảo; có nhập quyết định/kế hoạch theo lô và điều hướng bốn màn hình.
