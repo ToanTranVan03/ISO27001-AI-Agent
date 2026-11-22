@@ -15,6 +15,7 @@ from backend.team_api import router as team_router, require_user, require_campai
 from backend.enterprise_api import router as enterprise_router
 from backend.a8_api import router as a8_router, recover_interrupted
 from backend.development_lab_api import router as development_lab_router
+from backend import remediation_api
 from agent_core.graph_builder import build_iso_agent_graph
 from evidence_collectors.document_parser import extract_document_text
 
@@ -38,6 +39,7 @@ def resolve_company(user, assessment_id=None):
 async def lifespan(app):
     database.initialize_database()
     teamwork.init_teamwork()
+    remediation_api.initialize()
     enterprise_lab.init_enterprise_lab()
     company_storage.initialize_company_inventory()
     recover_interrupted()
@@ -49,6 +51,7 @@ app.include_router(team_router)
 app.include_router(enterprise_router)
 app.include_router(a8_router)
 app.include_router(development_lab_router)
+app.include_router(remediation_api.router)
 app.mount('/assets',StaticFiles(directory=REACT_DIST/'assets',check_dir=False),name='react-assets')
 
 class EvaluationRequest(BaseModel):

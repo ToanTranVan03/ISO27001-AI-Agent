@@ -11,4 +11,6 @@ def isolate_database_startup(monkeypatch):
     monkeypatch.setattr(enterprise_lab, "init_enterprise_lab", lambda: None)
     monkeypatch.setattr(company_storage, "initialize_company_inventory", lambda: None)
     from backend import main
+    monkeypatch.setattr(main.remediation_api,'initialize',lambda:None)
+    monkeypatch.setattr(main.remediation_api,'require_review_role',lambda *_:None)
     monkeypatch.setattr(main, "recover_interrupted", lambda: None)

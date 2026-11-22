@@ -408,6 +408,8 @@ def scope_review(assessment_id: UUID,req: ScopeReview,user: dict=Depends(require
     from datetime import datetime,timezone
     import json
     require_campaign(assessment_id,user)
+    from backend.remediation_api import require_review_role
+    require_review_role(assessment_id,user)
     with a8_api.lock:
         report=scope56(assessment_id,user)
         row=next((c for c in report['controls'] if c['control_id']==req.control_id),None)
