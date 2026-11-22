@@ -6,6 +6,7 @@ from pathlib import Path
 from uuid import UUID
 from backend.scope56 import CATALOG
 from evidence_collectors.document_parser import extract_document_text
+from evidence_collectors.source_quality import text_quality
 
 ROOT=Path(__file__).resolve().parents[1]/'data'/'evidence-packages'
 MAX_BYTES=15*1024*1024
@@ -66,7 +67,11 @@ def inspect(assessment_id,control_id):
             if size>MAX_BYTES or total>30*1024*1024:raise ValueError('Nguồn quá lớn (15MB/file, 30MB/gói).')
             raw=target.read_bytes()
             text=extract_document_text(name,raw) if target.suffix.lower() in ('.pdf','.docx') else raw.decode('utf-8-sig')
-            if not text.strip() or len(text)>100000:raise ValueError('Không có văn bản hoặc quá 100000 ký tự.')
+            if '\x00' in text or len(text)>100000 or not text_quality(text)['usable']:
+                raise ValueError('Nguồn không phải văn bản dùng được, quá ít/lặp ký tự hoặc quá 100000 ký tự; kiểm tra nội dung/OCR.')
+            if target.suffix.lower()=='.json':
+                try:json.loads(text)
+                except ValueError as exc:raise ValueError('Tệp JSON sai cú pháp.') from exc
             observed=source.get('observed_at')
             if observed:
                 date=datetime.fromisoformat(observed)

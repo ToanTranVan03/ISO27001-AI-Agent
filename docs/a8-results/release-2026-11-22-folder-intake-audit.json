@@ -1,0 +1,401 @@
+{
+  "checked_at": "2026-11-22T11:06:43.226323+07:00",
+  "read_only": true,
+  "controls": [
+    {
+      "control_id": "A.6.1",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.6.2",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.6.3",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.6.4",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.6.5",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.6.6",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.6.7",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.6.8",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.7.1",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.7.2",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.7.3",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.7.4",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.7.5",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.7.6",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.7.7",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.7.8",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.7.9",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.7.10",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.7.11",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.7.12",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.7.13",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.7.14",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.8.1",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.8.2",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.8.3",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.8.4",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.8.5",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.8.6",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.8.7",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.8.8",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.8.9",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.8.10",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.8.11",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.8.12",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.8.13",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.8.14",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.8.15",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.8.16",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.8.17",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.8.18",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.8.19",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.8.20",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.8.21",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.8.22",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.8.23",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.8.24",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.8.25",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.8.26",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.8.27",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.8.28",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.8.29",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.8.30",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.8.31",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.8.32",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.8.33",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    },
+    {
+      "control_id": "A.8.34",
+      "valid_source_count": 0,
+      "issues": [
+        "Gói trống; cần hồ sơ/cấu hình/log do người phụ trách cung cấp."
+      ]
+    }
+  ],
+  "total_controls": 56,
+  "valid_sources": 0,
+  "note": "Folder inspection only; no import, model run or approval."
+}

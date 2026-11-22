@@ -29,8 +29,38 @@ def test_reads_actual_text_idempotent_hash_and_version_change(monkeypatch,tmp_pa
     assert first['items']==packages.inspect(AID,c['control_id'])['items']
     payload=json.loads(first['items'][0]['extracted_text'])
     assert not payload['provenance_verified'] and payload['observed_at'] is None
-    (folder/'policy.txt').write_text('New evidence content',encoding='utf-8')
+    (folder/'policy.txt').write_text('New evidence content with updated observed records.',encoding='utf-8')
     assert packages.inspect(AID,c['control_id'])['items'][0]['evidence_id']!=first['items'][0]['evidence_id']
+
+
+@pytest.mark.parametrize('name,raw',[
+    ('record.txt',b'x'),('record.txt',b's'*100),
+    ('record.txt',b'\x00Actual recorded configuration for the reviewed system.'),
+    ('record.json',b'{ broken JSON but long enough for a minimal text check'),
+])
+def test_folder_connector_rejects_same_invalid_sources_as_web(monkeypatch,tmp_path,name,raw):
+    from evidence_collectors import source_intake
+    c,folder=source(monkeypatch,tmp_path)
+    (folder/name).write_bytes(raw)
+    (folder/'manifest.json').write_text(json.dumps({'control_id':c['control_id'],'sources':[
+        {'file':name,'evidence_type':c['expected_evidence_types'][0]}]}),encoding='utf-8')
+    before=(folder/name).read_bytes()
+    packet=packages.inspect(AID,c['control_id'])
+    assert not packet['items'] and packet['issues']
+    assert (folder/name).read_bytes()==before
+    with pytest.raises(ValueError):
+        source_intake.prepare(AID,c['control_id'],name,raw,c['expected_evidence_types'][0],'Actual owner source')
+
+
+def test_bad_source_does_not_discard_another_valid_file(monkeypatch,tmp_path):
+    c,folder=source(monkeypatch,tmp_path)
+    (folder/'bad.txt').write_text('x',encoding='utf-8')
+    manifest=json.loads((folder/'manifest.json').read_text(encoding='utf-8'))
+    manifest['sources'].append({'file':'bad.txt','evidence_type':c['expected_evidence_types'][0]})
+    (folder/'manifest.json').write_text(json.dumps(manifest),encoding='utf-8')
+    packet=packages.inspect(AID,c['control_id'])
+    assert len(packet['items'])==1 and len(packet['issues'])==1
+    assert json.loads(packet['items'][0]['extracted_text'])['file']=='policy.txt'
 
 
 def test_original_bytes_change_even_when_extracted_text_is_identical(monkeypatch,tmp_path):

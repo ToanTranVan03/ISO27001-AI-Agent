@@ -77,6 +77,10 @@ File mã/test mới: `agent_core/assessment_comparison.py`, `scripts/export_scop
 
 ## Checklist trước và sau
 
+Bổ sung sau khóa sổ cùng ngày: phát hiện connector thư mục chỉ kiểm văn bản không rỗng, vẫn nhận nguồn một ký tự/JSON sai cú pháp, khác luồng web. Đã dùng cùng `text_quality`, chặn NUL và JSON lỗi trước tạo item; giữ tệp gốc và tiếp tục nhận các item hợp lệ khác trong cùng gói. Cập nhật `evidence_collectors/control_packages.py`, thêm năm tình huống hồi quy trong `tests/test_control_packages.py`; sửa nội dung fixture kiểm đổi phiên bản thành văn bản hợp lệ theo chính sách mới, không hạ ngưỡng để test qua.
+
+[Audit đọc 56 thư mục](a8-results/release-2026-11-22-folder-intake-audit.json) có 0 item nguồn hợp lệ mới, không nhập database. [Bộ Python sau sửa](a8-results/release-2026-11-22-folder-intake-python.xml): **385 đạt**. Đây là mốc mới hơn 380 ở đợt khóa sổ phía trên; không chạy lại LLM/UI vì thay đổi chỉ ở kiểm tra connector thư mục đã được kiểm thử API/collector trong bộ Python, không sửa frontend hoặc prompt.
+
 Tám nhóm mục cần nguồn/xác nhận bên ngoài của tuần 6 **vẫn để `[ ]`**: chưa đủ bằng chứng để hoàn thành. Đã bổ sung/tích riêng phần kỹ thuật có minh chứng: export hiện trạng 56, so sánh hai lần chạy, runner 38 có snapshot và hồi quy UI. Không chuyển thành tích ngày 22/11 sang công việc tuần 7.
 
 Để đóng các mục còn mở, nhóm cần: (1) nội dung xác nhận rubric/phạm vi/người chấm; (2) nguồn thật phù hợp cho các control thiếu và bộ kiểm định tách khỏi phát triển; (3) người chấm tự nộp kết luận/căn cứ; (4) người có trách nhiệm quyết định áp dụng, thẩm định và duyệt SoA. Hệ thống đã có luồng tiếp nhận, chạy lại và xuất báo cáo; không thể thay những đầu vào/xác nhận này bằng test đạt.

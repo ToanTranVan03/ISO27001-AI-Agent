@@ -29,6 +29,7 @@ Phần triển khai kỹ thuật đã hoàn thành trong tuần:
 - [x] Bổ sung runner 38 hồ sơ chống ghi đè, chốt nguồn/khóa trước suy luận, lưu từng control và chỉ thử lại lỗi kỹ thuật; chạy Qwen lại đủ 18 + 38, xuất riêng hai nhóm và rà 19 sai khác tiêu chí.
 - [x] Kiểm chứng hồi quy phần nguồn mới bằng Edge: ba trạng thái, mã lỗi, mở đúng control và không ghi nguồn; 11 luồng cũ đạt, ca mới đạt sau sửa thao tác test mở khối cha (giữ báo cáo lỗi). Tổng 12 kịch bản qua hai lần chạy, 380 Python/14 JavaScript, lint/build đạt; [minh chứng 22/11](../docs/HOAN_THIEN_TUAN_06_2026_11_22.md).
 - [x] Lưu đầy đủ CSV và 132 artifact có manifest hash; đối chiếu hash với byte đã lưu trong Git, giữ nguyên LF/CRLF của minh chứng để có thể kiểm tra lại khi tải repo.
+- [x] Thống nhất bộ lọc nguồn giữa nhập thư mục và web: chặn ít/lặp ký tự, NUL và JSON sai cú pháp; tệp lỗi không loại các tệp hợp lệ khác. Quét đọc 56 thư mục chưa có nguồn mới hợp lệ; 385 test Python đạt. [Audit thư mục](../docs/a8-results/release-2026-11-22-folder-intake-audit.json), [JUnit](../docs/a8-results/release-2026-11-22-folder-intake-python.xml).
 - [x] Kiểm tra nội dung nguồn trước suy luận, giữ dữ liệu cũ và yêu cầu nộp lại nguồn không dùng được.
 - [x] Trực quan hóa và thống nhất bốn màn hình; phân biệt kết quả, tiến độ, bằng chứng và thẩm định.
 - [x] Nối ngữ cảnh đợt/control/nhân viên/lượt nguồn giữa bốn màn hình; giữ mục đang xem khi tải lại hoặc Back/Forward, nhập nguồn A.8 dẫn về đúng hồ sơ và lọc nhân viên theo viện dẫn bằng chứng.
@@ -111,6 +112,7 @@ Các thông tin trên là **trạng thái bàn giao từ tuần 5**, không ph�
 
 ### Cập nhật mới nhất ngày 22/11
 
+- **Bổ sung sau khóa sổ:** sửa luồng nhập thư mục còn nhận nguồn một ký tự/JSON sai; thống nhất với web, không sửa nguồn cũ. 385 test Python đạt; quét 56 thư mục có 0 nguồn mới hợp lệ, chưa thể đóng các mục thiếu nguồn.
 - **Triển khai:** công cụ xuất hiện trạng nguồn/packet/CSV 56 control; so sánh hai lần đánh giá theo nguồn/rubric/model; runner 38 hồ sơ chốt nguồn và khóa trước suy luận, chống ghi đè, giữ lỗi và chỉ thử lại lỗi kỹ thuật.
 - **Agent 18 A.8 live:** chạy Qwen đủ 18/18, không lỗi đầu/cuối; 18 kết luận một phần trên snapshot lab mới. Kết quả riêng từng control, không thay các kết luận của đợt chính.
 - **38 hồ sơ mô phỏng:** chạy đủ, không lỗi đầu/cuối; khớp khóa phát triển 23/38, giữ 15 lệch tổng và 19 lệch tiêu chí ở 18 control. Không phải accuracy độc lập; một số lý do LLM vẫn cần người đánh giá rà.
