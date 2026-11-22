@@ -1,0 +1,162 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "D:\\AI_Agent_ISO27001\\frontend-react\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "frontend-react/tests/remediation-workspace.spec.js",
+      "--workers=1",
+      "--reporter=list,json",
+      "--output=work/remediation-ui-retry"
+    ],
+    "rootDir": "D:/AI_Agent_ISO27001",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "D:/AI_Agent_ISO27001/work/remediation-ui-retry",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "D:/AI_Agent_ISO27001",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "D:\\AI_Agent_ISO27001\\work\\remediation-ui-retry",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "D:\\AI_Agent_ISO27001",
+        "snapshotDir": "D:\\AI_Agent_ISO27001",
+        "testIgnore": [],
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 30000,
+        "use": {},
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.65.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "frontend-react\\tests\\remediation-workspace.spec.js",
+      "file": "frontend-react/tests/remediation-workspace.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "corrective action UI: baseline, consultant approval, assigned work and separate verification without main writes",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 90167,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 90000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 90000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 90000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\AI_Agent_ISO27001\\frontend-react\\tests\\remediation-workspace.spec.js",
+                        "column": 39,
+                        "line": 65
+                      },
+                      "message": "Error: apiRequestContext.post: Test timeout of 90000ms exceeded.\n\n  63 |   await expect(card.getByText('Cần thực hiện lại',{exact:true})).toBeVisible();expect(mutations).toBeGreaterThan(5);\n  64 |   const after=await (await page.request.get(path,{headers})).json();expect(after.handoff_packet.sha256).toBe(scopeBefore.handoff_packet.sha256);expect(after.soa.fingerprint).toBe(scopeBefore.soa.fingerprint);\n> 65 |  }finally{if(token)await page.request.post('/api/auth/logout',{headers:{Authorization:`Bearer ${token}`}});}\n     |                                       ^\n  66 | });\n  67 |\n    at D:\\AI_Agent_ISO27001\\frontend-react\\tests\\remediation-workspace.spec.js:65:39"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-22T10:52:03.212Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "D:\\AI_Agent_ISO27001\\work\\remediation-ui-retry\\frontend-react-tests-remed-5bd1e-ication-without-main-writes\\error-context.md"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "e207fae58293b4b2f4c8-47f8776009813279692f",
+          "file": "frontend-react/tests/remediation-workspace.spec.js",
+          "line": 7,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-22T10:52:02.549Z",
+    "duration": 91657.383,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

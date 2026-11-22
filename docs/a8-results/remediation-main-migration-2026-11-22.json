@@ -1,0 +1,35 @@
+{
+  "main_counts_before": {
+    "evidence": 110,
+    "evaluations": 281,
+    "team_users": 3,
+    "control_progress": 56
+  },
+  "main_counts_after": {
+    "evidence": 110,
+    "evaluations": 281,
+    "team_users": 3,
+    "control_progress": 56
+  },
+  "unchanged": true,
+  "new_remediation_records": 0,
+  "checks": [
+    {
+      "path": "/remediation",
+      "status": 200
+    },
+    {
+      "path": "/remediation/report",
+      "status": 200
+    },
+    {
+      "path": "/remediation/report.csv",
+      "status": 200
+    },
+    {
+      "path": "/remediation/report.html",
+      "status": 200
+    }
+  ],
+  "fake_business_records_created": false
+}

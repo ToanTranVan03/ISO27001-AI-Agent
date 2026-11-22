@@ -25,6 +25,7 @@ Khi có thay đổi code/nguồn, chạy kiểm tra phù hợp và lưu minh ch�
 
 Đây là trạng thái tại mốc bàn giao **21–22/11**, không phải thành tích thực hiện tuần 7:
 
+- Đã bổ sung [vòng đời tư vấn/khắc phục](../docs/TU_VAN_VA_KHAC_PHUC_ISO.md): profile ISMS, baseline phát hiện, đề xuất, giao việc, nguồn sau, xác minh tách vai trò và báo cáo trước–sau, PostgreSQL lưu qua restart. Đợt chính chưa có hồ sơ thật trong module mới. Cần nhập bối cảnh/phân vai, sử dụng nguồn thật; các giới hạn thư viện tiêu chuẩn, hình ảnh/OCR, risk register, thông báo và xuất XLSX/PDF server ghi trong báo cáo, chưa coi đã hoàn thành toàn bộ prompt nâng cấp.
 - Bổ sung gate SoA chặn quyết định thiếu/sai kiểu tính áp dụng; 397 Python đạt. Đã kiểm Edge cho lý do khóa nút thiếu nguồn và điều hướng mở hồ sơ; giữ nguyên các mục chờ nguồn/quyết định thật.
 - Đã có CLI kiểm tra trước tệp nguồn ngày 22/11, không nhập database và không gọi Agent; 387 test Python đạt. Dùng khi nhóm cung cấp nguồn mới theo [hướng dẫn](../docs/KIEM_TRA_NGUON_TRUOC_KHI_NOP.md); các mục chờ nguồn/xác nhận vẫn mở.
 - Đã nối kiểm tra trước nguồn lên web, cùng kiểm quyền đợt và bộ lọc nhập thật; 388 test Python đạt. Đây là phần chuẩn bị kỹ thuật ngày 22/11, chưa thay nguồn thật hoặc phê duyệt còn thiếu.

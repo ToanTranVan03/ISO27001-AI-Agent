@@ -10,6 +10,7 @@ Hiện 27 control có kiểm tra lab đại diện; 29 có connector hồ sơ v�
 
 ## Chức năng hiện hành
 
+- [Tư vấn và khắc phục](docs/TU_VAN_VA_KHAC_PHUC_ISO.md): bối cảnh ISMS có phiên bản, phát hiện gắn baseline, đề xuất Qwen/thủ công chờ duyệt, giao việc theo vai trò, bằng chứng sau thực hiện, xác minh tách người thực hiện và báo cáo trước–sau. Công việc hoàn tất không tự đổi kết luận control hoặc duyệt SoA; nguồn/phiên bản thay đổi cần rà lại.
 - Quản lý phạm vi, tiêu chí, nhân viên, tài khoản, thiết bị và hồ sơ theo đợt đánh giá.
 - Thu tài liệu/cấu hình/log, kiểm tra nguồn/hash/phiên bản và chống nhập trùng; chế độ chỉ đánh giá hồ sơ đã thu không dùng preset thay thế.
 - Tải nguồn cho 56 control ngay trên web, khai xuất xứ/thời điểm, lưu và tải lại bản gốc có kiểm tra hash; hàng đợi tiếp tục đánh giá nguồn đã nộp cho control chưa có collector riêng. Xem [hướng dẫn thu nguồn web](docs/THU_NGUON_WEB_56.md).
