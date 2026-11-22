@@ -326,6 +326,24 @@ class CollectPackage(BaseModel):
     control_id: str | None = None
 
 
+@router.post('/scope56/controls/{control_id}/sources/validate')
+async def validate_control_source(assessment_id: UUID,control_id: str,
+        evidence_type: str=Form(...),origin: str=Form(...),observed_at: str | None=Form(None),
+        note: str=Form(''),file: UploadFile=File(...),user: dict=Depends(require_user)):
+    from evidence_collectors import source_intake,control_packages
+    from evidence_collectors.source_quality import text_quality
+    import json
+    require_campaign(assessment_id,user)
+    raw=await file.read(control_packages.MAX_BYTES+1)
+    if len(raw)>control_packages.MAX_BYTES:raise HTTPException(413,'Tệp quá 15MB.')
+    try:item=source_intake.prepare(str(assessment_id),control_id,file.filename,raw,evidence_type,origin,observed_at,note)
+    except (ValueError,UnicodeError) as exc:raise HTTPException(422,str(exc)) from exc
+    return dict(preflight_only=True,original_preserved=False,evidence_saved=False,
+        original_sha256=item['sha256_hash'],quality=text_quality(json.loads(item['extracted_text'])['content']),
+        warnings=['Chưa lưu nguồn; kiểm tra kỹ thuật không xác nhận nguồn thật hoặc đủ tiêu chí.']+
+                 ([] if observed_at else ['Chưa có thời điểm quan sát nguồn.']))
+
+
 @router.post('/scope56/controls/{control_id}/sources/upload',status_code=201)
 async def upload_control_source(assessment_id: UUID,control_id: str,
         evidence_type: str=Form(...),origin: str=Form(...),observed_at: str | None=Form(None),

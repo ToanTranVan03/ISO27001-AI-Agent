@@ -2,6 +2,16 @@
 
 Đây là kiểm tra kỹ thuật, không nhập database, không giữ bản gốc, không chạy Agent và không tạo xác nhận chuyên môn. Không cần mở API hoặc có tài khoản để dùng CLI trên tệp mà bạn được phép đọc.
 
+## Kiểm tra trên giao diện
+
+Mở control → phần nộp hồ sơ → chọn tệp và điền xuất xứ → bấm **Kiểm tra trước — chưa lưu**. Kết quả hiển thị hash, số ký tự và cảnh báo; không hiển thị như đã nộp bằng chứng. Khi đổi tệp hoặc metadata, kết quả xem trước được xóa để tránh dùng nhầm. Muốn nộp thật phải bấm riêng **Lưu nguồn và bản gốc**; server kiểm tra lại đầu vào, không tin kết quả xem trước cũ.
+
+API multipart: `POST /api/assessments/{assessment_id}/enterprise/scope56/controls/{control_id}/sources/validate`, cùng trường đầu vào với `/sources/upload`; yêu cầu đăng nhập và quyền thành viên của đợt. Trả `preflight_only: true`, `evidence_saved: false`, `original_preserved: false`. Không có thao tác lưu bản gốc, bằng chứng, kết luận hoặc phê duyệt. CLI vẫn dùng được khi API không mở.
+
+Kiểm chứng tích hợp web ngày 22/11: [388 test Python](a8-results/release-2026-11-22-web-preflight-python.xml), [12 kịch bản Edge đạt trong một lần](a8-results/release-2026-11-22-web-preflight-ui.json), lint/build đạt. Hồi quy UI dùng phản hồi giả lập để kiểm tra xem trước không lưu và tự xóa khi sửa metadata; bộ Python kiểm endpoint thực có xác thực/quyền, không gọi hàm lưu. [Gọi API trên server thật](a8-results/release-2026-11-22-web-preflight-api.json) bằng fixture đã biết trả 200 cho tệp qua kiểm kỹ thuật, 422 cho tệp một ký tự; packet/SoA trước–sau không đổi. Không nhập fixture làm nguồn chính thức.
+
+## Kiểm tra bằng dòng lệnh
+
 ```powershell
 .venv\Scripts\python.exe scripts/check_source_before_intake.py --file "DUONG_DAN_TEP_GOC" --assessment-id 7f7c009b-bdcd-5b33-934e-15251ad2c976 --control-id A.6.2 --evidence-type EVID_PPL_CONTRACT_NDA --origin "DON_VI_CUNG_CAP_THUC_TE" --output work/ket-qua-kiem-tra-moi.json
 ```

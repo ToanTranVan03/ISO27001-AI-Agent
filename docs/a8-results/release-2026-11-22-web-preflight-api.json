@@ -1,0 +1,25 @@
+{
+  "valid_status": 200,
+  "invalid_status": 422,
+  "response": {
+    "preflight_only": true,
+    "original_preserved": false,
+    "evidence_saved": false,
+    "original_sha256": "08c2112e9aee9ac06536219be5dac317d947b5b97a09664450bb01808c5d7e15",
+    "quality": {
+      "usable": true,
+      "issues": [],
+      "alphanumeric_characters": 38,
+      "policy": "text-usability-v1",
+      "note": "Ngưỡng kỹ thuật của dự án; không xác nhận tính đúng, đủ tiêu chí, nguồn gốc hoặc tuân thủ ISO."
+    },
+    "warnings": [
+      "Chưa lưu nguồn; kiểm tra kỹ thuật không xác nhận nguồn thật hoặc đủ tiêu chí.",
+      "Chưa có thời điểm quan sát nguồn."
+    ]
+  },
+  "handoff_unchanged": true,
+  "soa_unchanged": true,
+  "is_synthetic_technical_test": true,
+  "human_assessment": false
+}

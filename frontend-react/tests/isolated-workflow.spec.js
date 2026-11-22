@@ -29,6 +29,10 @@ test('isolated UI: valid upload, original download, stale review, criteria and d
   // Every write below is intercepted. Nothing is evidence or a human label.
   await page.route(`**${path}/**`,async route=>{
    const req=route.request(),url=new URL(req.url()).pathname;
+   if(req.method()==='POST'&&url.endsWith('/A.6.2/sources/validate')){
+    return route.fulfill({json:{preflight_only:true,original_preserved:false,evidence_saved:false,
+     original_sha256:'c'.repeat(64),quality:{alphanumeric_characters:60},warnings:['UI MOCK: chưa xác nhận đủ tiêu chí.']}});
+   }
    if(req.method()==='POST'&&url.endsWith('/A.6.2/sources/upload')){
     uploads++;
     expect(req.headers()['content-type']).toContain('multipart/form-data');
@@ -68,6 +72,11 @@ test('isolated UI: valid upload, original download, stale review, criteria and d
   await openControl();
   await page.getByLabel('Xuất xứ / đơn vị cung cấp').fill('Isolated UI mock fixture - not genuine evidence');
   await page.getByLabel('Chọn bản gốc bằng chứng').setInputFiles({name:'ui-isolated-source.txt',mimeType:'text/plain',buffer:Buffer.from('UI fixture only. This content must never be stored as real compliance evidence.')});
+  await page.getByRole('button',{name:'Kiểm tra trước — chưa lưu',exact:true}).click();
+  await expect(page.getByText('Đã qua kiểm tra kỹ thuật — chưa lưu bằng chứng',{exact:true})).toBeVisible();
+  expect(uploads).toBe(0);expect(control.review_token).toBe(originalToken);
+  await page.getByLabel('Xuất xứ / đơn vị cung cấp').fill('Updated UI mock origin, still not real evidence');
+  await expect(page.getByText('Đã qua kiểm tra kỹ thuật — chưa lưu bằng chứng',{exact:true})).toHaveCount(0);
   await page.getByRole('button',{name:'Lưu nguồn và bản gốc',exact:true}).click();
   await expect(page.getByText('Đã lưu nguồn mới',{exact:true})).toBeVisible();
   expect(originalToken).not.toBe(control.review_token);
