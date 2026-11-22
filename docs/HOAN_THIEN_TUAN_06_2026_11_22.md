@@ -27,6 +27,7 @@ Báo cáo do trợ lý AI thực hiện trên máy dự án. Phạm vi giữ ngu
 - [Phiếu yêu cầu nguồn](a8-results/release-2026-11-22-scope/source-requests.md), [packet](a8-results/release-2026-11-22-scope/handoff.json), [việc còn thiếu](a8-results/release-2026-11-22-scope/worklist.json).
 - [Kiểm tra bảo toàn](a8-results/release-2026-11-22-preservation.json): hash packet/rubric và chỉ số nghiệm thu trước–sau không đổi. Không sửa nguồn/nhãn/quyết định chính.
 - [Kiểm tra lại sau UI](a8-results/release-2026-11-22-after-ui-preservation.json): packet/chỉ số chính vẫn không đổi. [Manifest artifact](a8-results/release-2026-11-22-manifest.json) ghi hash và kích thước các file kết quả mới để truy vết.
+- Đã kiểm đủ 132 artifact với byte lưu trong Git index; `.gitattributes` giữ nguyên byte để hash không đổi do chuyển LF/CRLF. Hai CSV con được thêm rõ ràng vì quy tắc ignore chung `*.csv`; không thay quy tắc bỏ qua dữ liệu doanh nghiệp.
 
 ## Kết quả Agent và giới hạn
 
