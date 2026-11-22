@@ -24,6 +24,7 @@ Giữ phạm vi 56 control (8 A.6, 14 A.7, 34 A.8), ưu tiên kiểm định sâ
 
 Phần triển khai kỹ thuật đã hoàn thành trong tuần:
 
+- [x] Hiển thị lý do khóa nút kiểm tra: thiếu nguồn ngoài preset, nguồn không dùng được/lỗi toàn vẹn hoặc Agent đang xử lý; chỉ dẫn mở hồ sơ để bổ sung. Lint/build đạt; chưa kiểm thử trình duyệt riêng cho dòng giải thích mới, không thay điều kiện cho phép chạy.
 - [x] Nối kiểm tra trước tệp nguồn lên web qua API có kiểm quyền đợt: không lưu bản gốc/bằng chứng, không chạy Agent; kết quả xem trước tự xóa khi đổi tệp/metadata, nút lưu thật tách riêng. 388 Python, 12 Edge trong một lần và lint/build đạt; gọi API thực 200/422, packet/SoA không đổi. [Hướng dẫn và minh chứng](../docs/KIEM_TRA_NGUON_TRUOC_KHI_NOP.md).
 - [x] Bổ sung CLI kiểm tra tệp trước nộp bằng cùng bộ lọc web; xuất hash/lỗi/cảnh báo metadata, không lưu bằng chứng hoặc gọi Agent, chặn ghi đè báo cáo. Chạy thử fixture đã biết, 387 test Python đạt; [hướng dẫn và minh chứng](../docs/KIEM_TRA_NGUON_TRUOC_KHI_NOP.md). Không tự xác nhận phù hợp tiêu chí hoặc bổ sung nguồn còn thiếu.
 - [x] Rà rubric 56 control/113 tiêu chí và lập ma trận nguồn/phiên bản cho người xác nhận; đọc lại API, xuất packet/CSV 56 dòng và phiếu nguồn, giữ xác nhận chuyên môn ở trạng thái chờ. [Báo cáo 22/11](../docs/HOAN_THIEN_TUAN_06_2026_11_22.md).
