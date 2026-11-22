@@ -23,6 +23,9 @@ def build_packet(scope):
         if not excluded:
             if not control['explicit_source_count']: gaps.append('explicit_sources_missing')
             elif not control.get('usable_source_count',control['explicit_source_count']): gaps.append('source_content_unusable')
+            if any(e.get('source_quality',{}).get('integrity',{}).get('state') == 'failed'
+                   for e in control['evidence']):
+                gaps.append('source_integrity_failed')
             if control['assessment_state'] != 'evaluated': gaps.append('evaluation_not_current')
             if not review: gaps.append('human_criteria_review_not_current')
             if any(c['verified_verdict'] == 'unknown' for c in checks): gaps.append('criteria_unknown')
@@ -36,7 +39,8 @@ def build_packet(scope):
             missing_evidence_types=control['evidence_types_to_check'],
             sources=[dict(evidence_id=e['evidence_id'],sha256=e['sha256_hash'],
                 source=e.get('source'),is_synthetic=e.get('is_synthetic'),
-                evidence_type=e.get('evidence_type')) for e in control['evidence']],
+                evidence_type=e.get('evidence_type'),
+                source_quality=e.get('source_quality')) for e in control['evidence']],
             machine_conclusion=control['conclusion'],
             current_human_conclusion=review['conclusion'] if review else None,
             review_token=control['review_token'],gaps=gaps,

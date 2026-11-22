@@ -3,7 +3,9 @@ def build_requests(packet):
     requests=[];coverage=[]
     for row in packet['controls']:
         if row['excluded_by_recorded_decision']:continue
-        reason='replace_unusable_source' if 'source_content_unusable' in row['gaps'] else 'supply_missing_source' if 'explicit_sources_missing' in row['gaps'] else None
+        reason=('restore_source_integrity' if 'source_integrity_failed' in row['gaps'] else
+                'replace_unusable_source' if 'source_content_unusable' in row['gaps'] else
+                'supply_missing_source' if 'explicit_sources_missing' in row['gaps'] else None)
         if not reason:
             if 'human_criteria_review_not_current' in row['gaps'] or 'criteria_unknown' in row['gaps']:
                 coverage.append(dict(control_id=row['control_id'],owner_role=row['owner_role'],
@@ -16,6 +18,12 @@ def build_requests(packet):
             expected_evidence_types=row['expected_evidence_types'],
             criteria=[c['criterion'] for c in row['criteria']],
             existing_evidence_ids=[s['evidence_id'] for s in row['sources']],
+            source_issues=[dict(evidence_id=s['evidence_id'],
+                issues=s['source_quality'].get('issues',[]),
+                integrity_state=s['source_quality'].get('integrity',{}).get('state','not_verifiable'))
+                for s in row['sources'] if s.get('source_quality') and
+                (s['source_quality'].get('usable') is False or
+                 s['source_quality'].get('integrity',{}).get('state') == 'failed')],
             assignee=None,due_date=None,status='DRAFT_NOT_ASSIGNED',
             submission_checklist=['Bản gốc có nội dung đọc được, không dùng mẫu yêu cầu làm bằng chứng.',
                 'Ghi nguồn cung cấp, đối tượng, kỳ quan sát và giới hạn mẫu.',
@@ -35,11 +43,16 @@ def markdown(report,role=None):
         'Nhóm nhận đề nghị: '+(role or 'Tất cả nhóm'),'Số control cần nguồn: '+str(len(rows))]
     for r in rows:
         lines+=['','## '+r['control_id']+' — '+r['name'],'',
-            'Lý do: '+('Nguồn hiện có không dùng được; cần kiểm tra/nộp lại.' if r['reason']=='replace_unusable_source' else 'Chưa có nguồn ngoài preset.'),
+            'Lý do: '+({'restore_source_integrity':'Bản lưu thiếu hoặc lệch kiểm tra toàn vẹn; đối chiếu bản gốc và nộp lại đúng nguồn. Không sửa hash để bỏ qua lỗi.',
+                'replace_unusable_source':'Nguồn hiện có không dùng được; cần kiểm tra/nộp lại.',
+                'supply_missing_source':'Chưa có nguồn ngoài preset.'}[r['reason']]),
             'Người nhận thực tế: ____________________','Hạn cung cấp: ____________________',
             'Loại nguồn được hỗ trợ: '+', '.join(r['expected_evidence_types']),'',
             'Nội dung cần chứng minh hoặc bác bỏ:',*['- '+c for c in r['criteria']],'',
             'Checklist bàn giao:',*['- [ ] '+c for c in r['submission_checklist']]]
+        for issue in r.get('source_issues',[]):
+            lines+=['- Nguồn cần đối chiếu: '+issue['evidence_id']+'; trạng thái: '+issue['integrity_state']+
+                    '; mã lỗi: '+', '.join(issue['issues'])]
     coverage=[r for r in report.get('coverage_reviews',[]) if role is None or r['owner_role']==role]
     if coverage:
         lines+=['','## Rà mức bao phủ nguồn đã có','',

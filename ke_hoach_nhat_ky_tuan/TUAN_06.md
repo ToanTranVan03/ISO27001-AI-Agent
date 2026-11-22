@@ -65,6 +65,7 @@ Các thông tin trên là **trạng thái bàn giao từ tuần 5**, không ph�
 
 | Ngày | Công việc | Kết quả / minh chứng |
 |---|---|---|
+| 22/11/2026 | Làm rõ yêu cầu bổ sung/đối chiếu nguồn | Gói bàn giao và phiếu nguồn phân biệt thiếu hồ sơ, nội dung không dùng được và lỗi toàn vẹn; giữ mã bằng chứng/lỗi trong JSON/Markdown, hiển thị trên UI và mở đúng control. Nguồn hỏng vẫn được yêu cầu đối chiếu khi control còn nguồn khác dùng được; nguồn cũ chưa xác minh không bị coi là hỏng. 367 test Python, lint/build đạt; chưa kiểm thử trình duyệt thay đổi này. Không thay bằng chứng, nhãn, quyết định hay phê duyệt thật |
 | 18/11/2026 | Củng cố kiểm tra nội dung nguồn và đầu vào Agent | Chặn tài liệu quá ít/ký tự lặp khi nạp mới, lọc nguồn cũ trước suy luận, giữ lịch sử; thêm cảnh báo và việc yêu cầu nộp lại trên Phạm vi 56 |
 | 18/11/2026 | Kiểm chứng và rà nguồn A.6.2 | Nguồn 1 ký tự không đưa vào model; Mốc đầu: 253 test Python, 5 test JavaScript, lint/build đạt. Không coi ngưỡng văn bản là đủ bằng chứng tuân thủ |
 | 18/11/2026 | Thống nhất giao diện hệ thống đánh giá | Bản đồ 56 control, tiến độ/Agent đang chạy, tìm kiếm và lọc; sắp xếp bốn màn hình, thu gọn quản trị/JSON, tách luyện tập khỏi chấm thật; giữ tên ISO 27001 và mô tả luôn hiện, điều hướng xuống hàng khi cửa sổ hẹp |
