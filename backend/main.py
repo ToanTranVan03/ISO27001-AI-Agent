@@ -97,6 +97,22 @@ def favicon():
     return FileResponse(ROOT_DIR/'frontend-react'/'public'/'favicon.svg',media_type='image/svg+xml')
 
 
+@app.get("/api/health")
+def health_check():
+    try:
+        with database.get_connection() as con, con.cursor() as cur:
+            cur.execute("SELECT 1")
+            cur.fetchone()
+    except (PostgresError, RuntimeError) as exc:
+        logger.exception("Health check database probe failed.")
+        raise HTTPException(status_code=503, detail="Database is unavailable.") from exc
+    return {
+        "status": "ok",
+        "database": "connected",
+        "frontend_build": (REACT_DIST / "index.html").is_file(),
+    }
+
+
 @app.get("/api/controls")
 async def get_controls(user: dict = Depends(require_user)):
     try:

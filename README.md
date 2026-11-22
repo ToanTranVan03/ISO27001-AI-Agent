@@ -52,18 +52,21 @@ AI_Agent_ISO27001/
 │   ├── people_assessment.py   # Kiểm tra A.6 đại diện trên hồ sơ lab
 │   └── business_events.py     # Thay đổi hồ sơ nghiệp vụ lab
 ├── backend/
-│   ├── main.py               # API chính và giao diện React đã build
-│   ├── team_api.py           # Đăng nhập, bằng chứng, công việc dùng chung
+│   ├── main.py               # API chính, healthcheck và giao diện React đã build
+│   ├── team_api.py           # Đăng nhập, khách hàng, đợt đánh giá, bằng chứng
+│   ├── remediation.py        # Engine vòng đời khắc phục, phân quyền và dashboard
+│   ├── remediation_api.py    # API phát hiện, AI tư vấn, giao việc và xác minh
+│   ├── governance_api.py     # Sổ rủi ro 5x5 và sổ yêu cầu có nguồn
 │   ├── a8_api.py             # Lượt A.8, chấm mù và phê duyệt
 │   ├── scope56.py            # Phạm vi và SoA tổng thể 56 control
-│   └── company_storage.py    # Kho nhân viên/tài khoản/thiết bị độc lập demo
-├── evidence_collectors/      # Parser tài liệu, connector 56, raw/live A.8
-├── frontend-react/src/       # App, Scope56, A8, CompanyInventory, ComplianceDossier
+│   └── company_storage.py    # Kho nhân viên/tài khoản/thiết bị theo đợt
+├── evidence_collectors/      # Parser tài liệu, kiểm tra nguồn, connector 56, raw/live A.8
+├── frontend-react/src/       # App, Scope56, RemediationWorkspace, ConsultingDashboard, ClientManagement, A8, CompanyInventory, ComplianceDossier
 ├── lab_company/              # Seed danh bạ/tài sản lab dùng chung
 ├── lab_a8/                   # Rubric, bộ ca raw, script container và nhãn thiết kế
-├── docs/                     # Ma trận, quy trình và bằng chứng thực nghiệm A.8
-├── tests/                    # Kiểm thử chức năng hiện hành
-├── ke_hoach_nhat_ky_tuan/     # Nhật ký tuần 1–5
+├── docs/                     # Ma trận, quy trình, báo cáo nghiệm thu và bằng chứng thực nghiệm
+├── tests/                    # Kiểm thử chức năng, RBAC, báo cáo và tích hợp hiện hành
+├── ke_hoach_nhat_ky_tuan/     # Nhật ký tuần 1–7
 ├── run_agent_cli.py          # CLI đánh giá A.8 hiện hành
 └── CHAY_LOCAL.md             # Hướng dẫn khởi động local
 ```
@@ -131,3 +134,5 @@ Báo cáo là kiểm tra API, không thay nghiệm thu toàn giao diện hoặc 
 Nâng cấp tư vấn/khắc phục: [đối chiếu chức năng và giới hạn](docs/DOI_CHIEU_PROMPT_NANG_CAP_2026_11_22.md), gồm sổ rủi ro/yêu cầu có nguồn, giao việc phối hợp, thông báo nội bộ và báo cáo PDF/XLSX trước–sau.
 
 Theo `s.txt`: [quản lý khách hàng/đợt riêng, dashboard vai trò, tư vấn AI và hướng dẫn sử dụng](docs/HOAN_THIEN_THEO_S_TXT_2026_11_22.md). Doanh nghiệp mới bắt đầu rỗng và chỉ đánh giá nguồn nộp; không tự nạp dữ liệu lab.
+
+Nghiệm thu toàn diện cuối cùng: [báo cáo nghiệm thu kỹ thuật, nghiệp vụ, bảo mật và kịch bản demo](docs/FINAL_ACCEPTANCE_2026.md).
