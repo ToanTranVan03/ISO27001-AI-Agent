@@ -1,0 +1,26 @@
+{
+  "protocol": "source-intake-preflight-v1",
+  "checked_at": "2026-11-22T11:13:54.621803+07:00",
+  "control_id": "A.8.1",
+  "filename": "lsblk.json",
+  "passed": true,
+  "issues": [],
+  "writes_evidence": false,
+  "provenance_verified": false,
+  "coverage_verified": false,
+  "note": "Technical preflight only, not evidence intake, independent validation or ISO compliance.",
+  "original_sha256": "08c2112e9aee9ac06536219be5dac317d947b5b97a09664450bb01808c5d7e15",
+  "proposed_evidence_id": "WEB-3c5353316443f52852afc9e5e325788b",
+  "bytes": 71,
+  "content_quality": {
+    "usable": true,
+    "issues": [],
+    "alphanumeric_characters": 38,
+    "policy": "text-usability-v1",
+    "note": "Ngưỡng kỹ thuật của dự án; không xác nhận tính đúng, đủ tiêu chí, nguồn gốc hoặc tuân thủ ISO."
+  },
+  "warnings": [
+    "Cần đối chiếu nội dung với từng tiêu chí và xác nhận nguồn gốc.",
+    "Chưa có thời điểm quan sát nguồn."
+  ]
+}

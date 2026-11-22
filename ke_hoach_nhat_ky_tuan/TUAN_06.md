@@ -24,6 +24,7 @@ Giữ phạm vi 56 control (8 A.6, 14 A.7, 34 A.8), ưu tiên kiểm định sâ
 
 Phần triển khai kỹ thuật đã hoàn thành trong tuần:
 
+- [x] Bổ sung CLI kiểm tra tệp trước nộp bằng cùng bộ lọc web; xuất hash/lỗi/cảnh báo metadata, không lưu bằng chứng hoặc gọi Agent, chặn ghi đè báo cáo. Chạy thử fixture đã biết, 387 test Python đạt; [hướng dẫn và minh chứng](../docs/KIEM_TRA_NGUON_TRUOC_KHI_NOP.md). Không tự xác nhận phù hợp tiêu chí hoặc bổ sung nguồn còn thiếu.
 - [x] Rà rubric 56 control/113 tiêu chí và lập ma trận nguồn/phiên bản cho người xác nhận; đọc lại API, xuất packet/CSV 56 dòng và phiếu nguồn, giữ xác nhận chuyên môn ở trạng thái chờ. [Báo cáo 22/11](../docs/HOAN_THIEN_TUAN_06_2026_11_22.md).
 - [x] Bổ sung so sánh hai báo cáo A.8 có kiểm hash, recipe, nguồn/lỗi/kết luận; không suy thay đổi trạng thái là khắc phục thành công hoặc sửa kết quả cũ.
 - [x] Bổ sung runner 38 hồ sơ chống ghi đè, chốt nguồn/khóa trước suy luận, lưu từng control và chỉ thử lại lỗi kỹ thuật; chạy Qwen lại đủ 18 + 38, xuất riêng hai nhóm và rà 19 sai khác tiêu chí.
