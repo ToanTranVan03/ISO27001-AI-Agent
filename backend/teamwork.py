@@ -21,6 +21,14 @@ WORKFLOW = {'NOT_STARTED', 'RUNNING', 'WAITING_EVIDENCE', 'NEEDS_REVIEW', 'COMPL
 COMPLIANCE = {'Compliant', 'Partially Compliant', 'Non-Compliant', 'Not Applicable', 'Insufficient Evidence'}
 
 
+def inventory_mode(assessment_id):
+    with get_connection() as con,con.cursor() as cur:
+        cur.execute('SELECT inventory_mode FROM assessment_campaigns WHERE assessment_id=%s',(assessment_id,))
+        row=cur.fetchone()
+    if not row:raise ValueError('Không có đợt đánh giá.')
+    return row[0]
+
+
 def hash_password(password: str) -> str:
     if len(password) < 12:
         raise ValueError('Mật khẩu phải có ít nhất 12 ký tự.')
@@ -70,6 +78,14 @@ def init_teamwork() -> None:
                     user_id UUID REFERENCES team_users(user_id) ON DELETE CASCADE,
                     PRIMARY KEY (assessment_id, user_id)
                 )''')
+            cur.execute("ALTER TABLE assessment_campaigns ADD COLUMN IF NOT EXISTS inventory_mode TEXT NOT NULL DEFAULT 'lab'")
+            cur.execute('''CREATE TABLE IF NOT EXISTS consulting_clients (
+                client_id UUID PRIMARY KEY,name TEXT NOT NULL,profile JSONB NOT NULL,
+                version INTEGER NOT NULL DEFAULT 1,created_by UUID REFERENCES team_users(user_id),
+                created_at TIMESTAMPTZ NOT NULL DEFAULT NOW())''')
+            cur.execute('''CREATE TABLE IF NOT EXISTS consulting_campaigns (
+                assessment_id UUID PRIMARY KEY REFERENCES assessment_campaigns(assessment_id),
+                client_id UUID NOT NULL REFERENCES consulting_clients(client_id))''')
             cur.execute('''
                 CREATE TABLE IF NOT EXISTS control_progress (
                     assessment_id UUID NOT NULL REFERENCES assessment_campaigns(assessment_id),
@@ -126,7 +142,9 @@ def init_teamwork() -> None:
             init_batch_schema(cur)
             # Default team is shared intentionally in this single-enterprise MVP.
             cur.execute('''INSERT INTO assessment_members (assessment_id, user_id)
-                           SELECT %s, user_id FROM team_users ON CONFLICT DO NOTHING''',
+                           SELECT %s, u.user_id FROM team_users u WHERE NOT EXISTS(
+                               SELECT 1 FROM assessment_members m JOIN consulting_campaigns c ON c.assessment_id=m.assessment_id
+                               WHERE m.user_id=u.user_id) ON CONFLICT DO NOTHING''',
                         (DEMO_ASSESSMENT_ID,))
             cur.execute("CREATE TABLE IF NOT EXISTS login_attempts (username TEXT NOT NULL, attempted_at TIMESTAMPTZ NOT NULL DEFAULT NOW())")
             cur.execute("CREATE INDEX IF NOT EXISTS login_attempts_idx ON login_attempts(username,attempted_at)")

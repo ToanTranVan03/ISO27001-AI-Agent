@@ -8,6 +8,7 @@ from uuid import UUID, uuid4
 from fastapi import APIRouter, Depends, File, Form, Header, HTTPException, UploadFile
 from pydantic import BaseModel, Field, ConfigDict
 from psycopg import IntegrityError
+from psycopg.types.json import Jsonb
 
 from backend import database, teamwork
 from evidence_collectors.document_parser import extract_document_text
@@ -110,6 +111,134 @@ def assessments(user: dict = Depends(require_user)):
     return teamwork.list_assessments(user['user_id'])
 
 
+class ClientInput(BaseModel):
+    model_config=ConfigDict(extra='forbid',str_strip_whitespace=True)
+    name:str=Field(min_length=2,max_length=200)
+    sector:str=Field(min_length=2,max_length=300)
+    contact:str=Field(min_length=2,max_length=1000)
+    locations:str=Field(default='',max_length=2000)
+    expected_version:int=Field(default=0,ge=0)
+
+
+class CampaignInput(BaseModel):
+    model_config=ConfigDict(extra='forbid',str_strip_whitespace=True)
+    name:str=Field(min_length=3,max_length=200)
+    isms_scope:str=Field(min_length=10,max_length=4000)
+
+
+def require_admin(user):
+    if user['role']!='admin':raise HTTPException(403,'Chỉ quản trị hệ thống quản lý khách hàng và thành viên.')
+
+
+def require_client(cur,cid,user):
+    cur.execute('''SELECT c.name,c.profile,c.version FROM consulting_clients c
+        WHERE c.client_id=%s AND EXISTS(SELECT 1 FROM consulting_campaigns cc
+        JOIN assessment_members m ON m.assessment_id=cc.assessment_id
+        WHERE cc.client_id=c.client_id AND m.user_id=%s)''',(cid,user['user_id']))
+    row=cur.fetchone()
+    if not row:raise HTTPException(403,'Bạn không thuộc doanh nghiệp này.')
+    return row
+
+
+@router.get('/clients')
+def clients(user:dict=Depends(require_user)):
+    with database.get_connection() as con,con.cursor() as cur:
+        cur.execute('''SELECT c.client_id,c.name,c.profile,c.version,cc.assessment_id,a.name
+            FROM consulting_clients c JOIN consulting_campaigns cc ON cc.client_id=c.client_id
+            JOIN assessment_campaigns a ON a.assessment_id=cc.assessment_id
+            JOIN assessment_members m ON m.assessment_id=a.assessment_id
+            WHERE m.user_id=%s ORDER BY c.name,a.created_at''',(user['user_id'],))
+        rows={}
+        for cid,name,profile,version,aid,title in cur.fetchall():
+            item=rows.setdefault(str(cid),dict(client_id=str(cid),name=name,profile=profile,version=version,campaigns=[]))
+            item['campaigns'].append(dict(assessment_id=str(aid),name=title))
+    return dict(clients=list(rows.values()),can_manage=user['role']=='admin',note='Chỉ đợt được cấp quyền; doanh nghiệp mới bắt đầu rỗng, không tự nạp preset.')
+
+
+def create_client_campaign(cur,cid,profile,req,user):
+    aid=str(uuid4())
+    cur.execute("INSERT INTO assessment_campaigns(assessment_id,name,inventory_mode) VALUES(%s,%s,'client')",(aid,req.name))
+    cur.execute('INSERT INTO consulting_campaigns VALUES(%s,%s)',(aid,cid))
+    cur.execute('INSERT INTO assessment_members VALUES(%s,%s)',(aid,user['user_id']))
+    cur.execute('INSERT INTO control_progress(assessment_id,control_id) SELECT %s,control_id FROM controls',(aid,))
+    from datetime import datetime
+    from zoneinfo import ZoneInfo
+    metadata=dict(name=profile['name'],synthetic=False,origin='user_supplied_not_verified',assessment_date=datetime.now(ZoneInfo('Asia/Bangkok')).date().isoformat(),policies={})
+    cur.execute('INSERT INTO enterprise_company(assessment_id,metadata) VALUES(%s,%s)',(aid,Jsonb(metadata)))
+    from backend.remediation import now
+    context=dict(name=profile['name'],sector=profile['sector'],isms_scope=req.isms_scope,contact=profile['contact'],locations=profile.get('locations',''),departments='',assets_systems='',obligations='',risks='',history=[dict(at=now(),actor=user['user_id'],command='client_campaign_created',note='Phạm vi do người dùng khai, chưa xác nhận chuyên môn.')])
+    cur.execute("INSERT INTO remediation_records VALUES(%s,%s,'context',1,%s)",(aid,str(uuid4()),Jsonb(context)))
+    cur.execute("INSERT INTO assessment_events(assessment_id,user_id,event_type,details) VALUES(%s,%s,'client_campaign_created',%s)",(aid,user['user_id'],Jsonb(dict(client_id=str(cid),scope=req.isms_scope))))
+    return dict(assessment_id=aid,name=req.name)
+
+
+class ClientCreate(ClientInput):
+    campaign:CampaignInput
+
+
+@router.post('/clients',status_code=201)
+def create_client(req:ClientCreate,user:dict=Depends(require_user)):
+    require_admin(user)
+    if req.expected_version!=0:raise HTTPException(422,'Tạo mới bắt đầu ở phiên bản 0.')
+    cid=str(uuid4());profile=req.model_dump(exclude={'campaign','expected_version'})
+    with database.get_connection() as con,con.cursor() as cur:
+        cur.execute('INSERT INTO consulting_clients(client_id,name,profile,created_by) VALUES(%s,%s,%s,%s)',(cid,req.name,Jsonb(profile),user['user_id']))
+        campaign=create_client_campaign(cur,cid,profile,req.campaign,user)
+    return dict(client_id=cid,version=1,campaign=campaign)
+
+
+@router.put('/clients/{client_id}')
+def edit_client(client_id:UUID,req:ClientInput,user:dict=Depends(require_user)):
+    require_admin(user)
+    with database.get_connection() as con,con.cursor() as cur:
+        require_client(cur,client_id,user)
+        cur.execute('SELECT profile,version FROM consulting_clients WHERE client_id=%s FOR UPDATE',(client_id,));old,version=cur.fetchone()
+        if version!=req.expected_version:raise HTTPException(409,'Hồ sơ đã đổi; tải lại.')
+        profile=req.model_dump(exclude={'expected_version'})
+        from backend.remediation import now
+        profile['history']=old.get('history',[])+[dict(at=now(),before={k:v for k,v in old.items() if k!='history'},actor=user['user_id'])]
+        cur.execute('UPDATE consulting_clients SET name=%s,profile=%s,version=version+1 WHERE client_id=%s',(req.name,Jsonb(profile),client_id))
+    return dict(client_id=str(client_id),version=version+1,note='Phạm vi từng đợt giữ riêng, không tự thay baseline đang đánh giá.')
+
+
+@router.post('/clients/{client_id}/campaigns',status_code=201)
+def add_client_campaign(client_id:UUID,req:CampaignInput,user:dict=Depends(require_user)):
+    require_admin(user)
+    with database.get_connection() as con,con.cursor() as cur:
+        _,profile,_=require_client(cur,client_id,user)
+        return create_client_campaign(cur,client_id,profile,req,user)
+
+
+class ClientMemberInput(BaseModel):
+    model_config=ConfigDict(extra='forbid',str_strip_whitespace=True)
+    username:str=Field(pattern=r'^[A-Za-z0-9_.-]{3,40}$')
+    display_name:str=Field(min_length=1,max_length=100)
+    password:str=Field(default='',max_length=200)
+    role:str=Field(pattern=r'^(consultant|verifier|business_admin|operator)$')
+
+
+@router.post('/clients/{client_id}/campaigns/{assessment_id}/members',status_code=201)
+def add_client_member(client_id:UUID,assessment_id:UUID,req:ClientMemberInput,user:dict=Depends(require_user)):
+    require_admin(user);require_campaign(assessment_id,user)
+    with database.get_connection() as con,con.cursor() as cur:
+        require_client(cur,client_id,user)
+        cur.execute('SELECT 1 FROM consulting_campaigns WHERE client_id=%s AND assessment_id=%s',(client_id,assessment_id))
+        if not cur.fetchone():raise HTTPException(403,'Đợt không thuộc doanh nghiệp.')
+        cur.execute('SELECT user_id FROM team_users WHERE username=%s',(req.username,));row=cur.fetchone()
+        if row:
+            if req.password:raise HTTPException(422,'Tài khoản đã có: để trống mật khẩu; không đổi mật khẩu tại đây.')
+            uid=str(row[0])
+        else:
+            try:encoded=teamwork.hash_password(req.password)
+            except ValueError as exc:raise HTTPException(422,str(exc)) from exc
+            uid=str(uuid4())
+            cur.execute("INSERT INTO team_users(user_id,username,password_hash,display_name,role) VALUES(%s,%s,%s,%s,'assessor')",(uid,req.username,encoded,req.display_name))
+        cur.execute('INSERT INTO assessment_members VALUES(%s,%s) ON CONFLICT DO NOTHING',(assessment_id,uid))
+        cur.execute('INSERT INTO remediation_roles VALUES(%s,%s,%s) ON CONFLICT(assessment_id,user_id) DO UPDATE SET role=EXCLUDED.role',(assessment_id,uid,req.role))
+        cur.execute("INSERT INTO assessment_events(assessment_id,user_id,event_type,details) VALUES(%s,%s,'client_member_assigned',%s)",(assessment_id,user['user_id'],Jsonb(dict(user_id=uid,role=req.role))))
+    return dict(user_id=uid,assessment_id=str(assessment_id),role=req.role)
+
+
 @router.get('/assessments/{assessment_id}/progress')
 def progress(assessment_id: UUID, user: dict = Depends(require_user)):
     require_campaign(assessment_id,user)
@@ -132,6 +261,8 @@ def execute_agent_job(job_id: str, assessment_id: str, control_id: str, evidence
     try:
         # Lazy import so the endpoints can also be tested without model execution.
         from agent_core.graph_builder import build_iso_agent_graph
+        if not evidence_only:
+            evidence_only=teamwork.inventory_mode(assessment_id)=='client'
         control = database.get_control(control_id)
         if not control:
             raise ValueError('Control not found')

@@ -36,8 +36,9 @@ def test_events_notify_correct_people_without_self_notifications(monkeypatch):
     sent=[]
     monkeypatch.setattr(notifications,'enqueue',lambda cur,aid,recipient,event,body,key:sent.append((recipient,event,body,key)) or True)
     class Cursor:
-        def execute(self,sql,args):assert args==('tenant',)
-        def fetchall(self):return [('consultant',),('verifier',),('operator',)]
+        def execute(self,sql,args):
+            assert args==('tenant',);self.sql=sql
+        def fetchall(self):return [] if "role='business_admin'" in self.sql else [('consultant',),('verifier',),('operator',)]
     doc=document()
     assert notifications.notify_event(Cursor(),'tenant',doc,'action','approve','consultant',2)==1
     assert sent[-1][0:2]==('operator','approve')
@@ -51,6 +52,16 @@ def test_events_notify_correct_people_without_self_notifications(monkeypatch):
     assert notifications.notify_event(Cursor(),'tenant',doc,'missing','approve','consultant',4)==0
     assert notifications.notify_event(Cursor(),'tenant',doc,'action','task','operator',4)==0
     assert not sent
+    doc['actions'][0]['tasks']=[{'task_id':'t1','title':'Step 1','assignee':'collaborator','done':False}]
+    assert notifications.notify_event(Cursor(),'tenant',doc,'action','assign_task','consultant',5)==2
+    assert {r[0] for r in sent}=={'operator','collaborator'}
+
+
+def test_optional_smtp_stays_disabled_unless_explicitly_configured(monkeypatch):
+    monkeypatch.delenv('REMEDIATION_SMTP_ENABLED',raising=False)
+    monkeypatch.delenv('REMEDIATION_SMTP_HOST',raising=False)
+    assert not notifications.smtp_configured()
+    assert not notifications.send_optional_email(None,'user',{'title':'Test'})
 
 
 def test_enqueue_is_membership_bound_and_idempotent_insert():

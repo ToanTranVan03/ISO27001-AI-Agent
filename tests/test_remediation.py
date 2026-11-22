@@ -73,6 +73,18 @@ def test_collaborator_can_execute_but_cannot_submit_or_verify():
     with pytest.raises(PermissionError):move(d,aid,'return',c,'helper','verifier')
 
 
+def test_task_assignment_is_restricted_to_action_participants_and_keeps_history():
+    c,d,aid=case()
+    d=move(d,aid,'approve',c,assignee='operator',collaborator_ids=['helper','other-helper'],due_date='2099-12-31')
+    tid=d['actions'][0]['tasks'][0]['task_id']
+    with pytest.raises(ValueError):move(d,aid,'assign_task',c,task_id=tid,task_assignee='outsider')
+    with pytest.raises(PermissionError):move(d,aid,'assign_task',c,'helper','operator',task_id=tid,task_assignee='helper')
+    d=move(d,aid,'assign_task',c,task_id=tid,task_assignee='helper')
+    with pytest.raises(PermissionError):move(d,aid,'task',c,'other-helper','operator',task_id=tid,done=True)
+    d=move(d,aid,'task',c,'helper','operator',task_id=tid,done=True)
+    assert d['actions'][0]['tasks'][0]['assignee']=='helper' and d['history'][-2]['command']=='assign_task'
+
+
 @pytest.mark.parametrize('outcome,state',[('partial','REWORK'),('rework','REWORK'),('more_information','NEEDS_INFORMATION')])
 def test_rejection_is_logged_without_promoting_control(outcome,state):
     c,d,aid=case();d['actions'][0].update(state='AWAITING_VERIFICATION',assignee='operator',submitted_token='before')

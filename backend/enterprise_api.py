@@ -25,7 +25,67 @@ class CompanyEvent(BaseModel):
 def company_inventory(assessment_id: UUID, user: dict = Depends(require_user)):
     from backend.company import snapshot
     require_campaign(assessment_id, user)
-    return snapshot(str(assessment_id))
+    from backend.remediation_api import membership
+    return dict(snapshot(str(assessment_id)),can_manage_inventory=membership(assessment_id,user) in ('consultant','business_admin'))
+
+
+class InventoryInput(BaseModel):
+    model_config=ConfigDict(extra='forbid',str_strip_whitespace=True)
+    expected_snapshot_hash:str=Field(pattern=r'^[a-f0-9]{64}$')
+    name:str=Field(min_length=2,max_length=200)
+    department:str=Field(min_length=2,max_length=150)
+    job_title:str=Field(default='',max_length=150)
+    employee_id:str|None=Field(default=None,pattern=r'^EMP-\d{3}$')
+    asset_type:str=Field(default='hardware',pattern=r'^(hardware|software|physical)$')
+    active:StrictBool|None=None
+    note:str=Field(min_length=10,max_length=2000)
+
+
+@router.put('/company/inventory/{kind}/{identifier}')
+def save_inventory(assessment_id:UUID,kind:str,identifier:str,req:InventoryInput,user:dict=Depends(require_user)):
+    from backend.remediation_api import membership
+    from backend.database import get_connection
+    from backend.company import snapshot
+    from psycopg.types.json import Jsonb
+    import re
+    role=membership(assessment_id,user)
+    if role not in ('consultant','business_admin'):raise HTTPException(403,'Cần tư vấn hoặc quản trị doanh nghiệp quản lý danh mục.')
+    if kind not in ('person','account','asset') or not re.fullmatch(r'[A-Za-z0-9_.-]{2,80}',identifier):raise HTTPException(422,'Loại hoặc mã danh mục không hợp lệ.')
+    if kind=='person' and not re.fullmatch(r'EMP-\d{3}',identifier):raise HTTPException(422,'Mã nhân viên dùng EMP-001 đến EMP-999.')
+    with get_connection() as con,con.cursor() as cur:
+        cur.execute('SELECT inventory_mode FROM assessment_campaigns WHERE assessment_id=%s',(assessment_id,))
+        if cur.fetchone()[0]!='client':raise HTTPException(409,'Danh mục khai báo dành cho đợt doanh nghiệp; lab giữ luồng mô phỏng cũ.')
+        cur.execute('SELECT metadata FROM enterprise_company WHERE assessment_id=%s FOR UPDATE',(assessment_id,));cur.fetchone()
+        current=snapshot(str(assessment_id),cur)
+        if current['snapshot_hash']!=req.expected_snapshot_hash:raise HTTPException(409,'Danh mục đã đổi; tải snapshot mới trước khi lưu.')
+        if kind!='person':
+            cur.execute('SELECT 1 FROM enterprise_sim_people WHERE assessment_id=%s AND employee_id=%s',(assessment_id,req.employee_id))
+            if not cur.fetchone():raise HTTPException(422,'Chọn nhân viên cùng đợt để liên kết.')
+        source={'person':current['people'],'account':current['accounts'],'asset':current['assets']}[kind]
+        old=next((r for r in source if r.get('id',r.get('asset_id'))==identifier),None)
+        state=dict(origin='user_declared_not_verified')
+        if kind=='person':
+            if not req.job_title:raise HTTPException(422,'Cần chức danh nhân viên.')
+            cur.execute('''INSERT INTO enterprise_sim_people(assessment_id,employee_id,display_name,department,job_title,state)
+                VALUES(%s,%s,%s,%s,%s,%s) ON CONFLICT(assessment_id,employee_id) DO UPDATE SET
+                display_name=EXCLUDED.display_name,department=EXCLUDED.department,job_title=EXCLUDED.job_title,updated_at=NOW()''',
+                (assessment_id,identifier,req.name,req.department,req.job_title,Jsonb(state)))
+        elif kind=='account':
+            state.update(active=req.active,mfa=None)
+            cur.execute('''INSERT INTO enterprise_company_accounts(assessment_id,account_id,employee_id,system_name,state)
+                VALUES(%s,%s,%s,%s,%s) ON CONFLICT(assessment_id,account_id) DO UPDATE SET
+                employee_id=EXCLUDED.employee_id,system_name=EXCLUDED.system_name,state=EXCLUDED.state,updated_at=NOW()''',
+                (assessment_id,identifier,req.employee_id,req.name,Jsonb(state)))
+        else:
+            cur.execute('''INSERT INTO enterprise_sim_assets(assessment_id,asset_id,asset_type,asset_name,department,state)
+                VALUES(%s,%s,%s,%s,%s,%s) ON CONFLICT(assessment_id,asset_id) DO UPDATE SET
+                asset_type=EXCLUDED.asset_type,asset_name=EXCLUDED.asset_name,department=EXCLUDED.department,updated_at=NOW()''',
+                (assessment_id,identifier,req.asset_type,req.name,req.department,Jsonb(state)))
+            cur.execute("DELETE FROM enterprise_sim_asset_people WHERE assessment_id=%s AND asset_id=%s AND relationship='responsible_employee'",(assessment_id,identifier))
+            cur.execute("INSERT INTO enterprise_sim_asset_people VALUES(%s,%s,%s,'responsible_employee') ON CONFLICT DO NOTHING",(assessment_id,identifier,req.employee_id))
+        cur.execute("INSERT INTO assessment_events(assessment_id,user_id,event_type,details) VALUES(%s,%s,'client_inventory_saved',%s)",
+            (assessment_id,user['user_id'],Jsonb(dict(kind=kind,identifier=identifier,before=old,submitted=req.model_dump(exclude={'expected_snapshot_hash'})))))
+        return dict(saved=True,snapshot=dict(snapshot(str(assessment_id),cur),can_manage_inventory=True),note='Khai báo danh mục không tự chứng minh tuân thủ; giữ nguồn/thẩm định riêng.')
 
 
 @router.post('/company/events')

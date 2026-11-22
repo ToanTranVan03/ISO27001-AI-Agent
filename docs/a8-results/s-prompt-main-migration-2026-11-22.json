@@ -1,0 +1,45 @@
+{
+  "checked_at": "2026-11-22",
+  "routes": {
+    "/api/clients": {
+      "status": 200,
+      "content_type": "application/json"
+    },
+    "/api/assessments/7f7c009b-bdcd-5b33-934e-15251ad2c976/remediation/dashboard": {
+      "status": 200,
+      "content_type": "application/json"
+    },
+    "/api/assessments/7f7c009b-bdcd-5b33-934e-15251ad2c976/remediation/report.pdf": {
+      "status": 200,
+      "content_type": "application/pdf"
+    },
+    "/api/assessments/7f7c009b-bdcd-5b33-934e-15251ad2c976/remediation/report.xlsx": {
+      "status": 200,
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    }
+  },
+  "before": {
+    "evidence": 110,
+    "evaluations": 281,
+    "team_users": 3,
+    "control_progress": 56,
+    "remediation_records": 0,
+    "governance_records": 0,
+    "remediation_notifications": 0,
+    "assessment_campaigns": 1
+  },
+  "after": {
+    "evidence": 110,
+    "evaluations": 281,
+    "team_users": 3,
+    "control_progress": 56,
+    "remediation_records": 0,
+    "governance_records": 0,
+    "remediation_notifications": 0,
+    "assessment_campaigns": 1,
+    "consulting_clients": 0,
+    "consulting_campaigns": 0
+  },
+  "tracked_counts_unchanged": true,
+  "synthetic_records_added": false
+}

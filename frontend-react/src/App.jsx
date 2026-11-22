@@ -13,6 +13,7 @@ export default function App() {
   const [token, setToken] = useState(() => sessionStorage.getItem(SESSION_KEY) || "");
   const [user, setUser] = useState(null);
   const [assessment, setAssessment] = useState(null);
+  const [campaigns,setCampaigns]=useState([]);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(true);
@@ -41,9 +42,10 @@ export default function App() {
   },[]);
   useEffect(()=>{
     if(!assessment||!navigation.assessmentId||navigation.assessmentId===assessment.assessment_id)return;
-    const frame=requestAnimationFrame(()=>navigate({...readNavigation(''),assessmentId:assessment.assessment_id},true));
+    const previousCampaign=campaigns.find(c=>c.assessment_id===navigation.assessmentId);
+    const frame=requestAnimationFrame(()=>{if(previousCampaign)setAssessment(previousCampaign);else navigate({...readNavigation(''),assessmentId:assessment.assessment_id},true);});
     return()=>cancelAnimationFrame(frame);
-  },[assessment,navigation.assessmentId,navigate]);
+  },[assessment,navigation.assessmentId,navigate,campaigns]);
   const clearSession = useCallback(() => {
     sessionStorage.removeItem(SESSION_KEY);
     sessionStorage.removeItem("iso_team_assessment");
@@ -70,7 +72,7 @@ export default function App() {
         ]);
         if (cancelled) return;
         if (!campaigns.length) throw new ApiError("Tài khoản chưa thuộc đợt đánh giá nào.", 403);
-        setUser(profile);
+        setUser(profile);setCampaigns(campaigns);
         const target=campaigns.find(c=>c.assessment_id===navigationRef.current.assessmentId)||campaigns[0];
         setAssessment(target);
         if(navigationRef.current.assessmentId&&navigationRef.current.assessmentId!==target.assessment_id){
@@ -114,7 +116,7 @@ export default function App() {
       setPassword("");
       sessionStorage.setItem(SESSION_KEY, session.access_token);
       setToken(session.access_token);
-      setUser(session.user);
+      setUser(session.user);setCampaigns(campaigns);
       const target=campaigns.find(c=>c.assessment_id===navigationRef.current.assessmentId)||campaigns[0];
       setAssessment(target);
       if(navigationRef.current.assessmentId&&navigationRef.current.assessmentId!==target.assessment_id)navigate({...readNavigation(''),assessmentId:target.assessment_id},true);
@@ -148,12 +150,13 @@ if (user && assessment && token) {
         <nav aria-label="Điều hướng chính" className="order-last flex w-full min-w-0 gap-1 overflow-x-auto lg:order-none lg:w-auto lg:flex-1">{[
           ['scope56','Tổng quan 56 control',LayoutDashboard],['a8','Thực nghiệm A.8',FlaskConical],['company','Doanh nghiệp',Building2],['dossier','Hồ sơ ISO',FolderCheck]
         ].map(([id,label,Icon])=><button key={id} type="button" onClick={()=>navigate({view:id,assessmentId:assessment.assessment_id})} aria-current={view===id?'page':undefined} className={`flex shrink-0 items-center gap-2 whitespace-nowrap rounded-xl px-3 py-3 text-xs font-semibold transition ${view===id?'bg-teal-400/15 text-teal-200 ring-1 ring-teal-400/30':'text-slate-400 hover:bg-slate-800 hover:text-white'}`}><Icon size={16}/>{label}</button>)}</nav>
+        {campaigns.length>1&&<label className="text-[10px] text-slate-400">Đợt đang làm<select aria-label="Chọn đợt đánh giá" className="ml-1 max-w-40 rounded bg-slate-900 p-2 text-xs" value={assessment.assessment_id} onChange={e=>{const next=campaigns.find(c=>c.assessment_id===e.target.value);setAssessment(next);navigate({...readNavigation(''),assessmentId:next.assessment_id});}}>{campaigns.map(c=><option key={c.assessment_id} value={c.assessment_id}>{c.name}</option>)}</select></label>}
         <AccountProfile user={user} assessment={assessment} request={request} onSaved={setUser}/><button type="button" onClick={logout} aria-label="Đăng xuất" title="Đăng xuất" className="rounded-xl p-3 text-slate-400 hover:bg-slate-800 hover:text-white"><LogOut size={18}/></button></div>
       </header>
 
-      {view === "scope56" ? <Scope56 focusDetails={focusDetails} canManage={user.role==='admin'} assessment={assessment} request={request} controlId={navigation.controlId} employeeId={navigation.employeeId} runId={navigation.runId} onContext={updateContext} onOpenA8={context=>navigate({view:'a8',...context})} onOpenDossier={context=>navigate({view:'dossier',...context})} onOpenCompany={context=>navigate({view:'company',...context})}/> : view === "company" ? <CompanyInventory focusDetails={focusDetails} assessment={assessment} request={request} employeeId={navigation.employeeId} onContext={updateContext} onOpenDossier={context=>navigate({view:'dossier',...context})}/> : view === "dossier" ? <ComplianceDossier focusDetails={focusDetails} user={user} assessment={assessment} request={request} controlId={navigation.controlId} employeeId={navigation.employeeId} onContext={updateContext} onOpenDashboard={context=>navigate({view:'scope56',...context})} onOpenCompany={context=>navigate({view:'company',...context})} onOpenA8={context=>navigate({view:'a8',...context})}/> : (
+      <div key={assessment.assessment_id}>{view === "scope56" ? <Scope56 focusDetails={focusDetails} canManage={user.role==='admin'} assessment={assessment} request={request} controlId={navigation.controlId} employeeId={navigation.employeeId} runId={navigation.runId} onContext={updateContext} onOpenA8={context=>navigate({view:'a8',...context})} onOpenDossier={context=>navigate({view:'dossier',...context})} onOpenCompany={context=>navigate({view:'company',...context})}/> : view === "company" ? <CompanyInventory onCampaignsChanged={async()=>setCampaigns(await request("/api/assessments"))} focusDetails={focusDetails} assessment={assessment} request={request} employeeId={navigation.employeeId} onContext={updateContext} onOpenDossier={context=>navigate({view:'dossier',...context})}/> : view === "dossier" ? <ComplianceDossier focusDetails={focusDetails} user={user} assessment={assessment} request={request} controlId={navigation.controlId} employeeId={navigation.employeeId} onContext={updateContext} onOpenDashboard={context=>navigate({view:'scope56',...context})} onOpenCompany={context=>navigate({view:'company',...context})} onOpenA8={context=>navigate({view:'a8',...context})}/> : (
         <A8ComplianceStudy assessment={assessment} request={request} controlId={navigation.controlId} runId={navigation.runId} onContext={updateContext} onOpenDashboard={context=>navigate({view:'scope56',...context})}/>
-      )}
+      )}</div>
     </>
   );
 }

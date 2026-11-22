@@ -29,17 +29,17 @@ def initialize_company_inventory():
         for p in seed['people']:
             cur.execute('''INSERT INTO enterprise_sim_people
                 (assessment_id,employee_id,display_name,department,job_title,employment_status,account_status,state)
-                SELECT assessment_id,%s,%s,%s,%s,%s,%s,%s FROM assessment_campaigns ON CONFLICT DO NOTHING''',
+                SELECT assessment_id,%s,%s,%s,%s,%s,%s,%s FROM assessment_campaigns WHERE inventory_mode='lab' ON CONFLICT DO NOTHING''',
                 (p['employee_id'],p['display_name'],p['department'],p['job_title'],p['employment_status'],p['account_status'],Jsonb(p['state'])))
         for a in seed['assets']:
             cur.execute('''INSERT INTO enterprise_sim_assets
                 (assessment_id,asset_id,asset_type,asset_name,department,state)
-                SELECT assessment_id,%s,%s,%s,%s,%s FROM assessment_campaigns ON CONFLICT DO NOTHING''',
+                SELECT assessment_id,%s,%s,%s,%s,%s FROM assessment_campaigns WHERE inventory_mode='lab' ON CONFLICT DO NOTHING''',
                 (a['asset_id'],a['asset_type'],a['asset_name'],a['department'],Jsonb(a['state'])))
         for r in seed['relationships']:
             cur.execute('''INSERT INTO enterprise_sim_asset_people
                 (assessment_id,asset_id,employee_id,relationship)
-                SELECT assessment_id,%s,%s,%s FROM assessment_campaigns ON CONFLICT DO NOTHING''',
+                SELECT assessment_id,%s,%s,%s FROM assessment_campaigns WHERE inventory_mode='lab' ON CONFLICT DO NOTHING''',
                 (r['asset_id'],r['employee_id'],r['relationship']))
     # Expands to the canonical 50-person inventory, preserving all existing rows.
     from backend.company import initialize_company
@@ -48,9 +48,9 @@ def initialize_company_inventory():
         cur.execute('''INSERT INTO enterprise_sim_assets
             (assessment_id,asset_id,asset_type,asset_name,department,state)
             SELECT assessment_id,'OFFICE-'||employee_id,'hardware','Máy làm việc '||employee_id,department,%s
-            FROM enterprise_sim_people ON CONFLICT DO NOTHING''',
+            FROM enterprise_sim_people WHERE assessment_id IN (SELECT assessment_id FROM assessment_campaigns WHERE inventory_mode='lab') ON CONFLICT DO NOTHING''',
             (Jsonb({'device_status':'available','encrypted':None,'returned':False,'is_synthetic':True}),))
         cur.execute('''INSERT INTO enterprise_sim_asset_people
             (assessment_id,asset_id,employee_id,relationship)
             SELECT assessment_id,'OFFICE-'||employee_id,employee_id,'responsible_employee'
-            FROM enterprise_sim_people ON CONFLICT DO NOTHING''')
+            FROM enterprise_sim_people WHERE assessment_id IN (SELECT assessment_id FROM assessment_campaigns WHERE inventory_mode='lab') ON CONFLICT DO NOTHING''')

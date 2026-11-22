@@ -163,7 +163,14 @@ Tài liệu bàn giao tuần trước: [Nhật ký tuần 5](TUAN_05.md), [phi�
 - [x] Bổ sung người chính/người phối hợp cùng đợt; người phối hợp cập nhật công việc, chỉ người chính gửi xác minh. Mọi người thực hiện đều không tự xác minh.
 - [x] Bổ sung sổ rủi ro và yêu cầu có nguồn/phiên bản/quyền sử dụng, liên kết control/phát hiện, owner/hạn, điểm trước/còn lại và rà soát khác người sửa; sửa giữ lịch sử và trở lại nháp. Thang 5×5 là quy ước dự án, không tự xác nhận chuyên môn.
 - [x] Bổ sung inbox đọc/chưa đọc theo tài khoản, giao việc/xác minh và nhắc hạn nội bộ; xuất XLSX/PDF Unicode bên cạnh JSON/CSV/HTML.
-- [x] Kiểm chứng 432 Python, 14 JavaScript, 15 kịch bản giao diện và lint/build; ghi thật PostgreSQL/Qwen trên database tạm, kiểm restart và quyền người phối hợp; API local đã nhận nâng cấp, các bảng chính theo dõi không đổi số dòng.
+- [x] Quản lý khách hàng và nhiều đợt riêng: tạo/sửa hồ sơ có phiên bản, cấp thành viên/vai trò theo đợt, chọn đợt trên UI; đợt khách hàng bắt đầu rỗng, không tự nạp nhân sự/tài khoản/thiết bị lab sau restart.
+- [x] Khai báo/sửa danh mục nhân viên, tài khoản, tài sản có snapshot, quyền backend và audit trước/sau; đợt khách hàng chỉ đánh giá nguồn nộp, kể cả API cũ.
+- [x] Bổ sung dashboard tư vấn/doanh nghiệp/lãnh đạo và danh sách việc cụ thể (`required_tasks`) theo từng control; hiển thị phân loại rủi ro, tiêu chí chưa đáp ứng, mức độ đáp ứng và nguồn lực dự kiến; số liệu lấy DB theo quyền, không suy tỷ lệ tuân thủ từ tiến độ.
+- [x] Mở rộng AI tư vấn: mục tiêu, lý do, vị trí, nguyên nhân cần xác minh, ước lượng thời gian, bằng chứng/cách kiểm tra lại/câu hỏi; nối sổ đã rà và việc trước. Sửa đầu vào trích đoạn nguồn bị rỗng và form sửa gửi thừa metadata.
+- [x] Phân công từng bước cho người chính/phối hợp, chặn sửa bước của người khác; thông báo quản lý, thông báo phân công bước con (`assign_task`), phân loại kết quả xác minh và hỗ trợ tùy chọn SMTP qua biến môi trường; báo cáo PDF/XLSX/HTML/CSV thêm tổng quan lãnh đạo, sổ rủi ro/yêu cầu và công việc còn thiếu.
+- [x] Kiểm chứng 438 Python, 14 JavaScript, 17 kịch bản giao diện và lint/build; API/PostgreSQL/Qwen/UI thật trên DB tạm có hai khách hàng, phân quyền, nguồn, đánh giá trước/sau, khắc phục và export; kiểm restart, giữ dữ liệu chính. Test mô phỏng không thay nghiệm thu/chấm thật.
+
+Chi tiết nâng cấp theo [s.txt và minh chứng](../docs/HOAN_THIEN_THEO_S_TXT_2026_11_22.md).
 
 Minh chứng và phần còn thiếu: [đối chiếu prompt](../docs/DOI_CHIEU_PROMPT_NANG_CAP_2026_11_22.md), [ghi thật có phối hợp](../docs/a8-results/upgrade-collaboration-2026-11-22-isolated.json), [migration](../docs/a8-results/upgrade-main-migration-2026-11-22.json). Các mục cần nguồn/xác nhận/chấm/phê duyệt thật bên trên vẫn giữ mở; không coi bài thử là nghiệm thu chuyên môn.
 
@@ -203,4 +210,4 @@ Ghi gọn theo ngày/nhánh; ghi người đồng bộ theo từng lần thực 
 | 21/11/2026 | 11:16 | Lê Đoàn Văn Tú, Trần Văn Toàn | `main`, `Tuan6` | Hướng dẫn chốt việc; kiểm thử ghi thật cô lập; 38 hồ sơ lab và kết quả LLM; rà 19 tiêu chí lệch, chốt khóa thiết kế cho lượt mới; cập nhật nhật ký và mốc 337 test Python |
 | 21/11/2026 | 22:40 | Trần Văn Toàn | `main` | Liên kết bốn màn hình, sửa F5; kiểm chứng gói LLM và phục hồi sau ngắt API; nhập quyết định theo lô; kiểm tra toàn vẹn nguồn; chốt ma trận UI và rà nhật ký tuần 6 |
 | 22/11/2026 | 07:00, 11:48 | Trần Văn Toàn | `main` | Tạo nhật ký tuần 7 và bàn giao tồn đọng; chạy lại 18 A.8/38 hồ sơ, lưu minh chứng; thống nhất kiểm tra nguồn thư mục/web và kiểm tra trước trên CLI/UI; giải thích nút bị khóa, siết gate SoA; cập nhật nhật ký và mốc 397 test Python |
-| 22/11/2026 | 19:03 | Trần Văn Toàn | `main` | Đồng bộ vòng đời tư vấn/khắc phục, sổ rủi ro và yêu cầu có nguồn, giao việc phối hợp, thông báo, PDF/Excel; kiểm chứng 432 Python, 14 JavaScript, 15 kịch bản giao diện |
+| 22/11/2026 | 19:03, 20:04 | Trần Văn Toàn | `main` | Đồng bộ vòng đời tư vấn/khắc phục, sổ rủi ro và yêu cầu có nguồn, quản lý nhiều khách hàng/đợt riêng, danh mục khai báo, dashboard 3 góc nhìn, AI tư vấn chi tiết, giao việc bước con, thông báo/tùy chọn SMTP và báo cáo PDF/Excel/HTML/CSV; kiểm chứng 438 Python, 14 JavaScript, 17 kịch bản giao diện |

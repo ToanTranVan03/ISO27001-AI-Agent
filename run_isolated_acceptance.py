@@ -134,8 +134,10 @@ def main():
     parser.add_argument('--verify-restart',action='store_true',help='Restart only the disposable backend while workers run')
     parser.add_argument('--remediation',action='store_true',help='Exercise corrective action lifecycle on disposable records')
     parser.add_argument('--governance',action='store_true',help='Also verify risk/requirements/inbox on disposable records')
+    parser.add_argument('--clients',action='store_true',help='Also verify client isolation and real UI on disposable records')
     args=parser.parse_args()
     if args.governance and not args.remediation:parser.error('Use --remediation with --governance')
+    if args.clients and not args.governance:parser.error('Use --remediation --governance with --clients')
     if not args.execute:parser.error('--execute is required')
     if not args.extended and (args.candidate_engine!='rules' or args.verify_restart):parser.error('Use --extended for candidate engine/restart verification')
     output=Path(args.output)
@@ -188,7 +190,7 @@ def main():
                     stop_backend(child);launch()
                 launch()
                 runner=ROOT/'frontend-react/node_modules/@playwright/test/cli.js'
-                specs=['tests/live-isolated.spec.js']+(['tests/live-orchestration.spec.js'] if args.extended else [])+(['tests/live-remediation.spec.js'] if args.remediation else [])+(['tests/live-z-governance.spec.js'] if args.governance else [])
+                specs=['tests/live-isolated.spec.js']+(['tests/live-orchestration.spec.js'] if args.extended else [])+(['tests/live-remediation.spec.js'] if args.remediation else [])+(['tests/live-z-governance.spec.js'] if args.governance else [])+(['tests/live-zz-clients.spec.js'] if args.clients else [])
                 result=subprocess.run(['node',str(runner),'test',*specs,'--workers=1','--reporter=list','--output',str(directory/'browser-results')],
                     cwd=ROOT/'frontend-react',env=env,capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=900 if args.candidate_engine=='llm' or args.remediation else 420 if args.extended else 240)
                 (directory/'browser.log').write_text(result.stdout+'\n'+result.stderr,encoding='utf-8')
@@ -204,10 +206,32 @@ def main():
                             records=response.json()['records']
                             if not args.governance:return records
                             governance=s.get(env['UI_BASE_URL']+f'/api/assessments/{aid}/governance',timeout=30);governance.raise_for_status()
-                            return {'remediation':records,'governance':governance.json()['records']}
+                            snapshot={'remediation':records,'governance':governance.json()['records']}
+                            if args.clients:
+                                client_response=s.get(env['UI_BASE_URL']+'/api/clients',timeout=15);client_response.raise_for_status()
+                                snapshot['clients']=client_response.json()
+                                snapshot['client_inventory']={}
+                                snapshot['client_remediation']={}
+                                for client in snapshot['clients']['clients']:
+                                    for campaign in client['campaigns']:
+                                        company=s.get(env['UI_BASE_URL']+f"/api/assessments/{campaign['assessment_id']}/enterprise/company",timeout=15);company.raise_for_status()
+                                        snapshot['client_inventory'][campaign['assessment_id']]=company.json()
+                                        records=s.get(env['UI_BASE_URL']+f"/api/assessments/{campaign['assessment_id']}/remediation",timeout=15);records.raise_for_status()
+                                        snapshot['client_remediation'][campaign['assessment_id']]=records.json()['records']
+                                with requests.Session() as owner_session:
+                                    login=owner_session.post(env['UI_BASE_URL']+'/api/auth/login',json={'username':'client_a_owner','password':env['ISO_ASSESSOR_PASSWORD']},timeout=15);login.raise_for_status()
+                                    owner_session.headers['Authorization']='Bearer '+login.json()['access_token']
+                                    mine=owner_session.get(env['UI_BASE_URL']+'/api/assessments',timeout=15);mine.raise_for_status()
+                                    snapshot['client_owner_campaigns']=mine.json()
+                                    assert len(snapshot['client_owner_campaigns'])==1,'Client-only user gained legacy or foreign membership after restart'
+                                    owner_session.post(env['UI_BASE_URL']+'/api/auth/logout',timeout=15)
+                            return snapshot
                         finally:s.post(env['UI_BASE_URL']+'/api/auth/logout',timeout=15)
                     before_restart=remediation_snapshot();restart()
-                    report['remediation_restart_persistence']=before_restart==remediation_snapshot()
+                    after_restart=remediation_snapshot()
+                    report['remediation_restart_persistence']=before_restart==after_restart
+                    if not report['remediation_restart_persistence']:
+                        report['restart_changed_sections']=[k for k in before_restart if before_restart[k]!=after_restart.get(k)]
                     report['remediation_receipt']={'origin':'SYNTHETIC_DISPOSABLE_DATABASE_ONLY',
                         'records':before_restart,'human_assessment':False,'professional_approval':False}
                     report['passed']=report['passed'] and report['remediation_restart_persistence']

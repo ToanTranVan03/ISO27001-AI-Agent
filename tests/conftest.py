@@ -8,6 +8,7 @@ from backend import database, enterprise_lab, company_storage, teamwork
 def isolate_database_startup(monkeypatch):
     monkeypatch.setattr(database, "initialize_database", lambda: None)
     monkeypatch.setattr(teamwork, "init_teamwork", lambda: None)
+    monkeypatch.setattr(teamwork, "inventory_mode", lambda *_:'lab')
     monkeypatch.setattr(enterprise_lab, "init_enterprise_lab", lambda: None)
     monkeypatch.setattr(company_storage, "initialize_company_inventory", lambda: None)
     from backend import main

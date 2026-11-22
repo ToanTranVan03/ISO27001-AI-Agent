@@ -63,7 +63,7 @@ def build_dossier(assessment_id, board, evidence_by_control, history_by_control=
         failed=item.get('workflow_status')=='FAILED'
         if evaluated and not document_only and company_snapshot and (cid in PEOPLE_CONTROLS | set(CONTROL_TO_NODE) or any(e.get('snapshot_hash') for e in used)):
             stale = stale or not any(e.get('snapshot_hash') for e in used) or any(e.get('snapshot_hash') and e['snapshot_hash'] != company_snapshot['snapshot_hash'] for e in used)
-        records.append({**item, 'collector_supported': bool(node) or cid in PEOPLE_CONTROLS,
+        records.append({**item, 'collector_supported': (bool(node) or cid in PEOPLE_CONTROLS) and (company_snapshot or {}).get('synthetic') is not False,
             'source': 'Doanh nghiệp dùng chung' if cid in PEOPLE_CONTROLS else node.get('title'),
             'criteria': criteria[cid] if cid in criteria else node.get('values', {}).get('healthy', {}),
             'evidence': evidence_by_control.get(cid, []),
@@ -71,9 +71,9 @@ def build_dossier(assessment_id, board, evidence_by_control, history_by_control=
             'historical_conclusion': item.get('compliance_status') if evaluated else None,
             'conclusion': 'Lỗi đánh giá gần nhất' if failed else 'Cần tái đánh giá' if stale else (item.get('compliance_status') if evaluated else 'Chưa đánh giá'),
             'assessment_state': 'failed' if failed else 'stale' if stale else ('evaluated' if evaluated else 'not_evaluated')})
-    payload = {'assessment_id': str(assessment_id), 'is_synthetic': True,
+    payload = {'assessment_id': str(assessment_id), 'is_synthetic': (company_snapshot or {}).get('synthetic',True),
         'generated_at': datetime.now(timezone.utc).isoformat(),
-        'supported_collectors': sorted(set(CONTROL_TO_NODE) | PEOPLE_CONTROLS), 'controls': records,
+        'supported_collectors': sorted(set(CONTROL_TO_NODE) | PEOPLE_CONTROLS) if (company_snapshot or {}).get('synthetic') is not False else [], 'controls': records,
         'company_snapshot_hash': company_snapshot['snapshot_hash'] if company_snapshot else None,
         'company_summary': {'employees':len(company_snapshot['people']), 'accounts':len(company_snapshot['accounts']),
                             'devices':len(company_snapshot['devices'])} if company_snapshot else None,

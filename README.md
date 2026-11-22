@@ -129,3 +129,5 @@ Hệ thống hỗ trợ thử nghiệm trong lab, chưa chứng nhận ISO. Cầ
 Báo cáo là kiểm tra API, không thay nghiệm thu toàn giao diện hoặc đánh giá chuyên môn. Mốc 20/11/2026: [39 bước API bằng ba tài khoản](docs/a8-results/api-acceptance-2026-11-20.json) đạt; `gui_tested=false`.
 
 Nâng cấp tư vấn/khắc phục: [đối chiếu chức năng và giới hạn](docs/DOI_CHIEU_PROMPT_NANG_CAP_2026_11_22.md), gồm sổ rủi ro/yêu cầu có nguồn, giao việc phối hợp, thông báo nội bộ và báo cáo PDF/XLSX trước–sau.
+
+Theo `s.txt`: [quản lý khách hàng/đợt riêng, dashboard vai trò, tư vấn AI và hướng dẫn sử dụng](docs/HOAN_THIEN_THEO_S_TXT_2026_11_22.md). Doanh nghiệp mới bắt đầu rỗng và chỉ đánh giá nguồn nộp; không tự nạp dữ liệu lab.

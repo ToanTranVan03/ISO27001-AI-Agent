@@ -38,7 +38,7 @@ def initialize_company():
             created_at TIMESTAMPTZ NOT NULL DEFAULT NOW())''')
         cur.execute('ALTER TABLE enterprise_company_changes ADD COLUMN IF NOT EXISTS submitted_by UUID REFERENCES team_users(user_id)')
         cur.execute('''INSERT INTO enterprise_company(assessment_id,metadata)
-            SELECT assessment_id,%s FROM assessment_campaigns ON CONFLICT DO NOTHING''',
+            SELECT assessment_id,%s FROM assessment_campaigns WHERE inventory_mode='lab' ON CONFLICT DO NOTHING''',
             (Jsonb({'assessment_date': datetime.now(ZoneInfo('Asia/Bangkok')).date().isoformat(),
                     'policies': fixture['policies'], 'schema_version': 1}),))
         for person in fixture['people']:
@@ -47,7 +47,7 @@ def initialize_company():
             profile.update(remote=person['remote'], profile_origin='synthetic_baseline_v1')
             cur.execute('''INSERT INTO enterprise_sim_people
                 (assessment_id,employee_id,display_name,department,job_title,employment_status,account_status,state)
-                SELECT assessment_id,%s,%s,%s,%s,'active','active',%s FROM assessment_campaigns
+                SELECT assessment_id,%s,%s,%s,%s,'active','active',%s FROM assessment_campaigns WHERE inventory_mode='lab'
                 ON CONFLICT DO NOTHING''', (eid, f'Nhân sự mô phỏng {eid[-3:]}', person['department'], person['role'], Jsonb(profile)))
         # Existing staff with incomplete profiles remain incomplete. Do not infer
         # signed contracts or training completion from a preset or model response.
@@ -58,7 +58,7 @@ def initialize_company():
                     jsonb_build_object('active',CASE WHEN account_status='active' THEN TRUE
                         WHEN account_status='disabled' THEN FALSE ELSE NULL END,
                         'mfa',NULL,'access','Theo vai trò','origin','migration_v1')
-                FROM enterprise_sim_people ON CONFLICT DO NOTHING''', (system, system))
+                FROM enterprise_sim_people WHERE assessment_id IN (SELECT assessment_id FROM assessment_campaigns WHERE inventory_mode='lab') ON CONFLICT DO NOTHING''', (system, system))
         # Only explicitly named personal accounts with one unambiguous owner.
         # Shared services remain assets; they are not invented personal logins.
         cur.execute('''INSERT INTO enterprise_company_accounts
@@ -68,6 +68,7 @@ def initialize_company():
             FROM enterprise_sim_assets a JOIN enterprise_sim_asset_people ap
                 ON ap.assessment_id=a.assessment_id AND ap.asset_id=a.asset_id
             WHERE a.asset_type='software' AND a.asset_name ILIKE '%%tài khoản%%'
+            AND a.assessment_id IN (SELECT assessment_id FROM assessment_campaigns WHERE inventory_mode='lab')
             GROUP BY a.assessment_id,a.asset_id,a.asset_name
             HAVING COUNT(DISTINCT ap.employee_id)=1 ON CONFLICT DO NOTHING''')
 
@@ -105,7 +106,7 @@ def project_company(assessment_id, people, accounts, assets, metadata):
             'type': asset['asset_name'],
             'encrypted': {'enabled':True,'disabled':False}.get(state.get('encryption_status'), state.get('encrypted')),
             'returned': state.get('returned', False)})
-    result = {'name': 'HiveFive', 'assessment_id': str(assessment_id), 'synthetic': True,
+    result = {'name': metadata.get('name','HiveFive'), 'assessment_id': str(assessment_id), 'synthetic': metadata.get('synthetic',True),
         'source': 'postgresql://assessment/company', 'schema_version': 1,
         'assessment_date': metadata['assessment_date'], 'policies': metadata['policies'],
         'lab_config': metadata.get('lab_config', {}),
@@ -113,7 +114,7 @@ def project_company(assessment_id, people, accounts, assets, metadata):
         'assets': assets, 'policy_note': 'Chính sách lab, không phải kết luận chứng nhận ISO.'}
     result['snapshot_hash'] = hashlib.sha256(json.dumps(result, sort_keys=True, ensure_ascii=False, default=str).encode()).hexdigest()
     from agent_core.business_events import ACTIONS
-    result['actions'] = [{'id': key, 'name': value} for key, value in ACTIONS.items()]
+    result['actions'] = [{'id': key, 'name': value} for key, value in ACTIONS.items()] if result['synthetic'] else []
     return result
 
 
@@ -169,6 +170,7 @@ def describe_changes(before, after):
 def preview(assessment_id, employee_id, action):
     from agent_core.business_events import apply_business_change
     data = snapshot(assessment_id)
+    if data.get('synthetic') is False:raise ValueError('Sự kiện mô phỏng chỉ dành cho doanh nghiệp lab.')
     candidate = copy.deepcopy(data)
     before, after = apply_business_change(candidate, canonical_employee(employee_id), action)
     return dict(snapshot_hash=data['snapshot_hash'], changes=describe_changes(before, after),
@@ -215,6 +217,7 @@ def change(assessment_id, employee_id, action, cur=None, actor_id=None, expected
         ORDER BY asset_id FOR UPDATE''', (assessment_id,assessment_id,eid))
     cur.fetchall()
     data = snapshot(assessment_id, cur)
+    if data.get('synthetic') is False:raise ValueError('Sự kiện mô phỏng chỉ dành cho doanh nghiệp lab.')
     if expected_snapshot_hash is not None and data['snapshot_hash'] != expected_snapshot_hash:
         raise ValueError('Dữ liệu doanh nghiệp đã thay đổi. Hãy xem trước lại trước khi lưu.')
     before, after = apply_business_change(data, eid, action)

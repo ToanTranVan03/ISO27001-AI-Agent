@@ -34,6 +34,61 @@ def action(proposal,origin):
     return value
 
 
+def dashboard(records,controls,today):
+    """Observed workflow counts only; zero denominators stay unknown."""
+    from collections import Counter
+    from datetime import timedelta
+    findings=[r for r in records if r['kind']=='finding']
+    actions=[a for r in findings for a in r['document']['actions']]
+    done=sum(a['state'] in ('VERIFIED','CLOSED') for a in actions)
+    active=[a for a in actions if a['state'] not in ('VERIFIED','CLOSED')]
+    limit=(date.fromisoformat(today)+timedelta(days=3)).isoformat()
+    states=dict(Counter(a['state'] for a in actions))
+    task_labels={
+        'missing_sources':'Bổ sung nguồn bằng chứng gốc',
+        'unusable_sources':'Thay thế nguồn không đủ chất lượng',
+        'needs_assessment_check':'Chạy Agent đánh giá nguồn hiện hành',
+        'needs_review':'Chuyên viên thẩm định từng tiêu chí',
+        'needs_applicability':'Ghi quyết định tính áp dụng (SoA)',
+        'has_finding':'Rà phát hiện và lập/duyệt kế hoạch khắc phục',
+        'remediating':'Thực hiện công việc và đính kèm bằng chứng sau',
+        'awaiting_verification':'Chuyên viên xác minh độc lập và đánh giá lại',
+        'has_verified_action':'Kiểm tra hiệu lực xác minh trước khi chốt hồ sơ',
+    }
+    work=[]
+    for c in controls:
+        fs=[r for r in findings if r['document']['control_id']==c['control_id']]
+        related=[a for r in fs for a in r['document']['actions']]
+        sources=[e for e in c.get('evidence',[]) if e.get('is_synthetic') is False or (e.get('source') or '').startswith('a8-capture://')]
+        usable=[e for e in sources if e.get('source_quality',{}).get('usable') is not False]
+        flags=[]
+        if not sources:flags.append('missing_sources')
+        elif not usable:flags.append('unusable_sources')
+        if not c.get('latest_evaluation_id') or c.get('assessment_state') in ('failed','stale','not_evaluated'):flags.append('needs_assessment_check')
+        if not c.get('human_review_current'):flags.append('needs_review')
+        if not c.get('applicability'):flags.append('needs_applicability')
+        if fs:flags.append('has_finding')
+        if any(a['state'] in ('IN_PROGRESS','REWORK','NEEDS_INFORMATION','NOT_STARTED') for a in related):flags.append('remediating')
+        if any(a['state']=='AWAITING_VERIFICATION' for a in related):flags.append('awaiting_verification')
+        if any(a['state'] in ('VERIFIED','CLOSED') for a in related):flags.append('has_verified_action')
+        required_tasks=[task_labels[f] for f in flags if f in task_labels]
+        work.append(dict(control_id=c['control_id'],name=c.get('name',''),conclusion=c.get('conclusion'),flags=flags,required_tasks=required_tasks,findings=len(fs),actions=len(related),usable_sources=len(usable)))
+    planned_resources=[dict(action_id=a.get('action_id'),title=a.get('title'),resources=a.get('resources'),estimated_effort=a.get('estimated_effort'))
+        for a in actions if a.get('resources') or a.get('estimated_effort')]
+    remaining_issues=[dict(control_id=r['document']['control_id'],finding_id=r['record_id'],description=r['document']['description'],risk=r['document'].get('risk','unconfirmed'))
+        for r in findings if not r['document']['actions'] or any(a['state'] not in ('VERIFIED','CLOSED') for a in r['document']['actions'])]
+    return dict(findings=len(findings),actions=len(actions),by_state=states,
+        overdue=sum(bool(a.get('due_date')) and a['due_date']<today for a in active),
+        due_soon=sum(bool(a.get('due_date')) and today<=a['due_date']<=limit for a in active),
+        completed=done,completion_percent=round(100*done/len(actions),2) if actions else None,
+        risk_proposals=dict(Counter(r['document'].get('risk','unconfirmed') for r in findings)),
+        urgent=[dict(control_id=r['document']['control_id'],finding_id=r['record_id'],description=r['document']['description']) for r in findings if r['document'].get('risk')=='high'],
+        conclusions=dict(Counter(c.get('conclusion') or 'Insufficient Evidence' for c in controls)),
+        decisions_pending=sum(not c.get('applicability') for c in controls),estimated_cost=None,
+        planned_resources=planned_resources,remaining_issues=remaining_issues,
+        worklist=work,scope_note='Số công việc theo quyền hiện tại; tỷ lệ hoàn thành không phải tỷ lệ tuân thủ. Chi phí chưa có dữ liệu.')
+
+
 def transition(document,action_id,command,payload,actor,role,control):
     doc=deepcopy(document)
     item=next((a for a in doc['actions'] if a['action_id']==action_id),None)
@@ -51,9 +106,16 @@ def transition(document,action_id,command,payload,actor,role,control):
         item.update(state='NOT_STARTED',assignee=payload['assignee'],collaborator_ids=payload.get('collaborator_ids',[]),due_date=due.isoformat(),approved_by=actor)
     elif command=='edit':
         if role!='consultant' or before!='PENDING_APPROVAL':raise PermissionError('Chỉ sửa đề xuất chưa phê duyệt.')
-        for key in ('title','steps','acceptance','resources','department','priority'):
+        for key in ('title','steps','acceptance','resources','department','priority','problem','possible_causes','clarification_questions','objective','rationale','target_location','estimated_effort','required_evidence','recheck_method'):
             if key in payload:item[key]=payload[key]
         if 'tasks' in payload:item['tasks']=[dict(task_id=str(uuid4()),title=t,done=False) for t in payload['tasks']]
+    elif command=='assign_task':
+        if role!='consultant' or before not in ('NOT_STARTED','IN_PROGRESS','REWORK','NEEDS_INFORMATION'):raise PermissionError('Chỉ tư vấn phân công bước khi đang thực hiện.')
+        target=payload.get('task_assignee')
+        if target not in [item.get('assignee'),*item.get('collaborator_ids',[])]:raise ValueError('Người nhận bước phải là người chính hoặc người phối hợp đã giao.')
+        task=next((t for t in item['tasks'] if t['task_id']==payload.get('task_id')),None)
+        if not task or task['done']:raise ValueError('Chỉ phân công công việc con chưa hoàn tất.')
+        task['assignee']=target
     elif command in ('start','task','attach','submit'):
         if not operator:raise PermissionError('Chỉ người được giao thực hiện công việc.')
         if before not in ('NOT_STARTED','IN_PROGRESS','NEEDS_INFORMATION','REWORK'):raise ValueError('Trạng thái không cho cập nhật thực hiện.')
@@ -61,6 +123,7 @@ def transition(document,action_id,command,payload,actor,role,control):
         if command=='task':
             task=next((t for t in item['tasks'] if t['task_id']==payload.get('task_id')),None)
             if not task or type(payload.get('done')) is not bool:raise ValueError('Công việc/trạng thái không hợp lệ.')
+            if task.get('assignee') and str(task['assignee'])!=str(actor) and str(item['assignee'])!=str(actor):raise PermissionError('Bước đã giao cho thành viên khác; người chính có thể điều phối.')
             index=item['tasks'].index(task)
             if payload['done'] and any(not t['done'] for t in item['tasks'][:index]):raise ValueError('Hoàn tất các bước trước theo thứ tự phụ thuộc.')
             if not payload['done'] and any(t['done'] for t in item['tasks'][index+1:]):raise ValueError('Bỏ hoàn tất các bước phụ thuộc phía sau trước.')

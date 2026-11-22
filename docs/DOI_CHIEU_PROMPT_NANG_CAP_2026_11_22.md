@@ -1,5 +1,7 @@
 # Đối chiếu prompt nâng cấp — 22/11/2026
 
+Đây là mốc trước yêu cầu `s.txt`; xem [nâng cấp tiếp và trạng thái mới](HOAN_THIEN_THEO_S_TXT_2026_11_22.md) cho quản lý nhiều khách hàng/dashboard/tư vấn AI chi tiết.
+
 Đối chiếu toàn bộ prompt đính kèm với code và kiểm thử thực tế. Bản đính kèm mới trùng nội dung bản yêu cầu trước. Phạm vi vẫn là 56 control (8 A.6, 14 A.7, 34 A.8), ưu tiên sâu 18 A.8; không tự mở rộng thành toàn bộ ISMS hoặc cấp chứng nhận ISO.
 
 ## Phần đã có và phần bổ sung

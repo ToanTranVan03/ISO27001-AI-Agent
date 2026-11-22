@@ -196,6 +196,7 @@ def evaluate_control(req: EvaluationRequest, user: dict = Depends(require_user),
 
     initial_state = {
         "assessment_id": aid,
+        "source_mode": "user_evidence_only" if teamwork.inventory_mode(aid)=='client' else "shared_lab",
         "control_id": control["control_id"],
         "control_name": control["name"],
         "objective": control["objective"],

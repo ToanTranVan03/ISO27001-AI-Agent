@@ -28,7 +28,7 @@ def init_enterprise_lab() -> None:
             cur.execute("ALTER TABLE evidence ADD COLUMN IF NOT EXISTS evidence_origin TEXT NOT NULL DEFAULT 'USER_UPLOAD'")
             for key in NODE_SPECS:
                 cur.execute('''INSERT INTO enterprise_lab_nodes (assessment_id,node_key)
-                               SELECT assessment_id, %s FROM assessment_campaigns
+                               SELECT assessment_id, %s FROM assessment_campaigns WHERE inventory_mode='lab'
                                ON CONFLICT DO NOTHING''', (key,))
 
 

@@ -52,6 +52,9 @@ def xlsx_report(report):
     summary=[['Assessment',report['assessment_id']],['Total actions',report['total_actions']],
         ['Overdue actions',report['overdue']],['Certification claim',False],['Notice',DISCLAIMER]]
     summary.extend(['State: '+str(k),v] for k,v in report.get('by_state',{}).items())
+    dashboard=report.get('dashboard',{})
+    if dashboard:
+        summary.extend([['Workflow completion percent (not compliance)',dashboard.get('completion_percent')],['Applicability decisions pending',dashboard.get('decisions_pending')],['Estimated cost','Not provided']])
     for context in report.get('context',[]):
         for key in ('name','sector','isms_scope','locations','departments','assets_systems','obligations','risks','contact'):
             summary.append(['Company: '+key,context['document'].get(key,'')])
@@ -69,14 +72,22 @@ def xlsx_report(report):
             aid=a['action_id']
             actions.append([fid,doc['control_id'],aid,a['title'],a['state'],a.get('department'),a.get('assignee'),
                 a.get('due_date'),a.get('priority'),a['steps'],a['acceptance'],a.get('resources'),a.get('proposal_origin'),
-                '\n'.join(text(e.get('evidence_id'))+' | '+text(e.get('sha256_hash')) for e in a['evidence'])])
-            for index,task in enumerate(a['tasks'],1):tasks.append([fid,aid,index,task['task_id'],task['title'],task['done']])
+                '\n'.join(text(e.get('evidence_id'))+' | '+text(e.get('sha256_hash')) for e in a['evidence']),', '.join(a.get('collaborator_ids',[])),a.get('objective'),a.get('possible_causes'),a.get('rationale'),a.get('target_location'),a.get('estimated_effort'),a.get('required_evidence'),a.get('recheck_method'),'\n'.join(a.get('clarification_questions',[]))])
+            for index,task in enumerate(a['tasks'],1):tasks.append([fid,aid,index,task['task_id'],task['title'],task['done'],task.get('assignee')])
             for v in a['verifications']:verifications.append([fid,aid,v.get('at'),v.get('reviewer_id'),v['outcome'],
                 v['note'],v.get('review_token'),v.get('conclusion'),v.get('human_review_signature')])
     sheet('Findings',['Finding ID','Control','Finding','Location','Reported cause','Risk proposed','Initial result','Current machine','Current human','Baseline token','Current token','Verification stale','Initial evidence ID / hash','Criteria'],findings)
-    sheet('Actions',['Finding ID','Control','Action ID','Action','Workflow state','Department','Assignee ID','Due date','Priority','Instructions','Acceptance evidence','Resources','Proposal origin','After evidence ID / hash'],actions)
-    sheet('Tasks',['Finding ID','Action ID','Sequence','Task ID','Task','Done by executor'],tasks)
+    sheet('Actions',['Finding ID','Control','Action ID','Action','Workflow state','Department','Assignee ID','Due date','Priority','Instructions','Acceptance evidence','Resources','Proposal origin','After evidence ID / hash','Collaborators','Objective','Possible causes - unconfirmed','Why','Where','Estimated effort - proposed','Required evidence','Recheck method','Clarification questions'],actions)
+    sheet('Tasks',['Finding ID','Action ID','Sequence','Task ID','Task','Done by executor','Assigned step owner'],tasks)
     sheet('Verification',['Finding ID','Action ID','Time','Reviewer ID','Outcome','Rationale','Review token','Human conclusion','Review signature'],verifications)
+    if dashboard:
+        sheet('Control worklist',['Control','Name','Current machine result','Required work','Findings','Actions','Usable sources'],
+            [[c['control_id'],c['name'],c['conclusion'],'; '.join(c['flags']),c['findings'],c['actions'],c['usable_sources']] for c in dashboard['worklist']])
+    if 'governance' in report:
+        sheet('Risk register',['ID','Title','Controls','Status','Inherent score (project 5x5)','Residual score','Treatment','Owner','Due date','Rationale'],
+            [[r['record_id'],r['document']['title'],', '.join(r['document']['control_ids']),r['document']['status'],r['document'].get('inherent_score'),r['document'].get('residual_score'),r['document']['treatment_plan'],r['document']['owner_id'],r['document']['due_date'],r['document']['rationale']] for r in report['governance'] if r['kind']=='risk'])
+        sheet('Requirements',['ID','Reference','Title','Source','Source version','Rights basis','Scope','Controls','Status'],
+            [[r['record_id'],r['document']['reference'],r['document']['title'],r['document']['source_reference'],r['document']['source_version'],r['document']['rights_basis'],r['document']['applicability_scope'],', '.join(r['document']['control_ids']),r['document']['status']] for r in report['governance'] if r['kind']=='requirement'])
     stream=BytesIO();workbook.save(stream);return stream.getvalue()
 
 
@@ -122,6 +133,23 @@ def pdf_report(report):
     for context in report.get('context',[]):
         doc=context['document'];paragraph(doc.get('name','Doanh nghiệp'),'heading')
         paragraph('Phạm vi ISMS: '+text(doc.get('isms_scope')))
+    dashboard=report.get('dashboard')
+    if dashboard:
+        paragraph('Tổng quan cho lãnh đạo','heading')
+        paragraph('Tiến độ hành động (không phải mức tuân thủ): '+text(dashboard['completion_percent'] if dashboard['completion_percent'] is not None else 'Chưa có mẫu để tính')+'%')
+        paragraph('Chưa xác định tính áp dụng: '+text(dashboard['decisions_pending'])+' | Sắp đến hạn: '+text(dashboard['due_soon'])+' | Chi phí: chưa có dữ liệu số tiền.')
+        paragraph('Kết luận máy theo control: '+text(dashboard['conclusions']))
+        for item in dashboard['urgent']:paragraph('Ưu tiên cần người phụ trách rà: '+item['control_id']+' — '+item['description'])
+        paragraph('Các control còn việc cần xử lý','heading')
+        for item in dashboard['worklist']:
+            if item['flags']:paragraph(item['control_id']+' | '+', '.join(item['flags']),'small')
+    for record in report.get('governance',[]):
+        item=record['document'];paragraph(('Rủi ro: ' if record['kind']=='risk' else 'Yêu cầu: ')+item['title'],'heading')
+        paragraph('Trạng thái sổ: '+item['status']+' | Control: '+', '.join(item['control_ids']),'small')
+        if record['kind']=='risk':
+            paragraph('Điểm dự án 5×5 trước / còn lại: '+text(item.get('inherent_score'))+' / '+text(item.get('residual_score')))
+            paragraph(item['treatment_plan']);paragraph('Căn cứ: '+item['rationale'])
+        else:paragraph('Nguồn: '+item['source_reference']+' | Phiên bản: '+item['source_version'])
     for row in report['records']:
         doc=row['document'];baseline=doc['baseline']
         paragraph(doc['control_id']+' — '+doc['description'],'heading')
@@ -138,8 +166,12 @@ def pdf_report(report):
             paragraph(a['title']+' — '+a['state'],'heading')
             paragraph('Bộ phận: '+text(a.get('department'))+' | Người thực hiện: '+text(a.get('assignee') or 'Chưa giao')+
                 ' | Hạn: '+text(a.get('due_date') or 'Chưa ghi')+' | Ưu tiên: '+text(a.get('priority')))
+            if a.get('collaborator_ids'):paragraph('Người phối hợp: '+', '.join(a['collaborator_ids']))
             paragraph(a['steps']);paragraph('Điều kiện nghiệm thu: '+a['acceptance'])
             paragraph('Nguồn lực: '+text(a.get('resources')))
+            for key,label in [('objective','Mục tiêu'),('rationale','Vì sao'),('possible_causes','Nguyên nhân có thể, cần xác minh'),('target_location','Vị trí'),('estimated_effort','Ước lượng cần chuyên viên xem xét'),('required_evidence','Bằng chứng cần nộp'),('recheck_method','Cách kiểm tra lại')]:
+                if a.get(key):paragraph(label+': '+a[key])
+            for question in a.get('clarification_questions',[]):paragraph('Cần hỏi bổ sung: '+question)
             for index,t in enumerate(a['tasks'],1):paragraph(f"{index}. [{'x' if t['done'] else ' '}] "+t['title'])
             for e in a['evidence']:paragraph('Nguồn sau: '+text(e.get('evidence_id'))+' | '+text(e.get('sha256_hash')),'small')
             for v in a['verifications']:
