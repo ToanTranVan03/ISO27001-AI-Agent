@@ -72,7 +72,8 @@ def dashboard(records,controls,today):
         if any(a['state']=='AWAITING_VERIFICATION' for a in related):flags.append('awaiting_verification')
         if any(a['state'] in ('VERIFIED','CLOSED') for a in related):flags.append('has_verified_action')
         required_tasks=[task_labels[f] for f in flags if f in task_labels]
-        work.append(dict(control_id=c['control_id'],name=c.get('name',''),conclusion=c.get('conclusion'),flags=flags,required_tasks=required_tasks,findings=len(fs),actions=len(related),usable_sources=len(usable)))
+        effective=c['human_review']['conclusion'] if c.get('human_review_current') and c.get('human_review') else c.get('conclusion')
+        work.append(dict(control_id=c['control_id'],name=c.get('name',''),conclusion=effective,machine_conclusion=c.get('conclusion'),flags=flags,required_tasks=required_tasks,findings=len(fs),actions=len(related),usable_sources=len(usable)))
     planned_resources=[dict(action_id=a.get('action_id'),title=a.get('title'),resources=a.get('resources'),estimated_effort=a.get('estimated_effort'))
         for a in actions if a.get('resources') or a.get('estimated_effort')]
     remaining_issues=[dict(control_id=r['document']['control_id'],finding_id=r['record_id'],description=r['document']['description'],risk=r['document'].get('risk','unconfirmed'))
@@ -83,7 +84,7 @@ def dashboard(records,controls,today):
         completed=done,completion_percent=round(100*done/len(actions),2) if actions else None,
         risk_proposals=dict(Counter(r['document'].get('risk','unconfirmed') for r in findings)),
         urgent=[dict(control_id=r['document']['control_id'],finding_id=r['record_id'],description=r['document']['description']) for r in findings if r['document'].get('risk')=='high'],
-        conclusions=dict(Counter(c.get('conclusion') or 'Insufficient Evidence' for c in controls)),
+        conclusions=dict(Counter((c['human_review']['conclusion'] if c.get('human_review_current') and c.get('human_review') else c.get('conclusion')) or 'Insufficient Evidence' for c in controls)),
         decisions_pending=sum(not c.get('applicability') for c in controls),estimated_cost=None,
         planned_resources=planned_resources,remaining_issues=remaining_issues,
         worklist=work,scope_note='Số công việc theo quyền hiện tại; tỷ lệ hoàn thành không phải tỷ lệ tuân thủ. Chi phí chưa có dữ liệu.')

@@ -198,16 +198,17 @@ def context(assessment_id:UUID,req:Context,user=Depends(require_user)):
     # Campaign UUID is a fixed context record key; advisory lock prevents duplicate first writers.
     with get_connection() as con,con.cursor() as cur:
         cur.execute('SELECT pg_advisory_xact_lock(hashtext(%s))',('context:'+str(assessment_id),))
-        cur.execute('SELECT version,document FROM remediation_records WHERE assessment_id=%s AND record_id=%s FOR UPDATE',(assessment_id,assessment_id))
-        old=cur.fetchone();version=old[0] if old else 0
+        cur.execute("SELECT record_id,version,document FROM remediation_records WHERE assessment_id=%s AND kind='context' FOR UPDATE",(assessment_id,))
+        old=cur.fetchone();rid=old[0] if old else assessment_id;version=old[1] if old else 0
         if version!=req.expected_version:raise HTTPException(409,'Hồ sơ doanh nghiệp đã đổi.')
         value=req.model_dump(exclude={'expected_version'})
-        history=old[1].get('history',[]) if old else []
-        value['history']=history+[dict(at=engine.now(),actor=user['user_id'],before={k:v for k,v in old[1].items() if k!='history'} if old else None)]
+        history=old[2].get('history',[]) if old else []
+        value['history']=history+[dict(at=engine.now(),actor=user['user_id'],before={k:v for k,v in old[2].items() if k!='history'} if old else None)]
         value['standard_reference']='ISO/IEC 27001:2022; Amd 1:2024 — cần xác nhận tài liệu được cấp phép/phạm vi'
-        if old:return save(cur,assessment_id,assessment_id,version,value)
-        cur.execute('INSERT INTO remediation_records VALUES(%s,%s,%s,1,%s)',(assessment_id,assessment_id,'context',Jsonb(value)))
-    return dict(record_id=str(assessment_id),version=1,document=value)
+        cur.execute("UPDATE enterprise_company SET metadata=jsonb_set(metadata,'{name}',%s),updated_at=NOW() WHERE assessment_id=%s AND COALESCE((metadata->>'synthetic')::boolean,TRUE)=FALSE",(Jsonb(req.name),assessment_id))
+        if old:return save(cur,assessment_id,rid,version,value)
+        cur.execute('INSERT INTO remediation_records VALUES(%s,%s,%s,1,%s)',(assessment_id,rid,'context',Jsonb(value)))
+    return dict(record_id=str(rid),version=1,document=value)
 
 
 @router.post('/findings',status_code=201)

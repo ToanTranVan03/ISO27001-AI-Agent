@@ -167,7 +167,7 @@ def create_client_campaign(cur,cid,profile,req,user):
     cur.execute('INSERT INTO enterprise_company(assessment_id,metadata) VALUES(%s,%s)',(aid,Jsonb(metadata)))
     from backend.remediation import now
     context=dict(name=profile['name'],sector=profile['sector'],isms_scope=req.isms_scope,contact=profile['contact'],locations=profile.get('locations',''),departments='',assets_systems='',obligations='',risks='',history=[dict(at=now(),actor=user['user_id'],command='client_campaign_created',note='Phạm vi do người dùng khai, chưa xác nhận chuyên môn.')])
-    cur.execute("INSERT INTO remediation_records VALUES(%s,%s,'context',1,%s)",(aid,str(uuid4()),Jsonb(context)))
+    cur.execute("INSERT INTO remediation_records VALUES(%s,%s,'context',1,%s)",(aid,aid,Jsonb(context)))
     cur.execute("INSERT INTO assessment_events(assessment_id,user_id,event_type,details) VALUES(%s,%s,'client_campaign_created',%s)",(aid,user['user_id'],Jsonb(dict(client_id=str(cid),scope=req.isms_scope))))
     return dict(assessment_id=aid,name=req.name)
 

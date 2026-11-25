@@ -135,4 +135,17 @@ Nâng cấp tư vấn/khắc phục: [đối chiếu chức năng và giới h�
 
 Theo `s.txt`: [quản lý khách hàng/đợt riêng, dashboard vai trò, tư vấn AI và hướng dẫn sử dụng](docs/HOAN_THIEN_THEO_S_TXT_2026_11_22.md). Doanh nghiệp mới bắt đầu rỗng và chỉ đánh giá nguồn nộp; không tự nạp dữ liệu lab.
 
-Nghiệm thu toàn diện cuối cùng: [báo cáo nghiệm thu kỹ thuật, nghiệp vụ, bảo mật và kịch bản demo](docs/FINAL_ACCEPTANCE_2026.md).
+Nghiệm thu toàn diện cuối cùng: [nghiệm thu theo mục tiêu đề tài](docs/THESIS_FINAL_VALIDATION.md), [báo cáo nghiệm thu kỹ thuật & nghiệp vụ](docs/FINAL_ACCEPTANCE_2026.md) và [kiểm tra tính liên kết & đồng bộ toàn hệ thống](docs/INTEGRATION_AUDIT_2026.md).
+
+### Bộ hồ sơ bảo vệ & nghiệm thu đề tài (`docs/defense/` & `docs/thesis-validation/`)
+
+- [Báo cáo nghiệm thu cuối cùng theo mục tiêu đề tài](docs/THESIS_FINAL_VALIDATION.md)
+- [Đánh giá chất lượng kết luận & 10 tình huống AI độc lập](docs/thesis-validation/AI_EVALUATION.md)
+- [Kịch bản kiểm thử nghiệm thu theo đề tài](docs/thesis-validation/TEST_CASES.md)
+- [Checklist kiểm tra nhanh trước khi demo](docs/thesis-validation/DEMO_CHECKLIST.md)
+- [Báo cáo kiến trúc & cơ chế hoạt động hệ thống](docs/defense/ARCHITECTURE_PRESENTATION.md)
+- [Bộ test case nghiệm thu kỹ thuật & nghiệp vụ](docs/defense/ACCEPTANCE_TEST_CASES.md)
+- [Kịch bản demo 15 phút & bộ dữ liệu demo mẫu](docs/defense/DEMO_SCRIPT_15_MIN.md)
+- [Đề cương báo cáo đồ án 6 chương](docs/defense/REPORT_OUTLINE.md)
+- [Đề cương 18 slide thuyết trình bảo vệ](docs/defense/SLIDE_OUTLINE.md)
+- [Bộ 28 câu hỏi phản biện & câu trả lời mẫu](docs/defense/DEFENSE_QA.md)
