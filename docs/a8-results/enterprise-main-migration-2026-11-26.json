@@ -1,0 +1,31 @@
+{
+  "before": {
+    "evidence": 110,
+    "evaluations": 282,
+    "team_users": 3,
+    "assessment_campaigns": 1,
+    "control_progress": 56,
+    "remediation_records": 22,
+    "governance_records": 0
+  },
+  "after": {
+    "evidence": 110,
+    "evaluations": 282,
+    "team_users": 3,
+    "assessment_campaigns": 1,
+    "control_progress": 56,
+    "remediation_records": 22,
+    "governance_records": 0,
+    "consulting_clients": 0,
+    "consulting_campaigns": 0,
+    "enterprise_period_snapshots": 0
+  },
+  "checked_at": "2026-11-26",
+  "routes": {
+    "/api/clients": 200,
+    "/api/assessments/7f7c009b-bdcd-5b33-934e-15251ad2c976/sources/search?q=backup&limit=1": 200,
+    "/api/assessments/7f7c009b-bdcd-5b33-934e-15251ad2c976/remediation/dashboard": 200
+  },
+  "tracked_counts_unchanged": true,
+  "synthetic_records_added": false
+}

@@ -87,6 +87,31 @@ def extract_document_text(filename: str, content: bytes) -> str:
             text = _extract_pdf(content)
         elif extension == ".docx":
             text = _extract_docx(content)
+        elif extension == '.xlsx':
+            from zipfile import ZipFile
+            with ZipFile(BytesIO(content)) as archive:
+                if sum(i.file_size for i in archive.infolist())>40*1024*1024:
+                    raise ValueError('XLSX giải nén vượt 40MB.')
+            from openpyxl import load_workbook
+            workbook=load_workbook(BytesIO(content),read_only=True,data_only=False,keep_links=False)
+            parts=[];characters=0;cells=0
+            try:
+                for sheet in workbook:
+                    parts.append('Sheet: '+sheet.title)
+                    for row in sheet.iter_rows():
+                        values=[]
+                        for cell in row:
+                            cells+=1
+                            if cells>200000:raise ValueError('XLSX vượt giới hạn 200000 ô.')
+                            if cell.value is not None:
+                                value=str(cell.value)
+                                if cell.data_type=='f':value='[FORMULA_NOT_EXECUTED] '+value
+                                values.append(value)
+                        line=' | '.join(values);characters+=len(line)
+                        if characters>MAX_DOCUMENT_CHARS:raise ValueError('XLSX vượt giới hạn nội dung; chia nhỏ nguồn.')
+                        if line:parts.append(line)
+            finally:workbook.close()
+            text='\n'.join(parts)
         else:
             raise ValueError(
                 f"Định dạng '{extension}' không được hỗ trợ. Chỉ chấp nhận PDF và DOCX."

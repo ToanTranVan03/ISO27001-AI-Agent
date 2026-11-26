@@ -2,11 +2,11 @@
 
 - Thời gian: **23/11/2026–29/11/2026 (thứ Hai–Chủ nhật).**
 - Trạng thái: **Đang thực hiện — đã kiểm tra liên kết, nghiệm thu theo đề tài và chuẩn bị hồ sơ bảo vệ (25/11).**
-- Lập kế hoạch và cập nhật: **22/11/2026** (Chủ nhật cuối tuần 6).
+- Lập kế hoạch: **22/11/2026**; cập nhật gần nhất: **26/11/2026**.
 
 ## Mục tiêu và kế hoạch
 
-Giữ phạm vi 56 control Annex A (8 A.6, 14 A.7, 34 A.8). Tuần 7 **không xây thêm chức năng mới** (chỉ sửa lỗi thật). Trọng tâm: kiểm tra liên kết toàn hệ thống, nghiệm thu theo mục tiêu đề tài và chuẩn bị hồ sơ bảo vệ đồ án.
+Giữ phạm vi 56 control Annex A (8 A.6, 14 A.7, 34 A.8). Kế hoạch ban đầu ưu tiên sửa lỗi và nghiệm thu; ngày 26/11 bổ sung nâng cấp nhiều doanh nghiệp/nhiều kỳ theo yêu cầu mới. Trọng tâm: kiểm tra liên kết toàn hệ thống, nghiệm thu theo mục tiêu đề tài và chuẩn bị hồ sơ bảo vệ đồ án.
 
 **Việc đã làm (có minh chứng, xem nhật ký bên dưới):**
 
@@ -70,6 +70,18 @@ Tài liệu để tiếp tục:
 - Dữ liệu demo bảo vệ là doanh nghiệp giả lập, tách khỏi đợt đánh giá chính; không dùng làm kết quả đánh giá thực tế.
 - Probe lab chỉ kiểm tra tiêu chí đại diện; hash khớp không chứng minh nguồn thật hoặc đủ nội dung control.
 - Chốt kiểm thử các luồng UI chính không đồng nghĩa bao phủ mọi ngoại lệ hoặc nghiệm thu chuyên môn. Giữ lịch sử lỗi, nhãn khóa và tách dữ liệu thử khỏi đợt chính.
+
+## Nâng cấp nhiều doanh nghiệp và dữ liệu theo thời gian — 26/11/2026
+
+- [x] Bổ sung kỳ có ngày bắt đầu/kết thúc và loại tháng/quý/năm/đột xuất/sau khắc phục; timeline theo doanh nghiệp, công thức tỷ lệ/độ phủ và trạng thái chưa đánh giá/cần đánh giá lại tách riêng.
+- [x] Chốt bản lưu kỳ bất biến theo fingerprint, chống chốt phiên bản cũ/trùng; kiểm quyền doanh nghiệp/đợt, giữ snapshot sau restart; không tự phê duyệt SoA.
+- [x] Nộp nhiều file tuần tự vào control, giữ kết quả từng file/trùng/lỗi; hỗ trợ XLSX có giới hạn giải nén/ô/nội dung, không chạy công thức. Thêm tìm nguồn full-text đúng tenant/control với ID/hash/trích đoạn.
+- [x] Sinh dữ liệu liên kết nhân sự/tài khoản/tài sản và nguồn nhiều kỳ; đã sinh/kiểm hash 507 file cho 30/100/500 nhân viên × 24 tháng. Có gói ZIP trên UI, importer API/preflight/receipt vào khách hàng mô phỏng mới; không nạp design key hoặc nhãn chuyên gia.
+- [x] Đo intake/index từ khóa 10/100/500/1.000 file, tách số đọc được/trùng/lỗi/thời gian/CPU/Python allocation; không coi là AI đã đánh giá toàn bộ file.
+- [x] Kiểm thử Python 464, JavaScript 14, lint/build và hồi quy UI; ghi thật PostgreSQL/Qwen/UI trên DB riêng có nhập bộ 6 người × 2 tháng, multi-file, tìm nguồn, timeline/snapshot và restart; giữ nguyên dữ liệu doanh nghiệp chính.
+- [ ] Còn cần nguồn thật, thẩm định rubric và tập held-out/nhãn chuyên gia; chưa có accuracy độc lập mới, OCR, vector retrieval hoặc kiểm LLM trên toàn bộ 507/1.000 file. Không đánh dấu hoàn thành nghiệm thu chuyên môn bằng bộ mô phỏng.
+
+Minh chứng, kiến trúc và giới hạn: [báo cáo nâng cấp doanh nghiệp](../docs/THESIS_ENTERPRISE_AI_AGENT_UPGRADE.md), [hướng dẫn dữ liệu mô phỏng](../docs/SYNTHETIC_DATA_GUIDE.md), [pipeline](../docs/AI_AGENT_DATA_PIPELINE.md). Các việc phụ thuộc nguồn/phê duyệt thật giữ mở.
 
 ## Việc chuyển tiếp sang tuần 8
 

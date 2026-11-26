@@ -38,6 +38,7 @@ class InventoryInput(BaseModel):
     employee_id:str|None=Field(default=None,pattern=r'^EMP-\d{3}$')
     asset_type:str=Field(default='hardware',pattern=r'^(hardware|software|physical)$')
     active:StrictBool|None=None
+    employment_status:str=Field(default='active',pattern=r'^(active|terminated|onboarding)$')
     note:str=Field(min_length=10,max_length=2000)
 
 
@@ -66,10 +67,10 @@ def save_inventory(assessment_id:UUID,kind:str,identifier:str,req:InventoryInput
         state=dict(origin='user_declared_not_verified')
         if kind=='person':
             if not req.job_title:raise HTTPException(422,'Cần chức danh nhân viên.')
-            cur.execute('''INSERT INTO enterprise_sim_people(assessment_id,employee_id,display_name,department,job_title,state)
-                VALUES(%s,%s,%s,%s,%s,%s) ON CONFLICT(assessment_id,employee_id) DO UPDATE SET
-                display_name=EXCLUDED.display_name,department=EXCLUDED.department,job_title=EXCLUDED.job_title,updated_at=NOW()''',
-                (assessment_id,identifier,req.name,req.department,req.job_title,Jsonb(state)))
+            cur.execute('''INSERT INTO enterprise_sim_people(assessment_id,employee_id,display_name,department,job_title,state,employment_status)
+                VALUES(%s,%s,%s,%s,%s,%s,%s) ON CONFLICT(assessment_id,employee_id) DO UPDATE SET
+                display_name=EXCLUDED.display_name,department=EXCLUDED.department,job_title=EXCLUDED.job_title,employment_status=EXCLUDED.employment_status,updated_at=NOW()''',
+                (assessment_id,identifier,req.name,req.department,req.job_title,Jsonb(state),req.employment_status))
         elif kind=='account':
             state.update(active=req.active,mfa=None)
             cur.execute('''INSERT INTO enterprise_company_accounts(assessment_id,account_id,employee_id,system_name,state)

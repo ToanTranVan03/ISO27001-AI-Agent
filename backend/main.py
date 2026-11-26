@@ -17,6 +17,7 @@ from backend.a8_api import router as a8_router, recover_interrupted
 from backend.development_lab_api import router as development_lab_router
 from backend import remediation_api
 from backend import governance_api,remediation_notifications
+from backend import source_search
 from agent_core.graph_builder import build_iso_agent_graph
 from evidence_collectors.document_parser import extract_document_text
 
@@ -59,6 +60,7 @@ app.include_router(development_lab_router)
 app.include_router(remediation_api.router)
 app.include_router(governance_api.router)
 app.include_router(remediation_notifications.router)
+app.include_router(source_search.router)
 app.mount('/assets',StaticFiles(directory=REACT_DIST/'assets',check_dir=False),name='react-assets')
 
 class EvaluationRequest(BaseModel):

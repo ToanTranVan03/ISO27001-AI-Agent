@@ -10,7 +10,7 @@ from evidence_collectors.source_quality import text_quality
 
 ROOT=Path(__file__).resolve().parents[1]/'data'/'evidence-packages'
 MAX_BYTES=15*1024*1024
-ALLOWED={'.pdf','.docx','.txt','.md','.csv','.tsv','.json','.conf','.log'}
+ALLOWED={'.pdf','.docx','.xlsx','.txt','.md','.csv','.tsv','.json','.conf','.log'}
 
 
 def controls():return json.loads(CATALOG.read_text(encoding='utf-8'))
@@ -66,7 +66,7 @@ def inspect(assessment_id,control_id):
             size=target.stat().st_size;total+=size
             if size>MAX_BYTES or total>30*1024*1024:raise ValueError('Nguồn quá lớn (15MB/file, 30MB/gói).')
             raw=target.read_bytes()
-            text=extract_document_text(name,raw) if target.suffix.lower() in ('.pdf','.docx') else raw.decode('utf-8-sig')
+            text=extract_document_text(name,raw) if target.suffix.lower() in ('.pdf','.docx','.xlsx') else raw.decode('utf-8-sig')
             if '\x00' in text or len(text)>100000 or not text_quality(text)['usable']:
                 raise ValueError('Nguồn không phải văn bản dùng được, quá ít/lặp ký tự hoặc quá 100000 ký tự; kiểm tra nội dung/OCR.')
             if target.suffix.lower()=='.json':

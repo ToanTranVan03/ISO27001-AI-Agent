@@ -212,7 +212,10 @@ def main():
                                 snapshot['clients']=client_response.json()
                                 snapshot['client_inventory']={}
                                 snapshot['client_remediation']={}
+                                snapshot['client_timelines']={}
                                 for client in snapshot['clients']['clients']:
+                                    timeline=s.get(env['UI_BASE_URL']+f"/api/clients/{client['client_id']}/timeline",timeout=30);timeline.raise_for_status()
+                                    snapshot['client_timelines'][client['client_id']]=timeline.json()
                                     for campaign in client['campaigns']:
                                         company=s.get(env['UI_BASE_URL']+f"/api/assessments/{campaign['assessment_id']}/enterprise/company",timeout=15);company.raise_for_status()
                                         snapshot['client_inventory'][campaign['assessment_id']]=company.json()

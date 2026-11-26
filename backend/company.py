@@ -115,6 +115,7 @@ def project_company(assessment_id, people, accounts, assets, metadata):
     result['snapshot_hash'] = hashlib.sha256(json.dumps(result, sort_keys=True, ensure_ascii=False, default=str).encode()).hexdigest()
     from agent_core.business_events import ACTIONS
     result['actions'] = [{'id': key, 'name': value} for key, value in ACTIONS.items()] if result['synthetic'] else []
+    result['synthetic_dataset']=metadata.get('synthetic_dataset',False)
     return result
 
 
