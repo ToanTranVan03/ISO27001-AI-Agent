@@ -1,0 +1,10 @@
+{
+  "id": "regulated",
+  "version": 1,
+  "training_max_age_days": 180,
+  "training_min_score": 90,
+  "screen_lock_max_seconds": 180,
+  "termination_access_hours": 0,
+  "asset_return_business_days": 1,
+  "scope_exclusions": {}
+}

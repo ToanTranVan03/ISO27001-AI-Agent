@@ -1,0 +1,26 @@
+{
+  "id": "incident-reporting",
+  "version": 1,
+  "language": "vi",
+  "source_type": "research_rubric",
+  "criteria": [
+    {
+      "id": "recognize",
+      "weight": 25,
+      "description": "Nhận biết dấu hiệu đáng ngờ và giải thích ngắn gọn."
+    },
+    {
+      "id": "safe_response",
+      "weight": 40,
+      "description": "Tránh tương tác với nội dung đáng ngờ và hạn chế tác động."
+    },
+    {
+      "id": "report",
+      "weight": 35,
+      "description": "Yêu cầu hỗ trợ qua kênh đã được doanh nghiệp phê duyệt."
+    }
+  ],
+  "initial": "Bạn nhận được tin nhắn giả định yêu cầu nhập thông tin đăng nhập. Bạn xử lý thế nào?",
+  "retest": "Một thông báo giả định yêu cầu xác minh tài khoản qua tệp đính kèm. Bạn xử lý thế nào?",
+  "ambiguous": "human_review"
+}

@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "compliance-ai"
+version = "0.1.0"
+description = "People-centric ISO 27001 compliance research prototype"
+requires-python = ">=3.11"
+dependencies = [
+    "alembic==1.20.1",
+    "argon2-cffi==25.1.0",
+    "fastapi==0.165.0",
+    "langgraph==1.2.24",
+    "streamlit==1.67.0",
+    "psycopg[binary]==3.3.9",
+    "pyjwt==2.15.1",
+    "sqlalchemy==2.1.9",
+    "pydantic==2.14.4",
+    "python-dotenv==1.2.4",
+    "uvicorn==0.54.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "httpx2==2.13.1",
+    "mypy==2.4.1",
+    "pytest==9.2.0",
+    "ruff==0.17.6",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+markers = ["postgres: requires a disposable PostgreSQL database with pgvector"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+
+[tool.mypy]
+python_version = "3.11"
+check_untyped_defs = true
+warn_unused_ignores = true
+files = ["src", "tests", "migrations", "ui"]

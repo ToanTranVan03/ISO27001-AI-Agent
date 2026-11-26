@@ -1,0 +1,212 @@
+[
+  {
+    "id": "A.6.1",
+    "title": "Hồ sơ sàng lọc",
+    "primary_pillar": "people",
+    "mappings": [
+      "people"
+    ]
+  },
+  {
+    "id": "A.6.2",
+    "title": "Xác nhận nghĩa vụ ATTT",
+    "primary_pillar": "people",
+    "mappings": [
+      "people"
+    ]
+  },
+  {
+    "id": "A.6.3",
+    "title": "Đào tạo và nhận thức",
+    "primary_pillar": "people",
+    "mappings": [
+      "people"
+    ]
+  },
+  {
+    "id": "A.6.4",
+    "title": "Quy trình xử lý vi phạm",
+    "primary_pillar": "people",
+    "mappings": [
+      "people"
+    ]
+  },
+  {
+    "id": "A.6.5",
+    "title": "Nghĩa vụ sau chuyển đổi việc làm",
+    "primary_pillar": "people",
+    "mappings": [
+      "people"
+    ]
+  },
+  {
+    "id": "A.6.6",
+    "title": "Thỏa thuận bảo mật",
+    "primary_pillar": "people",
+    "mappings": [
+      "people"
+    ]
+  },
+  {
+    "id": "A.6.7",
+    "title": "Làm việc từ xa",
+    "primary_pillar": "people",
+    "mappings": [
+      "people"
+    ]
+  },
+  {
+    "id": "A.6.8",
+    "title": "Báo cáo sự kiện ATTT",
+    "primary_pillar": "people",
+    "mappings": [
+      "people"
+    ]
+  },
+  {
+    "id": "A.5.16",
+    "title": "Vòng đời định danh",
+    "primary_pillar": "people",
+    "mappings": [
+      "people"
+    ]
+  },
+  {
+    "id": "A.5.18",
+    "title": "Quản lý quyền truy cập",
+    "primary_pillar": "people",
+    "mappings": [
+      "people",
+      "software"
+    ]
+  },
+  {
+    "id": "A.5.9",
+    "title": "Kiểm kê tài sản",
+    "primary_pillar": "hardware",
+    "mappings": [
+      "hardware"
+    ]
+  },
+  {
+    "id": "A.5.11",
+    "title": "Hoàn trả tài sản",
+    "primary_pillar": "hardware",
+    "mappings": [
+      "hardware"
+    ]
+  },
+  {
+    "id": "A.7.7",
+    "title": "Bàn làm việc và màn hình",
+    "primary_pillar": "hardware",
+    "mappings": [
+      "hardware"
+    ]
+  },
+  {
+    "id": "A.7.9",
+    "title": "Tài sản ngoài cơ sở",
+    "primary_pillar": "hardware",
+    "mappings": [
+      "hardware",
+      "people"
+    ]
+  },
+  {
+    "id": "A.7.10",
+    "title": "Quản lý thiết bị lưu trữ",
+    "primary_pillar": "hardware",
+    "mappings": [
+      "hardware"
+    ]
+  },
+  {
+    "id": "A.7.14",
+    "title": "Thanh lý hoặc tái sử dụng thiết bị",
+    "primary_pillar": "hardware",
+    "mappings": [
+      "hardware"
+    ]
+  },
+  {
+    "id": "A.8.1",
+    "title": "Bảo vệ thiết bị đầu cuối",
+    "primary_pillar": "hardware",
+    "mappings": [
+      "hardware"
+    ]
+  },
+  {
+    "id": "A.8.24",
+    "title": "Bảo vệ bằng mật mã",
+    "primary_pillar": "hardware",
+    "mappings": [
+      "hardware"
+    ]
+  },
+  {
+    "id": "A.8.2",
+    "title": "Kiểm soát đặc quyền",
+    "primary_pillar": "software",
+    "mappings": [
+      "software"
+    ]
+  },
+  {
+    "id": "A.8.5",
+    "title": "Xác thực an toàn",
+    "primary_pillar": "software",
+    "mappings": [
+      "software"
+    ]
+  },
+  {
+    "id": "A.8.7",
+    "title": "Bảo vệ trước mã độc",
+    "primary_pillar": "software",
+    "mappings": [
+      "software"
+    ]
+  },
+  {
+    "id": "A.8.8",
+    "title": "Quản lý bản vá",
+    "primary_pillar": "software",
+    "mappings": [
+      "software"
+    ]
+  },
+  {
+    "id": "A.8.9",
+    "title": "Đường cơ sở cấu hình",
+    "primary_pillar": "software",
+    "mappings": [
+      "software"
+    ]
+  },
+  {
+    "id": "A.8.15",
+    "title": "Thu thập và giữ nhật ký",
+    "primary_pillar": "software",
+    "mappings": [
+      "software"
+    ]
+  },
+  {
+    "id": "A.8.19",
+    "title": "Cài đặt phần mềm đã duyệt",
+    "primary_pillar": "software",
+    "mappings": [
+      "software"
+    ]
+  },
+  {
+    "id": "A.8.32",
+    "title": "Quản lý thay đổi",
+    "primary_pillar": "software",
+    "mappings": [
+      "software"
+    ]
+  }
+]

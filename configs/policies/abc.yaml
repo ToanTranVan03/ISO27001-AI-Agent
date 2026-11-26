@@ -1,0 +1,10 @@
+{
+  "id": "abc",
+  "version": 1,
+  "training_max_age_days": 365,
+  "training_min_score": 80,
+  "screen_lock_max_seconds": 300,
+  "termination_access_hours": 0,
+  "asset_return_business_days": 3,
+  "scope_exclusions": {}
+}

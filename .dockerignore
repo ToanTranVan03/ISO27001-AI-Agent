@@ -1,0 +1,14 @@
+**
+!requirements.lock
+!pyproject.toml
+!alembic.ini
+!src/
+!src/**
+!migrations/
+!migrations/**
+!configs/
+!configs/**
+!ui/
+!ui/**
+**/__pycache__/
+configs/*.local.yaml

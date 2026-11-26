@@ -1,0 +1,48 @@
+name: compliance-ai
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_DB: compliance_ai
+      POSTGRES_USER: compliance_migrator
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env or the environment}
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT:-55432}:5432"
+    volumes:
+      - compliance_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "compliance_migrator", "-d", "compliance_ai"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  api:
+    profiles: ["app"]
+    build: .
+    image: compliance-ai:local
+    command: [python, -m, uvicorn, "compliance_ai.api:create_app", --factory, --host, 0.0.0.0]
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      EXECUTION_MODE: SIMULATION
+      LAB_ENABLED: "false"
+      LOCAL_INTERVIEW_MODEL: ${LOCAL_INTERVIEW_MODEL:-}
+      COMPLIANCE_OLLAMA_HOST: host.docker.internal
+      APP_SECRET_KEY: ${APP_SECRET_KEY:-}
+      DATABASE_URL: postgresql+psycopg://compliance_app:${APP_DB_PASSWORD:-}@db:5432/compliance_ai
+    ports:
+      - "127.0.0.1:8000:8000"
+  ui:
+    profiles: ["app"]
+    image: compliance-ai:local
+    command: [python, -m, streamlit, run, ui/streamlit_app.py, --server.address, 0.0.0.0]
+    depends_on: [api]
+    environment:
+      COMPLIANCE_API_HOST: api
+      STREAMLIT_BROWSER_GATHER_USAGE_STATS: "false"
+    ports:
+      - "127.0.0.1:8501:8501"
+
+volumes:
+  compliance_pgdata:

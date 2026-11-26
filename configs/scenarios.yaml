@@ -1,0 +1,135 @@
+[
+  {
+    "id": "SC-H01",
+    "criterion_ids": [
+      "H01"
+    ]
+  },
+  {
+    "id": "SC-H02",
+    "criterion_ids": [
+      "H02"
+    ]
+  },
+  {
+    "id": "SC-H03",
+    "criterion_ids": [
+      "H03"
+    ]
+  },
+  {
+    "id": "SC-H04",
+    "criterion_ids": [
+      "H03",
+      "H08"
+    ]
+  },
+  {
+    "id": "SC-H05",
+    "criterion_ids": [
+      "H06"
+    ]
+  },
+  {
+    "id": "SC-H06",
+    "criterion_ids": [
+      "H04"
+    ]
+  },
+  {
+    "id": "SC-H07",
+    "criterion_ids": [
+      "H07",
+      "D04"
+    ]
+  },
+  {
+    "id": "SC-H08",
+    "criterion_ids": [
+      "H08"
+    ]
+  },
+  {
+    "id": "SC-H09",
+    "criterion_ids": [
+      "H05",
+      "H09",
+      "M01"
+    ]
+  },
+  {
+    "id": "SC-H10",
+    "criterion_ids": [
+      "M01",
+      "S01"
+    ]
+  },
+  {
+    "id": "SC-H11",
+    "criterion_ids": [
+      "S02"
+    ]
+  },
+  {
+    "id": "SC-H12",
+    "criterion_ids": [
+      "H05",
+      "D02"
+    ]
+  },
+  {
+    "id": "SC-D01",
+    "criterion_ids": [
+      "D01"
+    ]
+  },
+  {
+    "id": "SC-D02",
+    "criterion_ids": [
+      "D03",
+      "D07"
+    ]
+  },
+  {
+    "id": "SC-D03",
+    "criterion_ids": [
+      "D05",
+      "D06"
+    ]
+  },
+  {
+    "id": "SC-D04",
+    "criterion_ids": [
+      "D04",
+      "D07",
+      "D08"
+    ]
+  },
+  {
+    "id": "SC-S01",
+    "criterion_ids": [
+      "S04"
+    ]
+  },
+  {
+    "id": "SC-S02",
+    "criterion_ids": [
+      "S05",
+      "S08"
+    ]
+  },
+  {
+    "id": "SC-S03",
+    "criterion_ids": [
+      "S03",
+      "S06"
+    ]
+  },
+  {
+    "id": "SC-S04",
+    "criterion_ids": [
+      "S07",
+      "S01"
+    ]
+  }
+]

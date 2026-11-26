@@ -1,0 +1,10 @@
+{
+  "id": "small",
+  "version": 1,
+  "training_max_age_days": 365,
+  "training_min_score": 75,
+  "screen_lock_max_seconds": 600,
+  "termination_access_hours": 4,
+  "asset_return_business_days": 5,
+  "scope_exclusions": {}
+}

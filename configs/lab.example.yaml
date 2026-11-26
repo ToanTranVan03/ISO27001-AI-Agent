@@ -1,0 +1,7 @@
+{
+  "enabled": false,
+  "network": "isolated",
+  "targets": [
+    {"id": "windows-training-client", "hostname": "training-client.example.invalid", "snapshot": "operator-record-required"}
+  ]
+}

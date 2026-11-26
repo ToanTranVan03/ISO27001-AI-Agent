@@ -1,0 +1,782 @@
+[
+  {
+    "id": "H01",
+    "control_ids": [
+      "A.6.1"
+    ],
+    "primary_pillar": "people",
+    "target_type": "employee",
+    "applies_when": "approved_policy_scope",
+    "policy_keys": [],
+    "required_evidence": [
+      "screening_record"
+    ],
+    "evidence_freshness_hours": 720,
+    "predicate_or_rubric": "checklist",
+    "status_mapping": "verified_checks_v1",
+    "severity": "medium",
+    "read_tool": "get_employee_record",
+    "allowed_actions": [
+      "create_remediation_ticket"
+    ],
+    "risk_class": "low",
+    "verification_tool": "get_employee_record",
+    "weight": 1,
+    "source_ref": {
+      "source_type": "research_rubric",
+      "reference": "A.6.1"
+    },
+    "version": 1
+  },
+  {
+    "id": "H02",
+    "control_ids": [
+      "A.6.2"
+    ],
+    "primary_pillar": "people",
+    "target_type": "employee",
+    "applies_when": "approved_policy_scope",
+    "policy_keys": [],
+    "required_evidence": [
+      "terms_ack"
+    ],
+    "evidence_freshness_hours": 720,
+    "predicate_or_rubric": "checklist",
+    "status_mapping": "verified_checks_v1",
+    "severity": "medium",
+    "read_tool": "get_employee_record",
+    "allowed_actions": [
+      "create_remediation_ticket"
+    ],
+    "risk_class": "low",
+    "verification_tool": "get_employee_record",
+    "weight": 1,
+    "source_ref": {
+      "source_type": "research_rubric",
+      "reference": "A.6.2"
+    },
+    "version": 1
+  },
+  {
+    "id": "H03",
+    "control_ids": [
+      "A.6.3"
+    ],
+    "primary_pillar": "people",
+    "target_type": "employee",
+    "applies_when": "approved_policy_scope",
+    "policy_keys": [
+      "training_max_age_days",
+      "training_min_score"
+    ],
+    "required_evidence": [
+      "training_completion_age_days",
+      "training_score"
+    ],
+    "evidence_freshness_hours": 720,
+    "predicate_or_rubric": "training",
+    "status_mapping": "verified_checks_v1",
+    "severity": "medium",
+    "read_tool": "get_employee_record",
+    "allowed_actions": [
+      "assign_training"
+    ],
+    "risk_class": "low",
+    "verification_tool": "get_employee_record",
+    "weight": 1,
+    "source_ref": {
+      "source_type": "research_rubric",
+      "reference": "A.6.3"
+    },
+    "version": 1
+  },
+  {
+    "id": "H04",
+    "control_ids": [
+      "A.6.4"
+    ],
+    "primary_pillar": "people",
+    "target_type": "organization",
+    "applies_when": "approved_policy_scope",
+    "policy_keys": [],
+    "required_evidence": [
+      "disciplinary_process"
+    ],
+    "evidence_freshness_hours": 720,
+    "predicate_or_rubric": "manual_review",
+    "status_mapping": "verified_checks_v1",
+    "severity": "medium",
+    "read_tool": "get_policy",
+    "allowed_actions": [
+      "create_remediation_ticket"
+    ],
+    "risk_class": "low",
+    "verification_tool": "get_policy",
+    "weight": 1,
+    "source_ref": {
+      "source_type": "research_rubric",
+      "reference": "A.6.4"
+    },
+    "version": 1
+  },
+  {
+    "id": "H05",
+    "control_ids": [
+      "A.6.5"
+    ],
+    "primary_pillar": "people",
+    "target_type": "employee",
+    "applies_when": "approved_policy_scope",
+    "policy_keys": [],
+    "required_evidence": [
+      "transition_obligations"
+    ],
+    "evidence_freshness_hours": 720,
+    "predicate_or_rubric": "checklist",
+    "status_mapping": "verified_checks_v1",
+    "severity": "medium",
+    "read_tool": "get_employee_record",
+    "allowed_actions": [
+      "create_remediation_ticket"
+    ],
+    "risk_class": "low",
+    "verification_tool": "get_employee_record",
+    "weight": 1,
+    "source_ref": {
+      "source_type": "research_rubric",
+      "reference": "A.6.5"
+    },
+    "version": 1
+  },
+  {
+    "id": "H06",
+    "control_ids": [
+      "A.6.6"
+    ],
+    "primary_pillar": "people",
+    "target_type": "employee",
+    "applies_when": "approved_policy_scope",
+    "policy_keys": [],
+    "required_evidence": [
+      "confidentiality_ack"
+    ],
+    "evidence_freshness_hours": 720,
+    "predicate_or_rubric": "checklist",
+    "status_mapping": "verified_checks_v1",
+    "severity": "medium",
+    "read_tool": "get_employee_record",
+    "allowed_actions": [
+      "request_nda_signature"
+    ],
+    "risk_class": "low",
+    "verification_tool": "get_employee_record",
+    "weight": 1,
+    "source_ref": {
+      "source_type": "research_rubric",
+      "reference": "A.6.6"
+    },
+    "version": 1
+  },
+  {
+    "id": "H07",
+    "control_ids": [
+      "A.6.7"
+    ],
+    "primary_pillar": "people",
+    "target_type": "employee",
+    "applies_when": "approved_policy_scope",
+    "policy_keys": [],
+    "required_evidence": [
+      "remote_approval",
+      "remote_guidance",
+      "remote_safeguards"
+    ],
+    "evidence_freshness_hours": 720,
+    "predicate_or_rubric": "checklist",
+    "status_mapping": "verified_checks_v1",
+    "severity": "medium",
+    "read_tool": "get_employee_record",
+    "allowed_actions": [
+      "create_remediation_ticket"
+    ],
+    "risk_class": "low",
+    "verification_tool": "get_employee_record",
+    "weight": 1,
+    "source_ref": {
+      "source_type": "research_rubric",
+      "reference": "A.6.7"
+    },
+    "version": 1
+  },
+  {
+    "id": "H08",
+    "control_ids": [
+      "A.6.8"
+    ],
+    "primary_pillar": "people",
+    "target_type": "employee",
+    "applies_when": "approved_policy_scope",
+    "policy_keys": [],
+    "required_evidence": [
+      "reporting_channel",
+      "verified_response"
+    ],
+    "evidence_freshness_hours": 720,
+    "predicate_or_rubric": "checklist",
+    "status_mapping": "verified_checks_v1",
+    "severity": "medium",
+    "read_tool": "get_employee_record",
+    "allowed_actions": [
+      "schedule_interview_retest"
+    ],
+    "risk_class": "low",
+    "verification_tool": "get_employee_record",
+    "weight": 1,
+    "source_ref": {
+      "source_type": "research_rubric",
+      "reference": "A.6.8"
+    },
+    "version": 1
+  },
+  {
+    "id": "H09",
+    "control_ids": [
+      "A.5.16"
+    ],
+    "primary_pillar": "people",
+    "target_type": "account",
+    "applies_when": "approved_policy_scope",
+    "policy_keys": [],
+    "required_evidence": [
+      "identity_hr_link",
+      "identity_lifecycle_ok"
+    ],
+    "evidence_freshness_hours": 24,
+    "predicate_or_rubric": "checklist",
+    "status_mapping": "verified_checks_v1",
+    "severity": "high",
+    "read_tool": "get_access_state",
+    "allowed_actions": [
+      "disable_lab_account"
+    ],
+    "risk_class": "high",
+    "verification_tool": "get_access_state",
+    "weight": 1,
+    "source_ref": {
+      "source_type": "research_rubric",
+      "reference": "A.5.16"
+    },
+    "version": 1
+  },
+  {
+    "id": "M01",
+    "control_ids": [
+      "A.5.18"
+    ],
+    "primary_pillar": "people",
+    "target_type": "account",
+    "applies_when": "approved_policy_scope",
+    "policy_keys": [],
+    "required_evidence": [
+      "grant_review",
+      "current_grants_authorized"
+    ],
+    "evidence_freshness_hours": 24,
+    "predicate_or_rubric": "checklist",
+    "status_mapping": "verified_checks_v1",
+    "severity": "high",
+    "read_tool": "get_access_state",
+    "allowed_actions": [
+      "revoke_lab_entitlement"
+    ],
+    "risk_class": "high",
+    "verification_tool": "get_access_state",
+    "weight": 1,
+    "source_ref": {
+      "source_type": "research_rubric",
+      "reference": "A.5.18"
+    },
+    "version": 1
+  },
+  {
+    "id": "D01",
+    "control_ids": [
+      "A.5.9"
+    ],
+    "primary_pillar": "hardware",
+    "target_type": "device",
+    "applies_when": "approved_policy_scope",
+    "policy_keys": [],
+    "required_evidence": [
+      "asset_inventory",
+      "custody_match"
+    ],
+    "evidence_freshness_hours": 24,
+    "predicate_or_rubric": "checklist",
+    "status_mapping": "verified_checks_v1",
+    "severity": "medium",
+    "read_tool": "get_device_observation",
+    "allowed_actions": [
+      "create_remediation_ticket"
+    ],
+    "risk_class": "low",
+    "verification_tool": "get_device_observation",
+    "weight": 1,
+    "source_ref": {
+      "source_type": "research_rubric",
+      "reference": "A.5.9"
+    },
+    "version": 1
+  },
+  {
+    "id": "D02",
+    "control_ids": [
+      "A.5.11"
+    ],
+    "primary_pillar": "hardware",
+    "target_type": "device",
+    "applies_when": "approved_policy_scope",
+    "policy_keys": ["asset_return_business_days"],
+    "required_evidence": [
+      "return_receipt"
+    ],
+    "evidence_freshness_hours": 24,
+    "predicate_or_rubric": "checklist",
+    "status_mapping": "verified_checks_v1",
+    "severity": "medium",
+    "read_tool": "get_device_observation",
+    "allowed_actions": [
+      "request_asset_return"
+    ],
+    "risk_class": "low",
+    "verification_tool": "get_device_observation",
+    "weight": 1,
+    "source_ref": {
+      "source_type": "research_rubric",
+      "reference": "A.5.11"
+    },
+    "version": 1
+  },
+  {
+    "id": "D03",
+    "control_ids": [
+      "A.7.7"
+    ],
+    "primary_pillar": "hardware",
+    "target_type": "device",
+    "applies_when": "approved_policy_scope",
+    "policy_keys": [
+      "screen_lock_max_seconds"
+    ],
+    "required_evidence": [
+      "clear_screen_ack",
+      "screen_lock_seconds"
+    ],
+    "evidence_freshness_hours": 24,
+    "predicate_or_rubric": "screen",
+    "status_mapping": "verified_checks_v1",
+    "severity": "high",
+    "read_tool": "get_device_observation",
+    "allowed_actions": [
+      "apply_baseline_profile"
+    ],
+    "risk_class": "medium",
+    "verification_tool": "get_device_observation",
+    "weight": 1,
+    "source_ref": {
+      "source_type": "research_rubric",
+      "reference": "A.7.7"
+    },
+    "version": 1
+  },
+  {
+    "id": "D04",
+    "control_ids": [
+      "A.7.9"
+    ],
+    "primary_pillar": "hardware",
+    "target_type": "device",
+    "applies_when": "approved_policy_scope",
+    "policy_keys": [],
+    "required_evidence": [
+      "offsite_authorization",
+      "offsite_protection"
+    ],
+    "evidence_freshness_hours": 24,
+    "predicate_or_rubric": "checklist",
+    "status_mapping": "verified_checks_v1",
+    "severity": "medium",
+    "read_tool": "get_device_observation",
+    "allowed_actions": [
+      "create_remediation_ticket"
+    ],
+    "risk_class": "low",
+    "verification_tool": "get_device_observation",
+    "weight": 1,
+    "source_ref": {
+      "source_type": "research_rubric",
+      "reference": "A.7.9"
+    },
+    "version": 1
+  },
+  {
+    "id": "D05",
+    "control_ids": [
+      "A.7.10"
+    ],
+    "primary_pillar": "hardware",
+    "target_type": "media",
+    "applies_when": "approved_policy_scope",
+    "policy_keys": [],
+    "required_evidence": [
+      "media_policy",
+      "media_custody"
+    ],
+    "evidence_freshness_hours": 720,
+    "predicate_or_rubric": "checklist",
+    "status_mapping": "verified_checks_v1",
+    "severity": "medium",
+    "read_tool": "get_asset_record",
+    "allowed_actions": [
+      "create_remediation_ticket"
+    ],
+    "risk_class": "low",
+    "verification_tool": "get_asset_record",
+    "weight": 1,
+    "source_ref": {
+      "source_type": "research_rubric",
+      "reference": "A.7.10"
+    },
+    "version": 1
+  },
+  {
+    "id": "D06",
+    "control_ids": [
+      "A.7.14"
+    ],
+    "primary_pillar": "hardware",
+    "target_type": "device",
+    "applies_when": "approved_policy_scope",
+    "policy_keys": [],
+    "required_evidence": [
+      "disposal_record"
+    ],
+    "evidence_freshness_hours": 24,
+    "predicate_or_rubric": "manual_review",
+    "status_mapping": "verified_checks_v1",
+    "severity": "medium",
+    "read_tool": "get_device_observation",
+    "allowed_actions": [
+      "create_remediation_ticket"
+    ],
+    "risk_class": "low",
+    "verification_tool": "get_device_observation",
+    "weight": 1,
+    "source_ref": {
+      "source_type": "research_rubric",
+      "reference": "A.7.14"
+    },
+    "version": 1
+  },
+  {
+    "id": "D07",
+    "control_ids": [
+      "A.8.1"
+    ],
+    "primary_pillar": "hardware",
+    "target_type": "device",
+    "applies_when": "approved_policy_scope",
+    "policy_keys": [],
+    "required_evidence": [
+      "managed_endpoint",
+      "endpoint_protection"
+    ],
+    "evidence_freshness_hours": 24,
+    "predicate_or_rubric": "checklist",
+    "status_mapping": "verified_checks_v1",
+    "severity": "high",
+    "read_tool": "get_device_observation",
+    "allowed_actions": [
+      "apply_baseline_profile"
+    ],
+    "risk_class": "medium",
+    "verification_tool": "get_device_observation",
+    "weight": 1,
+    "source_ref": {
+      "source_type": "research_rubric",
+      "reference": "A.8.1"
+    },
+    "version": 1
+  },
+  {
+    "id": "D08",
+    "control_ids": [
+      "A.8.24"
+    ],
+    "primary_pillar": "hardware",
+    "target_type": "device",
+    "applies_when": "approved_policy_scope",
+    "policy_keys": [],
+    "required_evidence": [
+      "encryption_on",
+      "recovery_policy_evidence"
+    ],
+    "evidence_freshness_hours": 24,
+    "predicate_or_rubric": "checklist",
+    "status_mapping": "verified_checks_v1",
+    "severity": "medium",
+    "read_tool": "get_device_observation",
+    "allowed_actions": [
+      "request_encryption_review"
+    ],
+    "risk_class": "low",
+    "verification_tool": "get_device_observation",
+    "weight": 1,
+    "source_ref": {
+      "source_type": "research_rubric",
+      "reference": "A.8.24"
+    },
+    "version": 1
+  },
+  {
+    "id": "S01",
+    "control_ids": [
+      "A.8.2"
+    ],
+    "primary_pillar": "software",
+    "target_type": "account",
+    "applies_when": "approved_policy_scope",
+    "policy_keys": [],
+    "required_evidence": [
+      "privilege_approval",
+      "privilege_review"
+    ],
+    "evidence_freshness_hours": 24,
+    "predicate_or_rubric": "checklist",
+    "status_mapping": "verified_checks_v1",
+    "severity": "medium",
+    "read_tool": "get_access_state",
+    "allowed_actions": [
+      "create_remediation_ticket"
+    ],
+    "risk_class": "low",
+    "verification_tool": "get_access_state",
+    "weight": 1,
+    "source_ref": {
+      "source_type": "research_rubric",
+      "reference": "A.8.2"
+    },
+    "version": 1
+  },
+  {
+    "id": "S02",
+    "control_ids": [
+      "A.8.5"
+    ],
+    "primary_pillar": "software",
+    "target_type": "account",
+    "applies_when": "approved_policy_scope",
+    "policy_keys": [],
+    "required_evidence": [
+      "mfa_registered",
+      "mfa_enforced"
+    ],
+    "evidence_freshness_hours": 24,
+    "predicate_or_rubric": "checklist",
+    "status_mapping": "verified_checks_v1",
+    "severity": "medium",
+    "read_tool": "get_access_state",
+    "allowed_actions": [
+      "request_mfa_enrollment"
+    ],
+    "risk_class": "low",
+    "verification_tool": "get_access_state",
+    "weight": 1,
+    "source_ref": {
+      "source_type": "research_rubric",
+      "reference": "A.8.5"
+    },
+    "version": 1
+  },
+  {
+    "id": "S03",
+    "control_ids": [
+      "A.8.7"
+    ],
+    "primary_pillar": "software",
+    "target_type": "device",
+    "applies_when": "approved_policy_scope",
+    "policy_keys": [],
+    "required_evidence": [
+      "malware_protection",
+      "malware_signatures_current"
+    ],
+    "evidence_freshness_hours": 24,
+    "predicate_or_rubric": "checklist",
+    "status_mapping": "verified_checks_v1",
+    "severity": "high",
+    "read_tool": "get_device_observation",
+    "allowed_actions": [
+      "restore_endpoint_protection"
+    ],
+    "risk_class": "medium",
+    "verification_tool": "get_device_observation",
+    "weight": 1,
+    "source_ref": {
+      "source_type": "research_rubric",
+      "reference": "A.8.7"
+    },
+    "version": 1
+  },
+  {
+    "id": "S04",
+    "control_ids": [
+      "A.8.8"
+    ],
+    "primary_pillar": "software",
+    "target_type": "device",
+    "applies_when": "approved_policy_scope",
+    "policy_keys": [],
+    "required_evidence": [
+      "patch_applicability",
+      "required_patches_installed"
+    ],
+    "evidence_freshness_hours": 24,
+    "predicate_or_rubric": "checklist",
+    "status_mapping": "verified_checks_v1",
+    "severity": "high",
+    "read_tool": "get_device_observation",
+    "allowed_actions": [
+      "apply_approved_patch"
+    ],
+    "risk_class": "medium",
+    "verification_tool": "get_device_observation",
+    "weight": 1,
+    "source_ref": {
+      "source_type": "research_rubric",
+      "reference": "A.8.8"
+    },
+    "version": 1
+  },
+  {
+    "id": "S05",
+    "control_ids": [
+      "A.8.9"
+    ],
+    "primary_pillar": "software",
+    "target_type": "device",
+    "applies_when": "approved_policy_scope",
+    "policy_keys": [],
+    "required_evidence": [
+      "configuration_matches_baseline"
+    ],
+    "evidence_freshness_hours": 24,
+    "predicate_or_rubric": "checklist",
+    "status_mapping": "verified_checks_v1",
+    "severity": "high",
+    "read_tool": "get_device_observation",
+    "allowed_actions": [
+      "apply_baseline_profile"
+    ],
+    "risk_class": "medium",
+    "verification_tool": "get_device_observation",
+    "weight": 1,
+    "source_ref": {
+      "source_type": "research_rubric",
+      "reference": "A.8.9"
+    },
+    "version": 1
+  },
+  {
+    "id": "S06",
+    "control_ids": [
+      "A.8.15"
+    ],
+    "primary_pillar": "software",
+    "target_type": "device",
+    "applies_when": "approved_policy_scope",
+    "policy_keys": [],
+    "required_evidence": [
+      "logging_enabled",
+      "log_sample",
+      "log_retention_policy"
+    ],
+    "evidence_freshness_hours": 24,
+    "predicate_or_rubric": "checklist",
+    "status_mapping": "verified_checks_v1",
+    "severity": "medium",
+    "read_tool": "get_device_observation",
+    "allowed_actions": [
+      "create_remediation_ticket"
+    ],
+    "risk_class": "low",
+    "verification_tool": "get_device_observation",
+    "weight": 1,
+    "source_ref": {
+      "source_type": "research_rubric",
+      "reference": "A.8.15"
+    },
+    "version": 1
+  },
+  {
+    "id": "S07",
+    "control_ids": [
+      "A.8.19"
+    ],
+    "primary_pillar": "software",
+    "target_type": "device",
+    "applies_when": "approved_policy_scope",
+    "policy_keys": [],
+    "required_evidence": [
+      "software_inventory_verified",
+      "installed_software_approved"
+    ],
+    "evidence_freshness_hours": 24,
+    "predicate_or_rubric": "checklist",
+    "status_mapping": "verified_checks_v1",
+    "severity": "medium",
+    "read_tool": "get_device_observation",
+    "allowed_actions": [
+      "request_software_removal"
+    ],
+    "risk_class": "low",
+    "verification_tool": "get_device_observation",
+    "weight": 1,
+    "source_ref": {
+      "source_type": "research_rubric",
+      "reference": "A.8.19"
+    },
+    "version": 1
+  },
+  {
+    "id": "S08",
+    "control_ids": [
+      "A.8.32"
+    ],
+    "primary_pillar": "software",
+    "target_type": "change",
+    "applies_when": "approved_policy_scope",
+    "policy_keys": [],
+    "required_evidence": [
+      "change_approval",
+      "change_test_record",
+      "change_review"
+    ],
+    "evidence_freshness_hours": 720,
+    "predicate_or_rubric": "checklist",
+    "status_mapping": "verified_checks_v1",
+    "severity": "medium",
+    "read_tool": "get_change_record",
+    "allowed_actions": [
+      "create_remediation_ticket"
+    ],
+    "risk_class": "low",
+    "verification_tool": "get_change_record",
+    "weight": 1,
+    "source_ref": {
+      "source_type": "research_rubric",
+      "reference": "A.8.32"
+    },
+    "version": 1
+  }
+]
