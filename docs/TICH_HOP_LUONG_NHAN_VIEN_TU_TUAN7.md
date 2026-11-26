@@ -37,3 +37,5 @@ Nguồn phải đúng đợt/control, không phải preset tự sinh và không 
 Nhóm vẫn cần gán tài khoản đúng người, cung cấp nội dung chính sách và bằng chứng thực tế, thực hiện/xác minh bằng người có trách nhiệm. Không tạo sẵn xác nhận thật trên đợt chính.
 
 [Kiểm tra main sau nạp API](a8-results/employee-workflows-main-smoke-2026-11-27.json): API 200, chưa tạo binding/yêu cầu trên đợt chính; giữ 110 bằng chứng, 282 kết quả, 3 tài khoản và 22 hồ sơ khắc phục.
+
+Hồi quy `npm run test:ui` trong frontend-react: 8 đạt, 4 bỏ qua theo điều kiện dữ liệu/tài khoản của test (không tính là đạt). Luồng người dùng mới được kiểm tra riêng bằng tài khoản synthetic trong bộ ghi thật cô lập nêu trên.
