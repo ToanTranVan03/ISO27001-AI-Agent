@@ -40,3 +40,5 @@ File chuyển thuật toán: `backend/business_deadline.py`; UI `BusinessDeadlin
 - [UI lần đầu](a8-results/tu-tuan7-selective-ui-2026-11-27.json) lỗi locator label chứa option text; đã dùng accessible listbox role và chạy lại. Không bỏ test hoặc đổi đáp án.
 
 Các luồng interview/NDA/MFA/biên nhận/rollback chưa được nhập và không đánh dấu hoàn thành. Đây là lựa chọn tích hợp phù hợp dữ liệu hiện hành, không tuyên bố đã gộp mọi tính năng của nhánh Tú. Dữ liệu/chấm/phê duyệt thật vẫn cần đúng người thực hiện.
+
+Cập nhật tiếp 27/11: bốn luồng nhân viên đã được triển khai riêng trên main; xem [hướng dẫn và giới hạn](TICH_HOP_LUONG_NHAN_VIEN_TU_TUAN7.md). Phần chưa tích hợp nêu trên là trạng thái của lần tích hợp đầu.

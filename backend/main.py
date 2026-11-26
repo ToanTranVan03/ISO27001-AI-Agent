@@ -18,6 +18,7 @@ from backend.development_lab_api import router as development_lab_router
 from backend import remediation_api
 from backend import governance_api,remediation_notifications
 from backend import source_search
+from backend import employee_workflow_api
 from agent_core.graph_builder import build_iso_agent_graph
 from evidence_collectors.document_parser import extract_document_text
 
@@ -46,6 +47,7 @@ async def lifespan(app):
     remediation_notifications.initialize()
     enterprise_lab.init_enterprise_lab()
     company_storage.initialize_company_inventory()
+    employee_workflow_api.initialize()
     recover_interrupted()
     stop_reminders=remediation_notifications.start()
     try:yield
@@ -61,6 +63,7 @@ app.include_router(remediation_api.router)
 app.include_router(governance_api.router)
 app.include_router(remediation_notifications.router)
 app.include_router(source_search.router)
+app.include_router(employee_workflow_api.router)
 app.mount('/assets',StaticFiles(directory=REACT_DIST/'assets',check_dir=False),name='react-assets')
 
 class EvaluationRequest(BaseModel):

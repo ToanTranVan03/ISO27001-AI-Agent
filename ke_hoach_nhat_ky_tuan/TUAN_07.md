@@ -89,7 +89,7 @@ Minh chứng, kiến trúc và giới hạn: [báo cáo nâng cấp doanh nghi�
 - [x] Bổ sung yêu cầu đánh giá lưu mục tiêu/phạm vi/control, rubric/baseline và lịch sử; kiểm tenant/vai trò/version, hủy giữ dữ liệu, mở đúng control hiện hành.
 - [x] Bổ sung gợi ý hạn theo ngày làm việc UTC+7, có căn cứ chính sách; chỉ điền vào nháp trước khi tư vấn duyệt, chưa tự giao việc hoặc coi là hạn ISO bắt buộc.
 - [x] Kiểm chứng 476 test Python main, lint/build, UI yêu cầu/client/khắc phục và gợi ý hạn; ghi thật trên database riêng, kiểm quyền và bảo toàn yêu cầu sau restart.
-- [ ] Phỏng vấn/đào tạo/NDA/MFA/biên nhận tài sản của nhánh Tú chưa tích hợp; cần ánh xạ danh tính nhân viên, nguồn và quyền xác nhận trước khi đưa vào main.
+- [x] Tích hợp luồng đào tạo có câu hỏi tiếp theo/làm lại, xác nhận NDA theo hash/phiên bản, MFA và biên nhận tài sản trên main; gán danh tính theo đợt, tách người thực hiện/quan sát/xác minh, giữ lịch sử và yêu cầu kiểm tra lại khi nguồn đổi. Không tự ký NDA, bật MFA, xác nhận trả vật lý hay duyệt control/SoA.
 
 Chi tiết và minh chứng: [Tích hợp chọn lọc Tu/Tuan7](../docs/TICH_HOP_CHON_LOC_TU_TUAN7.md).
 
@@ -104,3 +104,11 @@ Ghi gọn theo ngày/nhánh; ghi người đồng bộ theo từng lần thực 
 | Ngày | Giờ (UTC+7) | Người push | Nhánh | Nội dung chính |
 |---|---|---|---|---|
 | 25/11/2026 | 12:03 | Trần Văn Toàn | `main` | Kiểm tra liên kết toàn hệ thống và sửa lỗi đồng bộ (`context`, `human_review_current`, làm mới UI khắc phục); nghiệm thu theo mục tiêu đề tài + 10 tình huống AI độc lập; hồ sơ bảo vệ (`docs/defense/`); test mới nâng lên 449 test Python; cập nhật README và nhật ký tuần 7 |
+
+## Hoàn thiện luồng nhân viên — 27/11/2026
+
+- [x] Nối bốn luồng vào màn hình Doanh nghiệp, hồ sơ control và thông báo trong ứng dụng; kiểm tra quyền, đúng tài khoản/thiết bị, phiên bản và nguồn gốc.
+- [x] Kiểm chứng 481 test Python, 14 JavaScript, lint/build và API/UI ghi thật trên database riêng, kiểm tra giữ dữ liệu sau restart; không dùng kết quả synthetic làm nghiệm thu chuyên môn.
+- [ ] Nhóm gán tài khoản đúng người, cung cấp chính sách/nguồn thật và tự thực hiện/xác minh.
+
+Chi tiết: [Luồng nhân viên](../docs/TICH_HOP_LUONG_NHAN_VIEN_TU_TUAN7.md).

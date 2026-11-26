@@ -135,9 +135,11 @@ def main():
     parser.add_argument('--remediation',action='store_true',help='Exercise corrective action lifecycle on disposable records')
     parser.add_argument('--governance',action='store_true',help='Also verify risk/requirements/inbox on disposable records')
     parser.add_argument('--clients',action='store_true',help='Also verify client isolation and real UI on disposable records')
+    parser.add_argument('--employee-workflows',action='store_true',help='Verify employee participation on disposable clients')
     args=parser.parse_args()
     if args.governance and not args.remediation:parser.error('Use --remediation with --governance')
     if args.clients and not args.governance:parser.error('Use --remediation --governance with --clients')
+    if args.employee_workflows and not args.clients:parser.error('Use --clients with --employee-workflows')
     if not args.execute:parser.error('--execute is required')
     if not args.extended and (args.candidate_engine!='rules' or args.verify_restart):parser.error('Use --extended for candidate engine/restart verification')
     output=Path(args.output)
@@ -190,7 +192,7 @@ def main():
                     stop_backend(child);launch()
                 launch()
                 runner=ROOT/'frontend-react/node_modules/@playwright/test/cli.js'
-                specs=['tests/live-isolated.spec.js']+(['tests/live-orchestration.spec.js'] if args.extended else [])+(['tests/live-remediation.spec.js'] if args.remediation else [])+(['tests/live-z-governance.spec.js'] if args.governance else [])+(['tests/live-zz-clients.spec.js'] if args.clients else [])
+                specs=['tests/live-isolated.spec.js']+(['tests/live-orchestration.spec.js'] if args.extended else [])+(['tests/live-remediation.spec.js'] if args.remediation else [])+(['tests/live-z-governance.spec.js'] if args.governance else [])+(['tests/live-zz-clients.spec.js'] if args.clients else [])+(['tests/live-zzz-employee-workflows.spec.js'] if args.employee_workflows else [])
                 result=subprocess.run(['node',str(runner),'test',*specs,'--workers=1','--reporter=list','--output',str(directory/'browser-results')],
                     cwd=ROOT/'frontend-react',env=env,capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=900 if args.candidate_engine=='llm' or args.remediation else 420 if args.extended else 240)
                 (directory/'browser.log').write_text(result.stdout+'\n'+result.stderr,encoding='utf-8')
@@ -214,6 +216,7 @@ def main():
                                 snapshot['client_remediation']={}
                                 snapshot['client_timelines']={}
                                 snapshot['client_assessment_requests']={}
+                                if args.employee_workflows:snapshot['employee_workflows']={}
                                 for client in snapshot['clients']['clients']:
                                     timeline=s.get(env['UI_BASE_URL']+f"/api/clients/{client['client_id']}/timeline",timeout=30);timeline.raise_for_status()
                                     snapshot['client_timelines'][client['client_id']]=timeline.json()
@@ -224,6 +227,9 @@ def main():
                                         snapshot['client_remediation'][campaign['assessment_id']]=records.json()['records']
                                         assessment_requests=s.get(env['UI_BASE_URL']+f"/api/assessments/{campaign['assessment_id']}/enterprise/assessment-requests",timeout=15);assessment_requests.raise_for_status()
                                         snapshot['client_assessment_requests'][campaign['assessment_id']]=assessment_requests.json()['requests']
+                                        if args.employee_workflows:
+                                            workflow=s.get(env['UI_BASE_URL']+f"/api/assessments/{campaign['assessment_id']}/employee-workflows",timeout=15);workflow.raise_for_status()
+                                            snapshot['employee_workflows'][campaign['assessment_id']]=workflow.json()
                                 with requests.Session() as owner_session:
                                     login=owner_session.post(env['UI_BASE_URL']+'/api/auth/login',json={'username':'client_a_owner','password':env['ISO_ASSESSOR_PASSWORD']},timeout=15);login.raise_for_status()
                                     owner_session.headers['Authorization']='Bearer '+login.json()['access_token']
