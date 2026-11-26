@@ -442,6 +442,8 @@ def run_assessment(
     actor: UUID,
     scope: ScanInput,
     key: str,
+    *,
+    expected_policy: int | None = None,
 ) -> Assessment:
     digest = stable_hash(scope.model_dump())
     params = {"tenant": tenant, "actor": actor, "key": key}
@@ -469,6 +471,8 @@ def run_assessment(
     policy = latest_policy(connection, tenant)
     if policy is None:
         raise LookupError("Chưa có chính sách mô phỏng.")
+    if expected_policy is not None and expected_policy != policy.version:
+        raise ValueError("Chính sách đã đổi. Hãy tạo yêu cầu đánh giá mới.")
     run_id, captured_at = uuid4(), datetime.now(UTC)
     criteria = {criterion.id: criterion for criterion in research_catalog().criteria}
     records = None

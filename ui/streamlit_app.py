@@ -202,15 +202,32 @@ def assessment_page(base: str, role: str) -> None:
         code = st.text_input("Mã nhân viên", value="NV015")
         scenarios = st.checkbox("Chạy danh mục kịch bản mô phỏng")
         submitted = st.form_submit_button("Bắt đầu đánh giá")
-    if submitted:
+        queued = st.form_submit_button("Lưu yêu cầu để chạy sau")
+    if submitted or queued:
         result = call(
-            f"{base}/assessments",
+            f"{base}/assessment-jobs" if queued else f"{base}/assessments",
             method="POST",
             key=str(uuid4()),
             payload={"mode": "scenarios" if scenarios else "offboarding", "employee_code": code},
         )
         if result:
-            st.session_state["run"] = result
+            st.session_state["job" if queued else "run"] = result
+    saved_job = st.text_input("Mã yêu cầu đánh giá đã lưu")
+    if saved_job and st.button("Mở yêu cầu đã lưu"):
+        loaded = call(f"{base}/assessment-jobs/{saved_job.strip()}")
+        if loaded:
+            st.session_state["job"] = loaded
+    job = st.session_state.get("job")
+    if job:
+        st.code(job["id"])
+        if job["state"] == "PENDING" and st.button("Chạy yêu cầu đã lưu"):
+            resumed = call(f"{base}/assessment-jobs/{job['id']}/resume", method="POST")
+            if resumed:
+                st.session_state["job"] = job = resumed
+        if job["assessment_id"] and st.button("Xem kết quả yêu cầu"):
+            completed = call(f"{base}/assessments/{job['assessment_id']}")
+            if completed:
+                st.session_state["run"] = completed
     run_id = st.text_input("Mã đánh giá đã lưu")
     if run_id and st.button("Mở đánh giá"):
         result = call(f"{base}/assessments/{run_id.strip()}")
@@ -290,6 +307,46 @@ def assessment_page(base: str, role: str) -> None:
     report("Bản trích SoA", f"{base}/reports/soa", "soa")
 
 
+def benchmark_page() -> None:
+    st.header("Kết quả benchmark mô phỏng")
+    upload = st.file_uploader("Chọn dashboard.json do lệnh benchmark xuất", type="json")
+    if upload is None:
+        return
+    if upload.size > 32_000:
+        st.error("Tệp tóm tắt benchmark quá lớn.")
+        return
+    try:
+        data = json.loads(upload.getvalue())
+        modes = {"MOCK_TEST_ONLY": "Chạy kiểm thử mock", "OLLAMA_LOCAL_RESEARCH": "Ollama cục bộ"}
+        mode = modes[data["mode"]]
+        tenants, cases = data["tenants"], data["cases"]
+        if type(tenants) is not int or type(cases) is not int or not 0 < tenants <= cases:
+            raise ValueError
+        metrics = data["metrics"]
+        if not isinstance(metrics, list) or not 1 <= len(metrics) <= 4:
+            raise ValueError
+        rows: list[dict[str, str | float | None]] = []
+        for item in metrics:
+            method = item["method"]
+            if method not in ("M1", "M2", "M3", "M4") or any(
+                r["Phương pháp"] == method for r in rows
+            ):
+                raise ValueError
+            row: dict[str, str | float | None] = {"Phương pháp": method}
+            for field in ("precision", "recall", "f1", "fpr", "coverage"):
+                value = item[field]
+                if value is not None and (type(value) not in (int, float) or not 0 <= value <= 1):
+                    raise ValueError
+                row[field] = value
+            rows.append(row)
+    except (ValueError, KeyError, TypeError):
+        st.error("Tệp tóm tắt benchmark không hợp lệ.")
+        return
+    st.caption(f"{mode} · {tenants} doanh nghiệp · {cases} ca")
+    st.dataframe(rows, hide_index=True)
+    st.caption("Phạm vi đo là phát hiện. M2 và M3 dùng chung đầu ra phát hiện.")
+
+
 st.set_page_config(page_title="Đánh giá an toàn thông tin", layout="wide")
 st.title("Đánh giá an toàn thông tin")
 st.caption("SIMULATION · Rubric nghiên cứu · ISO/IEC 27001:2022")
@@ -329,4 +386,7 @@ base = f"/companies/{tenant}"
 if role == "employee":
     employee_page(base)
 else:
-    assessment_page(base, role)
+    if st.sidebar.radio("Trang", ("Đánh giá", "Benchmark")) == "Benchmark":
+        benchmark_page()
+    else:
+        assessment_page(base, role)

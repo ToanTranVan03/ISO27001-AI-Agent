@@ -14,7 +14,7 @@
 | 10 | IN_PROGRESS | Đánh giá con người, phần cứng và phần mềm |
 | 11 | IN_PROGRESS | Phê duyệt, thực thi và xác minh |
 | 12 | BLOCKED | Lab máy ảo cô lập |
-| 13 | IN_PROGRESS | Dashboard và báo cáo |
+| 13 | PASS | Dashboard và báo cáo trong mô phỏng |
 | 14 | IN_PROGRESS | Benchmark M1–M4 |
 | 15 | IN_PROGRESS | Đóng gói và nghiệm thu |
 
@@ -61,7 +61,9 @@ PASS trong phạm vi bộ sinh và mô phỏng. `seed-demo --seed 42` tạo ABC 
 
 ## Phase 06
 
-API đánh giá và báo cáo được lưu trong PostgreSQL. Revision 0003 áp dụng thành công. Bài kiểm thử đầu cuối kiểm tra yêu cầu lặp, đoán ID tenant khác và xuất báo cáo. Phạm vi hiện đồng bộ và có giới hạn. Hàng đợi worker, checkpoint khôi phục và toàn bộ API quản trị còn thiếu.
+API đánh giá và báo cáo được lưu trong PostgreSQL. Revision 0003 áp dụng thành công. Bài kiểm thử đầu cuối kiểm tra yêu cầu lặp, đoán ID tenant khác và xuất báo cáo. Yêu cầu có thể lưu và chạy nền trong tiến trình API. Chưa có worker chuyên dụng, checkpoint giữa các node hoặc toàn bộ API quản trị.
+
+Revision 0010 lưu yêu cầu đánh giá theo người tạo và doanh nghiệp. API có thể chạy nền hoặc mở lại yêu cầu đã lưu. Giao dịch khóa theo yêu cầu, kiểm tra lại vai trò và phiên bản chính sách khi chạy, và chỉ gắn kết quả sau khi ghi báo cáo. Nếu tiến trình bị dừng giữa giao dịch, yêu cầu còn chờ để mở lại. Đây là checkpoint ở ranh giới yêu cầu và báo cáo, chưa lưu trạng thái giữa từng node LangGraph.
 
 ## Phase 07
 
@@ -101,7 +103,9 @@ Hạn trả tài sản D02 lấy từ chính sách của doanh nghiệp. Lịch 
 
 ## Phase 13
 
-Dashboard Streamlit lấy dữ liệu từ API, có đánh giá, kế hoạch, phê duyệt, xác minh, phỏng vấn và báo cáo JSON/CSV. AppTest kiểm tra màn hình đăng nhập. Bài tích hợp chạy Uvicorn thật, đăng nhập auditor qua dashboard và xác nhận chỉ thấy tenant được cấp quyền. Kiểm tra HTTP Streamlit trên Docker Compose trả ok. Chưa có kiểm thử trình duyệt xuyên qua tác vụ và chưa có trang benchmark chuyên biệt.
+Dashboard Streamlit lấy dữ liệu từ API, có đánh giá, kế hoạch, phê duyệt, xác minh, phỏng vấn và báo cáo JSON/CSV. AppTest kiểm tra màn hình đăng nhập. Bài tích hợp chạy Uvicorn thật, đăng nhập auditor qua dashboard và xác nhận chỉ thấy tenant được cấp quyền. Kiểm tra HTTP Streamlit trên Docker Compose trả ok. AppTest thực hiện trọn tác vụ mô phỏng qua API thật. Trang Benchmark nhận tệp tổng hợp mà lệnh benchmark xuất.
+
+Kiểm thử AppTest qua Uvicorn thật và PostgreSQL đi từ lưu yêu cầu, đánh giá, lập kế hoạch, đổi vai trò, chạy thử, phê duyệt, thực thi, xác minh đến tải dữ liệu báo cáo. Dashboard có trang đọc tệp tóm tắt benchmark.
 
 ## Phase 14
 
@@ -109,9 +113,11 @@ Dashboard Streamlit lấy dữ liệu từ API, có đánh giá, kế hoạch, p
 - Ollama qwen2.5:1.5b, 25 doanh nghiệp, 200 ca, 21 lượt gọi hợp lệ, 4 lượt gọi lỗi. Báo cáo `artifacts/benchmarks/4bedcb45-b9a1-4dc6-ad84-3dbe3df7f9cc`.
 - M1–M4 hiện đo phát hiện có cấu trúc. M2/M3 dùng chung dự đoán. Chưa đo hành động và xác minh theo từng phương pháp, chi phí hay chất lượng trích dẫn. Không suy rộng kết quả tổng hợp.
 
+Benchmark phát hiện đã xuất tệp dashboard, hash dữ liệu và kết quả phân tầng. Ngày 26-11-2026 chạy 1.650 ca mock, 18 ca Ollama smoke và 200 ca Ollama trên 25 doanh nghiệp. Chi tiết và giới hạn còn lại được ghi trong [thực nghiệm](EXPERIMENT.md).
+
 ## Phase 15
 
-Lockfile được cài trên Windows và trong ảnh Linux. Ruff, mypy và pip check qua. Đợt bổ sung 2026-11-26: `scripts/test-postgres.ps1` chạy 30 bài đạt, không skip; mypy kiểm tra 38 tệp. Xem [nghiệm thu AC01–AC15](ACCEPTANCE.md) cho các mục còn mở.
+Lockfile được cài trên Windows và trong ảnh Linux. Ngày 26-11-2026 migration 0010 chạy trên cơ sở dữ liệu trắng và bản Docker cập nhật trả sẵn sàng ở /ready cùng /_stcore/health. Bộ kiểm thử PostgreSQL đạt 40 bài, Ruff và mypy đạt trên 47 tệp. Ruff, mypy và pip check qua. Đợt bổ sung 2026-11-26: `scripts/test-postgres.ps1` chạy 30 bài đạt, không skip; mypy kiểm tra 38 tệp. Xem [nghiệm thu AC01–AC15](ACCEPTANCE.md) cho các mục còn mở.
 
 ## Đối chiếu đề cương và góp ý — 2026-11-26
 

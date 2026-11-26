@@ -126,6 +126,7 @@ def fixture() -> Iterator[Fixture]:
                 "app_data.audit_events",
                 "app_data.asset_return_receipts",
                 "app_data.sim_actions",
+                "app_data.assessment_jobs",
                 "app_data.assessments",
                 "app_data.sim_resources",
                 "app_data.sim_cases",
@@ -486,6 +487,38 @@ def test_nv015_offboarding_and_employee_retest(
         return response.json()
 
     actor_run = scan("NV015", auditor, "offboard-0001")
+    queue = f"{base}/assessment-jobs"
+    queued_headers = auditor | {"Idempotency-Key": "offboard-queued"}
+    scope = {"employee_code": "NV015"}
+    queued = client.post(queue, headers=queued_headers, json=scope)
+    assert queued.status_code == 202, queued.text
+    checkpoint = queued.json()
+    assert checkpoint["state"] == "PENDING"
+    assert client.post(queue, headers=queued_headers, json=scope).json() == checkpoint
+    assert (
+        client.post(queue, headers=queued_headers, json={"employee_code": "NV001"}).status_code
+        == 409
+    )
+    job_url = f"{queue}/{checkpoint['id']}"
+    assert client.get(job_url, headers=auditor).json() == checkpoint
+    assert client.post(job_url + "/resume", headers=admin).status_code == 404
+    assert (
+        client.post(
+            job_url.replace(str(tenant), str(foreign)) + "/resume", headers=auditor
+        ).status_code
+        == 404
+    )
+    completed_job = client.post(job_url + "/resume", headers=auditor).json()
+    assert completed_job["state"] == "COMPLETED" and completed_job["assessment_id"]
+    assert client.post(job_url + "/resume", headers=auditor).json() == completed_job
+    background = client.post(
+        queue + "?start=true",
+        json=scope,
+        headers=auditor | {"Idempotency-Key": "offboard-background"},
+    )
+    assert background.status_code == 202
+    background_job = client.get(f"{queue}/{background.json()['id']}", headers=auditor).json()
+    assert background_job["state"] == "COMPLETED"
     (citation,) = actor_run["citations_by_control"]["A.6.3"]
     assert citation["chunk_id"] == str(fixture.docs[0])
     assert actor_run["citations_by_control"]["A.5.11"] == []
@@ -969,7 +1002,7 @@ def test_nv015_offboarding_and_employee_retest(
     )
 
 
-def test_dashboard_signs_in_to_real_api(
+def test_dashboard_runs_assessment_approval_and_report_through_real_api(
     fixture: Fixture,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -983,6 +1016,37 @@ def test_dashboard_signs_in_to_real_api(
     from urllib.request import urlopen
 
     from streamlit.testing.v1 import AppTest
+
+    from compliance_ai.catalog import research_catalog
+
+    tenant, _ = fixture.companies
+    employee, target = uuid4(), uuid4()
+    policy = next(item for item in research_catalog().policies if item.id == "abc")
+    with fixture.maintenance.begin() as connection:
+        connection.execute(
+            text("""
+                INSERT INTO app_data.policy_versions(company_id,version,effective_at,document)
+                VALUES (:tenant,1,now(),CAST(:doc AS jsonb)) ON CONFLICT DO NOTHING
+            """),
+            {"tenant": tenant, "doc": policy.model_dump_json()},
+        )
+        connection.execute(
+            text("""
+                INSERT INTO app_data.employees
+                    (company_id,id,code,display_name,employment_status,termination_effective_at)
+                VALUES (:tenant,:employee,'NV019','UI test','terminated',now())
+            """),
+            {"tenant": tenant, "employee": employee},
+        )
+        connection.execute(
+            text("""
+                INSERT INTO app_data.sim_resources(company_id,id,employee_id,kind,state,updated_at)
+                VALUES (:tenant,:target,:employee,'account',
+                        jsonb_build_object('enabled',true,'protected',false,'grants','[]'::jsonb),
+                        now())
+            """),
+            {"tenant": tenant, "employee": employee, "target": target},
+        )
 
     with socket.socket() as reserved:
         reserved.bind(("127.0.0.1", 0))
@@ -1024,6 +1088,71 @@ def test_dashboard_signs_in_to_real_api(
         assert any(element.value == "Đánh giá" for element in app.header)
         assert len(app.sidebar.selectbox) == 1
         assert app.sidebar.selectbox[0].options == ["Tenant A"]
+
+        def button(label: str):
+            return next(widget for widget in app.button if widget.label == label)
+
+        def input_field(label: str):
+            return next(widget for widget in app.text_input if widget.label == label)
+
+        input_field("Mã nhân viên").set_value("NV019")
+        button("Lưu yêu cầu để chạy sau").click().run()
+        assert app.session_state["job"]["state"] == "PENDING"
+        button("Chạy yêu cầu đã lưu").click().run()
+        button("Xem kết quả yêu cầu").click().run()
+        run = app.session_state["run"]
+        assert run["scope"]["employee_code"] == "NV019"
+        button("Lập kế hoạch mô phỏng").click().run()
+        action = app.session_state["action_id"]
+        assert not any(widget.label == "Phê duyệt mô phỏng" for widget in app.button)
+        app.sidebar.button[0].click().run()
+        app.text_input[0].set_value(fixture.logins["admin"])
+        app.text_input[1].set_value(PASSWORD)
+        app.button[0].click().run()
+        input_field("Mã đánh giá đã lưu").set_value(run["id"]).run()
+        button("Mở đánh giá").click().run()
+        input_field("Mã hành động cần mở").set_value(action).run()
+        button("Chạy thử điều kiện thực thi").click().run()
+        button("Phê duyệt mô phỏng").click().run()
+        button("Thực thi mô phỏng").click().run()
+        button("Đọc lại nguồn để xác minh").click().run()
+        button("Báo cáo khắc phục").click().run()
+        report = app.session_state[f"report-remediation-{run['id']}"]
+        assert not app.exception and not app.error
+        assert any(
+            item["id"] == action and item["state"] == "VERIFIED" for item in report["actions"]
+        )
     finally:
         process.terminate()
         process.wait(timeout=10)
+
+
+def test_checkpoint_rejects_a_new_policy_before_resume(
+    client: TestClient, fixture: Fixture
+) -> None:
+    from compliance_ai.catalog import research_catalog
+
+    tenant = fixture.companies[1]
+    policy = next(item for item in research_catalog().policies if item.id == "abc")
+    insert = text("""
+        INSERT INTO app_data.policy_versions(company_id,version,effective_at,document)
+        VALUES (:tenant,:version,now(),CAST(:doc AS jsonb))
+    """)
+    with fixture.maintenance.begin() as connection:
+        connection.execute(
+            insert, {"tenant": tenant, "version": 1, "doc": policy.model_dump_json()}
+        )
+    admin = login(client, fixture.logins["foreign_admin"])
+    jobs = f"/api/v1/companies/{tenant}/assessment-jobs"
+    queued = client.post(
+        jobs, json={"employee_code": "NV001"}, headers=admin | {"Idempotency-Key": "stale-policy"}
+    )
+    assert queued.status_code == 202, queued.text
+    with fixture.maintenance.begin() as connection:
+        new_policy = policy.model_copy(update={"version": 2})
+        connection.execute(
+            insert, {"tenant": tenant, "version": 2, "doc": new_policy.model_dump_json()}
+        )
+    path = f"{jobs}/{queued.json()['id']}"
+    assert client.post(path + "/resume", headers=admin).status_code == 409
+    assert client.get(path, headers=admin).json() == queued.json()

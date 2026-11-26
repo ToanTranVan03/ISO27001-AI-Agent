@@ -1,6 +1,7 @@
 from collections import Counter
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 from datetime import UTC, datetime
+from hashlib import sha256
 from json import dumps
 from os import getenv
 from pathlib import Path
@@ -34,6 +35,7 @@ class BenchCase:
     facts: dict[str, CaseValue]
     observed_at: datetime
     exclusion: str | None
+    employees: int
 
 
 def load_inputs(split: str, limit: int, max_cases: int) -> list[BenchCase]:
@@ -51,7 +53,9 @@ def load_inputs(split: str, limit: int, max_cases: int) -> list[BenchCase]:
                     (c.company_id,c.policy_version) WHERE c.split=%s
             )
             SELECT id,company_id AS tenant,scenario_id AS scenario,criterion_id AS criterion,
-                document,evidence AS facts,observed_at,exclusion_reason AS exclusion
+                document,evidence AS facts,observed_at,exclusion_reason AS exclusion,
+                (SELECT count(*) FROM app_data.employees e WHERE e.company_id=cases.company_id)
+                    AS employees
             FROM cases WHERE seq<=%s ORDER BY tenant,seq
         """,
             (split, limit, split, max_cases),
@@ -218,12 +222,29 @@ def run_benchmark(
         for method, outputs in predictions.items()
     }
     for method, outputs in predictions.items():
-        metrics[method]["by_scenario"] = {
-            scenario: score_predictions(
-                [(labels[case.id], outputs[case.id]) for case in cases if case.scenario == scenario]
-            )
-            for scenario in sorted({case.scenario for case in cases})
+        strata: dict[str, dict[str, list[tuple[Status, Status]]]] = {
+            key: {} for key in ("by_scenario", "by_policy", "by_size", "by_pillar", "by_tenant")
         }
+        for case in cases:
+            pair = (labels[case.id], outputs[case.id])
+            for field, value in zip(
+                strata,
+                (
+                    case.scenario,
+                    f"{case.document['id']}/v{case.document['version']}",
+                    str(case.employees),
+                    criteria[case.criterion].primary_pillar,
+                    str(case.tenant),
+                ),
+                strict=True,
+            ):
+                strata[field].setdefault(value, []).append(pair)
+        metrics[method].update(
+            {
+                field: {value: score_predictions(group) for value, group in sorted(groups.items())}
+                for field, groups in strata.items()
+            }
+        )
     root = Path("artifacts/benchmarks") / str(uuid4())
     root.mkdir(parents=True, exist_ok=False)
 
@@ -242,6 +263,15 @@ def run_benchmark(
             "methods": list(methods),
             "tenants": len(by_tenant),
             "cases": len(cases),
+            "snapshot_sha256": sha256(
+                dumps(
+                    [asdict(case) for case in cases],
+                    sort_keys=True,
+                    ensure_ascii=False,
+                    default=str,
+                ).encode()
+            ).hexdigest(),
+            "limits": {"tenants": limit, "cases_per_tenant": max_cases},
             "model": model if mode == "llm" else None,
             "generated_at": datetime.now(UTC).isoformat(),
             "duration_seconds": monotonic() - started,
@@ -257,6 +287,19 @@ def run_benchmark(
         },
     )
     save_json("metrics.json", metrics)
+    columns = ("method", "precision", "recall", "f1", "fpr", "coverage")
+    save_json(
+        "dashboard.json",
+        {
+            "mode": label,
+            "tenants": len(by_tenant),
+            "cases": len(cases),
+            "metrics": [
+                {"method": method, **{field: result[field] for field in columns[1:]}}
+                for method, result in metrics.items()
+            ],
+        },
+    )
     save_jsonl(
         "cases.jsonl",
         [
@@ -278,7 +321,6 @@ def run_benchmark(
         ],
     )
     save_jsonl("failures.jsonl", failures)
-    columns = ("method", "precision", "recall", "f1", "fpr", "coverage")
     csv_rows = [",".join(columns)] + [
         ",".join(
             str(value) if value is not None else ""

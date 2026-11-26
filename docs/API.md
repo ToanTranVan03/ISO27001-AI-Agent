@@ -23,6 +23,9 @@ Các đường dẫn dưới đây tiếp sau `/api/v1/companies/{company_id}`.
 | Phương thức | Đường dẫn | Vai trò |
 | --- | --- | --- |
 | POST | `/assessments` | Auditor, admin. Dùng Idempotency-Key. |
+| POST | `/assessment-jobs` | Auditor, admin. Lưu yêu cầu với Idempotency-Key. Thêm `?start=true` để bắt đầu đánh giá nền sau khi lưu. |
+| GET | `/assessment-jobs/{job_id}` | Người tạo yêu cầu trong đúng doanh nghiệp. Trả `PENDING` hoặc `COMPLETED`. |
+| POST | `/assessment-jobs/{job_id}/resume` | Người tạo yêu cầu chạy tiếp hoặc đọc kết quả đã gắn. Nếu chính sách đã đổi, tạo yêu cầu mới. |
 | GET | `/assessments/{run_id}` | Auditor, admin |
 | POST | `/assessments/{run_id}/findings/{finding_id}/plan` | Auditor, admin |
 | GET | `/actions/{action_id}` | Auditor, admin |

@@ -4,8 +4,9 @@ from io import StringIO
 from typing import Annotated
 from uuid import UUID
 
-from fastapi import APIRouter, Header, HTTPException, Query, Response
+from fastapi import APIRouter, BackgroundTasks, Header, HTTPException, Query, Response
 from sqlalchemy import Connection, text
+from sqlalchemy.exc import SQLAlchemyError
 
 from compliance_ai.actions import (
     Action,
@@ -30,6 +31,7 @@ from compliance_ai.assessments import (
 )
 from compliance_ai.db import Document
 from compliance_ai.interview import Answer, acknowledge_nda, answer, complete, training_view
+from compliance_ai.jobs import AssessmentJob, enqueue, job, resume
 from compliance_ai.nda import NdaAcknowledgement, NdaReceipt
 from compliance_ai.rag import retrieve
 from compliance_ai.tenant_api import DB, Actor, Database
@@ -78,6 +80,8 @@ def authorize(db: Database, connection: Connection, company_id: UUID, *, admin=F
 
 @router.post("/assessments", tags=["assessments"])
 def scan(company_id: UUID, payload: ScanInput, actor: Actor, db: DB, key: RetryKey) -> Assessment:
+    if key.startswith("job/"):
+        raise HTTPException(422, "Khóa bắt đầu bằng job/ dành cho yêu cầu đã lưu.")
     with db.transaction(actor, company_id) as connection:
         authorize(db, connection, company_id)
         try:
@@ -96,6 +100,59 @@ def assessment(company_id: UUID, run_id: UUID, actor: Actor, db: DB) -> Assessme
         if result is None:
             raise HTTPException(404, "Không tìm thấy đánh giá.")
         return result
+
+
+@router.post("/assessment-jobs", tags=["assessments"], status_code=202)
+def create_job(
+    company_id: UUID,
+    payload: ScanInput,
+    actor: Actor,
+    db: DB,
+    key: RetryKey,
+    background: BackgroundTasks,
+    start: bool = False,
+) -> AssessmentJob:
+    with db.transaction(actor, company_id) as connection:
+        authorize(db, connection, company_id)
+        try:
+            queued = enqueue(connection, company_id, actor, payload, key)
+        except LookupError as error:
+            raise HTTPException(404, str(error)) from error
+        except ValueError as error:
+            raise HTTPException(409, str(error)) from error
+    if start and queued.state == "PENDING":
+        background.add_task(run_background_job, db, company_id, actor, queued.id)
+    return queued
+
+
+def run_background_job(db: Database, company_id: UUID, actor: UUID, job_id: UUID) -> None:
+    try:
+        resume_job(company_id, job_id, actor, db)
+    except (HTTPException, SQLAlchemyError):
+        # The transaction rolls back. The owner can retry or see the cause at /resume.
+        return
+
+
+@router.get("/assessment-jobs/{job_id}", tags=["assessments"])
+def get_job(company_id: UUID, job_id: UUID, actor: Actor, db: DB) -> AssessmentJob:
+    with db.transaction(actor, company_id) as connection:
+        authorize(db, connection, company_id)
+        try:
+            return job(connection, company_id, job_id)
+        except LookupError as error:
+            raise HTTPException(404, str(error)) from error
+
+
+@router.post("/assessment-jobs/{job_id}/resume", tags=["assessments"])
+def resume_job(company_id: UUID, job_id: UUID, actor: Actor, db: DB) -> AssessmentJob:
+    with db.transaction(actor, company_id) as connection:
+        authorize(db, connection, company_id)
+        try:
+            return resume(connection, company_id, actor, job_id)
+        except LookupError as error:
+            raise HTTPException(404, str(error)) from error
+        except ValueError as error:
+            raise HTTPException(409, str(error)) from error
 
 
 @router.get("/assessments/{run_id}/reports/gap", tags=["reports"])

@@ -14,6 +14,12 @@ M1 dùng bộ quy tắc có cấu trúc. M2 và M3 dùng cùng dự đoán phát
 
 Báo cáo giữ ma trận nhiều trạng thái và ca có lỗi. Ca ngoài phạm vi và nhãn thiếu bằng chứng được loại khỏi ma trận nhị phân. Phát hiện vi phạm bị bỏ phiếu vì thiếu bằng chứng vẫn là âm tính giả trong phép đo nhị phân. Mẫu số bằng 0 cho giá trị trống. Tỷ lệ bao phủ tính trên ca áp dụng.
 
+Lượt ngày 26-11-2026 bổ sung SHA-256 của snapshot đầu vào và chỉ số theo kịch bản, chính sách, quy mô, trụ cột và doanh nghiệp. Tệp `dashboard.json` chỉ chứa các chỉ số tổng hợp để mở trên trang Benchmark.
+
+- Mock chạy 1.650 ca trên 25 doanh nghiệp, không có lượt gọi model. Thư mục `artifacts/benchmarks/7a4b16bb-907c-43fa-99da-e7ca479a4474`.
+- Ollama kiểm tra nhanh 18 ca trên ba doanh nghiệp, hai lượt gọi hợp lệ và một lượt lỗi. F1 không xác định trên mẫu này. Thư mục `artifacts/benchmarks/2029c70c-29eb-4ad8-b1f4-194f7e394699`.
+- Ollama chạy 200 ca trên 25 doanh nghiệp, 21 lượt gọi hợp lệ và bốn lượt lỗi trong khoảng 24 giây. Thư mục `artifacts/benchmarks/c7d37c6f-3e9b-403c-81d4-6c6cf84c81f8`. M2/M3 vẫn dùng chung dự đoán phát hiện. Chưa có số liệu đối chứng hành động.
+
 ## Câu hỏi nghiên cứu và bằng chứng cần thu
 
 Đối chiếu với mục 6 của đề cương và phần góp ý người dùng cung cấp. Bảng sau là thiết kế thực nghiệm; không phải kết luận rằng hệ thống đã trả lời được mọi câu hỏi.

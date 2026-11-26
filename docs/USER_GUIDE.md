@@ -39,6 +39,10 @@ Khôi phục bị chặn nếu endpoint có thêm thay đổi sau hành động 
 
 ## Lệnh tham chiếu
 
+Để giữ yêu cầu trước khi đánh giá, chọn **Lưu yêu cầu để chạy sau** và lưu mã hiện trên màn hình. Đăng nhập lại bằng cùng tài khoản, mở yêu cầu rồi chọn **Chạy yêu cầu đã lưu**. Khi hoàn tất, dùng **Xem kết quả yêu cầu** để mở báo cáo.
+
+Trang **Benchmark** trong thanh bên nhận tệp `dashboard.json` do lệnh benchmark xuất. Tệp chứa chế độ thực nghiệm, số ca, số doanh nghiệp và các chỉ số tổng hợp. Chi tiết phân tầng nằm trong `metrics.json`.
+
 ### Trình diễn MFA của NV001
 
 1. Dùng `abc-auditor` đánh giá NV001 trong ABC. Mở **Căn cứ, điểm và độ bao phủ**, tìm S02 và lấy `observed.revision` của tài khoản.
