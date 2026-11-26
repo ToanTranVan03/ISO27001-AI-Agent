@@ -213,6 +213,7 @@ def main():
                                 snapshot['client_inventory']={}
                                 snapshot['client_remediation']={}
                                 snapshot['client_timelines']={}
+                                snapshot['client_assessment_requests']={}
                                 for client in snapshot['clients']['clients']:
                                     timeline=s.get(env['UI_BASE_URL']+f"/api/clients/{client['client_id']}/timeline",timeout=30);timeline.raise_for_status()
                                     snapshot['client_timelines'][client['client_id']]=timeline.json()
@@ -221,6 +222,8 @@ def main():
                                         snapshot['client_inventory'][campaign['assessment_id']]=company.json()
                                         records=s.get(env['UI_BASE_URL']+f"/api/assessments/{campaign['assessment_id']}/remediation",timeout=15);records.raise_for_status()
                                         snapshot['client_remediation'][campaign['assessment_id']]=records.json()['records']
+                                        assessment_requests=s.get(env['UI_BASE_URL']+f"/api/assessments/{campaign['assessment_id']}/enterprise/assessment-requests",timeout=15);assessment_requests.raise_for_status()
+                                        snapshot['client_assessment_requests'][campaign['assessment_id']]=assessment_requests.json()['requests']
                                 with requests.Session() as owner_session:
                                     login=owner_session.post(env['UI_BASE_URL']+'/api/auth/login',json={'username':'client_a_owner','password':env['ISO_ASSESSOR_PASSWORD']},timeout=15);login.raise_for_status()
                                     owner_session.headers['Authorization']='Bearer '+login.json()['access_token']

@@ -13,6 +13,7 @@ test('corrective action UI: baseline, consultant approval, assigned work and sep
  await page.route('**/remediation**',async route=>{
   const req=route.request(),path=new URL(req.url()).pathname;
   if(path.includes('/notifications'))return route.fulfill({json:{items:[],unread_count:0,note:'UI MOCK inbox'}});
+  if(path.endsWith('/deadline-preview'))return route.fulfill({json:{due_date:'2026-11-30',saved:false,policy_reference:'UI MOCK policy'}});
   if(path.endsWith('/report.csv'))return route.fulfill({contentType:'text/csv',body:'Control,State\nA.6.1,REWORK'});
   if(path.endsWith('/report.html'))return route.fulfill({contentType:'text/html',body:'<!doctype html><html>UI MOCK print report</html>'});
   if(req.method()==='GET')return route.fulfill({json:board});
@@ -56,6 +57,8 @@ test('corrective action UI: baseline, consultant approval, assigned work and sep
   for(const [label,value] of [['Tên hành động','UI MOCK review accounts'],['Hướng dẫn thực hiện','UI MOCK identify accounts, review and record actual observations.'],['Điều kiện nghiệm thu/bằng chứng cần nộp','UI MOCK submit review evidence and require separate verification.'],['Bộ phận thực hiện','UI MOCK IT'],['Nguồn lực cần thiết','UI MOCK accountable personnel'],['Công việc con — mỗi dòng một việc','UI MOCK list accounts\nUI MOCK record review']])await page.getByLabel(label,{exact:true}).fill(value);
   await page.getByRole('button',{name:'Lưu đề xuất chờ duyệt',exact:true}).click();
   const card=page.locator('article').filter({has:page.getByRole('heading',{name:'UI MOCK review accounts',exact:true})}).last();
+  await card.getByText('Gợi ý hạn theo ngày làm việc',{exact:true}).click();
+  await card.getByLabel('Mốc bắt đầu tính hạn',{exact:true}).fill('2026-11-27T10:00');await card.getByLabel('Căn cứ chính sách về hạn',{exact:true}).fill('UI MOCK policy');await card.getByRole('button',{name:'Tính thử hạn — chưa lưu',exact:true}).click();await card.getByRole('button',{name:'Dùng hạn gợi ý trong kế hoạch nháp',exact:true}).click();await expect(card.getByLabel('Hạn hoàn thành',{exact:true})).toHaveValue('2026-11-30');
   await card.getByRole('textbox',{name:'Ghi chú thao tác / căn cứ xác minh (ít nhất 10 ký tự)',exact:true}).fill('UI MOCK approve test plan only');await card.getByRole('combobox',{name:'Người thực hiện',exact:true}).selectOption(operator);await card.getByLabel('Hạn hoàn thành',{exact:true}).fill('2026-12-20');await card.getByRole('button',{name:'Duyệt và giao thực hiện',exact:true}).click();
   board.role='operator';board.user_id=operator;board.can_manage_roles=false;await page.getByRole('button',{name:'Làm mới khắc phục',exact:true}).click();
   await card.getByRole('textbox',{name:'Ghi chú thao tác / căn cứ xác minh (ít nhất 10 ký tự)',exact:true}).fill('UI MOCK progress, no genuine record');

@@ -25,6 +25,16 @@ test('real client UI and lifecycle: empty inventory, tenant isolation, model adv
  await call('POST','/api/clients',{name:'Unauthorized',sector:'test',contact:'owner',campaign:{name:'Test',isms_scope:'No permission for new client'}},owner,403);
  let inventory=await call('GET',company);expect(inventory.people).toHaveLength(0);expect(inventory.accounts).toHaveLength(0);expect(inventory.devices).toHaveLength(0);expect(inventory.synthetic).toBe(false);
  const scopeBefore=await call('GET',scopePath);expect(scopeBefore.controls).toHaveLength(56);expect(scopeBefore.controls.every(c=>!c.collector_supported)).toBe(true);
+ const requestPath=base+'/enterprise/assessment-requests';
+ const requested=await call('POST',requestPath,{title:'SYNTHETIC request for evidence review',objective:'Test persisted assessment scope without automatic execution',control_ids:['A.6.1','A.8.13'],note:'Synthetic acceptance only, not human approval'},owner,201);
+ expect((await call('GET',requestPath)).requests.some(r=>r.request_id===requested.request_id)).toBe(true);
+ await call('GET',`/api/assessments/${bid}/enterprise/assessment-requests`,undefined,owner,403);
+ await call('POST',requestPath+'/'+requested.request_id+'/cancel',{expected_version:99,note:'Synthetic stale cancellation test'},owner,409);
+ const cancelled=await call('POST',requestPath+'/'+requested.request_id+'/cancel',{expected_version:1,note:'Synthetic cancellation keeps initial request history'},owner);
+ expect(cancelled.document.status).toBe('CANCELLED');expect(cancelled.document.history).toHaveLength(2);
+ const deadline=await call('POST',rem+'/deadline-preview',{anchor:'2026-11-27T10:00:00+07:00',business_days:1,policy_reference:'Synthetic test policy, not an ISO requirement'});
+ expect(deadline.due_date).toBe('2026-11-30');expect(deadline.saved).toBe(false);
+ await call('POST',rem+'/deadline-preview',{anchor:'2026-11-27T10:00:00+07:00',business_days:1,policy_reference:'Synthetic policy'},owner,403);
  const empty=await call('POST','/api/evaluate?assessment_id='+aid,{control_id:'A.6.2'},owner);
  expect(empty.status).toBe('Insufficient Evidence');
  await page.goto('/');await page.getByLabel('Tên đăng nhập',{exact:true}).fill('release_admin');await page.getByLabel('Mật khẩu',{exact:true}).fill(process.env.INITIAL_ADMIN_PASSWORD);await page.getByRole('button',{name:'ĐĂNG NHẬP HỆ THỐNG'}).click();

@@ -83,6 +83,16 @@ Tài liệu để tiếp tục:
 
 Minh chứng, kiến trúc và giới hạn: [báo cáo nâng cấp doanh nghiệp](../docs/THESIS_ENTERPRISE_AI_AGENT_UPGRADE.md), [hướng dẫn dữ liệu mô phỏng](../docs/SYNTHETIC_DATA_GUIDE.md), [pipeline](../docs/AI_AGENT_DATA_PIPELINE.md). Các việc phụ thuộc nguồn/phê duyệt thật giữ mở.
 
+## Tích hợp chọn lọc nhánh Tu/Tuan7 — 27/11/2026
+
+- [x] Đối chiếu code/tài liệu nhánh Tú; giữ React/FastAPI và phạm vi 56 control của main. Không nhập database, benchmark hoặc kết luận mô phỏng của nhánh khác thành dữ liệu chính.
+- [x] Bổ sung yêu cầu đánh giá lưu mục tiêu/phạm vi/control, rubric/baseline và lịch sử; kiểm tenant/vai trò/version, hủy giữ dữ liệu, mở đúng control hiện hành.
+- [x] Bổ sung gợi ý hạn theo ngày làm việc UTC+7, có căn cứ chính sách; chỉ điền vào nháp trước khi tư vấn duyệt, chưa tự giao việc hoặc coi là hạn ISO bắt buộc.
+- [x] Kiểm chứng 476 test Python main, lint/build, UI yêu cầu/client/khắc phục và gợi ý hạn; ghi thật trên database riêng, kiểm quyền và bảo toàn yêu cầu sau restart.
+- [ ] Phỏng vấn/đào tạo/NDA/MFA/biên nhận tài sản của nhánh Tú chưa tích hợp; cần ánh xạ danh tính nhân viên, nguồn và quyền xác nhận trước khi đưa vào main.
+
+Chi tiết và minh chứng: [Tích hợp chọn lọc Tu/Tuan7](../docs/TICH_HOP_CHON_LOC_TU_TUAN7.md).
+
 ## Việc chuyển tiếp sang tuần 8
 
 Chưa chốt. Rà kết quả cuối tuần 7 rồi xác định; chưa tạo trước nhật ký tuần 8–10.

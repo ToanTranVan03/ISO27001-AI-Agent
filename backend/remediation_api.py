@@ -5,6 +5,7 @@ from uuid import UUID,uuid4
 from typing import Literal
 from fastapi import APIRouter,Depends,HTTPException
 from pydantic import BaseModel,Field,ConfigDict,field_validator,StrictBool
+from pydantic import AwareDatetime
 from psycopg.types.json import Jsonb
 from backend.database import get_connection
 from backend.team_api import require_user,require_campaign
@@ -29,6 +30,18 @@ def initialize():
 
 
 class Input(BaseModel):model_config=ConfigDict(extra='forbid',str_strip_whitespace=True)
+class DeadlinePreview(Input):
+    anchor:AwareDatetime
+    business_days:int=Field(ge=0,le=3650,strict=True)
+    policy_reference:str=Field(min_length=5,max_length=500)
+
+
+@router.post('/deadline-preview')
+def deadline_preview(assessment_id:UUID,req:DeadlinePreview,user=Depends(require_user)):
+    require_consultant(membership(assessment_id,user))
+    from backend.business_deadline import business_due_date
+    return dict(due_date=business_due_date(req.anchor,req.business_days).isoformat(),policy_reference=req.policy_reference,
+        saved=False,note='Gợi ý theo chính sách người dùng khai; tính thứ Hai–thứ Sáu ở UTC+7, chưa loại ngày lễ. Không phải hạn ISO bắt buộc và chưa giao việc.')
 class Role(Input):
     user_id:UUID
     role:Literal['consultant','verifier','business_admin','operator']

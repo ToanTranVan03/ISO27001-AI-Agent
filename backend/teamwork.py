@@ -92,6 +92,10 @@ def init_teamwork() -> None:
                 created_by UUID NOT NULL REFERENCES team_users(user_id),source_sha256 TEXT NOT NULL,
                 document JSONB NOT NULL,created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
                 UNIQUE(assessment_id,source_sha256))''')
+            cur.execute('''CREATE TABLE IF NOT EXISTS enterprise_assessment_requests (
+                request_id UUID PRIMARY KEY,assessment_id UUID NOT NULL REFERENCES assessment_campaigns(assessment_id),
+                created_by UUID NOT NULL REFERENCES team_users(user_id),version INTEGER NOT NULL DEFAULT 1,
+                document JSONB NOT NULL,created_at TIMESTAMPTZ NOT NULL DEFAULT NOW())''')
             cur.execute('''
                 CREATE TABLE IF NOT EXISTS control_progress (
                     assessment_id UUID NOT NULL REFERENCES assessment_campaigns(assessment_id),

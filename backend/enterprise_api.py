@@ -11,6 +11,73 @@ from backend.enterprise_spec import CONTROL_TO_NODE, PRESETS
 router = APIRouter(prefix='/api/assessments/{assessment_id}/enterprise', tags=['Enterprise Lab'])
 
 
+class AssessmentRequestInput(BaseModel):
+    model_config=ConfigDict(extra='forbid',str_strip_whitespace=True)
+    title:str=Field(min_length=5,max_length=200)
+    objective:str=Field(min_length=10,max_length=2000)
+    control_ids:list[str]=Field(min_length=1,max_length=56)
+    note:str=Field(min_length=10,max_length=2000)
+
+
+@router.get('/assessment-requests')
+def assessment_requests(assessment_id:UUID,user:dict=Depends(require_user)):
+    from backend.remediation_api import membership
+    from backend.database import get_connection
+    role=membership(assessment_id,user)
+    with get_connection() as con,con.cursor() as cur:
+        cur.execute('''SELECT request_id,created_by,version,document,created_at FROM enterprise_assessment_requests
+            WHERE assessment_id=%s AND (%s OR created_by=%s) ORDER BY created_at DESC''',
+            (assessment_id,role!='operator',user['user_id']))
+        rows=[dict(request_id=str(r[0]),created_by=str(r[1]),version=r[2],document=r[3],created_at=r[4].isoformat()) for r in cur.fetchall()]
+    return dict(requests=rows,can_create=role in ('consultant','business_admin'),
+        note='Yêu cầu lưu phạm vi và mục đích; không tự chạy Agent, kết luận đạt hoặc phê duyệt SoA.')
+
+
+@router.post('/assessment-requests',status_code=201)
+def create_assessment_request(assessment_id:UUID,req:AssessmentRequestInput,user:dict=Depends(require_user)):
+    from backend.remediation_api import membership
+    from backend.database import get_connection
+    from psycopg.types.json import Jsonb
+    from uuid import uuid4
+    from datetime import datetime,timezone
+    if membership(assessment_id,user) not in ('consultant','business_admin'):raise HTTPException(403,'Cần tư vấn hoặc quản trị doanh nghiệp lập yêu cầu.')
+    scope=scope56(assessment_id,user);controls={c['control_id']:c for c in scope['controls']}
+    if len(set(req.control_ids))!=len(req.control_ids) or not set(req.control_ids)<=controls.keys():raise HTTPException(422,'Mã control phải duy nhất và nằm trong phạm vi 56 hiện có.')
+    rid=str(uuid4());now=datetime.now(timezone.utc).isoformat()
+    doc=dict(**req.model_dump(),status='REQUESTED',rubric_sha256=scope['rubric_sha256'],
+        baseline=[dict(control_id=cid,review_token=controls[cid]['review_token'],conclusion=controls[cid]['conclusion']) for cid in req.control_ids],
+        history=[dict(event='requested',actor=user['user_id'],at=now,note=req.note)],professional_approval=False)
+    with get_connection() as con,con.cursor() as cur:
+        cur.execute('INSERT INTO enterprise_assessment_requests(request_id,assessment_id,created_by,document) VALUES(%s,%s,%s,%s)',(rid,assessment_id,user['user_id'],Jsonb(doc)))
+    return dict(request_id=rid,version=1,document=doc)
+
+
+class CancelAssessmentRequest(BaseModel):
+    model_config=ConfigDict(extra='forbid',str_strip_whitespace=True)
+    expected_version:int=Field(ge=1)
+    note:str=Field(min_length=10,max_length=2000)
+
+
+@router.post('/assessment-requests/{request_id}/cancel')
+def cancel_assessment_request(assessment_id:UUID,request_id:UUID,req:CancelAssessmentRequest,user:dict=Depends(require_user)):
+    from backend.remediation_api import membership
+    from backend.database import get_connection
+    from psycopg.types.json import Jsonb
+    from datetime import datetime,timezone
+    role=membership(assessment_id,user)
+    if role not in ('consultant','business_admin'):raise HTTPException(403,'Vai trò này không hủy yêu cầu đánh giá.')
+    with get_connection() as con,con.cursor() as cur:
+        cur.execute('SELECT created_by,version,document FROM enterprise_assessment_requests WHERE assessment_id=%s AND request_id=%s FOR UPDATE',(assessment_id,request_id));row=cur.fetchone()
+        if not row:raise HTTPException(404,'Không có yêu cầu thuộc đợt này.')
+        author,version,doc=row
+        if role!='consultant' and str(author)!=str(user['user_id']):raise HTTPException(403,'Chỉ người lập hoặc tư vấn hủy yêu cầu.')
+        if version!=req.expected_version:raise HTTPException(409,'Yêu cầu đã đổi; tải lại.')
+        if doc['status']=='CANCELLED':return dict(request_id=str(request_id),version=version,document=doc)
+        doc['status']='CANCELLED';doc['history'].append(dict(event='cancelled',actor=user['user_id'],note=req.note,at=datetime.now(timezone.utc).isoformat()))
+        cur.execute('UPDATE enterprise_assessment_requests SET version=version+1,document=%s WHERE assessment_id=%s AND request_id=%s',(Jsonb(doc),assessment_id,request_id))
+    return dict(request_id=str(request_id),version=version+1,document=doc)
+
+
 class ScenarioInput(BaseModel):
     scenario: str = Field(pattern='^(healthy|partial|gap)$')
 
