@@ -1,0 +1,100 @@
+[
+  {
+    "chunk_id": "ISO27001-A5.9",
+    "standard_ref": "ISO/IEC 27001:2022",
+    "control_id": "A.5.9",
+    "pillar": "hardware",
+    "content": "ISO/IEC 27001:2022 A.5.9 & ISO/IEC 27002:2022 5.9: Danh mục thông tin và tài sản liên quan (laptop, máy trạm, máy chủ, thẻ từ vật lý) phải được lập, cập nhật liên tục và gắn với chủ sở hữu rõ ràng để truy xuất trách nhiệm khi kiểm toán."
+  },
+  {
+    "chunk_id": "ISO27001-A5.11",
+    "standard_ref": "ISO/IEC 27001:2022",
+    "control_id": "A.5.11",
+    "pillar": "hardware",
+    "content": "ISO/IEC 27001:2022 A.5.11 & ISO/IEC 27002:2022 5.11: Nhân sự khi chấm dứt hợp đồng hoặc thay đổi công việc phải hoàn trả toàn bộ tài sản tổ chức (laptop, thiết bị di động, thẻ từ ra vào) theo biên bản bàn giao trước khi đóng hồ sơ nghỉ việc."
+  },
+  {
+    "chunk_id": "ISO27001-A5.16",
+    "standard_ref": "ISO/IEC 27001:2022",
+    "control_id": "A.5.16",
+    "pillar": "human",
+    "content": "ISO/IEC 27001:2022 A.5.16 & ISO/IEC 27002:2022 5.16: Quản lý trọn vòng đời định danh số (tạo mới, duy trì, vô hiệu hóa). Mỗi định danh gắn duy nhất với một nhân sự và phải đồng bộ trạng thái từ HR sang Active Directory và các hệ thống ứng dụng."
+  },
+  {
+    "chunk_id": "ISO27001-A5.18",
+    "standard_ref": "ISO/IEC 27001:2022",
+    "control_id": "A.5.18",
+    "pillar": "cross_domain",
+    "content": "ISO/IEC 27001:2022 A.5.18 & ISO/IEC 27002:2022 5.18: Quyền truy cập vào Active Directory, VPN, Email và phần mềm nghiệp vụ (như phần mềm kế toán) phải được cấp theo nguyên tắc tối thiểu đặc quyền và thu hồi ngay khi chấm dứt lao động."
+  },
+  {
+    "chunk_id": "ISO27001-A6.3",
+    "standard_ref": "ISO/IEC 27002:2022",
+    "control_id": "A.6.3",
+    "pillar": "human",
+    "content": "ISO/IEC 27002:2022 6.3: Toàn bộ nhân sự phải được đào tạo nhận thức an toàn thông tin định kỳ, cập nhật về chính sách ATTT và đánh giá hiệu quả qua bài kiểm tra thực tế (bao gồm mô phỏng phishing). Các cá nhân chưa hoàn thành cần được giao khóa đào tạo bổ sung và theo dõi tới khi có bằng chứng đạt."
+  },
+  {
+    "chunk_id": "ISO27001-A6.5",
+    "standard_ref": "ISO/IEC 27002:2022",
+    "control_id": "A.6.5",
+    "pillar": "cross_domain",
+    "content": "ISO/IEC 27002:2022 6.5: Khi nhân sự nghỉ việc (offboarding), HR phải phối hợp IT và An ninh vật lý để xác nhận nghĩa vụ bảo mật còn hiệu lực, khóa toàn bộ tài khoản (AD, VPN, Email, phần mềm nghiệp vụ) và thu hồi thiết bị phần cứng cùng thẻ từ."
+  },
+  {
+    "chunk_id": "ISO27001-A6.6",
+    "standard_ref": "ISO/IEC 27002:2022",
+    "control_id": "A.6.6",
+    "pillar": "human",
+    "content": "ISO/IEC 27002:2022 6.6: Thỏa thuận bảo mật hoặc không tiết lộ thông tin (NDA) phải được xác định, lưu hồ sơ, rà soát định kỳ và ký kết đầy đủ bởi toàn bộ nhân sự trước khi tiếp cận thông tin nhạy cảm."
+  },
+  {
+    "chunk_id": "ISO27001-A6.8",
+    "standard_ref": "ISO/IEC 27002:2022",
+    "control_id": "A.6.8",
+    "pillar": "human",
+    "content": "ISO/IEC 27002:2022 6.8: Tổ chức phải thiết lập kênh báo cáo sự kiện ATTT kịp thời và đảm bảo nhân sự biết cách nhận diện email lừa đảo, mất thiết bị hoặc rò rỉ dữ liệu để báo cáo ngay cho bộ phận ATTT/IT. Đánh giá năng lực thực tế có thể kết hợp phỏng vấn tình huống mở nhưng kết quả AI phải được con người xác minh và không dùng để kỷ luật tự động."
+  },
+  {
+    "chunk_id": "ISO27001-A7.7",
+    "standard_ref": "ISO/IEC 27002:2022",
+    "control_id": "A.7.7",
+    "pillar": "hardware",
+    "content": "ISO/IEC 27002:2022 7.7: Chính sách bàn làm việc sạch và màn hình sạch yêu cầu thiết bị đầu cuối tự động khóa màn hình sau thời gian ngắn không hoạt động (baseline khuyến nghị <= 5 phút) và bảo vệ tài liệu nhạy cảm."
+  },
+  {
+    "chunk_id": "ISO27001-A8.5",
+    "standard_ref": "ISO/IEC 27002:2022",
+    "control_id": "A.8.5",
+    "pillar": "software",
+    "content": "ISO/IEC 27002:2022 8.5: Xác thực an toàn yêu cầu kích hoạt xác thực đa yếu tố (MFA) cho truy cập từ xa, hệ thống thư điện tử, tài khoản đặc quyền và các ứng dụng nghiệp vụ quan trọng."
+  },
+  {
+    "chunk_id": "ISO27001-A8.8",
+    "standard_ref": "ISO/IEC 27002:2022",
+    "control_id": "A.8.8",
+    "pillar": "software",
+    "content": "ISO/IEC 27002:2022 8.8: Quản lý lỗ hổng kỹ thuật đòi hỏi quét phát hiện định kỳ bản vá bảo mật còn thiếu, kiểm tra tính tương thích trước khi cập nhật, áp dụng bản vá trong cửa sổ bảo trì được duyệt và quét xác minh lại sau khi vá."
+  },
+  {
+    "chunk_id": "ISO27001-A8.9",
+    "standard_ref": "ISO/IEC 27002:2022",
+    "control_id": "A.8.9",
+    "pillar": "software",
+    "content": "ISO/IEC 27002:2022 8.9: Quản lý cấu hình yêu cầu thiết lập Security Baseline thống nhất (Firewall, khóa màn hình 5 phút, mã hóa ổ đĩa, chính sách mật khẩu, Antivirus, đồng bộ thời gian NTP), sao lưu cấu hình (snapshot) trước khi điều chỉnh qua GPO/PowerShell và kiểm tra xác minh lại sau triển khai."
+  },
+  {
+    "chunk_id": "ISO27001-A8.24",
+    "standard_ref": "ISO/IEC 27002:2022",
+    "control_id": "A.8.24",
+    "pillar": "hardware",
+    "content": "ISO/IEC 27002:2022 8.24: Áp dụng mật mã bảo vệ tính bí mật và toàn vẹn dữ liệu lưu trữ trên máy trạm/laptop (BitLocker trên Windows hoặc LUKS trên Linux) kèm quản lý khóa khôi phục an toàn."
+  },
+  {
+    "chunk_id": "ISO27007-AUDIT-VERIFICATION",
+    "standard_ref": "ISO/IEC 27007:2020",
+    "control_id": "AUDIT_METHODOLOGY",
+    "pillar": "cross_domain",
+    "content": "ISO/IEC 27007:2020 Hướng dẫn đánh giá ISMS: Mọi kết luận tuân thủ (Compliant) phải dựa trên bằng chứng kiểm toán khách quan, có thể kiểm chứng lại (verifiable) và truy vết thời điểm thu thập (UTC) cùng giá trị băm toàn vẹn (SHA-256). Thiếu bằng chứng bắt buộc kết luận Insufficient Evidence, tuyệt đối không suy đoán. Mọi hành động khắc phục chỉ được đóng sau khi thu thập và xác minh bằng chứng mới hậu khắc phục."
+  }
+]

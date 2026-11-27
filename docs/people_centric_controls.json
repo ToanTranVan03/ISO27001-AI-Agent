@@ -1,0 +1,331 @@
+[
+  {
+    "control_id": "A.5.9",
+    "name": "Inventory of information and other associated assets",
+    "name_vi": "Danh mục thông tin và các tài sản liên quan",
+    "pillar": "hardware",
+    "standard_ref": "ISO/IEC 27001:2022 A.5.9 / ISO/IEC 27002:2022 5.9",
+    "objective": "Duy trì danh mục chính xác laptop, máy chủ và thẻ từ gắn với chủ sở hữu nhân sự.",
+    "default_risk_level": "LOW",
+    "pass_criteria": [
+      "Mọi thiết bị cấp phát đều có chủ sở hữu (assigned_employee_id) hợp lệ",
+      "Không có thiết bị mồ côi không rõ người chịu trách nhiệm"
+    ]
+  },
+  {
+    "control_id": "A.5.11",
+    "name": "Return of assets",
+    "name_vi": "Thu hồi tài sản khi nghỉ việc hoặc chuyển vị trí",
+    "pillar": "hardware",
+    "standard_ref": "ISO/IEC 27001:2022 A.5.11 / ISO/IEC 27002:2022 5.11",
+    "objective": "Nhân sự nghỉ việc phải hoàn trả toàn bộ laptop, thiết bị lưu trữ và thẻ từ vật lý.",
+    "default_risk_level": "LOW",
+    "pass_criteria": [
+      "Nhân sự trạng thái terminated đã hoàn trả laptop (returned_to_it = true)",
+      "Thẻ từ vật lý của nhân sự nghỉ việc đã bị vô hiệu hóa (badge_card_active = false)"
+    ]
+  },
+  {
+    "control_id": "A.5.16",
+    "name": "Identity management",
+    "name_vi": "Quản lý vòng đời định danh",
+    "pillar": "human",
+    "standard_ref": "ISO/IEC 27001:2022 A.5.16 / ISO/IEC 27002:2022 5.16",
+    "objective": "Quản lý nhất quán vòng đời định danh từ khi tuyển dụng đến khi nghỉ việc.",
+    "default_risk_level": "HIGH",
+    "pass_criteria": [
+      "Mọi tài khoản hệ thống đều ánh xạ tới một mã nhân sự hợp lệ",
+      "Không có tài khoản định danh hoạt động thuộc nhân sự đã nghỉ việc"
+    ]
+  },
+  {
+    "control_id": "A.5.18",
+    "name": "Access rights",
+    "name_vi": "Quản lý quyền truy cập",
+    "pillar": "cross_domain",
+    "standard_ref": "ISO/IEC 27001:2022 A.5.18 / ISO/IEC 27002:2022 5.18",
+    "objective": "Cấp phát, rà soát và thu hồi kịp thời quyền truy cập AD, VPN, Email và ứng dụng nghiệp vụ.",
+    "default_risk_level": "HIGH",
+    "pass_criteria": [
+      "Nhân sự nghỉ việc không còn tài khoản hoạt động trên AD, VPN, Email và ứng dụng nghiệp vụ",
+      "Tài khoản đang hoạt động tuân thủ nguyên tắc tối thiểu đặc quyền"
+    ]
+  },
+  {
+    "control_id": "A.6.1",
+    "name": "Screening",
+    "name_vi": "Thẩm tra lý lịch trước tuyển dụng",
+    "pillar": "human",
+    "standard_ref": "ISO/IEC 27001:2022 A.6.1 / ISO/IEC 27002:2022 6.1",
+    "objective": "Hoàn tất xác minh lý lịch nhân sự phù hợp yêu cầu công việc trước khi gia nhập.",
+    "default_risk_level": "LOW",
+    "pass_criteria": [
+      "100% nhân sự đang làm việc có hồ sơ thẩm tra (screened = true)"
+    ]
+  },
+  {
+    "control_id": "A.6.2",
+    "name": "Terms and conditions of employment",
+    "name_vi": "Điều khoản và điều kiện lao động về ATTT",
+    "pillar": "human",
+    "standard_ref": "ISO/IEC 27001:2022 A.6.2 / ISO/IEC 27002:2022 6.2",
+    "objective": "Hợp đồng lao động quy định rõ trách nhiệm bảo vệ thông tin của nhân viên.",
+    "default_risk_level": "LOW",
+    "pass_criteria": [
+      "100% nhân sự đã ký hợp đồng có điều khoản ATTT (contract_signed = true)"
+    ]
+  },
+  {
+    "control_id": "A.6.3",
+    "name": "Information security awareness, education and training",
+    "name_vi": "Nhận thức, giáo dục và đào tạo về ATTT",
+    "pillar": "human",
+    "standard_ref": "ISO/IEC 27001:2022 A.6.3 / ISO/IEC 27002:2022 6.3",
+    "objective": "Nhân sự hoàn thành đào tạo ATTT định kỳ và vượt qua bài kiểm tra mô phỏng phishing.",
+    "default_risk_level": "LOW",
+    "pass_criteria": [
+      "100% nhân sự đang hoạt động hoàn thành khóa đào tạo ATTT (training_completed = true)",
+      "100% nhân sự vượt qua bài kiểm tra mô phỏng phishing (phishing_passed = true)"
+    ]
+  },
+  {
+    "control_id": "A.6.4",
+    "name": "Disciplinary process",
+    "name_vi": "Quy trình xử lý vi phạm ATTT",
+    "pillar": "human",
+    "standard_ref": "ISO/IEC 27001:2022 A.6.4 / ISO/IEC 27002:2022 6.4",
+    "objective": "Truyền đạt quy trình xử lý vi phạm minh bạch và không sử dụng kết quả AI chưa xác minh để kỷ luật.",
+    "default_risk_level": "LOW",
+    "pass_criteria": [
+      "Quy trình xử lý vi phạm được phổ biến đầy đủ",
+      "Mọi quyết định nhân sự đều có xác minh của con người"
+    ]
+  },
+  {
+    "control_id": "A.6.5",
+    "name": "Responsibilities after termination or change of employment",
+    "name_vi": "Trách nhiệm sau khi chấm dứt hoặc thay đổi công việc",
+    "pillar": "cross_domain",
+    "standard_ref": "ISO/IEC 27001:2022 A.6.5 / ISO/IEC 27002:2022 6.5",
+    "objective": "Xác nhận nghĩa vụ bảo mật, thu hồi toàn bộ quyền truy cập và tài sản khi nhân sự nghỉ việc.",
+    "default_risk_level": "HIGH",
+    "pass_criteria": [
+      "Nhân sự nghỉ việc đã xác nhận nghĩa vụ bảo mật sau nghỉ việc (offboarding_ack = true)",
+      "Toàn bộ tài khoản (AD, VPN, Email, phần mềm nghiệp vụ) đã khóa",
+      "Toàn bộ thiết bị và thẻ từ đã thu hồi"
+    ]
+  },
+  {
+    "control_id": "A.6.6",
+    "name": "Confidentiality or non-disclosure agreements",
+    "name_vi": "Thỏa thuận bảo mật thông tin (NDA)",
+    "pillar": "human",
+    "standard_ref": "ISO/IEC 27001:2022 A.6.6 / ISO/IEC 27002:2022 6.6",
+    "objective": "Nhân sự ký đầy đủ thỏa thuận bảo mật NDA còn hiệu lực.",
+    "default_risk_level": "LOW",
+    "pass_criteria": [
+      "100% nhân sự đang làm việc đã ký NDA (nda_signed = true)"
+    ]
+  },
+  {
+    "control_id": "A.6.7",
+    "name": "Remote working",
+    "name_vi": "An toàn khi làm việc từ xa",
+    "pillar": "human",
+    "standard_ref": "ISO/IEC 27001:2022 A.6.7 / ISO/IEC 27002:2022 6.7",
+    "objective": "Nhân sự làm việc từ xa tuân thủ chính sách VPN, mã hóa thiết bị và môi trường an toàn.",
+    "default_risk_level": "LOW",
+    "pass_criteria": [
+      "100% nhân sự tuân thủ chính sách làm việc từ xa (remote_work_compliant = true)"
+    ]
+  },
+  {
+    "control_id": "A.6.8",
+    "name": "Information security event reporting",
+    "name_vi": "Báo cáo sự kiện an toàn thông tin",
+    "pillar": "human",
+    "standard_ref": "ISO/IEC 27001:2022 A.6.8 / ISO/IEC 27002:2022 6.8",
+    "objective": "Nhân sự nắm vững quy trình phát hiện và báo cáo sự cố ATTT (đánh giá qua Adaptive Interview).",
+    "default_risk_level": "LOW",
+    "pass_criteria": [
+      "100% nhân sự nắm rõ quy trình báo cáo sự cố (incident_process_known = true)",
+      "Phiên phỏng vấn thích ứng đạt ngưỡng điểm yêu cầu và có ghi nhận kiểm chứng"
+    ]
+  },
+  {
+    "control_id": "A.7.7",
+    "name": "Clear desk and clear screen",
+    "name_vi": "Bàn làm việc sạch và khóa màn hình tự động",
+    "pillar": "hardware",
+    "standard_ref": "ISO/IEC 27001:2022 A.7.7 / ISO/IEC 27002:2022 7.7",
+    "objective": "Thiết bị đầu cuối phải tự động khóa màn hình sau tối đa 5 phút không hoạt động.",
+    "default_risk_level": "MEDIUM",
+    "pass_criteria": [
+      "screen_lock_minutes <= 5 trên toàn bộ máy trạm"
+    ]
+  },
+  {
+    "control_id": "A.7.9",
+    "name": "Security of assets off-premises",
+    "name_vi": "An toàn tài sản mang ra ngoài cơ sở",
+    "pillar": "hardware",
+    "standard_ref": "ISO/IEC 27001:2022 A.7.9 / ISO/IEC 27002:2022 7.9",
+    "objective": "Thiết bị di động/laptop mang ra ngoài phải được mã hóa ổ đĩa và kiểm soát truy cập.",
+    "default_risk_level": "HIGH",
+    "pass_criteria": [
+      "Laptop nhân sự đều bật mã hóa ổ đĩa (disk_encrypted = true)"
+    ]
+  },
+  {
+    "control_id": "A.7.10",
+    "name": "Storage media",
+    "name_vi": "Quản lý phương tiện lưu trữ di động (USB)",
+    "pillar": "hardware",
+    "standard_ref": "ISO/IEC 27001:2022 A.7.10 / ISO/IEC 27002:2022 7.10",
+    "objective": "Ngăn chặn và phát hiện hành vi cắm thiết bị lưu trữ USB trái phép.",
+    "default_risk_level": "MEDIUM",
+    "pass_criteria": [
+      "Không phát sinh sự kiện cắm USB trái phép chưa xử lý (usb_unauthorized_events == 0)"
+    ]
+  },
+  {
+    "control_id": "A.7.14",
+    "name": "Secure disposal or re-use of equipment",
+    "name_vi": "Thanh lý hoặc tái sử dụng thiết bị an toàn",
+    "pillar": "hardware",
+    "standard_ref": "ISO/IEC 27001:2022 A.7.14 / ISO/IEC 27002:2022 7.14",
+    "objective": "Thiết bị thanh lý/tái cấp phát phải được xóa sạch dữ liệu có xác nhận.",
+    "default_risk_level": "LOW",
+    "pass_criteria": [
+      "Thiết bị chờ thanh lý có biên bản xác nhận xóa dữ liệu (disposal_verified = true)"
+    ]
+  },
+  {
+    "control_id": "A.8.1",
+    "name": "User endpoint devices",
+    "name_vi": "Bảo vệ thiết bị đầu cuối người dùng",
+    "pillar": "hardware",
+    "standard_ref": "ISO/IEC 27001:2022 A.8.1 / ISO/IEC 27002:2022 8.1",
+    "objective": "Đảm bảo toàn bộ máy trạm người dùng bật tường lửa, khóa màn hình 5 phút và mã hóa ổ đĩa.",
+    "default_risk_level": "MEDIUM",
+    "pass_criteria": [
+      "firewall_enabled = true",
+      "screen_lock_minutes <= 5",
+      "disk_encrypted = true"
+    ]
+  },
+  {
+    "control_id": "A.8.2",
+    "name": "Privileged access rights",
+    "name_vi": "Quản lý quyền truy cập đặc quyền",
+    "pillar": "software",
+    "standard_ref": "ISO/IEC 27001:2022 A.8.2 / ISO/IEC 27002:2022 8.2",
+    "objective": "Giới hạn tài khoản đặc quyền và bắt buộc bật MFA cho mọi tài khoản Admin.",
+    "default_risk_level": "HIGH",
+    "pass_criteria": [
+      "Tài khoản đặc quyền đang hoạt động đều bật MFA",
+      "Không có nhân sự nghỉ việc nắm quyền đặc quyền"
+    ]
+  },
+  {
+    "control_id": "A.8.5",
+    "name": "Secure authentication",
+    "name_vi": "Xác thực an toàn (MFA)",
+    "pillar": "software",
+    "standard_ref": "ISO/IEC 27001:2022 A.8.5 / ISO/IEC 27002:2022 8.5",
+    "objective": "Bắt buộc xác thực đa yếu tố (MFA) trên tài khoản nhân sự và hệ thống trọng yếu.",
+    "default_risk_level": "LOW",
+    "pass_criteria": [
+      "100% tài khoản đang hoạt động của nhân sự kích hoạt MFA (mfa_enabled = true)"
+    ]
+  },
+  {
+    "control_id": "A.8.7",
+    "name": "Protection against malware",
+    "name_vi": "Bảo vệ chống mã độc (Antivirus/EDR)",
+    "pillar": "software",
+    "standard_ref": "ISO/IEC 27001:2022 A.8.7 / ISO/IEC 27002:2022 8.7",
+    "objective": "Antivirus/EDR hoạt động liên tục trên toàn bộ máy trạm và máy chủ.",
+    "default_risk_level": "MEDIUM",
+    "pass_criteria": [
+      "100% thiết bị có antivirus_active = true"
+    ]
+  },
+  {
+    "control_id": "A.8.8",
+    "name": "Management of technical vulnerabilities",
+    "name_vi": "Quản lý lỗ hổng kỹ thuật và cập nhật bản vá",
+    "pillar": "software",
+    "standard_ref": "ISO/IEC 27001:2022 A.8.8 / ISO/IEC 27002:2022 8.8",
+    "objective": "Phát hiện máy trạm/server thiếu bản vá bảo mật, kiểm tra tương thích, triển khai và xác minh lại.",
+    "default_risk_level": "MEDIUM",
+    "pass_criteria": [
+      "100% thiết bị đạt trạng thái patch_compliant = true và missing_patches rỗng"
+    ]
+  },
+  {
+    "control_id": "A.8.9",
+    "name": "Configuration management",
+    "name_vi": "Quản lý cấu hình chuẩn an toàn (Security Baseline)",
+    "pillar": "software",
+    "standard_ref": "ISO/IEC 27001:2022 A.8.9 / ISO/IEC 27002:2022 8.9",
+    "objective": "Đồng bộ và duy trì 6 tiêu chí Security Baseline: Firewall, Khóa màn hình <=5p, Mã hóa ổ đĩa, Mật khẩu, Antivirus, NTP.",
+    "default_risk_level": "MEDIUM",
+    "pass_criteria": [
+      "firewall_enabled = true",
+      "screen_lock_minutes <= 5",
+      "disk_encrypted = true",
+      "password_policy_ok = true",
+      "antivirus_active = true",
+      "ntp_synced = true"
+    ]
+  },
+  {
+    "control_id": "A.8.15",
+    "name": "Logging",
+    "name_vi": "Ghi nhận nhật ký hệ thống",
+    "pillar": "software",
+    "standard_ref": "ISO/IEC 27001:2022 A.8.15 / ISO/IEC 27002:2022 8.15",
+    "objective": "Bật ghi nhật ký kiểm toán trên máy trạm và máy chủ.",
+    "default_risk_level": "MEDIUM",
+    "pass_criteria": [
+      "100% thiết bị bật audit_logging_enabled = true"
+    ]
+  },
+  {
+    "control_id": "A.8.19",
+    "name": "Installation of software on operational systems",
+    "name_vi": "Kiểm soát cài đặt phần mềm ngoài Whitelist",
+    "pillar": "software",
+    "standard_ref": "ISO/IEC 27001:2022 A.8.19 / ISO/IEC 27002:2022 8.19",
+    "objective": "Phát hiện và gỡ bỏ phần mềm không nằm trong danh sách phê duyệt (Whitelist).",
+    "default_risk_level": "HIGH",
+    "pass_criteria": [
+      "Mọi phần mềm cài đặt trên thiết bị đều nằm trong approved_software_whitelist"
+    ]
+  },
+  {
+    "control_id": "A.8.24",
+    "name": "Use of cryptography",
+    "name_vi": "Sử dụng mật mã (Mã hóa ổ đĩa BitLocker/LUKS)",
+    "pillar": "hardware",
+    "standard_ref": "ISO/IEC 27001:2022 A.8.24 / ISO/IEC 27002:2022 8.24",
+    "objective": "Mã hóa toàn bộ ổ đĩa chứa dữ liệu doanh nghiệp trên máy trạm người dùng.",
+    "default_risk_level": "HIGH",
+    "pass_criteria": [
+      "100% thiết bị đầu cuối bật disk_encrypted = true"
+    ]
+  },
+  {
+    "control_id": "A.8.32",
+    "name": "Change management",
+    "name_vi": "Quản lý thay đổi hệ thống",
+    "pillar": "software",
+    "standard_ref": "ISO/IEC 27001:2022 A.8.32 / ISO/IEC 27002:2022 8.32",
+    "objective": "Mọi thay đổi cấu hình, bản vá hoặc phân quyền phải có ticket phê duyệt, snapshot và khả năng rollback.",
+    "default_risk_level": "MEDIUM",
+    "pass_criteria": [
+      "Thay đổi hệ thống có change_ticket_id và audit trail đầy đủ"
+    ]
+  }
+]

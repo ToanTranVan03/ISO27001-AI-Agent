@@ -17,4 +17,5 @@ def isolate_database_startup(monkeypatch):
     monkeypatch.setattr(main.remediation_notifications,'initialize',lambda:None)
     monkeypatch.setattr(main.remediation_notifications,'start',lambda:lambda:None)
     monkeypatch.setattr(main.remediation_api,'require_review_role',lambda *_:None)
+    monkeypatch.setattr(main.pc_api,'initialize_on_startup',lambda:None)
     monkeypatch.setattr(main, "recover_interrupted", lambda: None)

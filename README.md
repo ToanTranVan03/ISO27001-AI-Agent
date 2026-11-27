@@ -149,3 +149,11 @@ Nghiệm thu toàn diện cuối cùng: [nghiệm thu theo mục tiêu đề tà
 - [Đề cương báo cáo đồ án 6 chương](docs/defense/REPORT_OUTLINE.md)
 - [Đề cương 18 slide thuyết trình bảo vệ](docs/defense/SLIDE_OUTLINE.md)
 - [Bộ 28 câu hỏi phản biện & câu trả lời mẫu](docs/defense/DEFENSE_QA.md)
+
+## People-Centric ISO 27001 Agent (Multi-Agent, Closed-loop)
+
+Hướng dẫn chạy nhanh dashboard Streamlit, các endpoint `/api/pc/*` và benchmark M1–M4: xem [docs/HUONG_DAN_CHAY_PEOPLE_CENTRIC.md](docs/HUONG_DAN_CHAY_PEOPLE_CENTRIC.md).
+
+```powershell
+streamlit run dashboard_streamlit/app.py
+```
