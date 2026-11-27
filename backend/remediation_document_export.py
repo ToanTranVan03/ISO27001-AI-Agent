@@ -67,7 +67,9 @@ def xlsx_report(report):
             baseline['conclusion'],row.get('current_conclusion'),row.get('current_human_conclusion'),
             baseline['review_token'],row.get('current_review_token'),row.get('verification_stale',False),
             '\n'.join(text(e.get('evidence_id'))+' | '+text(e.get('sha256_hash')) for e in baseline['evidence']),
-            '\n'.join(baseline.get('criteria',[]))])
+            '\n'.join(baseline.get('criteria',[])),
+            baseline['criteria'][doc['criterion_index']] if doc.get('criterion_index') is not None else '',
+            (baseline.get('human_review') or {}).get('rationale')])
         for a in doc['actions']:
             aid=a['action_id']
             actions.append([fid,doc['control_id'],aid,a['title'],a['state'],a.get('department'),a.get('assignee'),
@@ -75,11 +77,11 @@ def xlsx_report(report):
                 '\n'.join(text(e.get('evidence_id'))+' | '+text(e.get('sha256_hash')) for e in a['evidence']),', '.join(a.get('collaborator_ids',[])),a.get('objective'),a.get('possible_causes'),a.get('rationale'),a.get('target_location'),a.get('estimated_effort'),a.get('required_evidence'),a.get('recheck_method'),'\n'.join(a.get('clarification_questions',[]))])
             for index,task in enumerate(a['tasks'],1):tasks.append([fid,aid,index,task['task_id'],task['title'],task['done'],task.get('assignee')])
             for v in a['verifications']:verifications.append([fid,aid,v.get('at'),v.get('reviewer_id'),v['outcome'],
-                v['note'],v.get('review_token'),v.get('conclusion'),v.get('human_review_signature')])
-    sheet('Findings',['Finding ID','Control','Finding','Location','Reported cause','Risk proposed','Initial result','Current machine','Current human','Baseline token','Current token','Verification stale','Initial evidence ID / hash','Criteria'],findings)
+                v['note'],v.get('review_token'),v.get('conclusion'),v.get('human_review_signature'),v.get('criterion')])
+    sheet('Findings',['Finding ID','Control','Finding','Location','Reported cause','Risk proposed','Initial result','Current machine','Current human','Baseline token','Current token','Verification stale','Initial evidence ID / hash','Criteria','Tiêu chí cần khắc phục','Căn cứ thẩm định ban đầu'],findings)
     sheet('Actions',['Finding ID','Control','Action ID','Action','Workflow state','Department','Assignee ID','Due date','Priority','Instructions','Acceptance evidence','Resources','Proposal origin','After evidence ID / hash','Collaborators','Objective','Possible causes - unconfirmed','Why','Where','Estimated effort - proposed','Required evidence','Recheck method','Clarification questions'],actions)
     sheet('Tasks',['Finding ID','Action ID','Sequence','Task ID','Task','Done by executor','Assigned step owner'],tasks)
-    sheet('Verification',['Finding ID','Action ID','Time','Reviewer ID','Outcome','Rationale','Review token','Human conclusion','Review signature'],verifications)
+    sheet('Verification',['Finding ID','Action ID','Time','Reviewer ID','Outcome','Rationale','Review token','Human conclusion','Review signature','Tiêu chí xác minh'],verifications)
     if dashboard:
         sheet('Control worklist',['Control','Name','Current machine result','Required work','Findings','Actions','Usable sources'],
             [[c['control_id'],c['name'],c['conclusion'],'; '.join(c['flags']),c['findings'],c['actions'],c['usable_sources']] for c in dashboard['worklist']])
@@ -153,11 +155,16 @@ def pdf_report(report):
     for row in report['records']:
         doc=row['document'];baseline=doc['baseline']
         paragraph(doc['control_id']+' — '+doc['description'],'heading')
+        if doc.get('criterion_index') is not None:
+            paragraph('Tiêu chí cần khắc phục: '+baseline['criteria'][doc['criterion_index']])
         paragraph('Vị trí: '+text(doc['location']))
         paragraph('Nguyên nhân cần xác nhận: '+text(doc['root_cause']))
         paragraph('Rủi ro đề nghị: '+text(doc.get('risk','unconfirmed')))
         paragraph('Trước khắc phục: '+text(baseline['conclusion'])+'\nMáy hiện tại: '+text(row.get('current_conclusion'))+
                     '\nThẩm định hiện hành: '+text(row.get('current_human_conclusion') or 'Chưa có'))
+        initial_review=baseline.get('human_review')
+        if initial_review:
+            paragraph('Thẩm định ban đầu: '+text(initial_review['conclusion'])+' | '+text(initial_review['rationale']))
         paragraph('Baseline: '+text(baseline['review_token']),'small')
         for criterion in baseline.get('criteria',[]):paragraph('Tiêu chí: '+text(criterion),'small')
         for evidence in baseline['evidence']:paragraph('Nguồn ban đầu: '+text(evidence.get('evidence_id'))+' | '+text(evidence.get('sha256_hash')),'small')
