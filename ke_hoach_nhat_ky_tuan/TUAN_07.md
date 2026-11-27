@@ -126,3 +126,5 @@ Chi tiết: [Luồng nhân viên](../docs/TICH_HOP_LUONG_NHAN_VIEN_TU_TUAN7.md).
 - Thu nguồn MFA ban đầu và lưu biên nhận sau chạy trực tiếp vào hồ sơ A.8.5, giữ bản gốc/hash, chống nạp trùng và giữ bước thẩm định của chuyên viên.
 
 - Mở rộng nghiệm thu Edge của ca MFA: tạo phát hiện, duyệt giao việc, thẩm định từng tiêu chí và xác minh trên giao diện; ghi rõ các thao tác còn kiểm qua API và các môi trường chưa có công cụ thực thi.
+
+- Bổ sung cập nhật ứng dụng mẫu tham chiếu A.8.8: phê duyệt, thực thi cô lập, đo phiên bản và hash trước/sau, lưu biên nhận PDF/Excel. Kiểm Edge với PostgreSQL riêng, 488 test Python và 14 JavaScript đạt. [Phạm vi và cách chạy](../docs/DOI_CHIEU_HANH_DONG_KHAC_PHUC.md).

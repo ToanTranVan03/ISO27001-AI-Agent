@@ -377,22 +377,36 @@ class MfaLabRun(Expected):
 
 @router.post('/findings/{finding_id}/actions/{action_id}/mfa-lab')
 def execute_mfa_lab(assessment_id:UUID,finding_id:UUID,action_id:UUID,req:MfaLabRun,user=Depends(require_user)):
-    require_consultant(membership(assessment_id,user))
-    if os.getenv('ISO_MFA_DEMO_ENABLED')!='1':
-        raise HTTPException(403,'Cần bật chế độ demo MFA trên máy lab.')
     from lab_a8.mfa_remediation_demo import run_demo
+    return execute_fixed_lab(assessment_id,finding_id,action_id,req,user,'A.8.5','mfa_lab_receipt',run_demo)
+
+
+class SoftwareLabRun(Expected):
+    operation:Literal['replace_disposable_application']
+
+
+@router.post('/findings/{finding_id}/actions/{action_id}/software-lab')
+def execute_software_lab(assessment_id:UUID,finding_id:UUID,action_id:UUID,req:SoftwareLabRun,user=Depends(require_user)):
+    from lab_a8.software_update_demo import run_demo
+    return execute_fixed_lab(assessment_id,finding_id,action_id,req,user,'A.8.8','software_lab_receipt',run_demo)
+
+
+def execute_fixed_lab(assessment_id,finding_id,action_id,req,user,control_id,receipt_field,run_demo):
+    require_mfa_lab(assessment_id,user)
     with get_connection() as con,con.cursor() as cur:
         version,doc=read(cur,assessment_id,finding_id,req.expected_version)
         item=next((a for a in doc['actions'] if a['action_id']==str(action_id)),None)
         if item is None:
             raise HTTPException(404,'Không tìm thấy hành động.')
-        if doc['control_id']!='A.8.5' or item['state'] not in ('NOT_STARTED','IN_PROGRESS'):
-            raise HTTPException(409,'Cần hành động A.8.5 đã duyệt và đang được thực hiện.')
+        if doc['control_id']!=control_id or item['state'] not in ('NOT_STARTED','IN_PROGRESS'):
+            raise HTTPException(409,f'Cần hành động {control_id} đã duyệt và đang được thực hiện.')
         criterion_index=doc.get('criterion_index')
         criteria=doc['baseline']['criteria']
-        if not isinstance(criterion_index,int) or not 0<=criterion_index<len(criteria) or criteria[criterion_index]!=MFA_LAB_CRITERION:
+        if control_id=='A.8.5' and (not isinstance(criterion_index,int) or not 0<=criterion_index<len(criteria) or criteria[criterion_index]!=MFA_LAB_CRITERION):
             raise HTTPException(409,'Cần phát hiện gắn đúng tiêu chí MFA cho tài khoản đặc quyền.')
-        if item.get('mfa_lab_receipt'):
+        if control_id=='A.8.8' and criterion_index is not None:
+            raise HTTPException(409,'Demo ứng dụng mẫu chỉ tham chiếu A.8.8, không gắn tiêu chí bản vá hệ điều hành.')
+        if item.get(receipt_field):
             raise HTTPException(409,'Hành động đã có biên nhận lab.')
         approval=next((e for e in reversed(doc['history'])
                        if e.get('action_id')==str(action_id) and e.get('command')=='approve'),None)
@@ -408,8 +422,8 @@ def execute_mfa_lab(assessment_id:UUID,finding_id:UUID,action_id:UUID,req:MfaLab
             raise HTTPException(409,'Phạm vi doanh nghiệp đã đổi; cần rà lại phát hiện.')
         receipt=run_demo(lambda *_:str(user['user_id']))
         receipt['workflow_approval']={'actor':str(approval['actor']),'at':approval['at']}
-        item['mfa_lab_receipt']=receipt
-        doc['history'].append(dict(command='mfa_lab',actor=user['user_id'],at=engine.now(),
+        item[receipt_field]=receipt
+        doc['history'].append(dict(command='mfa_lab' if control_id=='A.8.5' else 'software_lab',actor=user['user_id'],at=engine.now(),
                                    action_id=str(action_id),note=receipt['status']))
         return save(cur,assessment_id,finding_id,version,doc)
 

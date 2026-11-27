@@ -88,6 +88,14 @@ def xlsx_report(report):
             receipt=item.get('mfa_lab_receipt')
             if receipt:
                 lab_rows.append([item['action_id'],receipt['status'],json.dumps(receipt,ensure_ascii=False)])
+    software_rows=[]
+    for row in report['records']:
+        for item in row['document']['actions']:
+            receipt=item.get('software_lab_receipt')
+            if receipt:
+                software_rows.append([item['action_id'],receipt['status'],json.dumps(receipt,ensure_ascii=False)])
+    if software_rows:
+        sheet('Cập nhật lab',['Mã hành động','Kết quả kỹ thuật','Biên nhận trước–sau'],software_rows)
     if lab_rows:
         sheet('MFA lab',['Mã hành động','Kết quả kỹ thuật','Biên nhận trước–sau'],lab_rows)
     sheet('Verification',['Finding ID','Action ID','Time','Reviewer ID','Outcome','Rationale','Review token','Human conclusion','Review signature','Tiêu chí xác minh'],verifications)
@@ -185,6 +193,8 @@ def pdf_report(report):
             if a.get('collaborator_ids'):paragraph('Người phối hợp: '+', '.join(a['collaborator_ids']))
             if a.get('mfa_lab_receipt'):
                 paragraph('Biên nhận MFA lab: '+json.dumps(a['mfa_lab_receipt'],ensure_ascii=False),'small')
+            if a.get('software_lab_receipt'):
+                paragraph('Biên nhận cập nhật lab: '+json.dumps(a['software_lab_receipt'],ensure_ascii=False),'small')
             paragraph(a['steps']);paragraph('Điều kiện nghiệm thu: '+a['acceptance'])
             paragraph('Nguồn lực: '+text(a.get('resources')))
             for key,label in [('objective','Mục tiêu'),('rationale','Vì sao'),('possible_causes','Nguyên nhân có thể, cần xác minh'),('target_location','Vị trí'),('estimated_effort','Ước lượng cần chuyên viên xem xét'),('required_evidence','Bằng chứng cần nộp'),('recheck_method','Cách kiểm tra lại')]:

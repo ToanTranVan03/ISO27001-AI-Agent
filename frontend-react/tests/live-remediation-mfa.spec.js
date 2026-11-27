@@ -176,6 +176,29 @@ test('real remediation: approve, assign, evidence, reject, recheck, verify, pres
   expect(exported.headers()['content-type']).toContain(extension==='csv'?'text/csv':'text/html');
  }
  await page.getByRole('button',{name:'Làm mới khắc phục',exact:true}).click();
+ const a88=(await call('GET',scopePath)).controls.find(row=>row.control_id==='A.8.8');
+ let software=await call('POST',path+'/findings',{control_id:'A.8.8',expected_review_token:a88.review_token,description:'MÔ PHỎNG: ứng dụng mẫu đang chạy phiên bản 1.0.0',location:'Kho ứng dụng thử',root_cause:'Ứng dụng mẫu được cấu hình phiên bản ban đầu',risk:'unconfirmed'},admin,201);
+ const softwarePath=path+'/findings/'+software.record_id+'/actions';
+ software=await call('POST',softwarePath,{...action,title:'Cập nhật iso-demo-inventory',steps:'Thay gói ứng dụng mẫu và đọc lại phiên bản đã chạy.',acceptance:'Quan sát ứng dụng phiên bản 1.1.0 và hash gói khớp.',expected_version:software.version});
+ const appAction=software.document.actions[0].action_id;
+ const updatePath=softwarePath+'/'+appAction+'/software-lab';
+ const updateBody=()=>({expected_version:software.version,operation:'replace_disposable_application'});
+ await call('POST',updatePath,updateBody(),admin,409);
+ software=await call('POST',softwarePath+'/'+appAction+'/events',{command:'approve',expected_version:software.version,note:'Duyệt cập nhật duy nhất ứng dụng mẫu trong thư mục tạm.',assignee:person.user_id,due_date:'2099-12-31'});
+ await call('POST',updatePath,updateBody(),operator,403);
+ await page.getByRole('button',{name:'Làm mới khắc phục',exact:true}).click();
+ const updatedResponse=page.waitForResponse(r=>r.url().endsWith('/software-lab')&&r.request().method()==='POST');
+ await page.getByRole('button',{name:'Chạy cập nhật ứng dụng mẫu',exact:true}).click();
+ const updated=await updatedResponse;
+ expect(updated.status(),await updated.text()).toBe(200);
+ software=await updated.json();
+ const softwareReceipt=software.document.actions[0].software_lab_receipt;
+ expect(softwareReceipt.status).toBe('VERIFIED_MET');
+ expect(softwareReceipt.before.version).toBe('1.0.0');
+ expect(softwareReceipt.after.version).toBe('1.1.0');
+ expect(softwareReceipt.after.sha256).toBe(softwareReceipt.plan.candidate_sha256);
+ expect((await call('GET',scopePath)).controls.find(row=>row.control_id==='A.8.8').human_review_current).toBe(false);
+ await call('POST',updatePath,updateBody(),admin,409);
  for(const [extension,label] of [['xlsx','Tải Excel XLSX'],['pdf','Tải PDF']]){
   const [download]=await Promise.all([page.waitForEvent('download'),page.getByRole('button',{name:label,exact:true}).click()]);
   await download.saveAs(testInfo.outputPath('mfa-before-after.'+extension));
