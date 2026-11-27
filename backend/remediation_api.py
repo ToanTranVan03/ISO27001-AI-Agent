@@ -14,6 +14,9 @@ from backend import remediation as engine
 router=APIRouter(prefix='/api/assessments/{assessment_id}/remediation',tags=['Corrective action lifecycle'])
 
 
+MFA_LAB_CRITERION = 'Bật MFA cho tài khoản đặc quyền'
+
+
 def initialize():
     with get_connection() as con,con.cursor() as cur:
         cur.execute('''CREATE TABLE IF NOT EXISTS remediation_roles (
@@ -185,7 +188,7 @@ def board(assessment_id:UUID,user=Depends(require_user)):
     if role=='operator':
         for record in records:
             if record['kind']=='finding':record['document']['actions']=[a for a in record['document']['actions'] if str(a.get('assignee'))==str(user['user_id']) or str(user['user_id']) in a.get('collaborator_ids',[])]
-    return dict(mfa_lab_enabled=os.getenv('ISO_MFA_DEMO_ENABLED')=='1',records=records,members=members,role=role,user_id=user['user_id'],can_manage_roles=user['role']=='admin',
+    return dict(mfa_lab_criterion=MFA_LAB_CRITERION,mfa_lab_enabled=os.getenv('ISO_MFA_DEMO_ENABLED')=='1',records=records,members=members,role=role,user_id=user['user_id'],can_manage_roles=user['role']=='admin',
         standard_references=[dict(name='ISO/IEC 27001:2022',url='https://www.iso.org/standard/27001'),
             dict(name='Amd 1:2024 — Climate action changes',url='https://www.iso.org/standard/88435.html')],
         note='Tiến độ khắc phục không phải kết luận tuân thủ hoặc chứng nhận ISO. Các vai trò chỉ có hiệu lực trong đợt này.')
@@ -341,6 +344,10 @@ def execute_mfa_lab(assessment_id:UUID,finding_id:UUID,action_id:UUID,req:MfaLab
             raise HTTPException(404,'Không tìm thấy hành động.')
         if doc['control_id']!='A.8.5' or item['state'] not in ('NOT_STARTED','IN_PROGRESS'):
             raise HTTPException(409,'Cần hành động A.8.5 đã duyệt và đang được thực hiện.')
+        criterion_index=doc.get('criterion_index')
+        criteria=doc['baseline']['criteria']
+        if not isinstance(criterion_index,int) or not 0<=criterion_index<len(criteria) or criteria[criterion_index]!=MFA_LAB_CRITERION:
+            raise HTTPException(409,'Cần phát hiện gắn đúng tiêu chí MFA cho tài khoản đặc quyền.')
         if item.get('mfa_lab_receipt'):
             raise HTTPException(409,'Hành động đã có biên nhận lab.')
         approval=next((e for e in reversed(doc['history'])

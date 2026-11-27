@@ -63,6 +63,11 @@ test('real remediation: approve, assign, evidence, reject, recheck, verify, pres
  await page.getByText('Tư vấn & khắc phục · từ phát hiện đến xác minh',{exact:true}).click();
  await page.getByRole('button',{name:'Xác nhận chạy công cụ MFA lab',exact:true}).click();
  await expect(page.getByText('Biên nhận công cụ · VERIFIED_MET',{exact:true})).toBeVisible();
+ const receiptDownload=page.waitForEvent('download');
+ await page.getByRole('button',{name:'Tải biên nhận kỹ thuật JSON',exact:true}).click();
+ const receiptFile=await receiptDownload;
+ expect(receiptFile.suggestedFilename()).toMatch(/^mfa-lab-.*[.]json$/);
+ await receiptFile.saveAs(testInfo.outputPath('mfa-lab-receipt.json'));
  record=(await call('GET',path)).records.find(r=>r.record_id===rid);
  const activeReceipt=record.document.actions[actionIndex].mfa_lab_receipt;
  expect(activeReceipt.before.observations.no_second_factor.response).toMatch(/^200/);
@@ -112,6 +117,7 @@ test('real remediation: approve, assign, evidence, reject, recheck, verify, pres
  for(const extension of ['csv','html']){
   const exported=await request.get(path+'/report.'+extension,{headers:{Authorization:`Bearer ${admin}`}});
   expect(exported.status()).toBe(200);expect(await exported.text()).toContain('A.8.5');
+  if(extension==='html')expect(await exported.text()).toContain('VERIFIED_MET');
   expect(exported.headers()['content-type']).toContain(extension==='csv'?'text/csv':'text/html');
  }
  await page.getByRole('button',{name:'Làm mới khắc phục',exact:true}).click();

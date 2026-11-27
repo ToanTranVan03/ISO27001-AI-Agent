@@ -37,3 +37,11 @@ npm --prefix frontend-react run build
 Runner bật cờ trên backend thử. Trong test trình duyệt chỉ thao tác chạy công cụ và tải báo cáo qua React; tạo/duyệt đầu việc, nộp nguồn và thẩm định chạy qua API thật. Môi trường chưa có connector IAM bên ngoài. Ca bàn giao laptop tiếp tục theo quy trình người thực hiện và người xác minh riêng.
 
 Kết quả bản React: [Biên nhận nghiệm thu](../work/mfa-ui-tool.json), [PDF](../work/mfa-ui-delivery/mfa-before-after.pdf) và [Excel](../work/mfa-ui-delivery/mfa-before-after.xlsx). Lượt thử chặn chạy trước duyệt, chặn vai trò nhân viên và chặn chạy lặp. Edge gọi công cụ, hiện VERIFIED_MET và tải cả hai báo cáo. Kiểm nội dung PDF/XLSX có đối tượng, kết quả 403 khi thiếu yếu tố và người duyệt. Dữ liệu giữ sau restart backend. Database thử đã dọn và số dòng các bảng chính được theo dõi giữ nguyên.
+
+### Phạm vi hành động trình bày
+
+- **MFA A.8.5:** Công cụ thay đổi chính sách trên dịch vụ tổng hợp dùng một lần. Chỉ phát hiện gắn với tiêu chí “Bật MFA cho tài khoản đặc quyền” mới có quyền chạy sau duyệt. Giao diện hiện bảng trước/sau và cho tải biên nhận JSON. Báo cáo HTML, PDF và Excel giữ thông tin thực thi.
+- **Bàn giao A.6.5:** Nhân viên và người tiếp nhận thực hiện. Hệ thống giao việc, kiểm mã tài sản, lưu nguồn và chuyển người khác xác minh.
+- **Còn thiếu:** baseline phát hiện vẫn cần bộ nguồn đã chuẩn bị; biên nhận sau chạy chưa tự nhập làm nguồn thẩm định. Chưa có công cụ đổi cấu hình trên IAM/thiết bị khác, chưa kiểm thử cả chuỗi tạo, duyệt, nộp và thẩm định bằng thao tác giao diện. Với hệ thống ngoài lab cần connector và phạm vi được người phụ trách xác nhận.
+
+[Lượt kiểm thử truy vết biên nhận](../work/mfa-traceable-final.json).
