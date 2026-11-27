@@ -1,13 +1,19 @@
 # Tuần 7 — Từ đánh giá đến khắc phục và xác minh
 
 - **Thời gian:** 23/11/2026–29/11/2026 (thứ Hai–Chủ nhật).
-- **Cập nhật:** 27/11/2026. Đã nghiệm thu các ca kỹ thuật chính trên môi trường thử. Hồ sơ thực tế và phê duyệt chuyên môn vẫn mở.
+- **Trạng thái:** Đang thực hiện. Đã nghiệm thu các ca kỹ thuật chính trên môi trường thử.
+- **Cập nhật:** 27/11/2026.
 
-## Hướng hiện tại
+## Mục tiêu và kế hoạch
 
 Giữ phạm vi **56 control** của đồ án (8 A.6 con người, 14 A.7 vật lý, 34 A.8 công nghệ), trong đó **18 A.8** được thực nghiệm sâu. Tập trung trình bày chuỗi **đọc bằng chứng → chỉ ra điểm chưa đạt → duyệt và giao việc → thực hiện → đo lại → thẩm định → xuất báo cáo**. Làm rõ bước nào do Agent, công cụ lab, nhân viên và chuyên viên thực hiện.
 
-## Việc chính đã làm
+## Công việc chuyển tiếp từ tuần 6
+
+- Bổ sung nguồn thực tế cho 37 control còn thiếu và thay nguồn A.6.2 theo mốc bàn giao. Cập nhật số liệu khi rà lại đợt chính. [Nhật ký tuần 6](TUAN_06.md)
+- Xác nhận rubric, phạm vi và nguồn. Chuẩn bị tập kiểm định mới, thu nhãn độc lập và hoàn tất thẩm định, quyết định áp dụng, phê duyệt SoA.
+
+## Nhật ký công việc chính
 
 | Ngày | Công việc và kết quả |
 |---|---|
@@ -19,15 +25,23 @@ Giữ phạm vi **56 control** của đồ án (8 A.6 con người, 14 A.7 vật
 | 27/11 | **Cập nhật ứng dụng mẫu · tham chiếu A.8.8:** sau khi duyệt, công cụ cập nhật gói thử từ 1.0.0 lên 1.1.0, khởi chạy lại và kiểm phiên bản, trạng thái, hash. Biên nhận trước–sau có trong hồ sơ và PDF/Excel. Phép thử chỉ áp dụng ứng dụng mẫu trong lab. [Phạm vi và cách chạy](../docs/DOI_CHIEU_HANH_DONG_KHAC_PHUC.md) |
 | 27/11 | Làm rõ bốn màn hình chính theo mục đích, người thực hiện và bước tiếp theo. Màn Khắc phục cho thấy người duyệt, trạng thái đầu việc và bằng chứng trước–sau. Hồi quy điều hướng giữ đúng ngữ cảnh đợt, control và nhân viên. |
 
-**Mốc kiểm chứng mới nhất:** 488 test Python, 14 test JavaScript, lint và build đạt. Ca tích hợp MFA và cập nhật ứng dụng chạy trên Edge, FastAPI và PostgreSQL riêng, giữ biên nhận sau khi khởi động lại API. Đã đối chiếu PDF/Excel. Một số thao tác ghi nghiệp vụ vẫn được kiểm qua API. Các kết quả lab và 10 tình huống Qwen là minh chứng kỹ thuật, chưa dùng làm số đo độ đúng với người chấm độc lập.
+## Kết quả và minh chứng
 
-## Việc còn mở và chuyển tiếp tuần 8
+**Mốc kiểm chứng mới nhất:** 488 test Python, 14 test JavaScript, lint và build đạt. Ca tích hợp MFA và cập nhật ứng dụng chạy trên Edge, FastAPI và PostgreSQL riêng, giữ biên nhận sau khi khởi động lại API. Đã đối chiếu PDF/Excel.
+
+## Vướng mắc và giới hạn
+
+- Một số thao tác ghi nghiệp vụ vẫn được kiểm qua API.
+- Kết quả lab và 10 tình huống Qwen chỉ là minh chứng kỹ thuật. Số đo độ đúng với người chấm độc lập còn chờ.
+- Demo cập nhật chỉ xác minh phiên bản và hash của ứng dụng mẫu. Kiểm kê và cập nhật trên các hệ điều hành đích cần lab và quyền phù hợp.
+
+## Việc chuyển tiếp sang tuần 8
 
 - [ ] Chạy diễn tập bảo vệ bằng giao diện và bộ dữ liệu riêng; chốt minh chứng, ảnh giao diện, slide và báo cáo theo kịch bản đã cập nhật.
-- [ ] Rà và bổ sung hồ sơ thực tế. Mốc bàn giao tuần 6 ghi nhận 37 control thiếu nguồn và A.6.2 cần nguồn thay thế; cần đo lại trên đợt chính khi có hồ sơ mới. [Nhật ký tuần 6](TUAN_06.md)
+- [ ] Thu hồ sơ còn thiếu và rà lại mức bao phủ trên đợt chính.
 - [ ] Xác nhận rubric, phạm vi và nguồn được chấp nhận; chốt tập kiểm định mới và thu nhãn của người đánh giá đủ điều kiện.
 - [ ] Hoàn thiện quyết định áp dụng, thẩm định và trình người phụ trách duyệt SoA. [Điều kiện duyệt SoA](../docs/DIEU_KIEN_DUYET_SOA_56.md)
-- [ ] Khi có lab thiết bị và hệ điều hành phù hợp, bổ sung công cụ kiểm kê, cập nhật có phê duyệt và đo lại. Ca ứng dụng mẫu hiện chỉ xác minh phiên bản và hash của gói thử.
+- [ ] Khi có lab thiết bị và hệ điều hành phù hợp, bổ sung công cụ kiểm kê, cập nhật có phê duyệt và đo lại.
 
 ## Đồng bộ GitHub
 
