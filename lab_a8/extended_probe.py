@@ -118,6 +118,19 @@ def exchange(handler,payload=b'probe',source='127.0.0.1',server_context=None,cli
         if thread.is_alive():raise TimeoutError('Lab listener did not stop')
 
 
+def observe_auth(conf):
+    otp=hmac.new(bytes.fromhex(conf['otp_key']),str(int(time.time()//30)).encode(),'sha256').hexdigest()[:8]
+    def login(raw,_address):
+        data=json.loads(raw);candidate=hashlib.pbkdf2_hmac('sha256',data['password'].encode(),bytes.fromhex(conf['salt']),100000).hex()
+        if conf['require_password'] and not hmac.compare_digest(candidate,conf['password_hash']):return b'401 invalid password'
+        if conf['require_otp'] and data.get('otp')!=otp:return b'403 missing second factor'
+        return b'200 authenticated'
+    return dict(bad_password=exchange(login,json.dumps(dict(password='wrong',otp=otp)).encode()),
+                no_second_factor=exchange(login,json.dumps(dict(password='lab-only-password')).encode()),
+                authenticated=exchange(login,json.dumps(dict(password='lab-only-password',otp=otp)).encode()),
+                mechanism='PBKDF2 + lab time-based HMAC token, not production IAM/TOTP certification')
+
+
 def observe(profile,cid):
     if profile not in PROFILES or cid not in IDS:raise ValueError('Invalid fixed probe')
     root=ROOT/profile
@@ -134,16 +147,7 @@ def observe(profile,cid):
         return dict(privileged_write_rc=attempt.returncode,account=command(['id','labadmin']).stdout.decode(),
                     review_csv=(root/'privileged-review.csv').read_text())
     if cid=='A.8.5':
-        conf=load(root/'auth.json');otp=hmac.new(bytes.fromhex(conf['otp_key']),str(int(time.time()//30)).encode(),'sha256').hexdigest()[:8]
-        def login(raw,_address):
-            data=json.loads(raw);candidate=hashlib.pbkdf2_hmac('sha256',data['password'].encode(),bytes.fromhex(conf['salt']),100000).hex()
-            if conf['require_password'] and not hmac.compare_digest(candidate,conf['password_hash']):return b'401 invalid password'
-            if conf['require_otp'] and data.get('otp')!=otp:return b'403 missing second factor'
-            return b'200 authenticated'
-        return dict(bad_password=exchange(login,json.dumps(dict(password='wrong',otp=otp)).encode()),
-                    no_second_factor=exchange(login,json.dumps(dict(password='lab-only-password')).encode()),
-                    authenticated=exchange(login,json.dumps(dict(password='lab-only-password',otp=otp)).encode()),
-                    mechanism='PBKDF2 + lab time-based HMAC token, not production IAM/TOTP certification')
+        return observe_auth(load(root/'auth.json'))
     if cid=='A.8.7':
         conf=load(root/'scanner.json');db=root/'signatures.txt';signature='LAB_ONLY_HARMLESS_TEST_SIGNATURE'
         database=db.read_text()
