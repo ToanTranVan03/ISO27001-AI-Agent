@@ -129,6 +129,7 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--execute',action='store_true',help='Create, test and drop only a disposable database')
     parser.add_argument('--output',required=True)
+    parser.add_argument('--handover-only',action='store_true',help='Run the employee and asset handover scenario only')
     parser.add_argument('--remediation-only',action='store_true',help='Run only the remediation browser scenario')
     parser.add_argument('--extended',action='store_true',help='Also exercise real Ollama batch and candidate worker on disposable data')
     parser.add_argument('--candidate-engine',choices=('rules','llm'),default='rules')
@@ -141,6 +142,7 @@ def main():
     if args.governance and not args.remediation:parser.error('Use --remediation with --governance')
     if args.clients and not args.governance:parser.error('Use --remediation --governance with --clients')
     if args.employee_workflows and not args.clients:parser.error('Use --clients with --employee-workflows')
+    if args.handover_only and not args.employee_workflows:parser.error('--handover-only requires --employee-workflows')
     if args.remediation_only and not args.remediation:parser.error('--remediation-only requires --remediation')
     if not args.execute:parser.error('--execute is required')
     if not args.extended and (args.candidate_engine!='rules' or args.verify_restart):parser.error('Use --extended for candidate engine/restart verification')
@@ -195,6 +197,7 @@ def main():
                 launch()
                 runner=ROOT/'frontend-react/node_modules/@playwright/test/cli.js'
                 specs=['tests/live-isolated.spec.js']+(['tests/live-orchestration.spec.js'] if args.extended else [])+(['tests/live-remediation.spec.js'] if args.remediation else [])+(['tests/live-z-governance.spec.js'] if args.governance else [])+(['tests/live-zz-clients.spec.js'] if args.clients else [])+(['tests/live-zzz-employee-workflows.spec.js'] if args.employee_workflows else [])
+                if args.handover_only:specs=['tests/live-zzz-employee-workflows.spec.js']
                 if args.remediation_only:specs=['tests/live-remediation-mfa.spec.js']
                 result=subprocess.run(['node',str(runner),'test',*specs,'--workers=1','--reporter=list','--output',str(directory/'browser-results')],
                     cwd=ROOT/'frontend-react',env=env,capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=900 if args.candidate_engine=='llm' or args.remediation else 420 if args.extended else 240)
@@ -234,7 +237,7 @@ def main():
                                             workflow=s.get(env['UI_BASE_URL']+f"/api/assessments/{campaign['assessment_id']}/employee-workflows",timeout=15);workflow.raise_for_status()
                                             snapshot['employee_workflows'][campaign['assessment_id']]=workflow.json()
                                 with requests.Session() as owner_session:
-                                    login=owner_session.post(env['UI_BASE_URL']+'/api/auth/login',json={'username':'client_a_owner','password':env['ISO_ASSESSOR_PASSWORD']},timeout=15);login.raise_for_status()
+                                    login=owner_session.post(env['UI_BASE_URL']+'/api/auth/login',json={'username':'employee_participant' if args.handover_only else 'client_a_owner','password':env['ISO_ASSESSOR_PASSWORD']},timeout=15);login.raise_for_status()
                                     owner_session.headers['Authorization']='Bearer '+login.json()['access_token']
                                     mine=owner_session.get(env['UI_BASE_URL']+'/api/assessments',timeout=15);mine.raise_for_status()
                                     snapshot['client_owner_campaigns']=mine.json()
