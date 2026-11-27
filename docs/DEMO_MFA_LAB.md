@@ -45,3 +45,11 @@ Kết quả bản React: [Biên nhận nghiệm thu](../work/mfa-ui-tool.json), 
 - **Còn thiếu:** baseline phát hiện vẫn cần bộ nguồn đã chuẩn bị; biên nhận sau chạy chưa tự nhập làm nguồn thẩm định. Chưa có công cụ đổi cấu hình trên IAM/thiết bị khác, chưa kiểm thử cả chuỗi tạo, duyệt, nộp và thẩm định bằng thao tác giao diện. Với hệ thống ngoài lab cần connector và phạm vi được người phụ trách xác nhận.
 
 [Lượt kiểm thử truy vết biên nhận](../work/mfa-traceable-final.json).
+
+### Thu bằng chứng trực tiếp từ giao diện
+
+Trong phần Tư vấn & khắc phục, tư vấn bấm **Thu nguồn MFA ban đầu từ lab**. Hệ thống chạy phép thử đăng nhập trên cấu hình khởi điểm tổng hợp, giữ JSON gốc và hash vào hồ sơ A.8.5. Dùng nguồn này để lập phát hiện. Mỗi lần đo dùng môi trường tạm riêng; khi chạy đầu việc, công cụ đo lại ngay trên môi trường sắp sửa để có cặp trước/sau cùng phiên.
+
+Sau khi chạy công cụ, bấm **Lưu biên nhận vào nguồn A.8.5**. Nguồn được nhập từ biên nhận server đã lưu, không cần tải xuống rồi nộp lại. Cùng một biên nhận có cùng ID/hash và được tái sử dụng. Người thực hiện vẫn chọn nguồn để gửi xác minh; chuyên viên vẫn ghi căn cứ và kết luận từng tiêu chí.
+
+Lượt kiểm thử Edge thao tác thu nguồn đầu, chạy công cụ, lưu nguồn sau và tải PDF/Excel. Tạo/duyệt công việc, nộp xác minh và thẩm định được kiểm qua API thật. [Biên nhận kiểm thử](../work/mfa-sources-verified.json).

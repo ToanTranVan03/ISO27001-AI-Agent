@@ -122,3 +122,5 @@ Chi tiết: [Luồng nhân viên](../docs/TICH_HOP_LUONG_NHAN_VIEN_TU_TUAN7.md).
 - Nối thao tác MFA lab vào đầu việc đã duyệt trên React. Lưu người duyệt, người chạy và bằng chứng đăng nhập trước/sau trong hồ sơ và PDF/Excel. Kiểm quyền, chặn chạy lặp và kiểm tra restart trên database riêng. [Hướng dẫn và kết quả](../docs/DEMO_MFA_LAB.md).
 
 - Ràng buộc công cụ MFA với đúng tiêu chí, thêm bảng so sánh trước/sau, tải biên nhận riêng và xuất HTML. Đã chạy lại trên Edge và database riêng, giữ biên nhận sau restart.
+
+- Thu nguồn MFA ban đầu và lưu biên nhận sau chạy trực tiếp vào hồ sơ A.8.5, giữ bản gốc/hash, chống nạp trùng và giữ bước thẩm định của chuyên viên.

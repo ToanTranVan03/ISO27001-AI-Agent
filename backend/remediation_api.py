@@ -327,6 +327,50 @@ def event(assessment_id:UUID,finding_id:UUID,action_id:UUID,req:Event,user=Depen
         return save(cur,assessment_id,finding_id,version,updated)
 
 
+def store_mfa_observation(aid,user,filename,payload,observed_at):
+    from evidence_collectors import source_intake,control_packages
+    raw=json.dumps(payload,ensure_ascii=False,sort_keys=True).encode('utf-8')
+    try:
+        item=source_intake.prepare(str(aid),'A.8.5',filename,raw,'EVID_TECH_IAM_AUTH',
+            'Lab MFA tổng hợp - phép thử xác thực loopback',observed_at,
+            'Chỉ đại diện tài khoản thử. Cần chuyên viên thẩm định.')
+        source_intake.preserve(str(aid),raw)
+        result=control_packages.store(str(aid),'A.8.5',user['user_id'],{'items':[item],'issues':[]})
+    except ValueError as exc:
+        raise HTTPException(409,str(exc)) from exc
+    except OSError as exc:
+        raise HTTPException(503,'Không lưu được bản gốc nguồn lab.') from exc
+    return {**result,'evidence_id':item['evidence_id'],'sha256':item['sha256_hash']}
+
+
+def require_mfa_lab(aid,user):
+    require_consultant(membership(aid,user))
+    if os.getenv('ISO_MFA_DEMO_ENABLED')!='1':
+        raise HTTPException(403,'Cần bật chế độ demo MFA trên máy lab.')
+
+
+@router.post('/mfa-lab/baseline',status_code=201)
+def collect_mfa_baseline(assessment_id:UUID,user=Depends(require_user)):
+    require_mfa_lab(assessment_id,user)
+    from lab_a8.mfa_remediation_demo import run_demo
+    report=run_demo(lambda *_:None)
+    return store_mfa_observation(assessment_id,user,'mfa-lab-baseline.json',report['before'],
+                                 report['before']['observed_at'])
+
+
+@router.post('/findings/{finding_id}/actions/{action_id}/mfa-lab/source',status_code=201)
+def publish_mfa_lab_source(assessment_id:UUID,finding_id:UUID,action_id:UUID,user=Depends(require_user)):
+    require_mfa_lab(assessment_id,user)
+    with get_connection() as con,con.cursor() as cur:
+        _,doc=read(cur,assessment_id,finding_id)
+        item=next((a for a in doc['actions'] if a['action_id']==str(action_id)),None)
+        receipt=item.get('mfa_lab_receipt') if item else None
+    if not receipt or not receipt.get('after'):
+        raise HTTPException(409,'Chưa có phép đo lại để lưu vào hồ sơ.')
+    return store_mfa_observation(assessment_id,user,'mfa-lab-'+receipt['plan']['id']+'.json',
+                                 receipt,receipt['after']['observed_at'])
+
+
 class MfaLabRun(Expected):
     operation:Literal['require_second_factor_labadmin_demo']
 
