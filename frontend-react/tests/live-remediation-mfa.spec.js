@@ -4,6 +4,7 @@ test.use({baseURL:process.env.UI_BASE_URL,channel:'msedge'});
 test.setTimeout(360000);
 
 test('real remediation: approve, assign, evidence, reject, recheck, verify, preserve and export',async({request,page},testInfo)=>{
+ page.setDefaultTimeout(20000);
  test.skip(process.env.ISO_ISOLATED_TEST!=='1'||!/^iso_acceptance_[a-f0-9]{12}$/.test(process.env.ISO_ISOLATED_DBNAME||''),'Disposable database required');
  const login=async(user,password)=>{const r=await request.post('/api/auth/login',{data:{username:user,password}});expect(r.status()).toBe(200);return (await r.json()).access_token;};
  const admin=await login('release_admin',process.env.INITIAL_ADMIN_PASSWORD);
@@ -42,7 +43,18 @@ test('real remediation: approve, assign, evidence, reject, recheck, verify, pres
  const c=(await call('GET',scopePath)).controls.find(c=>c.control_id==='A.8.5');
  const review=async (control,verdict,eid,conclusion)=>call('POST',scopePath+'/reviews',{control_id:control.control_id,review_token:control.review_token,conclusion,rationale:'Mô phỏng: đối chiếu tài khoản labadmin-mfa-demo và chính sách LAB-ADMIN-MFA trong IAM-LAB.',evidence_ids:[eid],criteria_reviews:control.pass_criteria.map((_,i)=>({criterion_index:i,verdict:i===criterionIndex?verdict:'unknown',rationale:'Mô phỏng: chỉ đánh giá chính sách MFA của tài khoản labadmin-mfa-demo.',evidence_ids:i===criterionIndex?[eid]:[]}))});
  await review(c,'not_met',baselineId,c.pass_criteria.length===1?'Non-Compliant':'Insufficient Evidence');
- let record=await call('POST',path+'/findings',{control_id:c.control_id,expected_review_token:c.review_token,criterion_index:criterionIndex,description:'MÔ PHỎNG: labadmin-mfa-demo đã đăng ký MFA nhưng LAB-ADMIN-MFA chưa bắt buộc',location:'IAM-LAB / labadmin-mfa-demo / LAB-ADMIN-MFA',root_cause:'Unconfirmed, requires investigation',risk:'unconfirmed'},admin,201);
+ const findingSection=page.locator('details').filter({has:page.locator('summary').filter({hasText:'Ghi nhận phát hiện trên snapshot hiện tại'})}).last();
+ await findingSection.locator('summary').first().click();
+ await findingSection.getByRole('combobox',{name:'Control',exact:true}).selectOption('A.8.5');
+ await findingSection.getByRole('combobox',{name:'Phạm vi phát hiện',exact:true}).selectOption(String(criterionIndex));
+ await findingSection.getByLabel('Phát hiện / khoảng cách',{exact:true}).fill('MÔ PHỎNG: labadmin-mfa-demo đăng nhập được khi thiếu yếu tố thứ hai.');
+ await findingSection.getByLabel('Địa điểm, tài sản hoặc quy trình',{exact:true}).fill('IAM-LAB / labadmin-mfa-demo / LAB-ADMIN-MFA');
+ await findingSection.getByLabel('Giả thuyết nguyên nhân — cần xác nhận',{exact:true}).fill('Chính sách lab chưa bắt buộc MFA.');
+ const findingResponse=page.waitForResponse(r=>r.url().endsWith('/remediation/findings')&&r.request().method()==='POST');
+ await findingSection.getByRole('button',{name:'Lưu phát hiện và baseline'}).click();
+ const savedFinding=await findingResponse;
+ expect(savedFinding.status(),await savedFinding.text()).toBe(201);
+ let record=await savedFinding.json();
  const originalBaseline=structuredClone(record.document.baseline),rid=record.record_id;
  const draftResponse=await request.post(path+`/findings/${rid}/ai-proposal`,{headers:{Authorization:`Bearer ${admin}`},data:{expected_version:record.version},timeout:240000});
  const draft=await draftResponse.json();
@@ -63,7 +75,18 @@ test('real remediation: approve, assign, evidence, reject, recheck, verify, pres
  const executeBody=()=>({expected_version:record.version,operation:'require_second_factor_labadmin_demo'});
  await call('POST',labPath,executeBody(),admin,409);
  await event('approve',{assignee:person.user_id,collaborator_ids:[person.user_id],due_date:'2099-12-31'},admin,422);
- await event('approve',{assignee:person.user_id,collaborator_ids:[helperPerson.user_id],due_date:'2099-12-31'});
+ await page.getByRole('button',{name:'Làm mới khắc phục',exact:true}).click();
+ const actionCard=page.locator('article').filter({has:page.getByRole('heading',{name:action.title,exact:true})}).last();
+ const actionNote=actionCard.getByLabel(/Ghi chú thao tác/);
+ await actionNote.fill('Duyệt thử thao tác MFA trên đúng tài khoản lab.');
+ await actionCard.getByRole('combobox',{name:'Người thực hiện',exact:true}).selectOption(person.user_id);
+ await actionCard.getByRole('listbox',{name:'Người phối hợp (tùy chọn)',exact:true}).selectOption(helperPerson.user_id);
+ await actionCard.getByLabel('Hạn hoàn thành',{exact:true}).fill('2099-12-31');
+ const approvalResponse=page.waitForResponse(r=>r.url().endsWith('/actions/'+act+'/events')&&r.request().method()==='POST');
+ await actionCard.getByRole('button',{name:'Duyệt và giao thực hiện',exact:true}).click();
+ const approved=await approvalResponse;
+ expect(approved.status(),await approved.text()).toBe(200);
+ record=await approved.json();
  await call('POST',labPath,executeBody(),operator,403);
  await page.getByRole('button',{name:'Làm mới khắc phục',exact:true}).click();
  await page.getByRole('button',{name:'Xác nhận chạy công cụ MFA lab',exact:true}).click();
@@ -114,8 +137,27 @@ test('real remediation: approve, assign, evidence, reject, recheck, verify, pres
  await event('attach',{evidence_id:corrected},operator);
  await event('submit',{},operator);
  const current=(await call('GET',scopePath)).controls.find(c=>c.control_id==='A.8.5');
- await review(current,'met',corrected,current.pass_criteria.length===1?'Compliant':'Insufficient Evidence');
- await event('verify',{outcome:'accepted'});
+ await page.getByRole('button',{name:'Làm mới khắc phục',exact:true}).click();
+ await page.getByRole('button',{name:'A.8.5 · mở hồ sơ nguồn và thẩm định',exact:true}).click();
+ await page.locator('summary').filter({hasText:'02 · Thẩm định kết luận trên nguồn hiện hành'}).click();
+ for(const [index] of current.pass_criteria.entries()){
+  await page.getByLabel('Kết quả tiêu chí '+(index+1),{exact:true}).selectOption(index===criterionIndex?'met':'unknown');
+  await page.getByLabel('Căn cứ tiêu chí '+(index+1),{exact:true}).fill(index===criterionIndex?'Biên nhận lab cho thấy thiếu yếu tố thứ hai bị từ chối.':'Chưa có nguồn cho tiêu chí ngoài phép thử MFA.');
+ }
+ await page.getByLabel('Nguồn tiêu chí '+(criterionIndex+1),{exact:true}).selectOption(corrected);
+ await page.getByLabel('Kết luận thẩm định',{exact:true}).selectOption(current.pass_criteria.length===1?'Compliant':'Insufficient Evidence');
+ await page.getByLabel('Căn cứ thẩm định',{exact:true}).fill('Đã đọc biên nhận trước và sau cho LAB-ADMIN-MFA và tài khoản tổng hợp.');
+ const reviewResponse=page.waitForResponse(r=>r.url().endsWith('/scope56/reviews')&&r.request().method()==='POST');
+ await page.getByRole('button',{name:'Người đánh giá xác nhận',exact:true}).click();
+ const reviewed=await reviewResponse;
+ expect(reviewed.status(),await reviewed.text()).toBe(200);
+ await page.getByRole('button',{name:'Làm mới khắc phục',exact:true}).click();
+ await actionNote.fill('Đã đối chiếu nguồn lab sau khắc phục và thẩm định tiêu chí.');
+ const verifyResponse=page.waitForResponse(r=>r.url().endsWith('/actions/'+act+'/events')&&r.request().method()==='POST');
+ await actionCard.getByRole('button',{name:'Xác minh đạt',exact:true}).click();
+ const verified=await verifyResponse;
+ expect(verified.status(),await verified.text()).toBe(200);
+ record=await verified.json();
  await event('close');
  expect(record.document.baseline).toEqual(originalBaseline);
  expect(record.document.actions[actionIndex].state).toBe('CLOSED');
