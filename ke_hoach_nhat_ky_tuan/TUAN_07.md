@@ -106,6 +106,7 @@ Ghi gọn theo ngày/nhánh; ghi người đồng bộ theo từng lần thực 
 | 25/11/2026 | 12:03 | Trần Văn Toàn | `main` | Kiểm tra liên kết toàn hệ thống và sửa lỗi đồng bộ (`context`, `human_review_current`, làm mới UI khắc phục); nghiệm thu theo mục tiêu đề tài + 10 tình huống AI độc lập; hồ sơ bảo vệ (`docs/defense/`); test mới nâng lên 449 test Python; cập nhật README và nhật ký tuần 7 |
 
 | 27/11/2026 | 07:20 | Trần Văn Toàn | `ToanTuan7` | Tích hợp chọn lọc Tu/Tuan7: yêu cầu đánh giá, gợi ý hạn; đào tạo/NDA/MFA/bàn giao gắn nguồn và xác minh riêng; kiểm thử và cập nhật hướng dẫn |
+| 27/11/2026 | 10:12 | Trần Văn Toàn | `ToanTuan7` | Nghiệm thu MFA và bàn giao; bổ sung cập nhật ứng dụng mẫu có phê duyệt, báo cáo trước–sau và làm rõ bốn màn hình |
 
 ## Hoàn thiện luồng nhân viên — 27/11/2026
 
