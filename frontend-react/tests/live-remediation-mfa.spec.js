@@ -20,7 +20,7 @@ test('real remediation: approve, assign, evidence, reject, recheck, verify, pres
  await call('PUT',path+'/roles',{user_id:person.user_id,role:'operator'});
  await call('PUT',path+'/roles',{user_id:helperPerson.user_id,role:'operator'});
  await call('GET',`/api/assessments/${randomUUID()}/remediation`,undefined,operator,403);
- await call('PUT',path+'/context',{expected_version:0,name:'SYNTHETIC acceptance company',sector:'Software test only',isms_scope:'MÔ PHỎNG: chỉ đánh giá việc bắt buộc MFA đối với admin-demo theo chính sách ADMIN-MFA trong IAM-LAB.',locations:'Test location',departments:'Test IT',assets_systems:'IAM-LAB / admin-demo / ADMIN-MFA',obligations:'Not assessed; synthetic test only',risks:'Unverified sample risk',contact:'Synthetic test owner'});
+ await call('PUT',path+'/context',{expected_version:0,name:'SYNTHETIC acceptance company',sector:'Software test only',isms_scope:'MÔ PHỎNG: chỉ đánh giá việc bắt buộc MFA đối với labadmin-mfa-demo theo chính sách LAB-ADMIN-MFA trong IAM-LAB.',locations:'Test location',departments:'Test IT',assets_systems:'IAM-LAB / labadmin-mfa-demo / LAB-ADMIN-MFA',obligations:'Not assessed; synthetic test only',risks:'Unverified sample risk',contact:'Synthetic test owner'});
  await call('PUT',path+'/context',{expected_version:0,name:'test',sector:'test',isms_scope:'Stale edit should fail',locations:'',departments:'',assets_systems:'',obligations:'',risks:'',contact:''},admin,409);
  const initial=(await call('GET',scopePath)).controls.find(c=>c.control_id==='A.8.5');
  const criterionIndex=initial.pass_criteria.findIndex(text=>/MFA|đa yếu tố|đa nhân tố|2FA/i.test(text));
@@ -29,11 +29,11 @@ test('real remediation: approve, assign, evidence, reject, recheck, verify, pres
   const response=await request.post(scopePath+'/controls/A.8.5/sources/upload',{headers:{Authorization:`Bearer ${token}`},multipart:{evidence_type:initial.expected_evidence_types[0],origin:'SYNTHETIC: export từ bộ giả lập IAM cô lập',file:{name:name+'.txt',mimeType:'text/plain',buffer:Buffer.from(content)}}});
   expect(response.status(),await response.text()).toBe(201);return (await response.json()).evidence_id;
  };
- const baselineId=await source('mfa-before','MÔ PHỎNG IAM-LAB / admin-demo / policy ADMIN-MFA: enrolled=true, enforced=false.');
+ const baselineId=await source('mfa-before','MÔ PHỎNG IAM-LAB / labadmin-mfa-demo / policy LAB-ADMIN-MFA: enrolled=true, enforced=false.');
  const c=(await call('GET',scopePath)).controls.find(c=>c.control_id==='A.8.5');
- const review=async (control,verdict,eid,conclusion)=>call('POST',scopePath+'/reviews',{control_id:control.control_id,review_token:control.review_token,conclusion,rationale:'Mô phỏng: đối chiếu tài khoản admin-demo và chính sách ADMIN-MFA trong IAM-LAB.',evidence_ids:[eid],criteria_reviews:control.pass_criteria.map((_,i)=>({criterion_index:i,verdict:i===criterionIndex?verdict:'unknown',rationale:'Mô phỏng: chỉ đánh giá chính sách MFA của tài khoản admin-demo.',evidence_ids:i===criterionIndex?[eid]:[]}))});
+ const review=async (control,verdict,eid,conclusion)=>call('POST',scopePath+'/reviews',{control_id:control.control_id,review_token:control.review_token,conclusion,rationale:'Mô phỏng: đối chiếu tài khoản labadmin-mfa-demo và chính sách LAB-ADMIN-MFA trong IAM-LAB.',evidence_ids:[eid],criteria_reviews:control.pass_criteria.map((_,i)=>({criterion_index:i,verdict:i===criterionIndex?verdict:'unknown',rationale:'Mô phỏng: chỉ đánh giá chính sách MFA của tài khoản labadmin-mfa-demo.',evidence_ids:i===criterionIndex?[eid]:[]}))});
  await review(c,'not_met',baselineId,c.pass_criteria.length===1?'Non-Compliant':'Insufficient Evidence');
- let record=await call('POST',path+'/findings',{control_id:c.control_id,expected_review_token:c.review_token,criterion_index:criterionIndex,description:'MÔ PHỎNG: admin-demo đã đăng ký MFA nhưng ADMIN-MFA chưa bắt buộc',location:'IAM-LAB / admin-demo / ADMIN-MFA',root_cause:'Unconfirmed, requires investigation',risk:'unconfirmed'},admin,201);
+ let record=await call('POST',path+'/findings',{control_id:c.control_id,expected_review_token:c.review_token,criterion_index:criterionIndex,description:'MÔ PHỎNG: labadmin-mfa-demo đã đăng ký MFA nhưng LAB-ADMIN-MFA chưa bắt buộc',location:'IAM-LAB / labadmin-mfa-demo / LAB-ADMIN-MFA',root_cause:'Unconfirmed, requires investigation',risk:'unconfirmed'},admin,201);
  const originalBaseline=structuredClone(record.document.baseline),rid=record.record_id;
  const draftResponse=await request.post(path+`/findings/${rid}/ai-proposal`,{headers:{Authorization:`Bearer ${admin}`},data:{expected_version:record.version},timeout:240000});
  const draft=await draftResponse.json();
@@ -41,7 +41,7 @@ test('real remediation: approve, assign, evidence, reject, recheck, verify, pres
  expect([200,502]).toContain(draftResponse.status());
  if(draftResponse.ok())expect(draft.document.actions[0].proposal_origin).toBe('OLLAMA_DRAFT_REQUIRES_REVIEW');
  record=(await call('GET',path)).records.find(r=>r.record_id===rid);
- const action={title:'Bắt buộc MFA cho admin-demo trong IAM-LAB',steps:'Trong IAM-LAB, áp dụng ADMIN-MFA cho admin-demo; xuất cấu hình, thử đăng nhập và lưu kết quả xác nhận MFA.',acceptance:'Đối chiếu admin-demo thuộc chính sách ADMIN-MFA và lần thử đăng nhập yêu cầu MFA.',department:'Test HR',resources:'Test owner and isolated record',tasks:['Đối chiếu phạm vi chính sách','Thử đăng nhập và nộp bằng chứng']};
+ const action={title:'Bắt buộc MFA cho labadmin-mfa-demo trong IAM-LAB',steps:'Trong IAM-LAB, áp dụng LAB-ADMIN-MFA cho labadmin-mfa-demo; xuất cấu hình, thử đăng nhập và lưu kết quả xác nhận MFA.',acceptance:'Đối chiếu labadmin-mfa-demo thuộc chính sách LAB-ADMIN-MFA và lần thử đăng nhập yêu cầu MFA.',department:'Test HR',resources:'Test owner and isolated record',tasks:['Đối chiếu phạm vi chính sách','Thử đăng nhập và nộp bằng chứng']};
  await call('POST',path+`/findings/${rid}/actions`,{...action,expected_version:record.version},operator,403);
  record=await call('POST',path+`/findings/${rid}/actions`,{...action,expected_version:record.version});
  const actionIndex=record.document.actions.length-1;
@@ -50,8 +50,24 @@ test('real remediation: approve, assign, evidence, reject, recheck, verify, pres
   const value=await call('POST',path+`/findings/${rid}/actions/${act}/events`,{command,expected_version:record.version,note:'SYNTHETIC acceptance test, not professional verification',...payload},token,expected);
   if(expected===200)record=value;return value;
  };
+ const labPath=path+`/findings/${rid}/actions/${act}/mfa-lab`;
+ const executeBody=()=>({expected_version:record.version,operation:'require_second_factor_labadmin_demo'});
+ await call('POST',labPath,executeBody(),admin,409);
  await event('approve',{assignee:person.user_id,collaborator_ids:[person.user_id],due_date:'2099-12-31'},admin,422);
  await event('approve',{assignee:person.user_id,collaborator_ids:[helperPerson.user_id],due_date:'2099-12-31'});
+ await call('POST',labPath,executeBody(),operator,403);
+ await page.goto('/');
+ await page.getByLabel('Tên đăng nhập',{exact:true}).fill('release_admin');
+ await page.getByLabel('Mật khẩu',{exact:true}).fill(process.env.INITIAL_ADMIN_PASSWORD);
+ await page.getByRole('button',{name:'ĐĂNG NHẬP HỆ THỐNG'}).click();
+ await page.getByText('Tư vấn & khắc phục · từ phát hiện đến xác minh',{exact:true}).click();
+ await page.getByRole('button',{name:'Xác nhận chạy công cụ MFA lab',exact:true}).click();
+ await expect(page.getByText('Biên nhận công cụ · VERIFIED_MET',{exact:true})).toBeVisible();
+ record=(await call('GET',path)).records.find(r=>r.record_id===rid);
+ const activeReceipt=record.document.actions[actionIndex].mfa_lab_receipt;
+ expect(activeReceipt.before.observations.no_second_factor.response).toMatch(/^200/);
+ expect(activeReceipt.after.observations.no_second_factor.response).toMatch(/^403/);
+ await call('POST',labPath,executeBody(),admin,409);
  expect((await call('GET',path,undefined,helper)).records.some(r=>r.record_id===rid)).toBe(true);
  const employeeContext=await page.context().browser().newContext({baseURL:process.env.UI_BASE_URL});
  const employeePage=await employeeContext.newPage();
@@ -69,14 +85,14 @@ test('real remediation: approve, assign, evidence, reject, recheck, verify, pres
  await event('submit',{},helper,403);
  await event('submit',{},operator,409);
  for(const task of record.document.actions[actionIndex].tasks)await event('task',{task_id:task.task_id,done:true},operator);
- const eid=await source('mfa-incomplete','MÔ PHỎNG IAM-LAB: admin-demo enrolled=true; chưa có thông tin áp dụng chính sách.',operator);
+ const eid=await source('mfa-incomplete','MÔ PHỎNG IAM-LAB: labadmin-mfa-demo enrolled=true; chưa có thông tin áp dụng chính sách.',operator);
  await event('attach',{evidence_id:eid},operator);
  await event('submit',{},operator);
  await event('verify',{outcome:'accepted'},operator,403);
  await event('verify',{outcome:'accepted'},admin,409);
  await event('verify',{outcome:'partial'});
  expect(record.document.actions[actionIndex].state).toBe('REWORK');
- const corrected=await source('mfa-after','MÔ PHỎNG IAM-LAB: admin-demo thuộc nhóm Administrators, ADMIN-MFA enforced=true; lần thử đăng nhập yêu cầu MFA.',operator);
+ const corrected=await source('mfa-after',JSON.stringify(activeReceipt,null,2),operator);
  await event('attach',{evidence_id:corrected},operator);
  await event('submit',{},operator);
  const current=(await call('GET',scopePath)).controls.find(c=>c.control_id==='A.8.5');
@@ -98,16 +114,12 @@ test('real remediation: approve, assign, evidence, reject, recheck, verify, pres
   expect(exported.status()).toBe(200);expect(await exported.text()).toContain('A.8.5');
   expect(exported.headers()['content-type']).toContain(extension==='csv'?'text/csv':'text/html');
  }
- await page.goto('/');
- await page.getByLabel('Tên đăng nhập',{exact:true}).fill('release_admin');
- await page.getByLabel('Mật khẩu',{exact:true}).fill(process.env.INITIAL_ADMIN_PASSWORD);
- await page.getByRole('button',{name:'ĐĂNG NHẬP HỆ THỐNG'}).click();
- await page.getByText('Tư vấn & khắc phục · từ phát hiện đến xác minh',{exact:true}).click();
+ await page.getByRole('button',{name:'Làm mới khắc phục',exact:true}).click();
  for(const [extension,label] of [['xlsx','Tải Excel XLSX'],['pdf','Tải PDF']]){
   const [download]=await Promise.all([page.waitForEvent('download'),page.getByRole('button',{name:label,exact:true}).click()]);
   await download.saveAs(testInfo.outputPath('mfa-before-after.'+extension));
  }
- await source('mfa-new-observation','MÔ PHỎNG IAM-LAB: quan sát mới cần rà lại chính sách ADMIN-MFA.');
+ await source('mfa-new-observation','MÔ PHỎNG IAM-LAB: quan sát mới cần rà lại chính sách LAB-ADMIN-MFA.');
  const stale=(await call('GET',path+'/report')).records.find(r=>r.record_id===rid);
  expect(stale.verification_stale).toBe(true);
  expect(stale.document.actions[actionIndex].verifications).toHaveLength(2);

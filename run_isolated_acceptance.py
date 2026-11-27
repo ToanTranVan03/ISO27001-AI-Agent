@@ -162,6 +162,8 @@ def main():
     report=dict(protocol='isolated-real-write-acceptance-v1',checked_at=datetime.now(ZoneInfo('Asia/Bangkok')).isoformat(),
         database=name,test_data_only=True,human_assessment=False,professional_approval=False,
         api_mocked=False,passed=False,database_dropped=False,main_table_counts_unchanged=False)
+    if args.remediation_only:
+        env['ISO_MFA_DEMO_ENABLED']='1'
     if args.extended:
         env['ISO_ISOLATED_CANDIDATE_PATH']=str(prepare_regression_candidate(directory))
         env['ISO_ISOLATED_ORCHESTRATION_RECEIPT']=str(directory/'orchestration-receipt.json')

@@ -3,6 +3,7 @@ from io import BytesIO
 from pathlib import Path
 from html import escape
 import hashlib
+import json
 import os
 import re
 import threading
@@ -81,6 +82,14 @@ def xlsx_report(report):
     sheet('Findings',['Finding ID','Control','Finding','Location','Reported cause','Risk proposed','Initial result','Current machine','Current human','Baseline token','Current token','Verification stale','Initial evidence ID / hash','Criteria','Tiêu chí cần khắc phục','Căn cứ thẩm định ban đầu'],findings)
     sheet('Actions',['Finding ID','Control','Action ID','Action','Workflow state','Department','Assignee ID','Due date','Priority','Instructions','Acceptance evidence','Resources','Proposal origin','After evidence ID / hash','Collaborators','Objective','Possible causes - unconfirmed','Why','Where','Estimated effort - proposed','Required evidence','Recheck method','Clarification questions'],actions)
     sheet('Tasks',['Finding ID','Action ID','Sequence','Task ID','Task','Done by executor','Assigned step owner'],tasks)
+    lab_rows=[]
+    for row in report['records']:
+        for item in row['document']['actions']:
+            receipt=item.get('mfa_lab_receipt')
+            if receipt:
+                lab_rows.append([item['action_id'],receipt['status'],json.dumps(receipt,ensure_ascii=False)])
+    if lab_rows:
+        sheet('MFA lab',['Mã hành động','Kết quả kỹ thuật','Biên nhận trước–sau'],lab_rows)
     sheet('Verification',['Finding ID','Action ID','Time','Reviewer ID','Outcome','Rationale','Review token','Human conclusion','Review signature','Tiêu chí xác minh'],verifications)
     if dashboard:
         sheet('Control worklist',['Control','Name','Current machine result','Required work','Findings','Actions','Usable sources'],
@@ -174,6 +183,8 @@ def pdf_report(report):
             paragraph('Bộ phận: '+text(a.get('department'))+' | Người thực hiện: '+text(a.get('assignee') or 'Chưa giao')+
                 ' | Hạn: '+text(a.get('due_date') or 'Chưa ghi')+' | Ưu tiên: '+text(a.get('priority')))
             if a.get('collaborator_ids'):paragraph('Người phối hợp: '+', '.join(a['collaborator_ids']))
+            if a.get('mfa_lab_receipt'):
+                paragraph('Biên nhận MFA lab: '+json.dumps(a['mfa_lab_receipt'],ensure_ascii=False),'small')
             paragraph(a['steps']);paragraph('Điều kiện nghiệm thu: '+a['acceptance'])
             paragraph('Nguồn lực: '+text(a.get('resources')))
             for key,label in [('objective','Mục tiêu'),('rationale','Vì sao'),('possible_causes','Nguyên nhân có thể, cần xác minh'),('target_location','Vị trí'),('estimated_effort','Ước lượng cần chuyên viên xem xét'),('required_evidence','Bằng chứng cần nộp'),('recheck_method','Cách kiểm tra lại')]:

@@ -118,3 +118,5 @@ Chi tiết: [Luồng nhân viên](../docs/TICH_HOP_LUONG_NHAN_VIEN_TU_TUAN7.md).
 - Nghiệm thu kỹ thuật ca MFA A.8.5 trên database riêng: xác minh theo tiêu chí, giữ lịch sử, mở hồ sơ nguồn từ việc được giao và tải PDF/Excel từ React. Các bước ghi nghiệp vụ được kiểm bằng API; luồng bấm UI xuyên suốt còn mở. [Kết quả và kịch bản demo](../docs/NGHIEM_THU_KHAC_PHUC_MFA.md).
 
 - Nghiệm thu ca bàn giao A.6.5 trên PostgreSQL riêng: nối việc được giao với yêu cầu nhân viên; chặn mã thiết bị sai trên UI, tải nguồn biên nhận, giữ lịch sử trả bổ sung/xác minh và đối chiếu PDF/Excel. Thẩm định và ghi một số bước qua API. [Kịch bản và kết quả](../docs/NGHIEM_THU_BAN_GIAO_A65.md).
+
+- Nối thao tác MFA lab vào đầu việc đã duyệt trên React. Lưu người duyệt, người chạy và bằng chứng đăng nhập trước/sau trong hồ sơ và PDF/Excel. Kiểm quyền, chặn chạy lặp và kiểm tra restart trên database riêng. [Hướng dẫn và kết quả](../docs/DEMO_MFA_LAB.md).

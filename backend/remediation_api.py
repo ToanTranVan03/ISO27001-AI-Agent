@@ -185,7 +185,7 @@ def board(assessment_id:UUID,user=Depends(require_user)):
     if role=='operator':
         for record in records:
             if record['kind']=='finding':record['document']['actions']=[a for a in record['document']['actions'] if str(a.get('assignee'))==str(user['user_id']) or str(user['user_id']) in a.get('collaborator_ids',[])]
-    return dict(records=records,members=members,role=role,user_id=user['user_id'],can_manage_roles=user['role']=='admin',
+    return dict(mfa_lab_enabled=os.getenv('ISO_MFA_DEMO_ENABLED')=='1',records=records,members=members,role=role,user_id=user['user_id'],can_manage_roles=user['role']=='admin',
         standard_references=[dict(name='ISO/IEC 27001:2022',url='https://www.iso.org/standard/27001'),
             dict(name='Amd 1:2024 — Climate action changes',url='https://www.iso.org/standard/88435.html')],
         note='Tiến độ khắc phục không phải kết luận tuân thủ hoặc chứng nhận ISO. Các vai trò chỉ có hiệu lực trong đợt này.')
@@ -322,6 +322,45 @@ def event(assessment_id:UUID,finding_id:UUID,action_id:UUID,req:Event,user=Depen
         from backend.remediation_notifications import notify_event
         notify_event(cur,assessment_id,updated,str(action_id),req.command,user['user_id'],version+1)
         return save(cur,assessment_id,finding_id,version,updated)
+
+
+class MfaLabRun(Expected):
+    operation:Literal['require_second_factor_labadmin_demo']
+
+
+@router.post('/findings/{finding_id}/actions/{action_id}/mfa-lab')
+def execute_mfa_lab(assessment_id:UUID,finding_id:UUID,action_id:UUID,req:MfaLabRun,user=Depends(require_user)):
+    require_consultant(membership(assessment_id,user))
+    if os.getenv('ISO_MFA_DEMO_ENABLED')!='1':
+        raise HTTPException(403,'Cần bật chế độ demo MFA trên máy lab.')
+    from lab_a8.mfa_remediation_demo import run_demo
+    with get_connection() as con,con.cursor() as cur:
+        version,doc=read(cur,assessment_id,finding_id,req.expected_version)
+        item=next((a for a in doc['actions'] if a['action_id']==str(action_id)),None)
+        if item is None:
+            raise HTTPException(404,'Không tìm thấy hành động.')
+        if doc['control_id']!='A.8.5' or item['state'] not in ('NOT_STARTED','IN_PROGRESS'):
+            raise HTTPException(409,'Cần hành động A.8.5 đã duyệt và đang được thực hiện.')
+        if item.get('mfa_lab_receipt'):
+            raise HTTPException(409,'Hành động đã có biên nhận lab.')
+        approval=next((e for e in reversed(doc['history'])
+                       if e.get('action_id')==str(action_id) and e.get('command')=='approve'),None)
+        if approval is None:
+            raise HTTPException(409,'Không tìm thấy lịch sử phê duyệt.')
+        control,scope=scope_control(assessment_id,doc['control_id'],user)
+        if scope['rubric_sha256']!=doc['rubric_sha256'] or control['review_token']!=doc['baseline']['review_token']:
+            raise HTTPException(409,'Nguồn hoặc rubric đã đổi; rà lại phát hiện trước khi chạy lab.')
+        cur.execute('SELECT version FROM remediation_records WHERE assessment_id=%s AND kind=%s FOR SHARE',
+                    (assessment_id,'context'))
+        context=cur.fetchone()
+        if not context or context[0]!=doc.get('context_snapshot',{}).get('version'):
+            raise HTTPException(409,'Phạm vi doanh nghiệp đã đổi; cần rà lại phát hiện.')
+        receipt=run_demo(lambda *_:str(user['user_id']))
+        receipt['workflow_approval']={'actor':str(approval['actor']),'at':approval['at']}
+        item['mfa_lab_receipt']=receipt
+        doc['history'].append(dict(command='mfa_lab',actor=user['user_id'],at=engine.now(),
+                                   action_id=str(action_id),note=receipt['status']))
+        return save(cur,assessment_id,finding_id,version,doc)
 
 
 @router.post('/findings/{finding_id}/ai-proposal')
