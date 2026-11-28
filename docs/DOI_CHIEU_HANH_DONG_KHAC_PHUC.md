@@ -28,3 +28,9 @@ Chạy trực tiếp CLI: `.venv\Scripts\python.exe -m lab_a8.software_update_de
 Bấm **Thu phiên bản ứng dụng mẫu từ lab** trước khi lập phát hiện. Hệ thống chạy gói mẫu, lưu kết quả đọc phiên bản ban đầu và hash vào kho nguồn A.8.8. Sau khi duyệt và chạy cập nhật, bấm **Lưu biên nhận cập nhật vào nguồn A.8.8** trong thẻ đầu việc. Mỗi nguồn có mã và bản gốc, nạp lại biên nhận không tạo bản trùng. Chuyên viên vẫn rà nguồn và xác định phạm vi kết luận. Hồ sơ chỉ xác nhận ứng dụng mẫu trong lab.
 
 Lệnh nghiệm thu ở trên kiểm cả hai nút, kiểm nguồn trước/sau xuất hiện đúng control và xác nhận kết luận thẩm định không tự đổi. [Biên nhận lượt kiểm](../work/software-evidence-2026-11-28.json).
+
+## Khi giao việc và thẩm định
+
+Mỗi đầu việc trong phạm vi 56 control hiển thị người phụ trách, cách thực hiện, bằng chứng cần nộp, cách kiểm tra lại và số nguồn đã gắn. Nếu đợt có công cụ lab phù hợp, thẻ ghi đích và thao tác được phép. Khi công việc chờ xác minh, người có quyền mở đúng tiêu chí và bằng chứng từ ngay trong thẻ. Sau khi thẩm định, quay lại đầu việc để lưu kết quả xác minh.
+
+Đầu việc dùng kế hoạch do chuyên viên duyệt. Tự động hóa lab hiện có cho hai ca MFA và cập nhật ứng dụng thử. Mỗi thao tác ngoài lab cần công cụ và phép đo phù hợp với thiết bị hoặc hệ điều hành cụ thể.

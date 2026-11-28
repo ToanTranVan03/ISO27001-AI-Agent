@@ -138,7 +138,7 @@ test('real remediation: approve, assign, evidence, reject, recheck, verify, pres
  await event('submit',{},operator);
  const current=(await call('GET',scopePath)).controls.find(c=>c.control_id==='A.8.5');
  await page.getByRole('button',{name:'Làm mới khắc phục',exact:true}).click();
- await page.getByRole('button',{name:'A.8.5 · mở hồ sơ nguồn và thẩm định',exact:true}).click();
+ await actionCard.getByRole('button',{name:'Mở tiêu chí và bằng chứng để thẩm định',exact:true}).click();
  await page.locator('summary').filter({hasText:'02 · Thẩm định kết luận trên nguồn hiện hành'}).click();
  for(const [index] of current.pass_criteria.entries()){
   await page.getByLabel('Kết quả tiêu chí '+(index+1),{exact:true}).selectOption(index===criterionIndex?'met':'unknown');
