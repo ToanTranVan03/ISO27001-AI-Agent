@@ -52,6 +52,7 @@ Giữ phạm vi **56 control** của đồ án (8 A.6 con người, 14 A.7 vật
 |---|---|---|---|---|
 | 25/11/2026 | 12:03 | Trần Văn Toàn | `main` | Sửa đồng bộ hồ sơ, kiểm thử với Qwen và bổ sung tài liệu bảo vệ. |
 | 27/11/2026 | 07:20, 10:12, 10:21, 10:23 | Trần Văn Toàn | `ToanTuan7` | Tích hợp luồng nhân viên, nghiệm thu MFA và bàn giao, bổ sung ca cập nhật ứng dụng và báo cáo trước–sau; cập nhật nhật ký và dọn `s.txt`. |
+| 28/11/2026 | 11:18:19 | Trần Văn Toàn | `ToanTuan7` | Đồng bộ tích hợp từ KhoaTuan7, nghiệm thu và truy vết A.8.8, kiểm tra gói bản vá và nhật ký tuần 7 (`4547f74`). |
 
 ### Nhánh thành viên được tích hợp chọn lọc
 
