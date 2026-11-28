@@ -1,7 +1,9 @@
 from copy import deepcopy
 import hashlib
+import json
 
-from evidence_collectors.os_patch_preflight import preflight
+from evidence_collectors import control_packages
+from evidence_collectors.os_patch_preflight import intake_manifest, preflight
 
 
 def packet(tmp_path):
@@ -47,3 +49,22 @@ def test_patch_success_without_independent_after_source_cannot_pass(tmp_path):
     assert not preflight(manifest, tmp_path)['ready_for_review']
     manifest['after']['artifact'] = {'file': '../outside.txt'}
     assert any('cạnh manifest' in issue for issue in preflight(manifest, tmp_path)['issues'])
+
+
+def test_intake_uses_checked_files_and_rejects_change_after_preflight(tmp_path,monkeypatch):
+    monkeypatch.setattr(control_packages,'ROOT',tmp_path)
+    aid='7f7c009b-bdcd-5b33-934e-15251ad2c976'
+    folder=control_packages.directory(aid,'A.8.8')
+    folder.mkdir(parents=True)
+    manifest=packet(folder)
+    for record in manifest.values():
+        for field in ('observed_at','approved_at','executed_at'):
+            if field in record:record[field]=record[field].replace('2026','2020')
+    assert preflight(manifest,folder)['ready_for_review']
+    intake=intake_manifest(manifest,'Synthetic integration test')
+    (folder/'manifest.json').write_text(json.dumps(intake),encoding='utf-8')
+    assert len(control_packages.inspect(aid,'A.8.8')['items'])==3
+    (folder/'after.txt').write_text('Changed synthetic test file with enough text to be read.')
+    report=control_packages.inspect(aid,'A.8.8')
+    assert len(report['items'])==2
+    assert any('after.txt: SHA-256' in issue for issue in report['issues'])

@@ -88,14 +88,43 @@ def result(issues):
     }
 
 
+def intake_manifest(manifest, origin):
+    origin=origin.strip()
+    if not 5<=len(origin)<=200:
+        raise ValueError('Xuất xứ cần từ 5 đến 200 ký tự.')
+    sources=[]
+    stages=(('before','Đo trước','observed_at'),('execution','Biên nhận thực thi','executed_at'),
+            ('after','Đo lại','observed_at'))
+    for stage,label,timestamp in stages:
+        record=manifest[stage]
+        sources.append({
+            'file':record['artifact']['file'],
+            'sha256':record['artifact']['sha256'],
+            'evidence_type':'EVID_TECH_VULN_CONFIG',
+            'origin':origin,
+            'observed_at':record[timestamp],
+            'note':f'{label} · Máy {record["asset_id"]} · Bản vá {record["patch_id"]}'[:1000],
+        })
+    return {'control_id':'A.8.8','sources':sources}
+
+
 def main():
     parser = argparse.ArgumentParser(description='Kiểm tra gói nguồn bản vá A.8.8 trước khi nộp.')
     parser.add_argument('manifest', type=Path)
+    parser.add_argument('--intake-output', type=Path, help='Ghi manifest nhập nguồn vào tệp mới.')
+    parser.add_argument('--origin', help='Xuất xứ do người nộp khai báo khi xuất manifest.')
     args = parser.parse_args()
+    if bool(args.intake_output)!=bool(args.origin):
+        parser.error('Dùng --intake-output cùng --origin.')
     try:
         with args.manifest.open(encoding='utf-8-sig') as stream:
             manifest = json.loads(stream.read(65537))
         report = preflight(manifest, args.manifest.resolve().parent)
+        if report['ready_for_review'] and args.intake_output:
+            content=json.dumps(intake_manifest(manifest,args.origin),ensure_ascii=False,indent=2)
+            with args.intake_output.open('x',encoding='utf-8') as stream:
+                stream.write(content+'\n')
+            report['intake_manifest']=str(args.intake_output)
     except (OSError, ValueError) as error:
         report = result([str(error)])
     print(json.dumps(report, ensure_ascii=False, indent=2))
