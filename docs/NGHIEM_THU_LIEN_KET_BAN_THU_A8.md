@@ -13,6 +13,14 @@ Thao tác trên dữ liệu mới gồm chạy live, nhập nguồn, tạo phát
 
 Đây là phát hiện cho bản thu inventory. Phát hiện cập nhật ứng dụng mẫu A.8.8 đã kiểm chứng ở lượt trước có chuỗi nguồn trước–sau riêng. Muốn nối chính ca ứng dụng vào một lượt nghiên cứu, lượt đó phải thu được cùng đối tượng, ứng dụng và phép đo, rồi chốt bộ nguồn theo rubric của lượt. API chặn ghép nguồn inventory với nguồn đầu của ca cập nhật mẫu.
 
+## Xem phép đo của chính ca cập nhật ứng dụng
+
+Trong Tổng quan 56 control, chọn **Theo dõi phát hiện này**, rồi mở **Thực nghiệm A.8 · phát hiện**. Mục **Phép đo trước–sau ứng dụng mẫu A.8.8** đọc biên nhận đã lưu của đúng đầu việc. Mục này hiển thị mã phép đo, phiên bản, thời điểm quan sát, SHA-256 trước–sau và kết quả xác minh hồ sơ. Biên nhận thuộc ca ứng dụng; lượt nghiên cứu 18 control có bộ nguồn và rubric riêng.
+
+Gói ứng dụng thử được đóng gói xác định để lần đọc mới có thể so SHA-256 với nguồn đã chốt. Với nguồn đầu mới, công cụ chỉ chạy khi khớp nền tảng, ứng dụng, phiên bản và hash. Ca thử tạo thư mục tạm, đọc lại ứng dụng trên đúng đích lab sau thao tác và ghi biên nhận; trạng thái ứng dụng của ca thử kết thúc cùng môi trường tạm.
+
+Edge đã kiểm mở phép đo `c45b562650c1c0aa` từ phát hiện `015c3700-2971-463a-9bea-5dd08d018257`, xem hash và kết luận cải thiện một phần, tải lại trang rồi quay về hồ sơ. Đã đọc lại các báo cáo xuất từ ca thử. [Biên nhận Edge](../work/a8-phep-do-ung-dung-2026-11-28.json), [PDF](../work/ban-giao-nghiem-thu-2026-11-28/a8-phep-do-ung-dung.pdf), [Excel](../work/ban-giao-nghiem-thu-2026-11-28/a8-phep-do-ung-dung.xlsx), [JSON](../work/ban-giao-nghiem-thu-2026-11-28/a8-phep-do-ung-dung.json).
+
 ## Phần còn chờ
 
 - Xác nhận tên/model và hệ điều hành ở đoạn 08:43–09:35. Ca vá hệ điều hành cần máy thử cô lập có quyền thao tác, bản vá xác định trước và phương án phục hồi.
@@ -27,4 +35,4 @@ $env:ISO_TEST_LINUX_LAB='1'
 .venv\Scripts\python.exe run_isolated_acceptance.py --execute --remediation --remediation-only --output work/a8-lien-ket-phat-hien-moi.json
 ```
 
-490 test Python thuộc nhánh và 16 test JavaScript đạt. Lint và build đạt. Kiểm thử báo cáo xác nhận đủ các trường truy vết trong PDF và Excel. Không cần migration.
+491 test Python thuộc nhánh và 16 test JavaScript đạt. Lint và build đạt. Kiểm thử báo cáo xác nhận đủ các trường truy vết trong PDF và Excel. Không cần migration.

@@ -22,7 +22,7 @@ def package(path, version):
         {'application': TARGET, 'version': version, 'health': 'ok'}
     ) + '))\n'
     with zipfile.ZipFile(path, 'w') as archive:
-        archive.writestr('__main__.py', entrypoint)
+        archive.writestr(zipfile.ZipInfo('__main__.py'), entrypoint)
 
 
 def sha256(path):
@@ -122,8 +122,10 @@ def run_demo(approve, change=install):
 
 
 def matches_baseline(binding, before, target=TARGET):
-    return (before["platform"], before["version"], target) == (
-        binding["system"], binding["baseline_version"], binding["application"])
+    return ((before["platform"], before["version"], target) ==
+            (binding["system"], binding["baseline_version"], binding["application"])
+            and (not binding.get("baseline_artifact_sha256")
+                 or before.get("sha256") == binding["baseline_artifact_sha256"]))
 
 
 def run_linux_demo(approve, expected=None):

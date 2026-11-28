@@ -261,6 +261,7 @@ test('real remediation: approve, assign, evidence, reject, recheck, verify, pres
  if(linuxLab){expect(softwareReceipt.platform_target).toBe('linux_lab');expect(softwareReceipt.platform_inventory.system).toBe('Linux');}
  expect(softwareReceipt.binding.baseline_evidence_id).toBe(softwareBaseline);
  expect(softwareReceipt.before.version).toBe('1.0.0');
+ expect(softwareReceipt.before.sha256).toBe(softwareReceipt.binding.baseline_artifact_sha256);
  expect(softwareReceipt.after.version).toBe('1.1.0');
  expect(softwareReceipt.after.sha256).toBe(softwareReceipt.plan.candidate_sha256);
  expect((await call('GET',scopePath)).controls.find(row=>row.control_id==='A.8.8').human_review_current).toBe(false);
@@ -310,6 +311,14 @@ test('real remediation: approve, assign, evidence, reject, recheck, verify, pres
  await softwareCard.getByRole('button',{name:'Cải thiện một phần',exact:true}).click();
  expect((await decision).status()).toBe(200);
 
+ await marker.getByRole('button',{name:'Thực nghiệm A.8 · phát hiện',exact:true}).click();
+ const measurement=page.getByRole('region',{name:'Phép đo ứng dụng mẫu A.8.8'});
+ await expect(measurement.getByText(new RegExp(softwareReceipt.plan.id))).toBeVisible();
+ await expect(measurement.getByText(new RegExp(softwareReceipt.after.sha256))).toBeVisible();
+ await expect(measurement.getByText(/Cải thiện một phần/)).toBeVisible();
+ await page.reload();
+ await expect(measurement.getByText(new RegExp(softwareReceipt.plan.id))).toBeVisible();
+ await marker.getByRole('button',{name:'Tổng quan 56 control · phát hiện',exact:true}).click();
 
  for(const [extension,label] of [['xlsx','Tải Excel XLSX'],['pdf','Tải PDF'],['json','Xuất báo cáo trước / sau JSON']]){
   const [download]=await Promise.all([page.waitForEvent('download'),page.getByRole('button',{name:label,exact:true}).click()]);

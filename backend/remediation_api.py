@@ -443,7 +443,8 @@ def collect_software_baseline(assessment_id:UUID,req:SoftwareTarget=SoftwareTarg
         raise HTTPException(503,'Không đọc được môi trường đã chọn. Kiểm tra Docker và image lab nếu chọn Linux.') from exc
     before=receipt['before']
     binding=dict(platform_target=req.platform_target,system=before['platform'],application=TARGET,
-                 environment_id=str(assessment_id)+':'+req.platform_target,baseline_version=before['version'])
+                 environment_id=str(assessment_id)+':'+req.platform_target,baseline_version=before['version'],
+                 baseline_artifact_sha256=before['sha256'])
     payload=dict(stage='baseline',binding=binding,observation=before,platform_inventory=receipt['platform_inventory'])
     return {**store_lab_observation(assessment_id,user,'software-lab-baseline-'+req.platform_target+'.json',
                                  payload,before['observed_at'],'A.8.8'),'software_target':binding}
@@ -536,8 +537,8 @@ def execute_fixed_lab(assessment_id,finding_id,action_id,req,user,control_id,rec
         except (OSError,subprocess.SubprocessError,ValueError) as exc:
             raise HTTPException(503,'Không lấy được biên nhận công cụ lab. Kiểm tra Docker và image lab nếu chọn Linux.') from exc
         if control_id=='A.8.8':
-            if receipt['before']['platform']!=binding['system'] or receipt['before']['version']!=binding['baseline_version'] or receipt['plan']['target']!=binding['application']:
-                raise HTTPException(409,'Phép đo tại đích không khớp nền tảng, ứng dụng hoặc phiên bản nguồn đầu.')
+            if not matches_baseline(binding,receipt['before'],receipt['plan']['target']):
+                raise HTTPException(409,'Phép đo tại đích không khớp nền tảng, ứng dụng, phiên bản hoặc hash nguồn đầu.')
             receipt['platform_target']=req.platform_target
             receipt['binding']=binding
         receipt['workflow_approval']={'actor':str(approval['actor']),'at':approval['at']}
