@@ -149,3 +149,7 @@ Nghiệm thu toàn diện cuối cùng: [nghiệm thu theo mục tiêu đề tà
 - [Đề cương báo cáo đồ án 6 chương](docs/defense/REPORT_OUTLINE.md)
 - [Đề cương 18 slide thuyết trình bảo vệ](docs/defense/SLIDE_OUTLINE.md)
 - [Bộ 28 câu hỏi phản biện & câu trả lời mẫu](docs/defense/DEFENSE_QA.md)
+
+Nâng cấp nhiều doanh nghiệp/nhiều kỳ: [kiến trúc, kết quả kiểm thử và giới hạn](docs/THESIS_ENTERPRISE_AI_AGENT_UPGRADE.md), [sinh/nhập dữ liệu mô phỏng](docs/SYNTHETIC_DATA_GUIDE.md). Không cần train lại khi thêm doanh nghiệp; dữ liệu mô phỏng không thay nguồn và nhãn chuyên gia.
+
+- [Luồng nhân viên: đào tạo, NDA, MFA và bàn giao](docs/TICH_HOP_LUONG_NHAN_VIEN_TU_TUAN7.md).

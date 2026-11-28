@@ -36,17 +36,18 @@ main { animation: reveal-page .25s ease-out; }
 }
 
 /* Shared assessment workspace */
-.app-page { background: radial-gradient(ellipse at 80% 0%, #11334455, transparent 45%), #080f1d; padding: 112px 28px 64px; }
+.app-page { background: #0b1220; padding: 112px 28px 64px; }
 .app-page > section { max-width: 1280px; margin-inline: auto; }
 .page-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; padding: 8px 0 12px; }
 .page-eyebrow { display: flex; align-items: center; gap: 7px; color: #5eead4; font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
 .page-heading h1 { font-size: clamp(24px, 3vw, 34px); font-weight: 750; line-height: 1.25; letter-spacing: -.025em; margin-top: 12px; }
 .page-description { color: #94a3b8; font-size: 13px; line-height: 1.8; max-width: 740px; margin-top: 12px; }
 .page-heading-actions { display: flex; flex-wrap: wrap; gap: 8px; flex-shrink: 0; }
-.workflow-guide { display: flex; flex-wrap: wrap; gap: 18px; padding: 14px 18px; border: 1px solid #263446; border-radius: 14px; background: #0f1a2a; }
-.workflow-guide > span { display: flex; align-items: center; gap: 10px; color: #7f91a8; font-size: 11px; }
-.workflow-guide b { font-size: 10px; color: #64748b; }
-.workflow-guide .workflow-current, .workflow-current b { color: #5eead4; }
+.workflow-guide { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; padding: 14px 0; border-block: 1px solid #334155; }
+.workflow-guide dt { color: #e2e8f0; font-weight: 650; font-size: 13px; margin-bottom: 4px; }
+.workflow-guide dd { color: #aebdd0; font-size: 13px; line-height: 1.5; }
+.workflow-guide > div:last-child dt { color: #5eead4; }
+@media (max-width: 640px) { .workflow-guide { grid-template-columns: 1fr; } }
 .status-badge { display: inline-flex; align-items: center; gap: 6px; border: 1px solid; border-radius: 999px; padding: 5px 9px; font-size: 10px; line-height: 1.4; white-space: nowrap; }
 .status-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
 .status-success { color: #6ee7b7; background: #10b98112; border-color: #10b98145; }
@@ -81,7 +82,7 @@ main { animation: reveal-page .25s ease-out; }
  .page-heading { flex-direction: column; gap: 12px; }
  .page-heading-actions { width: 100%; }
  .workflow-guide { gap: 10px 14px; padding: 12px; }
- .workflow-guide > span { font-size: 10px; gap: 5px; }
+
  .panel-toolbar { padding: 14px; }
  .app-page table { min-width: 600px; }
 }

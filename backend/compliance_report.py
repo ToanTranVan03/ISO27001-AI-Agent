@@ -5,6 +5,7 @@ import hashlib
 import json
 from backend.enterprise_spec import NODE_SPECS, CONTROL_TO_NODE
 from backend.database import get_connection
+from backend.a8_evidence_import import ORIGIN as A8_CAPTURE_ORIGIN,capture_reference
 from evidence_collectors.source_verification import source_quality
 
 
@@ -13,11 +14,11 @@ def campaign_evidence(assessment_id):
     with get_connection() as con:
         with con.cursor() as cur:
             cur.execute('''SELECT control_id,evidence_id,evidence_type,source,sha256_hash,
-                                  created_at,is_synthetic,extracted_text
+                                  created_at,is_synthetic,extracted_text,evidence_origin
                            FROM evidence WHERE assessment_id=%s ORDER BY created_at DESC''', (assessment_id,))
             rows = cur.fetchall()
     grouped = {}
-    for cid, eid, kind, source, digest, created, synthetic, text in rows:
+    for cid, eid, kind, source, digest, created, synthetic, text, origin in rows:
         payload = {}
         if synthetic:
             try:
@@ -26,9 +27,17 @@ def campaign_evidence(assessment_id):
                     payload = {}
             except (TypeError, ValueError):
                 pass
+        software_lab=None
+        if origin=='SERVER_SOFTWARE_LAB':
+            try:
+                observation=json.loads(json.loads(text)['content'])
+                software_lab={'stage':observation.get('stage'),'binding':observation.get('binding'),'action_id':observation.get('action_id')}
+            except (ValueError,TypeError,KeyError):
+                pass
         grouped.setdefault(cid, []).append({'evidence_id': eid, 'evidence_type': kind,
             'source': source, 'sha256_hash': digest, 'created_at': created.isoformat(),
-            'is_synthetic': synthetic, 'revision': payload.get('revision'),
+            'a8_capture': capture_reference(assessment_id,cid,eid,source,digest,text) if origin==A8_CAPTURE_ORIGIN else None,
+            'is_synthetic': synthetic, 'software_lab': software_lab, 'revision': payload.get('revision'),
             'facts': payload.get('facts', {}), 'entity_refs': payload.get('entity_refs', {}),
             'snapshot_hash': payload.get('snapshot_hash'), 'origin': 'lab' if synthetic else 'uploaded_or_imported',
             'source_quality': source_quality(assessment_id,cid,eid,kind,source,text,digest)})

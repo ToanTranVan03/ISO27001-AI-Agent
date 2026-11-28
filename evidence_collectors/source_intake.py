@@ -28,7 +28,7 @@ def prepare(assessment_id,control_id,filename,raw,evidence_type,origin,observed_
         except (TypeError,ValueError) as exc:raise ValueError('Thời điểm quan sát không hợp lệ.') from exc
         if observed.tzinfo is None or observed>datetime.now(timezone.utc):raise ValueError('Thời điểm quan sát phải có múi giờ và không ở tương lai.')
         observed_at=observed.astimezone(timezone.utc).isoformat()
-    text=extract_document_text(filename,raw) if extension in {'.pdf','.docx'} else raw.decode('utf-8-sig')
+    text=extract_document_text(filename,raw) if extension in {'.pdf','.docx','.xlsx'} else raw.decode('utf-8-sig')
     if '\x00' in text or len(text)>100000 or not text_quality(text)['usable']:
         raise ValueError('Nguồn không phải văn bản dùng được, quá ít/lặp ký tự hoặc quá 100000 ký tự; kiểm tra nội dung/OCR.')
     if extension=='.json':

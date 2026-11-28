@@ -79,6 +79,7 @@ def init_teamwork() -> None:
                     PRIMARY KEY (assessment_id, user_id)
                 )''')
             cur.execute("ALTER TABLE assessment_campaigns ADD COLUMN IF NOT EXISTS inventory_mode TEXT NOT NULL DEFAULT 'lab'")
+            cur.execute("ALTER TABLE assessment_campaigns ADD COLUMN IF NOT EXISTS period_metadata JSONB NOT NULL DEFAULT '{}'::jsonb")
             cur.execute('''CREATE TABLE IF NOT EXISTS consulting_clients (
                 client_id UUID PRIMARY KEY,name TEXT NOT NULL,profile JSONB NOT NULL,
                 version INTEGER NOT NULL DEFAULT 1,created_by UUID REFERENCES team_users(user_id),
@@ -86,6 +87,15 @@ def init_teamwork() -> None:
             cur.execute('''CREATE TABLE IF NOT EXISTS consulting_campaigns (
                 assessment_id UUID PRIMARY KEY REFERENCES assessment_campaigns(assessment_id),
                 client_id UUID NOT NULL REFERENCES consulting_clients(client_id))''')
+            cur.execute('''CREATE TABLE IF NOT EXISTS enterprise_period_snapshots (
+                snapshot_id UUID PRIMARY KEY,assessment_id UUID NOT NULL REFERENCES assessment_campaigns(assessment_id),
+                created_by UUID NOT NULL REFERENCES team_users(user_id),source_sha256 TEXT NOT NULL,
+                document JSONB NOT NULL,created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+                UNIQUE(assessment_id,source_sha256))''')
+            cur.execute('''CREATE TABLE IF NOT EXISTS enterprise_assessment_requests (
+                request_id UUID PRIMARY KEY,assessment_id UUID NOT NULL REFERENCES assessment_campaigns(assessment_id),
+                created_by UUID NOT NULL REFERENCES team_users(user_id),version INTEGER NOT NULL DEFAULT 1,
+                document JSONB NOT NULL,created_at TIMESTAMPTZ NOT NULL DEFAULT NOW())''')
             cur.execute('''
                 CREATE TABLE IF NOT EXISTS control_progress (
                     assessment_id UUID NOT NULL REFERENCES assessment_campaigns(assessment_id),
@@ -125,6 +135,7 @@ def init_teamwork() -> None:
                 )''')
             # Migration: attach each upload and evaluation to a campaign (nullable for legacy data).
             cur.execute('ALTER TABLE evidence ADD COLUMN IF NOT EXISTS assessment_id UUID')
+            cur.execute('CREATE INDEX IF NOT EXISTS evidence_tenant_control_lookup ON evidence(assessment_id,control_id)')
             cur.execute('ALTER TABLE evidence ADD COLUMN IF NOT EXISTS uploaded_by UUID')
             cur.execute('ALTER TABLE evaluations ADD COLUMN IF NOT EXISTS assessment_id UUID')
             cur.execute('ALTER TABLE evaluations ADD COLUMN IF NOT EXISTS evaluated_by UUID')

@@ -1,0 +1,12 @@
+{
+  "api_status": 200,
+  "counts": {
+    "evidence": 110,
+    "evaluations": 282,
+    "team_users": 3,
+    "remediation_records": 22,
+    "employee_workflow_requests": 0,
+    "employee_identity_bindings": 0
+  },
+  "no_employee_confirmations_created": true
+}

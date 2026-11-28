@@ -1,0 +1,27 @@
+{
+  "protocol": "synthetic-enterprise-development-v1",
+  "synthetic": true,
+  "files": 507,
+  "errors": [],
+  "passed": true,
+  "enterprises": [
+    {
+      "employees": 30,
+      "departments": 3,
+      "months": 24
+    },
+    {
+      "employees": 100,
+      "departments": 6,
+      "months": 24
+    },
+    {
+      "employees": 500,
+      "departments": 20,
+      "months": 24
+    }
+  ],
+  "training": false,
+  "independent_validation": false,
+  "model_calls": 0
+}

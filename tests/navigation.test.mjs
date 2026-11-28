@@ -23,3 +23,13 @@ test('source links and employee scope use explicit evidence references only',()=
  assert.equal(controlReferencesEmployee(c,'EMP-002'),false);
  assert.equal(controlReferencesEmployee({evidence:[]},'EMP-001'),false);
 });
+
+test('finding links survive page changes and clear on scope changes',()=>{
+ const finding='00000000-0000-0000-0000-000000000034';
+ const n=readNavigation(navigationHash({controlId:'A.8.8',assessmentId:run,findingId:finding}));
+ assert.equal(n.findingId,finding);
+ assert.equal(mergeNavigation(n,{view:'company'}).findingId,finding);
+ assert.equal(mergeNavigation(n,{controlId:'A.8.5'}).findingId,undefined);
+ assert.equal(mergeNavigation(n,{assessmentId:finding}).findingId,undefined);
+ assert.equal(readNavigation('#finding=../../private').findingId,undefined);
+});

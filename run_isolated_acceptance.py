@@ -129,15 +129,22 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--execute',action='store_true',help='Create, test and drop only a disposable database')
     parser.add_argument('--output',required=True)
+    parser.add_argument('--headed',action='store_true',help='Show the Playwright browser during acceptance')
+    parser.add_argument('--handover-only',action='store_true',help='Run the employee and asset handover scenario only')
+    parser.add_argument('--remediation-only',action='store_true',help='Run only the remediation browser scenario')
     parser.add_argument('--extended',action='store_true',help='Also exercise real Ollama batch and candidate worker on disposable data')
     parser.add_argument('--candidate-engine',choices=('rules','llm'),default='rules')
     parser.add_argument('--verify-restart',action='store_true',help='Restart only the disposable backend while workers run')
     parser.add_argument('--remediation',action='store_true',help='Exercise corrective action lifecycle on disposable records')
     parser.add_argument('--governance',action='store_true',help='Also verify risk/requirements/inbox on disposable records')
     parser.add_argument('--clients',action='store_true',help='Also verify client isolation and real UI on disposable records')
+    parser.add_argument('--employee-workflows',action='store_true',help='Verify employee participation on disposable clients')
     args=parser.parse_args()
     if args.governance and not args.remediation:parser.error('Use --remediation with --governance')
     if args.clients and not args.governance:parser.error('Use --remediation --governance with --clients')
+    if args.employee_workflows and not args.clients:parser.error('Use --clients with --employee-workflows')
+    if args.handover_only and not args.employee_workflows:parser.error('--handover-only requires --employee-workflows')
+    if args.remediation_only and not args.remediation:parser.error('--remediation-only requires --remediation')
     if not args.execute:parser.error('--execute is required')
     if not args.extended and (args.candidate_engine!='rules' or args.verify_restart):parser.error('Use --extended for candidate engine/restart verification')
     output=Path(args.output)
@@ -156,6 +163,8 @@ def main():
     report=dict(protocol='isolated-real-write-acceptance-v1',checked_at=datetime.now(ZoneInfo('Asia/Bangkok')).isoformat(),
         database=name,test_data_only=True,human_assessment=False,professional_approval=False,
         api_mocked=False,passed=False,database_dropped=False,main_table_counts_unchanged=False)
+    if args.remediation_only:
+        env['ISO_MFA_DEMO_ENABLED']='1'
     if args.extended:
         env['ISO_ISOLATED_CANDIDATE_PATH']=str(prepare_regression_candidate(directory))
         env['ISO_ISOLATED_ORCHESTRATION_RECEIPT']=str(directory/'orchestration-receipt.json')
@@ -190,8 +199,10 @@ def main():
                     stop_backend(child);launch()
                 launch()
                 runner=ROOT/'frontend-react/node_modules/@playwright/test/cli.js'
-                specs=['tests/live-isolated.spec.js']+(['tests/live-orchestration.spec.js'] if args.extended else [])+(['tests/live-remediation.spec.js'] if args.remediation else [])+(['tests/live-z-governance.spec.js'] if args.governance else [])+(['tests/live-zz-clients.spec.js'] if args.clients else [])
-                result=subprocess.run(['node',str(runner),'test',*specs,'--workers=1','--reporter=list','--output',str(directory/'browser-results')],
+                specs=['tests/live-isolated.spec.js']+(['tests/live-orchestration.spec.js'] if args.extended else [])+(['tests/live-remediation.spec.js'] if args.remediation else [])+(['tests/live-z-governance.spec.js'] if args.governance else [])+(['tests/live-zz-clients.spec.js'] if args.clients else [])+(['tests/live-zzz-employee-workflows.spec.js'] if args.employee_workflows else [])
+                if args.handover_only:specs=['tests/live-zzz-employee-workflows.spec.js']
+                if args.remediation_only:specs=['tests/live-remediation-mfa.spec.js']
+                result=subprocess.run(['node',str(runner),'test',*specs,'--workers=1','--reporter=list','--output',str(directory/'browser-results')]+(['--headed'] if args.headed else []),
                     cwd=ROOT/'frontend-react',env=env,capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=900 if args.candidate_engine=='llm' or args.remediation else 420 if args.extended else 240)
                 (directory/'browser.log').write_text(result.stdout+'\n'+result.stderr,encoding='utf-8')
                 report['browser_exit_code']=result.returncode
@@ -212,14 +223,24 @@ def main():
                                 snapshot['clients']=client_response.json()
                                 snapshot['client_inventory']={}
                                 snapshot['client_remediation']={}
+                                snapshot['client_timelines']={}
+                                snapshot['client_assessment_requests']={}
+                                if args.employee_workflows:snapshot['employee_workflows']={}
                                 for client in snapshot['clients']['clients']:
+                                    timeline=s.get(env['UI_BASE_URL']+f"/api/clients/{client['client_id']}/timeline",timeout=30);timeline.raise_for_status()
+                                    snapshot['client_timelines'][client['client_id']]=timeline.json()
                                     for campaign in client['campaigns']:
                                         company=s.get(env['UI_BASE_URL']+f"/api/assessments/{campaign['assessment_id']}/enterprise/company",timeout=15);company.raise_for_status()
                                         snapshot['client_inventory'][campaign['assessment_id']]=company.json()
                                         records=s.get(env['UI_BASE_URL']+f"/api/assessments/{campaign['assessment_id']}/remediation",timeout=15);records.raise_for_status()
                                         snapshot['client_remediation'][campaign['assessment_id']]=records.json()['records']
+                                        assessment_requests=s.get(env['UI_BASE_URL']+f"/api/assessments/{campaign['assessment_id']}/enterprise/assessment-requests",timeout=15);assessment_requests.raise_for_status()
+                                        snapshot['client_assessment_requests'][campaign['assessment_id']]=assessment_requests.json()['requests']
+                                        if args.employee_workflows:
+                                            workflow=s.get(env['UI_BASE_URL']+f"/api/assessments/{campaign['assessment_id']}/employee-workflows",timeout=15);workflow.raise_for_status()
+                                            snapshot['employee_workflows'][campaign['assessment_id']]=workflow.json()
                                 with requests.Session() as owner_session:
-                                    login=owner_session.post(env['UI_BASE_URL']+'/api/auth/login',json={'username':'client_a_owner','password':env['ISO_ASSESSOR_PASSWORD']},timeout=15);login.raise_for_status()
+                                    login=owner_session.post(env['UI_BASE_URL']+'/api/auth/login',json={'username':'employee_participant' if args.handover_only else 'client_a_owner','password':env['ISO_ASSESSOR_PASSWORD']},timeout=15);login.raise_for_status()
                                     owner_session.headers['Authorization']='Bearer '+login.json()['access_token']
                                     mine=owner_session.get(env['UI_BASE_URL']+'/api/assessments',timeout=15);mine.raise_for_status()
                                     snapshot['client_owner_campaigns']=mine.json()

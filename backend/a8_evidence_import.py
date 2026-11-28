@@ -2,11 +2,50 @@
 import hashlib
 import json
 from pathlib import Path
+from uuid import UUID
 from psycopg.types.json import Jsonb
 from backend.database import get_connection
 from agent_core.a8_assessment import digest
 
 ORIGIN='a8-live-capture-v1'
+
+
+def capture_reference(assessment_id, control_id, evidence_id, source, checksum, content):
+    """Resolve a server-imported observation without treating it as a conclusion."""
+    try:
+        payload=json.loads(content)
+        if not isinstance(payload,dict):return None
+        run_id=str(UUID(payload['run_id']))
+        report_hash=payload['report_sha256']
+        asset=payload['asset_id']
+        if not isinstance(asset,str) or not asset.strip():return None
+        if not isinstance(report_hash,str) or len(report_hash)!=64 or any(ch not in '0123456789abcdef' for ch in report_hash):return None
+        if payload['origin']!=ORIGIN or payload['assessment_id']!=str(assessment_id) or payload['control_id']!=control_id:return None
+        if source!=f'a8-capture://{run_id}/{control_id}' or hashlib.sha256(content.encode()).hexdigest()!=checksum:return None
+        if evidence_id!='A8CAP-'+digest([str(assessment_id),control_id,checksum])[:40]:return None
+    except (ValueError,TypeError,KeyError,AttributeError):
+        return None
+    reference=dict(run_id=run_id,report_sha256=report_hash,evidence_id=evidence_id,source_sha256=checksum,asset_id=asset)
+    if control_id=='A.8.8':
+        sample=sample_application(payload)
+        if sample:reference['sample_application']=sample
+    return reference
+
+
+def sample_application(payload):
+    try:
+        artifact,=[a for a in payload['artifacts'] if a['artifact']=='sample-application.json']
+        content=artifact['content']
+        if hashlib.sha256(content.encode()).hexdigest()!=artifact['sha256']:return None
+        packet=json.loads(content)
+        observed=packet['observation']
+        if packet['schema']!='a88-sample-baseline-v1' or packet['platform_target']!='linux_lab':return None
+        if observed['platform']!='Linux' or observed['health']!='ok' or not observed['observed_at']:return None
+        return dict(platform_target='linux_lab',system='Linux',application=observed['application'],
+                    baseline_version=observed['version'],baseline_artifact_sha256=observed['sha256'],
+                    observed_at=observed['observed_at'])
+    except (KeyError,TypeError,ValueError,AttributeError):
+        return None
 
 
 def prepare_sources(assessment_id,run_id,doc):

@@ -2,6 +2,7 @@
 import csv
 from io import StringIO
 from html import escape
+import json
 
 
 def csv_report(report):
@@ -54,6 +55,8 @@ def print_report(report):
                 '<p>Phụ trách: '+e(a.get('assignee') or 'Chưa giao')+' · Hạn: '+e(a.get('due_date') or 'Chưa ghi')+' · Ưu tiên: '+e(a.get('priority') or 'medium')+'</p>',
                 ('<p>Người phối hợp: '+e(', '.join(a['collaborator_ids']))+'</p>' if a.get('collaborator_ids') else ''),
                 '<p>'+e(a['steps'])+'</p>','<p>Điều kiện nghiệm thu: '+e(a['acceptance'])+'</p>']
+            if a.get('mfa_lab_receipt'):
+                parts+=['<details open><summary>Biên nhận MFA lab</summary><pre>'+e(json.dumps(a['mfa_lab_receipt'],ensure_ascii=False,indent=2))+'</pre></details>']
             for key,label in [('objective','Mục tiêu'),('rationale','Vì sao'),('possible_causes','Nguyên nhân có thể'),('target_location','Vị trí xử lý'),('estimated_effort','Ước lượng thời gian'),('required_evidence','Bằng chứng cần nộp'),('recheck_method','Cách kiểm tra lại')]:
                 if a.get(key):parts+=['<p>'+label+': '+e(a[key])+'</p>']
             if a.get('clarification_questions'):

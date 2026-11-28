@@ -4,9 +4,11 @@ import logging
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from uuid import UUID, uuid4
+from typing import Literal
+from datetime import date
 
 from fastapi import APIRouter, Depends, File, Form, Header, HTTPException, UploadFile
-from pydantic import BaseModel, Field, ConfigDict
+from pydantic import BaseModel, Field, ConfigDict,model_validator
 from psycopg import IntegrityError
 from psycopg.types.json import Jsonb
 
@@ -118,12 +120,21 @@ class ClientInput(BaseModel):
     contact:str=Field(min_length=2,max_length=1000)
     locations:str=Field(default='',max_length=2000)
     expected_version:int=Field(default=0,ge=0)
+    data_classification:Literal['user_supplied','synthetic_development']='user_supplied'
 
 
 class CampaignInput(BaseModel):
     model_config=ConfigDict(extra='forbid',str_strip_whitespace=True)
     name:str=Field(min_length=3,max_length=200)
     isms_scope:str=Field(min_length=10,max_length=4000)
+    period_start:date|None=None
+    period_end:date|None=None
+    assessment_kind:Literal['initial','monthly','quarterly','annual','ad_hoc','reassessment']='ad_hoc'
+    @model_validator(mode='after')
+    def validate_period(self):
+        if (self.period_start is None)!=(self.period_end is None):raise ValueError('Cần cả ngày bắt đầu/kết thúc kỳ hoặc để trống cả hai.')
+        if self.period_start and self.period_end<self.period_start:raise ValueError('Ngày kết thúc trước bắt đầu kỳ.')
+        return self
 
 
 def require_admin(user):
@@ -143,27 +154,84 @@ def require_client(cur,cid,user):
 @router.get('/clients')
 def clients(user:dict=Depends(require_user)):
     with database.get_connection() as con,con.cursor() as cur:
-        cur.execute('''SELECT c.client_id,c.name,c.profile,c.version,cc.assessment_id,a.name
+        cur.execute('''SELECT c.client_id,c.name,c.profile,c.version,cc.assessment_id,a.name,a.period_metadata
             FROM consulting_clients c JOIN consulting_campaigns cc ON cc.client_id=c.client_id
             JOIN assessment_campaigns a ON a.assessment_id=cc.assessment_id
             JOIN assessment_members m ON m.assessment_id=a.assessment_id
             WHERE m.user_id=%s ORDER BY c.name,a.created_at''',(user['user_id'],))
         rows={}
-        for cid,name,profile,version,aid,title in cur.fetchall():
+        for cid,name,profile,version,aid,title,period in cur.fetchall():
             item=rows.setdefault(str(cid),dict(client_id=str(cid),name=name,profile=profile,version=version,campaigns=[]))
-            item['campaigns'].append(dict(assessment_id=str(aid),name=title))
+            item['campaigns'].append(dict(assessment_id=str(aid),name=title,period=period))
     return dict(clients=list(rows.values()),can_manage=user['role']=='admin',note='Chỉ đợt được cấp quyền; doanh nghiệp mới bắt đầu rỗng, không tự nạp preset.')
+
+
+@router.get('/clients/{client_id}/timeline')
+def client_timeline(client_id:UUID,user:dict=Depends(require_user)):
+    """Compare visible saved periods only; never infer missing periods or approvals."""
+    with database.get_connection() as con,con.cursor() as cur:
+        require_client(cur,client_id,user)
+        cur.execute('''SELECT a.assessment_id,a.name,a.created_at,a.period_metadata FROM consulting_campaigns c
+            JOIN assessment_campaigns a ON a.assessment_id=c.assessment_id
+            JOIN assessment_members m ON m.assessment_id=a.assessment_id
+            WHERE c.client_id=%s AND m.user_id=%s ORDER BY COALESCE(a.period_metadata->>'period_start',a.created_at::date::text),a.created_at,a.assessment_id''',(client_id,user['user_id']))
+        periods=cur.fetchall()
+    from backend.enterprise_api import scope56
+    from backend.enterprise_comparison import summarize_periods
+    rows=[]
+    for aid,name,created,metadata in periods:
+        scope=scope56(aid,user)
+        rows.append(dict(assessment_id=str(aid),name=name,created_at=created.isoformat(),controls=scope['controls'],period=metadata))
+    result=summarize_periods(str(client_id),rows)
+    with database.get_connection() as con,con.cursor() as cur:
+        cur.execute('''SELECT s.snapshot_id,s.assessment_id,s.created_at,s.source_sha256,s.document FROM enterprise_period_snapshots s
+            JOIN consulting_campaigns c ON c.assessment_id=s.assessment_id
+            JOIN assessment_members m ON m.assessment_id=s.assessment_id WHERE c.client_id=%s AND m.user_id=%s
+            ORDER BY s.created_at,s.snapshot_id''',(client_id,user['user_id']))
+        result['sealed_snapshots']=[dict(snapshot_id=str(sid),assessment_id=str(aid),sealed_at=at.isoformat(),source_sha256=sha,summary=doc['summary']) for sid,aid,at,sha,doc in cur.fetchall()]
+    return result
+
+
+class SealPeriodInput(BaseModel):
+    model_config=ConfigDict(extra='forbid')
+    expected_sha256:str=Field(pattern=r'^[a-f0-9]{64}$')
+
+
+@router.post('/clients/{client_id}/periods/{assessment_id}/seal',status_code=201)
+def seal_client_period(client_id:UUID,assessment_id:UUID,req:SealPeriodInput,user:dict=Depends(require_user)):
+    require_campaign(assessment_id,user)
+    from backend.remediation_api import membership
+    if membership(assessment_id,user) not in ('consultant','business_admin'):raise HTTPException(403,'Cần tư vấn hoặc quản trị doanh nghiệp chốt bản lưu kỳ.')
+    with database.get_connection() as con,con.cursor() as cur:
+        require_client(cur,client_id,user)
+        cur.execute('SELECT 1 FROM consulting_campaigns WHERE client_id=%s AND assessment_id=%s',(client_id,assessment_id))
+        if not cur.fetchone():raise HTTPException(403,'Kỳ không thuộc doanh nghiệp.')
+    from backend.enterprise_api import scope56
+    from backend.enterprise_comparison import summarize_periods,period_fingerprint
+    scope=scope56(assessment_id,user)
+    fingerprint=period_fingerprint(scope['controls'])
+    if fingerprint!=req.expected_sha256:raise HTTPException(409,'Dữ liệu đã đổi; tải lại trước khi chốt kỳ.')
+    summary=summarize_periods(str(client_id),[dict(assessment_id=str(assessment_id),name='Sealed period',created_at='',controls=scope['controls'])])['periods'][0]
+    snapshot_id=str(uuid4())
+    document=dict(scope=scope,summary=summary,professional_approval=False,note='Bản lưu kết quả hiện có; không tự khóa nguồn, duyệt SoA hoặc xác nhận chuyên môn.')
+    with database.get_connection() as con,con.cursor() as cur:
+        cur.execute('''INSERT INTO enterprise_period_snapshots(snapshot_id,assessment_id,created_by,source_sha256,document)
+            VALUES(%s,%s,%s,%s,%s) ON CONFLICT(assessment_id,source_sha256) DO NOTHING''',
+            (snapshot_id,assessment_id,user['user_id'],fingerprint,Jsonb(document)))
+        cur.execute('SELECT snapshot_id FROM enterprise_period_snapshots WHERE assessment_id=%s AND source_sha256=%s',(assessment_id,fingerprint))
+        snapshot_id=str(cur.fetchone()[0])
+    return dict(snapshot_id=snapshot_id,assessment_id=str(assessment_id),summary=summary,professional_approval=False)
 
 
 def create_client_campaign(cur,cid,profile,req,user):
     aid=str(uuid4())
-    cur.execute("INSERT INTO assessment_campaigns(assessment_id,name,inventory_mode) VALUES(%s,%s,'client')",(aid,req.name))
+    cur.execute("INSERT INTO assessment_campaigns(assessment_id,name,inventory_mode,period_metadata) VALUES(%s,%s,'client',%s)",(aid,req.name,Jsonb(req.model_dump(mode='json',include={'period_start','period_end','assessment_kind'}))))
     cur.execute('INSERT INTO consulting_campaigns VALUES(%s,%s)',(aid,cid))
     cur.execute('INSERT INTO assessment_members VALUES(%s,%s)',(aid,user['user_id']))
     cur.execute('INSERT INTO control_progress(assessment_id,control_id) SELECT %s,control_id FROM controls',(aid,))
     from datetime import datetime
     from zoneinfo import ZoneInfo
-    metadata=dict(name=profile['name'],synthetic=False,origin='user_supplied_not_verified',assessment_date=datetime.now(ZoneInfo('Asia/Bangkok')).date().isoformat(),policies={})
+    metadata=dict(name=profile['name'],synthetic=False,synthetic_dataset=profile.get('data_classification')=='synthetic_development',origin=profile.get('data_classification','user_supplied')+'_not_verified',assessment_date=datetime.now(ZoneInfo('Asia/Bangkok')).date().isoformat(),policies={})
     cur.execute('INSERT INTO enterprise_company(assessment_id,metadata) VALUES(%s,%s)',(aid,Jsonb(metadata)))
     from backend.remediation import now
     context=dict(name=profile['name'],sector=profile['sector'],isms_scope=req.isms_scope,contact=profile['contact'],locations=profile.get('locations',''),departments='',assets_systems='',obligations='',risks='',history=[dict(at=now(),actor=user['user_id'],command='client_campaign_created',note='Phạm vi do người dùng khai, chưa xác nhận chuyên môn.')])
@@ -194,11 +262,39 @@ def edit_client(client_id:UUID,req:ClientInput,user:dict=Depends(require_user)):
         require_client(cur,client_id,user)
         cur.execute('SELECT profile,version FROM consulting_clients WHERE client_id=%s FOR UPDATE',(client_id,));old,version=cur.fetchone()
         if version!=req.expected_version:raise HTTPException(409,'Hồ sơ đã đổi; tải lại.')
+        if old.get('data_classification')=='synthetic_development' and req.data_classification!='synthetic_development':
+            raise HTTPException(422,'Không đổi dữ liệu mô phỏng thành hồ sơ thật.')
         profile=req.model_dump(exclude={'expected_version'})
         from backend.remediation import now
         profile['history']=old.get('history',[])+[dict(at=now(),before={k:v for k,v in old.items() if k!='history'},actor=user['user_id'])]
         cur.execute('UPDATE consulting_clients SET name=%s,profile=%s,version=version+1 WHERE client_id=%s',(req.name,Jsonb(profile),client_id))
     return dict(client_id=str(client_id),version=version+1,note='Phạm vi từng đợt giữ riêng, không tự thay baseline đang đánh giá.')
+
+
+class DemoDatasetInput(BaseModel):
+    model_config=ConfigDict(extra='forbid')
+    sizes:list[int]=Field(default=[30,100,500],min_length=1,max_length=3)
+    months:int=Field(default=6,ge=1,le=24)
+    seed:int=Field(default=27001,ge=0,le=2147483647)
+
+
+@router.post('/demo-dataset/download')
+def download_demo_dataset(req:DemoDatasetInput,user:dict=Depends(require_user)):
+    require_admin(user)
+    if any(n<1 or n>500 for n in req.sizes) or sum(req.sizes)*req.months>20000:
+        raise HTTPException(422,'Gói web tối đa 3 doanh nghiệp, 500 người/doanh nghiệp và 20000 dòng người–kỳ; gói lớn dùng CLI.')
+    from tempfile import TemporaryDirectory
+    from io import BytesIO
+    from zipfile import ZipFile,ZIP_DEFLATED
+    from fastapi.responses import Response
+    from generate_enterprise_dataset import generate
+    with TemporaryDirectory(prefix='iso-synthetic-') as temp:
+        root=Path(temp)/'dataset';generate(root,tuple(req.sizes),req.months,req.seed)
+        out=BytesIO()
+        with ZipFile(out,'w',ZIP_DEFLATED) as archive:
+            for file in sorted(root.rglob('*')):
+                if file.is_file():archive.write(file,file.relative_to(root).as_posix())
+    return Response(out.getvalue(),media_type='application/zip',headers={'Content-Disposition':'attachment; filename="synthetic-development-dataset.zip"','Cache-Control':'no-store'})
 
 
 @router.post('/clients/{client_id}/campaigns',status_code=201)

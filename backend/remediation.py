@@ -14,11 +14,13 @@ def review_signature(control):
     return hashlib.sha256(json.dumps(control.get('human_review'),sort_keys=True,ensure_ascii=False).encode()).hexdigest()
 
 
-def finding(control,description,location,cause,risk):
+def finding(control,description,location,cause,risk,criterion_index=None):
+    if criterion_index is not None and not 0 <= criterion_index < len(control['pass_criteria']):
+        raise ValueError('Tiêu chí không thuộc control này.')
     if control['applicability'] and control['applicability'].get('applicable') is False:
         raise ValueError('Control đã có quyết định loại trừ; rà quyết định trước khi mở khắc phục.')
     return dict(finding_id=str(uuid4()),control_id=control['control_id'],description=description,
-        location=location,root_cause=cause,risk=risk,root_cause_confirmed=False,
+        criterion_index=criterion_index,location=location,root_cause=cause,risk=risk,root_cause_confirmed=False,
         baseline=dict(review_token=control['review_token'],conclusion=control['conclusion'],
             human_review=deepcopy(control['human_review']) if control['human_review_current'] else None,
             evidence=[{k:e.get(k) for k in ('evidence_id','sha256_hash','source','evidence_type')} for e in control['evidence']],
@@ -155,12 +157,25 @@ def transition(document,action_id,command,payload,actor,role,control):
                 raise ValueError('Bằng chứng sau khắc phục thiếu, đổi hoặc không dùng được.')
         if outcome=='accepted':
             review=control['human_review']
-            if not control['human_review_current'] or review['conclusion']!='Compliant':raise ValueError('Cần thẩm định từng tiêu chí hiện hành kết luận tuân thủ trước khi xác minh đạt.')
+            if not control['human_review_current']:
+                raise ValueError('Cần thẩm định hiện hành trước khi xác minh.')
+            index=doc.get('criterion_index')
+            if index is None:
+                if review['conclusion']!='Compliant':
+                    raise ValueError('Cần thẩm định kết luận tuân thủ cho hành động toàn control.')
+                cited=set(review['evidence_ids'])
+            else:
+                if control['pass_criteria']!=doc['baseline']['criteria']:
+                    raise ValueError('Rubric đã thay đổi; cần lập phát hiện trên tiêu chí hiện hành.')
+                criterion=next((c for c in review.get('criteria_reviews',[]) if c['criterion_index']==index),None)
+                if not criterion or criterion['verdict']!='met':
+                    raise ValueError('Tiêu chí của hành động chưa được thẩm định đạt.')
+                cited=set(criterion['evidence_ids'])
             if str(review.get('reviewed_by'))!=str(actor):raise ValueError('Người xác minh phải tự thẩm định hiện hành, không dùng xác nhận của người thực hiện.')
-            cited=set(review['evidence_ids'])
             if not cited.intersection(e['evidence_id'] for e in item['evidence']):raise ValueError('Thẩm định phải viện dẫn nguồn sau khắc phục.')
         item['state']={'accepted':'VERIFIED','rework':'REWORK','partial':'REWORK','more_information':'NEEDS_INFORMATION'}[outcome]
         item['verifications'].append(dict(outcome=outcome,reviewer_id=actor,note=payload['note'],at=now(),
+            criterion=doc['baseline']['criteria'][doc['criterion_index']] if doc.get('criterion_index') is not None else None,
             human_review_signature=review_signature(control),
             human_reviewed_at=control['human_review'].get('reviewed_at') if control['human_review_current'] else None,
             review_token=control['review_token'],conclusion=control['human_review']['conclusion'] if control['human_review_current'] else None))
@@ -170,7 +185,7 @@ def transition(document,action_id,command,payload,actor,role,control):
     elif command=='close':
         if not consultant or operator or before!='VERIFIED':raise PermissionError('Chỉ đóng hành động đã xác minh đạt.')
         if (not control['human_review_current'] or control['review_token']!=item['verifications'][-1]['review_token'] or
-            control['human_review']['conclusion']!='Compliant' or review_signature(control)!=item['verifications'][-1]['human_review_signature']):
+            review_signature(control)!=item['verifications'][-1]['human_review_signature']):
             raise ValueError('Thẩm định đã cũ, không đóng hành động trên nguồn khác.')
         item['state']='CLOSED'
     else:raise ValueError('Lệnh không được hỗ trợ.')

@@ -1,0 +1,248 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "D:\\AI_Agent_ISO27001\\frontend-react\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/assessment-requests.spec.js",
+      "tests/client-management.spec.js",
+      "tests/remediation-workspace.spec.js",
+      "--workers=1",
+      "--reporter=list,json",
+      "--output=../work/tu-tuan7-selective-ui"
+    ],
+    "rootDir": "D:/AI_Agent_ISO27001/frontend-react",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "D:/AI_Agent_ISO27001/work/tu-tuan7-selective-ui",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "D:/AI_Agent_ISO27001/frontend-react",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "D:\\AI_Agent_ISO27001\\work\\tu-tuan7-selective-ui",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "D:\\AI_Agent_ISO27001\\frontend-react",
+        "snapshotDir": "D:\\AI_Agent_ISO27001\\frontend-react",
+        "testIgnore": [],
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 30000,
+        "use": {},
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.65.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "tests\\assessment-requests.spec.js",
+      "file": "tests/assessment-requests.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "assessment request UI preserves requested scope and cancellation history without running Agent",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 30201,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "D:\\AI_Agent_ISO27001\\frontend-react\\tests\\assessment-requests.spec.js",
+                        "column": 271,
+                        "line": 18
+                      },
+                      "message": "Error: locator.selectOption: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Control trong yêu cầu', { exact: true })\u001b[22m\n\n\n  16 |  await page.goto('/');await page.getByLabel('Tên đăng nhập',{exact:true}).fill('admin');await page.getByLabel('Mật khẩu',{exact:true}).fill(process.env.INITIAL_ADMIN_PASSWORD);await page.getByRole('button',{name:'ĐĂNG NHẬP HỆ THỐNG'}).click();\n  17 |  await page.getByText('Yêu cầu đánh giá · lưu mục đích và phạm vi',{exact:true}).click();\n> 18 |  await page.getByLabel('Tên yêu cầu đánh giá',{exact:true}).fill('UI TEST yêu cầu đánh giá');await page.getByLabel('Mục đích và phạm vi yêu cầu',{exact:true}).fill('UI MOCK xem hồ sơ gốc cho kiểm tra nhân sự');await page.getByLabel('Control trong yêu cầu',{exact:true}).selectOption(['A.6.1']);await page.getByLabel('Căn cứ lập yêu cầu',{exact:true}).fill('UI MOCK ONLY, không ghi doanh nghiệp chính');await page.getByRole('button',{name:'Lưu yêu cầu đánh giá',exact:true}).click();\n     |                                                                                                                                                                                                                                                                               ^\n  19 |  await expect(page.getByRole('heading',{name:'UI TEST yêu cầu đánh giá',exact:true})).toBeVisible();\n  20 |  await page.getByLabel('Lý do hủy UI TEST yêu cầu đánh giá',{exact:true}).fill('UI MOCK yêu cầu giữ nguyên lịch sử');await page.getByRole('button',{name:'Hủy yêu cầu, giữ lịch sử',exact:true}).click();await expect(page.getByText(/Đã hủy — giữ lịch sử/)).toBeVisible();\n  21 |  const token=await page.evaluate(()=>sessionStorage.getItem('iso_team_token'));await page.request.post('/api/auth/logout',{headers:{Authorization:`Bearer ${token}`}});\n    at D:\\AI_Agent_ISO27001\\frontend-react\\tests\\assessment-requests.spec.js:18:271"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-26T22:54:59.875Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "D:\\AI_Agent_ISO27001\\work\\tu-tuan7-selective-ui\\tests-assessment-requests--32409-story-without-running-Agent\\error-context.md"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "15d26d46f926d6fa635b-9b4acec79f135f0c3cfd",
+          "file": "tests/assessment-requests.spec.js",
+          "line": 5,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "tests\\client-management.spec.js",
+      "file": "tests/client-management.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "client forms UI: create and edit versioned profile without main campaign mutations",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2093,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-26T22:55:31.211Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "37b90e91989a91940f27-9428dacafc385059eab7",
+          "file": "tests/client-management.spec.js",
+          "line": 5,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "tests\\remediation-workspace.spec.js",
+      "file": "tests/remediation-workspace.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "corrective action UI: baseline, consultant approval, assigned work and separate verification without main writes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7386,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-26T22:55:33.820Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a8a41497c31d57a090ba-c6578d87424062f43e5b",
+          "file": "tests/remediation-workspace.spec.js",
+          "line": 7,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-26T22:54:59.332Z",
+    "duration": 42070.129,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

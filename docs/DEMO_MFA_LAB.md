@@ -1,0 +1,67 @@
+# Demo hành động khắc phục MFA trong lab
+
+Ca React/khắc phục trước đây dùng các tệp TXT tự soạn với enrolled/enforced, có lưu phát hiện, nháp Qwen, giao việc, thẩm định theo tiêu chí và báo cáo. Kho doanh nghiệp cũng có số liệu IAM mô phỏng. Hai nguồn này không truy vấn chính sách một IAM thực. Probe A.8.5 hiện tại dùng dịch vụ TCP loopback với mật khẩu PBKDF2 và mã HMAC theo thời gian, đọc file auth.json nội bộ. Compose chạy container không có mạng ngoài và không có API quản trị IAM.
+
+## Ca thực thi dùng một lần
+
+```powershell
+.venv\Scripts\python.exe -m lab_a8.mfa_remediation_demo --output work/mfa-demo-new.json
+```
+
+1. Đọc trạng thái và thực hiện phép thử đăng nhập cho tài khoản labadmin-mfa-demo. Quan sát đồng thời có mốc thời gian, nguồn, chính sách LAB-ADMIN-MFA và tiêu chí second_factor_enforced.
+2. Xem nháp thao tác và mã đề xuất in ra. Người vận hành nhập tên và gõ APPROVE theo sau bởi mã đề xuất. Để trống nếu từ chối. Tên ghi trong CLI là khai báo của người vận hành.
+3. Tool chỉ đổi require_otp trong file chính sách riêng của lần chạy. Không nhận địa chỉ, tài khoản, đường dẫn chính sách hoặc lệnh tùy ý. Thu lại chính sách và thực hiện các kết nối riêng có/không có yếu tố thứ hai.
+4. Xem receipt JSON. Kết quả VERIFIED_MET chỉ áp dụng tiêu chí hành vi của dịch vụ tổng hợp. Các trạng thái EXECUTION_FAILED, VERIFIED_NOT_MET và VERIFICATION_UNAVAILABLE được giữ riêng. File chính sách tạm dọn sau khi kết thúc.
+
+## Cách chuyển biên nhận thủ công của bản CLI
+
+Trong đợt mô phỏng riêng, nộp phần before làm nguồn A.8.5 rồi lập phát hiện và duyệt giao việc qua hệ thống. Chạy CLI ở máy lab, nộp receipt JSON gồm approval, execution, before, after qua hồ sơ A.8.5, gắn mã nguồn vào hành động rồi thẩm định và xác minh theo tiêu chí. Báo cáo khắc phục hiện có dẫn ID/hash nguồn; mở bản gốc để xem chi tiết thực thi và lần đọc lại. Đây là luồng chuyển nguồn thủ công. CLI có cổng duyệt riêng; chưa có cầu nối để lấy người duyệt đã xác thực từ React hoặc tự ghi biên nhận vào báo cáo.
+
+Minh chứng chạy trên máy: [receipt tổng hợp](../work/mfa-active-lab.json). Phê duyệt trong receipt này là callback của bài kiểm tra tự động. Trước thay đổi đăng nhập thiếu yếu tố thứ hai trả 200. Sau thay đổi trả 403, đăng nhập đủ yếu tố vẫn trả 200. Kiểm thử nhắm vào bốn ca: chưa duyệt, thành công, tool lỗi và tool báo thành công khi đọc lại vẫn trượt. Hai ca lỗi dùng thay thế hàm ghi chính sách trong test, giữ phép đọc/thử loopback thật. Chưa chạy lại React/PostgreSQL/PDF/Excel cho receipt mới.
+
+Muốn tự động hóa trên IAM lab chuyên dụng cần API đọc và ghi cho đối tượng thử, thông tin nhận diện môi trường, tài khoản dịch vụ có quyền tối thiểu, phê duyệt gắn với phiên bản đề xuất và lưu biên nhận thực thi. Ca CLI hiện không cần Docker hoặc IAM bên ngoài.
+
+## Chạy từ giao diện khắc phục
+
+Dùng một đợt thử riêng và bật ISO_MFA_DEMO_ENABLED=1 trong tiến trình backend lab. Mở A.8.5, lập phát hiện và đầu việc với đích labadmin-mfa-demo / LAB-ADMIN-MFA, rồi duyệt giao việc. Tư vấn mở đầu việc đã duyệt và chọn **Xác nhận chạy công cụ MFA lab**. Server kiểm quyền, phiên bản, lịch sử duyệt, rubric và bối cảnh. Đích và thao tác được cố định trong mã. Khi tắt cờ, giao diện chỉ hướng dẫn người phụ trách thực hiện và nộp nguồn.
+
+Đầu việc giữ biên nhận trước/sau, người duyệt, người bấm chạy, công cụ và kết quả đọc lại. JSON báo cáo chứa biên nhận; Excel có sheet MFA lab và PDF có mục tương ứng. Biên nhận kỹ thuật không tự cập nhật kết luận. Trong ca thử, người thực hiện nộp bản sao biên nhận làm nguồn, sau đó tư vấn thẩm định và xác minh bằng luồng hiện có. Lần đo ban đầu trong biên nhận chạy ngay trước khi ghi chính sách, còn hồ sơ để mở phát hiện vẫn dùng dữ liệu mô phỏng chuẩn bị trước.
+
+Chạy nghiệm thu với database tạm:
+
+```powershell
+npm --prefix frontend-react run build
+.venv\Scripts\python.exe run_isolated_acceptance.py --execute --remediation --remediation-only --output work/mfa-ui-tool-new.json
+```
+
+Runner bật cờ trên backend thử. Trong test trình duyệt chỉ thao tác chạy công cụ và tải báo cáo qua React; tạo/duyệt đầu việc, nộp nguồn và thẩm định chạy qua API thật. Môi trường chưa có connector IAM bên ngoài. Ca bàn giao laptop tiếp tục theo quy trình người thực hiện và người xác minh riêng.
+
+Kết quả bản React: [Biên nhận nghiệm thu](../work/mfa-ui-tool.json), [PDF](../work/mfa-ui-delivery/mfa-before-after.pdf) và [Excel](../work/mfa-ui-delivery/mfa-before-after.xlsx). Lượt thử chặn chạy trước duyệt, chặn vai trò nhân viên và chặn chạy lặp. Edge gọi công cụ, hiện VERIFIED_MET và tải cả hai báo cáo. Kiểm nội dung PDF/XLSX có đối tượng, kết quả 403 khi thiếu yếu tố và người duyệt. Dữ liệu giữ sau restart backend. Database thử đã dọn và số dòng các bảng chính được theo dõi giữ nguyên.
+
+### Phạm vi hành động trình bày
+
+- **MFA A.8.5:** Công cụ thay đổi chính sách trên dịch vụ tổng hợp dùng một lần. Chỉ phát hiện gắn với tiêu chí “Bật MFA cho tài khoản đặc quyền” mới có quyền chạy sau duyệt. Giao diện hiện bảng trước/sau và cho tải biên nhận JSON. Báo cáo HTML, PDF và Excel giữ thông tin thực thi.
+- **Bàn giao A.6.5:** Nhân viên và người tiếp nhận thực hiện. Hệ thống giao việc, kiểm mã tài sản, lưu nguồn và chuyển người khác xác minh.
+- **Còn thiếu:** baseline phát hiện vẫn cần bộ nguồn đã chuẩn bị; biên nhận sau chạy chưa tự nhập làm nguồn thẩm định. Chưa có công cụ đổi cấu hình trên IAM/thiết bị khác, chưa kiểm thử cả chuỗi tạo, duyệt, nộp và thẩm định bằng thao tác giao diện. Với hệ thống ngoài lab cần connector và phạm vi được người phụ trách xác nhận.
+
+[Lượt kiểm thử truy vết biên nhận](../work/mfa-traceable-final.json).
+
+### Thu bằng chứng trực tiếp từ giao diện
+
+Trong phần Tư vấn & khắc phục, tư vấn bấm **Thu nguồn MFA ban đầu từ lab**. Hệ thống chạy phép thử đăng nhập trên cấu hình khởi điểm tổng hợp, giữ JSON gốc và hash vào hồ sơ A.8.5. Dùng nguồn này để lập phát hiện. Mỗi lần đo dùng môi trường tạm riêng; khi chạy đầu việc, công cụ đo lại ngay trên môi trường sắp sửa để có cặp trước/sau cùng phiên.
+
+Sau khi chạy công cụ, bấm **Lưu biên nhận vào nguồn A.8.5**. Nguồn được nhập từ biên nhận server đã lưu, không cần tải xuống rồi nộp lại. Cùng một biên nhận có cùng ID/hash và được tái sử dụng. Người thực hiện vẫn chọn nguồn để gửi xác minh; chuyên viên vẫn ghi căn cứ và kết luận từng tiêu chí.
+
+Lượt kiểm thử Edge thao tác thu nguồn đầu, chạy công cụ, lưu nguồn sau và tải PDF/Excel. Tạo/duyệt công việc, nộp xác minh và thẩm định được kiểm qua API thật. [Biên nhận kiểm thử](../work/mfa-sources-verified.json).
+
+### Nghiệm thu thao tác chuyên viên trên Edge
+
+Lượt [MFA qua giao diện](../work/mfa-full-review-ui.json) dùng Edge, FastAPI và PostgreSQL riêng. Tài khoản tư vấn thực hiện thu nguồn ban đầu, tạo phát hiện gắn đúng tiêu chí, duyệt giao việc, chạy công cụ, lưu nguồn sau, thẩm định từng tiêu chí, xác minh đạt và tải báo cáo. Các tiêu chí ngoài MFA vẫn thiếu nguồn. Tài khoản nhân viên mở đầu việc và đường đến hồ sơ nguồn trên React. Tạo nháp kế hoạch, ghi tiến độ, gắn nguồn, gửi lại và đóng hành động được kiểm qua API trong lượt này.
+
+| Tình huống | Người hoặc công cụ thực hiện |
+|---|---|
+| MFA trong lab tổng hợp | Công cụ đổi cấu hình thử và thu lại kết quả đăng nhập. Tư vấn duyệt, thẩm định và xác minh tiêu chí. |
+| Thu hồi laptop | Nhân viên bàn giao; người tiếp nhận đối chiếu mã tài sản và biên nhận; chuyên viên khác xác minh. |
+| Cập nhật phần mềm hoặc cấu hình hệ điều hành khác | Quy trình có thể lưu phát hiện và giao việc. Muốn thực thi tự động cần lab có đích xác định, connector được cấp quyền, gói cập nhật hoặc cấu hình được phép và phép đo phiên bản/trạng thái sau thay đổi. Ca A.8.8 hiện có phép đọc inventory đại diện. |
+
+Cách trình bày với giảng viên: trình diễn một thao tác kỹ thuật có phê duyệt bằng MFA và một thao tác nghiệp vụ bằng bàn giao. Giữ bảng rà soát riêng cho những môi trường chưa có công cụ thực thi. Hai ca cung cấp minh chứng cho tiêu chí đại diện trong phạm vi đồ án.

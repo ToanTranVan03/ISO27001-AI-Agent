@@ -1,84 +1,64 @@
-# Tuần 7 — Kiểm tra liên kết, nghiệm thu theo đề tài và chuẩn bị bảo vệ
+# Tuần 7 — Từ đánh giá đến khắc phục và xác minh
 
-- Thời gian: **23/11/2026–29/11/2026 (thứ Hai–Chủ nhật).**
-- Trạng thái: **Đang thực hiện — đã kiểm tra liên kết, nghiệm thu theo đề tài và chuẩn bị hồ sơ bảo vệ (25/11).**
-- Lập kế hoạch và cập nhật: **22/11/2026** (Chủ nhật cuối tuần 6).
+- **Thời gian:** 23/11/2026–29/11/2026 (thứ Hai–Chủ nhật).
+- **Trạng thái:** Đang thực hiện. Đã nghiệm thu các ca kỹ thuật chính trên môi trường thử.
+- **Cập nhật:** 28/11/2026.
 
 ## Mục tiêu và kế hoạch
 
-Giữ phạm vi 56 control Annex A (8 A.6, 14 A.7, 34 A.8). Tuần 7 **không xây thêm chức năng mới** (chỉ sửa lỗi thật). Trọng tâm: kiểm tra liên kết toàn hệ thống, nghiệm thu theo mục tiêu đề tài và chuẩn bị hồ sơ bảo vệ đồ án.
+Giữ phạm vi **56 control** của đồ án (8 A.6 con người, 14 A.7 vật lý, 34 A.8 công nghệ), trong đó **18 A.8** được thực nghiệm sâu. Tập trung trình bày chuỗi **đọc bằng chứng → chỉ ra điểm chưa đạt → duyệt và giao việc → thực hiện → đo lại → thẩm định → xuất báo cáo**. Làm rõ bước nào do Agent, công cụ lab, nhân viên và chuyên viên thực hiện.
 
-**Việc đã làm (có minh chứng, xem nhật ký bên dưới):**
+## Công việc chuyển tiếp từ tuần 6
 
-- [x] Kiểm tra liên kết và đồng bộ toàn hệ thống; sửa lỗi phát hiện và bổ sung test hồi quy.
-- [x] Nghiệm thu theo mục tiêu đề tài: ma trận 56 control, đánh giá năng lực AI Agent, 10 tình huống độc lập (kiểm thử kỹ thuật).
-- [x] Soạn hồ sơ bảo vệ: kiến trúc, test case nghiệm thu, kịch bản demo 15 phút + dữ liệu demo, đề cương báo cáo, slide, câu hỏi phản biện.
-
-**Việc còn lại trong tuần:**
-
-- [ ] Chạy thử kịch bản demo 15 phút trên giao diện, điền cột "Kết quả thực tế / Pass-Fail / Minh chứng" trong bộ test case nghiệm thu (chỉ điền khi đã chạy thật).
-- [ ] Chụp ảnh màn hình cho slide và báo cáo; dựng slide từ đề cương.
-- [ ] Viết nội dung báo cáo đồ án theo đề cương 6 chương.
-- [ ] Gửi giảng viên xem hồ sơ; ghi nhận góp ý, người/ngày xác nhận.
-
-**Phụ thuộc người thật — không tự hoàn thành thay** (chuyển tiếp từ tuần 6, vẫn mở): bổ sung nguồn cho 37 control thiếu và thay nguồn A.6.2; bộ kiểm định và người chấm độc lập; 56 quyết định tính áp dụng; thẩm định và phê duyệt SoA.
-
-Chỉ tích hoàn thành khi có kết quả thực tế; chạy Agent xong không đồng nghĩa control tuân thủ.
-
-## Nền tảng bàn giao từ tuần 6
-
-Đây là trạng thái tại mốc bàn giao **21–22/11**, không phải thành tích thực hiện tuần 7:
-
-- Đã hoàn thiện [vòng đời tư vấn/khắc phục](../docs/TU_VAN_VA_KHAC_PHUC_ISO.md), [nâng cấp theo s.txt](../docs/HOAN_THIEN_THEO_S_TXT_2026_11_22.md) và [nghiệm thu toàn diện](../docs/FINAL_ACCEPTANCE_2026.md): quản lý nhiều khách hàng/đợt riêng (`inventory_mode = 'client'`, bắt đầu rỗng), khai báo danh mục doanh nghiệp có snapshot, profile ISMS, baseline phát hiện, AI tư vấn có cấu trúc chi tiết + câu hỏi làm rõ, giao việc người chính/phối hợp/bước con, nguồn sau, xác minh độc lập, sổ rủi ro 5×5 & sổ yêu cầu có nguồn, dashboard 3 góc nhìn, thông báo hộp thư + tùy chọn SMTP an toàn, báo cáo trước–sau PDF/XLSX/CSV/HTML/JSON và `/api/health`, PostgreSQL lưu qua restart. Đợt chính giữ nguyên không chèn hồ sơ giả; các giới hạn ngoài phạm vi đồ án (toàn văn tiêu chuẩn bản quyền, điều khoản ISMS 4–10/A.5, hình ảnh/OCR, hàng đợi phân tán HA) được ghi rõ trong tài liệu nghiệm thu.
-- Bổ sung gate SoA chặn quyết định thiếu/sai kiểu tính áp dụng; đã kiểm Edge cho lý do khóa nút thiếu nguồn và điều hướng mở hồ sơ; giữ nguyên các mục chờ nguồn/quyết định thật.
-- **Hành động khắc phục (hoàn thành 22/11, commit lúc 18:18–21:12):** từ phát hiện (control, khoảng cách, địa điểm/tài sản, giả thuyết nguyên nhân, ưu tiên rủi ro → lưu phát hiện và baseline), bấm "AI đề xuất có cấu trúc — chờ từ chối/duyệt" để sinh thẻ **Hành động khắc phục**. Mở "Phân tích tư vấn / thông tin cần xác minh" sẽ thấy: sai gì, thiếu gì, checklist việc phải làm, bằng chứng cần nộp thêm và điều kiện nghiệm thu để đạt chuẩn; kèm câu hỏi làm rõ. Người duyệt chấp nhận/từ chối, giao người chính/phối hợp/bước con, có hạn và thông báo; người thực hiện nộp nguồn sau, người khác xác minh độc lập rồi mới đánh giá lại. Đã thêm hướng dẫn mở khóa phát hiện và mở sẵn khung phân tích trên giao diện.
-- Đã có CLI và web kiểm tra trước tệp nguồn ngày 22/11, không nhập database và không gọi Agent. Dùng khi nhóm cung cấp nguồn mới theo [hướng dẫn](../docs/KIEM_TRA_NGUON_TRUOC_KHI_NOP.md); các mục chờ nguồn/xác nhận vẫn mở.
-- Đã có luồng quản lý 56 control, thu/kiểm toàn vẹn nguồn, Agent chạy lô, chấm mù, thẩm định, báo cáo và SoA dự thảo; có nhập quyết định/kế hoạch theo lô và điều hướng bốn màn hình.
-- Kiểm chứng mới nhất cuối ngày 22/11: **442 test Python, 14 JavaScript, 17 kịch bản giao diện Edge**, lint/build đạt; API 39 kiểm tra ba tài khoản và kiểm thử xuyên suốt ghi thật PostgreSQL + Qwen2.5:7b + UI qua khởi động lại trên database riêng đạt. Xem [báo cáo nghiệm thu cuối cùng](../docs/FINAL_ACCEPTANCE_2026.md), [hoàn thiện theo s.txt](../docs/HOAN_THIEN_THEO_S_TXT_2026_11_22.md) và [báo cáo khóa sổ 22/11](../docs/HOAN_THIEN_TUAN_06_2026_11_22.md); không chuyển công việc này thành thành tích tuần 7.
-- Đã chạy lại 18 A.8 lab và 38 hồ sơ mô phỏng ngày 22/11, không lỗi kỹ thuật cuối; bộ 38 khớp khóa phát triển 23/38, còn 15 lệch tổng và 19 lệch tiêu chí. Có công cụ so sánh hai lượt và xuất hiện trạng nguồn 56; đây vẫn là thực nghiệm phát triển, chưa phải độ đúng độc lập.
-- Bổ sung ngày 22/11: thống nhất kiểm tra nội dung ở connector thư mục/web, 385 test Python đạt; quét 56 thư mục chưa có nguồn mới hợp lệ. Không chuyển phần đã làm này thành nhiệm vụ tuần 7 hoặc coi các nguồn thiếu đã được bổ sung.
-- Đợt chính: 19 control có nguồn ngoài preset, 18 qua ngưỡng nội dung; 37 thiếu nguồn và A.6.2 cần thay. Có 0 quyết định áp dụng, 0 thẩm định hiện hành; rubric/SoA chưa được phê duyệt ở mốc bàn giao.
-- 38 hồ sơ do trợ lý tạo và gói ứng viên kỹ thuật là dữ liệu phát triển/hồi quy; không thay bộ kiểm định độc lập hoặc nguồn được người phụ trách chấp nhận.
+- Bổ sung nguồn thực tế cho 37 control còn thiếu và thay nguồn A.6.2 theo mốc bàn giao. Cập nhật số liệu khi rà lại đợt chính. [Nhật ký tuần 6](TUAN_06.md)
+- Xác nhận rubric, phạm vi và nguồn. Chuẩn bị tập kiểm định mới, thu nhãn độc lập và hoàn tất thẩm định, quyết định áp dụng, phê duyệt SoA.
 
 ## Nhật ký công việc chính
 
-| Ngày | Ý chính | Kết quả / minh chứng |
-|---|---|---|
-| 25/11/2026 (sáng) | Kiểm tra toàn diện tính liên kết và đồng bộ hệ thống (khách hàng–đợt–control–bằng chứng–finding–khắc phục–xác minh–dashboard–báo cáo). | [INTEGRATION_AUDIT_2026.md](../docs/INTEGRATION_AUDIT_2026.md), `tests/test_integration_audit_2026.py` |
-| 25/11/2026 | Sửa lỗi phát hiện khi audit: `record_id` của `context` và đồng bộ tên doanh nghiệp (`backend/team_api.py`); đồng bộ `human_review_current` lên kết luận dashboard (`backend/remediation.py`); làm mới UI theo revision ở `RemediationWorkspace.jsx`, `RemediationNotifications.jsx`. | Test hồi quy đạt |
-| 25/11/2026 | Kiểm tra lại luồng hành động khắc phục từ đầu đến cuối: phát hiện → AI đề xuất → duyệt → giao việc → nộp nguồn sau → xác minh độc lập → đánh giá lại → dashboard/báo cáo. Sửa để kết luận sau thẩm định (`human_review_current`) hiện đúng trên dashboard, thẻ hành động và thông báo tự làm mới khi có revision mới. | `backend/remediation.py`, `RemediationWorkspace.jsx`, `RemediationNotifications.jsx`; [INTEGRATION_AUDIT_2026.md](../docs/INTEGRATION_AUDIT_2026.md) |
-| 25/11/2026 | Chuẩn bị hồ sơ bảo vệ: báo cáo kiến trúc + sơ đồ Mermaid, bộ test case nghiệm thu (không tự điền Pass), kịch bản demo 15 phút + dữ liệu demo tách khỏi đợt chính, đề cương báo cáo 6 chương, 18 slide, 28 câu hỏi phản biện. | [docs/defense/](../docs/defense/) |
-| 25/11/2026 | Nghiệm thu theo mục tiêu đề tài: xác minh 56 control/rubric khớp 1–1; chạy 10 tình huống AI độc lập (IND-01…IND-10B) với `qwen2.5:7b`, guardrail và schema đạt; lập checklist trước buổi bảo vệ. | [THESIS_FINAL_VALIDATION.md](../docs/THESIS_FINAL_VALIDATION.md), [AI_EVALUATION.md](../docs/thesis-validation/AI_EVALUATION.md), [TEST_CASES.md](../docs/thesis-validation/TEST_CASES.md), [DEMO_CHECKLIST.md](../docs/thesis-validation/DEMO_CHECKLIST.md) |
-| 25/11/2026 | Bổ sung `tests/test_thesis_final_validation.py`, `tests/test_final_acceptance_2026.py`; cập nhật README liên kết các tài liệu mới. | **449 test Python**, 14 test JavaScript đạt; oxlint 0 lỗi; build production đạt |
+| Ngày | Công việc và kết quả |
+|---|---|
+| 25/11 | Rà liên kết khách hàng, đợt, control, nguồn, hành động và báo cáo. Sửa lỗi đồng bộ hồ sơ, kết luận thẩm định và thông báo. Kiểm tra ma trận 56 control và 10 tình huống kỹ thuật với Qwen. Chuẩn bị kiến trúc, kịch bản, đề cương báo cáo và câu hỏi bảo vệ. [Kiểm tra liên kết](../docs/INTEGRATION_AUDIT_2026.md) · [Nghiệm thu kỹ thuật](../docs/THESIS_FINAL_VALIDATION.md) · [Hồ sơ bảo vệ](../docs/defense/) |
+| 26/11 | Bổ sung nhiều doanh nghiệp và kỳ đánh giá riêng, lưu bản chụp từng kỳ và so sánh theo thời gian. Hỗ trợ nộp nhiều tệp, đọc XLSX, tìm bằng chứng đúng phạm vi quyền và nhập bộ doanh nghiệp mô phỏng. Đo riêng tốc độ tiếp nhận và lập chỉ mục. [Nâng cấp doanh nghiệp](../docs/THESIS_ENTERPRISE_AI_AGENT_UPGRADE.md) |
+| 27/11 | Tích hợp chọn lọc từ `Tu/Tuan7`: yêu cầu đánh giá, gợi ý hạn theo ngày làm việc, đào tạo, đọc NDA theo phiên bản, yêu cầu MFA và bàn giao. Gắn tài khoản với đúng nhân viên, phân vai thực hiện và xác minh, giữ lịch sử. [Tích hợp nhánh](../docs/TICH_HOP_CHON_LOC_TU_TUAN7.md) · [Luồng nhân viên](../docs/TICH_HOP_LUONG_NHAN_VIEN_TU_TUAN7.md) |
+| 27/11 | **Bàn giao laptop · A.6.5:** mở yêu cầu từ đầu việc được giao, kiểm mã thiết bị, chặn mã sai, tải bản gốc biên nhận và giữ lịch sử trả bổ sung. Chuyên viên xác minh tiêu chí thu hồi. Kết luận A.6.5 vẫn thiếu hồ sơ cắt quyền. [Nghiệm thu bàn giao](../docs/NGHIEM_THU_BAN_GIAO_A65.md) |
+| 27/11 | **MFA · A.8.5:** thu nguồn ban đầu từ lab, tạo phát hiện theo tiêu chí, duyệt rồi chạy công cụ. Sau khi bật yêu cầu MFA, lần đo riêng từ chối đăng nhập thiếu yếu tố thứ hai và cho phép khi cung cấp đủ. Lưu nguồn sau vào hồ sơ, thẩm định và xác minh trên React, xuất PDF/Excel. [Demo MFA](../docs/DEMO_MFA_LAB.md) |
+| 27/11 | **Cập nhật ứng dụng mẫu · tham chiếu A.8.8:** sau khi duyệt, công cụ cập nhật gói thử từ 1.0.0 lên 1.1.0, khởi chạy lại và kiểm phiên bản, trạng thái, hash. Biên nhận trước–sau có trong hồ sơ và PDF/Excel. Phép thử chỉ áp dụng ứng dụng mẫu trong lab. [Phạm vi và cách chạy](../docs/DOI_CHIEU_HANH_DONG_KHAC_PHUC.md) |
+| 27/11 | Làm rõ mục đích của bốn màn hình. Khu Tư vấn & khắc phục trong Tổng quan 56 control hiển thị người duyệt, người thực hiện, đích và bằng chứng trước–sau. |
+| 28/11 | Tích hợp chọn lọc từ `KhoaTuan7`: ba mẫu luyện tập theo vai trò và cách đăng ký công cụ đích cố định cho ca MFA, cập nhật ứng dụng. [Phạm vi tích hợp](../docs/TICH_HOP_KHOA_TUAN7.md) |
+| 28/11 | **Nghiệm thu Linux và truy vết A.8.8:** tạo phát hiện, duyệt giao, chạy công cụ, gắn nguồn và xác minh qua Edge. Giữ cùng mã phát hiện qua bốn màn hình, tải lại và mở từ báo cáo. Lượt live A.8 thu thêm phiên bản và hash của ứng dụng mẫu; backend kiểm tra khớp đợt, cấu hình đích, ứng dụng, phiên bản và hash trước khi gắn lượt với phát hiện. Đối chiếu PDF, Excel và JSON. [Biên bản và báo cáo](../docs/NGHIEM_THU_LIEN_KET_BAN_THU_A8.md) |
+| 28/11 | **Chuẩn bị ca vá hệ điều hành:** bổ sung kiểm gói nguồn đo trước, biên nhận và đo lại; tạo manifest nhập hồ sơ A.8.8 và kiểm lại SHA-256 khi nhập. Hướng dẫn nộp nguồn trên A.8.8 và kiểm nội dung trích xuất của bản thay thế A.6.2. [Hướng dẫn tiếp nhận](../docs/NOP_BANG_CHUNG_BAN_VA_A88.md) |
 
 ## Kết quả và minh chứng
 
-- Hệ thống liên kết xuyên suốt sau khi sửa 3 nhóm lỗi đồng bộ; bộ hồ sơ bảo vệ và báo cáo nghiệm thu theo đề tài đã sẵn sàng.
-- 10 tình huống độc lập là kiểm thử kỹ thuật (guardrail/schema), **chưa** thay nhãn của người đánh giá đủ điều kiện; các mục checklist phía trên vẫn chờ nguồn và xác nhận chuyên môn thật.
-
-Tài liệu để tiếp tục:
-
-- [Nhật ký tuần 6](TUAN_06.md): công việc và minh chứng đã có.
-- [Hồ sơ bảo vệ](../docs/defense/), [nghiệm thu theo đề tài](../docs/THESIS_FINAL_VALIDATION.md), [kiểm tra liên kết](../docs/INTEGRATION_AUDIT_2026.md): tài liệu chính của tuần 7.
-- [Hướng dẫn nhóm chốt việc](../docs/HUONG_DAN_CHOT_VIEC_TUAN_06.md), [phiếu nguồn theo nhóm](../docs/CHOT_VIEC_TUAN_06_2026_11_21.md): hồ sơ và xác nhận cần cung cấp; cập nhật lại khi nguồn thay đổi.
-- [Nhập quyết định/kế hoạch theo lô](../docs/NHAP_QUYET_DINH_KE_HOACH_THEO_LO.md), [điều kiện duyệt SoA](../docs/DIEU_KIEN_DUYET_SOA_56.md): thao tác và điều kiện hoàn tất.
-- [Toàn vẹn nguồn](../docs/KIEM_TRA_TOAN_VEN_NGUON.md), [ma trận UI](../docs/MA_TRAN_NGHIEM_THU_UI_TUAN_06.md): phạm vi kiểm tra và giới hạn kỹ thuật.
+**Mốc kiểm chứng ngày 28/11:** 496 test Python thuộc nhánh, 16 test JavaScript đạt. Lint và build đạt ở lượt kiểm giao diện gần nhất. Ca Edge sử dụng FastAPI và PostgreSQL thử riêng; hồi quy Linux, Windows, MFA và bàn giao laptop có biên nhận kiểm thử. Liên kết lượt A.8 với phát hiện vẫn đọc được sau khi khởi động lại API.
 
 ## Vướng mắc và giới hạn
 
-- Đến 25/11 nhóm vẫn chưa cung cấp nguồn mới, bộ kiểm định hoặc xác nhận chuyên môn; không tự tạo phê duyệt hay nhãn độc lập thay người thật.
-- Dữ liệu demo bảo vệ là doanh nghiệp giả lập, tách khỏi đợt đánh giá chính; không dùng làm kết quả đánh giá thực tế.
-- Probe lab chỉ kiểm tra tiêu chí đại diện; hash khớp không chứng minh nguồn thật hoặc đủ nội dung control.
-- Chốt kiểm thử các luồng UI chính không đồng nghĩa bao phủ mọi ngoại lệ hoặc nghiệm thu chuyên môn. Giữ lịch sử lỗi, nhãn khóa và tách dữ liệu thử khỏi đợt chính.
+- Trong ca nối A.8.8, bước khởi chạy lượt nghiên cứu và nhập bản thu được kiểm qua API. Các bước tạo phát hiện, duyệt giao, cập nhật và xác minh được kiểm qua Edge.
+- Ca cập nhật ứng dụng mẫu ghi **cải thiện một phần**. Ca vá hệ điều hành chờ xác nhận thiết bị trong ghi âm, máy thử cô lập được cấp quyền, mã bản vá, phê duyệt và phương án phục hồi.
+- Đợt chính còn 37 control thiếu nguồn ngoài preset và A.6.2 cần bản đọc được thay thế. Rà thư mục gói ngày 28/11 có 56 manifest trống và chưa có tệp nguồn mới. Độ đúng đối chiếu độc lập và phê duyệt SoA còn chờ.
 
 ## Việc chuyển tiếp sang tuần 8
 
-Chưa chốt. Rà kết quả cuối tuần 7 rồi xác định; chưa tạo trước nhật ký tuần 8–10.
+- [ ] Chạy diễn tập bảo vệ bằng giao diện và bộ dữ liệu riêng; chốt minh chứng, ảnh giao diện, slide và báo cáo theo kịch bản đã cập nhật.
+- [ ] Thu hồ sơ còn thiếu và rà lại mức bao phủ trên đợt chính.
+- [ ] Xác nhận rubric, phạm vi và nguồn được chấp nhận; chốt tập kiểm định mới và thu nhãn của người đánh giá đủ điều kiện.
+- [ ] Hoàn thiện quyết định áp dụng, thẩm định và trình người phụ trách duyệt SoA. [Điều kiện duyệt SoA](../docs/DIEU_KIEN_DUYET_SOA_56.md)
+- [ ] Chốt thiết bị và quyền thử, thực hiện ca vá đã duyệt, nộp ba nguồn trước–thực thi–sau và thẩm định riêng tiêu chí vá hệ điều hành.
 
 ## Đồng bộ GitHub
 
-Ghi gọn theo ngày/nhánh; ghi người đồng bộ theo từng lần thực hiện. Không ghi thao tác chạy/dừng hoặc chuyển nhánh. Tên trong nhật ký là thông tin nhóm ghi nhận, không thay danh tính tài khoản GitHub xác thực thao tác push.
-
 | Ngày | Giờ (UTC+7) | Người push | Nhánh | Nội dung chính |
 |---|---|---|---|---|
-| 25/11/2026 | 12:03 | Trần Văn Toàn | `main` | Kiểm tra liên kết toàn hệ thống và sửa lỗi đồng bộ (`context`, `human_review_current`, làm mới UI khắc phục); nghiệm thu theo mục tiêu đề tài + 10 tình huống AI độc lập; hồ sơ bảo vệ (`docs/defense/`); test mới nâng lên 449 test Python; cập nhật README và nhật ký tuần 7 |
+| 25/11/2026 | 12:03 | Trần Văn Toàn | `main` | Sửa đồng bộ hồ sơ, kiểm thử với Qwen và bổ sung tài liệu bảo vệ. |
+| 27/11/2026 | 07:20, 10:12, 10:21, 10:23 | Trần Văn Toàn | `ToanTuan7` | Tích hợp luồng nhân viên, nghiệm thu MFA và bàn giao, bổ sung ca cập nhật ứng dụng và báo cáo trước–sau; cập nhật nhật ký và dọn `s.txt`. |
+| 28/11/2026 | 11:18:19 | Trần Văn Toàn | `ToanTuan7` | Đồng bộ tích hợp từ KhoaTuan7, nghiệm thu và truy vết A.8.8, kiểm tra gói bản vá và nhật ký tuần 7 (`4547f74`). |
+
+### Nhánh thành viên được tích hợp chọn lọc
+
+Mốc do GitHub ghi nhận, quy đổi sang UTC+7. Sự kiện tạo nhánh là lần nhánh xuất hiện trên GitHub.
+
+| Ngày | Giờ (UTC+7) | Thành viên · tài khoản GitHub | Nhánh | Hoạt động |
+|---|---|---|---|---|
+| 26/11/2026 | 21:05:39, 21:20:51 | Lê Đoàn Văn Tú · `vantu1410` | `Tu/Tuan7` | Tạo nhánh tại `3dbcf10`; push `720943e` bổ sung yêu cầu đánh giá và báo cáo. |
+| 28/11/2026 | 00:22:24 | Lê Đăng Khoa · `Gera-YCYC` | `KhoaTuan7` | Tạo nhánh tại `9c192f7`; nhóm tích hợp chọn lọc mẫu luyện tập và danh mục công cụ. |

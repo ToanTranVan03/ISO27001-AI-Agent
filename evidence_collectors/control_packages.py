@@ -10,7 +10,7 @@ from evidence_collectors.source_quality import text_quality
 
 ROOT=Path(__file__).resolve().parents[1]/'data'/'evidence-packages'
 MAX_BYTES=15*1024*1024
-ALLOWED={'.pdf','.docx','.txt','.md','.csv','.tsv','.json','.conf','.log'}
+ALLOWED={'.pdf','.docx','.xlsx','.txt','.md','.csv','.tsv','.json','.conf','.log'}
 
 
 def controls():return json.loads(CATALOG.read_text(encoding='utf-8'))
@@ -66,7 +66,10 @@ def inspect(assessment_id,control_id):
             size=target.stat().st_size;total+=size
             if size>MAX_BYTES or total>30*1024*1024:raise ValueError('Nguồn quá lớn (15MB/file, 30MB/gói).')
             raw=target.read_bytes()
-            text=extract_document_text(name,raw) if target.suffix.lower() in ('.pdf','.docx') else raw.decode('utf-8-sig')
+            raw_hash=hashlib.sha256(raw).hexdigest()
+            if 'sha256' in source and source['sha256']!=raw_hash:
+                raise ValueError(f'{name}: SHA-256 khác bản đã kiểm trong manifest.')
+            text=extract_document_text(name,raw) if target.suffix.lower() in ('.pdf','.docx','.xlsx') else raw.decode('utf-8-sig')
             if '\x00' in text or len(text)>100000 or not text_quality(text)['usable']:
                 raise ValueError('Nguồn không phải văn bản dùng được, quá ít/lặp ký tự hoặc quá 100000 ký tự; kiểm tra nội dung/OCR.')
             if target.suffix.lower()=='.json':
@@ -80,7 +83,6 @@ def inspect(assessment_id,control_id):
                 'observed_at':observed,'origin':str(source.get('origin','unspecified'))[:200],
                 'note':str(source.get('note',''))[:1000],'content':text,'provenance_verified':False}
             content=json.dumps(payload,ensure_ascii=False,sort_keys=True)
-            raw_hash=hashlib.sha256(raw).hexdigest()
             identity=f'{assessment_id}:{control_id}:{kind}:{raw_hash}:{content}'
             items.append({'evidence_id':'PKG-'+hashlib.sha256(identity.encode()).hexdigest()[:32],
                 'evidence_type':kind,'source':f'package://{control_id}/{name}',
@@ -95,7 +97,7 @@ def collect(assessment_id,control_id,user_id):
     return store(assessment_id,control_id,user_id,inspect(assessment_id,control_id))
 
 
-def store(assessment_id,control_id,user_id,packet):
+def store(assessment_id,control_id,user_id,packet,*,origin="USER_PROVIDED_PACKAGE"):
     """Store validated items under the same upload/evaluation transaction lock."""
     from backend.database import get_connection
     from backend.teamwork import log_event
@@ -107,9 +109,9 @@ def store(assessment_id,control_id,user_id,packet):
         for item in packet['items']:
             cur.execute('''INSERT INTO evidence(evidence_id,control_id,evidence_type,source,extracted_text,sha256_hash,
                 assessment_id,uploaded_by,is_sample,is_synthetic,evidence_origin)
-                VALUES(%s,%s,%s,%s,%s,%s,%s,%s,FALSE,FALSE,'USER_PROVIDED_PACKAGE')
+                VALUES(%s,%s,%s,%s,%s,%s,%s,%s,FALSE,FALSE,%s)
                 ON CONFLICT(evidence_id) DO NOTHING RETURNING evidence_id''',
-                (item['evidence_id'],control_id,item['evidence_type'],item['source'],item['extracted_text'],item['sha256_hash'],assessment_id,user_id))
+                (item['evidence_id'],control_id,item['evidence_type'],item['source'],item['extracted_text'],item['sha256_hash'],assessment_id,user_id,origin))
             if cur.fetchone():
                 inserted.append(item['evidence_id']);log_event(cur,assessment_id,control_id,user_id,'PACKAGE_EVIDENCE_COLLECTED',{'evidence_id':item['evidence_id']})
             else:reused.append(item['evidence_id'])

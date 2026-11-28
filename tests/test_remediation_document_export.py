@@ -48,9 +48,21 @@ def test_pdf_has_vietnamese_before_after_evidence_and_verification():
     report=fixture();before=deepcopy(report)
     raw=pdf_report(report);assert raw.startswith(b'%PDF-')
     reader=PdfReader(BytesIO(raw));text='\n'.join(p.extract_text() for p in reader.pages)
-    for expected in ('Tổ chức thử nghiệm','Non-Compliant','Partially Compliant','before-1','after-1','verifier-1','REWORK','không phải chứng nhận ISO'):
+    for expected in ('Mã phát hiện: finding-1','Tổ chức thử nghiệm','Non-Compliant','Partially Compliant','before-1','after-1','verifier-1','REWORK','không phải chứng nhận ISO'):
         assert expected in text
     assert report==before
+
+
+def test_exports_trace_the_selected_a8_capture():
+    report=fixture()
+    capture=dict(run_id='a8-run-1',report_sha256='a'*64,asset_id='DEBIAN-LAB-01',evidence_id='A8CAP-1')
+    report['records'][0]['document']['a8_capture']=capture
+    pdf=''.join(p.extract_text() for p in PdfReader(BytesIO(pdf_report(report))).pages)
+    workbook=load_workbook(BytesIO(xlsx_report(report)))
+    row=[cell.value for cell in workbook['Findings'][2]]
+    for value in capture.values():
+        assert value in ''.join(pdf.split())
+        assert value in row
 
 
 def test_pdf_handles_escaped_markup_and_long_fields_across_pages():
