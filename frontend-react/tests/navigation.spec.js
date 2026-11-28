@@ -84,6 +84,11 @@ test('employee, dossier, control and source-run context survive navigation, relo
   await expect(page.getByRole('heading',{name:`Bằng chứng và kết quả · ${captured.control_id}`,exact:true})).toBeVisible();
   await page.reload();
   await expect(page.getByLabel('Mở lượt đánh giá đã lưu')).toHaveValue(rid);
+  await page.getByRole('button',{name:`Theo dõi ${captured.control_id} trong Hồ sơ ISO`,exact:true}).click();
+  await expect(page.getByRole('heading',{name:'Hồ sơ & công việc chung',exact:true})).toBeVisible();
+  expect(new URLSearchParams(new URL(page.url()).hash.slice(1)).get('run')).toBe(rid);
+  await page.getByRole('button',{name:`Quay lại lượt nguồn A.8 · ${rid.slice(0,8)}`,exact:true}).click();
+  await expect(page.getByLabel('Mở lượt đánh giá đã lưu')).toHaveValue(rid);
   // Intercept the import write: verify its navigation without importing test data.
   await page.route(`**/a8/runs/${rid}/import-sources`,route=>route.fulfill({json:{inserted:[],reused:['UI-MOCK-NAVIGATION'],skipped_controls:[]}}));
   await page.getByRole('button',{name:'Nhập nguồn live vào hồ sơ 56 (admin)',exact:true}).click();
