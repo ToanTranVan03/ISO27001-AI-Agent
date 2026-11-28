@@ -41,3 +41,13 @@ Mốc đợt chính đã xuất: 19/56 có nguồn ngoài preset, 18 có nội d
 - [PDF trước–sau](../work/ban-giao-nghiem-thu-2026-11-28/khoi-phuc-linux.pdf), [Excel trước–sau](../work/ban-giao-nghiem-thu-2026-11-28/khoi-phuc-linux.xlsx).
 - [Ma trận nguồn 56](../work/ban-giao-nghiem-thu-2026-11-28/ma-tran-nguon-56.xlsx), [SoA dự thảo](../work/ban-giao-nghiem-thu-2026-11-28/soa-du-thao.json), [Đối chiếu người đánh giá theo từng lượt](../work/ban-giao-nghiem-thu-2026-11-28/doi-chieu-giang-vien.json).
 - 38 test Python liên quan đạt, frontend lint/build đạt. Hai lần kiểm thử Edge ban đầu vấp vì phép kiểm checkbox chưa chờ API và phép đợi phản hồi bắt nhầm yêu cầu gắn nguồn. Đã chỉnh phép kiểm, chạy lại đạt. Windows chạy ca ràng buộc nguồn và công cụ trước khi bổ sung kiểm thao tác nhân viên ở bản Linux cuối.
+
+## Bổ sung nghiệm thu ngày 28/11/2026
+
+- Edge đã tạo phát hiện A.8.8 từ nguồn đo Linux, lập kế hoạch, duyệt và giao trên giao diện. Cùng mã `8f9cbd48-caf6-47dc-92a0-cf3cf866f57e` xuất hiện ở Doanh nghiệp, Thực nghiệm A.8, Hồ sơ ISO và Tổng quan 56 control, kể cả sau tải lại. Màn Thực nghiệm A.8 hiển thị ngữ cảnh phát hiện. Lượt đo kỹ thuật A.8 vẫn có nguồn và kết quả riêng.
+- Trên Edge, chuyên viên chạy công cụ lab, lưu biên nhận, nhân viên gắn nguồn sau và gửi xác minh, chuyên viên ghi cải thiện một phần. Ứng dụng mẫu `iso-demo-inventory` chuyển từ 1.0.0 lên 1.1.0 trên Linux. Phạm vi vá hệ điều hành còn thiếu bằng chứng. Các phép thử quyền và thao tác trước duyệt trong kịch bản dùng API.
+- Edge kết nối FastAPI và PostgreSQL thật trên database thử riêng. Runner kiểm tra dữ liệu sau khi khởi động lại API, dọn database thử và xác nhận số dòng các bảng được theo dõi của database chính giữ nguyên. Hồ sơ thử dùng chung với ca MFA và phần khai phạm vi mẫu đang mô tả MFA; khi demo riêng Linux, khai phạm vi ứng dụng và đích Linux ngay ở bước đầu.
+- [Biên nhận lượt đạt](../work/linux-bon-man-lai-2026-11-28.json), [lượt đầu lỗi định vị ô nhập](../work/linux-bon-man-2026-11-28.json), [PDF mới](../work/ban-giao-nghiem-thu-2026-11-28/linux-bon-man.pdf), [Excel mới](../work/ban-giao-nghiem-thu-2026-11-28/linux-bon-man.xlsx). Đã đọc lại hai file và kiểm UUID trong PDF và Excel, phiên bản trước/sau và nhãn tiếng Việt trong PDF.
+- Không cần migration. Luồng điều hướng dùng mã phát hiện trong URL và đọc hồ sơ qua API có phân quyền hiện hành. Mốc này bổ sung cho ca đã ghi ở trên.
+
+Chạy lại bằng lệnh ở trên với tên tệp kết quả mới. Phần còn chờ gồm hồ sơ ngoài preset cho 37 control, thay một nguồn chưa dùng được, đối chiếu độc lập, thẩm định và duyệt SoA. Cần xác nhận tên thiết bị trong ghi âm trước khi chọn môi trường thử tương ứng.

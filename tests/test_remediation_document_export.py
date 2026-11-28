@@ -48,7 +48,7 @@ def test_pdf_has_vietnamese_before_after_evidence_and_verification():
     report=fixture();before=deepcopy(report)
     raw=pdf_report(report);assert raw.startswith(b'%PDF-')
     reader=PdfReader(BytesIO(raw));text='\n'.join(p.extract_text() for p in reader.pages)
-    for expected in ('Tổ chức thử nghiệm','Non-Compliant','Partially Compliant','before-1','after-1','verifier-1','REWORK','không phải chứng nhận ISO'):
+    for expected in ('Mã phát hiện: finding-1','Tổ chức thử nghiệm','Non-Compliant','Partially Compliant','before-1','after-1','verifier-1','REWORK','không phải chứng nhận ISO'):
         assert expected in text
     assert report==before
 

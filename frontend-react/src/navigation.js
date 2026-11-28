@@ -6,21 +6,23 @@ export function normalizeNavigation(input={}){
  const validControl=parts&&!parts[2].startsWith('0')&&Number(parts[2])>=1&&Number(parts[2])<=({'6':8,'7':14,'8':34}[parts[1]]);
  return {view:views.has(input.view)?input.view:'scope56',controlId:validControl?cid:'',
   employeeId:/^EMP-\d{3}$/.test(value('employeeId'))?value('employeeId'):'',
+  ...(uuid.test(value('findingId'))?{findingId:value('findingId').toLowerCase()}:{}),
   runId:uuid.test(value('runId'))?value('runId').toLowerCase():'',
   assessmentId:uuid.test(value('assessmentId'))?value('assessmentId').toLowerCase():''};
 }
 export function readNavigation(hash=''){
  const params=new URLSearchParams(hash.replace(/^#/,''));
- return normalizeNavigation({view:params.get('view'),controlId:params.get('control'),employeeId:params.get('employee'),runId:params.get('run'),assessmentId:params.get('assessment')});
+ return normalizeNavigation({view:params.get('view'),controlId:params.get('control'),employeeId:params.get('employee'),runId:params.get('run'),assessmentId:params.get('assessment'),findingId:params.get('finding')});
 }
 export function navigationHash(input){
  const n=normalizeNavigation(input),p=new URLSearchParams({view:n.view});
- for(const [key,field] of [['control','controlId'],['employee','employeeId'],['run','runId'],['assessment','assessmentId']])if(n[field])p.set(key,n[field]);
+ for(const [key,field] of [['control','controlId'],['employee','employeeId'],['run','runId'],['assessment','assessmentId'],['finding','findingId']])if(n[field])p.set(key,n[field]);
  return '#'+p.toString();
 }
 export function mergeNavigation(current,patch){
  const update=typeof patch==='string'?{view:patch}:patch||{};
- return normalizeNavigation({...current,...Object.fromEntries(Object.entries(update).filter(([,v])=>v!==undefined))});
+ const reset=update.assessmentId&&update.assessmentId!==current.assessmentId||update.controlId!==undefined&&update.controlId!==current.controlId;
+ return normalizeNavigation({...current,...(reset?{findingId:''}:{}),...Object.fromEntries(Object.entries(update).filter(([,v])=>v!==undefined))});
 }
 export function sourceRunIds(control){
  return [...new Set((control?.evidence||[]).map(e=>{

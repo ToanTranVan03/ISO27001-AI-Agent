@@ -1,0 +1,32 @@
+import {useEffect,useState} from 'react';
+
+const screens=[['company','Doanh nghiệp'],['scope56','Tổng quan 56 control'],['a8','Thực nghiệm A.8'],['dossier','Hồ sơ ISO']];
+
+export default function FindingContext({assessment,navigation,request,navigate}){
+ const [loaded,setLoaded]=useState(null);
+ const {findingId,controlId,view}=navigation;
+ const aid=assessment.assessment_id;
+ const key=aid+':'+findingId;
+ useEffect(()=>{
+  if(!findingId)return;
+  let active=true;
+  request(`/api/assessments/${aid}/remediation`).then(board=>{
+   if(active)setLoaded({key,row:board.records.find(r=>r.kind==='finding'&&r.record_id===findingId)});
+  }).catch(()=>{if(active)setLoaded({key,row:null});});
+  return()=>{active=false;};
+ },[aid,findingId,key,request,view]);
+ if(!findingId)return null;
+ if(loaded?.key!==key)return <p role="status" className="mx-auto mt-36 max-w-7xl px-5 text-sm text-slate-300">Đang kiểm tra liên kết phát hiện…</p>;
+ const row=loaded.row;
+ if(!row||row.document.control_id!==controlId)return <p role="status" className="mx-auto mt-36 max-w-7xl px-5 text-sm text-amber-200">Phát hiện không có trong hồ sơ được phép xem của đợt và control này.</p>;
+ const target=row.document.software_target;
+ return <aside aria-label="Phát hiện đang theo dõi" className="mx-auto mt-36 max-w-7xl space-y-2 border-l-2 border-teal-500 px-5 text-sm text-slate-200 lg:mt-28">
+  <p><strong>Mã phát hiện:</strong> <span className="break-all">{row.record_id}</span></p>
+  <p>{controlId} · {row.document.description}</p>
+  {target&&<p>Đích: {target.system} · {target.application} · Nguồn đầu: {target.baseline_evidence_id}</p>}
+  {view==='a8'&&<p>Đây là đường dẫn tới hồ sơ khắc phục. Kết quả thực nghiệm A.8 vẫn thuộc lượt và nguồn riêng.</p>}
+  <nav aria-label="Đi theo phát hiện" className="flex flex-wrap gap-2">
+   {screens.filter(([id])=>id!==view).map(([id,label])=><button key={id} className="rounded border border-slate-600 px-2 py-1" onClick={()=>navigate({view:id,controlId,findingId})}>{label} · phát hiện</button>)}
+  </nav>
+ </aside>;
+}

@@ -172,6 +172,7 @@ def pdf_report(report):
     for row in report['records']:
         doc=row['document'];baseline=doc['baseline']
         paragraph(doc['control_id']+' — '+doc['description'],'heading')
+        paragraph('Mã phát hiện: '+text(row.get('record_id') or doc.get('finding_id')),'small')
         if doc.get('criterion_index') is not None:
             paragraph('Tiêu chí cần khắc phục: '+baseline['criteria'][doc['criterion_index']])
         paragraph('Vị trí: '+text(doc['location']))

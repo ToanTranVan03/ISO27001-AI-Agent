@@ -185,7 +185,19 @@ test('real remediation: approve, assign, evidence, reject, recheck, verify, pres
  const softwareBaseline=(await softwareBaselineResult.json()).evidence_id;
  const a88=(await call('GET',scopePath)).controls.find(row=>row.control_id==='A.8.8');
  expect(a88.evidence.some(e=>e.evidence_id===softwareBaseline)).toBe(true);
- let software=await call('POST',path+'/findings',{control_id:'A.8.8',software_baseline_id:softwareBaseline,expected_review_token:a88.review_token,description:'MÔ PHỎNG: ứng dụng mẫu đang chạy phiên bản 1.0.0',location:'Kho ứng dụng thử',root_cause:'Ứng dụng mẫu được cấu hình phiên bản ban đầu',risk:'unconfirmed'},admin,201);
+ const description='MÔ PHỎNG: ứng dụng mẫu đang chạy phiên bản 1.0.0';
+ const softwareForm=page.locator('details').filter({has:page.locator('summary').filter({hasText:'Ghi nhận phát hiện trên snapshot hiện tại'})}).last();
+ await softwareForm.getByRole('combobox',{name:'Control',exact:true}).selectOption('A.8.8');
+ await softwareForm.getByRole('combobox',{name:'Nguồn đầu ứng dụng mẫu',exact:true}).selectOption(softwareBaseline);
+ await softwareForm.getByRole('textbox',{name:'Phát hiện / khoảng cách',exact:true}).fill(description);
+ await softwareForm.getByRole('textbox',{name:'Địa điểm, tài sản hoặc quy trình',exact:true}).fill('Kho ứng dụng thử');
+ await softwareForm.getByRole('textbox',{name:'Giả thuyết nguyên nhân — cần xác nhận',exact:true}).fill('Ứng dụng mẫu được cấu hình phiên bản ban đầu');
+ const createSoftware=page.waitForResponse(r=>r.url().endsWith('/remediation/findings')&&r.request().method()==='POST');
+ await softwareForm.getByRole('button',{name:'Lưu phát hiện và baseline'}).click();
+ const softwareCreated=await createSoftware;
+ expect(softwareCreated.status(),await softwareCreated.text()).toBe(201);
+ let software=await softwareCreated.json();
+ const trackedId=software.record_id;
  const softwarePath=path+'/findings/'+software.record_id+'/actions';
  await page.getByRole('button',{name:'Làm mới khắc phục',exact:true}).click();
  const updateFinding=page.locator('article').filter({has:page.getByRole('heading',{name:'MÔ PHỎNG: ứng dụng mẫu đang chạy phiên bản 1.0.0',exact:true})}).last();
@@ -202,7 +214,23 @@ test('real remediation: approve, assign, evidence, reject, recheck, verify, pres
  const updatePath=softwarePath+'/'+appAction+'/software-lab';
  const updateBody=()=>({expected_version:software.version,operation:'replace_disposable_application'});
  await call('POST',updatePath,updateBody(),admin,409);
- software=await call('POST',softwarePath+'/'+appAction+'/events',{command:'approve',expected_version:software.version,note:'Duyệt cập nhật duy nhất ứng dụng mẫu trong thư mục tạm.',assignee:person.user_id,due_date:'2099-12-31'});
+ const approvalCard=updateFinding.locator('article').filter({has:page.getByRole('heading',{name:/Kiểm kê phiên bản và lập kế hoạch/})}).last();
+ await approvalCard.getByLabel(/Ghi chú thao tác/).fill('Duyệt cập nhật duy nhất ứng dụng mẫu trong thư mục tạm.');
+ await approvalCard.getByRole('combobox',{name:'Người thực hiện',exact:true}).selectOption(person.user_id);
+ await approvalCard.getByLabel('Hạn hoàn thành',{exact:true}).fill('2099-12-31');
+ const approveSoftware=page.waitForResponse(r=>r.url().endsWith('/'+appAction+'/events')&&r.request().method()==='POST');
+ await approvalCard.getByRole('button',{name:'Duyệt và giao thực hiện',exact:true}).click();
+ const softwareApproved=await approveSoftware;
+ expect(softwareApproved.status(),await softwareApproved.text()).toBe(200);
+ software=await softwareApproved.json();
+ await updateFinding.getByRole('button',{name:'Theo dõi phát hiện này',exact:true}).click();
+ const marker=page.getByRole('complementary',{name:'Phát hiện đang theo dõi'});
+ for(const screen of ['Doanh nghiệp','Thực nghiệm A.8','Hồ sơ ISO','Tổng quan 56 control']){
+  await marker.getByRole('button',{name:screen+' · phát hiện',exact:true}).click();
+  await expect(marker.getByText(trackedId,{exact:true})).toBeVisible();
+ }
+ await page.reload();
+ await expect(marker.getByText(trackedId,{exact:true})).toBeVisible();
  await call('POST',updatePath,updateBody(),operator,403);
  await page.getByRole('button',{name:'Làm mới khắc phục',exact:true}).click();
  if(linuxLab)await call('POST',updatePath,updateBody(),admin,409);
