@@ -28,6 +28,22 @@ def test_import_preparation_preserves_raw_sources_but_excludes_predictions_and_l
     assert importer.prepare_sources('00000000-0000-0000-0000-000000000002',RID,doc)[0][0]['evidence_id']!=packets[0]['evidence_id']
 
 
+def test_capture_reference_requires_exact_campaign_control_asset_and_packet():
+    doc=document()
+    source=next(row for row in doc['report']['records'] if row['control_id']=='A.8.8')
+    source['evidence']['asset_id']='DEBIAN-LAB-01'
+    doc['report']['sha256']=a8.digest({k:v for k,v in doc['report'].items() if k!='sha256'})
+    packets,_=importer.prepare_sources(AID,RID,doc)
+    packet=next(row for row in packets if row['control_id']=='A.8.8')
+    args=[AID,'A.8.8',packet['evidence_id'],packet['source'],packet['sha256_hash'],packet['extracted_text']]
+    expected=dict(run_id=RID,report_sha256=doc['report']['sha256'],evidence_id=args[2],source_sha256=args[4],asset_id='DEBIAN-LAB-01')
+    assert importer.capture_reference(*args)==expected
+    for index,value in enumerate([RID,'A.8.5','A8CAP-other','a8-capture://other','0'*64,args[5]+' ']):
+        modified=args.copy()
+        modified[index]=value
+        assert importer.capture_reference(*modified) is None
+
+
 def test_import_refuses_replay_tampered_report_and_bad_artifact_hash():
     doc=document();doc['report']['transport']='files'
     with pytest.raises(ValueError):importer.prepare_sources(AID,RID,doc)

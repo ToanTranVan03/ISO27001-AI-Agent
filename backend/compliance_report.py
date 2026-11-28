@@ -5,6 +5,7 @@ import hashlib
 import json
 from backend.enterprise_spec import NODE_SPECS, CONTROL_TO_NODE
 from backend.database import get_connection
+from backend.a8_evidence_import import ORIGIN as A8_CAPTURE_ORIGIN,capture_reference
 from evidence_collectors.source_verification import source_quality
 
 
@@ -35,6 +36,7 @@ def campaign_evidence(assessment_id):
                 pass
         grouped.setdefault(cid, []).append({'evidence_id': eid, 'evidence_type': kind,
             'source': source, 'sha256_hash': digest, 'created_at': created.isoformat(),
+            'a8_capture': capture_reference(assessment_id,cid,eid,source,digest,text) if origin==A8_CAPTURE_ORIGIN else None,
             'is_synthetic': synthetic, 'software_lab': software_lab, 'revision': payload.get('revision'),
             'facts': payload.get('facts', {}), 'entity_refs': payload.get('entity_refs', {}),
             'snapshot_hash': payload.get('snapshot_hash'), 'origin': 'lab' if synthetic else 'uploaded_or_imported',

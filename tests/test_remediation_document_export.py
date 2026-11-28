@@ -53,6 +53,18 @@ def test_pdf_has_vietnamese_before_after_evidence_and_verification():
     assert report==before
 
 
+def test_exports_trace_the_selected_a8_capture():
+    report=fixture()
+    capture=dict(run_id='a8-run-1',report_sha256='a'*64,asset_id='DEBIAN-LAB-01',evidence_id='A8CAP-1')
+    report['records'][0]['document']['a8_capture']=capture
+    pdf=''.join(p.extract_text() for p in PdfReader(BytesIO(pdf_report(report))).pages)
+    workbook=load_workbook(BytesIO(xlsx_report(report)))
+    row=[cell.value for cell in workbook['Findings'][2]]
+    for value in capture.values():
+        assert value in ''.join(pdf.split())
+        assert value in row
+
+
 def test_pdf_handles_escaped_markup_and_long_fields_across_pages():
     report=fixture();doc=report['records'][0]['document']
     doc['description']='<script>test & evidence</script>'

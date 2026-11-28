@@ -324,5 +324,27 @@ test('real remediation: approve, assign, evidence, reject, recheck, verify, pres
  const again=await login('remediation_operator',process.env.ISO_ASSESSOR_PASSWORD);
  const persisted=await call('GET',path,undefined,again);
  expect(persisted.records.find(r=>r.record_id===rid).document.actions.find(a=>a.action_id===act).state).toBe('CLOSED');
+ if(linuxLab){
+  const a8Path=base+'/a8/runs';
+  const run=await call('POST',a8Path,{profile:'mixed',mode:'rules',transport:'live'},admin,202);
+  const runPath=a8Path+'/'+run.run_id;
+  await expect.poll(async()=>(await call('GET',runPath)).state,{timeout:120000}).not.toBe('running');
+  const finished=await call('GET',runPath);
+  expect(finished.state,finished.error).toBe('finished');
+  await call('POST',runPath+'/import-sources',{});
+  const control=(await call('GET',scopePath)).controls.find(row=>row.control_id==='A.8.8');
+  const capture=control.evidence.find(e=>e.a8_capture?.run_id===run.run_id)?.a8_capture;
+  expect(capture?.asset_id).toBeTruthy();
+  const body={control_id:'A.8.8',expected_review_token:control.review_token,a8_capture_id:capture.evidence_id,
+   description:'MÔ PHỎNG: rà lại bản thu inventory A.8.8.',location:capture.asset_id,root_cause:'Cần đối chiếu inventory'};
+  await call('POST',path+'/findings',{...body,software_baseline_id:softwareBaseline},admin,422);
+  const linked=await call('POST',path+'/findings',body,admin,201);
+  expect(linked.document.a8_capture).toEqual(capture);
+  await page.goto('/#view=a8&control=A.8.8&assessment='+aid+'&run='+run.run_id);
+  await page.getByRole('region',{name:'Phát hiện từ bản thu A.8'}).getByRole('button',{name:new RegExp(linked.record_id)}).click({timeout:30000});
+  await expect(marker.getByText(linked.record_id,{exact:true})).toBeVisible();
+  await marker.getByRole('button',{name:'Thực nghiệm A.8 · phát hiện',exact:true}).click();
+  await expect(page).toHaveURL(new RegExp('run='+run.run_id));
+ }
  await call('POST','/api/auth/logout',undefined,again);await call('POST','/api/auth/logout');
 });

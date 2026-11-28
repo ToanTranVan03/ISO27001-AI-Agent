@@ -81,6 +81,7 @@ class Context(Input):
     contact:str=Field(max_length=1000)
 class Finding(Input):
     software_baseline_id:str|None=Field(default=None,max_length=64)
+    a8_capture_id:str|None=Field(default=None,max_length=64)
     criterion_index:int|None=Field(default=None,ge=0)
     control_id:str
     expected_review_token:str=Field(pattern=r'^[a-f0-9]{64}$')
@@ -257,6 +258,13 @@ def create_finding(assessment_id:UUID,req:Finding,user=Depends(require_user)):
     try:doc=engine.finding(control,req.description,req.location,req.root_cause,req.risk,req.criterion_index)
     except ValueError as exc:raise HTTPException(422,str(exc)) from exc
     doc.update(created_by=user['user_id'],rubric_sha256=scope['rubric_sha256'])
+    if req.a8_capture_id:
+        if req.software_baseline_id:
+            raise HTTPException(422,'Phải chọn một nguồn đích. Bản thu A.8 và nguồn cập nhật ứng dụng mẫu có hai phương pháp đo riêng.')
+        capture=next((e.get('a8_capture') for e in control['evidence'] if e['evidence_id']==req.a8_capture_id and e.get('source_quality',{}).get('usable') is not False),None)
+        if not capture:
+            raise HTTPException(422,'Bản thu A.8 không khớp đợt, control hoặc không có định danh đối tượng.')
+        doc['a8_capture']=capture
     with get_connection() as con,con.cursor() as cur:
         cur.execute('SELECT version,document FROM remediation_records WHERE assessment_id=%s AND kind=%s',(assessment_id,'context'))
         context=cur.fetchone()

@@ -64,13 +64,15 @@ def xlsx_report(report):
     for row in report['records']:
         doc=row['document'];fid=row.get('record_id',doc.get('finding_id',''))
         baseline=doc['baseline']
+        capture=doc.get('a8_capture') or {}
         findings.append([fid,doc['control_id'],doc['description'],doc['location'],doc['root_cause'],doc.get('risk'),
             baseline['conclusion'],row.get('current_conclusion'),row.get('current_human_conclusion'),
             baseline['review_token'],row.get('current_review_token'),row.get('verification_stale',False),
             '\n'.join(text(e.get('evidence_id'))+' | '+text(e.get('sha256_hash')) for e in baseline['evidence']),
             '\n'.join(baseline.get('criteria',[])),
             baseline['criteria'][doc['criterion_index']] if doc.get('criterion_index') is not None else '',
-            (baseline.get('human_review') or {}).get('rationale')])
+            (baseline.get('human_review') or {}).get('rationale'),
+            capture.get('run_id'),capture.get('report_sha256'),capture.get('asset_id'),capture.get('evidence_id')])
         for a in doc['actions']:
             aid=a['action_id']
             actions.append([fid,doc['control_id'],aid,a['title'],a['state'],a.get('department'),a.get('assignee'),
@@ -79,7 +81,7 @@ def xlsx_report(report):
             for index,task in enumerate(a['tasks'],1):tasks.append([fid,aid,index,task['task_id'],task['title'],task['done'],task.get('assignee')])
             for v in a['verifications']:verifications.append([fid,aid,v.get('at'),v.get('reviewer_id'),v['outcome'],
                 v['note'],v.get('review_token'),v.get('conclusion'),v.get('human_review_signature'),v.get('criterion')])
-    sheet('Findings',['Finding ID','Control','Finding','Location','Reported cause','Risk proposed','Initial result','Current machine','Current human','Baseline token','Current token','Verification stale','Initial evidence ID / hash','Criteria','Tiêu chí cần khắc phục','Căn cứ thẩm định ban đầu'],findings)
+    sheet('Findings',['Finding ID','Control','Finding','Location','Reported cause','Risk proposed','Initial result','Current machine','Current human','Baseline token','Current token','Verification stale','Initial evidence ID / hash','Criteria','Tiêu chí cần khắc phục','Căn cứ thẩm định ban đầu','Lượt A.8','Hash báo cáo A.8','Đối tượng bản thu A.8','Mã nguồn A.8'],findings)
     sheet('Actions',['Finding ID','Control','Action ID','Action','Workflow state','Department','Assignee ID','Due date','Priority','Instructions','Acceptance evidence','Resources','Proposal origin','After evidence ID / hash','Collaborators','Objective','Possible causes - unconfirmed','Why','Where','Estimated effort - proposed','Required evidence','Recheck method','Clarification questions'],actions)
     sheet('Tasks',['Finding ID','Action ID','Sequence','Task ID','Task','Done by executor','Assigned step owner'],tasks)
     lab_rows=[]
@@ -173,6 +175,9 @@ def pdf_report(report):
         doc=row['document'];baseline=doc['baseline']
         paragraph(doc['control_id']+' — '+doc['description'],'heading')
         paragraph('Mã phát hiện: '+text(row.get('record_id') or doc.get('finding_id')),'small')
+        if capture:=doc.get('a8_capture'):
+            paragraph('Bản thu A.8: '+text(capture['run_id'])+' | '+text(capture['asset_id'])+' | '+text(capture['evidence_id']),'small')
+            paragraph('Hash báo cáo A.8: '+text(capture['report_sha256']),'small')
         if doc.get('criterion_index') is not None:
             paragraph('Tiêu chí cần khắc phục: '+baseline['criteria'][doc['criterion_index']])
         paragraph('Vị trí: '+text(doc['location']))
