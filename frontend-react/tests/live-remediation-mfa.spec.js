@@ -185,7 +185,17 @@ test('real remediation: approve, assign, evidence, reject, recheck, verify, pres
  expect(a88.evidence.some(e=>e.evidence_id===softwareBaseline)).toBe(true);
  let software=await call('POST',path+'/findings',{control_id:'A.8.8',expected_review_token:a88.review_token,description:'MÔ PHỎNG: ứng dụng mẫu đang chạy phiên bản 1.0.0',location:'Kho ứng dụng thử',root_cause:'Ứng dụng mẫu được cấu hình phiên bản ban đầu',risk:'unconfirmed'},admin,201);
  const softwarePath=path+'/findings/'+software.record_id+'/actions';
- software=await call('POST',softwarePath,{...action,title:'Cập nhật iso-demo-inventory',steps:'Thay gói ứng dụng mẫu và đọc lại phiên bản đã chạy.',acceptance:'Quan sát ứng dụng phiên bản 1.1.0 và hash gói khớp.',expected_version:software.version});
+ await page.getByRole('button',{name:'Làm mới khắc phục',exact:true}).click();
+ const updateFinding=page.locator('article').filter({has:page.getByRole('heading',{name:'MÔ PHỎNG: ứng dụng mẫu đang chạy phiên bản 1.0.0',exact:true})}).last();
+ await updateFinding.getByText('Đề xuất kế hoạch cho phát hiện này',{exact:true}).click();
+ await updateFinding.getByRole('button',{name:'Điền mẫu khắc phục theo control',exact:true}).click();
+ const draftSaved=page.waitForResponse(r=>r.url().endsWith('/findings/'+software.record_id+'/actions')&&r.request().method()==='POST');
+ await updateFinding.getByRole('button',{name:'Lưu đề xuất chờ duyệt',exact:true}).click();
+ const savedDraft=await draftSaved;
+ expect(savedDraft.status(),await savedDraft.text()).toBe(200);
+ software=await savedDraft.json();
+ expect(software.document.actions[0].title).toContain('Kiểm kê phiên bản');
+ expect(software.document.actions[0].state).toBe('PENDING_APPROVAL');
  const appAction=software.document.actions[0].action_id;
  const updatePath=softwarePath+'/'+appAction+'/software-lab';
  const updateBody=()=>({expected_version:software.version,operation:'replace_disposable_application'});

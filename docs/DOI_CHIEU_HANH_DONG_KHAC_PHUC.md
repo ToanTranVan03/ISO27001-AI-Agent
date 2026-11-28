@@ -34,3 +34,11 @@ Lệnh nghiệm thu ở trên kiểm cả hai nút, kiểm nguồn trước/sau 
 Mỗi đầu việc trong phạm vi 56 control hiển thị người phụ trách, cách thực hiện, bằng chứng cần nộp, cách kiểm tra lại và số nguồn đã gắn. Nếu đợt có công cụ lab phù hợp, thẻ ghi đích và thao tác được phép. Khi công việc chờ xác minh, người có quyền mở đúng tiêu chí và bằng chứng từ ngay trong thẻ. Sau khi thẩm định, quay lại đầu việc để lưu kết quả xác minh.
 
 Đầu việc dùng kế hoạch do chuyên viên duyệt. Tự động hóa lab hiện có cho hai ca MFA và cập nhật ứng dụng thử. Mỗi thao tác ngoài lab cần công cụ và phép đo phù hợp với thiết bị hoặc hệ điều hành cụ thể.
+
+## Mẫu khắc phục toàn bộ 56 control
+
+Trong Tổng quan 56 control → Tư vấn & khắc phục, mở phát hiện cần xử lý, mở **Đề xuất kế hoạch cho phát hiện này** rồi bấm **Điền mẫu khắc phục theo control**. Mỗi mẫu có bước thực hiện riêng, bộ phận gợi ý, nguồn phải nộp, điều kiện kiểm lại và ba công việc con. Rà tài sản, người liên quan, quyền và phạm vi trước khi lưu bản nháp. Mẫu có thể thay nội dung trường nháp đã nhập nhưng chưa lưu. Bước lưu, duyệt, giao việc, nộp nguồn và xác minh vẫn theo luồng hiện hành.
+
+Danh mục 56/56 nằm trong frontend-react/src/remediationTemplates.js, là mẫu theo rubric đồ án. Việc tự động chạy công cụ vẫn giới hạn ở các ca lab đã đăng ký. Các mẫu khác dùng để chuẩn bị kế hoạch có người thực hiện và bằng chứng kiểm chứng.
+
+[Kiểm thử tích hợp bản nháp A.8.8](../work/khoi-phuc-mau-56-2026-11-28.json).
