@@ -121,12 +121,18 @@ def run_demo(approve, change=install):
         return report
 
 
-def run_linux_demo(approve):
+def matches_baseline(binding, before, target=TARGET):
+    return (before["platform"], before["version"], target) == (
+        binding["system"], binding["baseline_version"], binding["application"])
+
+
+def run_linux_demo(approve, expected=None):
     """Run the fixed synthetic application in a disposable local Linux container."""
     lab_path = Path(__file__).resolve().parent
     program = (
-        'import json,sys; from lab_a8.software_update_demo import run_demo; '
-        'actor=json.load(sys.stdin); print(json.dumps(run_demo(lambda *_: actor)))'
+        'import json,sys; from lab_a8.software_update_demo import run_demo,matches_baseline; '
+        'req=json.load(sys.stdin); print(json.dumps(run_demo(lambda p,b: req["actor"] '
+        'if not req["expected"] or matches_baseline(req["expected"],b,p["target"]) else None)))'
     )
     args = [
         'docker', 'run', '--rm', '-i', '--pull=never', '--network=none',
@@ -136,7 +142,7 @@ def run_linux_demo(approve):
         '--workdir', '/demo', 'iso-a8-live-lab:v2', 'python', '-B', '-c', program,
     ]
     actor = approve(None, None)
-    result = subprocess.run(args, input=json.dumps(actor), capture_output=True,
+    result = subprocess.run(args, input=json.dumps(dict(actor=actor,expected=expected)), capture_output=True,
                             text=True, check=True, timeout=25)
     receipt = json.loads(result.stdout)
     if receipt['platform_inventory']['system'] != 'Linux':

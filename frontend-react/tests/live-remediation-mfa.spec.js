@@ -176,6 +176,8 @@ test('real remediation: approve, assign, evidence, reject, recheck, verify, pres
   expect(exported.headers()['content-type']).toContain(extension==='csv'?'text/csv':'text/html');
  }
  await page.getByRole('button',{name:'Làm mới khắc phục',exact:true}).click();
+ const linuxLab=process.env.ISO_TEST_LINUX_LAB==='1';
+ if(linuxLab)await page.getByRole('combobox',{name:'Môi trường thu nguồn đầu',exact:true}).selectOption('linux_lab');
  const softwareBaselineResponse=page.waitForResponse(r=>r.url().endsWith('/software-lab/baseline')&&r.request().method()==='POST');
  await page.getByRole('button',{name:'Thu phiên bản ứng dụng mẫu từ lab',exact:true}).click();
  const softwareBaselineResult=await softwareBaselineResponse;
@@ -183,7 +185,7 @@ test('real remediation: approve, assign, evidence, reject, recheck, verify, pres
  const softwareBaseline=(await softwareBaselineResult.json()).evidence_id;
  const a88=(await call('GET',scopePath)).controls.find(row=>row.control_id==='A.8.8');
  expect(a88.evidence.some(e=>e.evidence_id===softwareBaseline)).toBe(true);
- let software=await call('POST',path+'/findings',{control_id:'A.8.8',expected_review_token:a88.review_token,description:'MÔ PHỎNG: ứng dụng mẫu đang chạy phiên bản 1.0.0',location:'Kho ứng dụng thử',root_cause:'Ứng dụng mẫu được cấu hình phiên bản ban đầu',risk:'unconfirmed'},admin,201);
+ let software=await call('POST',path+'/findings',{control_id:'A.8.8',software_baseline_id:softwareBaseline,expected_review_token:a88.review_token,description:'MÔ PHỎNG: ứng dụng mẫu đang chạy phiên bản 1.0.0',location:'Kho ứng dụng thử',root_cause:'Ứng dụng mẫu được cấu hình phiên bản ban đầu',risk:'unconfirmed'},admin,201);
  const softwarePath=path+'/findings/'+software.record_id+'/actions';
  await page.getByRole('button',{name:'Làm mới khắc phục',exact:true}).click();
  const updateFinding=page.locator('article').filter({has:page.getByRole('heading',{name:'MÔ PHỎNG: ứng dụng mẫu đang chạy phiên bản 1.0.0',exact:true})}).last();
@@ -203,8 +205,7 @@ test('real remediation: approve, assign, evidence, reject, recheck, verify, pres
  software=await call('POST',softwarePath+'/'+appAction+'/events',{command:'approve',expected_version:software.version,note:'Duyệt cập nhật duy nhất ứng dụng mẫu trong thư mục tạm.',assignee:person.user_id,due_date:'2099-12-31'});
  await call('POST',updatePath,updateBody(),operator,403);
  await page.getByRole('button',{name:'Làm mới khắc phục',exact:true}).click();
- const linuxLab=process.env.ISO_TEST_LINUX_LAB==='1';
- if(linuxLab)await page.getByRole('combobox',{name:'Môi trường chạy bản thử',exact:true}).selectOption('linux_lab');
+ if(linuxLab)await call('POST',updatePath,updateBody(),admin,409);
  const updatedResponse=page.waitForResponse(r=>r.url().endsWith('/software-lab')&&r.request().method()==='POST');
  await page.getByRole('button',{name:'Chạy cập nhật ứng dụng mẫu',exact:true}).click();
  const updated=await updatedResponse;
@@ -213,6 +214,7 @@ test('real remediation: approve, assign, evidence, reject, recheck, verify, pres
  const softwareReceipt=software.document.actions[0].software_lab_receipt;
  expect(softwareReceipt.status).toBe('VERIFIED_MET');
  if(linuxLab){expect(softwareReceipt.platform_target).toBe('linux_lab');expect(softwareReceipt.platform_inventory.system).toBe('Linux');}
+ expect(softwareReceipt.binding.baseline_evidence_id).toBe(softwareBaseline);
  expect(softwareReceipt.before.version).toBe('1.0.0');
  expect(softwareReceipt.after.version).toBe('1.1.0');
  expect(softwareReceipt.after.sha256).toBe(softwareReceipt.plan.candidate_sha256);
@@ -228,6 +230,41 @@ test('real remediation: approve, assign, evidence, reject, recheck, verify, pres
  const softwareCurrent=(await call('GET',scopePath)).controls.find(row=>row.control_id==='A.8.8');
  expect(softwareCurrent.evidence.some(e=>e.evidence_id===softwareSource)).toBe(true);
  expect(softwareCurrent.human_review_current).toBe(false);
+ const softwareEvents=softwarePath+'/'+appAction+'/events';
+ await call('POST',softwareEvents,{command:'attach',expected_version:software.version,note:'Thử chặn nguồn ban đầu thay cho phép đo sau.',evidence_id:softwareBaseline},operator,409);
+ const workContext=await page.context().browser().newContext({baseURL:process.env.UI_BASE_URL});
+ try {
+  const worker=await workContext.newPage();
+  await worker.goto('/');
+  await worker.getByLabel('Tên đăng nhập',{exact:true}).fill('remediation_operator');
+  await worker.getByLabel('Mật khẩu',{exact:true}).fill(process.env.ISO_ASSESSOR_PASSWORD);
+  await worker.getByRole('button',{name:'ĐĂNG NHẬP HỆ THỐNG'}).click();
+  await worker.getByText('Tư vấn & khắc phục · từ phát hiện đến xác minh',{exact:true}).click();
+  const card=worker.locator('article').filter({has:worker.getByRole('heading',{name:/Kiểm kê phiên bản và lập kế hoạch/,exact:false})}).last();
+  await card.getByLabel(/Ghi chú thao tác/).fill('Tôi đã đọc biên nhận quan sát đúng đích và chuyển chuyên viên xác minh.');
+  await card.getByRole('button',{name:'Bắt đầu / tiếp tục',exact:true}).click();
+  const tasks=card.getByRole('checkbox');
+  for(let index=0;index<await tasks.count();index++){
+   const taskResult=worker.waitForResponse(r=>r.url().endsWith('/'+appAction+'/events')&&r.request().method()==='POST');
+   await tasks.nth(index).click();
+   const taskSaved=await taskResult;expect(taskSaved.status(),await taskSaved.text()).toBe(200);
+   await expect(tasks.nth(index)).toBeChecked();
+  }
+  await card.getByRole('combobox',{name:/Bằng chứng sau thực hiện/}).selectOption(softwareSource);
+  await card.getByRole('button',{name:'Gắn nguồn vào hành động',exact:true}).click();
+  const submission=worker.waitForResponse(r=>r.url().endsWith('/'+appAction+'/events')&&r.request().method()==='POST'&&r.request().postDataJSON().command==='submit');
+  await card.getByRole('button',{name:'Gửi xác minh — chưa kết luận đạt',exact:true}).click();
+  const submitted=await submission;expect(submitted.status(),await submitted.text()).toBe(200);
+  software=await submitted.json();
+ }finally{await workContext.close();}
+ await call('POST',softwareEvents,{command:'verify',expected_version:software.version,note:'Thử chặn người thực hiện tự xác minh.',outcome:'partial'},operator,403);
+ await page.getByRole('button',{name:'Làm mới khắc phục',exact:true}).click();
+ const softwareCard=page.locator('article').filter({has:page.getByRole('heading',{name:/Kiểm kê phiên bản và lập kế hoạch/})}).last();
+ await softwareCard.getByLabel(/Ghi chú thao tác/).fill('Đã đối chiếu phiên bản ứng dụng mẫu. Phạm vi bản vá hệ điều hành còn thiếu bằng chứng.');
+ const decision=page.waitForResponse(r=>r.url().endsWith('/'+appAction+'/events')&&r.request().method()==='POST');
+ await softwareCard.getByRole('button',{name:'Cải thiện một phần',exact:true}).click();
+ expect((await decision).status()).toBe(200);
+
 
  for(const [extension,label] of [['xlsx','Tải Excel XLSX'],['pdf','Tải PDF']]){
   const [download]=await Promise.all([page.waitForEvent('download'),page.getByRole('button',{name:label,exact:true}).click()]);

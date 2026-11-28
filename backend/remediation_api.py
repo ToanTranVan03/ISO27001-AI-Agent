@@ -80,6 +80,7 @@ class Context(Input):
     risks:str=Field(max_length=4000)
     contact:str=Field(max_length=1000)
 class Finding(Input):
+    software_baseline_id:str|None=Field(default=None,max_length=64)
     criterion_index:int|None=Field(default=None,ge=0)
     control_id:str
     expected_review_token:str=Field(pattern=r'^[a-f0-9]{64}$')
@@ -260,6 +261,13 @@ def create_finding(assessment_id:UUID,req:Finding,user=Depends(require_user)):
         cur.execute('SELECT version,document FROM remediation_records WHERE assessment_id=%s AND kind=%s',(assessment_id,'context'))
         context=cur.fetchone()
         if not context:raise HTTPException(409,'Lưu hồ sơ doanh nghiệp và phạm vi ISMS trước khi tạo phát hiện.')
+        if req.software_baseline_id:
+            if req.control_id!='A.8.8' or req.criterion_index is not None:
+                raise HTTPException(422,'Nguồn ứng dụng mẫu chỉ dùng cho phát hiện tham chiếu A.8.8.')
+            if not any(e['evidence_id']==req.software_baseline_id and e.get('source_quality',{}).get('usable') is not False for e in control['evidence']):
+                raise HTTPException(409,'Nguồn đầu không thuộc hồ sơ hiện hành hoặc không dùng được.')
+            observation=read_software_evidence(cur,assessment_id,req.software_baseline_id,'baseline')
+            doc['software_target']={**observation['binding'],'baseline_evidence_id':req.software_baseline_id}
         doc['context_snapshot']=dict(version=context[0],document=context[1])
         cur.execute('INSERT INTO remediation_records VALUES(%s,%s,%s,1,%s)',(assessment_id,doc['finding_id'],'finding',Jsonb(doc)))
     return dict(record_id=doc['finding_id'],version=1,document=doc)
@@ -337,6 +345,10 @@ def event(assessment_id:UUID,finding_id:UUID,action_id:UUID,req:Event,user=Depen
                 if not cur.fetchone():raise HTTPException(422,'Người phối hợp không thuộc đợt.')
         control,scope=scope_control(assessment_id,doc['control_id'],user)
         if scope['rubric_sha256']!=doc['rubric_sha256']:raise HTTPException(409,'Rubric đã đổi; cần rà phát hiện trên phiên bản mới.')
+        if doc.get('software_target') and req.command=='attach':
+            observed=read_software_evidence(cur,assessment_id,req.evidence_id,'after')
+            if observed['binding']!=doc['software_target'] or observed.get('action_id')!=str(action_id):
+                raise HTTPException(409,'Biên nhận không thuộc đầu việc và môi trường đã duyệt.')
         payload=req.model_dump(mode='json',exclude={'expected_version','command'})
         if req.proposal:payload.update(req.proposal.model_dump())
         try:updated=engine.transition(doc,str(action_id),req.command,payload,user['user_id'],role,control)
@@ -359,7 +371,8 @@ def store_lab_observation(aid,user,filename,payload,observed_at,control_id="A.8.
     try:
         item=source_intake.prepare(str(aid),control_id,filename,raw,evidence_type,origin,observed_at,note)
         source_intake.preserve(str(aid),raw)
-        result=control_packages.store(str(aid),control_id,user['user_id'],{'items':[item],'issues':[]})
+        result=control_packages.store(str(aid),control_id,user['user_id'],{'items':[item],'issues':[]},
+                                      origin='SERVER_SOFTWARE_LAB' if control_id=='A.8.8' else 'USER_PROVIDED_PACKAGE')
     except ValueError as exc:
         raise HTTPException(409,str(exc)) from exc
     except OSError as exc:
@@ -395,13 +408,37 @@ def publish_mfa_lab_source(assessment_id:UUID,finding_id:UUID,action_id:UUID,use
                                  receipt,receipt['after']['observed_at'])
 
 
+class SoftwareTarget(Input):
+    platform_target:Literal['local','linux_lab']='local'
+
+
+def read_software_evidence(cur,aid,evidence_id,stage):
+    cur.execute("""SELECT extracted_text FROM evidence WHERE assessment_id=%s AND control_id='A.8.8'
+                   AND evidence_id=%s AND evidence_origin='SERVER_SOFTWARE_LAB'""",(aid,evidence_id))
+    row=cur.fetchone()
+    if not row:
+        raise HTTPException(409,'Cần nguồn do công cụ lab tạo trong chính đợt này.')
+    data=json.loads(json.loads(row[0])['content'])
+    if data.get('stage')!=stage or not isinstance(data.get('binding'),dict):
+        raise HTTPException(409,'Nguồn lab thiếu định danh hoặc sai giai đoạn; cần thu lại.')
+    return data
+
+
 @router.post('/software-lab/baseline',status_code=201)
-def collect_software_baseline(assessment_id:UUID,user=Depends(require_user)):
+def collect_software_baseline(assessment_id:UUID,req:SoftwareTarget=SoftwareTarget(),user=Depends(require_user)):
     require_mfa_lab(assessment_id,user)
-    from lab_a8.software_update_demo import run_demo
-    before=run_demo(lambda *_:None)['before']
-    return store_lab_observation(assessment_id,user,'software-lab-baseline.json',
-                                 before,before['observed_at'],'A.8.8')
+    from lab_a8.software_update_demo import run_demo,run_linux_demo,TARGET
+    runner=run_linux_demo if req.platform_target=='linux_lab' else run_demo
+    try:
+        receipt=runner(lambda *_:None)
+    except (OSError,subprocess.SubprocessError,ValueError) as exc:
+        raise HTTPException(503,'Không đọc được môi trường đã chọn. Kiểm tra Docker và image lab nếu chọn Linux.') from exc
+    before=receipt['before']
+    binding=dict(platform_target=req.platform_target,system=before['platform'],application=TARGET,
+                 environment_id=str(assessment_id)+':'+req.platform_target,baseline_version=before['version'])
+    payload=dict(stage='baseline',binding=binding,observation=before,platform_inventory=receipt['platform_inventory'])
+    return {**store_lab_observation(assessment_id,user,'software-lab-baseline-'+req.platform_target+'.json',
+                                 payload,before['observed_at'],'A.8.8'),'software_target':binding}
 
 
 @router.post('/findings/{finding_id}/actions/{action_id}/software-lab/source',status_code=201)
@@ -414,7 +451,8 @@ def publish_software_lab_source(assessment_id:UUID,finding_id:UUID,action_id:UUI
     if not receipt or not receipt.get('after'):
         raise HTTPException(409,'Chưa có phép đo lại ứng dụng để lưu vào hồ sơ.')
     return store_lab_observation(assessment_id,user,'software-lab-'+receipt['plan']['id']+'.json',
-                                 receipt,receipt['after']['observed_at'],'A.8.8')
+                                 {**receipt,'stage':'after','binding':doc.get('software_target'),'action_id':str(action_id)},
+                                 receipt['after']['observed_at'],'A.8.8')
 
 
 class MfaLabRun(Expected):
@@ -459,6 +497,10 @@ def execute_fixed_lab(assessment_id,finding_id,action_id,req,user,control_id,rec
                 raise HTTPException(409,'Cần phát hiện gắn đúng tiêu chí MFA cho tài khoản đặc quyền.')
         elif criterion_index is not None:
             raise HTTPException(409,'Demo ứng dụng mẫu chỉ tham chiếu A.8.8, không gắn tiêu chí bản vá hệ điều hành.')
+        if control_id=='A.8.8':
+            binding=doc.get('software_target')
+            if not binding or binding['platform_target']!=req.platform_target:
+                raise HTTPException(409,'Cần nguồn đầu và phát hiện gắn đúng môi trường trước khi chạy.')
         if item.get(receipt_field):
             raise HTTPException(409,'Hành động đã có biên nhận lab.')
         approval=next((e for e in reversed(doc['history'])
@@ -474,11 +516,22 @@ def execute_fixed_lab(assessment_id,finding_id,action_id,req,user,control_id,rec
         if not context or context[0]!=doc.get('context_snapshot',{}).get('version'):
             raise HTTPException(409,'Phạm vi doanh nghiệp đã đổi; cần rà lại phát hiện.')
         try:
-            receipt=run_demo(lambda *_:str(user['user_id']))
+            if control_id=='A.8.8':
+                from lab_a8.software_update_demo import matches_baseline
+                actor=str(user['user_id'])
+                if req.platform_target=='linux_lab':
+                    receipt=run_demo(lambda *_:actor,expected=binding)
+                else:
+                    receipt=run_demo(lambda plan,before:actor if matches_baseline(binding,before,plan['target']) else None)
+            else:
+                receipt=run_demo(lambda *_:str(user['user_id']))
         except (OSError,subprocess.SubprocessError,ValueError) as exc:
             raise HTTPException(503,'Không lấy được biên nhận công cụ lab. Kiểm tra Docker và image lab nếu chọn Linux.') from exc
         if control_id=='A.8.8':
+            if receipt['before']['platform']!=binding['system'] or receipt['before']['version']!=binding['baseline_version'] or receipt['plan']['target']!=binding['application']:
+                raise HTTPException(409,'Phép đo tại đích không khớp nền tảng, ứng dụng hoặc phiên bản nguồn đầu.')
             receipt['platform_target']=req.platform_target
+            receipt['binding']=binding
         receipt['workflow_approval']={'actor':str(approval['actor']),'at':approval['at']}
         item[receipt_field]=receipt
         doc['history'].append(dict(command='mfa_lab' if control_id=='A.8.5' else 'software_lab',actor=user['user_id'],at=engine.now(),

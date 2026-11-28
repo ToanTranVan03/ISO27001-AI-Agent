@@ -95,7 +95,7 @@ def collect(assessment_id,control_id,user_id):
     return store(assessment_id,control_id,user_id,inspect(assessment_id,control_id))
 
 
-def store(assessment_id,control_id,user_id,packet):
+def store(assessment_id,control_id,user_id,packet,*,origin="USER_PROVIDED_PACKAGE"):
     """Store validated items under the same upload/evaluation transaction lock."""
     from backend.database import get_connection
     from backend.teamwork import log_event
@@ -107,9 +107,9 @@ def store(assessment_id,control_id,user_id,packet):
         for item in packet['items']:
             cur.execute('''INSERT INTO evidence(evidence_id,control_id,evidence_type,source,extracted_text,sha256_hash,
                 assessment_id,uploaded_by,is_sample,is_synthetic,evidence_origin)
-                VALUES(%s,%s,%s,%s,%s,%s,%s,%s,FALSE,FALSE,'USER_PROVIDED_PACKAGE')
+                VALUES(%s,%s,%s,%s,%s,%s,%s,%s,FALSE,FALSE,%s)
                 ON CONFLICT(evidence_id) DO NOTHING RETURNING evidence_id''',
-                (item['evidence_id'],control_id,item['evidence_type'],item['source'],item['extracted_text'],item['sha256_hash'],assessment_id,user_id))
+                (item['evidence_id'],control_id,item['evidence_type'],item['source'],item['extracted_text'],item['sha256_hash'],assessment_id,user_id,origin))
             if cur.fetchone():
                 inserted.append(item['evidence_id']);log_event(cur,assessment_id,control_id,user_id,'PACKAGE_EVIDENCE_COLLECTED',{'evidence_id':item['evidence_id']})
             else:reused.append(item['evidence_id'])
