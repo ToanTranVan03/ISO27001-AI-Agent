@@ -198,6 +198,11 @@ test('real remediation: approve, assign, evidence, reject, recheck, verify, pres
  expect(softwareCreated.status(),await softwareCreated.text()).toBe(201);
  let software=await softwareCreated.json();
  const trackedId=software.record_id;
+ const other=await call('POST',path+'/findings',{
+  control_id:'A.8.8',expected_review_token:a88.review_token,software_baseline_id:softwareBaseline,
+  description:'MÔ PHỎNG: phát hiện thứ hai cùng control, để kiểm tra định tuyến.',
+  location:'Kho ứng dụng thử',root_cause:'Ca đối chứng điều hướng'
+ },admin,201);
  const softwarePath=path+'/findings/'+software.record_id+'/actions';
  await page.getByRole('button',{name:'Làm mới khắc phục',exact:true}).click();
  const updateFinding=page.locator('article').filter({has:page.getByRole('heading',{name:'MÔ PHỎNG: ứng dụng mẫu đang chạy phiên bản 1.0.0',exact:true})}).last();
@@ -231,6 +236,18 @@ test('real remediation: approve, assign, evidence, reject, recheck, verify, pres
  }
  await page.reload();
  await expect(marker.getByText(trackedId,{exact:true})).toBeVisible();
+ const findingLink=page.url();
+ await page.getByRole('textbox',{name:'Mã phát hiện từ báo cáo'}).fill(other.record_id);
+ await page.getByRole('button',{name:'Mở theo mã phát hiện'}).click();
+ await expect(marker.getByText(other.record_id,{exact:true})).toBeVisible();
+ await expect(page.getByRole('heading',{name:description,exact:true})).toHaveCount(0);
+ await page.getByRole('textbox',{name:'Mã phát hiện từ báo cáo'}).fill(rid);
+ await page.getByRole('button',{name:'Mở theo mã phát hiện'}).click();
+ await expect(marker.getByText(rid,{exact:true})).toBeVisible();
+ await expect(page).toHaveURL(/control=A\.8\.5/);
+ await page.goto(findingLink);
+ await expect(marker.getByText(trackedId,{exact:true})).toBeVisible();
+ await expect(page.getByRole('heading',{name:other.document.description,exact:true})).toHaveCount(0);
  await call('POST',updatePath,updateBody(),operator,403);
  await page.getByRole('button',{name:'Làm mới khắc phục',exact:true}).click();
  if(linuxLab)await call('POST',updatePath,updateBody(),admin,409);
@@ -294,7 +311,7 @@ test('real remediation: approve, assign, evidence, reject, recheck, verify, pres
  expect((await decision).status()).toBe(200);
 
 
- for(const [extension,label] of [['xlsx','Tải Excel XLSX'],['pdf','Tải PDF']]){
+ for(const [extension,label] of [['xlsx','Tải Excel XLSX'],['pdf','Tải PDF'],['json','Xuất báo cáo trước / sau JSON']]){
   const [download]=await Promise.all([page.waitForEvent('download'),page.getByRole('button',{name:label,exact:true}).click()]);
   await download.saveAs(testInfo.outputPath('mfa-before-after.'+extension));
  }

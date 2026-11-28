@@ -14,10 +14,10 @@
 1. **Doanh nghiệp** (`#view=company`): chọn đợt demo riêng và giải thích đối tượng thử. Tài khoản tư vấn quản lý phạm vi. Ca tự động dùng cấu hình tổng hợp, không dùng danh mục doanh nghiệp thật.
 2. **Tổng quan 56 control** (`#view=scope56&control=A.8.8`): trong Tư vấn & khắc phục chọn Linux Debian ở phần thu nguồn, thu phiên bản 1.0.0, tạo phát hiện A.8.8 chọn nguồn đầu đó. Lập kế hoạch, duyệt và giao cho nhân viên. Kiểm mã nguồn và đích đã khóa trên thẻ. Tư vấn chạy công cụ và lưu nguồn sau. Phiên bản quan sát 1.1.0, hash khớp.
 3. **Hồ sơ ISO** (`#view=dossier&control=A.8.8`): xem nguồn trong đúng đợt và control. Nhân viên quay lại đầu việc, hoàn thành các bước, gắn biên nhận sau và gửi xác minh. Tư vấn đọc nguồn và kết luận mức cải thiện của đầu việc, giữ phần OS chưa có nguồn.
-4. **Thực nghiệm A.8** (`#view=a8&control=A.8.8`): minh họa khác biệt giữa một lượt probe kỹ thuật và hồ sơ khắc phục. Chỉ mở lượt A.8 đã lưu khi có liên kết nguồn phù hợp. Ca cập nhật ứng dụng không tự tạo lượt thử A.8 và hiện chưa có mã finding dùng chung ở cả bốn màn hình.
+4. **Thực nghiệm A.8** (`#view=a8&control=A.8.8`): minh họa khác biệt giữa một lượt probe kỹ thuật và hồ sơ khắc phục. Chỉ mở lượt A.8 đã lưu khi có liên kết nguồn phù hợp. Ca cập nhật ứng dụng có mã phát hiện dùng chung ở bốn màn hình. Lượt thử A.8 chỉ liên kết khi có nguồn phù hợp.
 5. Quay về **Tư vấn & khắc phục**, tải PDF/Excel, chỉ mã phát hiện, mã môi trường, nguồn đầu, phiên bản trước/sau, người duyệt/chạy/xác minh và kết quả còn thiếu.
 
-Lượt hồi quy dùng tài khoản thử do runner tạo. Tạo phát hiện A.8.8, duyệt giao và thử quyền qua API trong bộ tự động. Thu nguồn, điền mẫu, chạy công cụ, lưu nguồn, cập nhật việc phía nhân viên, xác minh một phần và xuất báo cáo qua Edge. Không coi kịch bản bốn màn hình bên trên đã được chạy liền mạch bằng một mã phát hiện.
+Lượt hồi quy dùng tài khoản thử do runner tạo. Bản mới đã tạo phát hiện chính, duyệt giao và chuyển bốn màn hình qua Edge. Phép thử quyền và bước tạo phát hiện đối chứng được thực hiện qua API.
 
 ## Chạy lại và tệp liên quan
 
@@ -51,3 +51,52 @@ Mốc đợt chính đã xuất: 19/56 có nguồn ngoài preset, 18 có nội d
 - Không cần migration. Luồng điều hướng dùng mã phát hiện trong URL và đọc hồ sơ qua API có phân quyền hiện hành. Mốc này bổ sung cho ca đã ghi ở trên.
 
 Chạy lại bằng lệnh ở trên với tên tệp kết quả mới. Phần còn chờ gồm hồ sơ ngoài preset cho 37 control, thay một nguồn chưa dùng được, đối chiếu độc lập, thẩm định và duyệt SoA. Cần xác nhận tên thiết bị trong ghi âm trước khi chọn môi trường thử tương ứng.
+
+## Đối chiếu hai yêu cầu nghiệm thu
+
+| Hạng mục | Trạng thái | Căn cứ |
+| --- | --- | --- |
+| Nhận diện đúng môi trường từ nguồn đầu đến đo lại | Đạt trong lab Linux và ca Windows hồi quy | Ràng buộc đợt, môi trường, ứng dụng và mã nguồn đầu trong phát hiện; phiên bản 1.0.0 → 1.1.0 trong biên nhận. |
+| Tạo phát hiện và duyệt giao qua React | Đạt | Lượt Edge trên PostgreSQL riêng chờ phản hồi tạo và duyệt ngay sau thao tác bấm; người thực hiện dùng phiên đăng nhập riêng. |
+| Bốn màn hình, tải lại và mở liên kết trực tiếp | Đạt | Ca Edge dùng hai UUID cùng A.8.8, kiểm tra chỉ đúng hồ sơ xuất hiện sau tra mã và mở URL. Tra mã phát hiện MFA từ A.8.8 chuyển đồng thời về đúng A.8.5. |
+| Quan hệ với lượt đo Thực nghiệm A.8 | Một phần | Đã có ngữ cảnh phát hiện và đường về hồ sơ. Probe A.8.8 của lượt kỹ thuật đọc inventory và cấu hình quét; nguồn Linux này ghi phiên bản ứng dụng mẫu. Chưa có lượt kỹ thuật thu đúng quan sát của ứng dụng để liên kết theo mã nguồn. |
+| Báo cáo trước–sau | Đạt cho ca ứng dụng | PDF, Excel và JSON cùng chứa hai UUID riêng. Hồ sơ có hành động ghi biên nhận, nguồn sau và thẩm định một phần. |
+| Phân vai và hành động theo phạm vi | Đạt trong ca đại diện | Tư vấn duyệt và khởi chạy công cụ lab; nhân viên đánh dấu tiến độ, gắn nguồn, gửi xác minh; tư vấn xác minh. Phép thử tự xác minh, chạy trước duyệt và gửi nguồn sai chạy qua API. |
+| Hồi quy | Đạt theo phạm vi ca đã lưu | Linux/MFA và Windows chạy lại; xem biên nhận hồi quy dưới đây. |
+| Bản vá hệ điều hành và thiết bị trong ghi âm | Chờ đầu vào | Cần chốt tên/model thiết bị, hệ điều hành và máy thử được chỉ định. Xem bảng bên dưới. |
+| Nguồn, chấm độc lập và SoA | Một phần | Ma trận và báo cáo đã xuất; các quyết định nghiệp vụ cần nguồn và người xác nhận. |
+
+### Báo cáo cùng lượt Edge
+
+- Phát hiện có đầu việc: `dc8ed051-9ca9-4740-a7a2-14320ee897ad`. Nguồn đầu `WEB-397d6a4877958baf07457d1d025baeb8`, nguồn sau `WEB-ffbc71a51eeca319d68b60dec4e2046f`. Đích `linux_lab`, ứng dụng `iso-demo-inventory`.
+- Phát hiện đối chứng cùng control `3980b9ea-464b-4154-83f0-477e640c49c8` được tạo qua API để thử điều hướng. Trong giao diện, vào Tổng quan 56 control → Tư vấn & khắc phục → dán mã từ PDF vào ô **Mã phát hiện từ báo cáo** → **Mở theo mã phát hiện**. Các mã trong gói này thuộc cơ sở dữ liệu kiểm thử đã dọn, nên cần tạo ca mới để thao tác với dữ liệu đang chạy.
+- [PDF](../work/ban-giao-nghiem-thu-2026-11-28/linux-doi-chieu-final.pdf), [Excel](../work/ban-giao-nghiem-thu-2026-11-28/linux-doi-chieu-final.xlsx), [JSON](../work/ban-giao-nghiem-thu-2026-11-28/linux-doi-chieu-final.json), [biên nhận kiểm thử](../work/linux-doi-chieu-final-2026-11-28.json).
+
+### Thiết bị, cách đo và ca chờ
+
+| Đích | Loại | Đo và hành động đã kiểm | Điều kiện để mở rộng |
+| --- | --- | --- | --- |
+| Windows, đích local của backend | Máy chạy ca thử Windows | Đọc thông tin nền tảng và phiên bản ứng dụng mẫu, cập nhật trong thư mục thử, kiểm lại phiên bản và hash | Muốn kiểm bản vá cần máy ảo thử riêng, tài sản định danh rõ và người phê duyệt |
+| Debian 12, `linux_lab` | Container cô lập | Đọc từ container, chạy lại ứng dụng mẫu sau cập nhật và kiểm hash | Bản vá hệ điều hành cần máy thử có vòng đời reboot và khả năng phục hồi phù hợp |
+| Laptop bàn giao | Tài sản mô phỏng | Nhân viên và người tiếp nhận đối chiếu mã tài sản, người xác minh thẩm định biên nhận | Muốn áp dụng thật cần danh mục tài sản và biên bản có người chịu trách nhiệm xác nhận |
+| Thiết bị đoạn 08:43–09:35 | Chưa xác định | Bản chép có các chuỗi nghe thành SEBA, Doutor và Sougwick, chưa đủ để định danh | Nhờ nhóm xác nhận tên/model và hệ điều hành từng thiết bị trước khi gán đích |
+
+**Ca vá hệ điều hành chờ máy thử.** Tạo phát hiện riêng cho tiêu chí Patch OS ở A.8.8, ghi mã máy và build ban đầu vào nguồn trước. Chuyên viên duyệt đầu việc với mã bản vá, cửa sổ thực hiện và điều kiện hồi phục; người được giao thực hiện trên máy thử được cấp quyền. Đính kèm nguồn bản vá đã áp dụng và phép đo riêng sau thao tác gồm mã máy, build/gói, thời điểm và trạng thái khởi động lại nếu áp dụng. Chuyên viên đối chiếu hai lần đo trước khi ghi kết quả. Có thể dùng ngay đường nộp nguồn, giao việc và thẩm định hiện có. Trạng thái ca này vẫn chờ thực thi.
+
+### Việc cần người phụ trách xử lý
+
+- Đợt chính có 19/56 control có nguồn ngoài preset, 18 có nội dung dùng được ở ngưỡng kỹ thuật, 37 thiếu nguồn. A.6.2 có tệp DOCX chỉ trích xuất 1 ký tự chữ/số. Nhân sự/pháp chế cần nộp bản đọc được, trích phần điều khoản ATTT liên quan và nêu phạm vi áp dụng. Các dòng khác có yêu cầu nguồn và vai trò phụ trách trong [gói yêu cầu 56 control](../work/ban-giao-nghiem-thu-2026-11-28/nguon-56/handoff.json).
+- Trong 17 lượt đã xuất, 14 dùng LLM, 3 dùng luật, 14 có đủ metadata, 8 có nguồn cho cả 18 control, 6 có nguồn cho 5 control và 3 có độ bao phủ ghi nhận bằng 0. Có 6 lỗi cuối trên 5 lượt. Cả 17 đang chờ đối chiếu độc lập, nên độ đúng độc lập chưa có mẫu số. Với lượt chấm mới, thống nhất người chấm và phạm vi, chốt report hash và rubric của cùng bộ nguồn, giao qua tài khoản chấm mù và lưu nhãn riêng của từng người. [Báo cáo đối chiếu](../work/ban-giao-nghiem-thu-2026-11-28/doi-chieu-giang-vien.json).
+- SoA mốc xuất có 56 dòng, 0 quyết định áp dụng và 0 thẩm định hiện hành. Người phụ trách ghi quyết định, lý do, nguồn, rồi thẩm định trước khi trình duyệt theo [điều kiện SoA](DIEU_KIEN_DUYET_SOA_56.md).
+
+### Kiểm thử đợt bổ sung
+
+- 488 test Python đã theo dõi trong Git đạt. Chạy pytest không giới hạn đường dẫn còn vướng 10 tệp chưa được Git theo dõi, thuộc cây kỹ thuật riêng, thiếu dependency/import trong venv hiện tại.
+- 15 test JavaScript đã theo dõi trong Git và một phép đối chiếu mới cho 56 mẫu khắc phục đạt. Phép kiểm đối chiếu mã với catalog và kiểm trường bộ phận, bước làm, nguồn, cách kiểm lại và điều kiện nghiệm thu. Lint và build frontend đạt; build cảnh báo kích thước chunk.
+- Edge với FastAPI/PostgreSQL thật đạt, giữ dữ liệu sau restart API, runner dọn database thử. Không có migration mới. Chạy lại lệnh ở trên và dùng tên file JSON mới.
+
+Hồi quy bổ sung ngày 28/11/2026 đạt cho [Windows và MFA](../work/windows-doi-chieu-2026-11-28.json) và [bàn giao laptop](../work/ban-giao-doi-chieu-final-2026-11-28.json), có kiểm giữ dữ liệu sau restart. Lượt bàn giao chạy kèm phép kiểm gián đoạn lô đánh giá trả HTTP 409 ở phần lô; trình duyệt và kiểm giữ hồ sơ bàn giao đã đạt. Lượt chuyên biệt bàn giao chạy lại đạt với lệnh:
+
+```powershell
+.venv\Scripts\python.exe run_isolated_acceptance.py --execute --remediation --governance --clients --employee-workflows --handover-only --output work/ban-giao-moi.json
+```
