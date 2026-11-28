@@ -24,6 +24,7 @@ Giữ phạm vi **56 control** của đồ án (8 A.6 con người, 14 A.7 vật
 | 27/11 | **MFA · A.8.5:** thu nguồn ban đầu từ lab, tạo phát hiện theo tiêu chí, duyệt rồi chạy công cụ. Sau khi bật yêu cầu MFA, lần đo riêng từ chối đăng nhập thiếu yếu tố thứ hai và cho phép khi cung cấp đủ. Lưu nguồn sau vào hồ sơ, thẩm định và xác minh trên React, xuất PDF/Excel. [Demo MFA](../docs/DEMO_MFA_LAB.md) |
 | 27/11 | **Cập nhật ứng dụng mẫu · tham chiếu A.8.8:** sau khi duyệt, công cụ cập nhật gói thử từ 1.0.0 lên 1.1.0, khởi chạy lại và kiểm phiên bản, trạng thái, hash. Biên nhận trước–sau có trong hồ sơ và PDF/Excel. Phép thử chỉ áp dụng ứng dụng mẫu trong lab. [Phạm vi và cách chạy](../docs/DOI_CHIEU_HANH_DONG_KHAC_PHUC.md) |
 | 27/11 | Làm rõ bốn màn hình chính theo mục đích, người thực hiện và bước tiếp theo. Màn Khắc phục cho thấy người duyệt, trạng thái đầu việc và bằng chứng trước–sau. Hồi quy điều hướng giữ đúng ngữ cảnh đợt, control và nhân viên. |
+| 28/11 | Đối chiếu KhoaTuan7 và tích hợp ba mẫu luyện tập theo vai trò vào luồng đào tạo hiện có. Kiểm tra điền nháp trên Edge. [Đối chiếu và phạm vi tích hợp](../docs/TICH_HOP_KHOA_TUAN7.md) |
 
 ## Kết quả và minh chứng
 
