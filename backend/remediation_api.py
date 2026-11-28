@@ -17,6 +17,25 @@ router=APIRouter(prefix='/api/assessments/{assessment_id}/remediation',tags=['Co
 MFA_LAB_CRITERION = 'Bật MFA cho tài khoản đặc quyền'
 
 
+# Adapt the fixed-tool idea from KhoaTuan7; lab targets are never caller-controlled.
+LAB_PLAYBOOKS = {
+    'A.8.5': {
+        'operation': 'require_second_factor_labadmin_demo',
+        'target': 'labadmin-mfa-demo / LAB-ADMIN-MFA',
+        'effect': 'Bật yêu cầu yếu tố thứ hai cho tài khoản thử.',
+        'verification': 'Đăng nhập thiếu yếu tố phải bị từ chối và đăng nhập đủ yếu tố phải thành công.',
+        'required_criterion': MFA_LAB_CRITERION,
+    },
+    'A.8.8': {
+        'operation': 'replace_disposable_application',
+        'target': 'iso-demo-inventory / thư mục tạm',
+        'effect': 'Thay gói ứng dụng mẫu từ 1.0.0 lên 1.1.0.',
+        'verification': 'Khởi chạy lại, đối chiếu phiên bản, tình trạng và hash gói. Phép thử chỉ áp dụng ứng dụng mẫu.',
+        'required_criterion': None,
+    },
+}
+
+
 def initialize():
     with get_connection() as con,con.cursor() as cur:
         cur.execute('''CREATE TABLE IF NOT EXISTS remediation_roles (
@@ -188,7 +207,7 @@ def board(assessment_id:UUID,user=Depends(require_user)):
     if role=='operator':
         for record in records:
             if record['kind']=='finding':record['document']['actions']=[a for a in record['document']['actions'] if str(a.get('assignee'))==str(user['user_id']) or str(user['user_id']) in a.get('collaborator_ids',[])]
-    return dict(mfa_lab_criterion=MFA_LAB_CRITERION,mfa_lab_enabled=os.getenv('ISO_MFA_DEMO_ENABLED')=='1',records=records,members=members,role=role,user_id=user['user_id'],can_manage_roles=user['role']=='admin',
+    return dict(lab_playbooks=LAB_PLAYBOOKS,mfa_lab_criterion=MFA_LAB_CRITERION,mfa_lab_enabled=os.getenv('ISO_MFA_DEMO_ENABLED')=='1',records=records,members=members,role=role,user_id=user['user_id'],can_manage_roles=user['role']=='admin',
         standard_references=[dict(name='ISO/IEC 27001:2022',url='https://www.iso.org/standard/27001'),
             dict(name='Amd 1:2024 — Climate action changes',url='https://www.iso.org/standard/88435.html')],
         note='Tiến độ khắc phục không phải kết luận tuân thủ hoặc chứng nhận ISO. Các vai trò chỉ có hiệu lực trong đợt này.')
@@ -426,11 +445,16 @@ def execute_fixed_lab(assessment_id,finding_id,action_id,req,user,control_id,rec
             raise HTTPException(404,'Không tìm thấy hành động.')
         if doc['control_id']!=control_id or item['state'] not in ('NOT_STARTED','IN_PROGRESS'):
             raise HTTPException(409,f'Cần hành động {control_id} đã duyệt và đang được thực hiện.')
+        playbook=LAB_PLAYBOOKS[control_id]
+        if req.operation!=playbook['operation']:
+            raise HTTPException(422,'Thao tác không khớp công cụ đã đăng ký.')
         criterion_index=doc.get('criterion_index')
         criteria=doc['baseline']['criteria']
-        if control_id=='A.8.5' and (not isinstance(criterion_index,int) or not 0<=criterion_index<len(criteria) or criteria[criterion_index]!=MFA_LAB_CRITERION):
-            raise HTTPException(409,'Cần phát hiện gắn đúng tiêu chí MFA cho tài khoản đặc quyền.')
-        if control_id=='A.8.8' and criterion_index is not None:
+        expected=playbook['required_criterion']
+        if expected is not None:
+            if not isinstance(criterion_index,int) or not 0<=criterion_index<len(criteria) or criteria[criterion_index]!=expected:
+                raise HTTPException(409,'Cần phát hiện gắn đúng tiêu chí MFA cho tài khoản đặc quyền.')
+        elif criterion_index is not None:
             raise HTTPException(409,'Demo ứng dụng mẫu chỉ tham chiếu A.8.8, không gắn tiêu chí bản vá hệ điều hành.')
         if item.get(receipt_field):
             raise HTTPException(409,'Hành động đã có biên nhận lab.')
