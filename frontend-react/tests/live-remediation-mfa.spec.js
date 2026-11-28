@@ -1,6 +1,6 @@
 import {test,expect} from '@playwright/test';
 import {randomUUID} from 'node:crypto';
-test.use({baseURL:process.env.UI_BASE_URL,channel:'msedge'});
+test.use({baseURL:process.env.UI_BASE_URL,channel:'msedge',launchOptions:{slowMo:process.env.ISO_DEMO_SLOW==='1'?1800:0}});
 test.setTimeout(360000);
 
 test('real remediation: approve, assign, evidence, reject, recheck, verify, preserve and export',async({request,page},testInfo)=>{
