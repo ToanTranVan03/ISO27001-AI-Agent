@@ -177,6 +177,17 @@ test('real remediation: approve, assign, evidence, reject, recheck, verify, pres
  }
  await page.getByRole('button',{name:'Làm mới khắc phục',exact:true}).click();
  const linuxLab=process.env.ISO_TEST_LINUX_LAB==='1';
+ let studyRunId;
+ if(linuxLab){
+  const a8Path=base+'/a8/runs';
+  const run=await call('POST',a8Path,{profile:'mixed',mode:'rules',transport:'live'},admin,202);
+  studyRunId=run.run_id;
+  const runPath=a8Path+'/'+studyRunId;
+  await expect.poll(async()=>(await call('GET',runPath)).state,{timeout:120000}).not.toBe('running');
+  const finished=await call('GET',runPath);
+  expect(finished.state,finished.error).toBe('finished');
+  await call('POST',runPath+'/import-sources',{});
+ }
  if(linuxLab)await page.getByRole('combobox',{name:'Môi trường thu nguồn đầu',exact:true}).selectOption('linux_lab');
  const softwareBaselineResponse=page.waitForResponse(r=>r.url().endsWith('/software-lab/baseline')&&r.request().method()==='POST');
  await page.getByRole('button',{name:'Thu phiên bản ứng dụng mẫu từ lab',exact:true}).click();
@@ -184,11 +195,15 @@ test('real remediation: approve, assign, evidence, reject, recheck, verify, pres
  expect(softwareBaselineResult.status(),await softwareBaselineResult.text()).toBe(201);
  const softwareBaseline=(await softwareBaselineResult.json()).evidence_id;
  const a88=(await call('GET',scopePath)).controls.find(row=>row.control_id==='A.8.8');
- expect(a88.evidence.some(e=>e.evidence_id===softwareBaseline)).toBe(true);
+ const baselineSource=a88.evidence.find(e=>e.evidence_id===softwareBaseline);
+ expect(baselineSource).toBeTruthy();
+ const studySource=linuxLab?a88.evidence.find(e=>e.a8_capture?.run_id===studyRunId):null;
+ if(linuxLab)expect(studySource?.a8_capture.sample_application?.baseline_artifact_sha256).toBe(baselineSource.software_lab.binding.baseline_artifact_sha256);
  const description='MÔ PHỎNG: ứng dụng mẫu đang chạy phiên bản 1.0.0';
  const softwareForm=page.locator('details').filter({has:page.locator('summary').filter({hasText:'Ghi nhận phát hiện trên snapshot hiện tại'})}).last();
  await softwareForm.getByRole('combobox',{name:'Control',exact:true}).selectOption('A.8.8');
  await softwareForm.getByRole('combobox',{name:'Nguồn đầu ứng dụng mẫu',exact:true}).selectOption(softwareBaseline);
+ if(linuxLab)await softwareForm.getByRole('combobox',{name:'Bản thu Thực nghiệm A.8 làm căn cứ',exact:true}).selectOption(studySource.evidence_id);
  await softwareForm.getByRole('textbox',{name:'Phát hiện / khoảng cách',exact:true}).fill(description);
  await softwareForm.getByRole('textbox',{name:'Địa điểm, tài sản hoặc quy trình',exact:true}).fill('Kho ứng dụng thử');
  await softwareForm.getByRole('textbox',{name:'Giả thuyết nguyên nhân — cần xác nhận',exact:true}).fill('Ứng dụng mẫu được cấu hình phiên bản ban đầu');
@@ -197,6 +212,7 @@ test('real remediation: approve, assign, evidence, reject, recheck, verify, pres
  const softwareCreated=await createSoftware;
  expect(softwareCreated.status(),await softwareCreated.text()).toBe(201);
  let software=await softwareCreated.json();
+ if(linuxLab)expect(software.document.a8_capture).toEqual(studySource.a8_capture);
  const trackedId=software.record_id;
  const other=await call('POST',path+'/findings',{
   control_id:'A.8.8',expected_review_token:a88.review_token,software_baseline_id:softwareBaseline,
@@ -334,26 +350,11 @@ test('real remediation: approve, assign, evidence, reject, recheck, verify, pres
  const persisted=await call('GET',path,undefined,again);
  expect(persisted.records.find(r=>r.record_id===rid).document.actions.find(a=>a.action_id===act).state).toBe('CLOSED');
  if(linuxLab){
-  const a8Path=base+'/a8/runs';
-  const run=await call('POST',a8Path,{profile:'mixed',mode:'rules',transport:'live'},admin,202);
-  const runPath=a8Path+'/'+run.run_id;
-  await expect.poll(async()=>(await call('GET',runPath)).state,{timeout:120000}).not.toBe('running');
-  const finished=await call('GET',runPath);
-  expect(finished.state,finished.error).toBe('finished');
-  await call('POST',runPath+'/import-sources',{});
-  const control=(await call('GET',scopePath)).controls.find(row=>row.control_id==='A.8.8');
-  const capture=control.evidence.find(e=>e.a8_capture?.run_id===run.run_id)?.a8_capture;
-  expect(capture?.asset_id).toBeTruthy();
-  const body={control_id:'A.8.8',expected_review_token:control.review_token,a8_capture_id:capture.evidence_id,
-   description:'MÔ PHỎNG: rà lại bản thu inventory A.8.8.',location:capture.asset_id,root_cause:'Cần đối chiếu inventory'};
-  await call('POST',path+'/findings',{...body,software_baseline_id:softwareBaseline},admin,422);
-  const linked=await call('POST',path+'/findings',body,admin,201);
-  expect(linked.document.a8_capture).toEqual(capture);
-  await page.goto('/#view=a8&control=A.8.8&assessment='+aid+'&run='+run.run_id);
-  await page.getByRole('region',{name:'Phát hiện từ bản thu A.8'}).getByRole('button',{name:new RegExp(linked.record_id)}).click({timeout:30000});
-  await expect(marker.getByText(linked.record_id,{exact:true})).toBeVisible();
+  await page.goto('/#view=a8&control=A.8.8&assessment='+aid+'&run='+studyRunId);
+  await page.getByRole('region',{name:'Phát hiện từ bản thu A.8'}).getByRole('button',{name:new RegExp(trackedId)}).click({timeout:30000});
+  await expect(marker.getByText(trackedId,{exact:true})).toBeVisible();
   await marker.getByRole('button',{name:'Thực nghiệm A.8 · phát hiện',exact:true}).click();
-  await expect(page).toHaveURL(new RegExp('run='+run.run_id));
+  await expect(page).toHaveURL(new RegExp('run='+studyRunId));
  }
  await call('POST','/api/auth/logout',undefined,again);await call('POST','/api/auth/logout');
 });

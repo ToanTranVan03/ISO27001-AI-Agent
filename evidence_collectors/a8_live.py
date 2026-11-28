@@ -44,6 +44,8 @@ def live_catalog(controls):
                 verification_kind='container-active-self-test') for check,source,condition in SPECS[cid]]
         c['scope_note'] = ('Phép thử đại diện trên tài nguyên container; không đại diện toàn bộ control/ISMS.'
                            if cid in LIVE_IDS else 'Chưa có probe live cho control này; phải kết luận thiếu bằng chứng.')
+        if cid=='A.8.8':
+            c['scope_note'] += ' Có bản đo bổ sung phiên bản và hash ứng dụng mẫu khi lab khả dụng; hai tiêu chí chấm vẫn dựa vào inventory và advisory lab.'
         for i, criterion in enumerate(c['criteria'] if cid not in SPECS else []):
             source, condition = DESCRIPTIONS[cid][i] if cid in LIVE_IDS else ('unavailable', 'Chưa triển khai probe live.')
             criterion.update(raw_source=source, pass_condition=condition,
@@ -161,6 +163,16 @@ def collect_live(profile, control):
         except (OSError, ValueError, KeyError, TypeError, subprocess.SubprocessError) as exc:
             errors.append({'artifact': 'live-probe', 'error': type(exc).__name__})
             facts = {k: None for k in control['checks']}
+    if cid=='A.8.8' and active_observations:
+        from lab_a8.software_update_demo import run_linux_demo
+        try:
+            receipt=run_linux_demo(lambda *_:None)
+            content=json.dumps(dict(schema='a88-sample-baseline-v1',platform_target='linux_lab',
+                                    observation=receipt['before']),sort_keys=True)
+            artifacts.append(dict(artifact='sample-application.json',content=content,
+                                  sha256=hashlib.sha256(content.encode()).hexdigest()))
+        except (OSError,ValueError,KeyError,subprocess.SubprocessError) as exc:
+            errors.append(dict(artifact='sample-application.json',error=type(exc).__name__))
     combined = hashlib.sha256(json.dumps({'control_id':cid,'artifacts':artifacts}, sort_keys=True).encode()).hexdigest()
     return dict(evidence_id='A8LIVE-'+combined[:24], source='live-container://'+cid,
                 source_sha256=combined, collected_at=datetime.now(timezone.utc).isoformat(),

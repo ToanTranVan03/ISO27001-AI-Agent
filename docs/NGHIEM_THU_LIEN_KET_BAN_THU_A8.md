@@ -11,7 +11,7 @@ Ngày 28/11/2026, Edge chạy qua FastAPI và PostgreSQL trên database kiểm t
 
 Thao tác trên dữ liệu mới gồm chạy live, nhập nguồn, tạo phát hiện trong Tổng quan 56 control và chọn **Bản thu Thực nghiệm A.8 làm căn cứ**. Trong lượt nghiệm thu tự động, bước chạy, nhập và tạo dùng API. Bước từ lượt đến phát hiện và quay lại lượt đi qua Edge. Lượt đang xem chỉ hiện các phát hiện có cùng mã lượt, control và hash báo cáo. Bản thu phải có định danh đối tượng, đúng đợt và hash. JSON, PDF và Excel giữ mã lượt cùng nguồn. Hai định danh trong bảng thuộc database thử đã dọn. [Biên nhận kiểm thử](../work/a8-lien-ket-phat-hien-2026-11-28.json).
 
-Đây là phát hiện cho bản thu inventory. Phát hiện cập nhật ứng dụng mẫu A.8.8 đã kiểm chứng ở lượt trước có chuỗi nguồn trước–sau riêng. Muốn nối chính ca ứng dụng vào một lượt nghiên cứu, lượt đó phải thu được cùng đối tượng, ứng dụng và phép đo, rồi chốt bộ nguồn theo rubric của lượt. API chặn ghép nguồn inventory với nguồn đầu của ca cập nhật mẫu.
+Đây là phát hiện cho bản thu inventory. Bản thử ứng dụng mẫu bên dưới dùng một lượt nghiên cứu mới với nguồn ứng dụng bổ sung. API chặn ghép nguồn chỉ có inventory với nguồn đầu của ca cập nhật mẫu.
 
 ## Xem phép đo của chính ca cập nhật ứng dụng
 
@@ -20,6 +20,12 @@ Trong Tổng quan 56 control, chọn **Theo dõi phát hiện này**, rồi mở
 Gói ứng dụng thử được đóng gói xác định để lần đọc mới có thể so SHA-256 với nguồn đã chốt. Với nguồn đầu mới, công cụ chỉ chạy khi khớp nền tảng, ứng dụng, phiên bản và hash. Ca thử tạo thư mục tạm, đọc lại ứng dụng trên đúng đích lab sau thao tác và ghi biên nhận; trạng thái ứng dụng của ca thử kết thúc cùng môi trường tạm.
 
 Edge đã kiểm mở phép đo `c45b562650c1c0aa` từ phát hiện `015c3700-2971-463a-9bea-5dd08d018257`, xem hash và kết luận cải thiện một phần, tải lại trang rồi quay về hồ sơ. Đã đọc lại các báo cáo xuất từ ca thử. [Biên nhận Edge](../work/a8-phep-do-ung-dung-2026-11-28.json), [PDF](../work/ban-giao-nghiem-thu-2026-11-28/a8-phep-do-ung-dung.pdf), [Excel](../work/ban-giao-nghiem-thu-2026-11-28/a8-phep-do-ung-dung.xlsx), [JSON](../work/ban-giao-nghiem-thu-2026-11-28/a8-phep-do-ung-dung.json).
+
+### Nối phép đo vào lượt nghiên cứu 18 control
+
+Lượt live A.8.8 thu thêm `sample-application.json` bằng cách chạy ứng dụng mẫu trên cấu hình đích Linux lab. Khi tạo phát hiện, chọn bản thu A.8 và nguồn đầu ứng dụng. Backend dùng mã nguồn của cùng đợt và đối chiếu cấu hình đích, nền tảng, ứng dụng, phiên bản và hash. Hai phép thu dùng hai bản tái lập của cùng cấu hình lab tạm, có chung hash gói trước. Hai tiêu chí chấm A.8.8 vẫn dựa vào inventory và advisory của lab. Phép đo ứng dụng bổ sung phục vụ truy vết khắc phục.
+
+Edge đã chọn cả hai nguồn, duyệt và chạy khắc phục, mở đúng phát hiện từ lượt nghiên cứu rồi quay lại. Lượt chạy luật bắt đầu qua API trên database thử, và liên kết được kiểm sau restart. Lượt `332c96e5-1803-41bb-9070-361bfad53ef0` nối phát hiện `20a94425-69a9-4c11-a334-aea69eb51819` và phép đo `35620f981e1a86bd`. Đã đọc lại mã lượt, mã nguồn và hash báo cáo trong PDF, Excel và JSON. [Biên nhận kiểm thử](../work/a8-nghien-cuu-ung-dung-2026-11-28.json), [PDF](../work/ban-giao-nghiem-thu-2026-11-28/a8-nghien-cuu-ung-dung.pdf), [Excel](../work/ban-giao-nghiem-thu-2026-11-28/a8-nghien-cuu-ung-dung.xlsx), [JSON](../work/ban-giao-nghiem-thu-2026-11-28/a8-nghien-cuu-ung-dung.json).
 
 ## Phần còn chờ
 

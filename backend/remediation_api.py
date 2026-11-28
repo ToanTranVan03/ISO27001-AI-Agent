@@ -259,8 +259,6 @@ def create_finding(assessment_id:UUID,req:Finding,user=Depends(require_user)):
     except ValueError as exc:raise HTTPException(422,str(exc)) from exc
     doc.update(created_by=user['user_id'],rubric_sha256=scope['rubric_sha256'])
     if req.a8_capture_id:
-        if req.software_baseline_id:
-            raise HTTPException(422,'Phải chọn một nguồn đích. Bản thu A.8 và nguồn cập nhật ứng dụng mẫu có hai phương pháp đo riêng.')
         capture=next((e.get('a8_capture') for e in control['evidence'] if e['evidence_id']==req.a8_capture_id and e.get('source_quality',{}).get('usable') is not False),None)
         if not capture:
             raise HTTPException(422,'Bản thu A.8 không khớp đợt, control hoặc không có định danh đối tượng.')
@@ -275,6 +273,12 @@ def create_finding(assessment_id:UUID,req:Finding,user=Depends(require_user)):
             if not any(e['evidence_id']==req.software_baseline_id and e.get('source_quality',{}).get('usable') is not False for e in control['evidence']):
                 raise HTTPException(409,'Nguồn đầu không thuộc hồ sơ hiện hành hoặc không dùng được.')
             observation=read_software_evidence(cur,assessment_id,req.software_baseline_id,'baseline')
+            if req.a8_capture_id:
+                binding=observation['binding']
+                sample=doc['a8_capture'].get('sample_application') or {}
+                fields=('platform_target','system','application','baseline_version','baseline_artifact_sha256')
+                if not all(binding.get(field) and binding[field]==sample.get(field) for field in fields):
+                    raise HTTPException(422,'Bản thu A.8 không khớp đích, ứng dụng, phiên bản hoặc hash của nguồn đầu đã chọn.')
             doc['software_target']={**observation['binding'],'baseline_evidence_id':req.software_baseline_id}
         doc['context_snapshot']=dict(version=context[0],document=context[1])
         cur.execute('INSERT INTO remediation_records VALUES(%s,%s,%s,1,%s)',(assessment_id,doc['finding_id'],'finding',Jsonb(doc)))

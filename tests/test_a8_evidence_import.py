@@ -1,4 +1,5 @@
 import copy
+import hashlib
 import json
 from contextlib import nullcontext
 import pytest
@@ -42,6 +43,20 @@ def test_capture_reference_requires_exact_campaign_control_asset_and_packet():
         modified=args.copy()
         modified[index]=value
         assert importer.capture_reference(*modified) is None
+
+
+def test_application_capture_requires_a_unique_intact_linux_measurement():
+    packet={'schema':'a88-sample-baseline-v1','platform_target':'linux_lab',
+            'observation':dict(platform='Linux',health='ok',observed_at='2026-11-28T00:00:00Z',
+                               application='iso-demo-inventory',version='1.0.0',sha256='a'*64)}
+    content=json.dumps(packet)
+    artifact=dict(artifact='sample-application.json',content=content,
+                  sha256=hashlib.sha256(content.encode()).hexdigest())
+    sample=importer.sample_application(dict(artifacts=[artifact]))
+    assert sample['baseline_artifact_sha256']=='a'*64
+    assert sample['baseline_version']=='1.0.0'
+    assert importer.sample_application(dict(artifacts=[artifact,artifact])) is None
+    assert importer.sample_application(dict(artifacts=[{**artifact,'content':content+' '}])) is None
 
 
 def test_import_refuses_replay_tampered_report_and_bad_artifact_hash():

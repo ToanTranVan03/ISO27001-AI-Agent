@@ -25,7 +25,27 @@ def capture_reference(assessment_id, control_id, evidence_id, source, checksum, 
         if evidence_id!='A8CAP-'+digest([str(assessment_id),control_id,checksum])[:40]:return None
     except (ValueError,TypeError,KeyError,AttributeError):
         return None
-    return dict(run_id=run_id,report_sha256=report_hash,evidence_id=evidence_id,source_sha256=checksum,asset_id=asset)
+    reference=dict(run_id=run_id,report_sha256=report_hash,evidence_id=evidence_id,source_sha256=checksum,asset_id=asset)
+    if control_id=='A.8.8':
+        sample=sample_application(payload)
+        if sample:reference['sample_application']=sample
+    return reference
+
+
+def sample_application(payload):
+    try:
+        artifact,=[a for a in payload['artifacts'] if a['artifact']=='sample-application.json']
+        content=artifact['content']
+        if hashlib.sha256(content.encode()).hexdigest()!=artifact['sha256']:return None
+        packet=json.loads(content)
+        observed=packet['observation']
+        if packet['schema']!='a88-sample-baseline-v1' or packet['platform_target']!='linux_lab':return None
+        if observed['platform']!='Linux' or observed['health']!='ok' or not observed['observed_at']:return None
+        return dict(platform_target='linux_lab',system='Linux',application=observed['application'],
+                    baseline_version=observed['version'],baseline_artifact_sha256=observed['sha256'],
+                    observed_at=observed['observed_at'])
+    except (KeyError,TypeError,ValueError,AttributeError):
+        return None
 
 
 def prepare_sources(assessment_id,run_id,doc):
