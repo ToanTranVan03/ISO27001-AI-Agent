@@ -29,6 +29,28 @@ def sha256(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def inventory():
+    system = platform.system()
+    result = {
+        'system': system,
+        'release': platform.release(),
+        'python_version': platform.python_version(),
+        'source': 'Python system and runtime APIs',
+    }
+    if system == 'Windows':
+        result['windows_version'] = platform.win32_ver()[1]
+        result['source'] = 'Windows version via Python runtime'
+    elif system == 'Linux':
+        try:
+            release = platform.freedesktop_os_release()
+            result['distribution'] = release.get('ID')
+            result['distribution_version'] = release.get('VERSION_ID')
+            result['source'] = 'Linux os-release and Python runtime'
+        except OSError:
+            result['distribution'] = None
+    return result
+
+
 def observe(path):
     result = subprocess.run([sys.executable, '-I', str(path)], capture_output=True,
                             text=True, check=True, timeout=5)
@@ -65,6 +87,7 @@ def run_demo(approve, change=install):
         report = {
             'control_reference': 'A.8.8', 'criterion': 'sample_application_meets_lab_version',
             'environment': 'synthetic application in a disposable local directory',
+            'platform_inventory': inventory(),
             'before': before, 'plan': plan, 'approval': None, 'execution': None,
             'after': None, 'status': 'AWAITING_APPROVAL',
         }

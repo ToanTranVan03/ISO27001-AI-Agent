@@ -42,3 +42,19 @@ Trong Tổng quan 56 control → Tư vấn & khắc phục, mở phát hiện c�
 Danh mục 56/56 nằm trong frontend-react/src/remediationTemplates.js, là mẫu theo rubric đồ án. Việc tự động chạy công cụ vẫn giới hạn ở các ca lab đã đăng ký. Các mẫu khác dùng để chuẩn bị kế hoạch có người thực hiện và bằng chứng kiểm chứng.
 
 [Kiểm thử tích hợp bản nháp A.8.8](../work/khoi-phuc-mau-56-2026-11-28.json).
+
+## Kiểm chứng ứng dụng mẫu trên Windows và Linux
+
+Cùng công cụ cập nhật chạy với hai môi trường thật tại máy thử. Windows lấy thông tin phiên bản qua Python runtime; Linux trong container Debian 12 đọc os-release và Python runtime. Cả hai khởi chạy ứng dụng mẫu trước và sau khi thay gói, ghi thời điểm, hash và phiên bản thực quan sát. Biên nhận gồm platform_inventory và chỉ áp dụng ứng dụng thử. Không thực hiện cập nhật hệ điều hành hoặc kết nối đến thiết bị doanh nghiệp.
+
+- [Biên nhận Windows](../work/platform-windows.json)
+- [Biên nhận Linux](../work/platform-linux.json)
+
+Lượt kiểm dùng một hàm cấp duyệt tự động chỉ cho test tổng hợp. Khi trình diễn tương tác, CLI hỏi mã phê duyệt. Chạy Windows từ thư mục gốc bằng công cụ đã nêu ở trên. Chạy Linux với Docker và dùng container không mạng, mã chỉ đọc, ghi tạm vào /tmp:
+
+```powershell
+$lab = (Resolve-Path lab_a8).Path
+docker run --rm -it --network none --read-only --tmpfs /tmp --mount "type=bind,source=$lab,target=/demo/lab_a8,readonly" --workdir /demo iso-a8-live-lab:v2 sh -c "python -B -m lab_a8.software_update_demo --output /tmp/demo.json && cat /tmp/demo.json"
+```
+
+Công cụ trong React vẫn chạy ở nền tảng của backend. Muốn chọn đích Linux riêng từ UI hoặc sử dụng công cụ cập nhật hệ điều hành thật, cần kết nối tới môi trường đã cấp quyền và phép kiểm riêng; bản thử chưa có các connector này.
