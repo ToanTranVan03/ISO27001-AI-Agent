@@ -1,6 +1,7 @@
 """Campaign-scoped consulting and corrective actions, stored transactionally."""
 import json
 import os
+import subprocess
 from uuid import UUID,uuid4
 from typing import Literal
 from fastapi import APIRouter,Depends,HTTPException
@@ -428,12 +429,14 @@ def execute_mfa_lab(assessment_id:UUID,finding_id:UUID,action_id:UUID,req:MfaLab
 
 class SoftwareLabRun(Expected):
     operation:Literal['replace_disposable_application']
+    platform_target:Literal['local','linux_lab']='local'
 
 
 @router.post('/findings/{finding_id}/actions/{action_id}/software-lab')
 def execute_software_lab(assessment_id:UUID,finding_id:UUID,action_id:UUID,req:SoftwareLabRun,user=Depends(require_user)):
-    from lab_a8.software_update_demo import run_demo
-    return execute_fixed_lab(assessment_id,finding_id,action_id,req,user,'A.8.8','software_lab_receipt',run_demo)
+    from lab_a8.software_update_demo import run_demo,run_linux_demo
+    runner=run_linux_demo if req.platform_target=='linux_lab' else run_demo
+    return execute_fixed_lab(assessment_id,finding_id,action_id,req,user,'A.8.8','software_lab_receipt',runner)
 
 
 def execute_fixed_lab(assessment_id,finding_id,action_id,req,user,control_id,receipt_field,run_demo):
@@ -470,7 +473,12 @@ def execute_fixed_lab(assessment_id,finding_id,action_id,req,user,control_id,rec
         context=cur.fetchone()
         if not context or context[0]!=doc.get('context_snapshot',{}).get('version'):
             raise HTTPException(409,'Phạm vi doanh nghiệp đã đổi; cần rà lại phát hiện.')
-        receipt=run_demo(lambda *_:str(user['user_id']))
+        try:
+            receipt=run_demo(lambda *_:str(user['user_id']))
+        except (OSError,subprocess.SubprocessError,ValueError) as exc:
+            raise HTTPException(503,'Không lấy được biên nhận công cụ lab. Kiểm tra Docker và image lab nếu chọn Linux.') from exc
+        if control_id=='A.8.8':
+            receipt['platform_target']=req.platform_target
         receipt['workflow_approval']={'actor':str(approval['actor']),'at':approval['at']}
         item[receipt_field]=receipt
         doc['history'].append(dict(command='mfa_lab' if control_id=='A.8.5' else 'software_lab',actor=user['user_id'],at=engine.now(),

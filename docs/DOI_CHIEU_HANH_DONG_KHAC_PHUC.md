@@ -57,4 +57,6 @@ $lab = (Resolve-Path lab_a8).Path
 docker run --rm -it --network none --read-only --tmpfs /tmp --mount "type=bind,source=$lab,target=/demo/lab_a8,readonly" --workdir /demo iso-a8-live-lab:v2 sh -c "python -B -m lab_a8.software_update_demo --output /tmp/demo.json && cat /tmp/demo.json"
 ```
 
-Công cụ trong React vẫn chạy ở nền tảng của backend. Muốn chọn đích Linux riêng từ UI hoặc sử dụng công cụ cập nhật hệ điều hành thật, cần kết nối tới môi trường đã cấp quyền và phép kiểm riêng; bản thử chưa có các connector này.
+Trong React, mở đầu việc A.8.8 đã duyệt rồi chọn **Máy đang chạy backend** hoặc **Linux Debian trong container cô lập** trước khi chạy. Cần Docker và image cục bộ iso-a8-live-lab:v2 cho lựa chọn Linux. Biên nhận đo trước/sau trên chính đích được chọn. Nút thu nguồn ban đầu ở đầu trang vẫn thu trên máy backend. Cập nhật hệ điều hành thật cần kết nối tới môi trường được cấp quyền và phép kiểm riêng.
+
+Kiểm thử chọn Linux từ Edge: đặt `$env:ISO_TEST_LINUX_LAB="1"` trước khi chạy runner nghiệm thu. [Biên nhận lượt kiểm](../work/linux-ui-demo-2026-11-28.json).

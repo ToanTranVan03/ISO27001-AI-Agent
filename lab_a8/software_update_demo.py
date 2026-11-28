@@ -121,6 +121,29 @@ def run_demo(approve, change=install):
         return report
 
 
+def run_linux_demo(approve):
+    """Run the fixed synthetic application in a disposable local Linux container."""
+    lab_path = Path(__file__).resolve().parent
+    program = (
+        'import json,sys; from lab_a8.software_update_demo import run_demo; '
+        'actor=json.load(sys.stdin); print(json.dumps(run_demo(lambda *_: actor)))'
+    )
+    args = [
+        'docker', 'run', '--rm', '-i', '--pull=never', '--network=none',
+        '--read-only', '--tmpfs', '/tmp:rw,size=32m', '--cap-drop=ALL',
+        '--security-opt=no-new-privileges', '--user', '65534:65534',
+        '--mount', f'type=bind,source={lab_path},target=/demo/lab_a8,readonly',
+        '--workdir', '/demo', 'iso-a8-live-lab:v2', 'python', '-B', '-c', program,
+    ]
+    actor = approve(None, None)
+    result = subprocess.run(args, input=json.dumps(actor), capture_output=True,
+                            text=True, check=True, timeout=25)
+    receipt = json.loads(result.stdout)
+    if receipt['platform_inventory']['system'] != 'Linux':
+        raise ValueError('Expected Linux lab inventory')
+    return receipt
+
+
 def interactive_approval(plan, before):
     print(json.dumps({'before': before, 'plan': plan}, indent=2), flush=True)
     try:

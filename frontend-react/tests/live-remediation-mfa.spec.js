@@ -203,6 +203,8 @@ test('real remediation: approve, assign, evidence, reject, recheck, verify, pres
  software=await call('POST',softwarePath+'/'+appAction+'/events',{command:'approve',expected_version:software.version,note:'Duyệt cập nhật duy nhất ứng dụng mẫu trong thư mục tạm.',assignee:person.user_id,due_date:'2099-12-31'});
  await call('POST',updatePath,updateBody(),operator,403);
  await page.getByRole('button',{name:'Làm mới khắc phục',exact:true}).click();
+ const linuxLab=process.env.ISO_TEST_LINUX_LAB==='1';
+ if(linuxLab)await page.getByRole('combobox',{name:'Môi trường chạy bản thử',exact:true}).selectOption('linux_lab');
  const updatedResponse=page.waitForResponse(r=>r.url().endsWith('/software-lab')&&r.request().method()==='POST');
  await page.getByRole('button',{name:'Chạy cập nhật ứng dụng mẫu',exact:true}).click();
  const updated=await updatedResponse;
@@ -210,6 +212,7 @@ test('real remediation: approve, assign, evidence, reject, recheck, verify, pres
  software=await updated.json();
  const softwareReceipt=software.document.actions[0].software_lab_receipt;
  expect(softwareReceipt.status).toBe('VERIFIED_MET');
+ if(linuxLab){expect(softwareReceipt.platform_target).toBe('linux_lab');expect(softwareReceipt.platform_inventory.system).toBe('Linux');}
  expect(softwareReceipt.before.version).toBe('1.0.0');
  expect(softwareReceipt.after.version).toBe('1.1.0');
  expect(softwareReceipt.after.sha256).toBe(softwareReceipt.plan.candidate_sha256);
