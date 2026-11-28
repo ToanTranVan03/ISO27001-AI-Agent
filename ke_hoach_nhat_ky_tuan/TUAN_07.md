@@ -2,7 +2,7 @@
 
 - **Thời gian:** 23/11/2026–29/11/2026 (thứ Hai–Chủ nhật).
 - **Trạng thái:** Đang thực hiện. Đã nghiệm thu các ca kỹ thuật chính trên môi trường thử.
-- **Cập nhật:** 27/11/2026.
+- **Cập nhật:** 28/11/2026.
 
 ## Mục tiêu và kế hoạch
 
@@ -23,19 +23,20 @@ Giữ phạm vi **56 control** của đồ án (8 A.6 con người, 14 A.7 vật
 | 27/11 | **Bàn giao laptop · A.6.5:** mở yêu cầu từ đầu việc được giao, kiểm mã thiết bị, chặn mã sai, tải bản gốc biên nhận và giữ lịch sử trả bổ sung. Chuyên viên xác minh tiêu chí thu hồi. Kết luận A.6.5 vẫn thiếu hồ sơ cắt quyền. [Nghiệm thu bàn giao](../docs/NGHIEM_THU_BAN_GIAO_A65.md) |
 | 27/11 | **MFA · A.8.5:** thu nguồn ban đầu từ lab, tạo phát hiện theo tiêu chí, duyệt rồi chạy công cụ. Sau khi bật yêu cầu MFA, lần đo riêng từ chối đăng nhập thiếu yếu tố thứ hai và cho phép khi cung cấp đủ. Lưu nguồn sau vào hồ sơ, thẩm định và xác minh trên React, xuất PDF/Excel. [Demo MFA](../docs/DEMO_MFA_LAB.md) |
 | 27/11 | **Cập nhật ứng dụng mẫu · tham chiếu A.8.8:** sau khi duyệt, công cụ cập nhật gói thử từ 1.0.0 lên 1.1.0, khởi chạy lại và kiểm phiên bản, trạng thái, hash. Biên nhận trước–sau có trong hồ sơ và PDF/Excel. Phép thử chỉ áp dụng ứng dụng mẫu trong lab. [Phạm vi và cách chạy](../docs/DOI_CHIEU_HANH_DONG_KHAC_PHUC.md) |
-| 27/11 | Làm rõ bốn màn hình chính theo mục đích, người thực hiện và bước tiếp theo. Màn Khắc phục cho thấy người duyệt, trạng thái đầu việc và bằng chứng trước–sau. Hồi quy điều hướng giữ đúng ngữ cảnh đợt, control và nhân viên. |
-| 28/11 | Đối chiếu KhoaTuan7 và tích hợp ba mẫu luyện tập theo vai trò vào luồng đào tạo hiện có. Kiểm tra điền nháp trên Edge. [Đối chiếu và phạm vi tích hợp](../docs/TICH_HOP_KHOA_TUAN7.md) |
-| 28/11 | Ghép cách đăng ký công cụ đích cố định của KhoaTuan7 vào MFA và cập nhật ứng dụng mẫu. Hiện người thực hiện, đích và cách kiểm chứng trên đầu việc. [Phạm vi tích hợp](../docs/TICH_HOP_KHOA_TUAN7.md) |
+| 27/11 | Làm rõ mục đích của bốn màn hình. Khu Tư vấn & khắc phục trong Tổng quan 56 control hiển thị người duyệt, người thực hiện, đích và bằng chứng trước–sau. |
+| 28/11 | Tích hợp chọn lọc từ `KhoaTuan7`: ba mẫu luyện tập theo vai trò và cách đăng ký công cụ đích cố định cho ca MFA, cập nhật ứng dụng. [Phạm vi tích hợp](../docs/TICH_HOP_KHOA_TUAN7.md) |
+| 28/11 | **Nghiệm thu Linux và truy vết A.8.8:** tạo phát hiện, duyệt giao, chạy công cụ, gắn nguồn và xác minh qua Edge. Giữ cùng mã phát hiện qua bốn màn hình, tải lại và mở từ báo cáo. Lượt live A.8 thu thêm phiên bản và hash của ứng dụng mẫu; backend kiểm tra khớp đợt, cấu hình đích, ứng dụng, phiên bản và hash trước khi gắn lượt với phát hiện. Đối chiếu PDF, Excel và JSON. [Biên bản và báo cáo](../docs/NGHIEM_THU_LIEN_KET_BAN_THU_A8.md) |
+| 28/11 | **Chuẩn bị ca vá hệ điều hành:** bổ sung kiểm gói nguồn đo trước, biên nhận và đo lại; tạo manifest nhập hồ sơ A.8.8 và kiểm lại SHA-256 khi nhập. Hướng dẫn nộp nguồn trên A.8.8 và kiểm nội dung trích xuất của bản thay thế A.6.2. [Hướng dẫn tiếp nhận](../docs/NOP_BANG_CHUNG_BAN_VA_A88.md) |
 
 ## Kết quả và minh chứng
 
-**Mốc kiểm chứng mới nhất:** 488 test Python, 14 test JavaScript, lint và build đạt. Ca tích hợp MFA và cập nhật ứng dụng chạy trên Edge, FastAPI và PostgreSQL riêng, giữ biên nhận sau khi khởi động lại API. Đã đối chiếu PDF/Excel.
+**Mốc kiểm chứng ngày 28/11:** 496 test Python thuộc nhánh, 16 test JavaScript đạt. Lint và build đạt ở lượt kiểm giao diện gần nhất. Ca Edge sử dụng FastAPI và PostgreSQL thử riêng; hồi quy Linux, Windows, MFA và bàn giao laptop có biên nhận kiểm thử. Liên kết lượt A.8 với phát hiện vẫn đọc được sau khi khởi động lại API.
 
 ## Vướng mắc và giới hạn
 
-- Một số thao tác ghi nghiệp vụ vẫn được kiểm qua API.
-- Kết quả lab và 10 tình huống Qwen chỉ là minh chứng kỹ thuật. Số đo độ đúng với người chấm độc lập còn chờ.
-- Demo cập nhật chỉ xác minh phiên bản và hash của ứng dụng mẫu. Kiểm kê và cập nhật trên các hệ điều hành đích cần lab và quyền phù hợp.
+- Trong ca nối A.8.8, bước khởi chạy lượt nghiên cứu và nhập bản thu được kiểm qua API. Các bước tạo phát hiện, duyệt giao, cập nhật và xác minh được kiểm qua Edge.
+- Ca cập nhật ứng dụng mẫu ghi **cải thiện một phần**. Ca vá hệ điều hành chờ xác nhận thiết bị trong ghi âm, máy thử cô lập được cấp quyền, mã bản vá, phê duyệt và phương án phục hồi.
+- Đợt chính còn 37 control thiếu nguồn ngoài preset và A.6.2 cần bản đọc được thay thế. Rà thư mục gói ngày 28/11 có 56 manifest trống và chưa có tệp nguồn mới. Độ đúng đối chiếu độc lập và phê duyệt SoA còn chờ.
 
 ## Việc chuyển tiếp sang tuần 8
 
@@ -43,14 +44,11 @@ Giữ phạm vi **56 control** của đồ án (8 A.6 con người, 14 A.7 vật
 - [ ] Thu hồ sơ còn thiếu và rà lại mức bao phủ trên đợt chính.
 - [ ] Xác nhận rubric, phạm vi và nguồn được chấp nhận; chốt tập kiểm định mới và thu nhãn của người đánh giá đủ điều kiện.
 - [ ] Hoàn thiện quyết định áp dụng, thẩm định và trình người phụ trách duyệt SoA. [Điều kiện duyệt SoA](../docs/DIEU_KIEN_DUYET_SOA_56.md)
-- [ ] Khi có lab thiết bị và hệ điều hành phù hợp, bổ sung công cụ kiểm kê, cập nhật có phê duyệt và đo lại.
+- [ ] Chốt thiết bị và quyền thử, thực hiện ca vá đã duyệt, nộp ba nguồn trước–thực thi–sau và thẩm định riêng tiêu chí vá hệ điều hành.
 
 ## Đồng bộ GitHub
 
 | Ngày | Giờ (UTC+7) | Người push | Nhánh | Nội dung chính |
 |---|---|---|---|---|
-| 25/11/2026 | 12:03 | Trần Văn Toàn | `main` | Kiểm tra liên kết toàn hệ thống và sửa lỗi đồng bộ (`context`, `human_review_current`, làm mới UI khắc phục); nghiệm thu theo mục tiêu đề tài + 10 tình huống AI độc lập; hồ sơ bảo vệ (`docs/defense/`); test mới nâng lên 449 test Python; cập nhật README và nhật ký tuần 7 |
-| 27/11/2026 | 07:20 | Trần Văn Toàn | `ToanTuan7` | Tích hợp chọn lọc Tu/Tuan7: yêu cầu đánh giá, gợi ý hạn; đào tạo/NDA/MFA/bàn giao gắn nguồn và xác minh riêng; kiểm thử và cập nhật hướng dẫn |
-| 27/11/2026 | 10:12 | Trần Văn Toàn | `ToanTuan7` | Nghiệm thu MFA và bàn giao; bổ sung cập nhật ứng dụng mẫu có phê duyệt, báo cáo trước–sau và làm rõ bốn màn hình |
-| 27/11/2026 | 10:21 | Trần Văn Toàn | `ToanTuan7` | Rút gọn nhật ký tuần 7, sắp theo bố cục tuần 6 và chốt việc chuyển tiếp tuần 8 |
-| 27/11/2026 | 10:23 | Trần Văn Toàn | `ToanTuan7` | Xóa tệp s.txt |
+| 25/11/2026 | 12:03 | Trần Văn Toàn | `main` | Sửa đồng bộ hồ sơ, kiểm thử với Qwen và bổ sung tài liệu bảo vệ. |
+| 27/11/2026 | 07:20, 10:12, 10:21, 10:23 | Trần Văn Toàn | `ToanTuan7` | Tích hợp luồng nhân viên, nghiệm thu MFA và bàn giao, bổ sung ca cập nhật ứng dụng và báo cáo trước–sau; cập nhật nhật ký và dọn `s.txt`. |
