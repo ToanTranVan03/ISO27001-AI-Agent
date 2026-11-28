@@ -52,3 +52,12 @@ Giữ phạm vi **56 control** của đồ án (8 A.6 con người, 14 A.7 vật
 |---|---|---|---|---|
 | 25/11/2026 | 12:03 | Trần Văn Toàn | `main` | Sửa đồng bộ hồ sơ, kiểm thử với Qwen và bổ sung tài liệu bảo vệ. |
 | 27/11/2026 | 07:20, 10:12, 10:21, 10:23 | Trần Văn Toàn | `ToanTuan7` | Tích hợp luồng nhân viên, nghiệm thu MFA và bàn giao, bổ sung ca cập nhật ứng dụng và báo cáo trước–sau; cập nhật nhật ký và dọn `s.txt`. |
+
+### Nhánh thành viên được tích hợp chọn lọc
+
+Mốc do GitHub ghi nhận, quy đổi sang UTC+7. Sự kiện tạo nhánh là lần nhánh xuất hiện trên GitHub.
+
+| Ngày | Giờ (UTC+7) | Thành viên · tài khoản GitHub | Nhánh | Hoạt động |
+|---|---|---|---|---|
+| 26/11/2026 | 21:05:39, 21:20:51 | Lê Đoàn Văn Tú · `vantu1410` | `Tu/Tuan7` | Tạo nhánh tại `3dbcf10`; push `720943e` bổ sung yêu cầu đánh giá và báo cáo. |
+| 28/11/2026 | 00:22:24 | Lê Đăng Khoa · `Gera-YCYC` | `KhoaTuan7` | Tạo nhánh tại `9c192f7`; nhóm tích hợp chọn lọc mẫu luyện tập và danh mục công cụ. |
