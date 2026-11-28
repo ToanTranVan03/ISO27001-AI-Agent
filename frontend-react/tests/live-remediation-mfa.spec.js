@@ -176,7 +176,13 @@ test('real remediation: approve, assign, evidence, reject, recheck, verify, pres
   expect(exported.headers()['content-type']).toContain(extension==='csv'?'text/csv':'text/html');
  }
  await page.getByRole('button',{name:'Làm mới khắc phục',exact:true}).click();
+ const softwareBaselineResponse=page.waitForResponse(r=>r.url().endsWith('/software-lab/baseline')&&r.request().method()==='POST');
+ await page.getByRole('button',{name:'Thu phiên bản ứng dụng mẫu từ lab',exact:true}).click();
+ const softwareBaselineResult=await softwareBaselineResponse;
+ expect(softwareBaselineResult.status(),await softwareBaselineResult.text()).toBe(201);
+ const softwareBaseline=(await softwareBaselineResult.json()).evidence_id;
  const a88=(await call('GET',scopePath)).controls.find(row=>row.control_id==='A.8.8');
+ expect(a88.evidence.some(e=>e.evidence_id===softwareBaseline)).toBe(true);
  let software=await call('POST',path+'/findings',{control_id:'A.8.8',expected_review_token:a88.review_token,description:'MÔ PHỎNG: ứng dụng mẫu đang chạy phiên bản 1.0.0',location:'Kho ứng dụng thử',root_cause:'Ứng dụng mẫu được cấu hình phiên bản ban đầu',risk:'unconfirmed'},admin,201);
  const softwarePath=path+'/findings/'+software.record_id+'/actions';
  software=await call('POST',softwarePath,{...action,title:'Cập nhật iso-demo-inventory',steps:'Thay gói ứng dụng mẫu và đọc lại phiên bản đã chạy.',acceptance:'Quan sát ứng dụng phiên bản 1.1.0 và hash gói khớp.',expected_version:software.version});
@@ -199,6 +205,17 @@ test('real remediation: approve, assign, evidence, reject, recheck, verify, pres
  expect(softwareReceipt.after.sha256).toBe(softwareReceipt.plan.candidate_sha256);
  expect((await call('GET',scopePath)).controls.find(row=>row.control_id==='A.8.8').human_review_current).toBe(false);
  await call('POST',updatePath,updateBody(),admin,409);
+ const softwareSourceResponse=page.waitForResponse(r=>r.url().endsWith('/software-lab/source')&&r.request().method()==='POST');
+ await page.getByRole('button',{name:'Lưu biên nhận cập nhật vào nguồn A.8.8',exact:true}).click();
+ const softwareSourceResult=await softwareSourceResponse;
+ expect(softwareSourceResult.status(),await softwareSourceResult.text()).toBe(201);
+ const softwareSource=(await softwareSourceResult.json()).evidence_id;
+ const softwareReuse=await call('POST',updatePath+'/source',{},admin,201);
+ expect(softwareReuse.reused).toContain(softwareSource);
+ const softwareCurrent=(await call('GET',scopePath)).controls.find(row=>row.control_id==='A.8.8');
+ expect(softwareCurrent.evidence.some(e=>e.evidence_id===softwareSource)).toBe(true);
+ expect(softwareCurrent.human_review_current).toBe(false);
+
  for(const [extension,label] of [['xlsx','Tải Excel XLSX'],['pdf','Tải PDF']]){
   const [download]=await Promise.all([page.waitForEvent('download'),page.getByRole('button',{name:label,exact:true}).click()]);
   await download.saveAs(testInfo.outputPath('mfa-before-after.'+extension));

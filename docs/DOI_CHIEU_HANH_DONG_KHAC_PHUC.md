@@ -22,3 +22,9 @@ npm --prefix frontend-react run build
 Chạy trực tiếp CLI: `.venv\Scripts\python.exe -m lab_a8.software_update_demo --output work/software-update-new.json`. CLI yêu cầu mã đề xuất để xác nhận chạy, tên người vận hành do người dùng khai.
 
 [Biên nhận lượt tích hợp MFA và cập nhật ứng dụng](../work/mfa-software-lab-verified.json).
+
+## Nguồn cập nhật ứng dụng trước và sau
+
+Bấm **Thu phiên bản ứng dụng mẫu từ lab** trước khi lập phát hiện. Hệ thống chạy gói mẫu, lưu kết quả đọc phiên bản ban đầu và hash vào kho nguồn A.8.8. Sau khi duyệt và chạy cập nhật, bấm **Lưu biên nhận cập nhật vào nguồn A.8.8** trong thẻ đầu việc. Mỗi nguồn có mã và bản gốc, nạp lại biên nhận không tạo bản trùng. Chuyên viên vẫn rà nguồn và xác định phạm vi kết luận. Hồ sơ chỉ xác nhận ứng dụng mẫu trong lab.
+
+Lệnh nghiệm thu ở trên kiểm cả hai nút, kiểm nguồn trước/sau xuất hiện đúng control và xác nhận kết luận thẩm định không tự đổi. [Biên nhận lượt kiểm](../work/software-evidence-2026-11-28.json).

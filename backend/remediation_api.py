@@ -327,15 +327,19 @@ def event(assessment_id:UUID,finding_id:UUID,action_id:UUID,req:Event,user=Depen
         return save(cur,assessment_id,finding_id,version,updated)
 
 
-def store_mfa_observation(aid,user,filename,payload,observed_at):
+def store_lab_observation(aid,user,filename,payload,observed_at,control_id="A.8.5"):
     from evidence_collectors import source_intake,control_packages
+    evidence_type,origin,note={
+        'A.8.5':('EVID_TECH_IAM_AUTH','Lab MFA tổng hợp - phép thử xác thực loopback',
+                 'Chỉ đại diện tài khoản thử. Cần chuyên viên thẩm định.'),
+        'A.8.8':('EVID_TECH_VULN_CONFIG','Lab tổng hợp - đo ứng dụng mẫu trong thư mục tạm',
+                 'Chỉ xác minh phiên bản ứng dụng mẫu. Không xác minh bản vá hệ điều hành.'),
+    }[control_id]
     raw=json.dumps(payload,ensure_ascii=False,sort_keys=True).encode('utf-8')
     try:
-        item=source_intake.prepare(str(aid),'A.8.5',filename,raw,'EVID_TECH_IAM_AUTH',
-            'Lab MFA tổng hợp - phép thử xác thực loopback',observed_at,
-            'Chỉ đại diện tài khoản thử. Cần chuyên viên thẩm định.')
+        item=source_intake.prepare(str(aid),control_id,filename,raw,evidence_type,origin,observed_at,note)
         source_intake.preserve(str(aid),raw)
-        result=control_packages.store(str(aid),'A.8.5',user['user_id'],{'items':[item],'issues':[]})
+        result=control_packages.store(str(aid),control_id,user['user_id'],{'items':[item],'issues':[]})
     except ValueError as exc:
         raise HTTPException(409,str(exc)) from exc
     except OSError as exc:
@@ -354,7 +358,7 @@ def collect_mfa_baseline(assessment_id:UUID,user=Depends(require_user)):
     require_mfa_lab(assessment_id,user)
     from lab_a8.mfa_remediation_demo import run_demo
     report=run_demo(lambda *_:None)
-    return store_mfa_observation(assessment_id,user,'mfa-lab-baseline.json',report['before'],
+    return store_lab_observation(assessment_id,user,'mfa-lab-baseline.json',report['before'],
                                  report['before']['observed_at'])
 
 
@@ -367,8 +371,30 @@ def publish_mfa_lab_source(assessment_id:UUID,finding_id:UUID,action_id:UUID,use
         receipt=item.get('mfa_lab_receipt') if item else None
     if not receipt or not receipt.get('after'):
         raise HTTPException(409,'Chưa có phép đo lại để lưu vào hồ sơ.')
-    return store_mfa_observation(assessment_id,user,'mfa-lab-'+receipt['plan']['id']+'.json',
+    return store_lab_observation(assessment_id,user,'mfa-lab-'+receipt['plan']['id']+'.json',
                                  receipt,receipt['after']['observed_at'])
+
+
+@router.post('/software-lab/baseline',status_code=201)
+def collect_software_baseline(assessment_id:UUID,user=Depends(require_user)):
+    require_mfa_lab(assessment_id,user)
+    from lab_a8.software_update_demo import run_demo
+    before=run_demo(lambda *_:None)['before']
+    return store_lab_observation(assessment_id,user,'software-lab-baseline.json',
+                                 before,before['observed_at'],'A.8.8')
+
+
+@router.post('/findings/{finding_id}/actions/{action_id}/software-lab/source',status_code=201)
+def publish_software_lab_source(assessment_id:UUID,finding_id:UUID,action_id:UUID,user=Depends(require_user)):
+    require_mfa_lab(assessment_id,user)
+    with get_connection() as con,con.cursor() as cur:
+        _,doc=read(cur,assessment_id,finding_id)
+        item=next((a for a in doc['actions'] if a['action_id']==str(action_id)),None)
+        receipt=item.get('software_lab_receipt') if item and doc['control_id']=='A.8.8' else None
+    if not receipt or not receipt.get('after'):
+        raise HTTPException(409,'Chưa có phép đo lại ứng dụng để lưu vào hồ sơ.')
+    return store_lab_observation(assessment_id,user,'software-lab-'+receipt['plan']['id']+'.json',
+                                 receipt,receipt['after']['observed_at'],'A.8.8')
 
 
 class MfaLabRun(Expected):
